@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { FiHome, FiCreditCard, FiShoppingBag, FiGrid, FiTarget, FiGift, FiHeadphones } from "react-icons/fi";
+import { FiHome, FiCreditCard, FiShoppingBag, FiGrid, FiTarget, FiGift, FiHeadphones, FiBookOpen } from "react-icons/fi";
 
 
 const BottomNav = () => {
@@ -23,12 +23,12 @@ const BottomNav = () => {
     const hideOnRoutes = ["/admin", "/owner", "/blog"];
     if (hideOnRoutes.some(route => pathname?.startsWith(route))) return null;
 
-    // Retained 7 items, preserving symmetry around the Home button
+    // Retained 7 items, preserving symmetry around the Blog button
     const navItems = [
         { label: "Wallet", icon: FiCreditCard, path: "/dashboard/wallet", action: () => router.push("/dashboard/wallet") },
         { label: "Games", icon: FiGrid, path: "/games", action: () => router.push("/games") },
         { label: "Region", icon: FiTarget, path: "/region", action: () => router.push("/region") },
-        { label: "Home", icon: FiHome, path: "/", isHome: true, action: () => router.push("/") },
+        { label: "Blog", icon: FiBookOpen, path: "/blog", isHome: true, action: () => router.push("/blog") },
         { label: "Orders", icon: FiShoppingBag, path: "/dashboard/orders", action: () => router.push("/dashboard/orders") },
         { label: "Redeem", icon: FiGift, path: "/dashboard/redeem", action: () => router.push("/dashboard/redeem") },
         { label: "Support", icon: FiHeadphones, path: "/dashboard/support", action: () => router.push("/dashboard/support") },
@@ -45,7 +45,7 @@ const BottomNav = () => {
 
                 {navItems.map((item, idx) => {
                     const isActive = item.isHome
-                        ? (pathname === "/" || pathname === "/home")
+                        ? (pathname === "/blog" || pathname.startsWith("/blog/"))
                         : (item.path && (pathname === item.path || pathname.startsWith(item.path + "/")));
 
                     const Icon = item.icon;

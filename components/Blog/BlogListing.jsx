@@ -65,64 +65,57 @@ export default function BlogListing({ initialGame = "all" }) {
   }, [search, selectedType, selectedGame]);
 
   return (
-    <section className="min-h-screen bg-[var(--background)] relative pb-32 transition-colors duration-300 px-6">
-
+    <section className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
       <div className="max-w-4xl mx-auto pt-8 md:pt-12 relative z-10">
-
         <motion.div
-          className="mb-10"
+          className="mb-8"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-[1px] bg-[var(--accent)]" />
-            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.4em] text-[var(--accent)] italic">
-                <Link href="/blog" className="hover:opacity-60 transition-opacity whitespace-nowrap">News & Blogs</Link>
-                {initialGame !== "all" && (
-                    <>
-                        <span className="opacity-20 translate-y-[1px]">/</span>
-                        <span className="text-[var(--muted)] opacity-50 whitespace-nowrap">{initialGame}</span>
-                    </>
-                )}
-            </div>
+          {/* 📍 COMPACT BREADCRUMB */}
+          <div className="flex items-center gap-2 mb-4 text-[9px] font-black uppercase tracking-widest opacity-30 italic">
+              <Link href="/blog" className="hover:text-[var(--accent)] transition-colors">News & Blogs</Link>
+              {initialGame !== "all" && (
+                  <>
+                      <span>/</span>
+                      <span className="text-[var(--accent)]">{initialGame}</span>
+                  </>
+              )}
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <h2 className="text-2xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
+
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <h2 className="text-3xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
               {initialGame === "all" ? "Latest" : initialGame} <span className="text-[var(--accent)]">News</span>
             </h2>
             
-            {/* 🔍 SEARCH - COMPACT */}
-            <div className="relative w-full md:w-64">
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                <FiSearch className="text-[var(--muted)] opacity-50" size={14} />
+            {/* 🔍 COMPACT SEARCH */}
+            <div className="relative w-full md:w-60">
+              <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
+                <FiSearch className="text-[var(--muted)] opacity-30" size={12} />
               </div>
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="SEARCH..."
-                className="w-full h-11 pl-10 pr-6 rounded-xl bg-[var(--card)] border border-[var(--border)] outline-none text-[10px] font-bold tracking-widest uppercase focus:border-[var(--accent)]/40 transition-all font-sans"
+                className="w-full h-10 pl-9 pr-6 rounded-xl bg-[var(--card)] border border-[var(--border)] outline-none text-[10px] font-bold tracking-widest uppercase focus:border-[var(--accent)]/40 transition-all font-sans"
               />
             </div>
           </div>
         </motion.div>
 
-        {/* 🔖 FILTERS SECTION */}
-        <div className="space-y-6 mb-12">
-            
-            {/* 🎮 GAME FILTER - ONLY SHOW IF NOT IN SPECIFIC GAME PAGE */}
+        {/* 🔖 COMPACT FILTERS */}
+        <div className="space-y-5 mb-10">
             {initialGame === "all" && (
-                <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-40 italic">
-                        <FiPlay size={10} className="fill-current" /> SELECT GAME
-                    </div>
-                    <div className="flex flex-wrap gap-2">
+                <div className="space-y-2">
+                    <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50 italic">SELECT GAME</div>
+                    <div className="flex flex-wrap gap-1.5">
                         {games.map((game) => (
                             <Link
                                 key={game}
                                 href={game === "all" ? "/blog" : `/blog/${game}`}
-                                className={`px-5 py-2 rounded-xl text-[10px] font-[1000] uppercase tracking-tighter transition-all border ${
+                                className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-tighter transition-all border ${
                                     selectedGame === game
-                                        ? "bg-[var(--accent)] border-[var(--accent)] text-black italic scale-105 shadow-lg shadow-[var(--accent)]/20"
+                                        ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--background)] italic shadow-lg shadow-[var(--foreground)]/10"
                                         : "bg-[var(--card)] border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]/30 hover:text-[var(--foreground)]"
                                 }`}
                             >
@@ -133,17 +126,14 @@ export default function BlogListing({ initialGame = "all" }) {
                 </div>
             )}
 
-            {/* 🏷️ CATEGORY FILTER */}
-            <div className="space-y-3">
-                <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-40 italic">
-                    <FiList size={10} /> TOPICS
-                </div>
-                <div className="flex flex-nowrap gap-2 overflow-x-auto pb-2 no-scrollbar">
+            <div className="space-y-2">
+                <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50 italic">TOPICS</div>
+                <div className="flex flex-nowrap gap-1.5 overflow-x-auto no-scrollbar">
                     {categories.map((type) => (
                         <button
                             key={type}
                             onClick={() => setSelectedType(type)}
-                            className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all whitespace-nowrap border ${
+                            className={`px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest transition-all whitespace-nowrap border ${
                                 selectedType === type
                                     ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--background)] italic"
                                     : "bg-[var(--card)] border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]/20"
