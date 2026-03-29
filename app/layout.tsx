@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
+// Google AdSense
+const AdSenseScript = () => (
+    <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3083932441516430"
+        crossOrigin="anonymous"
+        strategy="lazyOnload"
+    />
+);
+
 export const dynamic = "force-dynamic";
 
 import "./globals.css";
@@ -265,6 +275,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  other: {
+    'google-adsense-account': 'ca-pub-3083932441516430',
+  },
 };
 
 
@@ -286,6 +299,7 @@ export default async function RootLayout({
 
 
       <body className="bg-black text-white">
+        <AdSenseScript />
         {/* Structured Data for SEO */}
         <Script
           id="structured-data"
