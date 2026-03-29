@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "MLBB Insights & Guides – Tips for Safe & Cheap Top Up | Blue Buff",
-  description: "Stay updated with the latest Mobile Legends: Bang Bang news, diamond price guides, and safety tips for recharge in India. Your source for elite MLBB insights.",
+  title: "Gaming News & Pro Guides | BlueBuff MLBB & HOK India",
+  description: "Your definitive source for expert gaming news, meta tier lists, and safety guides. Get the edge in Mobile Legends, Honor of Kings, and other top titles in India.",
 };
 
 export default function BlogLayout({

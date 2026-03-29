@@ -25,11 +25,11 @@ import BottomNav from "@/components/Layout/BottomNav";
 
 export const metadata: Metadata = {
   title: {
-    default: "MLBB Top Up India – Buy Cheapest Diamonds Instantly | bluebuff.in",
-    template: "%s | MLBB Top Up India – Buy Cheapest Diamonds Instantly",
+    default: "BlueBuff | Premium Gaming Top-Up & Insights – India's Most Trusted Store",
+    template: "%s | BlueBuff Gaming",
   },
   description:
-    "Safe & instant MLBB diamond top up in India. Cheapest rates for Weekly Pass, Starlight & skins. Secure UPI/Paytm payments with 5-minute delivery. Trusted by thousands.",
+    "Instant, safe, and cheapest top-ups for MLBB, Honor of Kings, and more. Experience elite 2-minute delivery, secure UPI payments, and expert gaming insights on India's premier top-up platform.",
   keywords: [
     "mlbb recharge india cheap",
     "mlbb top up india instant",

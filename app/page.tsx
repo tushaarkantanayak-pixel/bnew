@@ -3,9 +3,9 @@ import HomeSection from "@/components/Home/Home";
 import WhatsAppQRPopup from "@/components/WhatsAppQRPopup";
 
 export const metadata = {
-  title: "MLBB Top Up India – Buy Cheapest Diamonds Instantly | bluebuff.in",
+  title: "BlueBuff | India's #1 Premium Gaming Top-Up Store – Instant & Safe",
   description:
-    "Safe & instant MLBB diamond top up in India. Cheapest rates for Weekly Pass, Starlight & skins. Secure UPI/Paytm payments with 5-minute delivery. Trusted by thousands.",
+    "India's most trusted gaming top-up destination. Get instant diamonds, tokens, and UC for MLBB, Honor of Kings, and more with 24/7 automated delivery and secure UPI.",
   keywords: [
     "mlbb recharge india cheap",
     "mlbb top up india instant",

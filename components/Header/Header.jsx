@@ -17,7 +17,9 @@ const HEADER_CONFIG = {
   },
 
   nav: [
+    { label: "Top-Up", href: "/games", icon: <FiShoppingBag size={14} /> },
     { label: "Region Check", href: "/region", icon: <FiCompass size={14} /> },
+    { label: "News", href: "/blog", icon: <FiLayers size={14} /> },
     { label: "Services", href: "/services", icon: <FiGrid size={14} /> },
   ],
 
@@ -240,23 +242,25 @@ export default function Header() {
     >
       <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-14">
+      <div className="w-full px-4 md:px-8">
+        <div className="flex items-center justify-between h-14 md:h-16">
 
-          <Link href="/" className="relative z-10 flex-shrink-0">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Image
-                src={HEADER_CONFIG.logo.src}
-                alt={HEADER_CONFIG.logo.alt}
-                width={HEADER_CONFIG.logo.width}
-                height={HEADER_CONFIG.logo.height}
-                priority
-                className="h-9 w-auto transition-all duration-300"
-              />
-            </motion.div>
-          </Link>
+          <div className="flex-1 flex items-center justify-start">
+            <Link href="/" className="relative z-10 flex-shrink-0">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Image
+                  src={HEADER_CONFIG.logo.src}
+                  alt={HEADER_CONFIG.logo.alt}
+                  width={HEADER_CONFIG.logo.width}
+                  height={HEADER_CONFIG.logo.height}
+                  priority
+                  className="h-8 md:h-10 w-auto transition-all duration-300"
+                />
+              </motion.div>
+            </Link>
+          </div>
 
-          <nav className="hidden xl:flex items-center space-x-1 flex-1 justify-center mr-4">
+          <nav className="hidden xl:flex items-center space-x-0.5 justify-center flex-shrink-0">
             {HEADER_CONFIG.nav.map((item) => (
               <Link
                 key={item.href}
@@ -300,7 +304,7 @@ export default function Header() {
               </motion.button>
             </div>
 
-            <div className="hidden lg:flex max-w-[200px] xl:max-w-md relative group flex-1">
+            <div className="hidden lg:flex max-w-[140px] xl:max-w-[180px] relative group">
               <div className="relative w-full">
                 <input
                   type="text"
@@ -395,7 +399,7 @@ export default function Header() {
 
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3" ref={dropdownRef}>
+          <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3" ref={dropdownRef}>
             <ThemeToggle />
 
             <motion.button
