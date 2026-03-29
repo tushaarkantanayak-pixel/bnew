@@ -330,7 +330,7 @@ export default async function RootLayout({
             })
           }}
         />
-        <GoogleAnalytics gaId="G-CKCKWLGJ9N" />
+        <GoogleAnalytics gaId="G-QG74Y0FC46" />
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
           <Header />
 
@@ -390,7 +390,7 @@ export default async function RootLayout({
         </Script>
 
       </body>
-      <GoogleAnalytics gaId="G-CKCKWLGJ9N" />
+      <GoogleAnalytics gaId="G-QG74Y0FC46" />
       {/* <script src="https://quge5.com/88/tag.min.js" data-zone="191906" async data-cfasync="false"></script> */}
     </html>
   );
