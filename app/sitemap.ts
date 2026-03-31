@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: "daily" as const, priority: 0.8 },
     { url: `${baseUrl}/blog/mlbb`, lastModified: now, changeFrequency: "daily" as const, priority: 0.8 },
     { url: `${baseUrl}/blog/hok`, lastModified: now, changeFrequency: "daily" as const, priority: 0.8 },
+    { url: `${baseUrl}/blog/genshin`, lastModified: now, changeFrequency: "daily" as const, priority: 0.8 },
   ];
 
   // 2. Dynamic Blog Routes from BLOGS_DATA

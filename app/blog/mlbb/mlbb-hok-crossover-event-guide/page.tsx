@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
+import { FiTrendingUp, FiStar, FiShield, FiCheck, FiAlertCircle } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: "How to Master the Honor of Kings x MLBB Crossover Event",
@@ -18,66 +19,140 @@ export default function BlogPage() {
       image="/blog/mlbb-hok.png"
       game="MLBB"
     >
-      <p className="text-lg md:text-xl font-medium !opacity-100 italic border-l-4 border-[var(--accent)] pl-6 py-2 bg-[var(--accent)]/5 rounded-r-2xl">
-        The crossover of the century has finally arrived! In a historic collaboration, <strong>Mobile Legends: Bang Bang (MLBB) and Honor of Kings (HOK)</strong> have joined forces for a massive global event in 2026. This isn't just a simple skin drop; it's a complete thematic overhaul of the Land of Dawn. Here’s everything you need to know to master the <strong>HOK x MLBB event</strong> and unlock every exclusive reward.
-      </p>
+      <section className="space-y-8">
+        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 p-4 opacity-10"><FiTrendingUp size={80} /></div>
+          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
+            "The CROSSOVER OF THE CENTURY has arrived! MLBB and Honor of Kings join forces in 2026 for a massive global event. This isn't just a skin drop—it's a complete thematic overhaul of the Land of Dawn."
+          </p>
+        </div>
 
-      <h2>The Legend of Two Worlds: Event Overview 🌏</h2>
-      <p>
-        The 2026 <strong>MLBB x Honor of Kings collaboration</strong> introduces the "Dual-World Quest" system. For the first time, players can earn rewards by competing in specific challenges that bridge the gap between these two MOBA giants. The event features a limited-time draw, a unique quest board, and a community-wide "World Pillar" challenge that unlocks server-wide bonuses as players progress.
-      </p>
+        <p className="opacity-70 leading-relaxed">
+          The 2026 <strong>MLBB x Honor of Kings collaboration</strong> introduces the "Dual-World Quest" system. For the first time, players can earn rewards by competing in specific challenges that bridge the gap between these two MOBA giants. This guide covers everything from <strong>exclusive skin reveals</strong> to <strong>F2P reward farming</strong>.
+        </p>
+      </section>
 
-      <h2>Exclusive HOK x MLBB Skins: Who Got the Look? 🎭</h2>
-      <p>
-        The centerpiece of the collaboration is the set of high-tier crossover skins. These aren't just recolors; they feature entirely new skill effects, voice lines, and recall animations inspired by HOK’s legendary aesthetic.
-      </p>
+      <section className="pt-12">
+        <div className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
+            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The Skin <span className="text-[var(--accent)]">Showcase</span></h2>
+        </div>
+        
+        <p className="opacity-70 leading-relaxed mb-8">
+            The centerpiece of the collaboration is the set of high-tier crossover skins. These aren't just recolors; they feature entirely new skill effects, voice lines, and recall animations inspired by HOK’s legendary aesthetic. In 2026, the <strong>MLBB skin meta</strong> has shifted toward these "Dual-Identity" transformations, where a hero's entire visual language changes to match their crossover counterpart.
+        </p>
 
-      <h3>Chou - The Dragon Awakens (Legend Grade)</h3>
-      <p>
-        Inspired by HOK's classic warrior designs, <strong>Chou</strong> receives a stunning transformation. His Jeet Kune Do skills are now infused with dragon-themed visual effects, making every kick a cinematic experience.
-      </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { name: "Chou", role: "Warrior", grade: "Legend", desc: "Spear of the Zenith transformation with dragon-themed Jeet Kune Do effects." },
+            { name: "Guinevere", role: "Mage / Fighter", grade: "Collector", desc: "Lotus Princess design featuring glowing petal trails and a cherry blossom ultimate." },
+            { name: "Arlott", role: "Assassin", grade: "Event Ltd", desc: "Celestial Spear aesthetic blending HOK's elite designs with Arlott's dash mastery." }
+          ].map((skin, i) => (
+            <div key={i} className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                <div className="flex items-center justify-between mb-3">
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-1 rounded">{skin.grade}</span>
+                    <FiStar className="text-[var(--accent)]" />
+                </div>
+                <h3 className="text-lg font-black uppercase italic tracking-tighter mb-2">{skin.name}</h3>
+                <p className="text-[10px] leading-relaxed opacity-60 m-0">{skin.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <h3>Guinevere - Lotus Princess (Collector Grade)</h3>
-      <p>
-        <strong>Guinevere</strong> takes on the mantle of a royal HOK princess. Her "Violet Pulse" skill now leaves a trail of glowing lotus petals, and her ultimate "Violet Requiem" creates a massive cherry blossom vortex.
-      </p>
+      <section className="pt-12 space-y-6 text-sm">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter">The World Pillar <span className="text-[var(--accent)]">Community Hub</span></h2>
+        <p className="opacity-80 leading-relaxed">
+            One of the most unique aspects of the <strong>HOK x MLBB event</strong> is the "World Pillar Project." This is a global progression system where every match played by the community contributes to a collective milestone. As the pillar grows, all players—regardless of their rank or diamond spending—unlock <strong>exclusive map themes</strong> and shared passive bonuses.
+        </p>
+        <p className="opacity-80 leading-relaxed">
+            In previous collaborations, events were often isolated to the individual player. However, the 2026 <strong>Honor of Kings partnership</strong> marks a shift toward a more unified global MOBA experience. By participating in the World Pillar, you aren't just farming for yourself; you're helping the entire Indian server unlock the "Celestial Arena" map skin, which is widely considered the <strong>best map aesthetic in MLBB history</strong>.
+        </p>
+      </section>
 
-      <h3>Arlott - Spear of the Zenith (Limited Event)</h3>
-      <p>
-        A more aggressive design for <strong>Arlott</strong>, blending HOK’s celestial spear techniques with his signature dash-and-burst gameplay. This skin is only available through the "Legacy Draw" during the event window.
-      </p>
+      <section className="pt-12 space-y-6 text-sm">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter italic">Cultural Impact of <span className="text-[var(--accent)]">MOBA Collaborations</span></h2>
+        <p className="opacity-80 leading-relaxed">
+            The crossover between <strong>Mobile Legends and Honor of Kings</strong> isn't just about gameplay—it's a massive cultural milestone for the mobile gaming community. For years, these two titles were seen as fierce rivals, competing for the top spot in the global market. Seeing them join forces shows a new level of maturity in the industry, where player experience is prioritized over corporate competition.
+        </p>
+        <p className="opacity-80 leading-relaxed">
+            For <strong>Indian MLBB players</strong>, this event is particularly significant. It brings the high-fidelity, polished aesthetic of Honor of Kings directly into the game they've mastered over the years. It's a fresh take on familiar heroes, giving long-time players a reason to dive back into the grind with renewed excitement. This isn't just an event; it's a <strong>celebration of mobile MOBA history</strong>.
+        </p>
+      </section>
 
       <div className="bg-[var(--card)] border border-[var(--border)] p-10 rounded-[40px] my-16 shadow-xl relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent)]" />
-        <h3 className="italic font-black uppercase text-[var(--accent)] mb-4">India Diamond Strategy 🛡️</h3>
-        <p className="text-sm italic opacity-70 m-0">
-          Limited-time crossover events can be expensive. For <strong>MLBB fans in India</strong>, the best way to participate without breaking the bank is to leverage the daily discount on event draws. Ensure your account is ready with a <strong>fast and cheap MLBB diamond recharge</strong> from BlueBuff to catch the lucky hour bonuses.
-        </p>
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <FiShield size={20} className="text-[var(--accent)]" />
+            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">India Diamond Strategy 🛡️</h3>
+          </div>
+          <p className="text-sm italic opacity-70 mb-4 font-medium">
+            Limited-time crossover events can be expensive. For <strong>MLBB fans in India</strong>, leveraging the daily discount on event draws is the key to getting these skins cheap. 
+          </p>
+          <p className="text-sm italic opacity-70 m-0">
+            Ensure your account is ready with a <strong>fast and cheap MLBB diamond recharge</strong> from <strong>BlueBuff</strong> to catch the lucky hour bonuses and bonus token events.
+          </p>
+        </div>
       </div>
 
-      <h2>How to Farm Legacy Fragments (F2P Guide) 🌾</h2>
-      <p>
-        If you're a Free-to-Play (F2P) player, don't worry! You can still earn several high-quality rewards by farming "Legacy Fragments."
-      </p>
-      <ol className="space-y-4 my-8">
-        <li><strong>Daily Log-in:</strong> Simply opening the game grants you 5 Fragments daily.</li>
-        <li><strong>Team-up Bonus:</strong> Play 3 matches with friends daily to earn a "World Fragment Case."</li>
-        <li><strong>Crossover Missions:</strong> Complete specific tasks like "Kill 10 Lords" or "Destroy 15 Turrets" to unlock the fragment milestone rewards.</li>
-      </ol>
+      <section className="space-y-6">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter">F2P <span className="text-[var(--accent)]">Event Checklist</span></h2>
+        <p className="opacity-70 leading-relaxed text-sm">
+            Don't have diamonds? No problem. You can still unlock high-tier rewards like <strong>Event Borders, Emotes, and potentially a Special Skin</strong> by following this daily routine:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            "Login daily for free 'Legacy Fragments'",
+            "Share the event page once a week",
+            "Win 3 matches in a party daily",
+            "Destroy 15 turrets total this week",
+            "Kill 10 Lords or Turtles in Rank",
+            "Reach Level 10 in the Crossover Pass"
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-[var(--card)]/40 border border-[var(--border)] italic">
+              <div className="w-5 h-5 rounded-md bg-[var(--accent)]/20 border border-[var(--border)]/30 flex items-center justify-center flex-shrink-0">
+                <FiCheck size={12} className="text-[var(--accent)]" />
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-tight">{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <h2>The Legacy Draw: Spend Your Diamonds Wisely 💎</h2>
-      <p>
-        If you're aiming for the Legend skins, wait for the **Bonus Recharge Events**! Mobile Legends typically hosts two "Recharge Tasks" during major collaborations. By waiting for these dates, you can earn "Free Event Passes" just by topping up diamonds you were already going to spend on the draw.
-        <strong>Tip:</strong> The first 10-draw always guarantees a permanent event item (Skin, Border, or Emote).
-      </p>
+      <section className="pt-12 space-y-6">
+        <div className="p-8 rounded-[32px] bg-red-500/5 border border-red-500/20">
+          <div className="flex items-center gap-3 mb-4 text-red-400">
+            <FiAlertCircle size={20} />
+            <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm">Pro Tip: The Bonus Token Phase</h4>
+          </div>
+          <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
+            Never spend all your diamonds on Day 1! Wait for the <strong>Bonus Recharge Phases</strong>. Mobile Legends traditionally hosts two phases where topping up just 250 diamonds grants you <strong>30+ free draw tokens</strong>. This effectively cuts the cost of a Collector skin in half. Use <strong>BlueBuff</strong> for instant delivery during these peak hours to avoid missing out.
+          </p>
+        </div>
+        
+        <div className="p-8 rounded-[32px] bg-[var(--accent)]/5 border border-[var(--border)]">
+            <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm mb-4">Conclusion: A New Era for MOBA</h4>
+            <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
+                The <strong>HOK x MLBB event</strong> represents a milestone in gaming collaborations. Whether you're here for the legendary skins or just the new map aesthetics, this event is one for the history books. Keep grinding those fragments and good luck on your draws!
+            </p>
+        </div>
+      </section>
 
-      <h2>Conclusion: A New Era for MOBA</h2>
-      <p>
-        The <strong>HOK x MLBB event</strong> represents a new level of collaboration in the gaming industry. Whether you're here for the legendary skins or just to enjoy the new map aesthetics, this event is one for the history books.
-      </p>
+      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want the exclusive Chou Legend? Top up safely.</p>
+        <div className="flex justify-center">
+            <Link 
+                href="/games/mobile-legends988" 
+                className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
+            >
+                Get MLBB Diamonds Now
+            </Link>
+        </div>
+      </section>
 
-      <p className="mt-8">
-        Ready to summon the Dragon Warrior? Visit our <Link href="/games/mobile-legends988" className="text-[var(--accent)] underline font-bold hover:opacity-70 transition-opacity">MLBB Event Shop</Link> to get the best diamond deals and start your HOK x MLBB journey today!
+      <p className="mt-8 text-xs opacity-50 italic">
+        Need help with your <strong>MLBB recharge India UPI</strong>? Contact our support team for instant assistance with your <strong>Honor of Kings crossover event</strong> top-ups.
       </p>
     </BlogPostLayout>
   );

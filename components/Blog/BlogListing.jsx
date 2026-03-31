@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   FiSearch,
   FiClock,
@@ -16,9 +17,10 @@ import {
 import { BLOGS_DATA } from "@/lib/blogData";
 
 /* ================= SETTINGS ================= */
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 25;
 
 export default function BlogListing({ initialGame = "all" }) {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedGame, setSelectedGame] = useState(initialGame);
@@ -66,19 +68,25 @@ export default function BlogListing({ initialGame = "all" }) {
 
   return (
     <section className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
-      <div className="max-w-4xl mx-auto pt-8 md:pt-12 relative z-10">
+      <div className="max-w-4xl mx-auto pt-0 relative z-10">
         <motion.div
-          className="mb-8"
+          className="mb-2"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          {/* 📍 COMPACT BREADCRUMB */}
-          <div className="flex items-center gap-2 mb-4 text-[9px] font-black uppercase tracking-widest opacity-30 italic">
-              <Link href="/blog" className="hover:text-[var(--accent)] transition-colors">News & Blogs</Link>
+          {/* 📍 COMPACT BREADCRUMB WITH BACK ARROW */}
+          <div className="flex items-center gap-2 mb-2 text-[9px] font-[1000] uppercase tracking-widest opacity-40 italic">
+              <button 
+                onClick={() => router.back()} 
+                className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-all group outline-none"
+              >
+                <FiChevronLeft size={10} className="group-hover:-translate-x-1 transition-transform" />
+                <span>Back</span>
+              </button>
               {initialGame !== "all" && (
                   <>
-                      <span>/</span>
-                      <span className="text-[var(--accent)]">{initialGame}</span>
+                      <span className="opacity-20">/</span>
+                      <span className="text-[var(--accent)] opacity-100">{initialGame}</span>
                   </>
               )}
           </div>

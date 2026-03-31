@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
+import { FiTrendingUp, FiStar, FiShield, FiCheck, FiAlertCircle, FiSettings } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: "MLBB Meta Tier List: Best Heroes for Solo Rank March 2026",
@@ -18,71 +19,163 @@ export default function BlogPage() {
       image="/blog/mlbb-meta.png"
       game="MLBB"
     >
-      <p className="text-lg md:text-xl font-medium !opacity-100 italic border-l-4 border-[var(--accent)] pl-6 py-2 bg-[var(--accent)]/5 rounded-r-2xl">
-        The meta has shifted! With the massive March 2026 patch in Mobile Legends, the power dynamics in the Land of Dawn have seen a significant overhaul. Whether you're a solo rank warrior or a coordinated team player, staying ahead of the meta is the only way to reach <strong>Mythic Immortal</strong> quickly. Here is your definitive, pro-vetted guide to the best MLBB heroes for solo rank this month.
-      </p>
+      <section className="space-y-8">
+        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 p-4 opacity-10"><FiTrendingUp size={80} /></div>
+          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
+            "The LAND OF DAWN is shifting! With the massive MARCH 2026 update, the power dynamics in rank are completely different. If you aren't picking these <strong>S-Tier MLBB Meta Heroes</strong>, you're essentially playing with a handicap."
+          </p>
+        </div>
 
-      <h2>The Current Meta State: Assassins & High Mobility 💨</h2>
-      <p>
-        March 2026 is officially the month of the assassin. Recent adjustments to jungle expedition speed and the rework of the <strong>Sky Piercer</strong> item have made high-burst, high-mobility killers the undisputed kings of the jungle. If you want to carry your team, you need a hero that can delete enemies instantly and secure objectives before the enemy can react.
-      </p>
+        <p className="opacity-70 leading-relaxed">
+          In the current high-stakes environment of <strong>Mobile Legends: Bang Bang</strong>, victory isn't just about fast fingers; it's about drafting the <strong>S-tier meta heroes</strong> that can dominate their lanes and carry the game. This guide breaks down the current meta so you can climb the ranks with confidence.
+        </p>
+      </section>
 
-      <h2>S-Tier: The Hard Carriers (Must Ban or Pick)</h2>
-      <p>
-        These heroes are currently in a league of their own. They possess extreme carry potential and can often win games even with lackluster teammates.
-      </p>
+      <section className="pt-12">
+        <div className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
+            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The God Tier <span className="text-[var(--accent)]">Lineup</span></h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { name: "Nolan", role: "Jungle", desc: "The fastest farmer in the game. His rift-jumping allows for unmatched jungle clear and gank potential." },
+            { name: "Arlott", role: "Exp / Roam", desc: "A relentless CC machine. His mark-reset mechanic makes him almost impossible to peel once he dives." },
+            { name: "Novaria", role: "Mid Lane", desc: "The queen of vision. Provides long-range snipes and map info that solo queue players desperately need." },
+            { name: "Cici", role: "Exp Lane", desc: "Maximum mobility and %HP damage. She shreds tanks while dancing around the battlefield." }
+          ].map((hero, i) => (
+            <div key={i} className="group p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
+                <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)] italic">{hero.role}</span>
+                    <FiStar className="text-[var(--accent)] opacity-40 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <h3 className="text-xl font-black uppercase italic tracking-tighter mb-2">{hero.name}</h3>
+                <p className="text-[11px] leading-relaxed opacity-60 m-0">{hero.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <h3>Nolan (The Cosmic Jungle King)</h3>
-      <p>
-        Even with targeted nerfs to his Dimensional Rift, <strong>Nolan</strong> remains the fastest farmer in MLBB. His ability to hit Level 4 while others are still at Level 2 makes him a terror in the early game. 
-        <strong>Pro Tip:</strong> Focus on building the <em>Great Dragon Spear</em> early to maximize your cooldown reduction and movement speed.
-      </p>
+      <section className="space-y-6">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter">Top <span className="text-[var(--accent)]">Hero Synergies</span></h2>
+        <p className="opacity-70 leading-relaxed">
+            Drafting a good hero is great, but pairing them with the right teammates is what wins games in <strong>Mythic Rank</strong>. Here are the most dominant <strong>duo and trio combinations</strong> in the March 2026 meta:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] italic">
+                <h4 className="text-[var(--accent)] font-black text-sm uppercase mb-2">The 'Infinite CC' Duo</h4>
+                <p className="text-[11px] leading-relaxed opacity-60"><strong>Arlott + Tigreal:</strong> When Tigreal pulls the entire enemy team, Arlott can dash up to 5 times instantly, deleting the backline before they can even flicker away. This is the <strong>best duo for rank climbing</strong>.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] italic">
+                <h4 className="text-[var(--accent)] font-black text-sm uppercase mb-2">The 'Global Pressure' Trio</h4>
+                <p className="text-[11px] leading-relaxed opacity-60"><strong>Novaria + Nolan + Aldous:</strong> With Novaria and Aldous providing <strong>complete map vision</strong>, Nolan is free to invade with zero risk. This trio forces enemies to play defensively under their towers.</p>
+            </div>
+        </div>
+      </section>
 
-      <h3>Arlott (The Unstoppable Duelist)</h3>
-      <p>
-        Dominating the Exp Lane, <strong>Arlott’s</strong> crowd control chain is nearly impossible to escape in 1v1 situations. His late-game teamfight presence has been buffed, making him a primary target for the first ban phase in high-rank lobbies.
-      </p>
-
-      <h3>Novaria (The Sniper Queen)</h3>
-      <p>
-        In the Mid Lane, <strong>Novaria</strong> provides what solo queue needs most: vision. Her ability to reveal the enemy jungler from across the map prevents your teammates from getting ganked, all while dealing massive poke damage from safety.
-      </p>
+      <section className="pt-12 space-y-6">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter"><FiSettings className="inline mr-2 text-[var(--accent)]" /> Laning Phase <span className="text-[var(--accent)]">Deep Dive</span></h2>
+        <p className="opacity-70 leading-relaxed">
+            The first 5 minutes define the game. If you lose your lane, you lose your pressure. mastering the <strong>MLBB laning phase</strong> is about more than just last-hitting minions; it's about <strong>wave management</strong> and knowing when to rotate.
+        </p>
+        <div className="space-y-4">
+            <div className="p-5 border-l-2 border-[var(--border)] hover:border-[var(--accent)] transition-colors">
+                <h4 className="font-bold text-xs uppercase italic tracking-wider mb-1">1. Frozen Wave Strategy</h4>
+                <p className="text-[11px] opacity-60 leading-relaxed">If you have the <strong>hero advantage</strong> (e.g., Terizla vs. a weak early-game hero), don't push the wave. Stand near the enemy's melee minions and prevent them from getting gold/XP. This forces them to overextend or fall behind by 500+ gold early.</p>
+            </div>
+            <div className="p-5 border-l-2 border-[var(--border)] hover:border-[var(--accent)] transition-colors">
+                <h4 className="font-bold text-xs uppercase italic tracking-wider mb-1">2. Rotation Windows</h4>
+                <p className="text-[11px] opacity-60 leading-relaxed">Clear your wave as fast as possible 30 seconds before the <strong>Turtle spawns</strong>. Always prioritize help over tower plating if you're the Exp Laner. Your presence during the Turtle fight can secure a <strong>Global Gold lead</strong> for your team.</p>
+            </div>
+        </div>
+      </section>
 
       <div className="bg-[var(--card)] border border-[var(--border)] p-10 rounded-[40px] my-16 shadow-xl relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent)]" />
-        <h3 className="italic font-black uppercase text-[var(--accent)] mb-4">India Gaming Insight: Safe Diamonds 💎</h3>
-        <p className="text-sm italic opacity-70 m-0">
-          Climbing to Mythic often requires the right skins and hero unlocks. For <strong>MLBB players in India</strong>, ensuring a safe and <strong>cheap MLBB diamond top-up</strong> is crucial. Always use trusted platforms like BlueBuff to get the best value on your diamond bundles instantly.
-        </p>
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <FiShield size={20} className="text-[var(--accent)]" />
+            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">India Gaming Insight: Safe Diamonds 💎</h3>
+          </div>
+          <p className="text-sm italic opacity-70 mb-4 font-medium">
+            Climbing to Mythic often requires the right skins and hero unlocks. For <strong>MLBB players in India</strong>, ensuring a <strong>safe and cheap MLBB diamond top-up</strong> is crucial. 
+          </p>
+          <p className="text-sm italic opacity-70 m-0">
+            Always use trusted platforms like <strong>BlueBuff</strong> to get the best value on your diamond bundles instantly with <strong>MLBB recharge India UPI</strong>.
+          </p>
+        </div>
       </div>
 
-      <h2>A-Tier: Reliable Solo Rank Staples</h2>
-      <p>
-        While not "broken," these heroes are incredibly strong and dependable picks for consistent climbing.
-      </p>
-      <ul>
-        <li><strong>Terizla (Exp Lane):</strong> The ultimate lane bully. His durability makes him near-immortal in the early game, allowing you to dominate the lane and rotate to mid.</li>
-        <li><strong>Bruno (Gold Lane):</strong> With the current marksman meta favoring burst over sustained DPS, Bruno’s critical hits can delete squishy targets in just two basic attacks.</li>
-        <li><strong>Edith (Gold/Exp):</strong> A hybrid tanker-marksman that provides both CC and massive magic damage. Perfect for teams lacking a solid front line.</li>
-      </ul>
+      <section className="space-y-6">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter">Solo Queue <span className="text-[var(--accent)]">Mental Edge</span></h2>
+        <p className="opacity-70 leading-relaxed">
+            The biggest enemy in solo rank isn't the enemy Nolan—it's <strong>tilt</strong>. Maintaining a <strong>pro mindset</strong> is what separates Mythic players from Epic hardstucks. 
+        </p>
+        <div className="p-8 rounded-[32px] bg-[var(--card)]/40 border border-[var(--border)] border-dashed">
+            <p className="text-[11px] leading-relaxed opacity-80 italic">
+                <strong>The 2-Loss Rule:</strong> If you lose two ranked games in a row, stop. Play a Brawl, watch a pro replay, or go for a walk. Negative momentum is real, and <strong>frustration leads to risky plays</strong>. Remember, even the <strong>top global players</strong> have losing streaks. Your goal is to be consistent, not perfect.
+            </p>
+        </div>
+      </section>
 
-      <h2>The Roamer’s Role: Aggressive Support</h2>
-      <p>
-        In March 2026, passive supports like Estes have fallen slightly out of favor in high-rank solo queue. The meta now favors <strong>aggressive roamers</strong> like:
-      </p>
-      <ul>
-        <li><strong>Khufra:</strong> The perfect counter to the high-mobility assassin meta. Bounce and stop any dash.</li>
-        <li><strong>Minotaur:</strong> His massive AOE knock-up and sustain make him the best pick for initiating game-winning teamfights.</li>
-      </ul>
+      <section className="pt-12 space-y-6">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter">Pro <span className="text-[var(--accent)]">Tactics Checklist</span></h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            "Prioritize Turtle buffs over early kills",
+            "Build Sea Halberd early against Cici/Estes",
+            "Use 'Enemy Missing' pings every 5 seconds",
+            "Counter-pick high mobility with Khufra/Minsithar",
+            "Secure Lord only when 3+ enemies are dead",
+            "Wait for Tank initiation, don't face-tank"
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-[var(--card)]/40 border border-[var(--border)] italic">
+              <div className="w-5 h-5 rounded-md bg-[var(--accent)]/20 border border-[var(--border)]/30 flex items-center justify-center flex-shrink-0">
+                <FiCheck size={12} className="text-[var(--accent)]" />
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-tight">{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <h2>Closing Thoughts: Drafting for Success</h2>
-      <p>
-        Solo rank isn't just about mechanical skill; it's about drafting logically. If you see the enemy pick a high-mobility hero, don't be afraid to pull out an anti-dash counter. Communication is key—even if it's just using the "Request Backup" ping.
-      </p>
+      <section className="pt-12 space-y-6">
+        <div className="p-8 rounded-[32px] bg-red-500/5 border border-red-500/20">
+          <div className="flex items-center gap-3 mb-4 text-red-400">
+            <FiAlertCircle size={20} />
+            <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm">Critical Meta Warning: Item Shifts</h4>
+          </div>
+          <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
+            Magic Penetration vs. Hybrid Armor. Items like <strong>Divine Glaive</strong> and <strong>Genius Wand</strong> are seeing record pick rates as players realize the power of flat penetration against squishy cores. If you're playing an assassin like <strong>Gusion</strong> or <strong>Nolan</strong>, <strong>Sky Piercer</strong> is mandatory for your early-to-mid transition. The execuction threshold at 20 stacks is basically a "free win" button in teamfights.
+          </p>
+        </div>
+        
+        <div className="p-8 rounded-[32px] bg-[var(--accent)]/5 border border-[var(--border)]">
+            <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm mb-4">Final Verdict: Consistency is King</h4>
+            <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
+                The <strong>Mobile Legends Tier List 2026</strong> is always evolving. Whether you're mastering an assassin or holding the line as a tank, consistency is your greatest weapon. Keep practicing your combos, maintain map awareness, and stay positive. The rank of <strong>Mythic Immortal</strong> is not just for the pros—it's for anyone with the discipline to master the current meta. See you in the Land of Dawn!
+            </p>
+        </div>
+      </section>
+
+      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want to dominate the arena? Grab your gear.</p>
+        <div className="flex justify-center">
+            <Link 
+                href="/games/mobile-legends988" 
+                className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
+            >
+                Get MLBB Diamonds Now
+            </Link>
+        </div>
+      </section>
+
 
       <p className="mt-8">
-        Need that <strong>Starlight Pass</strong> or a new <strong>Collector Skin</strong> to show off your Mythic rank? Check out our latest deals on <Link href="/games/mobile-legends988" className="text-[var(--accent)] underline font-bold hover:opacity-70 transition-opacity">MLBB Diamonds in India</Link> and get the edge you deserve.
+        Need a <strong>Starlight Pass</strong> or that new <strong>Collector Skin</strong> to celebrate your rank up? Visit <strong>BlueBuff</strong> for the most <strong>trusted MLBB diamonds India</strong> service. Get your <strong>MLBB recharge India fast delivery</strong> and dominate the Land of Dawn today!
       </p>
+
     </BlogPostLayout>
   );
 }

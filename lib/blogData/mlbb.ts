@@ -15,8 +15,8 @@ export const MLBB_BLOGS_DATA: BlogPost[] = [
     readingTime: "8 min read",
     image: "/blog/mlbb-meta.png",
     featured: true,
-    keywords: ["mlbb tier list march 2026", "best solo rank heroes mlbb", "carried reach mythic"],
-    tags: ["Tier List", "Meta", "Ranking"],
+    keywords: ["mlbb meta tier list march 2026", "best heroes for solo rank mlbb", "reach mythic immortal mlbb", "cheap mlbb diamond top-up india", "mlbb recharge india upi"],
+    tags: ["Tier List", "Meta", "Ranking", "Solo Rank"],
   },
   {
     id: "mlbb-2",
