@@ -11,14 +11,15 @@ const ROTATE_INTERVAL = 4500;
 /* ================= WHATSAPP BANNERS ================= */
 const BANNERS = [
   {
-    id: "discount",
-    title: "PREMIUM WHATSAPP DEALS",
-    subtitle: "Unlock 1–5% exclusive discount",
-    badge: "VIP SAVE",
+    id: "diamonds",
+    title: "MLBB DIAMOND TOP-UP",
+    subtitle: "INSTANT RECHARGE & 24/7 SUPPORT",
+    badge: "INSTANT",
     icon: <FiZap />,
-    color: "#eab308",
-    link: "https://wa.me/919178521537?text=Hi%20I%20want%205%25%20OFF",
+    color: "#a855f7",
+    link: "https://wa.me/919178521537?text=I%20want%20to%20purchase%20diamonds",
   },
+
   {
     id: "bgmi",
     title: "BGMI TACTICAL DROP 🔥",
