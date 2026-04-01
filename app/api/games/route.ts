@@ -170,64 +170,75 @@ export async function GET() {
       return updatedGame;
     };
 
-    /* ================= FILTER GAMES ================= */
-    const excludedGameSlugs = [
-      "test-1637",
-      "mobile-legends-backup826",
-      "ph-value-pass588",
-      "value-pass-ml948",
-
+    /* ================= FILTER GAMES (WHITELIST) ================= */
+    const ALLOWED_SLUGS = [
+      "mobile-legends988",
+      "mlbb-double332",
+      "sgmy-mlbb893",
+      "magic-chess-gogo-india924",
+      "mlbb-indo42",
+      "mlbb-russia953",
+      "pubg-mobile138",
+      "genshin-impact742",
+      "honor-of-kings57",
+      "wuthering-of-waves464",
+      "where-winds-meet280",
+      "mlbb-smallphp980",
+      "weeklymonthly-bundle931"
     ];
 
-    const filteredGames =
-      data?.data?.games
+    // manual games that are handled locally
+    const manualGamesLocal = [
+      {
+        gameName: "Clash of Clans",
+        gameSlug: "coc-manual",
+        gameFrom: "Supercell",
+        gameAvailablity: true,
+        gameImageId: { image: COC_IMAGE },
+        isManual: true,
+        tagId: {
+          tagName: "Manual",
+          tagBackground: "#f59e0b",
+          tagColor: "#ffffff",
+        },
+      },
+      {
+        gameName: "Starlight Card",
+        gameSlug: "starlight-card-manual",
+        gameFrom: "Moonton",
+        gameAvailablity: true,
+        gameImageId: { image: STARLIGHT_IMAGE },
+        isManual: true,
+        tagId: {
+          tagName: "Manual",
+          tagBackground: "#f59e0b",
+          tagColor: "#ffffff",
+        },
+      },
+      {
+        gameName: "BGMI",
+        gameSlug: "bgmi-manual",
+        gameFrom: "Krafton",
+        gameAvailablity: true,
+        gameImageId: { image: "/game-assets/bgmi-logo.webp" },
+        isManual: true,
+        tagId: {
+          tagName: "Manual",
+          tagBackground: "#f59e0b",
+          tagColor: "#ffffff",
+        },
+      }
+    ];
+
+    const filteredGames = [
+      ...(data?.data?.games
         ?.filter(
-          (game: any) => !excludedGameSlugs.includes(game.gameSlug)
+          (game: any) => ALLOWED_SLUGS.includes(game.gameSlug) || game.isManual === true
         )
-        ?.map(normalizeGame) || [];
+        ?.map(normalizeGame) || []),
+      ...manualGamesLocal
+    ];
 
-    // Add COC Manual
-    filteredGames.push({
-      gameName: "Clash of Clans",
-      gameSlug: "coc-manual",
-      gameFrom: "Supercell",
-      gameAvailablity: true,
-      gameImageId: {
-        image: COC_IMAGE,
-      },
-      tagId: {
-        tagName: "Manual",
-        tagBackground: "#f59e0b",
-        tagColor: "#ffffff",
-      },
-    });
-
-    // Add Starlight Card
-    filteredGames.push({
-      gameName: "Starlight Card",
-      gameSlug: "starlight-card-manual",
-      gameFrom: "Moonton",
-      gameAvailablity: true,
-      gameImageId: {
-        image: STARLIGHT_IMAGE,
-      },
-      tagId: {
-        tagName: "Manual",
-        tagBackground: "#f59e0b",
-        tagColor: "#ffffff",
-      },
-    });
-
-    // Add BGMI Manual
-    filteredGames.push({
-      gameName: "BGMI",
-      gameSlug: "bgmi-manual",
-      gameFrom: "Krafton",
-      gameAvailablity: true,
-      gameImageId: {
-        image: "/game-assets/bgmi-logo.webp",
-      },
-    });
 
     /* ================= FILTER CATEGORY GAMES ================= */
     const filteredCategories =
@@ -235,7 +246,7 @@ export async function GET() {
         ...cat,
         gameId:
           cat.gameId
-            ?.filter((game: any) => game.gameSlug !== "test-1637")
+            ?.filter((game: any) => ALLOWED_SLUGS.includes(game.gameSlug) || game.isManual === true || game.gameSlug?.includes("manual"))
             ?.map(normalizeGame) || [],
       })) || [];
 
