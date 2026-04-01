@@ -100,12 +100,7 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
             )}
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]/40 group-hover:bg-[var(--accent)] transition-colors shadow-[0_0_8px_var(--accent)]" />
-            <p className="text-[9px] font-bold uppercase tracking-tight text-[var(--muted)]">
-              {game.gameFrom}
-            </p>
-          </div>
+
         </div>
       </Link>
     </motion.div>

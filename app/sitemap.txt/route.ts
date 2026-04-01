@@ -56,7 +56,6 @@ export async function GET() {
             headers: {
                 "x-api-key": process.env.API_SECRET_KEY || "",
             },
-            next: { revalidate: 3600 },
         });
 
         if (response.ok) {

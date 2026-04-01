@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { BLOGS_DATA } from "@/lib/blogData";
 
-export const revalidate = 3600; // Revalidate every hour
+
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://bluebuff.in";
@@ -73,7 +73,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const response = await fetch("https://game-off-ten.vercel.app/api/v1/game", {
       headers: { "x-api-key": process.env.API_SECRET_KEY || "" },
-      next: { revalidate: 1800 },
     });
 
     if (response.ok) {
