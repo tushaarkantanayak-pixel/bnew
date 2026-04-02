@@ -31,7 +31,8 @@ export default function GamesPage() {
   const WEEKLY_PASS_SLUG = "mobile-legends988";
 
   const outOfStockGames = [
-    "mobile-legends-backup826"
+    "mobile-legends-backup826",
+
   ];
 
   const outOfStockSet = useMemo(() => new Set(outOfStockGames), []);
@@ -143,27 +144,27 @@ export default function GamesPage() {
         <Icon size={20} />
       </div>
       <div>
-        <h2 className="text-lg sm:text-xl font-black uppercase tracking-tighter italic text-white leading-none mb-1.5">
+        <h2 className="text-[15px] sm:text-base font-bold text-[var(--foreground)] leading-none mb-1.5">
           {title}
         </h2>
         <div className="flex items-center gap-2.5">
           <div className="h-1 w-8 bg-[var(--accent)] rounded-full shadow-[0_0_10px_rgba(var(--accent-rgb),0.5)]" />
-          <span className="text-[9px] font-black text-[var(--muted)] uppercase tracking-[0.15em]">
+          <span className="text-[10px] font-bold text-[var(--muted)] tracking-tight">
             {count} Items Found
           </span>
         </div>
       </div>
-      <div className="flex-1 h-px bg-gradient-to-r from-white/5 to-transparent ml-2" />
+      <div className="flex-1 h-px bg-gradient-to-r from-[var(--border)]/50 to-transparent ml-2" />
     </div>
   );
 
   const TabButton = ({ id, label, icon: Icon }) => (
     <button
       onClick={() => setActiveTab(id)}
-      className={`flex-1 flex items-center justify-center gap-1.5 px-1.5 py-2 rounded-lg font-black uppercase tracking-tight text-[8px] sm:text-[9px] italic transition-all duration-300 border
+      className={`flex-1 flex items-center justify-center gap-1.5 px-1.5 py-2 rounded-lg font-bold tracking-tight text-[10px] transition-all duration-300 border
         ${activeTab === id
-          ? "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/40 shadow-[0_0_10px_rgba(var(--accent-rgb),0.1)]"
-          : "bg-black/20 text-[var(--muted)] border-white/5 hover:border-white/10 hover:bg-black/40"
+          ? "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/40"
+          : "bg-[var(--card)] text-[var(--muted)] border-[var(--border)] hover:bg-[var(--border)]/50"
         }`}
     >
       <Icon size={12} className={`shrink-0 ${activeTab === id ? "fill-current" : ""}`} />
@@ -249,8 +250,8 @@ export default function GamesPage() {
             <TabButton id="all" label="All" icon={FiGrid} />
             <TabButton id="mlbb" label="MLBB" icon={FiZap} />
             <TabButton id="others" label="Others" icon={FiPackage} />
-            <TabButton id="streaming" label="Streaming" icon={FiTv} />
-            <TabButton id="memberships" label="Membership" icon={FiTrendingUp} />
+            <TabButton id="streaming" label="Stream" icon={FiTv} />
+            <TabButton id="memberships" label="Member" icon={FiTrendingUp} />
           </div>
         </div>
 
@@ -280,7 +281,7 @@ export default function GamesPage() {
             ) : (
               <div>
                 {/* 1. FEATURED */}
-                {(activeTab === "all" || activeTab === "others") && (processedFeaturedGames.filter(g => activeTab !== "others" || !isMlbbGame(g)).length > 0) && (
+                {/* {(activeTab === "all" || activeTab === "others") && (processedFeaturedGames.filter(g => activeTab !== "others" || !isMlbbGame(g)).length > 0) && (
                   <div className="mb-20">
                     <SectionHeader
                       title="Elite Picks"
@@ -293,7 +294,7 @@ export default function GamesPage() {
                       : <GameList games={processedFeaturedGames.filter(g => activeTab !== "others" || !isMlbbGame(g))} isOutOfStock={isOutOfStock} />
                     }
                   </div>
-                )}
+                )} */}
 
                 {/* 2. MLBB VARIANT */}
                 {(activeTab === "all" || activeTab === "mlbb") && processedMlbbGames.length > 0 && (
@@ -329,7 +330,7 @@ export default function GamesPage() {
 
                 {/* 4. OTT SECTION */}
                 {(activeTab === "all" || activeTab === "streaming") && otts?.items?.length > 0 && !searchQuery && (
-                  <div className="mb-10 border-t border-white/5 pt-10">
+                  <div className="mb-10 border-t border-[var(--border)]/50 pt-10">
                     <SectionHeader
                       title="Streaming Assets"
                       icon={FiTv}
@@ -347,7 +348,7 @@ export default function GamesPage() {
 
                 {/* 5. MEMBERSHIP SECTION */}
                 {(activeTab === "all" || activeTab === "memberships") && memberships?.items?.length > 0 && !searchQuery && (
-                  <div className="mb-10 border-t border-white/5 pt-10">
+                  <div className="mb-10 border-t border-[var(--border)]/50 pt-10">
                     <SectionHeader
                       title="Elite Memberships"
                       icon={FiPackage}

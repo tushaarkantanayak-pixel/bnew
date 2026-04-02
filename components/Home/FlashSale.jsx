@@ -12,10 +12,21 @@ const flashSaleData = [
         name: "Weekly Pass",
         game: "MLBB",
         image: "/game-assets/weeklypass.jpg",
-        price: "₹140",
+        price: "₹142",
         originalPrice: "₹175",
         slug: "mobile-legends988?type=weekly-pass",
         badge: "Hot"
+    },
+
+    {
+        id: 3,
+        name: "Starlight Card",
+        game: "MLBB",
+        image: "/game-assets/starkight.webp",
+        price: "₹225",
+        originalPrice: "₹299",
+        slug: "starlight-card-manual",
+        badge: "New"
     },
     {
         id: 2,
@@ -26,16 +37,6 @@ const flashSaleData = [
         originalPrice: "₹450",
         slug: "genshin-impact742",
         badge: "Sale"
-    },
-    {
-        id: 3,
-        name: "Starlight Card",
-        game: "MLBB",
-        image: "/game-assets/starkight.webp",
-        price: "₹225",
-        originalPrice: "₹299",
-        slug: "starlight-card-manual",
-        badge: "New"
     },
     // {
     //     id: 3,
@@ -52,7 +53,7 @@ const flashSaleData = [
         name: "Weekly Bundle",
         game: "MLBB",
         image: "/game-assets/weekly-monthly-bundle.jpg",
-        price: "₹78",
+        price: "₹79",
         originalPrice: "₹100",
         slug: "weeklymonthly-bundle931",
         badge: "Value"
@@ -76,9 +77,9 @@ export default function FlashSale() {
     }, []);
 
     return (
-        <section className="relative py-2 px-4 overflow-hidden border-b border-white/5 bg-black/10">
+        <section className="relative py-2 px-4 overflow-hidden border-b border-[var(--border)] bg-black/5">
             {/* Background Decorative */}
-            <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-amber-500/5 blur-[80px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-amber-500/5 blur-[60px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto">
                 {/* Compact Header */}
@@ -87,7 +88,7 @@ export default function FlashSale() {
                         <div className="p-1 rounded-lg bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.3)] shrink-0">
                             <FiZap size={12} fill="currentColor" />
                         </div>
-                        <h2 className="text-base sm:text-lg font-black uppercase tracking-tighter italic text-[var(--foreground)]">
+                        <h2 className="text-[15px] sm:text-base font-bold text-[var(--foreground)]">
                             Flash <span className="text-amber-500">Sale</span>
                         </h2>
                     </div>
@@ -119,7 +120,7 @@ export default function FlashSale() {
                             >
                                 <Link
                                     href={`/games/${item.slug}`}
-                                    className="group relative block w-[140px] sm:w-[160px] md:w-[210px] bg-[var(--card)]/40 backdrop-blur-lg border border-white/5 rounded-[1rem] p-2 transition-all duration-500 hover:border-amber-500/30 hover:bg-amber-500/[0.04] shadow-lg"
+                                    className="group relative block w-[120px] sm:w-[140px] md:w-[180px] bg-[var(--card)]/40 backdrop-blur-lg border border-[var(--border)]/30 rounded-[0.8rem] p-1.5 transition-all duration-500 hover:border-amber-500/30 hover:bg-amber-500/[0.04] shadow-md"
                                 >
                                     {/* Badge */}
                                     <div className="absolute top-3 left-3 z-20">
@@ -142,12 +143,12 @@ export default function FlashSale() {
                                     {/* Compact Info */}
                                     <div className="space-y-0.5">
                                         <p className="text-[7px] md:text-[9px] font-bold text-amber-500/80 uppercase tracking-widest truncate">{item.game}</p>
-                                        <h3 className="text-[11px] md:text-[14px] font-black uppercase tracking-tight text-[var(--foreground)] truncate group-hover:text-amber-500 transition-colors">
+                                        <h3 className="text-[10px] md:text-[12px] font-bold text-[var(--foreground)] truncate group-hover:text-amber-500 transition-colors">
                                             {item.name}
                                         </h3>
 
                                         <div className="flex items-center justify-between">
-                                            <span className="text-[14px] md:text-[16px] font-black italic text-[var(--foreground)]">
+                                            <span className="text-[13px] md:text-[15px] font-bold text-[var(--foreground)]">
                                                 {item.price}
                                             </span>
                                             <span className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] line-through opacity-50 decoration-red-500/50">

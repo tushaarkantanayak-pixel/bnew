@@ -37,13 +37,13 @@ export default function ServiceGridSection({
             <Icon size={20} />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tighter italic">
+            <h2 className="text-lg sm:text-xl font-bold text-[var(--foreground)] leading-none mb-1.5">
               {title}
             </h2>
             <div className="flex items-center gap-2">
               <div className="h-1 w-12 bg-[var(--accent)] rounded-full" />
-              <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-[0.2em]">
-                {total} Elite Items
+              <span className="text-[11px] font-semibold text-[var(--muted)] tracking-tight">
+                {total} Items Found
               </span>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function ServiceGridSection({
       )}
 
       {/* GRID SYSTEM (Match GameCardGrid 3 in a Row) */}
-      <div className="grid grid-cols-3 gap-3 md:gap-5">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 md:gap-4">
         {items.map((item, index) => (
           <motion.div
             key={item.slug}
@@ -113,7 +113,7 @@ export default function ServiceGridSection({
               {/* CONTENT */}
               <div className="p-3 sm:p-4 relative">
                 <div className="mb-1 flex items-center justify-between gap-2">
-                  <h3 className="text-[10px] sm:text-xs font-black uppercase tracking-widest italic leading-tight line-clamp-1 transition-colors text-[var(--foreground)] group-hover:text-[var(--accent)]">
+                  <h3 className="text-[10px] sm:text-[11px] font-bold leading-tight line-clamp-2 transition-colors text-[var(--foreground)] group-hover:text-[var(--accent)]">
                     {item.name}
                   </h3>
                   <FiChevronRight className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-all group-hover:translate-x-1" size={14} />

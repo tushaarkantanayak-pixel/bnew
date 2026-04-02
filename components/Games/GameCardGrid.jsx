@@ -23,14 +23,14 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
     >
       <Link
         href={disabled ? "#" : `/games/${game.gameSlug}`}
-        className={`group relative block rounded-3xl overflow-hidden border transition-all duration-500
+        className={`group relative block rounded-2xl overflow-hidden border transition-all duration-500
         ${disabled
             ? "opacity-60 cursor-not-allowed border-[var(--border)] bg-[var(--background)]"
-            : "border-[var(--border)] bg-[var(--card)]/40 hover:border-[var(--accent)]/50 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)]"
+            : "border-[var(--border)] bg-[var(--card)]/40 hover:border-[var(--accent)]/50 hover:shadow-lg"
           }`}
       >
         {/* IMAGE CONTAINER */}
-        <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+        <div className="relative w-full aspect-square overflow-hidden">
           <Image
             src={game.gameImageId?.image || logo}
             alt={game.gameName}
@@ -53,15 +53,16 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
 
           {/* TAG / BADGE */}
           {!disabled && game.tagId && (
-            <div className="absolute top-3 left-3 z-20">
+            <div className="absolute top-2 left-2 z-20">
               <span
-                className="text-[8px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-lg shadow-2xl backdrop-blur-md border border-white/10 flex items-center gap-1.5"
+                className="text-[8px] font-black uppercase tracking-[0.1em] px-2 py-0.5 rounded-md backdrop-blur-xl border flex items-center gap-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-transform hover:scale-105"
                 style={{
-                  background: `${game.tagId.tagBackground}cc`,
-                  color: game.tagId.tagColor,
+                  background: `linear-gradient(135deg, ${game.tagId.tagBackground}dd, ${game.tagId.tagBackground}99)`,
+                  color: "#ffffff",
+                  borderColor: `${game.tagId.tagBackground}66`,
                 }}
               >
-                {game.tagId.tagName === "Manual" && <FiZap size={10} fill="currentColor" />}
+                {game.tagId.tagName === "Manual" && <FiZap size={10} fill="#ffffff" />}
                 {game.tagId.tagName}
               </span>
             </div>
@@ -87,10 +88,10 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
         </div>
 
         {/* CONTENT */}
-        <div className="p-4 relative">
+        <div className="p-2.5 relative">
           <div className="mb-1 flex items-center justify-between gap-2">
             <h3
-              className={`text-[11px] sm:text-xs font-black uppercase tracking-widest italic leading-tight line-clamp-1 transition-colors
+              className={`text-[10px] sm:text-[11px] font-bold leading-tight line-clamp-2 transition-colors
               ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)] group-hover:text-[var(--accent)]"}`}
             >
               {game.gameName}

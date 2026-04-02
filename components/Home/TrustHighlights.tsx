@@ -57,11 +57,11 @@ const HIGHLIGHTS = [
 
 export default function TrustHighlights() {
   return (
-    <section className="py-12 bg-[var(--background)] px-6 overflow-hidden">
+    <section className="py-8 bg-[var(--background)] px-6 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-            <h2 className="text-xl font-black uppercase text-[var(--foreground)] italic tracking-tighter">WHY PLAYERS <span className="text-[var(--accent)]">CHOOSE US</span></h2>
-            <div className="w-12 h-[1px] bg-[var(--accent)]/40 mt-1" />
+        <div className="mb-6">
+            <h2 className="text-[15px] sm:text-base font-bold text-[var(--foreground)] tracking-tight">WHY PLAYERS <span className="text-[var(--accent)]">CHOOSE US</span></h2>
+            <div className="w-8 h-[2px] bg-[var(--accent)]/40 mt-1" />
         </div>
         <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {HIGHLIGHTS.map((item, i) => (
@@ -72,7 +72,7 @@ export default function TrustHighlights() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               whileHover={{ y: -2 }}
-              className="group relative p-5 rounded-2xl bg-[var(--card)]/40 border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all duration-300"
+              className="group relative p-3.5 rounded-xl bg-[var(--card)]/40 border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all duration-300"
             >
               <div className="flex flex-col items-center text-center space-y-3">
                 {/* ICON TAG */}
@@ -81,16 +81,16 @@ export default function TrustHighlights() {
                 </div>
 
                 {/* LABEL */}
-                <div className="text-[8px] font-black uppercase tracking-[0.3em] text-[var(--muted)] opacity-30 italic leading-none">
+                <div className="text-[8px] font-bold text-[var(--muted)] opacity-40 leading-none">
                   {item.label}
                 </div>
 
                 {/* VALUE & SUBTITLE */}
                 <div className="space-y-0.5">
-                  <h3 className="text-xl font-[1000] italic uppercase tracking-tighter text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-none">
+                  <h3 className="text-lg font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-none">
                     {item.value}
                   </h3>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50 italic">
+                  <p className="text-[10px] font-medium text-[var(--muted)] opacity-70">
                     {item.subtitle}
                   </p>
                 </div>

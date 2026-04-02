@@ -83,8 +83,7 @@ export default function HomeQuickActions() {
           className="group relative flex flex-col items-center justify-center py-2 px-1"
         >
           {/* Enhanced Icon Section */}
-          <div className="relative flex items-center justify-center p-2 rounded-2xl transition-all duration-500">
-
+          <div className="relative flex items-center justify-center p-1.5 rounded-2xl transition-all duration-500">
             {/* VALENTINE SPECIAL HIGHLIGHT */}
             {isColorful && (
               <>
@@ -120,8 +119,8 @@ export default function HomeQuickActions() {
               ${isColorful ? "text-rose-500" : ""}
             `}>
               <Icon
-                size={isColorful ? 24 : 22}
-                strokeWidth={isColorful ? 2 : 1.25}
+                size={isColorful ? 22 : 18}
+                strokeWidth={isColorful ? 2 : 1.5}
                 style={{ color: isColorful ? undefined : item.color }}
                 className={`
                   transition-transform duration-500
@@ -134,18 +133,12 @@ export default function HomeQuickActions() {
           {/* Title */}
           <span
             className={`
-              mt-2 text-[9px] font-black tracking-[0.1em] uppercase transition-all duration-300
+              mt-1 text-[8.5px] font-bold tracking-tight transition-all duration-300
               ${isColorful ? "text-rose-500 scale-105" : "text-[var(--muted)] group-hover:text-[var(--foreground)]"}
             `}
           >
             {item.title}
           </span>
-
-          {/* Status Bar */}
-          <div className={`mt-1.5 h-[1.5px] transition-all duration-500 rounded-full ${isColorful ? "w-4 bg-rose-500 opacity-60" : "w-0 group-hover:w-3 opacity-40"
-            }`}
-            style={{ backgroundColor: isColorful ? undefined : item.color }}
-          />
         </Link>
       </motion.div>
     );

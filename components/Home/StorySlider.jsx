@@ -111,7 +111,7 @@ export default function StorySlider() {
                 {/* Status Badge (Flat Premium - No Shadow) */}
                 {item.badge && (
                   <span
-                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[8px] md:text-[8.5px] font-bold text-white uppercase tracking-wider z-20 border border-[var(--background)]"
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[7.5px] md:text-[8px] font-bold text-white uppercase tracking-tight z-20 border border-[var(--background)]"
                     style={{ backgroundColor: item.color || "var(--accent)" }}
                   >
                     <span className="flex items-center gap-1.5">
@@ -125,7 +125,7 @@ export default function StorySlider() {
               </div>
 
               {/* Title - Flat & Clean */}
-              <span className="mt-4 text-[9px] md:text-[10px] font-medium text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors duration-300 tracking-wide text-center uppercase">
+              <span className="mt-3 text-[8.5px] md:text-[9.5px] font-semibold text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors duration-300 tracking-tight text-center">
                 {item.title}
               </span>
             </Link>
