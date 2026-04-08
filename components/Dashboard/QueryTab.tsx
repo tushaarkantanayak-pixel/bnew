@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaPhoneAlt,
@@ -31,24 +31,40 @@ const SUPPORT_CONFIG = {
 export default function QueryTab() {
   const [queryType, setQueryType] = useState("");
   const [queryMessage, setQueryMessage] = useState("");
+  const [queryPhone, setQueryPhone] = useState("");
+  const [queryOrderId, setQueryOrderId] = useState("");
   const [querySuccess, setQuerySuccess] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const canSubmit = !!queryType && !!queryMessage.trim() && !!queryPhone.trim();
+
+  useEffect(() => {
+    const storedPhone = localStorage.getItem("phone");
+    if (storedPhone) setQueryPhone(storedPhone);
+  }, []);
+
   const handleSubmit = async () => {
-    if (!queryType || !queryMessage.trim()) return;
+    if (!canSubmit) return;
     setIsSubmitting(true);
     const storedEmail = localStorage.getItem("email");
-    const storedPhone = localStorage.getItem("phone");
     try {
       const res = await fetch("/api/support/query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: storedEmail, phone: storedPhone, type: queryType, message: queryMessage }),
+        body: JSON.stringify({
+          email: storedEmail,
+          phone: queryPhone.trim(),
+          orderId: queryOrderId.trim() || null,
+          type: queryType,
+          message: queryMessage,
+        }),
       });
       const data = await res.json();
       if (data.success) setQuerySuccess("Message sent successfully!");
       else setQuerySuccess(data.message || "Failed to send. Try again.");
-      setQueryType(""); setQueryMessage("");
+      setQueryType("");
+      setQueryMessage("");
+      setQueryOrderId("");
     } catch {
       setQuerySuccess("Connection error. Try again.");
     } finally {
@@ -127,6 +143,22 @@ export default function QueryTab() {
           </AnimatePresence>
 
           <div className="space-y-3">
+            <input
+              type="tel"
+              className="w-full p-3.5 rounded-xl bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
+              placeholder="Phone No *"
+              value={queryPhone}
+              onChange={(e) => setQueryPhone(e.target.value)}
+            />
+
+            <input
+              type="text"
+              className="w-full p-3.5 rounded-xl bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
+              placeholder="Order ID (Optional)"
+              value={queryOrderId}
+              onChange={(e) => setQueryOrderId(e.target.value)}
+            />
+
             <div className="relative">
               <select
                 value={queryType}
@@ -149,7 +181,7 @@ export default function QueryTab() {
             />
 
             <button
-              disabled={!queryType || !queryMessage || isSubmitting}
+              disabled={!canSubmit || isSubmitting}
               onClick={handleSubmit}
               className="w-full p-3.5 rounded-2xl bg-[var(--accent)] text-black font-black uppercase tracking-widest italic text-[10px] shadow-lg hover:shadow-[0_8px_16px_-4px_rgba(var(--accent-rgb),0.3)] hover:scale-[1.01] active:scale-95 disabled:opacity-30 transition-all flex items-center justify-center gap-2"
             >

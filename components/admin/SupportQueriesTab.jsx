@@ -337,6 +337,7 @@ export default function SupportQueriesTab() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <DetailBlock label="Email" value={activeQuery.email || "N/A"} icon={<Mail size={12} />} />
                   <DetailBlock label="Phone" value={activeQuery.phone || "N/A"} icon={<Phone size={12} />} />
+                  <DetailBlock label="Order ID" value={activeQuery.orderId || "N/A"} icon={<MessageSquare size={12} />} />
                   <DetailBlock label="Type" value={activeQuery.type} emphasize icon={<MessageSquare size={12} />} />
                   <DetailBlock label="Date" value={new Date(activeQuery.createdAt).toLocaleString()} icon={<Clock size={12} />} />
                 </div>
