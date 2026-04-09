@@ -285,7 +285,7 @@ export default function WalletTab({
 
   return (
     <div className="max-w-2xl mx-auto space-y-10">
-      {/* TACTICAL BALANCE MODULE */}
+      {/* BALANCE */}
       <div className="relative group overflow-hidden">
         <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent blur-3xl opacity-20 pointer-events-none" />
         <div className="relative p-6 sm:p-8 rounded-[2.5rem] bg-[var(--card)] border border-[var(--border)] flex items-center justify-between overflow-hidden shadow-sm">
@@ -313,7 +313,7 @@ export default function WalletTab({
         </div>
       </div>
 
-      {/* ACQUISITION INTERFACE */}
+      {/* ADD MONEY */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <div className="space-y-6">
           <AnimatePresence mode="wait">

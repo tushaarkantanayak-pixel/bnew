@@ -94,7 +94,7 @@ export default function OrdersTab() {
         </div>
       </div>
 
-      {/* MISSION LIST */}
+      {/* ORDERS LIST */}
       <div className="min-h-[400px] relative">
         {loading ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
@@ -142,7 +142,7 @@ export default function OrdersTab() {
         )}
       </div>
 
-      {/* TACTICAL PAGINATION */}
+      {/* PAGINATION */}
       {totalPages > 1 && (
         <div className="pt-8 border-t border-[var(--border)] flex justify-center items-center gap-3">
           <button

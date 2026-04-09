@@ -41,13 +41,13 @@ export default function AboutPage() {
           className="mb-20 text-center md:text-left"
         >
           <div className="inline-block px-4 py-1.5 rounded-full bg-[var(--accent)]/5 border border-[var(--accent)]/10 mb-6">
-            <span className="text-[var(--accent)] text-[10px] font-black uppercase tracking-widest italic">Our Identity</span>
+            <span className="text-[var(--accent)] text-[10px] font-black uppercase tracking-widest italic">Who We Are</span>
           </div>
           <h1 className="text-5xl md:text-8xl font-[1000] italic tracking-tighter uppercase leading-[0.85] mb-6">
             ABOUT <span className="text-[var(--accent)]">{BRAND.toUpperCase()}</span>
           </h1>
           <p className="text-[var(--muted)] text-[10px] md:text-xs font-[900] uppercase tracking-[0.4em] opacity-60 italic leading-relaxed max-w-xl">
-            DEFINING THE GOLD STANDARD IN AUTOMATED GAME TOP-UPS
+            THE EASIEST WAY TO TOP UP YOUR FAVOURITE GAMES IN INDIA
           </p>
         </motion.div>
 
@@ -63,14 +63,14 @@ export default function AboutPage() {
               OUR <span className="text-[var(--accent)]">MISSION</span>
             </h2>
             <p className="text-[var(--muted)] text-base md:text-lg leading-relaxed opacity-70 mb-10 italic">
-              {BRAND} was engineered to eliminate the friction in premium gaming transactions. We believe that securing your diamonds, passes, and credits should be as fast as the games you play.
+              {BRAND} makes it super easy to top up your games. We believe buying diamonds, passes, and credits should be quick, simple, and stress-free.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                "Instant automated delivery systems",
-                "24/7 high-availability infrastructure",
-                "Secure Indian payment integrations",
-                "Transparent & market-leading rates"
+                "Your top-up is delivered in seconds",
+                "Available 24/7, every day",
+                "Safe Indian payment options",
+                "Best prices, no hidden charges"
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 py-3 border-b border-[var(--border)] last:border-0 md:last:border-b">
                   <div className="w-5 h-5 rounded-full bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]">
@@ -100,19 +100,19 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                title: "Velocity",
+                title: "Fast",
                 icon: FiZap,
-                desc: "Automated processing ensures credits hit your ID within seconds of confirmation."
+                desc: "Your top-up is delivered automatically within seconds of payment."
               },
               {
-                title: "Fortress",
+                title: "Safe",
                 icon: FiShield,
-                desc: "Bank-grade encryption and verified gateways protect every single transaction."
+                desc: "All payments are secure and your data is always protected."
               },
               {
-                title: "Elite Rates",
+                title: "Best Price",
                 icon: FiTrendingUp,
-                desc: "We negotiate the best deals to ensure you get maximum value for every rupee."
+                desc: "We offer the lowest prices so you get the most for your money."
               }
             ].map((feature, i) => (
               <motion.div

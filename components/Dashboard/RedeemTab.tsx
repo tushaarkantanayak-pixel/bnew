@@ -159,7 +159,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
 
                     <div className="px-5 py-3.5 rounded-2xl bg-blue-500/5 border border-blue-500/10 flex items-center gap-3">
                         <FiShield className="text-blue-500/60" size={12} />
-                        <p className="text-[8px] font-black text-blue-400/60 uppercase tracking-[0.2em]">Secure & Encrypted Processing</p>
+                        <p className="text-[8px] font-black text-blue-400/60 uppercase tracking-[0.2em]">Your code is safe & secure</p>
                     </div>
                 </motion.div>
             </div>
