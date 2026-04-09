@@ -8,16 +8,16 @@ const SERVICES = [
     title: "Reseller Program",
     desc: "Get our lowest prices for your business. Fast delivery and big profits.",
     icon: FiUsers,
-    badge: "ELITE PRICE",
+    badge: "BEST PRICE",
   },
   {
-    title: "Whitelabel Site",
+    title: "Your Own Site",
     desc: "Start your own brand. Get a full website with your name and automation.",
     icon: FiGlobe,
     badge: "FAST SETUP",
   },
   {
-    title: "Custom Portals",
+    title: "Custom Sites",
     desc: "We build special top-up websites with the look and features you want.",
     icon: FiZap,
     badge: "CUSTOM",
@@ -41,7 +41,7 @@ export default function HomeServices() {
         >
           <div className="flex items-center gap-2 mb-1">
             <div className="w-6 h-[1px] bg-[var(--accent)]/30" />
-            <span className="text-[var(--accent)] text-[8px] font-black uppercase tracking-widest italic opacity-40">Scale up</span>
+            <span className="text-[var(--accent)] text-[8px] font-black uppercase tracking-widest italic opacity-40">Grow</span>
           </div>
           <h2 className="text-2xl font-black italic tracking-tighter uppercase leading-none">
             GROW YOUR <span className="text-[var(--accent)]">BUSINESS</span>

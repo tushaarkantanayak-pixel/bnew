@@ -124,11 +124,11 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* CONNECT & ACTION BLOCK */}
+          {/* FIND US & ACTION BLOCK */}
           <div className="md:col-span-3 flex flex-col md:items-end gap-8">
             <div className="space-y-4 md:text-right">
               <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]/80 italic">
-                Connect
+                Find Us
               </h3>
               <div className="flex items-center justify-start md:justify-end gap-2.5">
                 {SOCIALS.map(({ label, href, icon: Icon }) => (

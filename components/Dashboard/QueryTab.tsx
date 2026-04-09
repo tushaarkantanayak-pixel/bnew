@@ -66,7 +66,7 @@ export default function QueryTab() {
       setQueryMessage("");
       setQueryOrderId("");
     } catch {
-      setQuerySuccess("Connection error. Try again.");
+      setQuerySuccess("Something went wrong. Try again.");
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setQuerySuccess(""), 4000);

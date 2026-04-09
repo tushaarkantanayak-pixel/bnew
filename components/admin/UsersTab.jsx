@@ -608,7 +608,7 @@ export default function UsersTab() {
                       }}
                     />
                     {selectedUser.userType === "owner" && (
-                      <p className="text-[11px] text-rose-500 font-medium px-1 italic">Role is restricted and cannot be modified.</p>
+                      <p className="text-[11px] text-rose-500 font-medium px-1 italic">You cannot change this role.</p>
                     )}
                   </div>
                 </DrawerSection>

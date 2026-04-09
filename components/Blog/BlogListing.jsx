@@ -221,7 +221,7 @@ export default function BlogListing({ initialGame = "all" }) {
                 {initialGame === "all" ? "MLBB" : initialGame.toUpperCase()} <span className="text-[var(--accent)]">NEWS & BLOGS</span>
             </h1>
             <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed italic max-w-2xl opacity-40">
-                Your definitive collection of <strong className="text-[var(--foreground)]">{initialGame === "all" ? "game" : initialGame} top up guides</strong>, pricing analysis, and safety protocols. Stay updated with the latest <strong className="text-[var(--foreground)]">mobile legends recharge india fast</strong> tips and diamond bundle value comparisons. We provide the most accurate information for <strong>Mobile Legends players in India</strong> to ensure safe and cheap diamond top-ups.
+                All our <strong className="text-[var(--foreground)]">{initialGame === "all" ? "game" : initialGame} top up guides</strong>, price lists, and safety tips. Stay updated with the latest <strong className="text-[var(--foreground)]">mobile legends recharge india fast</strong> tips and diamond bundle value comparisons. We provide the correct info for <strong>Mobile Legends players in India</strong> to make sure you get cheap diamond top-ups safely.
             </p>
         </motion.div>
       </div>

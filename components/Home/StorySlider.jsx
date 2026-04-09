@@ -63,7 +63,7 @@ const storyData = [
   },
   {
     id: 6,
-    title: "Membership",
+    title: "Go VIP",
     badge: "VIP",
     color: "#ec4899", // Pink
     image: "/membership/silver-m.png",

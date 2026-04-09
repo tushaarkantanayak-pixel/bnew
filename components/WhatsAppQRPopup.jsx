@@ -71,11 +71,11 @@ export default function WhatsAppCommunityPopup() {
                 <div className="space-y-1">
                   <h2 className="text-2xl font-[1000] tracking-tight uppercase italic leading-none text-[var(--foreground)]">
                     Join Our<br />
-                    <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">Community</span>
+                    <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">Group</span>
                   </h2>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--muted)] opacity-50 flex items-center justify-center gap-2">
                     <span className="w-1 h-1 rounded-full bg-blue-500 animate-ping" />
-                    Updates & Giveaways
+                    News & Free Gifts
                   </p>
                 </div>
 
@@ -105,7 +105,7 @@ export default function WhatsAppCommunityPopup() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                   <div className="flex items-center gap-2 relative z-10">
-                    <span className="text-xs font-black uppercase italic tracking-wider">Join Now</span>
+                    <span className="text-xs font-black uppercase italic tracking-wider">Open WhatsApp</span>
                     <FiZap size={14} className="animate-bounce" />
                   </div>
                 </a>
