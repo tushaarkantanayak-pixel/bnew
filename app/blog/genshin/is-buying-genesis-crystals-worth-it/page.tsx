@@ -23,30 +23,30 @@ export default function BlogPage() {
         <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 p-4 opacity-10"><FiCreditCard size={80} /></div>
           <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
-            "SMART TRAVELING requires smart spending. To win the gacha game without breaking the bank, you must master the hierarchy of value in the Paimon's Bargains shop."
+            "PLAY SMART and spend smart. To get the best characters without spending too much, you need to know what is worth your money in the shop."
           </p>
         </div>
 
         <p className="opacity-80 leading-relaxed">
-            In 2026, <strong>Genshin Impact</strong> remains the gold standard of high-fidelity gacha gaming. With new characters releasing almost every update, the temptation to buy <strong>Genesis Crystals</strong> is always high. But is it actually worth your hard-earned Rupees? This guide breaks down the math behind every bundle to find the most efficient way to fuel your pulls.
+            In 2026, <strong>Genshin Impact</strong> is still the best high quality anime game. With new characters coming out almost every month, it's tempting to buy <strong>Genesis Crystals</strong>. But is it worth it? This guide shows you the best way to spend your money on pulls.
         </p>
       </section>
 
       <section className="pt-12 space-y-6">
         <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The Hierarchy of <span className="text-[var(--accent)]">Value 🏆</span></h2>
+            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The Best Things to <span className="text-[var(--accent)]">Buy 🏆</span></h2>
         </div>
         
         <p className="opacity-80 leading-relaxed text-sm text-center">
-            If you are going to spend money in Genshin Impact, always follow this "Tier List" of financial efficiency.
+            If you are going to spend money in Genshin Impact, follow this list to get the most for your money.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { name: "Blessing of the Welkin Moon", rating: "S-Tier Value", icon: FiStar, desc: "Provides 3,000 Primogems over 30 days for roughly ₹400-500. This is the highest return on investment (ROI) in the game." },
-            { name: "Battle Pass (Gnostic Hymn)", rating: "A-Tier Value", icon: FiTrendingUp, desc: "For roughly ₹899, you get 8 Intertwined Fates, 680 Primogems, and millions of EXP/Mora resources." },
-            { name: "First-Time Crystal Recharge", rating: "B-Tier Value", icon: FiZap, desc: "Highly worth it once per year during the shop reset. You get double crystals for the same price." }
+            { name: "Blessing of the Welkin Moon", rating: "Best Value", icon: FiStar, desc: "Gives you 3,000 Primogems over 30 days for about ₹400-500. This is the best value for your money in the game." },
+            { name: "Battle Pass (Gnostic Hymn)", rating: "Great Value", icon: FiTrendingUp, desc: "For about ₹899, you get 8 Intertwined Fates, 680 Primogems, and many other resources." },
+            { name: "First-Time Crystal Recharge", rating: "Good Value", icon: FiZap, desc: "Very worth it once a year when the shop resets. You get double the crystals for the same price." }
           ].map((tier, i) => (
             <div key={i} className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
                 <div className="flex items-center justify-between mb-3 text-[var(--accent)]">
@@ -68,7 +68,7 @@ export default function BlogPage() {
             <h3 className="italic font-black uppercase text-[var(--accent)] m-0">The India Pricing Advantage 🇮🇳</h3>
           </div>
           <p className="opacity-80 leading-relaxed mb-4">
-            Direct in-game purchases can often be expensive due to international transaction fees on mobile app stores. For <strong>Genshin players in India</strong>, utilizing localized top-up services like <strong>BlueBuff</strong> is the tactical move.
+            Direct in-game purchases can be expensive because of extra fees. For <strong>Genshin players in India</strong>, using a top-up service like <strong>BlueBuff</strong> is the smart move.
           </p>
           <ul className="space-y-3 opacity-80 list-none p-0 italic text-[11px]">
             <li className="flex gap-3 items-center"><FiCheckCircle className="text-[var(--accent)] flex-shrink-0" /> <strong>Zero Hidden Fees:</strong> Use UPI, GPay, or PhonePe without extra bank processing costs.</li>
@@ -85,20 +85,20 @@ export default function BlogPage() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
             <div className="space-y-3">
-                <h4 className="font-black uppercase italic tracking-tighter text-[var(--accent)]">1. Pity Emergencies</h4>
-                <p className="opacity-60 leading-relaxed m-0 text-xs italic">If a limited banner character like <em>Furina</em> or <em>Raiden</em> is ending in hours and you are 20 pulls away from your guaranteed pity.</p>
+                <h4 className="font-black uppercase italic tracking-tighter text-[var(--accent)]">1. Last Minute Pulls</h4>
+                <p className="opacity-60 leading-relaxed m-0 text-xs italic">If a character banner is ending in hours and you only need a few more pulls to get them.</p>
             </div>
             <div className="space-y-3">
                 <h4 className="font-black uppercase italic tracking-tighter text-[var(--accent)]">2. 4-Star Skin Unlocks</h4>
-                <p className="opacity-60 leading-relaxed m-0 text-xs italic">Genesis Crystals are the ONLY way to purchase premium character skins. If a new outfit drops during a sale, it is mathematically efficient to use crystals then.</p>
+                <p className="opacity-60 leading-relaxed m-0 text-xs italic">Genesis Crystals are the ONLY way to buy special character skins. If a new outfit comes out, buying it with crystals is a good deal.</p>
             </div>
             <div className="space-y-3">
                 <h4 className="font-black uppercase italic tracking-tighter text-[var(--accent)]">3. The 2x Reset Event</h4>
-                <p className="opacity-60 leading-relaxed m-0 text-xs italic">MiHoYo resets the first-time bonus every anniversary. Clearing the bundles during this window is 100% efficient as you get double the value.</p>
+                <p className="opacity-60 leading-relaxed m-0 text-xs italic">The game gives double gems once a year. Buying them then gives you the best value.</p>
             </div>
             <div className="space-y-3">
                 <h4 className="font-black uppercase italic tracking-tighter text-[var(--accent)]">4. Targeted C2/C6 Rushes</h4>
-                <p className="opacity-60 leading-relaxed m-0 text-xs italic">If you are a high-end competitive player aiming for a character's vertical power spikes (like C2 Raiden), direct crystal top-ups are the only path to instant power.</p>
+                <p className="opacity-60 leading-relaxed m-0 text-xs italic">If you want to make your character much stronger right now, buying crystals is the fastest way.</p>
             </div>
         </div>
       </section>
@@ -114,7 +114,7 @@ export default function BlogPage() {
       </section>
 
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Master the gacha economy. Secure your Crystals now.</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Spend smart. Get your Crystals now.</p>
         <div className="flex justify-center">
             <Link 
                 href="/games/genshin-impact988" 

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <BlogPostLayout
-      title="HOW TO MASTER THE HONOR OF KINGS X MLBB CROSSOVER EVENT"
+      title="HOW TO USE THE HONOR OF KINGS X MLBB EVENT"
       category="Event Guide"
       readTime="10 min read"
       date="March 29, 2026"
@@ -28,7 +28,7 @@ export default function BlogPage() {
         </div>
 
         <p className="opacity-70 leading-relaxed">
-          The 2026 <strong>MLBB x Honor of Kings collaboration</strong> introduces the "Dual-World Quest" system. For the first time, players can earn rewards by competing in specific challenges that bridge the gap between these two MOBA giants. This guide covers everything from <strong>exclusive skin reveals</strong> to <strong>F2P reward farming</strong>.
+          The 2026 <strong>MLBB x Honor of Kings collaboration</strong> adds a new "Event Quest" system. For the first time, players can win prizes by finishing challenges in both games. This guide covers everything from <strong>new skins</strong> to <strong>getting free rewards</strong>.
         </p>
       </section>
 
@@ -39,7 +39,7 @@ export default function BlogPage() {
         </div>
         
         <p className="opacity-70 leading-relaxed mb-8">
-            The centerpiece of the collaboration is the set of high-tier crossover skins. These aren't just recolors; they feature entirely new skill effects, voice lines, and recall animations inspired by HOK’s legendary aesthetic. In 2026, the <strong>MLBB skin meta</strong> has shifted toward these "Dual-Identity" transformations, where a hero's entire visual language changes to match their crossover counterpart.
+            The best part of this event is the new set of special skins. These aren't just recolors; they have new effects and looks based on the HOK games. In 2026, MLBB skins have changed to show off these new styles.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -76,7 +76,7 @@ export default function BlogPage() {
             The crossover between <strong>Mobile Legends and Honor of Kings</strong> isn't just about gameplay—it's a massive cultural milestone for the mobile gaming community. For years, these two titles were seen as fierce rivals, competing for the top spot in the global market. Seeing them join forces shows a new level of maturity in the industry, where player experience is prioritized over corporate competition.
         </p>
         <p className="opacity-80 leading-relaxed">
-            For <strong>Indian MLBB players</strong>, this event is particularly significant. It brings the high-fidelity, polished aesthetic of Honor of Kings directly into the game they've mastered over the years. It's a fresh take on familiar heroes, giving long-time players a reason to dive back into the grind with renewed excitement. This isn't just an event; it's a <strong>celebration of mobile MOBA history</strong>.
+            For <strong>Indian MLBB players</strong>, this event is great. It brings the high quality look of Honor of Kings directly into the game you already love. It's a fresh look for your favorite heroes. This isn't just an event; it's a <strong>big party for mobile gamers</strong>.
         </p>
       </section>
 
@@ -88,8 +88,7 @@ export default function BlogPage() {
             <h3 className="italic font-black uppercase text-[var(--accent)] m-0">India Diamond Strategy 🛡️</h3>
           </div>
           <p className="text-sm italic opacity-70 mb-4 font-medium">
-            Limited-time crossover events can be expensive. For <strong>MLBB fans in India</strong>, leveraging the daily discount on event draws is the key to getting these skins cheap. 
-          </p>
+            Crossover events can be pricey. If you're in India, try to use the daily discounts to get these skins for less.          </p>
           <p className="text-sm italic opacity-70 m-0">
             Ensure your account is ready with a <strong>fast and cheap MLBB diamond recharge</strong> from <strong>BlueBuff</strong> to catch the lucky hour bonuses and bonus token events.
           </p>
@@ -140,7 +139,7 @@ export default function BlogPage() {
       </section>
 
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want the exclusive Chou Legend? Top up safely.</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want the new skins? Top up safely.</p>
         <div className="flex justify-center">
             <Link 
                 href="/games/mobile-legends988" 

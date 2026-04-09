@@ -23,12 +23,12 @@ export default function BlogPage() {
         <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 p-4 opacity-10"><FiTrendingUp size={80} /></div>
           <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
-            "GETTING THE MOST SKINS for less isn't just a budget choice—it's a math problem. In 2026, the <strong>HOK Token meta</strong> is defined by those who know how to navigate the shop like a pro and double-dip on event rewards."
+            "GETTING THE MOST SKINS for less isn't just about spending—it's about knowing when to buy. In 2026, the best players know how to use the shop and get double the rewards."
           </p>
         </div>
 
         <p className="opacity-80 leading-relaxed">
-            In the high-fidelity world of <strong>Honor of Kings (HOK)</strong>, Tokens are the primary fuel for your cosmetic and account progression. From legendary skins to exclusive hero unlocks, everything revolves around this premium currency. However, with the introduction of various event passes and timed bundles in 2026, the <strong>cost-per-token ratio</strong> can vary wildly. This guide breaks down the math to ensure you get the absolute <strong>maximum value for your Indian Rupees</strong>.
+            In the high quality world of <strong>Honor of Kings (HOK)</strong>, Tokens are what you need for skins and new heroes. Everything costs tokens. But in 2026, there are many ways to buy them, and some are better than others. This guide helps you get the <strong>most for your money in India</strong>.
         </p>
       </section>
 
@@ -53,10 +53,10 @@ export default function BlogPage() {
             </thead>
             <tbody className="divide-y divide-[var(--border)] opacity-80">
               {[
-                { size: "80 Tokens", price: "₹85 - ₹95", value: "Standard Baseline" },
-                { size: "400 Tokens", price: "₹420 - ₹450", value: "+5% Bonus Value" },
-                { size: "1200 Tokens", price: "₹1,250 - ₹1,350", value: "+10% Efficiency" },
-                { size: "6000+ Tokens", price: "₹6,200 - ₹6,800", value: "Best (S-Tier Value)" }
+                { size: "80 Tokens", price: "₹85 - ₹95", value: "Standard Price" },
+                { size: "400 Tokens", price: "₹420 - ₹450", value: "+5% Bonus" },
+                { size: "1200 Tokens", price: "₹1,250 - ₹1,350", value: "+10% Bonus" },
+                { size: "6000+ Tokens", price: "₹6,200 - ₹6,800", value: "Best Value" }
               ].map((tier, i) => (
                 <tr key={i} className="hover:bg-[var(--accent)]/5 transition-colors">
                   <td className="p-6 font-bold">{tier.size}</td>
@@ -91,8 +91,7 @@ export default function BlogPage() {
             <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full italic">Winner's Pass <span className="text-[var(--accent)]">vs. Direct 🏆</span></h2>
         </div>
         <p className="opacity-80 leading-relaxed text-sm">
-            For consistent players, the <strong>HOK Winner’s Pass</strong> is undisputedly the most efficient investment. While direct top-ups are great for instant gratification, the Pass provides a tiered reward system that exponentially increases your account value over time.
-        </p>
+            For regular players, the <strong>HOK Winner’s Pass</strong> is the best way to spend money. While buying tokens directly is fine if you need them now, the Pass gives you much more over time.        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
             { type: "Winner's Pass", roi: "400%+", icon: FiStar, benefits: "Exclusive Epic Skins, Starstones, Draw Vouchers, and Token Rebates." },
@@ -101,7 +100,7 @@ export default function BlogPage() {
             <div key={i} className="p-8 rounded-[32px] bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all group">
               <div className="flex items-center justify-between mb-4">
                 <item.icon size={28} className="text-[var(--accent)] group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)] bg-[var(--accent)]/10 px-3 py-1 rounded-full">{item.roi} ROI</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)] bg-[var(--accent)]/10 px-3 py-1 rounded-full">{item.roi} VALUE</span>
               </div>
               <h4 className="text-xl font-black uppercase italic tracking-tighter mb-2">{item.type}</h4>
               <p className="text-[11px] leading-relaxed opacity-60 m-0 italic">{item.benefits}</p>
@@ -113,15 +112,15 @@ export default function BlogPage() {
       <section className="pt-12 space-y-6 text-sm">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Event Double-Dipping: <span className="text-[var(--accent)]">A Pro Tip</span></h2>
         <p className="opacity-80 leading-relaxed">
-            Honor of Kings is famous for its <strong>Cumulative Recharge</strong> and <strong>Token Rebate</strong> events. Savvy players never buy tokens on a random Wednesday; they wait for the "Recharge Phase" that coincides with new skin releases. By doing this, you aren't just buying the tokens—you're unlocking additional vouchers, fragments, and sometimes even <strong>permanent skins for free</strong> as a top-up reward.
+            Honor of Kings often has <strong>top-up bonuses</strong> and <strong>token back</strong> events. Smart players don't just buy tokens any day; they wait for special event times when new skins come out. By doing this, you get tokens plus extra gifts, and sometimes even <strong>free permanent skins</strong> as a reward.
         </p>
         <p className="opacity-80 leading-relaxed">
-            Another critical habit is utilizing the <strong>"Daily First" Discount</strong>. Many gacha-style draws in HOK offer a massive 50% discount on the first pull of the day. If you aren't in a rush to complete a collection, doing "one pull a day" can save you hundreds of tokens compared to spamming "10 pulls" at full market price. Patience is the ultimate <strong>HOK savings strategy</strong>.
+            Another good tip is to use the <strong>"Daily First" Discount</strong>. Many pulls in HOK are 50% off for the first time each day. If you aren't in a hurry, doing "one pull a day" can save you a lot of tokens. Being patient is the best <strong>HOK savings strategy</strong>.
         </p>
       </section>
 
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Maximize your budget. Dominate the shop.</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Spend smart. Get more skins.</p>
         <div className="flex justify-center">
             <Link 
                 href="/games/honor-of-kings988" 

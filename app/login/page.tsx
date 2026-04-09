@@ -103,13 +103,13 @@ function AuthContent() {
       });
       const data = await res.json();
       if (!data.success) {
-        setError(data.message || "Authentication Protocol Failed");
+        setError(data.message || "Login failed");
         setLoading(false);
         return;
       }
       saveSession(data);
     } catch {
-      setError("Nexus Connection Interrupted");
+      setError("Connection lost");
       setLoading(false);
     }
   };
@@ -136,7 +136,7 @@ function AuthContent() {
         setError(data.message);
       }
     } catch {
-      setError("Nexus connection failed");
+      setError("Connection failed");
     }
     setLoading(false);
   };
@@ -241,10 +241,10 @@ function AuthContent() {
 
               <motion.div variants={itemVariants} className="space-y-2">
                 <h1 className="text-4xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[var(--foreground)] to-[var(--foreground)]/60 drop-shadow-sm">
-                  {showOtpField ? "Verification" : "Login Portal"}
+                  {showOtpField ? "Check Email" : "Login"}
                 </h1>
                 <p className="text-xs font-medium text-[var(--muted)]/80 tracking-wide uppercase">
-                  {showOtpField ? "Confirm your identity" : "Secure Access Control"}
+                  {showOtpField ? "Enter the code we sent" : "Welcome back"}
                 </p>
               </motion.div>
             </div>
@@ -269,7 +269,7 @@ function AuthContent() {
                   className="mb-6 p-4 rounded-xl bg-emerald-500 text-white flex items-center justify-center gap-2 text-center shadow-[0_0_30px_rgba(16,185,129,0.3)]"
                 >
                   <FiCheckCircle size={20} />
-                  <span className="text-sm font-black uppercase tracking-widest">ACCESS GRANTED</span>
+                  <span className="text-sm font-black uppercase tracking-widest">LOGIN SUCCESS</span>
                 </motion.div>
               )}
 
@@ -372,7 +372,7 @@ function AuthContent() {
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     ) : (
                       <>
-                        <span className="relative z-10">{showOtpField ? "Verify & Login" : "Send Access Code"}</span>
+                        <span className="relative z-10">{showOtpField ? "Verify & Login" : "Send Login Code"}</span>
                       </>
                     )}
                   </button>
@@ -418,7 +418,7 @@ function AuthContent() {
                     <div className="flex flex-col items-center gap-2">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--foreground)]/[0.02] border border-[var(--border)]/50">
                         <FiLock size={10} className="text-emerald-500" />
-                        <span className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)]/70">SECURE SHELL v2.0</span>
+                        <span className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)]/70">SECURE CONNECTION</span>
                       </div>
                       <a
                         href="tel:+919178521537"
@@ -427,7 +427,7 @@ function AuthContent() {
                         Help-Desk: +91 9178521537
                       </a>
                       <p className="text-[7px] text-[var(--muted)]/30 uppercase tracking-[0.2em] animate-pulse">
-                        System Monitoring Active • Session ID: RT-77
+                        Connected • Online
                       </p>
                     </div>
                   </div>

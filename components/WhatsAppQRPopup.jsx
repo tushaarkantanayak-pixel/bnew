@@ -41,7 +41,7 @@ export default function WhatsAppCommunityPopup() {
             <div className="absolute -top-12 -left-12 w-40 h-40 bg-blue-500/20 blur-[60px] rounded-full pointer-events-none animate-pulse" />
             <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-indigo-600/15 blur-[60px] rounded-full pointer-events-none animate-pulse" style={{ animationDelay: '1s' }} />
 
-            {/* Tactical Frame */}
+            {/* Popup Frame */}
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[var(--card)]/40 backdrop-blur-3xl p-5 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5">
               
               {/* Internal Border Glow */}

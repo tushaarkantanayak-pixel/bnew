@@ -614,7 +614,7 @@ export default function WalletTab({
                     disabled={usdtLoading || !txHash.trim()}
                     className="w-full p-4 rounded-2xl bg-green-500 text-black font-black uppercase tracking-[0.2em] italic text-xs hover:scale-[1.02] active:scale-95 disabled:opacity-50 transition-all flex items-center justify-center gap-3"
                   >
-                    {usdtLoading ? <FiLoader className="animate-spin" size={18} /> : "Submit & Verify"}
+                    {usdtLoading ? <FiLoader className="animate-spin" size={18} /> : "Check Payment"}
                   </button>
                 </div>
               )}
@@ -626,8 +626,8 @@ export default function WalletTab({
                     <FiClock size={24} className="text-amber-400" />
                   </div>
                   <div>
-                    <p className="font-black text-[var(--foreground)] text-sm">Verification Pending</p>
-                    <p className="text-[10px] text-[var(--muted)] mt-1">Your TX hash has been submitted. Our system will verify and credit <strong className="text-green-400">{usdtDeposit?.coinsToCredit} coins</strong> automatically.</p>
+                    <p className="font-black text-[var(--foreground)] text-sm">Checking Payment</p>
+                    <p className="text-[10px] text-[var(--muted)] mt-1">We are checking your payment. Your balance will be updated automatically.</p>
                   </div>
                   <div className="flex items-center justify-center gap-2 text-[9px] text-[var(--muted)]">
                     <FiRefreshCw size={10} className="animate-spin" />

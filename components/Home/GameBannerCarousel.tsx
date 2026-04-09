@@ -136,7 +136,7 @@ export default function GameBannerCarousel() {
                   </h2>
 
                   {/* <p className="text-white/50 text-[8px] sm:text-[9px] md:text-[10px] font-bold tracking-[0.1em] uppercase leading-relaxed max-w-md line-clamp-2">
-                    {currentBanner.bannerDescription || "Elite Gaming Access • Instant Provisioning • Zero Lag Connection Status: Optimal"}
+                    {currentBanner.bannerDescription || "Fast Top-ups • Instant Delivery • 24/7 Support"}
                   </p> */}
                 </motion.div>
               </div>

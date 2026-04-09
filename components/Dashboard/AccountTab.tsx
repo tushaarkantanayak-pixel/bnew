@@ -96,7 +96,7 @@ export default function AccountTab({ userDetails }: AccountTabProps) {
                 </div>
               </div>
               <h3 className="text-xl font-black uppercase italic tracking-tighter mb-1">{userDetails.name}</h3>
-              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)] opacity-60">Verified User</span>
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)] opacity-60">Trusted Member</span>
             </div>
 
             <div className="space-y-5">
@@ -164,7 +164,7 @@ export default function AccountTab({ userDetails }: AccountTabProps) {
               </div>
               <div className="p-5 rounded-[2rem] bg-white/5 border border-white/5">
                 <p className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]/40 mb-1">Account Status</p>
-                <p className="text-[10px] font-black italic text-[var(--accent)]">Verified</p>
+                <p className="text-[10px] font-black italic text-[var(--accent)]">Active</p>
               </div>
             </div>
           </div>

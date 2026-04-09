@@ -44,7 +44,7 @@ export default function Page() {
             Skin Grid <span className="text-[var(--accent)]">Generator</span>
           </h1>
           <p className="text-white/40 max-w-lg text-sm md:text-base">
-            Customize and export high-fidelity skin grids with precision. Adjust columns, filter by rarity, and manage your templates.
+            Create and download high quality skin grids easily. Use the filters below to get started.
           </p>
         </div>
 
@@ -83,13 +83,13 @@ export default function Page() {
           {/* SEARCH & FILTERS CARD */}
           <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl p-6 space-y-6 shadow-2xl">
             <div className="flex items-center gap-2 text-white/60 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider">Catalogue Filter</span>
+              <span className="text-xs font-bold uppercase tracking-wider">Filters</span>
             </div>
 
             <div className="space-y-4 pt-2">
               <div className="flex items-center gap-2 text-white/30 text-[10px] font-bold uppercase tracking-[0.1em]">
                 <SlidersHorizontal size={12} />
-                Configuration
+                Filters
               </div>
               <ColumnControl />
               <SkinFilter />
@@ -99,7 +99,7 @@ export default function Page() {
           {/* SKIN PICKER */}
           <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-white/60">Asset Library</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-white/60">Skins</span>
               <span className="text-[10px] bg-[var(--accent)]/20 text-[var(--accent)] px-2 py-1 rounded-md font-bold uppercase">Ready</span>
             </div>
             <SkinPicker />
