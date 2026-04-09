@@ -22,7 +22,7 @@ const BANNERS = [
 
   {
     id: "bgmi",
-    title: "BGMI TACTICAL DROP 🔥",
+    title: "BGMI UC TOP-UP ",
     subtitle: "60 UC @ ₹70 — Instantly",
     badge: "HOT DEAL",
     icon: <FiActivity />,
@@ -31,7 +31,7 @@ const BANNERS = [
   },
   {
     id: "support",
-    title: "DIRECT COMMAND CENTER",
+    title: "CHAT WITH US ON WHATSAPP",
     subtitle: "Instant support & help",
     badge: "24/7 LIVE",
     icon: <FiZap />,

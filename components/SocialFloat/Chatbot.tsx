@@ -65,7 +65,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "init",
-      text: "System Online. 👋 I'm your AI assistant. How can I help you today?",
+      text: "Hey there! 👋 I'm here to help. What do you need?",
       sender: "bot",
       timestamp: new Date(),
     },
@@ -167,15 +167,15 @@ export default function ChatBot() {
     if (nameMatch) {
       ctx.userName = nameMatch[1];
       ctx.unknownCount = 0;
-      return `Target identified: ${ctx.userName}. 🎯 Command acknowledged. How can I assist you?`;
+      return `Got it, ${ctx.userName}! 🎯 How can I help you?`;
     }
 
     if (/^(hi|hello|hey)/.test(msg)) {
       ctx.unknownCount = 0;
       return random([
-        "Greetings. 👋 Looking for top-ups or tactical support?",
-        "System ready. 😊 How can I help you today?",
-        "Connection established. Hello! How can I assist?",
+        "Hey! 👋 Looking for a top-up?",
+        "Hi there! 😊 How can I help you today?",
+        "Hello! What can I do for you?",
       ]);
     }
 
@@ -191,7 +191,7 @@ export default function ChatBot() {
     if (msg.includes("support") || msg.includes("issue") || msg.includes("help")) {
       ctx.topic = "support";
       ctx.unknownCount = 0;
-      return "Understood. 🔧 If you're facing an issue, please contact us on WhatsApp for the fastest resolution.";
+      return "Got it. 🔧 If you have an issue, please contact us on WhatsApp and we'll sort it out quickly.";
     }
 
     if (msg.includes("wallet") || msg.includes("add money") || msg.includes("topup")) {
@@ -205,15 +205,15 @@ export default function ChatBot() {
     ctx.unknownCount++;
     if (ctx.unknownCount >= 2) {
       return (
-        "Tactical analysis inconclusive. 😅\n\n" +
-        `Direct uplink for support:\n📞 ${SUPPORT_PHONE}\n📧 ${SUPPORT_EMAIL}`
+        "I'm not sure about that one. 😅\n\n" +
+        `Contact us directly:\n📞 ${SUPPORT_PHONE}\n📧 ${SUPPORT_EMAIL}`
       );
     }
 
-    return random([
-      "Scanning message... Could you provide more details? 🤔",
-      "Acknowledged. Please elaborate for more accurate assistance. 🤖",
-    ]);
+      return random([
+        "Can you give more details? 🤔",
+        "Could you explain a bit more? 🤖",
+      ]);
   };
 
   /* ================= SEND MESSAGE ================= */
@@ -298,8 +298,8 @@ export default function ChatBot() {
                   <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-[var(--card)] animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-[var(--foreground)] font-bold text-sm tracking-tight">TACTICAL AI</h3>
-                  <p className="text-[10px] text-[var(--muted)] uppercase tracking-widest font-medium">System Core v2.0</p>
+                  <h3 className="text-[var(--foreground)] font-bold text-sm tracking-tight">BlueBuff Bot</h3>
+                  <p className="text-[10px] text-[var(--muted)] uppercase tracking-widest font-medium">Online • Here to help</p>
                 </div>
               </div>
 
@@ -389,8 +389,7 @@ export default function ChatBot() {
                 <input
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Initiate command..."
-                  className="w-full pl-4 pr-12 py-3.5 rounded-xl bg-[var(--muted)]/5 border border-[var(--border)] outline-none text-[13px] text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus:ring-1 focus:ring-[var(--accent)]/20 transition-all"
+                  placeholder="Type a message..."                  className="w-full pl-4 pr-12 py-3.5 rounded-xl bg-[var(--muted)]/5 border border-[var(--border)] outline-none text-[13px] text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus:ring-1 focus:ring-[var(--accent)]/20 transition-all"
                 />
                 <button
                   type="submit"

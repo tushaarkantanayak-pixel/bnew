@@ -23,7 +23,7 @@ export default function SEOContent() {
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-[1px] bg-[var(--accent)]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--accent)] italic">Market Leader</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--accent)] italic">India's Top Choice</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter leading-[0.9] text-[var(--foreground)]">
               Blue Buff – Cheapest <br />
@@ -31,7 +31,7 @@ export default function SEOContent() {
               in India
             </h1>
             <p className="text-sm text-[var(--muted)] leading-relaxed italic max-w-md">
-              Blue Buff stands as the gold standard for <strong className="text-[var(--foreground)]">MLBB top up india instant</strong> services. We specialize in providing the <strong className="text-[var(--foreground)]">cheapest mlbb recharge website</strong> experience, ensuring every diamond is delivered with surgical precision and elite speed.
+              Blue Buff is the best place for <strong className="text-[var(--foreground)]">MLBB top up in India</strong>. We give you the <strong className="text-[var(--foreground)]">cheapest MLBB recharge</strong> with diamonds delivered instantly, every single time.
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
@@ -59,7 +59,7 @@ export default function SEOContent() {
               <div className="w-10 h-10 rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center text-[var(--accent)] mb-6 group-hover:scale-110 transition-transform">
                 <FiInfo size={18} />
               </div>
-              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[var(--accent)] mb-4 italic">Our Strategic MLBB Advantage</h2>
+              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[var(--accent)] mb-4 italic">Why Use Blue Buff for MLBB</h2>
               <ul className="space-y-4">
                 {[
                   { label: "MLBB Recharge with UPI", desc: "Native integration with all major Indian UPI apps." },
@@ -78,12 +78,12 @@ export default function SEOContent() {
               <div className="w-10 h-10 rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center text-[var(--accent)] mb-6 group-hover:scale-110 transition-transform">
                 <FiCheckCircle size={18} />
               </div>
-              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[var(--accent)] mb-4 italic">Unmatched Trust & Reliability</h2>
+              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[var(--accent)] mb-4 italic">Trusted & Reliable</h2>
               <p className="text-[11px] text-[var(--muted)] leading-relaxed italic mb-4">
                 As a <strong className="text-[var(--foreground)]">mlbb recharge trusted site india</strong>, we prioritize your account safety above all else.
               </p>
               <p className="text-[11px] text-[var(--muted)] leading-relaxed italic">
-                Our <strong className="text-[var(--foreground)]">mobile legends recharge india fast</strong> protocols ensure that <strong className="text-[var(--foreground)]">mlbb diamonds instant delivery india</strong> is not just a promise, but a consistent reality for our elite community.
+                We deliver <strong className="text-[var(--foreground)]">MLBB diamonds instantly in India</strong>. Thousands of happy players trust us for their <strong className="text-[var(--foreground)]">MLBB recharge</strong> every day.
               </p>
             </div>
           </motion.div>
@@ -97,11 +97,10 @@ export default function SEOContent() {
           className="mt-16 p-6 rounded-3xl bg-[var(--card)]/30 border border-dashed border-[var(--border)] text-center"
         >
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--muted)] italic">
-            Elite Gaming Infrastructure • <span className="text-[var(--accent)]">Blue Buff India</span> • High Fidelity Automation
+            Fast Top-ups • <span className="text-[var(--accent)]">Blue Buff India</span> • Instant Delivery
           </p>
         </motion.div>
       </div>
     </section>
   );
 }
-

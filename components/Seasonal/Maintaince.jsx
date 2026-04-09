@@ -109,7 +109,7 @@ export default function Maintaince() {
                                         className="w-full py-3.5 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2"
                                     >
                                         <FiLock className="text-sm" />
-                                        Secure Login
+                                        Login
                                     </motion.button>
                                 ) : !isLoggingOut ? (
                                     <motion.button
@@ -133,7 +133,7 @@ export default function Maintaince() {
                             </div>
 
                             <p className="mt-6 text-[7px] font-black uppercase tracking-[0.4em] text-white/20 italic">
-                                Blue Buff Nexus • 2026
+                                Blue Buff • 2026
                             </p>
                         </div>
                     </motion.div>

@@ -30,7 +30,7 @@ const HEADER_CONFIG = {
       { label: "Redeem Code", href: "/dashboard/redeem", icon: <FiGift size={14} />, desc: "Claim gift credits" },
       { label: "Refer & Earn", href: "/dashboard/referral", icon: <FiUsers size={14} />, desc: "Earn rewards" },
       { label: "API Setup", href: "/dashboard/api-keys", icon: <FiKey size={14} />, desc: "Developer API Access" },
-      { label: "Membership", href: "/admin-panal", icon: <FiShield size={14} />, desc: "Elite Tier" },
+      { label: "Membership", href: "/admin-panal", icon: <FiShield size={14} />, desc: "Member Benefits" },
       { label: "Support", href: "/dashboard/support", icon: <FiMessageSquare size={14} />, desc: "Get help 24/7" },
     ],
     roles: {
@@ -338,7 +338,7 @@ export default function Header() {
                   className="absolute top-full left-0 w-full mt-2 bg-[var(--background)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden z-[1100] backdrop-blur-3xl"
                 >
                   <div className="p-2 border-b border-[var(--border)] bg-[var(--foreground)]/[0.02]">
-                    <span className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]/60 px-2 italic">Global Game Library</span>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]/60 px-2 italic">All Games</span>
                   </div>
 
                   <div className="max-h-[60vh] overflow-y-auto custom-scrollbar">
@@ -389,7 +389,7 @@ export default function Header() {
 
                   <div className="p-3 bg-[var(--foreground)]/[0.02] border-t border-[var(--border)] text-center">
                     <p className="text-[8px] font-black text-[var(--muted)]/40 uppercase tracking-widest italic flex items-center justify-center gap-1.5">
-                      <FiZap size={10} className="text-[var(--accent)]" /> Search Powered by Blue Buff Core
+                      <FiZap size={10} className="text-[var(--accent)]" /> Blue Buff Search
                     </p>
                   </div>
                 </motion.div>
@@ -501,9 +501,9 @@ export default function Header() {
                           <div className="w-16 h-16 rounded-[2rem] bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]"><FiZap size={32} /></div>
                           <div className="space-y-1">
                             <h3 className="text-lg font-bold text-[var(--foreground)]">Sign in required</h3>
-                            <p className="text-xs text-[var(--muted)]">Login to access your personalized squad dashboard</p>
+                            <p className="text-xs text-[var(--muted)]">Login to access your dashboard</p>
                           </div>
-                          <Link href="/login" onClick={() => setUserMenuOpen(false)} className="w-full py-3.5 rounded-2xl bg-[var(--accent)] text-white text-xs font-bold hover:brightness-110 active:scale-[0.98] transition-all">Authenticate Now</Link>
+                          <Link href="/login" onClick={() => setUserMenuOpen(false)} className="w-full py-3.5 rounded-2xl bg-[var(--accent)] text-white text-xs font-bold hover:brightness-110 active:scale-[0.98] transition-all">Login Now</Link>
                         </div>
                       ) : (
                         <>
@@ -558,7 +558,7 @@ export default function Header() {
                                   <div className="flex flex-col min-w-0 flex-1">
                                     <h4 className="text-xs font-black uppercase tracking-widest text-[var(--foreground)] mb-1">Admin Console</h4>
                                     <div className="flex items-center gap-2">
-                                      <span className="text-[9px] font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded-md border border-[var(--accent)]/20 uppercase">Elite Access</span>
+                                      <span className="text-[9px] font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded-md border border-[var(--accent)]/20 uppercase">Owner</span>
                                       <span className="text-[9px] font-bold text-[#22c55e] flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-[#22c55e]"></span>Active</span>
                                     </div>
                                   </div>
@@ -606,7 +606,7 @@ export default function Header() {
               <input
                 autoFocus
                 type="text"
-                placeholder="Search premium games..."
+                placeholder="Search games..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full h-12 pl-12 pr-4 rounded-2xl bg-[var(--foreground)]/[0.04] border border-[var(--border)] text-sm font-bold focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"

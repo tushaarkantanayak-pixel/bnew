@@ -20,7 +20,7 @@ const SERVICES = [
     title: "Custom Portals",
     desc: "We build special top-up websites with the look and features you want.",
     icon: FiZap,
-    badge: "BESPOKE",
+    badge: "CUSTOM",
   },
 ];
 

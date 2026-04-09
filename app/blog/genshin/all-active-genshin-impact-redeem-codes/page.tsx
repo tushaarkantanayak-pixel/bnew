@@ -23,12 +23,12 @@ export default function BlogPage() {
         <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 p-4 opacity-10"><FiKey size={80} /></div>
           <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)] text-center">
-            "FREE PRIMOGEMS are a Traveler's best friend. Bookmark this page to stay ahead of the curve and never let an expiration date ruin your next 10-pull."
+            "FREE PRIMOGEMS are every player's best friend. Bookmark this page and never miss a code before it expires."
           </p>
         </div>
 
         <p className="opacity-80 leading-relaxed text-center">
-            While farming is great, <strong>Redeem Codes</strong> are the easiest way to get instant rewards. From standard 60-Primogem codes to special livestream 300-Primogem bundles, we track every live code in the <strong>Genshin Impact 2026 ecosystem</strong>.
+            While farming is great, <strong>Redeem Codes</strong> are the easiest way to get free rewards. From regular 60-Primogem codes to special livestream 300-Primogem codes, we track every active code in <strong>Genshin Impact 2026</strong>.
         </p>
       </section>
 
@@ -116,38 +116,38 @@ export default function BlogPage() {
       </div>
 
       <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter italic">Special <span className="text-[var(--accent)]">Livestream Codes (300 Primos) 📺</span></h2>
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter italic">Free <span className="text-[var(--accent)]">Livestream Codes (300 Primos) 📺</span></h2>
         <p className="opacity-80 leading-relaxed">
-            Every six weeks, HoYoverse hosts a <strong>Special Program Livestream</strong> to reveal the next version update. During these streams, three unique codes are shared, providing a total of <strong>300 Primogems</strong> plus Ascension materials. 
+            Every six weeks, HoYoverse does a <strong>Livestream</strong> to show the next game update. During these streams, they share three codes worth a total of <strong>300 Primogems</strong> plus extra materials.
         </p>
         <div className="p-6 rounded-2xl bg-[var(--background)] border border-[var(--border)] mb-8 flex flex-col gap-3">
-            <div className="flex items-center gap-2 text-[var(--accent)] text-[9px] font-black uppercase italic italic tracking-widest"><FiLayers /> Livestream Ticker Strategy</div>
+            <div className="flex items-center gap-2 text-[var(--accent)] text-[9px] font-black uppercase italic italic tracking-widest"><FiLayers /> How to Catch Livestream Codes</div>
             <p className="text-[10px] opacity-60 leading-relaxed m-0 italic italic leading-relaxed">
-                These codes are notorious for having a <strong>short 16 to 24-hour expiration window</strong>. To ensure you never miss these, BlueBuff monitors the global feeds in real-time. We recommend checking this page immediately after any 'Genshin Voice of the World' or 'Version Update' announcements.
+                These codes expire fast — usually in <strong>16 to 24 hours</strong>. We update this page as soon as codes go live. Check back right after any 'Version Update' announcements so you don't miss out.
             </p>
         </div>
       </section>
 
       <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter italic">Secondary Rewards: <span className="text-[var(--accent)]">Beyond the Primogems 💎</span></h2>
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter italic">Other Rewards: <span className="text-[var(--accent)]">More Than Just Primogems 💎</span></h2>
         <p className="opacity-80 leading-relaxed">
-            While gems are the prize, don't underestimate the <strong>Secondary Rewards</strong> bundled with these codes. <strong>Mora</strong>, <strong>Hero's Wit</strong>, and <strong>Adventurer's Experience</strong> are vital for leveling up your Inazuma and Sumeru characters.
+            Primogems are great, but the <strong>other rewards</strong> in these codes matter too. <strong>Mora</strong>, <strong>Hero's Wit</strong>, and <strong>Adventurer's Experience</strong> are all very useful for leveling up your characters.
         </p>
         <p className="opacity-80 leading-relaxed">
-            For high-level players in India, the bottleneck is often <em>Mora</em> rather than gems. Using these codes to bolster your 'Ley Line' savings allows you to focus your Original Resin on farming high-tier artifacts instead of spending it on gold.
+            For high-level players in India, Mora is often the main problem. Using these codes for extra Mora lets you spend your Original Resin on farming good artifacts instead of running Ley Lines for gold.
         </p>
       </section>
 
       <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">The 'Pity Buffer' <span className="text-[var(--accent)]">Long-term Strategy 🛡️</span></h2>
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Build Up Your <span className="text-[var(--accent)]">Pity Over Time 🛡️</span></h2>
         <p className="opacity-80 leading-relaxed">
-            In the 2026 competitive meta, many veterans use redeem codes to build what we call a <strong>'Pity Buffer'</strong>. While 60 Primogems might seem like a small amount, over a period of 12 months, these cumulative codes can account for 10-15 additional wishes.
+            Many experienced players use redeem codes to slowly build up pity. While 60 Primogems might seem small, over 12 months these free codes can add up to 10-15 extra wishes.
         </p>
         <p className="opacity-80 leading-relaxed">
             When you're chasing a C2 character or a signature weapon, that small buffer can be the difference between a successful pull and a wasted 50/50. 
         </p>
         <p className="opacity-80 leading-relaxed italic border-l-2 border-[var(--accent)] pl-6 py-2">
-            <strong>India Pity Emergencies:</strong> If you've exhausted all active codes and are still short of your 90-pull guarantee before a banner ends, don't panic. Secure your Genesis Crystals through <strong>BlueBuff</strong> using <strong>UPI, Google Pay, or PhonePe</strong> for instant delivery and the most competitive pricing in the Indian market.
+            <strong>Need more Primogems?</strong> If you've used all active codes and are still short before a banner ends, don't worry. Top up your Genesis Crystals through <strong>BlueBuff</strong> using <strong>UPI, Google Pay, or PhonePe</strong> for instant delivery at the best price in India.
         </p>
       </section>
 
