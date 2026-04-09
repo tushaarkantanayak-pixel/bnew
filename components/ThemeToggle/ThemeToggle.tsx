@@ -12,7 +12,7 @@ interface ThemeItem {
 }
 
 const themes: ThemeItem[] = [
-  { id: "elite", icon: "💎", label: "Elite" },
+  { id: "elite", icon: "💎", label: "Midnight" },
   { id: "dark", icon: "🌙", label: "Dark" },
   { id: "cyber", icon: "💠", label: "Cyber" },
   { id: "neon-night", icon: "🟣", label: "Neon" },

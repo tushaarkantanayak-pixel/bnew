@@ -21,11 +21,11 @@ import {
 /* ===================== CONFIG ===================== */
 
 const topRow = [
-  { title: "Scanner", href: "/region", icon: Globe, color: "#3b82f6" },
+  { title: "Region", href: "/region", icon: Globe, color: "#3b82f6" },
   { title: "Games", href: "/games", icon: Gamepad2, color: "#22c55e" },
   { title: "Services", href: "/services", icon: Layers, color: "#a855f7" },
   { title: "Blogs", href: "/blog", icon: BookOpen, color: "#eab308" },
-  { title: "Leader", href: "/leaderboard", icon: Trophy, color: "#f97316" },
+  { title: "Top Users", href: "/leaderboard", icon: Trophy, color: "#f97316" },
   { title: "Wallet", href: "/dashboard/wallet", icon: Wallet, color: "#10b981" },
 ];
 
@@ -82,7 +82,7 @@ export default function HomeQuickActions() {
           href={getTargetHref(item)}
           className="group relative flex flex-col items-center justify-center py-2 px-1"
         >
-          {/* Enhanced Icon Section */}
+          {/* Icon Section */}
           <div className="relative flex items-center justify-center p-1.5 rounded-2xl transition-all duration-500">
             {/* VALENTINE SPECIAL HIGHLIGHT */}
             {isColorful && (

@@ -18,7 +18,7 @@ export default function PromoBanner() {
                     transition={{ duration: 0.5 }}
                     className="group relative block overflow-hidden rounded-2xl border border-[var(--border)] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-xl p-4 transition-all duration-300 hover:border-amber-500/30"
                 >
-                    {/* Background Decorative */}
+                    {/* Background Design */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 blur-[40px] pointer-events-none group-hover:bg-amber-500/10 transition-colors" />
 
                     <div className="relative z-10 flex items-center justify-between gap-4">
@@ -31,7 +31,7 @@ export default function PromoBanner() {
                                     SMM & Vouchers
                                 </h3>
                                 <p className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-tight mt-0.5">
-                                    Checkout our new platform
+                                    Visit our new site
                                 </p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ export default function PromoBanner() {
                         </div>
                     </div>
 
-                    {/* Subtle Shine Effect */}
+                    {/* Shine Effect */}
                     <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent pointer-events-none" />
                 </motion.a>
             </div>

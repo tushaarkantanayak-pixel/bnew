@@ -39,7 +39,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                 setStatus({ type: 'error', message: data.message });
             }
         } catch (err) {
-            setStatus({ type: 'error', message: "Redemption failed. Try again." });
+            setStatus({ type: 'error', message: "Code didn't work. Try again." });
         } finally {
             setLoading(false);
         }
@@ -58,8 +58,8 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                             <FiGift className="text-blue-500" size={10} />
                             <span className="text-[8px] font-black uppercase tracking-widest text-blue-500">Rewards</span>
                         </div>
-                        <h1 className="text-2xl sm:text-3xl font-black uppercase italic tracking-tighter text-[var(--foreground)]">Redeem <span className="text-blue-500">Code</span></h1>
-                        <p className="text-[10px] font-bold text-[var(--muted)] mt-2 uppercase tracking-wide opacity-50">Add money to your wallet instantly.</p>
+                        <h1 className="text-2xl sm:text-3xl font-black uppercase italic tracking-tighter text-[var(--foreground)]">Use <span className="text-blue-500">Code</span></h1>
+                        <p className="text-[10px] font-bold text-[var(--muted)] mt-2 uppercase tracking-wide opacity-50">Add money to your account instantly.</p>
                     </motion.div>
 
                     <motion.div
@@ -70,7 +70,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                     >
                         <form onSubmit={handleRedeem} className="space-y-4">
                             <div className="space-y-1.5">
-                                <label className="text-[9px] uppercase tracking-widest font-black text-blue-500/40 ml-1">Voucher Code</label>
+                                <label className="text-[9px] uppercase tracking-widest font-black text-blue-500/40 ml-1">Enter Code</label>
                                 <input
                                     type="text"
                                     value={code}
@@ -94,7 +94,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                                     <FiLoader className="animate-spin" size={16} />
                                 ) : (
                                     <>
-                                        <span>Redeem Now</span>
+                                        <span>Use Code Now</span>
                                         <FiArrowRight size={14} />
                                     </>
                                 )}

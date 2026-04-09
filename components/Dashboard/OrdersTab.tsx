@@ -77,12 +77,12 @@ export default function OrdersTab() {
           <div>
             <h3 className="text-xl font-[900] uppercase italic tracking-tighter text-[var(--foreground)]">Your Orders</h3>
             <p className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">
-              {loading ? "Loading your orders..." : `Showing ${totalCount} Orders`}
+              {loading ? "Loading your orders..." : `You have ${totalCount} orders`}
             </p>
           </div>
         </div>
 
-        {/* SEARCH CONSOLE */}
+        {/* SEARCH ORDERS */}
         <div className="relative w-full sm:w-64 group">
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within:text-[var(--accent)] transition-colors" />
           <input

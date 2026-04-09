@@ -78,11 +78,11 @@ export default function FlashSale() {
 
     return (
         <section className="relative py-2 px-4 overflow-hidden border-b border-[var(--border)] bg-black/5">
-            {/* Background Decorative */}
+            {/* Background design */}
             <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-amber-500/5 blur-[60px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto">
-                {/* Compact Header */}
+                {/* Top bar */}
                 <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                         <div className="p-1 rounded-lg bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.3)] shrink-0">
@@ -96,7 +96,7 @@ export default function FlashSale() {
                     <div className="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-3 py-1 rounded-xl">
                         <FiClock className="text-amber-500 animate-pulse hidden sm:block" size={10} />
                         <div className="flex items-center gap-2 font-bold text-[10px] tabular-nums text-amber-500">
-                            <span className="opacity-60 text-[8px] uppercase tracking-widest text-[var(--foreground)] mr-1 hidden md:block">Ends In</span>
+                            <span className="opacity-60 text-[8px] uppercase tracking-widest text-[var(--foreground)] mr-1 hidden md:block">Over In</span>
                             <span>{String(timeLeft.hours).padStart(2, '0')}</span>
                             <span className="opacity-30 text-[var(--foreground)]">:</span>
                             <span>{String(timeLeft.minutes).padStart(2, '0')}</span>
@@ -106,7 +106,7 @@ export default function FlashSale() {
                     </div>
                 </div>
 
-                {/* Compact Horizontal Slider */}
+                {/* Sale list */}
                 <div className="overflow-x-auto pb-4 custom-scrollbar-premium snap-x snap-mandatory">
                     <div className="flex gap-3 md:gap-4 px-1 md:justify-center min-w-max md:min-w-0">
                         {flashSaleData.map((item, index) => (
@@ -129,7 +129,7 @@ export default function FlashSale() {
                                         </span>
                                     </div>
 
-                                    {/* Image Container */}
+                                    {/* Product image */}
                                     <div className="relative aspect-square rounded-[0.8rem] overflow-hidden mb-2 ring-1 ring-white/5 bg-black/20">
                                         <Image
                                             src={item.image}
@@ -140,7 +140,7 @@ export default function FlashSale() {
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 transition-opacity group-hover:opacity-60" />
                                     </div>
 
-                                    {/* Compact Info */}
+                                    {/* Info */}
                                     <div className="space-y-0.5">
                                         <p className="text-[7px] md:text-[9px] font-bold text-amber-500/80 uppercase tracking-widest truncate">{item.game}</p>
                                         <h3 className="text-[10px] md:text-[12px] font-bold text-[var(--foreground)] truncate group-hover:text-amber-500 transition-colors">

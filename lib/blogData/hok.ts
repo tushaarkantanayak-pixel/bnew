@@ -35,18 +35,18 @@ export const HOK_BLOGS_DATA: BlogPost[] = [
   },
   {
     id: "hok-3",
-    title: "HOK Advanced Jungle Strategy: Map Control and Rotations",
+    title: "HOK Jungle Guide: Map Control and Moving Better",
     slug: "hok-jungle-strategy-pro-guide",
     game: "hok",
-    type: "Pro Guide",
+    type: "Game Guide",
     excerpt:
       "The jungle in HOK is vastly different from other MOBA titles. Learn how to optimize your pathing, secure objectives, and dominate the early game with these simple tips.",
     publishedAt: "2026-03-28",
-    author: "Jungler Elite",
+    author: "Expert Jungler",
     readingTime: "7 min read",
     image: "/blog/hok-strategy.png",
     featured: false,
     keywords: ["hok jungle guide 2026", "pro jungle pathing hok", "master map control"],
-    tags: ["Strategy", "Advanced", "Gameplay"],
+    tags: ["How to Play", "Full Guide", "Gameplay"],
   },
 ];

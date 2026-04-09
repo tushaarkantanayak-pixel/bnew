@@ -92,7 +92,7 @@ export default function Footer() {
                   ))}
                 </div>
                 <p className="text-[7px] font-black uppercase tracking-widest text-[var(--muted)]">
-                  VERIFIED BY TRUSTPILOT <FiExternalLink className="inline mb-0.5 opacity-30" size={8} />
+                  TRUSTED ON TRUSTPILOT <FiExternalLink className="inline mb-0.5 opacity-30" size={8} />
                 </p>
               </div>
             </motion.a>

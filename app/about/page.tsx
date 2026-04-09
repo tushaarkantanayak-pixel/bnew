@@ -26,7 +26,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen relative overflow-hidden bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--accent)]/30 pb-32 transition-colors duration-300 px-6">
 
-      {/* Background Lighting */}
+      {/* Background Lights */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[20%] w-[70%] h-[50%] bg-[var(--accent)]/5 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[10%] w-[50%] h-[50%] bg-purple-500/5 rounded-full blur-[120px]" />
@@ -34,7 +34,7 @@ export default function AboutPage() {
 
       <div className="max-w-4xl mx-auto pt-16 md:pt-28 relative z-10">
 
-        {/* HEADER SECTION */}
+        {/* Title Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,7 +51,7 @@ export default function AboutPage() {
           </p>
         </motion.div>
 
-        {/* MISSION SECTION */}
+        {/* Our Goal */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
@@ -83,7 +83,7 @@ export default function AboutPage() {
           </motion.div>
         </motion.section>
 
-        {/* FEATURES GRID */}
+        {/* Features list */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
