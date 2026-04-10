@@ -24,13 +24,16 @@ export async function GET(req, { params }) {
             return NextResponse.json({ success: false, message: "Order not found or access denied" }, { status: 404 });
         }
 
+        const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5;
+
         return NextResponse.json({
             success: true,
             order: {
                 orderId: order.orderId,
                 gameSlug: order.gameSlug,
                 itemName: order.itemName,
-                price: order.price,
+                price: Number((order.price / rate).toFixed(2)),
+                currency: "USD",
                 status: order.status,
                 topupStatus: order.topupStatus,
                 createdAt: order.createdAt

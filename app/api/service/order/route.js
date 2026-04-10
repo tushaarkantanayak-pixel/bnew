@@ -91,7 +91,7 @@ export async function POST(req) {
             return NextResponse.json({
                 success: false,
                 status: "failed",
-                message: `Insufficient wallet balance. Required: ₹${price}`
+                message: `Insufficient wallet balance. Required: $${(price / (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5)).toFixed(2)}`
             }, { status: 403 });
         }
 
@@ -194,7 +194,7 @@ export async function POST(req) {
 
                 // ⚡ AUTOMATIC REFUND: Fulfillment failed
                 const refundedUser = await User.findByIdAndUpdate(auth.user.id, { $inc: { wallet: price } }, { new: true });
-                console.log(`[Service API] Order ${orderId} failed. Automatically refunded ₹${price}.`);
+                console.log(`[Service API] Order ${orderId} failed. Automatically refunded $${(price / (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5)).toFixed(2)}.`);
 
                 // 🛡️ Record Wallet Transaction (Refund)
                 const refundTxId = `TXN${Date.now()}${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
@@ -216,6 +216,8 @@ export async function POST(req) {
             newOrder.externalResponse = [gameData];
             await newOrder.save();
 
+            const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5;
+
             return NextResponse.json({
                 success: isSuccess,
                 status: isSuccess ? "success" : "failed",
@@ -223,15 +225,16 @@ export async function POST(req) {
                 order: {
                     orderId: newOrder.orderId,
                     itemName,
-                    price,
+                    price: Number((price / rate).toFixed(2)),
+                    currency: "USD",
                     status: newOrder.status,
                     topupStatus: newOrder.topupStatus,
                     deliveryResponse: gameData
                 },
                 usage: {
-                    usedToday: usedToday + (isSuccess ? price : 0),
-                    dailyLimit,
-                    remaining: Math.max(0, dailyLimit - (usedToday + (isSuccess ? price : 0))),
+                    usedToday: Number(((usedToday + (isSuccess ? price : 0)) / rate).toFixed(2)),
+                    dailyLimit: Number((dailyLimit / rate).toFixed(2)),
+                    remaining: Number((Math.max(0, dailyLimit - (usedToday + (isSuccess ? price : 0))) / rate).toFixed(2)),
                     isLimitReached: (usedToday + (isSuccess ? price : 0)) >= dailyLimit
                 }
             });

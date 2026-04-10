@@ -40,16 +40,19 @@ export async function GET(req, { params }) {
             };
         }));
 
+        const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5;
+
         return NextResponse.json({
             success: true,
             game: {
                 name: data.data.gameName,
                 slug: data.data.gameSlug,
                 publisher: data.data.gameFrom,
+                currency: "USD",
                 items: itemsWithPricing.map(i => ({
                     name: i.itemName,
                     slug: i.itemSlug,
-                    price: i.sellingPrice,
+                    price: Number((i.sellingPrice / rate).toFixed(2)),
                     available: i.itemAvailablity
                 }))
             }

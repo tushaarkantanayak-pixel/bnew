@@ -21,16 +21,19 @@ export async function GET(req) {
         const usedToday = keyDoc?.usedToday || 0;
         const dailyLimit = keyDoc?.dailyLimit || 0;
 
+        const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5;
+
         return NextResponse.json({
             success: true,
-            wallet: user.wallet,
+            wallet: Number((user.wallet / rate).toFixed(2)),
+            currency: "USD",
             userType: user.userType,
             name: user.name,
             userId: user.userId,
             usage: {
-                usedToday,
-                dailyLimit,
-                remaining: Math.max(0, dailyLimit - usedToday),
+                usedToday: Number((usedToday / rate).toFixed(2)),
+                dailyLimit: Number((dailyLimit / rate).toFixed(2)),
+                remaining: Number((Math.max(0, dailyLimit - usedToday) / rate).toFixed(2)),
                 isLimitReached: usedToday >= dailyLimit
             }
         });
