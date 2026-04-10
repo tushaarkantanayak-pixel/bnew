@@ -9,6 +9,8 @@ import {
 } from "react-icons/fi";
 import Link from "next/link";
 import { useUser } from "../layout";
+import { formatPrice } from "@/utils/currency";
+
 
 interface ApiKey {
     _id: string;
@@ -331,7 +333,7 @@ export default function ApiKeysPage() {
                                             <div className="space-y-1.5 pt-2">
                                                 <div className="flex justify-between text-[10px] font-black uppercase italic">
                                                     <span className="text-white/40 flex items-center gap-1"><FiBarChart /> Daily Budget</span>
-                                                    <span className="text-[var(--accent)]">₹{key.usedToday || 0} / ₹{key.dailyLimit || 10000}</span>
+                                                    <span className="text-[var(--accent)]">{formatPrice(key.usedToday || 0)} / {formatPrice(key.dailyLimit || 10000)}</span>
                                                 </div>
                                                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                                                     <motion.div
@@ -359,7 +361,7 @@ export default function ApiKeysPage() {
                                             {editingId === key._id ? (
                                                 <div className="space-y-3">
                                                     <div className="space-y-1">
-                                                        <label className="text-[9px] font-black uppercase text-white/40 ml-1">Daily Cap (₹)</label>
+                                                        <label className="text-[9px] font-black uppercase text-white/40 ml-1">Daily Cap ($)</label>
                                                         <input
                                                             type="number"
                                                             value={editValues.dailyLimit}

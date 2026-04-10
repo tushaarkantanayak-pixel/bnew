@@ -21,6 +21,8 @@ import RedeemCodesTab from "@/components/admin/RedeemCodesTab";
 import ApiKeysTab from "@/components/admin/ApiKeysTab";
 import UsdtTab from "@/components/admin/UsdtTab";
 import PromotionalTab from "@/components/admin/PromotionalTab";
+import { formatPrice } from "@/utils/currency";
+
 
 
 
@@ -122,13 +124,25 @@ export default function AdminPanalPage() {
     const data = await res.json();
 
     if (data.success) {
+      const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
+      const convertedSlabs = (data.data?.slabs || []).map(s => ({
+        ...s,
+        min: s.min / rate,
+        max: s.max / rate
+      }));
+      const convertedOverrides = (data.data?.overrides || []).map(o => ({
+        ...o,
+        fixedPrice: o.fixedPrice / rate
+      }));
+
       setSlabs(
-        data.data?.slabs?.length
-          ? data.data.slabs
+        convertedSlabs.length
+          ? convertedSlabs
           : [{ min: 0, max: 0, percent: 0 }]
       );
-      setOverrides(data.data?.overrides || []);
+      setOverrides(convertedOverrides);
     }
+
   };
 
   /* ================= SAVE PRICING ================= */
@@ -137,7 +151,8 @@ export default function AdminPanalPage() {
       setSavingPricing(true);
       const token = localStorage.getItem("token");
 
-      const res = await fetch("/api/admin/pricing", {
+        const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
+        const res = await fetch("/api/admin/pricing", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -145,10 +160,18 @@ export default function AdminPanalPage() {
         },
         body: JSON.stringify({
           userType: pricingType,
-          slabs: normalizeSlabs(slabs),
-          overrides,
+          slabs: normalizeSlabs(slabs).map(s => ({
+            ...s,
+            min: Math.round(s.min * rate),
+            max: Math.round(s.max * rate)
+          })),
+          overrides: overrides.map(o => ({
+            ...o,
+            fixedPrice: Math.round(o.fixedPrice * rate)
+          })),
         }),
       });
+
 
       if (!res.ok) {
         const data = await res.json();
@@ -230,7 +253,7 @@ export default function AdminPanalPage() {
 
             <div className="mt-1 flex items-end gap-2">
               <p className="text-2xl font-bold text-[var(--foreground)]">
-                {balance !== null ? balance : "Loading…"}
+                {balance !== null ? formatPrice(balance) : "Loading…"}
               </p>
 
               <span className="text-sm font-medium text-green-500">

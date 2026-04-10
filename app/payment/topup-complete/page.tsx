@@ -12,6 +12,8 @@ import {
   FaArrowRight,
   FaHistory,
 } from "react-icons/fa";
+import { formatPrice } from "@/utils/currency";
+
 
 // --- Types ---
 interface OrderData {
@@ -278,7 +280,7 @@ export default function TopupComplete() {
                       </div>
                       <div className="space-y-0.5">
                         <p className="text-[9px] text-[var(--muted)] uppercase font-bold tracking-widest">Total Paid</p>
-                        <p className="text-xs font-black text-[var(--accent)]">₹{orderData?.price || "---"}</p>
+                        <p className="text-xs font-black text-[var(--accent)]">{formatPrice(orderData?.price)}</p>
                       </div>
                     </div>
                   </motion.div>

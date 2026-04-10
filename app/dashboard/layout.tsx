@@ -141,7 +141,7 @@ export default function DashboardLayout({
                             {/* <div className="flex gap-4">
                                 <Link href="/dashboard/wallet" className="px-4 py-2 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm hover:bg-white/10 transition-all group">
                                     <p className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)]/40 mb-0.5 group-hover:text-[var(--accent)]/60 transition-colors">Wallet Assets</p>
-                                    <p className="text-sm font-black italic text-[var(--accent)] leading-none">₹{walletBalance}</p>
+                                    <p className="text-sm font-black italic text-[var(--accent)] leading-none">{formatPrice(walletBalance)}</p>
                                 </Link>
                             </div> */}
                         </motion.div>

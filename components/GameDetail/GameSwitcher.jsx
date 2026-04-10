@@ -172,7 +172,7 @@ export default function GameSwitcher() {
 
                             {/* Game Name Label - Always Visible */}
                             <p className={`
-                                text-[7px] md:text-[8px] font-black uppercase tracking-wider text-center max-w-[4rem] md:max-w-[4.5rem] line-clamp-1 transition-colors duration-300
+                                text-[7px] md:text-[8px] font-black uppercase tracking-wider text-center transition-colors duration-300
                                 ${isActive ? 'text-[var(--accent)]' : 'text-[var(--muted)] opacity-60 group-hover:opacity-100'}
                             `}>
                                 {game.gameName}

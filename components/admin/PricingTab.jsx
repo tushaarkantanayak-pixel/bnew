@@ -13,8 +13,9 @@ import {
   ChevronDown,
   Info,
   Shield,
-  IndianRupee,
+  DollarSign,
   Loader2,
+
   Package
 } from "lucide-react";
 
@@ -238,8 +239,8 @@ export default function PricingTab({
 
                 <div className="space-y-2">
                   <div className="hidden sm:grid grid-cols-12 gap-3 px-2 text-[10px] font-bold text-[var(--muted)]">
-                    <div className="col-span-4">Minimum Price (₹)</div>
-                    <div className="col-span-4">Maximum Price (₹)</div>
+                    <div className="col-span-4">Minimum Price ($)</div>
+                    <div className="col-span-4">Maximum Price ($)</div>
                     <div className="col-span-3">Add Profit (%)</div>
                     <div className="col-span-1"></div>
                   </div>
@@ -252,7 +253,8 @@ export default function PricingTab({
                       className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-3 items-center p-3 sm:p-3.5 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.01] hover:bg-[var(--foreground)]/[0.03] transition-colors"
                     >
                       <div className="col-span-4 space-y-1 sm:space-y-0">
-                        <label className="sm:hidden text-[10px] font-bold text-[var(--muted)] ml-1">Minimum Price (₹)</label>
+                        <label className="sm:hidden text-[10px] font-bold text-[var(--muted)] ml-1">Minimum Price ($)</label>
+
                         <input
                           type="number"
                           value={s.min}
@@ -262,7 +264,8 @@ export default function PricingTab({
                         />
                       </div>
                       <div className="col-span-4 space-y-1 sm:space-y-0">
-                        <label className="sm:hidden text-[10px] font-bold text-[var(--muted)] ml-1">Maximum Price (₹)</label>
+                        <label className="sm:hidden text-[10px] font-bold text-[var(--muted)] ml-1">Maximum Price ($)</label>
+
                         <input
                           type="number"
                           value={s.max}
@@ -395,7 +398,8 @@ export default function PricingTab({
                             </div>
                           </div>
                           <div className="relative">
-                            <IndianRupee size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--accent)]" />
+                            <DollarSign size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--accent)]" />
+
                             <input
                               type="number"
                               value={o.fixedPrice}

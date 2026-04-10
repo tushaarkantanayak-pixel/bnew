@@ -15,6 +15,8 @@ import {
     WifiOff,
     Clock
 } from "lucide-react";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function ApiKeysTab() {
     const [keys, setKeys] = useState([]);
@@ -151,8 +153,8 @@ export default function ApiKeysTab() {
                                                         />
                                                     </div>
                                                     <div className="flex items-center justify-between gap-4">
-                                                        <span className="text-[10px] font-bold text-[var(--foreground)]">₹{(k.usedToday || 0).toLocaleString()} used</span>
-                                                        <span className="text-[10px] text-[var(--muted)]">Limit: ₹{(k.dailyLimit || 10000).toLocaleString()}</span>
+                                                        <span className="text-[10px] font-bold text-[var(--foreground)]">{formatPrice(k.usedToday || 0)} used</span>
+                                                        <span className="text-[10px] text-[var(--muted)]">Limit: {formatPrice(k.dailyLimit || 10000)}</span>
                                                     </div>
                                                 </div>
                                             </td>
@@ -243,7 +245,7 @@ export default function ApiKeysTab() {
                                         <div className="flex justify-between items-center text-[9px] mb-1.5">
                                             <span className="font-bold text-[var(--muted)] uppercase tracking-tighter opacity-40">Daily Usage</span>
                                             <span className="font-black text-[var(--foreground)] tabular-nums tracking-tighter shadow-sm">
-                                                <span className="text-[var(--accent)] opacity-60">₹</span>{(k.usedToday || 0).toLocaleString()} <span className="opacity-10">/</span> ₹{(k.dailyLimit || 10000).toLocaleString()}
+                                                {formatPrice(k.usedToday || 0)} <span className="opacity-10">/</span> {formatPrice(k.dailyLimit || 10000)}
                                             </span>
                                         </div>
                                         <div className="w-full h-1 bg-[var(--foreground)]/[0.05] rounded-full overflow-hidden">

@@ -16,6 +16,8 @@ import {
   FiShare2,
   FiUsers,
 } from "react-icons/fi";
+import { formatPrice } from "@/utils/currency";
+
 import { usePathname } from "next/navigation";
 import { useUIStore } from "@/store/useUIStore";
 
@@ -138,7 +140,7 @@ export default function ChatBot() {
 
     if (msg === "prices") {
       ctx.topic = "pricing";
-      return "I can certainly help with that! 💰 MLBB Diamonds start from ₹99. Which game package are you looking for?";
+      return `I can certainly help with that! 💰 MLBB Diamonds start from ${formatPrice(99)}. Which game package are you looking for?`;
     }
 
     if (msg === "track") {

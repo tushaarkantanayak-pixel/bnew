@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiX, FiArrowRight, FiZap, FiActivity } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { formatPrice } from "@/utils/currency";
+
 
 const STORAGE_KEY = "hide_whatsapp_banner";
 const ROTATE_INTERVAL = 4500;
@@ -23,11 +25,11 @@ const BANNERS = [
   {
     id: "bgmi",
     title: "BGMI UC TOP-UP ",
-    subtitle: "60 UC @ ₹70 — Instantly",
+    subtitle: `60 UC @ ${formatPrice(70)} — Instantly`,
     badge: "HOT DEAL",
     icon: <FiActivity />,
     color: "#f97316",
-    link: "https://wa.me/919178521537?text=BGMI%2060%20UC%20Offer%20@%2070rs",
+    link: `https://wa.me/919178521537?text=BGMI%2060%20UC%20Offer%20@%20${formatPrice(70)}`,
   },
   {
     id: "support",

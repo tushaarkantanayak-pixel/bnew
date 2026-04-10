@@ -5,6 +5,8 @@ import Image from "next/image";
 import QRCode from "qrcode";
 import { FiCreditCard, FiSmartphone, FiUser, FiInfo, FiCheck, FiShield } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function ReviewAndPaymentStep({
   step,
@@ -26,6 +28,13 @@ export default function ReviewAndPaymentStep({
 }) {
   const [upiQR, setUpiQR] = useState("");
   const [isRedirecting, setIsRedirecting] = useState(false);
+
+  // Default to wallet if balance allows
+  useState(() => {
+    if (walletBalance >= totalPrice) {
+      setPaymentMethod("wallet");
+    }
+  });
 
   // Generate UPI QR
   const handleUPI = async () => {
@@ -171,12 +180,12 @@ export default function ReviewAndPaymentStep({
                   if (walletBalance >= totalPrice) setPaymentMethod("wallet");
                 }}
                 disabled={walletBalance < totalPrice}
-                className={`relative p-4 rounded-xl border2 transition-all text-left group overflow-hidden
+                className={`relative p-4 rounded-xl border-2 transition-all text-left group overflow-hidden col-span-full
                              ${paymentMethod === "wallet"
                     ? "bg-[var(--accent)]/10 border-[var(--accent)] ring-1 ring-[var(--accent)]"
                     : "bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted)]"
                   }
-                             ${walletBalance < totalPrice ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+                             ${walletBalance < totalPrice ? "opacity-50 cursor-not-allowed" : "pointer-events-auto"}
                         `}
               >
                 <div className="flex justify-between items-center mb-1">
@@ -184,15 +193,16 @@ export default function ReviewAndPaymentStep({
                   {paymentMethod === "wallet" && <FiCheck className="text-[var(--accent)]" />}
                 </div>
                 <div className="flex items-end gap-2">
-                  <span className="text-lg font-[900]">₹{walletBalance}</span>
+                  <span className="text-lg font-[900]">{formatPrice(walletBalance)}</span>
+
                   {walletBalance < totalPrice && (
                     <span className="text-[10px] text-red-400 font-bold mb-1">Insufficient</span>
                   )}
                 </div>
               </button>
 
-              {/* UPI Option */}
-              <button
+              {/* UPI Option Hidden or Disabled for Now */}
+              {/* <button
                 onClick={handleUPI}
                 className={`relative p-4 rounded-xl border transition-all text-left group overflow-hidden
                              ${paymentMethod === "upi"
@@ -208,7 +218,7 @@ export default function ReviewAndPaymentStep({
                 <div className="flex items-end gap-2">
                   <span className="text-xs text-[var(--muted)] font-medium">Instant Processing</span>
                 </div>
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -217,18 +227,18 @@ export default function ReviewAndPaymentStep({
             <div className="space-y-2 mb-6">
               <div className="flex justify-between text-sm">
                 <span className="text-[var(--muted)] font-medium">Subtotal</span>
-                <span className="font-bold">₹{price}</span>
+                <span className="font-bold">{formatPrice(price)}</span>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--muted)] font-medium">Discount</span>
-                  <span className="font-bold text-green-400">- ₹{discount}</span>
+                  <span className="font-bold text-green-400">- {formatPrice(discount)}</span>
                 </div>
               )}
               <div className="h-px bg-[var(--border)] my-2" />
               <div className="flex justify-between items-center">
                 <span className="font-[900] text-lg uppercase tracking-tight">Total Pay</span>
-                <span className="font-[900] text-2xl text-[var(--accent)]">₹{totalPrice}</span>
+                <span className="font-[900] text-2xl text-[var(--accent)]">{formatPrice(totalPrice)}</span>
               </div>
             </div>
 

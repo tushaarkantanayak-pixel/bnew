@@ -9,6 +9,7 @@ import AuthGuard from "@/components/AuthGuard";
 import ValidationStep from "./ValidationStep";
 import ReviewAndPaymentStep from "./ReviewAndPaymentStep";
 import { saveVerifiedPlayer } from "@/utils/storage/verifiedPlayerStorage";
+import { formatPrice } from "@/utils/currency";
 
 function BuyFlowContent() {
   const { slug, itemSlug } = useParams();
@@ -304,10 +305,10 @@ function BuyFlowContent() {
                       <h4 className="font-[900] text-[13px] leading-tight uppercase tracking-tight truncate text-[var(--foreground)]/90 mb-1">{item?.itemName || fallbackName}</h4>
 
                       <div className="flex items-end gap-2">
-                        <span className="text-lg font-[900] text-[var(--accent)] leading-none">₹{totalPrice}</span>
+                        <span className="text-lg font-[900] text-[var(--accent)] leading-none">{formatPrice(totalPrice)}</span>
                         {discount > 0 && (
                           <span className="text-[10px] font-bold text-[var(--muted)]/50 line-through decoration-red-500/30 pb-0.5">
-                            ₹{price + discount}
+                            {formatPrice(price + discount)}
                           </span>
                         )}
                       </div>

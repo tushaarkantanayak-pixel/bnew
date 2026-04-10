@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FiClock, FiCheckCircle, FiXCircle, FiRefreshCw, FiExternalLink, FiSearch } from "react-icons/fi";
+import { formatPrice } from "@/utils/currency";
 
 export default function UsdtTab() {
   const [deposits, setDeposits] = useState([]);
@@ -123,7 +124,7 @@ export default function UsdtTab() {
                   </td>
                   <td className="px-4 py-4">
                     <p className="text-sm font-black text-green-400">{d.usdtAmount} USDT</p>
-                    <p className="text-[9px] text-[var(--muted)] uppercase font-bold">≈ {d.coinsToCredit} Coins</p>
+                    <p className="text-[9px] text-[var(--muted)] uppercase font-bold">≈ {formatPrice(d.coinsToCredit * (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98))}</p>
                   </td>
                   <td className="px-4 py-4 max-w-[150px]">
                     {d.txHash ? (

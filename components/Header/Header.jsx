@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import { formatPrice } from "@/utils/currency";
+
 import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiSearch } from "react-icons/fi";
 
 /* ================= CONFIG ================= */
@@ -28,9 +30,9 @@ const HEADER_CONFIG = {
       { label: "My Orders", href: "/dashboard/orders", icon: <FiShoppingBag size={14} />, desc: "Track your top-ups" },
       { label: "My Wallet", href: "/dashboard/wallet", icon: <FiLayers size={14} />, desc: "Balance & Recharge" },
       { label: "Redeem Code", href: "/dashboard/redeem", icon: <FiGift size={14} />, desc: "Use your codes" },
-      { label: "Refer & Earn", href: "/dashboard/referral", icon: <FiUsers size={14} />, desc: "Earn rewards" },
+      // { label: "Refer & Earn", href: "/dashboard/referral", icon: <FiUsers size={14} />, desc: "Earn rewards" },
       { label: "API Setup", href: "/dashboard/api-keys", icon: <FiKey size={14} />, desc: "Developer API Access" },
-      { label: "Membership", href: "/admin-panal", icon: <FiShield size={14} />, desc: "Member Benefits" },
+      // { label: "Membership", href: "/admin-panal", icon: <FiShield size={14} />, desc: "Member Benefits" },
       { label: "Support", href: "/dashboard/support", icon: <FiMessageSquare size={14} />, desc: "Get help 24/7" },
     ],
     roles: {
@@ -288,7 +290,7 @@ export default function Header() {
                   whileTap={{ scale: 0.95 }}
                   className="relative w-auto h-9 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-300 group bg-[var(--foreground)]/5 hover:bg-[var(--foreground)]/10"
                 >
-                  <span className="text-xs font-black text-[var(--accent)]">₹{walletBalance}</span>
+                  <span className="text-xs font-black text-[var(--accent)]">{formatPrice(walletBalance)}</span>
                   <span className="text-lg text-[var(--accent)] group-hover:scale-110 transition-transform">+</span>
                 </motion.button>
               </Link>
@@ -316,108 +318,91 @@ export default function Header() {
                 />
                 <FiSearch className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isSearchFocused ? 'text-[var(--accent)]' : 'text-[var(--muted)]/40'}`} size={14} />
 
+                <AnimatePresence>
+                  {searchTerm && isSearchFocused && (
+                    <button
+                      onClick={() => setSearchTerm("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center bg-[var(--foreground)]/[0.05] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                    >
+                      <FiX size={10} />
+                    </button>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Global Search Results */}
               <AnimatePresence>
-                {searchTerm && isSearchFocused && (
-                  <button
-                    onClick={() => setSearchTerm("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center bg-[var(--foreground)]/[0.05] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                {isSearchFocused && (searchTerm || isSearching) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 5, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                    className="absolute top-full left-0 w-full mt-2 bg-[var(--background)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden z-[1100] backdrop-blur-3xl"
                   >
-                    <FiX size={10} />
-                  </button>
+                    <div className="p-2 border-b border-[var(--border)] bg-[var(--foreground)]/[0.02]">
+                      <span className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]/60 px-2 italic">All Games</span>
+                    </div>
+
+                    <div className="max-h-[60vh] overflow-y-auto custom-scrollbar">
+                      {searchResults.length > 0 ? (
+                        <div className="p-2 space-y-1">
+                          {searchResults.map((game, idx) => (
+                            <Link
+                              key={game.gameSlug}
+                              href={`/game/${game.gameSlug}`}
+                              onClick={() => {
+                                setIsSearchFocused(false);
+                                setSearchTerm("");
+                              }}
+                            >
+                              <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: idx * 0.05 }}
+                                className="flex items-center gap-3 p-2 rounded-xl hover:bg-[var(--foreground)]/[0.04] transition-all group border border-transparent hover:border-[var(--border)]"
+                              >
+                                <div className="w-10 h-10 rounded-lg overflow-hidden border border-[var(--border)] shrink-0">
+                                  <Image
+                                    src={game.gameImageId?.image || "/logoBB.png"}
+                                    alt={game.gameName}
+                                    width={40}
+                                    height={40}
+                                    className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                                  />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <p className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">{game.gameName}</p>
+                                  <p className="text-[9px] text-[var(--muted)]/50 italic uppercase tracking-tighter">{game.gameFrom}</p>
+                                </div>
+                                <FiChevronRight size={14} className="text-[var(--muted)] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                              </motion.div>
+                            </Link>
+                          ))}
+                        </div>
+                      ) : searchTerm ? (
+                        <div className="py-10 text-center">
+                          <div className="w-12 h-12 rounded-2xl bg-[var(--foreground)]/[0.03] flex items-center justify-center mx-auto mb-3 text-[var(--muted)]/20">
+                            <FiSearch size={20} />
+                          </div>
+                          <p className="text-xs font-bold text-[var(--muted)]/40 uppercase tracking-widest">No games found</p>
+                        </div>
+                      ) : null}
+                    </div>
+
+                    <div className="p-3 bg-[var(--foreground)]/[0.02] border-t border-[var(--border)] text-center">
+                      <p className="text-[8px] font-black text-[var(--muted)]/40 uppercase tracking-widest italic flex items-center justify-center gap-1.5">
+                        <FiZap size={10} className="text-[var(--accent)]" /> Blue Buff Search
+                      </p>
+                    </div>
+                  </motion.div>
                 )}
               </AnimatePresence>
             </div>
-
-            {/* Global Search Results */}
-            <AnimatePresence>
-              {isSearchFocused && (searchTerm || isSearching) && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 5, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                  className="absolute top-full left-0 w-full mt-2 bg-[var(--background)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden z-[1100] backdrop-blur-3xl"
-                >
-                  <div className="p-2 border-b border-[var(--border)] bg-[var(--foreground)]/[0.02]">
-                    <span className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]/60 px-2 italic">All Games</span>
-                  </div>
-
-                  <div className="max-h-[60vh] overflow-y-auto custom-scrollbar">
-                    {searchResults.length > 0 ? (
-                      <div className="p-2 space-y-1">
-                        {searchResults.map((game, idx) => (
-                          <Link
-                            key={game.gameSlug}
-                            href={`/game/${game.gameSlug}`}
-                            onClick={() => {
-                              setIsSearchFocused(false);
-                              setSearchTerm("");
-                            }}
-                          >
-                            <motion.div
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: idx * 0.05 }}
-                              className="flex items-center gap-3 p-2 rounded-xl hover:bg-[var(--foreground)]/[0.04] transition-all group border border-transparent hover:border-[var(--border)]"
-                            >
-                              <div className="w-10 h-10 rounded-lg overflow-hidden border border-[var(--border)] shrink-0">
-                                <Image
-                                  src={game.gameImageId?.image || "/logoBB.png"}
-                                  alt={game.gameName}
-                                  width={40}
-                                  height={40}
-                                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <p className="text-xs font-bold text-[var(--foreground)] truncate group-hover:text-[var(--accent)] transition-colors">{game.gameName}</p>
-                                <p className="text-[9px] text-[var(--muted)]/50 italic uppercase tracking-tighter truncate">{game.gameFrom}</p>
-                              </div>
-                              <FiChevronRight size={14} className="text-[var(--muted)] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                            </motion.div>
-                          </Link>
-                        ))}
-                      </div>
-                    ) : searchTerm ? (
-                      <div className="py-10 text-center">
-                        <div className="w-12 h-12 rounded-2xl bg-[var(--foreground)]/[0.03] flex items-center justify-center mx-auto mb-3 text-[var(--muted)]/20">
-                          <FiSearch size={20} />
-                        </div>
-                        <p className="text-xs font-bold text-[var(--muted)]/40 uppercase tracking-widest">No games found</p>
-                      </div>
-                    ) : null}
-                  </div>
-
-                  <div className="p-3 bg-[var(--foreground)]/[0.02] border-t border-[var(--border)] text-center">
-                    <p className="text-[8px] font-black text-[var(--muted)]/40 uppercase tracking-widest italic flex items-center justify-center gap-1.5">
-                      <FiZap size={10} className="text-[var(--accent)]" /> Blue Buff Search
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
 
           </div>
 
           <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3" ref={dropdownRef}>
             <ThemeToggle />
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handlePushToggle}
-              className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 group ${isSubscribed ? "text-[var(--accent)]" : "text-[var(--foreground)]/60"}`}
-            >
-              <div className="w-full h-full rounded-full flex items-center justify-center bg-[var(--foreground)]/5 group-hover:bg-[var(--foreground)]/10 transition-colors">
-                <motion.div animate={{ rotate: [0, -15, 15, -15, 15, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}>
-                  <FiBell className="text-lg" />
-                </motion.div>
-              </div>
-              {isSubscribed && (
-                <span className="absolute top-0 right-0 w-2 h-2 bg-[var(--accent)] rounded-full border-2 border-[var(--background)] shadow-[0_0_10px_rgba(var(--accent-rgb),0.5)]" />
-              )}
-            </motion.button>
-
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

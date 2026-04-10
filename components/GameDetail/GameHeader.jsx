@@ -40,7 +40,7 @@ export default function GameHeader({ game }) {
           {/* Name & Origin Info */}
           <div className="flex flex-col">
             <div className="flex items-center gap-2 mb-0.5">
-              <h1 className="text-sm md:text-base font-black tracking-tight text-[var(--foreground)] leading-none line-clamp-1 uppercase">
+              <h1 className="text-sm md:text-base font-black tracking-tight text-[var(--foreground)] leading-none uppercase">
                 {game.gameName}
               </h1>
               <FiCheckCircle className="text-[var(--accent)]" size={12} />
@@ -63,9 +63,9 @@ export default function GameHeader({ game }) {
               ? "bg-amber-500/5 border-amber-500/10 hover:border-amber-500/30"
               : "bg-[var(--accent)]/5 border-[var(--accent)]/10 hover:border-[var(--accent)]/30"
             }`}>
-            <FiZap className={`${(game.isValidationRequired === false && game.gameSlug !== 'bgmi-manual') ? "text-amber-500" : "text-[var(--accent)]"} transition-transform group-hover/badge:scale-110`} size={14} fill="currentColor" />
+            <FiZap className={`${(game.isValidationRequired === false && !game.gameSlug?.toLowerCase().includes('bgmi')) ? "text-amber-500" : "text-[var(--accent)]"} transition-transform group-hover/badge:scale-110`} size={14} fill="currentColor" />
             <span className="hidden sm:inline text-[9px] font-black uppercase tracking-widest text-[var(--foreground)] opacity-80">
-              {(game.isValidationRequired === false && game.gameSlug !== 'bgmi-manual') ? "Manual" : "Instant"}
+              {(game.isValidationRequired === false && !game.gameSlug?.toLowerCase().includes('bgmi')) ? "Manual" : "Instant"}
             </span>
           </div>
 

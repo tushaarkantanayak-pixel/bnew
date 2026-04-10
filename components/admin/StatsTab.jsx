@@ -24,6 +24,8 @@ import {
 } from "react-icons/fi";
 import { Loader2, Zap, ArrowUpRight, ArrowDownRight, User, Wallet } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function StatsTab() {
     const [loading, setLoading] = useState(true);
@@ -158,6 +160,7 @@ export default function StatsTab() {
         try {
             setUpdating(true);
             const token = localStorage.getItem("token");
+            const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
 
             const res = await fetch("/api/admin/wallet/manage", {
                 method: "POST",
@@ -167,7 +170,7 @@ export default function StatsTab() {
                 },
                 body: JSON.stringify({
                     email: finalEmail,
-                    amount: Number(finalAmount),
+                    amount: Math.round(Number(finalAmount) * rate),
                     action,
                 }),
             });
@@ -303,7 +306,8 @@ export default function StatsTab() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         <PremiumInsightCard
                             label="Customer Pool"
-                            value={`₹${(data.totalBalance || 0).toLocaleString()}`}
+                            value={formatPrice(data.totalBalance)}
+
                             color="blue"
                             icon={<Wallet size={20} />}
                             description="Total combined balance of all users"
@@ -335,9 +339,9 @@ export default function StatsTab() {
                                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Money Added</h4>
                             </div>
                             <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                                <InsightCard label="Today" value={`₹${(data.deposits?.day || 0).toLocaleString()}`} color="emerald" compact pulse={data.deposits?.day > 0} />
-                                <InsightCard label="Week" value={`₹${(data.deposits?.week || 0).toLocaleString()}`} color="emerald" compact />
-                                <InsightCard label="Month" value={`₹${(data.deposits?.month || 0).toLocaleString()}`} color="emerald" compact />
+                                <InsightCard label="Today" value={formatPrice(data.deposits?.day)} color="emerald" compact pulse={data.deposits?.day > 0} />
+                                <InsightCard label="Week" value={formatPrice(data.deposits?.week)} color="emerald" compact />
+                                <InsightCard label="Month" value={formatPrice(data.deposits?.month)} color="emerald" compact />
                             </div>
                         </div>
 
@@ -348,9 +352,9 @@ export default function StatsTab() {
                                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Money Spent</h4>
                             </div>
                             <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                                <InsightCard label="Today" value={`₹${(data.usage?.day || 0).toLocaleString()}`} color="purple" compact pulse={data.usage?.day > 0} />
-                                <InsightCard label="Week" value={`₹${(data.usage?.week || 0).toLocaleString()}`} color="purple" compact />
-                                <InsightCard label="Month" value={`₹${(data.usage?.month || 0).toLocaleString()}`} color="purple" compact />
+                                <InsightCard label="Today" value={formatPrice(data.usage?.day)} color="purple" compact pulse={data.usage?.day > 0} />
+                                <InsightCard label="Week" value={formatPrice(data.usage?.week)} color="purple" compact />
+                                <InsightCard label="Month" value={formatPrice(data.usage?.month)} color="purple" compact />
                             </div>
                         </div>
                     </div>
@@ -500,7 +504,7 @@ export default function StatsTab() {
                                                 </div>
                                                 <div className="text-right">
                                                     <div className={`text-lg font-mono font-bold ${txn.type === 'credit' ? 'text-emerald-500' : 'text-red-500'}`}>
-                                                        {txn.type === 'credit' ? '+' : '-'}{txn.amount.toLocaleString()}
+                                                        {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}
                                                     </div>
                                                     <div className="mt-2 flex justify-end gap-2">
                                                         <div className="mt-2 flex justify-end gap-2">
@@ -620,7 +624,7 @@ export default function StatsTab() {
                                                         </td>
                                                         <td className="px-6 py-4 text-right">
                                                             <span className={`font-mono font-bold ${txn.type === 'credit' ? 'text-emerald-500' : 'text-red-500'}`}>
-                                                                {txn.type === 'credit' ? '+' : '-'}{txn.amount.toLocaleString()}
+                                                                {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}
                                                             </span>
                                                         </td>
                                                         <td className="px-6 py-4">
@@ -782,8 +786,7 @@ export default function StatsTab() {
                                                     <div className="text-right">
                                                         <p className="text-[8px] font-black text-[var(--muted)] uppercase tracking-[0.2em] mb-1 opacity-40">Wallet</p>
                                                         <p className="text-xl font-black text-[var(--foreground)] tabular-nums tracking-tighter shadow-sm">
-                                                            <span className="text-[10px] mr-0.5 text-[var(--accent)] font-bold">₹</span>
-                                                            {user.wallet.toLocaleString()}
+                                                            {formatPrice(user.wallet)}
                                                         </p>
                                                     </div>
                                                     
@@ -866,7 +869,7 @@ export default function StatsTab() {
                                                             <div className="flex items-center justify-end gap-3">
                                                                 <div className="flex flex-col items-end">
                                                                     <span className="text-xs font-black text-[var(--foreground)] tabular-nums">
-                                                                        ₹{user.wallet.toLocaleString()}
+                                                                        {formatPrice(user.wallet)}
                                                                     </span>
                                                                     <span className="text-[9px] text-[var(--muted)] uppercase font-bold tracking-tighter opacity-50">Current Balance</span>
                                                                 </div>
@@ -969,7 +972,7 @@ export default function StatsTab() {
                                     </div>
                                     <div className="mt-4 pt-4 border-t border-[var(--border)] flex justify-between items-center">
                                         <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">Current Wallet</span>
-                                        <span className="font-black text-[var(--foreground)]">₹{selectedUserForWallet.wallet.toLocaleString()}</span>
+                                        <span className="font-black text-[var(--foreground)]">{formatPrice(selectedUserForWallet.wallet)}</span>
                                     </div>
                                 </div>
 
@@ -977,7 +980,7 @@ export default function StatsTab() {
                                     <div className="space-y-2">
                                         <label className="text-[10px] font-black text-[var(--muted)] uppercase tracking-widest ml-1">Adjustment Amount</label>
                                         <div className="relative group">
-                                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--accent)] font-bold">₹</span>
+                                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--accent)] font-bold">$</span>
                                             <input
                                                 autoFocus
                                                 type="number"

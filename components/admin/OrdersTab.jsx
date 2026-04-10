@@ -8,7 +8,8 @@ import {
   Clock,
   User,
   Gamepad2,
-  IndianRupee,
+  DollarSign,
+
   CheckCircle2,
   XCircle,
   AlertCircle,
@@ -24,6 +25,8 @@ import {
   ShoppingBag,
   Target
 } from "lucide-react";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function OrdersTab() {
   const [orders, setOrders] = useState([]);
@@ -217,13 +220,14 @@ export default function OrdersTab() {
         {/* Revenue Snapshot Column */}
         <div className="space-y-2 sm:space-y-3">
           <div className="flex items-center gap-2 px-1">
-            <IndianRupee size={12} className="text-emerald-500" />
+            <DollarSign size={12} className="text-emerald-500" />
+
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Earnings Summary</h4>
           </div>
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <InsightCard label="Today" value={`₹${(orderStats.revenue?.day || 0).toLocaleString()}`} color="emerald" compact />
-            <InsightCard label="Week" value={`₹${(orderStats.revenue?.week || 0).toLocaleString()}`} color="emerald" compact />
-            <InsightCard label="Month" value={`₹${(orderStats.revenue?.month || 0).toLocaleString()}`} color="emerald" compact />
+            <InsightCard label="Today" value={formatPrice(orderStats.revenue?.day)} color="emerald" compact />
+            <InsightCard label="Week" value={formatPrice(orderStats.revenue?.week)} color="emerald" compact />
+            <InsightCard label="Month" value={formatPrice(orderStats.revenue?.month)} color="emerald" compact />
           </div>
         </div>
       </div>
@@ -335,7 +339,7 @@ export default function OrdersTab() {
                         </td>
                         <td className="px-6 py-4">
                           <span className="text-base font-black text-emerald-500 tabular-nums">
-                            ₹{o.price}
+                            {formatPrice(o.price)}
                           </span>
                         </td>
                         <td className="px-6 py-4" onClick={(e) => e.stopPropagation()}>
@@ -382,7 +386,8 @@ export default function OrdersTab() {
                         </div>
                       </div>
                       <div className="flex flex-col items-end">
-                        <span className="text-base font-black text-emerald-500 tabular-nums">₹{o.price}</span>
+                        <span className="text-base font-black text-emerald-500 tabular-nums">{formatPrice(o.price)}</span>
+
                         <span className="text-[8px] font-bold text-[var(--muted)] uppercase opacity-60 tracking-tighter">{o.paymentMethod}</span>
                       </div>
                     </div>
@@ -486,7 +491,8 @@ export default function OrdersTab() {
                 <div className="flex items-center justify-between p-4.5 rounded-2xl bg-[var(--foreground)]/[0.02] border border-[var(--border)]">
                   <div>
                     <p className="text-[9px] font-bold text-[var(--muted)]/50 uppercase tracking-widest mb-0.5">Settlement</p>
-                    <span className="text-2xl font-black text-emerald-500 tabular-nums leading-none">₹{selectedOrder.price}</span>
+                    <span className="text-2xl font-black text-emerald-500 tabular-nums leading-none">{formatPrice(selectedOrder.price)}</span>
+
                   </div>
                   <StatusDropdown
                     value={selectedOrder.status}

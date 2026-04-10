@@ -21,26 +21,26 @@ export default function HeroSection() {
       <TopNoticeBanner />
       <GameBannerCarousel />
 
-      <div className="space-y-2 mt-4">
+      {/* <div className="space-y-2 mt-4">
         <StorySlider />
         <FlashSale />
-      </div>
+      </div> */}
 
       {/* <PromoBanner /> */}
 
-      <div className="space-y-2">
+      {/* <div className="space-y-2">
         <HomeQuickActions />
         <HomeReferralStats />
-      </div>
+      </div> */}
 
       <GamesPage />
 
-      <div className="mt-1 space-y-12 pb-10">
+      {/* <div className="mt-1 space-y-12 pb-10">
         <HomeServices />
         <TrustHighlights />
-      </div>
+      </div> */}
 
-      <SEOContent />
+      {/* <SEOContent /> */}
 
       {/* <ScrollingNoticeBand /> */}
 

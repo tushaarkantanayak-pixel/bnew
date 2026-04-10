@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { FiArrowRight, FiShield, FiLock, FiCheck } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function BuyPanel({
   activeItem,
@@ -70,7 +72,7 @@ export default function BuyPanel({
                 <div className="flex items-center gap-2 mb-0.5">
                   <span className="text-[8px] font-black uppercase tracking-[0.1em] text-[var(--accent)] opacity-80">Selected Package</span>
                 </div>
-                <h3 className="text-sm md:text-base font-black text-[var(--foreground)] tracking-tight leading-none uppercase italic truncate max-w-[150px] md:max-w-none">
+                <h3 className="text-sm md:text-base font-black text-[var(--foreground)] tracking-tight leading-none uppercase italic">
                   {activeItem.itemName}
                 </h3>
               </div>
@@ -81,11 +83,11 @@ export default function BuyPanel({
               <div className="flex flex-col items-start md:items-end">
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-[20px] md:text-[24px] font-[1000] text-[var(--foreground)] tracking-tighter">
-                    ₹{activeItem.sellingPrice}
+                    {formatPrice(activeItem.sellingPrice)}
                   </span>
                   {activeItem.dummyPrice && (
                     <span className="text-[11px] font-bold text-[var(--muted)] line-through">
-                      ₹{activeItem.dummyPrice}
+                      {formatPrice(activeItem.dummyPrice)}
                     </span>
                   )}
                 </div>

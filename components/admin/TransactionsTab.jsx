@@ -8,7 +8,7 @@ import {
   Clock,
   User,
   Gamepad2,
-  IndianRupee,
+  DollarSign,
   CheckCircle2,
   XCircle,
   AlertCircle,
@@ -22,6 +22,8 @@ import {
   Smartphone,
   ShoppingBag
 } from "lucide-react";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function TransactionsTab() {
   const [transactions, setTransactions] = useState([]);
@@ -172,13 +174,14 @@ export default function TransactionsTab() {
         {/* Revenue Snapshot Column */}
         <div className="space-y-2 sm:space-y-3">
           <div className="flex items-center gap-2 px-1">
-            <IndianRupee size={12} className="text-emerald-500" />
+            <DollarSign size={12} className="text-emerald-500" />
+
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Total Earnings</h4>
           </div>
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <InsightCard label="Today" value={`₹${(stats.volume?.day || 0).toLocaleString()}`} color="emerald" compact pulse={stats.volume?.day > 0} />
-            <InsightCard label="Week" value={`₹${(stats.volume?.week || 0).toLocaleString()}`} color="emerald" compact />
-            <InsightCard label="Month" value={`₹${(stats.volume?.month || 0).toLocaleString()}`} color="emerald" compact />
+            <InsightCard label="Today" value={formatPrice(stats.volume?.day)} color="emerald" compact pulse={stats.volume?.day > 0} />
+            <InsightCard label="Week" value={formatPrice(stats.volume?.week)} color="emerald" compact />
+            <InsightCard label="Month" value={formatPrice(stats.volume?.month)} color="emerald" compact />
           </div>
         </div>
       </div>
@@ -277,7 +280,7 @@ export default function TransactionsTab() {
                         </td>
                         <td className="px-6 py-4 text-right">
                           <span className="text-base font-black text-emerald-500 tracking-tighter tabular-nums">
-                            ₹{t.price}
+                            {formatPrice(t.price)}
                           </span>
                         </td>
                       </motion.tr>
@@ -320,7 +323,8 @@ export default function TransactionsTab() {
                         </div>
                       </div>
                       <div className="flex flex-col items-end shrink-0">
-                        <span className="text-base font-black text-emerald-500 tracking-tighter tabular-nums">₹{t.price}</span>
+                        <span className="text-base font-black text-emerald-500 tracking-tighter tabular-nums">{formatPrice(t.price)}</span>
+
                         <span className="text-[8px] font-medium text-[var(--muted)]/40 leading-none">{new Date(t.createdAt).toLocaleDateString()}</span>
                       </div>
                     </div>
@@ -407,7 +411,8 @@ export default function TransactionsTab() {
                 <div className="flex items-center justify-between p-4.5 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/10">
                   <div>
                     <p className="text-[9px] font-bold text-[var(--muted)]/50 uppercase tracking-widest mb-0.5">Settlement Amount</p>
-                    <span className="text-2xl font-black text-emerald-500 tabular-nums leading-none">₹{selectedTx.price}</span>
+                    <span className="text-2xl font-black text-emerald-500 tabular-nums leading-none">{formatPrice(selectedTx.price)}</span>
+
                   </div>
                   {(() => {
                     const meta = statusMeta[selectedTx.status] || statusMeta.pending;

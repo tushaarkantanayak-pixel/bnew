@@ -111,30 +111,9 @@ export default function ThemeToggle() {
             {currentTheme.icon}
           </motion.div>
 
-          {/* SPINNING RING */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className={`absolute inset-0 rounded-full border border-dashed ${open ? "border-white/30" : "border-[var(--foreground)]/20"}`}
-          />
         </div>
 
-        {/* EXPANDABLE LABEL (Only on Desktop/Large) */}
-        <AnimatePresence>
-          <div className="hidden md:block overflow-hidden">
-            <motion.span
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "auto", opacity: 1 }}
-              exit={{ width: 0, opacity: 0 }}
-              className={`text-[10px] font-black uppercase tracking-widest italic pr-3 whitespace-nowrap ${open ? "text-[var(--accent)]" : "text-[var(--foreground)]/60"}`}
-            >
-              {currentTheme.label}
-            </motion.span>
-          </div>
-        </AnimatePresence>
 
-        {/* INDICATOR */}
-        <div className={`absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full border-2 border-[var(--background)] transition-colors duration-300 ${open ? "bg-[var(--accent)] animate-pulse" : "bg-emerald-500"}`} />
       </motion.button>
 
       <AnimatePresence>

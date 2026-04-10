@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiZap, FiClock, FiChevronRight } from "react-icons/fi";
 import { useEffect, useState } from "react";
+import { formatPrice } from "@/utils/currency";
+
 
 const flashSaleData = [
     {
@@ -12,8 +14,8 @@ const flashSaleData = [
         name: "Weekly Pass",
         game: "MLBB",
         image: "/game-assets/weeklypass.jpg",
-        price: "₹142",
-        originalPrice: "₹175",
+        price: "142",
+        originalPrice: "175",
         slug: "mobile-legends988?type=weekly-pass",
         badge: "Hot"
     },
@@ -23,8 +25,8 @@ const flashSaleData = [
         name: "Starlight Card",
         game: "MLBB",
         image: "/game-assets/starkight.webp",
-        price: "₹225",
-        originalPrice: "₹299",
+        price: "225",
+        originalPrice: "299",
         slug: "starlight-card-manual",
         badge: "New"
     },
@@ -33,8 +35,8 @@ const flashSaleData = [
         name: "Blessing Welkin",
         game: "Genshin",
         image: "/game-assets/genshin.jpg",
-        price: "₹385",
-        originalPrice: "₹450",
+        price: "385",
+        originalPrice: "450",
         slug: "genshin-impact742",
         badge: "Sale"
     },
@@ -43,8 +45,8 @@ const flashSaleData = [
     //     name: "Weekly Card Plus",
     //     game: "HOK",
     //     image: "/game-assets/hok.jpg",
-    //     price: "₹240",
-    //     originalPrice: "₹299",
+    //     price: "240",
+    //     originalPrice: "299",
     //     slug: "honor-of-kings57",
     //     badge: "Best"
     // },
@@ -53,13 +55,14 @@ const flashSaleData = [
         name: "Weekly Bundle",
         game: "MLBB",
         image: "/game-assets/weekly-monthly-bundle.jpg",
-        price: "₹79",
-        originalPrice: "₹100",
+        price: "79",
+        originalPrice: "100",
         slug: "weeklymonthly-bundle931",
         badge: "Value"
     },
 
 ];
+
 
 export default function FlashSale() {
     const [timeLeft, setTimeLeft] = useState({ hours: 12, minutes: 45, seconds: 30 });
@@ -142,17 +145,17 @@ export default function FlashSale() {
 
                                     {/* Info */}
                                     <div className="space-y-0.5">
-                                        <p className="text-[7px] md:text-[9px] font-bold text-amber-500/80 uppercase tracking-widest truncate">{item.game}</p>
-                                        <h3 className="text-[10px] md:text-[12px] font-bold text-[var(--foreground)] truncate group-hover:text-amber-500 transition-colors">
+                                        <p className="text-[7px] md:text-[9px] font-bold text-amber-500/80 uppercase tracking-widest">{item.game}</p>
+                                        <h3 className="text-[10px] md:text-[12px] font-bold text-[var(--foreground)] group-hover:text-amber-500 transition-colors">
                                             {item.name}
                                         </h3>
 
                                         <div className="flex items-center justify-between">
                                             <span className="text-[13px] md:text-[15px] font-bold text-[var(--foreground)]">
-                                                {item.price}
+                                                {formatPrice(item.price)}
                                             </span>
                                             <span className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] line-through opacity-50 decoration-red-500/50">
-                                                {item.originalPrice}
+                                                {formatPrice(item.originalPrice)}
                                             </span>
                                         </div>
                                     </div>

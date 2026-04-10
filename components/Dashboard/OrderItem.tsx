@@ -15,6 +15,8 @@ import {
   FiCopy,
   FiCheck,
 } from "react-icons/fi";
+import { formatPrice } from "@/utils/currency";
+
 
 /* ================= TYPES ================= */
 
@@ -178,7 +180,7 @@ export default function OrderItem({ order }: { order: OrderType }) {
 
           <div className="flex items-center gap-3">
             <div className="flex flex-col items-end leading-none">
-              <div className="text-base font-black text-[var(--foreground)]">₹{order.price}</div>
+              <div className="text-base font-black text-[var(--foreground)]">{formatPrice(order.price)}</div>
               <div className="text-[8px] font-bold text-[var(--muted)] uppercase mt-1">
                 {new Date(order.createdAt).toLocaleDateString()}
               </div>

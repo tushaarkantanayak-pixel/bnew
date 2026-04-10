@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AuthGuard from "@/components/AuthGuard";
 import { FiUsers, FiDollarSign } from "react-icons/fi";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function LeaderboardPage() {
   const [data, setData] = useState([]);
@@ -171,8 +173,7 @@ export default function LeaderboardPage() {
                       <div className={`font-black italic tracking-tighter transition-all origin-right flex items-center justify-end ${index === 0 ? "text-3xl text-[var(--foreground)]" : "text-xl text-[var(--foreground)] group-hover:scale-110"}`}>
                         {type === "purchase" ? (
                           <>
-                            <span className="text-[var(--accent)] mr-1">₹</span>
-                            {item.totalSpent?.toLocaleString()}
+                            {formatPrice(item.totalSpent)}
                           </>
                         ) : (
                           <>

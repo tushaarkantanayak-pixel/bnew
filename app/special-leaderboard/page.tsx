@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import AuthGuard from "@/components/AuthGuard";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function SpecialLeaderboard() {
   const [data, setData] = useState<any[]>([]);
@@ -238,8 +240,7 @@ export default function SpecialLeaderboard() {
                         </h2>
 
                         <div className="text-5xl md:text-8xl font-[900] text-[var(--foreground)] mb-12 tracking-tighter flex items-center gap-1 italic">
-                          <span className="text-rose-500 drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">₹</span>
-                          {data[0]?.totalSpent?.toLocaleString()}
+                          {formatPrice(data[0]?.totalSpent)}
                         </div>
 
                         <div className="bg-[var(--background)] border border-[var(--border)] px-10 py-3 rounded-full shadow-lg hover:scale-105 transition-all">
@@ -284,8 +285,7 @@ export default function SpecialLeaderboard() {
 
                       <div className="text-right">
                         <div className="text-[var(--foreground)] font-[900] text-2xl md:text-3xl italic tracking-tighter group-hover:scale-110 transition-transform origin-right">
-                          <span className="text-rose-500 mr-1 italic">₹</span>
-                          {item.totalSpent?.toLocaleString()}
+                          {formatPrice(item.totalSpent)}
                         </div>
                       </div>
                     </motion.div>

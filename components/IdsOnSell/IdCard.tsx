@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { formatPrice } from "@/utils/currency";
+
 
 interface IdCardProps {
   item: any;
@@ -44,7 +46,7 @@ export default function IdCard({ item }: IdCardProps) {
           <span className="absolute top-3 right-3
             px-2.5 py-1 rounded-full text-xs font-semibold
             bg-emerald-500/90 text-black shadow">
-            Rent ₹{rentPrice} / {rentDuration}h
+            Rent {formatPrice(rentPrice)} / {rentDuration}h
           </span>
         )}
       </div>
@@ -65,12 +67,12 @@ export default function IdCard({ item }: IdCardProps) {
         {/* PRICE */}
         <div className="flex items-end justify-between mt-1">
           <div className="text-xl font-bold text-[var(--accent)]">
-            ₹{item.price}
+            {formatPrice(item.price)}
           </div>
 
           {rentAvailable && (
             <div className="text-xs text-emerald-400 font-semibold">
-              Rent ₹{rentPrice}/day
+              Rent {formatPrice(rentPrice)}/day
             </div>
           )}
         </div>

@@ -3,6 +3,8 @@
 import { FiGrid, FiList, FiCheckCircle } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function PackageSelector({
   items,
@@ -138,11 +140,11 @@ export default function PackageSelector({
 
                       <div className={`flex items-baseline gap-1.5 border-t border-[var(--border)] pt-3 ${item.itemAvailablity === false ? "opacity-30" : ""}`}>
                         <span className={`text-xl font-[1000] tracking-tighter leading-none ${isActive ? "text-[var(--accent)]" : "text-[var(--foreground)]"}`}>
-                          ₹{item.sellingPrice}
+                          {formatPrice(item.sellingPrice)}
                         </span>
                         {item.dummyPrice && (
                           <span className="text-[10px] font-bold text-[var(--muted)] line-through opacity-20">
-                            ₹{item.dummyPrice}
+                            {formatPrice(item.dummyPrice)}
                           </span>
                         )}
                       </div>
@@ -198,11 +200,11 @@ export default function PackageSelector({
                       <div className={`pt-4 border-t border-[var(--border)] ${item.itemAvailablity === false ? "opacity-30" : ""}`}>
                         <div className="flex items-baseline gap-2">
                           <p className={`text-3xl font-[1000] tracking-tighter ${isActive ? "text-[var(--accent)]" : "text-[var(--foreground)]"}`}>
-                            ₹{item.sellingPrice}
+                            {formatPrice(item.sellingPrice)}
                           </p>
                           {item.dummyPrice && (
                             <p className="text-[11px] font-bold text-[var(--muted)] line-through opacity-20">
-                              ₹{item.dummyPrice}
+                              {formatPrice(item.dummyPrice)}
                             </p>
                           )}
                         </div>

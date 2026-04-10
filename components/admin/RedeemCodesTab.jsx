@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiGift, FiPlus, FiCopy, FiCheck, FiClock, FiUser, FiTrash2 } from "react-icons/fi";
+import { formatPrice } from "@/utils/currency";
+
 
 export default function RedeemCodesTab() {
     const [amount, setAmount] = useState("");
@@ -49,6 +51,7 @@ export default function RedeemCodesTab() {
         const token = localStorage.getItem("token");
 
         try {
+            const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
             const res = await fetch("/api/admin/redeem-codes", {
                 method: "POST",
                 headers: {
@@ -56,7 +59,7 @@ export default function RedeemCodesTab() {
                     "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    amount: Number(amount),
+                    amount: Math.round(Number(amount) * rate),
                     quantity: isSeries ? 1 : Number(quantity),
                     isSeries,
                     customCode: isSeries ? customCode : "",
@@ -156,7 +159,7 @@ export default function RedeemCodesTab() {
 
                 <form className="grid grid-cols-1 sm:grid-cols-4 gap-4" onSubmit={handleGenerate}>
                     <div className="space-y-1.5">
-                        <label className="text-[9px] font-black uppercase text-[var(--muted)]/50 ml-1 tracking-[0.1em]">Value (₹)</label>
+                        <label className="text-[9px] font-black uppercase text-[var(--muted)]/50 ml-1 tracking-[0.1em]">Value ($)</label>
                         <input
                             type="number"
                             value={amount}
@@ -264,7 +267,7 @@ export default function RedeemCodesTab() {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className="font-black text-[var(--foreground)] tabular-nums">₹{code.value}</span>
+                                        <span className="font-black text-[var(--foreground)] tabular-nums">{formatPrice(code.value)}</span>
                                     </td>
                                     <td className="px-6 py-4">
                                         {code.isSeries ? (
@@ -339,7 +342,7 @@ export default function RedeemCodesTab() {
                                 </div>
                                 <div className="text-right">
                                     <span className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)]/40">Value</span>
-                                    <p className="text-base font-black text-[var(--foreground)] italic tracking-tighter">₹{code.value}</p>
+                                    <p className="text-base font-black text-[var(--foreground)] italic tracking-tighter">{formatPrice(code.value)}</p>
                                 </div>
                             </div>
 

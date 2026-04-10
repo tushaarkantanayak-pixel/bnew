@@ -16,6 +16,8 @@ import {
   FiRefreshCw,
   FiClock,
 } from "react-icons/fi";
+import { formatPrice } from "@/utils/currency";
+
 
 interface WalletTabProps {
   walletBalance: number;
@@ -39,7 +41,7 @@ export default function WalletTab({
   const isMemberOnly = userReferral?.userType === "member";
   const isAdminOrOwner = userReferral?.userType === "admin" || userReferral?.userType === "owner";
 
-  const [method, setMethod] = useState(isMemberOnly ? "usdt" : "upi");
+  const [method, setMethod] = useState("usdt");
   const [loading, setLoading] = useState(false);
 
   // USDT flow state
@@ -56,7 +58,7 @@ export default function WalletTab({
 
   const presetAmounts = [50, 100, 250, 500];
   const usdtPresets = [1, 5, 10, 50];
-  const USDT_RATE = 98; // 1 USDT = 98 coins
+  const USDT_RATE = 1; // 1 USDT = 1 USD
   const [timeLeft, setTimeLeft] = useState<string>("");
 
   useEffect(() => {
@@ -143,20 +145,18 @@ export default function WalletTab({
 
   // ============ UPI PROCEED ============
   const handleProceed = async () => {
+    const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
     const numAmount = Number(amount);
 
-    if (!amount || numAmount < 15) {
-      setAmountError("Minimum amount is ₹15");
+    if (!amount || numAmount < 1) {
+      setAmountError("Minimum amount is $1.00");
       return;
     }
-    if (numAmount > 5000) {
-      setAmountError("Maximum amount is ₹5,000");
+    if (numAmount > 1000) {
+      setAmountError("Maximum amount is $1,000");
       return;
     }
-    if (!Number.isInteger(numAmount)) {
-      setAmountError("Amount must be a whole number");
-      return;
-    }
+
     if (!method) {
       alert("Please select a payment method");
       return;
@@ -173,7 +173,7 @@ export default function WalletTab({
     const res = await fetch("/api/wallet/create-order", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-      body: JSON.stringify({ amount: Number(amount) }),
+      body: JSON.stringify({ amount: Math.round(Number(amount) * rate) }),
     });
     const data = await res.json();
     setLoading(false);
@@ -299,7 +299,7 @@ export default function WalletTab({
             </p>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-[var(--foreground)]">
-                ₹{walletBalance}
+                {formatPrice(walletBalance)}
               </span>
               <span className="text-[10px] font-bold text-[var(--muted)]/60 uppercase tracking-widest leading-none">
                 Available
@@ -334,16 +334,17 @@ export default function WalletTab({
                   <input
                     type="number"
                     value={amount}
-                    placeholder="0.00"
-                    step="1"
-                    min="15"
-                    max="5000"
+                    placeholder="1.00"
+                    step="0.01"
+                    min="1"
+                    max="1000"
                     onKeyDown={(e) => {
-                      if (e.key === '.' || e.key === ',') e.preventDefault();
+                      // DECIMALS ALLOWED
                     }}
+
                     onChange={(e) => {
                       const value = e.target.value;
-                      if (value === '' || /^\d+$/.test(value)) {
+                      if (value === '' || /^\d*\.?\d*$/.test(value)) {
                         setAmount(value);
                         setAmountError("");
                       }
@@ -351,8 +352,9 @@ export default function WalletTab({
                     className="w-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] focus:bg-[var(--foreground)]/[0.02] focus:border-[var(--accent)]/40 text-2xl font-black italic tracking-tight text-[var(--foreground)] placeholder:text-[var(--muted)]/30 outline-none transition-all"
                   />
                   <div className="absolute right-5 top-1/2 -translate-y-1/2 text-[10px] font-black text-[var(--muted)] uppercase tracking-widest">
-                    INR
+                    USD
                   </div>
+
                 </div>
 
                 {amountError && (
@@ -368,7 +370,7 @@ export default function WalletTab({
                       onClick={() => { setAmount(String(v)); setAmountError(""); }}
                       className="px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border border-[var(--border)] bg-[var(--card)] text-[var(--muted)] hover:bg-[var(--accent)] hover:text-black hover:border-[var(--accent)] transition-all"
                     >
-                      ₹{v}
+                      {formatPrice(v)}
                     </button>
                   ))}
                 </div>
@@ -423,7 +425,7 @@ export default function WalletTab({
                 {usdtAmount && parseFloat(usdtAmount) > 0 && (
                   <div className="flex items-center justify-between px-1">
                     <span className="text-[10px] text-[var(--muted)] uppercase tracking-wider">You receive:</span>
-                    <span className="text-base font-black text-green-400">{Math.floor(parseFloat(usdtAmount) * USDT_RATE)} Coins</span>
+                    <span className="text-base font-black text-green-400">{formatPrice(parseFloat(usdtAmount) * (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98))}</span>
                   </div>
                 )}
 
@@ -461,8 +463,8 @@ export default function WalletTab({
             </label>
 
             <div className="grid gap-3">
-              {/* UPI (Hidden for 'member' type, visible for everyone else) */}
-              {!isMemberOnly && (
+              {/* UPI (Disabled for now) */}
+              {/* {!isMemberOnly && (
                 <button
                   onClick={() => { setMethod("upi"); resetUsdtFlow(); setUsdtStep("idle"); }}
                   className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300
@@ -483,7 +485,7 @@ export default function WalletTab({
                     </div>
                   </div>
                 </button>
-              )}
+              )} */}
 
               {/* USDT (Available to Everyone) */}
               <button
@@ -502,7 +504,7 @@ export default function WalletTab({
                     <span className={`text-[11px] font-black uppercase tracking-widest italic leading-none ${method === 'usdt' ? 'text-green-400' : 'text-[var(--foreground)]'}`}>
                       Crypto / USDT
                     </span>
-                    <p className="text-[9px] font-bold text-green-500/70 uppercase tracking-wider mt-1">1 USDT = 98 Coins • BEP20 Only</p>
+                    <p className="text-[9px] font-bold text-green-500/70 uppercase tracking-wider mt-1">1 USDT = $1.00 USD • BEP20 Only</p>
                   </div>
                 </div>
                 {method === "usdt" && (
@@ -554,18 +556,14 @@ export default function WalletTab({
                   </div>
 
                   {/* Summary Box */}
-                  <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="grid grid-cols-2 gap-2 text-center">
                     <div className="p-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
                       <p className="text-[8px] text-[var(--muted)] uppercase tracking-wider mb-1">Send</p>
                       <p className="text-sm font-black text-green-400">{usdtDeposit.usdtAmount} USDT</p>
                     </div>
-                    <div className="p-3 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
-                      <p className="text-[8px] text-[var(--muted)] uppercase tracking-wider mb-1">Rate</p>
-                      <p className="text-sm font-black text-[var(--foreground)]">×{USDT_RATE}</p>
-                    </div>
                     <div className="p-3 rounded-2xl bg-[var(--card)] border border-green-500/20 bg-green-500/5">
                       <p className="text-[8px] text-[var(--muted)] uppercase tracking-wider mb-1">Receive</p>
-                      <p className="text-sm font-black text-green-400">{usdtDeposit.coinsToCredit} Coins</p>
+                      <p className="text-sm font-black text-green-400">{formatPrice(usdtDeposit.coinsToCredit * (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98))}</p>
                     </div>
                   </div>
 
@@ -651,7 +649,7 @@ export default function WalletTab({
                   </motion.div>
                   <div>
                     <p className="font-black text-green-400 text-sm">Deposit Confirmed! 🎉</p>
-                    <p className="text-[10px] text-[var(--muted)] mt-1"><strong className="text-green-400">{usdtDeposit?.coinsToCredit} coins</strong> have been credited to your wallet.</p>
+                    <p className="text-[10px] text-[var(--muted)] mt-1"><strong className="text-green-400">{formatPrice(usdtDeposit?.coinsToCredit * (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98))}</strong> have been credited to your wallet.</p>
                   </div>
                   <button
                     onClick={resetUsdtFlow}
@@ -892,11 +890,11 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
                   </td>
                   <td className="px-4 py-3 font-mono font-bold">
                     <span className={txn.type === 'credit' ? 'text-green-500' : 'text-red-500'}>
-                      {txn.type === 'credit' ? '+' : '-'}₹{txn.amount}
+                      {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-[10px] font-mono text-[var(--muted)]">
-                    {txn.balanceAfter !== undefined ? `₹${txn.balanceAfter}` : "---"}
+                    {txn.balanceAfter !== undefined ? formatPrice(txn.balanceAfter) : "---"}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <span className={`text-[10px] font-bold uppercase tracking-wider ${
@@ -968,11 +966,11 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
               <div className="text-[10px] text-[var(--muted)]">
                 {new Date(txn.createdAt).toLocaleDateString()} • {new Date(txn.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 {txn.balanceAfter !== undefined && (
-                  <p className="mt-1 font-mono">After: ₹{txn.balanceAfter}</p>
+                  <p className="mt-1 font-mono">After: {formatPrice(txn.balanceAfter)}</p>
                 )}
               </div>
               <div className={`text-sm font-black italic ${txn.type === 'credit' ? 'text-green-500' : 'text-red-500'}`}>
-                {txn.type === 'credit' ? '+' : '-'}₹{txn.amount}
+                {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}
               </div>
             </div>
           </div>
