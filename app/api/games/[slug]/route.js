@@ -402,21 +402,21 @@ export async function GET(req, { params }) {
       });
     }
 
-    if (slug === "coc-manual") {
+    if (slug === "coc-manual" || slug === "coc") {
       return NextResponse.json({
         success: true,
         data: { gameSlug: slug, ...COC_CONFIG },
       });
     }
 
-    if (slug === "starlight-card-manual") {
+    if (slug === "starlight-card-manual" || slug === "starlight") {
       return NextResponse.json({
         success: true,
         data: { gameSlug: slug, ...STARLIGHT_CONFIG },
       });
     }
 
-    if (slug === "bgmi-manual") {
+    if (slug === "bgmi-manual" || slug === "bgmi") {
       return NextResponse.json({
         success: true,
         data: { gameSlug: slug, ...BGMI_CONFIG },

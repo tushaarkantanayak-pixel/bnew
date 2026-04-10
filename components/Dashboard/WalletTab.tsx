@@ -424,7 +424,6 @@ export default function WalletTab({
                 {/* Live preview */}
                 {usdtAmount && parseFloat(usdtAmount) > 0 && (
                   <div className="flex items-center justify-between px-1">
-                    <span className="text-[10px] text-[var(--muted)] uppercase tracking-wider">You receive:</span>
                     <span className="text-base font-black text-green-400">{formatPrice(parseFloat(usdtAmount) * (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98))}</span>
                   </div>
                 )}
@@ -562,8 +561,7 @@ export default function WalletTab({
                       <p className="text-sm font-black text-green-400">{usdtDeposit.usdtAmount} USDT</p>
                     </div>
                     <div className="p-3 rounded-2xl bg-[var(--card)] border border-green-500/20 bg-green-500/5">
-                      <p className="text-[8px] text-[var(--muted)] uppercase tracking-wider mb-1">Receive</p>
-                      <p className="text-sm font-black text-green-400">{formatPrice(usdtDeposit.coinsToCredit * (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98))}</p>
+                      <p className="text-sm font-black text-green-400">{formatPrice(usdtDeposit.coinsToCredit)}</p>
                     </div>
                   </div>
 
@@ -649,7 +647,7 @@ export default function WalletTab({
                   </motion.div>
                   <div>
                     <p className="font-black text-green-400 text-sm">Deposit Confirmed! 🎉</p>
-                    <p className="text-[10px] text-[var(--muted)] mt-1"><strong className="text-green-400">{formatPrice(usdtDeposit?.coinsToCredit * (Number(process.env.NEXT_PUBLIC_USD_RATE) || 98))}</strong> have been credited to your wallet.</p>
+                    <p className="text-[10px] text-[var(--muted)] mt-1"><strong className="text-green-400">{formatPrice(usdtDeposit?.coinsToCredit)}</strong> have been credited to your wallet.</p>
                   </div>
                   <button
                     onClick={resetUsdtFlow}

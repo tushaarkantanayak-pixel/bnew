@@ -349,7 +349,7 @@ export default function Header() {
                           {searchResults.map((game, idx) => (
                             <Link
                               key={game.gameSlug}
-                              href={`/game/${game.gameSlug}`}
+                              href={`/games/${game.gameSlug}`}
                               onClick={() => {
                                 setIsSearchFocused(false);
                                 setSearchTerm("");

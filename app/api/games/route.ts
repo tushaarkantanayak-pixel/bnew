@@ -193,7 +193,7 @@ export async function GET() {
     const manualGamesLocal = [
       {
         gameName: "Clash of Clans",
-        gameSlug: "coc-manual",
+        gameSlug: "coc",
         gameFrom: "Supercell",
         gameAvailablity: true,
         gameImageId: { image: COC_IMAGE },
@@ -206,7 +206,7 @@ export async function GET() {
       },
       {
         gameName: "Starlight Card",
-        gameSlug: "starlight-card-manual",
+        gameSlug: "starlight",
         gameFrom: "Moonton",
         gameAvailablity: true,
         gameImageId: { image: STARLIGHT_IMAGE },
@@ -219,7 +219,7 @@ export async function GET() {
       },
       {
         gameName: "BGMI",
-        gameSlug: "bgmi-manual",
+        gameSlug: "bgmi",
         gameFrom: "Krafton",
         gameAvailablity: true,
         gameImageId: { image: "/game-assets/bgmi-logo.webp" },
