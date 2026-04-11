@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import QRCode from "qrcode";
 import { FiCreditCard, FiSmartphone, FiUser, FiInfo, FiCheck, FiShield } from "react-icons/fi";
+import { Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 import { formatPrice } from "@/utils/currency";
 
@@ -30,11 +31,11 @@ export default function ReviewAndPaymentStep({
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   // Default to wallet if balance allows
-  useState(() => {
-    if (walletBalance >= totalPrice) {
+  useEffect(() => {
+    if (walletBalance >= totalPrice && !paymentMethod) {
       setPaymentMethod("wallet");
     }
-  });
+  }, [walletBalance, totalPrice, paymentMethod, setPaymentMethod]);
 
   // Generate UPI QR
   const handleUPI = async () => {
@@ -114,52 +115,52 @@ export default function ReviewAndPaymentStep({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* STEP 2: REVIEW & PAY */}
       {step === 2 && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-6"
+          className="space-y-4"
         >
           {/* USER & ACCOUNT DETAILS */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-5 relative overflow-hidden group">
+            <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-4 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-20 h-20 bg-[var(--accent)]/5 rounded-full blur-2xl -z-10 group-hover:bg-[var(--accent)]/10 transition-all" />
-              <h3 className="text-xs font-[900] uppercase tracking-widest text-[var(--muted)] mb-4 flex items-center gap-2">
-                <FiUser className="text-lg" /> User Details
+              <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-3 flex items-center gap-2">
+                <FiUser className="text-base" /> User Details
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div>
-                  <p className="text-[10px] uppercase font-bold text-[var(--muted)]">Email Address</p>
-                  <p className="font-medium truncate text-sm">{userEmail || "Not provided"}</p>
+                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Email Address</p>
+                  <p className="font-bold truncate text-xs">{userEmail || "Not provided"}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase font-bold text-[var(--muted)]">Phone Number</p>
-                  <p className="font-medium truncate text-sm">{userPhone || "Not provided"}</p>
+                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Phone Number</p>
+                  <p className="font-bold truncate text-xs">{userPhone || "Not provided"}</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-5 relative overflow-hidden group">
+            <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-4 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-full blur-2xl -z-10 group-hover:bg-blue-500/10 transition-all" />
-              <h3 className="text-xs font-[900] uppercase tracking-widest text-[var(--muted)] mb-4 flex items-center gap-2">
-                <FiShield className="text-lg" /> Game Account
+              <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-3 flex items-center gap-2">
+                <FiShield className="text-base" /> Game Account
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div>
-                  <p className="text-[10px] uppercase font-bold text-[var(--muted)]">Username</p>
-                  <p className="font-bold text-[var(--accent)] truncate text-sm">{reviewData.userName}</p>
+                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Username</p>
+                  <p className="font-bold text-[var(--accent)] truncate text-xs leading-none mt-0.5">{reviewData.userName}</p>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-6">
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-[var(--muted)]">Player ID</p>
-                    <p className="font-medium truncate text-sm">{reviewData.playerId}</p>
+                    <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Player ID</p>
+                    <p className="font-bold truncate text-xs">{reviewData.playerId}</p>
                   </div>
                   {reviewData.zoneId && (
                     <div>
-                      <p className="text-[10px] uppercase font-bold text-[var(--muted)]">Zone ID</p>
-                      <p className="font-medium truncate text-sm">{reviewData.zoneId}</p>
+                      <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Zone ID</p>
+                      <p className="font-bold truncate text-xs">{reviewData.zoneId}</p>
                     </div>
                   )}
                 </div>
@@ -168,19 +169,19 @@ export default function ReviewAndPaymentStep({
           </div>
 
           {/* PAYMENT METHODS */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-[900] uppercase tracking-widest text-[var(--foreground)] flex items-center gap-2">
-              <FiCreditCard /> Select Payment Method
+          <div className="space-y-3">
+            <h3 className="text-xs font-[900] uppercase tracking-widest text-[var(--foreground)] flex items-center gap-2">
+              <FiCreditCard className="text-base" /> Payment Method
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
               {/* Wallet Option */}
               <button
                 onClick={() => {
                   if (walletBalance >= totalPrice) setPaymentMethod("wallet");
                 }}
                 disabled={walletBalance < totalPrice}
-                className={`relative p-4 rounded-xl border-2 transition-all text-left group overflow-hidden col-span-full
+                className={`relative p-3.5 rounded-2xl border-2 transition-all text-left group overflow-hidden col-span-full
                              ${paymentMethod === "wallet"
                     ? "bg-[var(--accent)]/10 border-[var(--accent)] ring-1 ring-[var(--accent)]"
                     : "bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted)]"
@@ -188,71 +189,100 @@ export default function ReviewAndPaymentStep({
                              ${walletBalance < totalPrice ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
                         `}
               >
-                <div className="flex justify-between items-center mb-1">
-                  <span className="font-bold text-sm">Wallet Balance</span>
-                  {paymentMethod === "wallet" && <FiCheck className="text-[var(--accent)]" />}
+                <div className="flex justify-between items-center mb-1.5">
+                  <div className="flex items-center gap-2.5">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${paymentMethod === 'wallet' ? 'bg-[var(--accent)] text-black' : 'bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black'}`}>
+                      <Wallet size={18} />
+                    </div>
+                    <div>
+                      <span className="font-[900] text-[10px] uppercase tracking-wider block">BlueBuff Wallet</span>
+                      <span className="text-[8px] text-[var(--muted)] font-black uppercase">Instant & Secure</span>
+                    </div>
+                  </div>
+                  {paymentMethod === "wallet" && (
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-5 h-5 rounded-full bg-[var(--accent)] flex items-center justify-center">
+                      <FiCheck className="text-black text-[10px] stroke-[4]" />
+                    </motion.div>
+                  )}
                 </div>
-                <div className="flex items-end gap-2">
-                  <span className="text-lg font-[900]">{formatPrice(walletBalance)}</span>
-
+                <div className="flex items-baseline gap-2 translate-x-[42px]">
+                  <span className="text-lg font-[900] tracking-tight">{formatPrice(walletBalance)}</span>
                   {walletBalance < totalPrice && (
-                    <span className="text-[10px] text-red-400 font-bold mb-1">Insufficient</span>
+                    <span className="text-[8px] text-red-400 font-black uppercase tracking-tight italic animate-pulse">Insufficient Balance</span>
                   )}
                 </div>
               </button>
 
-              {/* UPI Option Hidden or Disabled for Now */}
-              {/* <button
-                onClick={handleUPI}
-                className={`relative p-4 rounded-xl border transition-all text-left group overflow-hidden
-                             ${paymentMethod === "upi"
-                    ? "bg-[var(--accent)]/10 border-[var(--accent)] ring-1 ring-[var(--accent)]"
-                    : "bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted)]"
-                  }
-                        `}
-              >
-                <div className="flex justify-between items-center mb-1">
-                  <span className="font-bold text-sm">UPI / QR Payment</span>
-                  {paymentMethod === "upi" && <FiCheck className="text-[var(--accent)]" />}
+              {/* UPI Option (Disabled) */}
+              <div className="relative p-3.5 rounded-2xl border border-[var(--border)] bg-[var(--background)]/40 opacity-40 cursor-not-allowed grayscale group">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                    <FiSmartphone size={18} />
+                  </div>
+                  <div>
+                    <span className="font-[900] text-[10px] uppercase tracking-wider block">UPI Payment</span>
+                    <span className="text-[8px] text-[var(--muted)] font-black uppercase tracking-tight">External App</span>
+                  </div>
                 </div>
-                <div className="flex items-end gap-2">
-                  <span className="text-xs text-[var(--muted)] font-medium">Instant Processing</span>
+                <div className="absolute top-2.5 right-3 px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-500 text-[7px] font-black uppercase tracking-widest">
+                  Soon
                 </div>
-              </button> */}
+              </div>
+
+              {/* PayPal Option (Disabled) */}
+              <div className="relative p-3.5 rounded-2xl border border-[var(--border)] bg-[var(--background)]/40 opacity-40 cursor-not-allowed grayscale group">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#003087]/10 text-[#003087] flex items-center justify-center">
+                    <FiCreditCard size={18} />
+                  </div>
+                  <div>
+                    <span className="font-[900] text-[10px] uppercase tracking-wider block">Cards / PayPal</span>
+                    <span className="text-[8px] text-[var(--muted)] font-black uppercase tracking-tight">Global Payments</span>
+                  </div>
+                </div>
+                <div className="absolute top-2.5 right-3 px-1.5 py-0.5 rounded-full bg-red-500/10 text-red-500 text-[7px] font-black uppercase tracking-widest">
+                  Soon
+                </div>
+              </div>
             </div>
           </div>
 
           {/* SUMMARY & ACTION */}
-          <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-6 relative overflow-hidden">
-            <div className="space-y-2 mb-6">
-              <div className="flex justify-between text-sm">
-                <span className="text-[var(--muted)] font-medium">Subtotal</span>
-                <span className="font-bold">{formatPrice(price)}</span>
+          <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-5 relative overflow-hidden">
+            <div className="space-y-1.5 mb-5">
+              <div className="flex justify-between text-xs">
+                <span className="text-[var(--muted)] font-bold uppercase tracking-tighter">Subtotal</span>
+                <span className="font-black">{formatPrice(price)}</span>
               </div>
               {discount > 0 && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-[var(--muted)] font-medium">Discount</span>
-                  <span className="font-bold text-green-400">- {formatPrice(discount)}</span>
+                <div className="flex justify-between text-xs">
+                  <span className="text-[var(--muted)] font-bold uppercase tracking-tighter">Discount</span>
+                  <span className="font-black text-green-400">- {formatPrice(discount)}</span>
                 </div>
               )}
-              <div className="h-px bg-[var(--border)] my-2" />
+              <div className="h-px bg-[var(--border)]/50 my-2" />
               <div className="flex justify-between items-center">
-                <span className="font-[900] text-lg uppercase tracking-tight">Total Pay</span>
-                <span className="font-[900] text-2xl text-[var(--accent)]">{formatPrice(totalPrice)}</span>
+                <span className="font-[900] text-base uppercase tracking-widest">Total Pay</span>
+                <span className="font-[900] text-xl text-[var(--accent)]">{formatPrice(totalPrice)}</span>
               </div>
             </div>
 
             <button
               onClick={handleProceed}
               disabled={isRedirecting || !paymentMethod || (paymentMethod === "wallet" && walletBalance < totalPrice)}
-              className="w-full py-4 rounded-xl bg-[var(--accent)] text-black font-[900] uppercase tracking-widest hover:shadow-[0_0_20px_var(--accent)] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+              className="w-full py-4 rounded-xl bg-[var(--accent)] text-black font-[900] uppercase tracking-widest hover:shadow-[0_0_20px_var(--accent)] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex items-center justify-center gap-3 overflow-hidden group/btn"
             >
               {isRedirecting ? (
-                <span className="flex items-center justify-center gap-2">
+                <>
                   <span className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                  Processing...
-                </span>
-              ) : "Proceed to Pay"}
+                  <span>Processing...</span>
+                </>
+              ) : (
+                <>
+                  <span>Proceed to Pay</span>
+                  <FiCheck className="text-lg transition-transform group-hover/btn:translate-x-1" />
+                </>
+              )}
             </button>
           </div>
         </motion.div>

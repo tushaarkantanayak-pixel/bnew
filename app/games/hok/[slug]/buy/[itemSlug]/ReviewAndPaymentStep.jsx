@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import QRCode from "qrcode";
 import { FiCreditCard, FiSmartphone, FiUser, FiInfo, FiCheck, FiShield } from "react-icons/fi";
+import { Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 import { formatPrice } from "@/utils/currency";
 
@@ -114,13 +115,13 @@ export default function ReviewAndPaymentStep({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* STEP 2: REVIEW & PAY */}
       {step === 2 && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-6"
+          className="space-y-4"
         >
           {/* USER & ACCOUNT DETAILS */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -168,19 +169,18 @@ export default function ReviewAndPaymentStep({
           </div>
 
           {/* PAYMENT METHODS */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-[900] uppercase tracking-widest text-[var(--foreground)] flex items-center gap-2">
-              <FiCreditCard /> Select Payment Method
+          <div className="space-y-3">
+            <h3 className="text-xs font-[900] uppercase tracking-widest text-[var(--foreground)] flex items-center gap-2">
+              <FiCreditCard className="text-base" /> Payment Method
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {/* Wallet Option */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
               <button
                 onClick={() => {
                   if (walletBalance >= totalPrice) setPaymentMethod("wallet");
                 }}
                 disabled={walletBalance < totalPrice}
-                className={`relative p-4 rounded-xl border-2 transition-all text-left group overflow-hidden col-span-full
+                className={`relative p-4 rounded-2xl border-2 transition-all text-left group overflow-hidden col-span-full
                              ${paymentMethod === "wallet"
                     ? "bg-[var(--accent)]/10 border-[var(--accent)] ring-1 ring-[var(--accent)]"
                     : "bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted)]"
@@ -188,71 +188,100 @@ export default function ReviewAndPaymentStep({
                              ${walletBalance < totalPrice ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
                         `}
               >
-                <div className="flex justify-between items-center mb-1">
-                  <span className="font-bold text-sm">Wallet Balance</span>
-                  {paymentMethod === "wallet" && <FiCheck className="text-[var(--accent)]" />}
+                <div className="flex justify-between items-center mb-2">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${paymentMethod === 'wallet' ? 'bg-[var(--accent)] text-black' : 'bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black'}`}>
+                      <Wallet className="text-xl" />
+                    </div>
+                    <div>
+                      <span className="font-black text-xs uppercase tracking-wider block">BlueBuff Wallet</span>
+                      <span className="text-[10px] text-[var(--muted)] font-bold">Safe & Instant Checkout</span>
+                    </div>
+                  </div>
+                  {paymentMethod === "wallet" && (
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-6 h-6 rounded-full bg-[var(--accent)] flex items-center justify-center">
+                      <FiCheck className="text-black text-sm stroke-[4]" />
+                    </motion.div>
+                  )}
                 </div>
-                <div className="flex items-end gap-2">
-                  <span className="text-lg font-[900]">{formatPrice(walletBalance)}</span>
-
+                <div className="flex items-baseline gap-2 translate-x-[52px]">
+                  <span className="text-xl font-[900] tracking-tight">{formatPrice(walletBalance)}</span>
                   {walletBalance < totalPrice && (
-                    <span className="text-[10px] text-red-400 font-bold mb-1">Insufficient</span>
+                    <span className="text-[9px] text-red-400 font-black uppercase tracking-widest italic animate-pulse">Insufficient Balance</span>
                   )}
                 </div>
               </button>
 
-              {/* UPI Option Hidden or Disabled for Now */}
-              {/* <button
-                onClick={handleUPI}
-                className={`relative p-4 rounded-xl border transition-all text-left group overflow-hidden
-                             ${paymentMethod === "upi"
-                    ? "bg-[var(--accent)]/10 border-[var(--accent)] ring-1 ring-[var(--accent)]"
-                    : "bg-[var(--background)] border-[var(--border)] hover:border-[var(--muted)]"
-                  }
-                        `}
-              >
-                <div className="flex justify-between items-center mb-1">
-                  <span className="font-bold text-sm">UPI / QR Payment</span>
-                  {paymentMethod === "upi" && <FiCheck className="text-[var(--accent)]" />}
+              {/* UPI Option (Disabled) */}
+              <div className="relative p-4 rounded-2xl border border-[var(--border)] bg-[var(--background)]/40 opacity-40 cursor-not-allowed grayscale group">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                    <FiSmartphone className="text-xl" />
+                  </div>
+                  <div>
+                    <span className="font-black text-xs uppercase tracking-wider block">UPI Payment</span>
+                    <span className="text-[10px] text-[var(--muted)] font-bold">PhonePe, Google Pay, etc.</span>
+                  </div>
                 </div>
-                <div className="flex items-end gap-2">
-                  <span className="text-xs text-[var(--muted)] font-medium">Instant Processing</span>
+                <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-red-500/10 text-red-500 text-[8px] font-black uppercase tracking-widest">
+                  Not Available
                 </div>
-              </button> */}
+              </div>
+
+              {/* PayPal Option (Disabled) */}
+              <div className="relative p-4 rounded-2xl border border-[var(--border)] bg-[var(--background)]/40 opacity-40 cursor-not-allowed grayscale group">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#003087]/10 text-[#003087] flex items-center justify-center">
+                    <FiCreditCard className="text-xl" />
+                  </div>
+                  <div>
+                    <span className="font-black text-xs uppercase tracking-wider block">PayPal / Cards</span>
+                    <span className="text-[10px] text-[var(--muted)] font-bold">Global Card Payments</span>
+                  </div>
+                </div>
+                <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-red-500/10 text-red-500 text-[8px] font-black uppercase tracking-widest">
+                  Not Available
+                </div>
+              </div>
             </div>
           </div>
 
           {/* SUMMARY & ACTION */}
-          <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-6 relative overflow-hidden">
-            <div className="space-y-2 mb-6">
-              <div className="flex justify-between text-sm">
-                <span className="text-[var(--muted)] font-medium">Subtotal</span>
-                <span className="font-bold">{formatPrice(price)}</span>
+          <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-5 relative overflow-hidden">
+            <div className="space-y-1.5 mb-5">
+              <div className="flex justify-between text-xs">
+                <span className="text-[var(--muted)] font-bold uppercase tracking-tighter">Subtotal</span>
+                <span className="font-black">{formatPrice(price)}</span>
               </div>
               {discount > 0 && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-[var(--muted)] font-medium">Discount</span>
-                  <span className="font-bold text-green-400">- {formatPrice(discount)}</span>
+                <div className="flex justify-between text-xs">
+                  <span className="text-[var(--muted)] font-bold uppercase tracking-tighter">Discount</span>
+                  <span className="font-black text-green-400">- {formatPrice(discount)}</span>
                 </div>
               )}
-              <div className="h-px bg-[var(--border)] my-2" />
+              <div className="h-px bg-[var(--border)]/50 my-2" />
               <div className="flex justify-between items-center">
-                <span className="font-[900] text-lg uppercase tracking-tight">Total Pay</span>
-                <span className="font-[900] text-2xl text-[var(--accent)]">{formatPrice(totalPrice)}</span>
+                <span className="font-[900] text-base uppercase tracking-widest">Total Pay</span>
+                <span className="font-[900] text-xl text-[var(--accent)]">{formatPrice(totalPrice)}</span>
               </div>
             </div>
 
             <button
               onClick={handleProceed}
               disabled={isRedirecting || !paymentMethod || (paymentMethod === "wallet" && walletBalance < totalPrice)}
-              className="w-full py-4 rounded-xl bg-[var(--accent)] text-black font-[900] uppercase tracking-widest hover:shadow-[0_0_20px_var(--accent)] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+              className="w-full py-4 rounded-xl bg-[var(--accent)] text-black font-[900] uppercase tracking-widest hover:shadow-[0_0_20px_var(--accent)] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex items-center justify-center gap-3 overflow-hidden group/btn"
             >
               {isRedirecting ? (
-                <span className="flex items-center justify-center gap-2">
+                <>
                   <span className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                  Processing...
-                </span>
-              ) : "Proceed to Pay"}
+                  <span>Processing...</span>
+                </>
+              ) : (
+                <>
+                  <span>Proceed to Pay</span>
+                  <FiCheck className="text-lg transition-transform group-hover/btn:translate-x-1" />
+                </>
+              )}
             </button>
           </div>
         </motion.div>
