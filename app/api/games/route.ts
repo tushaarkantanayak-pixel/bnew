@@ -179,6 +179,7 @@ export async function GET() {
       "mlbb-indo42",
       "mlbbtr112",
       "mlbbglobal202",
+      "mlbbbr178",
       // "mlbb-russia953",
       "pubg-mobile138",
       "genshin-impact742",
@@ -186,7 +187,9 @@ export async function GET() {
       "wuthering-of-waves464",
       "where-winds-meet280",
       "mlbb-smallphp980",
-      "weeklymonthly-bundle931"
+      "weeklymonthly-bundle931",
+      "8ballpool498",
+      "asphalt9877"
     ];
 
     // manual games that are handled locally

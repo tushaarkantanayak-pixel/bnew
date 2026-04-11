@@ -1,4 +1,4 @@
-import { FiUser, FiGlobe, FiInfo, FiCheckCircle } from "react-icons/fi";
+import { FiUser, FiGlobe, FiInfo, FiCheckCircle, FiChevronDown } from "react-icons/fi";
 import HelpImagePopup from "../../../../../components/HelpImage/HelpImagePopup";
 import RecentVerifiedPlayers from "../../../../region/RecentVerifiedPlayers";
 import { motion } from "framer-motion";
@@ -16,9 +16,11 @@ export default function ValidationStep({
 }) {
   const isValidationRequired = game?.isValidationRequired !== false;
   const fieldOneLabel = game?.inputFieldOne || "Player ID";
-  const fieldTwoLabel = game?.inputFieldTwo || "Zone ID";
+  const fieldTwoLabel = game?.inputFieldTwo;
+  const isGenshin = game?.gameSlug?.toLowerCase().includes("gensin") || game?.gameName?.toLowerCase().includes("genshin");
 
   const buttonText = isValidationRequired ? "Check Player" : "Continue Order";
+
   return (
     <div className="space-y-4">
       {/* Premium Error State */}
@@ -46,7 +48,7 @@ export default function ValidationStep({
       </div>
 
       {/* Input Group */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className={`grid grid-cols-1 ${fieldTwoLabel ? "sm:grid-cols-2" : ""} gap-3`}>
         <div className="space-y-1.5">
           <label className="text-[10px] font-black uppercase tracking-widest text-[var(--muted)] ml-1 opacity-60">{fieldOneLabel}</label>
           <div className="relative group">
@@ -68,26 +70,52 @@ export default function ValidationStep({
           </div>
         </div>
 
-        <div className="space-y-1.5">
-          <label className="text-[10px] font-black uppercase tracking-widest text-[var(--muted)] ml-1 opacity-60">{fieldTwoLabel}</label>
-          <div className="relative group">
-            <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within:text-[var(--accent)] transition-colors duration-300">
-              <FiGlobe className="text-lg" />
+        {fieldTwoLabel && (
+          <div className="space-y-1.5">
+            <label className="text-[10px] font-black uppercase tracking-widest text-[var(--muted)] ml-1 opacity-60">{fieldTwoLabel}</label>
+            <div className="relative group">
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within:text-[var(--accent)] transition-colors duration-300 z-10 pointer-events-none">
+                <FiGlobe className="text-lg" />
+              </div>
+              
+              {isGenshin ? (
+                <>
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] pointer-events-none z-10">
+                    <FiChevronDown className="text-lg group-hover:translate-y-0.5 transition-transform" />
+                  </div>
+                  <select
+                    value={zoneId}
+                    onChange={(e) => {
+                      setZoneId(e.target.value);
+                      if (error && setError) setError("");
+                    }}
+                    disabled={loading}
+                    className="w-full pl-11 pr-10 py-2.5 rounded-xl bg-white/[0.03] border border-white/5 text-sm text-[var(--foreground)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 outline-none transition-all duration-300 font-bold appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled className="bg-[var(--card)] text-white">Select Server</option>
+                    <option value="america" className="bg-[var(--card)] text-white font-medium">America</option>
+                    <option value="asia" className="bg-[var(--card)] text-white font-medium">Asia</option>
+                    <option value="europe" className="bg-[var(--card)] text-white font-medium">Europe</option>
+                    <option value="tw_hk_mo" className="bg-[var(--card)] text-white font-medium">TW_HK_MO</option>
+                  </select>
+                </>
+              ) : (
+                <input
+                  value={zoneId}
+                  onChange={(e) => {
+                    setZoneId(e.target.value);
+                    if (error && setError) setError("");
+                  }}
+                  placeholder={`Enter ${fieldTwoLabel}`}
+                  className={`w-full pl-11 pr-4 py-2.5 rounded-xl bg-white/[0.03] border text-sm text-[var(--foreground)] placeholder-[var(--muted)]/40 focus:ring-2 focus:ring-[var(--accent)]/10 outline-none transition-all duration-300 font-bold
+                    ${error ? "border-red-500/30 focus:border-red-500" : "border-white/5 focus:border-[var(--accent)]"}
+                  `}
+                  disabled={loading}
+                />
+              )}
             </div>
-            <input
-              value={zoneId}
-              onChange={(e) => {
-                setZoneId(e.target.value);
-                if (error && setError) setError("");
-              }}
-              placeholder={`Enter ${fieldTwoLabel}`}
-              className={`w-full pl-11 pr-4 py-2.5 rounded-xl bg-white/[0.03] border text-sm text-[var(--foreground)] placeholder-[var(--muted)]/40 focus:ring-2 focus:ring-[var(--accent)]/10 outline-none transition-all duration-300 font-bold
-                ${error ? "border-red-500/30 focus:border-red-500" : "border-white/5 focus:border-[var(--accent)]"}
-              `}
-              disabled={loading}
-            />
           </div>
-        </div>
+        )}
       </div>
 
       {/* Action Button */}
@@ -95,9 +123,9 @@ export default function ValidationStep({
         <div className="absolute inset-0 bg-[var(--accent)] opacity-10 blur-xl group-hover:opacity-20 transition-opacity rounded-xl" />
         <button
           onClick={onValidate}
-          disabled={loading || !!error}
+          disabled={loading || !!error || !playerId || (fieldTwoLabel && !zoneId)}
           className={`relative w-full py-3 rounded-xl font-black uppercase tracking-[0.15em] text-[13px] transition-all duration-500 flex items-center justify-center gap-2 overflow-hidden
-            ${loading || error
+            ${loading || error || !playerId || (fieldTwoLabel && !zoneId)
               ? "bg-white/5 text-[var(--muted)] cursor-not-allowed border border-white/5"
               : "bg-[var(--foreground)] text-[var(--background)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] active:scale-[0.98]"
             }`}
@@ -133,7 +161,7 @@ export default function ValidationStep({
           limit={3}
           onSelect={(player) => {
             setPlayerId(player.playerId);
-            setZoneId(player.zoneId);
+            if (setZoneId) setZoneId(player.zoneId || "");
           }}
         />
       </div>

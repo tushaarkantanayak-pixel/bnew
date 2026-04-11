@@ -205,17 +205,7 @@ function GameDetailContent() {
       dummy: item.dummyPrice?.toString() || "",
       image: item.itemImageId?.image || "",
     });
-    const basePath = isBGMI
-      ? `/games/pubg/${slug}/buy`
-      : isGenshin
-        ? `/games/gensin/${slug}/buy`
-        : isHOK
-          ? `/games/hok/${slug}/buy`
-          : isWuwa
-            ? `/games/wwow/${slug}/buy`
-            : isWWM
-              ? `/games/wwm/${slug}/buy`
-              : `/games/${slug}/buy`;
+    const basePath = `/games/${slug}/buy`;
 
 
 

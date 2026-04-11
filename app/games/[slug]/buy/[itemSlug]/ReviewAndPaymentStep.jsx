@@ -154,8 +154,8 @@ export default function ReviewAndPaymentStep({
               </h3>
               <div className="space-y-2">
                 <div>
-                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{(isManual && slug !== 'bgmi-manual') ? "Delivery Mode" : "Username"}</p>
-                  <p className="font-bold text-[var(--accent)] truncate text-xs leading-none mt-0.5">{reviewData.userName}</p>
+                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{(isManual && !slug?.includes('bgmi')) ? "Order Details" : "Username"}</p>
+                  <p className="font-bold text-[var(--accent)] truncate text-xs leading-none mt-0.5">{reviewData.userName || "Player"}</p>
                 </div>
                 <div className="flex gap-6">
                   <div>
@@ -164,7 +164,7 @@ export default function ReviewAndPaymentStep({
                   </div>
                   {reviewData.zoneId && (
                     <div>
-                      <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{fieldTwoLabel}</p>
+                      <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{fieldTwoLabel || "Secondary ID"}</p>
                       <p className="font-bold truncate text-xs">{reviewData.zoneId}</p>
                     </div>
                   )}
@@ -177,6 +177,9 @@ export default function ReviewAndPaymentStep({
           <div className="space-y-3">
             <h3 className="text-xs font-[900] uppercase tracking-widest text-[var(--foreground)] flex items-center gap-2">
               <FiCreditCard className="text-base" /> Payment Method
+              <span className="text-[8px] font-bold text-[var(--muted)] lowercase tracking-tight opacity-50 ml-1">
+                (Only wallet payment accepted now. Top up using USDT)
+              </span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">

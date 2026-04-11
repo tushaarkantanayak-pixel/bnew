@@ -95,8 +95,12 @@ function BuyFlowContent() {
   /* ================= VALIDATION ================= */
   const handleValidate = async () => {
     setError(""); // reset error
-    if (!playerId || !zoneId) {
-      setError("Please enter Player ID and Zone ID");
+    
+    // Check if zoneId is actually required (based on inputFieldTwo)
+    const fieldTwoRequired = !!game?.inputFieldTwo;
+
+    if (!playerId || (fieldTwoRequired && !zoneId)) {
+      setError(`Please enter ${game?.inputFieldOne || "Player ID"}${fieldTwoRequired ? " and " + game.inputFieldTwo : ""}`);
       return;
     }
 
@@ -104,10 +108,10 @@ function BuyFlowContent() {
 
     if (game?.isValidationRequired === false) {
       setReviewData({
-        userName: slug === 'bgmi-manual' ? "BGMI Player" : "Manual Order",
-        region: slug === 'bgmi-manual' ? "India" : "Manual",
+        userName: "Player",
+        region: zoneId?.toUpperCase() || "INDIA",
         playerId,
-        zoneId,
+        zoneId: zoneId || "",
       });
       setLoading(false);
       setStep(2);
@@ -140,7 +144,7 @@ function BuyFlowContent() {
 
         saveVerifiedPlayer({
           playerId,
-          zoneId,
+          zoneId: zoneId || "",
           username: data.data.username || "Unknown",
           region: data.data.region || "Unknown",
           savedAt: Date.now(),
@@ -150,15 +154,15 @@ function BuyFlowContent() {
           userName: data.data.username || "Unknown",
           region: data.data.region || "Unknown",
           playerId,
-          zoneId,
+          zoneId: zoneId || "",
         });
 
         setLoading(false);
         setStep(2);
       } else {
-        const serverMsg = data?.message || "Invalid Player ID / Zone ID";
+        const serverMsg = data?.message || "Invalid ID / Information";
         const finalError = serverMsg.toLowerCase().includes("success")
-          ? "Player Not Found (Invalid ID/Zone)"
+          ? "No Account Found"
           : serverMsg;
 
         setError(finalError);

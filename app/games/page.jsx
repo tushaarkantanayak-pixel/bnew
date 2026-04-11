@@ -341,7 +341,7 @@ export default function GamesPage() {
                       title={null}
                       total={otts.total}
                       items={otts.items}
-                      hrefPrefix="/games/ott"
+                      hrefPrefix="/games"
                     />
                   </div>
                 )}
@@ -359,7 +359,7 @@ export default function GamesPage() {
                       title={null}
                       total={memberships.total}
                       items={memberships.items}
-                      hrefPrefix="/games/membership"
+                      hrefPrefix="/games"
                       showCategory={false}
                       ctaText="Join the Elite →"
                     />
