@@ -123,7 +123,7 @@ export default function ValidationStep({
         <button
           onClick={onValidate}
           disabled={loading || !!error || !playerId || (fieldTwoLabel && !zoneId)}
-          className={`relative w-full py-3 rounded-xl font-black uppercase tracking-[0.15em] text-[13px] transition-all duration-500 flex items-center justify-center gap-2 overflow-hidden
+          className={`relative w-full py-2.5 rounded-xl font-black uppercase tracking-[0.15em] text-[13px] transition-all duration-500 flex items-center justify-center gap-2 overflow-hidden
             ${loading || error || !playerId || (fieldTwoLabel && !zoneId)
               ? "bg-white/5 text-[var(--muted)] cursor-not-allowed border border-white/5"
               : "bg-[var(--foreground)] text-[var(--background)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] active:scale-[0.98]"

@@ -308,7 +308,7 @@ function AuthContent() {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         disabled={showOtpField}
-                        className={`w-full bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-2xl pl-12 pr-5 py-5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-[var(--accent)]/10 focus:border-[var(--accent)] transition-all placeholder:text-[var(--muted)]/50 ${showOtpField ? "opacity-50" : ""}`}
+                        className={`w-full bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-2xl pl-12 pr-5 py-3.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-[var(--accent)]/10 focus:border-[var(--accent)] transition-all placeholder:text-[var(--muted)]/50 ${showOtpField ? "opacity-50" : ""}`}
                       />
                       {showOtpField && (
                         <button
@@ -365,7 +365,7 @@ function AuthContent() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full relative overflow-hidden group/btn bg-[var(--accent)] text-white font-black uppercase tracking-widest py-5 rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-[0_10px_20px_-5px_rgba(var(--accent-rgb),0.3)]"
+                    className="w-full relative overflow-hidden group/btn bg-[var(--accent)] text-white font-black uppercase tracking-widest py-3.5 rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-[0_10px_20px_-5px_rgba(var(--accent-rgb),0.3)]"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_2s_infinite]" />
                     {loading ? (
