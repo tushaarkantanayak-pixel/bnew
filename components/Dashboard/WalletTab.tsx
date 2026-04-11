@@ -280,7 +280,7 @@ export default function WalletTab({
     setUsdtDeposit(null);
     setTxHash("");
     setUsdtError("");
-    setMethod(isMemberOnly ? "usdt" : "upi");
+    setMethod("usdt");
   };
 
   return (

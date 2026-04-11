@@ -23,7 +23,7 @@ function BuyFlowContent() {
 
   const [reviewData, setReviewData] = useState(null);
 
-  const [paymentMethod, setPaymentMethod] = useState("upi");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

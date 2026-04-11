@@ -18,7 +18,7 @@ function BuyFlowContent() {
   const [step, setStep] = useState(1);
   const [playerId, setPlayerId] = useState("");
   const [reviewData, setReviewData] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState("upi");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
 
   const [userEmail, setUserEmail] = useState("");

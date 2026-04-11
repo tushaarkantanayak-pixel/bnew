@@ -19,7 +19,7 @@ function BuyFlowContent() {
   const [playerId, setPlayerId] = useState("");
   const [zoneId, setZoneId] = useState(""); // SERVER = ZONE
   const [reviewData, setReviewData] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState("upi");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
 
   const [userEmail, setUserEmail] = useState("");

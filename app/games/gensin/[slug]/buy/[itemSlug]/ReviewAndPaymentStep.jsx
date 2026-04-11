@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import QRCode from "qrcode";
 import { FiCreditCard, FiSmartphone, FiUser, FiInfo, FiCheck, FiShield } from "react-icons/fi";
@@ -30,11 +30,11 @@ export default function ReviewAndPaymentStep({
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   // Default to wallet if balance allows
-  useState(() => {
-    if (walletBalance >= totalPrice) {
+  useEffect(() => {
+    if (walletBalance >= totalPrice && !paymentMethod) {
       setPaymentMethod("wallet");
     }
-  });
+  }, [walletBalance, totalPrice, paymentMethod, setPaymentMethod]);
 
   // Generate UPI QR
   const handleUPI = async () => {
