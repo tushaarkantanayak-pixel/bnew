@@ -503,6 +503,49 @@ export async function GET(req, { params }) {
     /* ===== APPLY PRICING ===== */
     data.data.itemId = applyPricingToItems(data.data.itemId, gameSlug, pricingConfig);
 
+    /* ================= NORMALIZE FOR GENERIC FLOW ================= */
+    if (slug.includes("genshin-impact")) {
+      data.data.inputFieldOne = "UID";
+      data.data.inputFieldTwo = "Server";
+      data.data.inputFieldTwoOptions = [
+        { label: "America", value: "america" },
+        { label: "Asia", value: "asia" },
+        { label: "Europe", value: "europe" },
+        { label: "TW_HK_MO", value: "tw_hk_mo" },
+      ];
+    }
+
+    if (slug.includes("honor-of-kings")) {
+      data.data.inputFieldOne = "Player ID";
+    }
+
+    if (slug.includes("wuthering-of-waves")) {
+      data.data.inputFieldOne = "Player ID";
+      data.data.inputFieldTwo = "Server";
+      data.data.inputFieldTwoOptions = [
+        { label: "America", value: "america" },
+        { label: "Asia", value: "asia" },
+        { label: "Europe", value: "europe" },
+        { label: "SEA", value: "sea" },
+      ];
+    }
+
+    if (slug.includes("asphalt")) {
+      data.data.inputFieldOne = "Player ID";
+      data.data.inputFieldTwo = "Platform";
+      data.data.inputFieldTwoOptions = [
+        { label: "iOS", value: "ios" },
+        { label: "Android", value: "android" },
+        { label: "Windows", value: "windows" },
+        { label: "Huawei", value: "huawei" },
+        { label: "Xbox", value: "xbox" },
+      ];
+    }
+
+    if (slug.includes("8ballpool")) {
+      data.data.inputFieldOne = "Player ID";
+    }
+
     // Final sort to keep UI clean
     data.data.itemId.sort((a, b) => a.sellingPrice - b.sellingPrice);
 
