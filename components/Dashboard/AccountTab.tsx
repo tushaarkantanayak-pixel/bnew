@@ -92,7 +92,7 @@ export default function AccountTab({ userDetails }: AccountTabProps) {
               <div className="w-24 h-24 rounded-[3rem] bg-[var(--accent)]/15 border border-[var(--accent)]/20 flex items-center justify-center text-4xl font-black text-[var(--accent)] italic shadow-xl mb-6 relative">
                 {userDetails.name?.charAt(0) || "U"}
                 <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-2xl bg-[#050505] border border-white/10 flex items-center justify-center text-[var(--accent)] shadow-lg">
-                  <FiZap size={14} className="animate-pulse" />
+                  <FiZap size={14} />
                 </div>
               </div>
               <h3 className="text-xl font-black uppercase italic tracking-tighter mb-1">{userDetails.name}</h3>

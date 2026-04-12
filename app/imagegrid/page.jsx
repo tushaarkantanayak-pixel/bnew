@@ -37,7 +37,7 @@ export default function Page() {
       <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-2">
           <div className="flex items-center gap-3 text-[var(--accent)]">
-            <Settings2 size={20} className="animate-pulse" />
+            <Settings2 size={20} />
             <span className="text-xs font-bold uppercase tracking-[0.2em]">Creative Studio</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight">

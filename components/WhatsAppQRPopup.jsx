@@ -38,8 +38,8 @@ export default function WhatsAppCommunityPopup() {
             className="relative w-full max-w-[300px]"
           >
             {/* Background Glows */}
-            <div className="absolute -top-12 -left-12 w-40 h-40 bg-blue-500/20 blur-[60px] rounded-full pointer-events-none animate-pulse" />
-            <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-indigo-600/15 blur-[60px] rounded-full pointer-events-none animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute -top-12 -left-12 w-40 h-40 bg-blue-500/20 blur-[60px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-indigo-600/15 blur-[60px] rounded-full pointer-events-none" style={{ opacity: 0.5 }} />
 
             {/* Popup Frame */}
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[var(--card)]/40 backdrop-blur-3xl p-5 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/5">
@@ -74,7 +74,7 @@ export default function WhatsAppCommunityPopup() {
                     <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">Group</span>
                   </h2>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--muted)] opacity-50 flex items-center justify-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-blue-500 animate-ping" />
+                    <span className="w-1 h-1 rounded-full bg-blue-500" />
                     News & Free Gifts
                   </p>
                 </div>
@@ -106,7 +106,7 @@ export default function WhatsAppCommunityPopup() {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                   <div className="flex items-center gap-2 relative z-10">
                     <span className="text-xs font-black uppercase italic tracking-wider">Open WhatsApp</span>
-                    <FiZap size={14} className="animate-bounce" />
+                    <FiZap size={14} />
                   </div>
                 </a>
               </div>

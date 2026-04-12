@@ -33,7 +33,7 @@ export default function GameHeader({ game }) {
 
             {/* Live Indicator Dot */}
             <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[var(--background)] rounded-full flex items-center justify-center p-[1px]">
-              <div className="w-full h-full bg-emerald-500 rounded-full animate-pulse" />
+              <div className="w-full h-full bg-emerald-500 rounded-full" />
             </div>
           </div>
 

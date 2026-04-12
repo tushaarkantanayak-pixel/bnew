@@ -439,10 +439,8 @@ export default function Header() {
                     style={{ background: 'var(--background)', opacity: 1 }}
                   >
                     <div className="absolute inset-0 bg-[var(--background)] pointer-events-none" style={{ background: 'var(--background)', opacity: 1 }} />
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05], rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                      className="absolute -top-[10%] -right-[10%] w-[120%] h-[120%] bg-[radial-gradient(circle,var(--accent)_0%,transparent_60%)] blur-[100px] pointer-events-none"
+                    <div
+                      className="absolute -top-[10%] -right-[10%] w-[120%] h-[120%] bg-[radial-gradient(circle,var(--accent)_0%,transparent_60%)] opacity-[0.05] blur-[100px] pointer-events-none"
                     />
                     {/* Dark overlay for extra depth */}
                     <div className="absolute inset-0 bg-[var(--foreground)]/[0.02] pointer-events-none" />
@@ -524,19 +522,14 @@ export default function Header() {
                                 onClick={() => setUserMenuOpen(false)}
                                 className="relative flex items-center justify-between p-4 bg-[var(--background)] border border-[var(--border)] rounded-[1.5rem] overflow-hidden transition-all duration-300"
                               >
-                                <motion.div
-                                  animate={{ x: ["-100%", "200%"] }}
-                                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                                  className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent -skew-x-12"
-                                />
+                                <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 <div className="flex items-center gap-3 relative z-10 w-full">
                                   <div className="relative flex-shrink-0">
                                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent)] to-purple-600 flex items-center justify-center shadow-lg">
                                       <FiZap size={18} className="text-white" />
                                     </div>
                                     <div className="absolute -bottom-1 -right-1 flex h-3 w-3">
-                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-[var(--background)]"></span>
+                                      <div className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-[var(--background)]"></div>
                                     </div>
                                   </div>
 

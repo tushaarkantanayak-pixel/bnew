@@ -124,7 +124,7 @@ export default function PrivacyPolicy() {
               href="/contact"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[var(--foreground)] text-[var(--background)] font-bold uppercase tracking-widest text-xs hover:scale-[1.02] active:scale-95 transition-all shadow-lg"
             >
-              <FiShield className="animate-pulse" />
+              <FiShield />
               Contact Data Officer
             </Link>
           </div>

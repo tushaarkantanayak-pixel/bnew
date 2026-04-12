@@ -65,7 +65,7 @@ export default function HomeReferralStats() {
                             {/* Left: Info Grid */}
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
                                     <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/80 italic">
                                         Referral Center
                                     </h3>

@@ -279,14 +279,12 @@ export default function ChatBot() {
             className="mb-3 w-[calc(100vw-32px)] sm:w-[380px] h-[500px] bg-[var(--card)]/90 backdrop-blur-xl border border-[var(--border)] rounded-2xl shadow-2xl flex flex-col overflow-hidden ring-1 ring-white/5"
           >
 
-            {/* Scanline Effect */}
-            <motion.div
-              animate={{ y: ["0%", "100%"] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 pointer-events-none z-0"
+            {/* Scanline Effect (Static) */}
+            <div className="absolute inset-0 pointer-events-none z-0 opacity-10"
               style={{
                 background: "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent) 3%, transparent), transparent)",
                 height: "10%",
+                top: "20%"
               }}
             />
 
@@ -297,7 +295,7 @@ export default function ChatBot() {
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent)] to-[var(--accent)]/80 flex items-center justify-center shadow-lg">
                     <FiCpu className="text-white text-lg" />
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-[var(--card)] animate-pulse" />
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-[var(--card)]" />
                 </div>
                 <div>
                   <h3 className="text-[var(--foreground)] font-bold text-sm tracking-tight">BlueBuff Bot</h3>
@@ -350,7 +348,7 @@ export default function ChatBot() {
                   className="flex gap-3"
                 >
                   <div className="w-8 h-8 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center">
-                    <FiCpu className="text-[var(--accent)] text-xs animate-pulse" />
+                    <FiCpu className="text-[var(--accent)] text-xs" />
                   </div>
                   <div className="px-4 py-3 rounded-2xl rounded-tl-none bg-white/5 border border-white/5 flex gap-1.5 items-center">
                     {[0, 1, 2].map((i) => (

@@ -97,7 +97,7 @@ export default function FlashSale() {
                     </div>
 
                     <div className="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-3 py-1 rounded-xl">
-                        <FiClock className="text-amber-500 animate-pulse hidden sm:block" size={10} />
+                        <FiClock className="text-amber-500 hidden sm:block" size={10} />
                         <div className="flex items-center gap-2 font-bold text-[10px] tabular-nums text-amber-500">
                             <span className="opacity-60 text-[8px] uppercase tracking-widest text-[var(--foreground)] mr-1 hidden md:block">Over In</span>
                             <span>{String(timeLeft.hours).padStart(2, '0')}</span>

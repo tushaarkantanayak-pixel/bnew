@@ -116,7 +116,7 @@ export default function StorySlider() {
                   >
                     <span className="flex items-center gap-1.5">
                       {item.badge === "Live" && (
-                        <span className="w-1 h-1 rounded-full bg-white animate-pulse" />
+                        <span className="w-1 h-1 rounded-full bg-white" />
                       )}
                       {item.badge}
                     </span>

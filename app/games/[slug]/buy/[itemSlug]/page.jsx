@@ -130,6 +130,7 @@ function BuyFlowContent() {
       if (
         data?.success === 200 &&
         data?.data &&
+        data?.data?.valid !== false &&
         (data?.data?.username || data?.data?.region)
       ) {
         // Filter restricted regions for mobile-legends988
@@ -160,7 +161,7 @@ function BuyFlowContent() {
         setLoading(false);
         setStep(2);
       } else {
-        const serverMsg = data?.message || "Invalid ID / Information";
+        const serverMsg = data?.data?.valid === false ? "Invalid Account Detail" : (data?.message || "Invalid ID / Information");
         const finalError = serverMsg.toLowerCase().includes("success")
           ? "No Account Found"
           : serverMsg;

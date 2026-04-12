@@ -78,7 +78,7 @@ export default function QueryTab() {
       {/* HEADER */}
       <div className="flex flex-col gap-2">
         <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[var(--accent)]/5 border border-[var(--accent)]/10 w-fit">
-          <FiZap className="text-[var(--accent)] animate-pulse" size={10} />
+          <FiZap className="text-[var(--accent)]" size={10} />
           <span className="text-[8px] font-black uppercase tracking-widest text-[var(--accent)]">Help Desk</span>
         </div>
         <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter leading-none text-[var(--foreground)]">
@@ -120,7 +120,7 @@ export default function QueryTab() {
 
           <div className="p-3.5 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/10 flex items-center justify-between border-dashed">
             <div className="flex items-center gap-2">
-              <div className="w-1 h-1 rounded-full bg-green-500 animate-ping" />
+              <div className="w-1 h-1 rounded-full bg-green-500" />
               <span className="text-[8px] font-black tracking-widest text-[#22c55e] uppercase">Online Now</span>
             </div>
             <span className="text-[8px] font-black tracking-widest text-[var(--muted)] uppercase opacity-40">Response: ~15m</span>
@@ -137,7 +137,7 @@ export default function QueryTab() {
           <AnimatePresence mode="wait">
             {querySuccess && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="p-2.5 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[9px] font-black uppercase tracking-widest flex items-center gap-2">
-                <FiZap size={10} className="animate-pulse" /> {querySuccess}
+                <FiZap size={10} /> {querySuccess}
               </motion.div>
             )}
           </AnimatePresence>

@@ -145,12 +145,8 @@ export default function GameSwitcher() {
                                 `}
                             >
                                 {/* Reflection Shimmer */}
-                                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.25rem] z-20">
-                                    <motion.div
-                                        animate={{ x: ["-100%", "200%"] }}
-                                        transition={{ repeat: Infinity, duration: 4, ease: "linear", repeatDelay: 2 }}
-                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent w-full skew-x-[-20deg]"
-                                    />
+                                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.25rem] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-full skew-x-[-20deg]" />
                                 </div>
 
                                 <div className="relative w-full h-full rounded-[1.25rem] overflow-hidden bg-[var(--card)] ring-1 ring-white/10 group-hover:ring-white/20">
