@@ -30,38 +30,79 @@ export async function POST(req) {
             return NextResponse.json({ success: false, status: "failed", message: "Missing required fields (gameSlug, itemSlug, playerId)" }, { status: 400 });
         }
 
-        // ⚡ REGION RESTRICTION CHECK for mobile-legends988 and mlbb-double332
-        if (gameSlug === "mobile-legends988" || gameSlug === "mlbb-double332" || gameSlug === "weeklymonthly-bundle931") {
-            try {
+        // ⚡ PLAYER VALIDATION CHECK (Dual check: namecheck + region check)
+        const isMLBB = gameSlug.includes("mlbb") || gameSlug.includes("legends988") || gameSlug.includes("weeklymonthly-bundle");
+        let isValidPlayer = false;
+        let playerRegion = "Global";
+
+        try {
+            // 1. Always check name for ALL games (Universal validator)
+            const nameCheckResp = await fetch("https://game-off-ten.vercel.app/api/v1/check-region/namecheck", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": process.env.API_SECRET_KEY,
+                },
+                body: JSON.stringify({
+                    productId: `${gameSlug}_${itemSlug}`,
+                    playerId: String(playerId),
+                    zoneId: String(zoneId || "NA"),
+                }),
+            });
+
+            const nameData = await nameCheckResp.json();
+            if ((nameData?.success === 200 || nameData?.success === true) && (nameData?.data?.username || nameData?.data?.name) && nameData?.data?.valid !== false) {
+                playerRegion = nameData?.data?.region || "Global";
+                isValidPlayer = true;
+            }
+
+            // 2. Special check for MLBB to verify region
+            if (isMLBB) {
                 const regionCheckResp = await fetch("https://game-off-ten.vercel.app/api/v1/check-region", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "x-api-key": process.env.API_SECRET_KEY,
                     },
-                    body: JSON.stringify({ id: playerId, zone: zoneId }),
+                    body: JSON.stringify({ id: String(playerId), zone: String(zoneId || "") }),
                 });
 
                 const regionData = await regionCheckResp.json();
-                const playerRegion = regionData?.data?.region?.toUpperCase();
-                const restrictedRegions = ["INDO", "ID", "PH", "SG", "RU", "MY", "MM"];
-
-                if (restrictedRegions.includes(playerRegion)) {
-                    return NextResponse.json({
-                        success: false,
-                        status: "failed",
-                        message: `Orders from ${playerRegion} region are not allowed for this product.`
-                    }, { status: 400 });
+                if (regionData?.success === 200 && (regionData?.data?.username || regionData?.data?.region)) {
+                    playerRegion = regionData.data.region || playerRegion;
+                    isValidPlayer = true;
                 }
-            } catch (regionErr) {
-                console.error("Region check failed during order:", regionErr);
-                // We proceed if the validator is down, or we could block it?
-                // Given the requirement "dont allow", we might want to block if we can't verify,
-                // but usually, it's safer to proceed if the validation service itself is down,
-                // UNLESS the user wants strict enforcement.
-                // For now, we proceed to avoid blocking orders due to 3rd party issues,
-                // but we might want to change this if strictness is preferred.
+
+                // ⚡ REGION RESTRICTION CHECK (Only for specific MLBB slugs)
+                const restrictedSlugs = ["mobile-legends988", "mlbb-double332", "weeklymonthly-bundle931"];
+                if (isValidPlayer && restrictedSlugs.includes(gameSlug)) {
+                    const finalRegion = playerRegion.toUpperCase();
+                    const restrictedRegions = ["INDO", "ID", "PH", "SG", "RU", "MY", "MM"];
+                    if (restrictedRegions.includes(finalRegion)) {
+                        return NextResponse.json({
+                            success: false,
+                            status: "failed",
+                            message: `Orders from ${finalRegion} region are not allowed for this product.`
+                        }, { status: 400 });
+                    }
+                }
             }
+
+            // Optional: Block if validation failed for games where validation is considered mandatory
+            // For now, if both fail and it's MLBB, we block. For other games, we might proceed 
+            // but the user logic implies "Always check name".
+            if (!isValidPlayer && isMLBB) {
+                return NextResponse.json({
+                    success: false,
+                    status: "failed",
+                    message: "Player identification failed. Please verify your Player ID and Zone ID."
+                }, { status: 400 });
+            }
+
+        } catch (valErr) {
+            console.error("Player validation failed during order:", valErr);
+            // On catastrophic failure of validation services, we might still allow the order 
+            // unless strictness is required. For MLBB, we usually want to be strict.
         }
 
         await connectDB();

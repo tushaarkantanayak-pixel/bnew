@@ -360,6 +360,20 @@
             </ul>
         </div>
 
+        <!-- REGIONAL RESTRICTIONS -->
+        <div class="warn-box" style="margin-top:20px; border-color: #f87171;">
+            <strong style="color: #f87171;">⚠️ Targeted Region Restrictions:</strong>
+            <p style="margin:8px 0 0;">
+                Orders are strictly <strong>blocked</strong> for players in <strong>INDO, ID, PH, SG, RU, MY, MM</strong> regions <strong>only</strong> for these specific products:
+                <ul style="margin:8px 0; padding-left: 20px;">
+                    <li><code>mobile-legends988</code></li>
+                    <li><code>mlbb-double332</code></li>
+                    <li><code>weeklymonthly-bundle931</code></li>
+                </ul>
+                Other games and MLBB products not listed above are available globally. Always use <code>/validate</code> to pre-check regions.
+            </p>
+        </div>
+
         <!-- SECTION 3: ENDPOINTS -->
         <h2>3. API Endpoints</h2>
 
@@ -484,8 +498,7 @@
                 <span class="method post">POST</span>
                 <span class="endpoint-path">/api/service/validate</span>
             </div>
-            <div class="endpoint-desc">Validates a player's game account before placing an order. Returns the player's
-                in-game name.</div>
+            <div class="endpoint-desc">Validates a player's game account before placing an order. Uses a dual-check system (Name Check + Region Verification) to ensure account existence and regional eligibility.</div>
             <div class="endpoint-body">
                 <div>
                     <div class="code-label">Sample Request</div>
@@ -494,6 +507,7 @@
 
 {
   <span class="key">"gameSlug"</span>: <span class="str">"mobile-legends988"</span>,
+  <span class="key">"itemSlug"</span>: <span class="str">"weekly-pass816"</span>, <span class="cm">// Required for some game validations</span>
   <span class="key">"playerId"</span>: <span class="str">"12345678"</span>,
   <span class="key">"zoneId"</span>: <span class="str">"1234"</span>
 }</pre>
@@ -501,10 +515,18 @@
                 <div>
                     <div class="code-label">Sample Response (200 OK)</div>
                     <pre>{
-  <span class="key">"success"</span>: <span class="bool">true</span>,
-  <span class="key">"playerName"</span>: <span class="str">"ProGamer123"</span>,
-  <span class="key">"playerId"</span>: <span class="str">"12345678"</span>
+  <span class="key">"success"</span>: <span class="num">200</span>,
+  <span class="key">"message"</span>: <span class="str">"Validation successful"</span>,
+  <span class="key">"data"</span>: {
+    <span class="key">"username"</span>: <span class="str">"ProGamer123"</span>,
+    <span class="key">"region"</span>: <span class="str">"Global"</span>,
+    <span class="key">"playerId"</span>: <span class="str">"12345678"</span>,
+    <span class="key">"zoneId"</span>: <span class="str">"1234"</span>
+  }
 }</pre>
+                </div>
+                <div class="warn-box" style="font-size: 0.75rem;">
+                    If validation fails, <code>success</code> will be <code>false</code> and an error message will be provided in the <code>message</code> field.
                 </div>
             </div>
         </div>
@@ -655,7 +677,7 @@
             <ol style="margin:10px 0 0;padding-left:20px;line-height:2.2;">
                 <li>Call <code>GET /games</code> → Show game list to your customer</li>
                 <li>Call <code>GET /games/{slug}</code> → Show items &amp; your prices</li>
-                <li>Call <code>POST /validate</code> → Verify player ID before payment</li>
+                <li>Call <code>POST /validate</code> → Verify player identity and <strong>regional eligibility</strong></li>
                 <li>Collect payment from your customer on your site</li>
                 <li>Call <code>POST /order</code> → Auto-executes top-up instantly</li>
                 <li>Call <code>GET /status/{orderId}</code> → Show delivery confirmation</li>

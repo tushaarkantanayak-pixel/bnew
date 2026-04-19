@@ -34,38 +34,46 @@ Get a list of all available games and services.
 Get a list of items and their **member-specific prices** for a specific game.
 *   **URL:** `/api/service/games/{gameSlug}`
 *   **Method:** `GET`
+
+> [!IMPORTANT]
+> **Mobile Legends (MLBB) Region Restrictions:**
+> Regional blocking (blocking **INDO, ID, PH, SG, RU, MY, MM**) applies **only** to the following products:
+> *   `mobile-legends988`
+> *   `mlbb-double332`
+> *   `weeklymonthly-bundle931`
+> Other MLBB products can be ordered globally. Always call the validation endpoint to verify the player's region before ordering.
+
+### 🛡️ ID & Region Check
+Verify a Player ID/Zone ID and check account region before ordering. This endpoint now uses a dual-verification system (Universal Name Check + Regional Check).
+*   **URL:** `/api/service/validate`
+*   **Method:** `POST`
+*   **Body:** `{"gameSlug": "...", "playerId": "...", "zoneId": "...", "itemSlug": "..."}`
 *   **Sample Response:**
     ```json
     {
-      "success": true,
-      "game": {
-        "name": "Mobile Legends",
-        "slug": "mobile-legends988",
-        "items": [
-          { "name": "Weekly Diamond Pass", "slug": "weekly-pass816", "price": 165 },
-          { "name": "5 Diamonds", "slug": "diamonds-5", "price": 8 }
-        ]
+      "success": 200,
+      "message": "Validation successful",
+      "data": {
+        "username": "ProPlayer",
+        "region": "Global",
+        "playerId": "12345678",
+        "zoneId": "1234"
       }
     }
     ```
-
-### 🛡️ ID & Region Check
-Verify a Player ID/Zone ID and check account region before ordering.
-*   **URL:** `/api/service/validate`
-*   **Method:** `POST`
-*   **Body:** `{"gameSlug": "...", "playerId": "...", "zoneId": "..."}`
 
 ### 🚀 Place Order
 Place a top-up order. Funds are temporarily deducted and auto-executed.
 *   **URL:** `/api/service/order`
 *   **Method:** `POST`
 *   **Body:** `{"gameSlug": "...", "itemSlug": "...", "playerId": "...", "zoneId": "..."}`
-*   **Note:** If fulfillment fails, the **full amount is instantly refunded** to your wallet. The response will include `"status": "failed"` and `"success": false`.
+*   **Note:** If fulfillment fails, the **full amount is instantly refunded** to your wallet. 
+*   **Validation:** Orders for MLBB will be automatically blocked if the player is in a restricted region or if identification fails.
 
 ---
 
 ## 3. Implementation Flow
 1. **List Games**: call `/api/service/games` to find the `gameSlug`.
 2. **Get Prices**: call `/api/service/games/{slug}` to get `itemSlug` and the exact price you will be charged.
-3. **Verify ID**: call `/api/service/validate` to confirm user identity.
+3. **Verify ID**: call `/api/service/validate` to confirm user identity and check region eligibility (especially for MLBB).
 4. **Order**: call `/api/service/order` to complete the transaction.
