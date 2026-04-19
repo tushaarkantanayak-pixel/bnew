@@ -220,19 +220,19 @@ export async function GET() {
           tagColor: "#ffffff",
         },
       },
-      {
-        gameName: "BGMI",
-        gameSlug: "bgmi",
-        gameFrom: "Krafton",
-        gameAvailablity: true,
-        gameImageId: { image: "/game-assets/bgmi-logo.webp" },
-        isManual: true,
-        tagId: {
-          tagName: "Manual",
-          tagBackground: "#f59e0b",
-          tagColor: "#ffffff",
-        },
-      }
+      // {
+      //   gameName: "BGMI",
+      //   gameSlug: "bgmi",
+      //   gameFrom: "Krafton",
+      //   gameAvailablity: true,
+      //   gameImageId: { image: "/game-assets/bgmi-logo.webp" },
+      //   isManual: true,
+      //   tagId: {
+      //     tagName: "Manual",
+      //     tagBackground: "#f59e0b",
+      //     tagColor: "#ffffff",
+      //   },
+      // }
     ];
 
     const filteredGames = [
