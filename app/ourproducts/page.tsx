@@ -10,7 +10,7 @@ export default function OurProductsPage() {
   const products = [
     {
       id: "topup-web",
-      name: "Topup Web",
+      name: "Game Topupweb",
       tagline: "The best website for game top-ups",
       desc: "Get a fast and automatic website for your game top-up business. It's easy to set up and works with many games.",
       icon: FiLayers,

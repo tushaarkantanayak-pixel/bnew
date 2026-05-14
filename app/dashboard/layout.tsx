@@ -151,7 +151,7 @@ export default function DashboardLayout({
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="bg-[var(--card)]/40 backdrop-blur-2xl border border-[var(--border)] rounded-[2rem] p-5 sm:p-8 shadow-2xl min-h-[500px]"
+                            className="min-h-[500px]"
                         >
                             {children}
                         </motion.div>
