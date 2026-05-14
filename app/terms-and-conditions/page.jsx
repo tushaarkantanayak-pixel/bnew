@@ -9,43 +9,43 @@ export default function TermsAndConditions() {
   const sections = [
     {
       id: "01",
-      title: "Eligibility",
-      content: "You must be at least 18 years old or have parental/guardian permission to use this platform. You are responsible for maintaining account confidentiality and all activities under your credentials."
+      title: "Who can use this",
+      content: "You must be 18 or older to use our site. If you are younger, please ask your parents or guardians for permission first."
     },
     {
       id: "02",
-      title: "Platform Use",
-      content: "You agree to use Blue Buff only for lawful purposes. Accurate information (Game ID, Server/Zone) is required for order fulfillment. Incorrect data may lead to irreversible transaction failure."
+      title: "How to use",
+      content: "Please use Blue Buff fairly. You must give us the correct Game ID and Zone so we can send your items quickly. If you give wrong info, we might not be able to help."
     },
     {
       id: "03",
-      title: "Digital Delivery",
-      content: "All products are digital services delivered instantly. Once processed, orders are final. We are not liable for user input errors or unauthorized account use after delivery."
+      title: "Delivery",
+      content: "All our items are digital and sent right away. Once we send the items to your game account, the deal is finished and cannot be changed."
     },
     {
       id: "04",
       title: "Payments",
-      content: "Transactions are processed through encrypted third-party gateways. We do not store sensitive payment details. We reserve the right to audit or block suspicious transaction patterns."
+      content: "We use safe and private ways to pay. We do not save your bank or card details. We can block any payments that look like a scam."
     },
     {
       id: "05",
-      title: "Refund Logic",
-      content: "Due to the instant nature of digital fulfillment, successful deliveries are non-refundable. Consideration is limited only to verified technical failures where no credit was issued."
+      title: "Refunds",
+      content: "Because digital items are sent instantly, we usually don't give refunds. We only help with refunds if there is a big technical problem on our side."
     },
     {
       id: "06",
-      title: "Prohibited Acts",
-      content: "Exploiting system vulnerabilities, engaging in fraudulent chargebacks, or utilizing unauthorized automation/bots will result in immediate permanent suspension."
+      title: "No Cheating",
+      content: "If you try to cheat, use bots, or lie about payments, we will have to block your account forever."
     },
     {
       id: "07",
-      title: "Intellectual Property",
-      content: "All Blue Buff branding remains our property. Game trademarks (Mobile Legends, etc.) belong to their respective publishers. We are an independent service provider."
+      title: "Our Brand",
+      content: "Blue Buff is our own brand. The games like Mobile Legends belong to their own companies. We are an independent store."
     },
     {
       id: "08",
-      title: "Liability Limits",
-      content: "We are not liable for losses due to user error, game server maintenance outages, account restrictions by developers, or indirect consequential damages."
+      title: "Our Limits",
+      content: "We are not responsible if you give us the wrong ID, or if the game company has a server problem."
     }
   ];
 

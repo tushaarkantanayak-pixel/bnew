@@ -1,10 +1,15 @@
-"use client";
-
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiZap, FiShield, FiCheckCircle } from "react-icons/fi";
 
 export default function GameHeader({ game }) {
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [game]);
+
   if (!game) return null;
 
   return (
@@ -22,13 +27,20 @@ export default function GameHeader({ game }) {
         <div className="relative z-10 flex items-center gap-3 md:gap-4">
           {/* Clean Game Icon Container */}
           <div className="relative shrink-0">
-            <div className="relative w-10 h-10 md:w-13 md:h-13 rounded-xl md:rounded-2xl overflow-hidden bg-[var(--background)] ring-1 ring-white/10 shadow-xl transition-transform duration-500 group-hover:scale-105">
-              <Image
-                src={game.gameImageId?.image || "/logo.png"}
-                alt={game.gameName}
-                fill
-                className="object-cover"
-              />
+            <div className="relative w-10 h-10 md:w-13 md:h-13 rounded-xl md:rounded-2xl overflow-hidden bg-[var(--background)] ring-1 ring-white/10 shadow-xl transition-transform duration-500 group-hover:scale-105 flex items-center justify-center">
+              {(!game.gameImageId?.image || imgError) ? (
+                <div className="w-full h-full flex items-center justify-center bg-[var(--accent)]/10 text-[var(--accent)] font-black text-xl italic uppercase">
+                  {game.gameName?.charAt(0)}
+                </div>
+              ) : (
+                <Image
+                  src={game.gameImageId?.image || "/logo.png"}
+                  alt={game.gameName}
+                  fill
+                  className="object-cover"
+                  onError={() => setImgError(true)}
+                />
+              )}
             </div>
 
             {/* Live Indicator Dot */}

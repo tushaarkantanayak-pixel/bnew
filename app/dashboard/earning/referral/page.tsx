@@ -1,8 +1,8 @@
 "use client";
 
-import ReferralTab from "../../../components/Dashboard/ReferralTab";
-import { useUser } from "../layout";
-import AuthGuard from "../../../components/AuthGuard";
+import ReferralTab from "../../../../components/Dashboard/ReferralTab";
+import { useUser } from "../../layout";
+import AuthGuard from "../../../../components/AuthGuard";
 
 export default function ReferralPage() {
     const { userDetails } = useUser();

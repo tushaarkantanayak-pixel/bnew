@@ -365,15 +365,16 @@ function AuthContent() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full relative overflow-hidden group/btn bg-[var(--accent)] text-white font-black uppercase tracking-widest py-3.5 rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-[0_10px_20px_-5px_rgba(var(--accent-rgb),0.3)]"
+                    className="w-full relative overflow-hidden group/btn bg-[var(--accent)] text-white font-black uppercase tracking-widest py-3 rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2.5 shadow-[0_10px_20px_-5px_rgba(var(--accent-rgb),0.3)]"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_2s_infinite]" />
                     {loading ? (
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     ) : (
-                      <>
-                        <span className="relative z-10">{showOtpField ? "Verify & Login" : "Send Login Code"}</span>
-                      </>
+                      <div className="flex items-center gap-2 relative z-10">
+                        {showOtpField ? <FiLock size={14} /> : <FiZap size={14} />}
+                        <span className="text-[11px] leading-none">{showOtpField ? "Verify & Login" : "Send Login Code"}</span>
+                      </div>
                     )}
                   </button>
                 </motion.form>

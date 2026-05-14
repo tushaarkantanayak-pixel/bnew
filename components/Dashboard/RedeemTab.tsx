@@ -50,17 +50,6 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-start px-4">
                 {/* LEFT: FORM SIDE */}
                 <div className="space-y-8">
-                    <motion.div
-                        initial={{ opacity: 0, x: -15 }}
-                        animate={{ opacity: 1, x: 0 }}
-                    >
-                        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-blue-500/5 border border-blue-500/10 mb-2">
-                            <FiGift className="text-blue-500" size={10} />
-                            <span className="text-[8px] font-black uppercase tracking-widest text-blue-500">Rewards</span>
-                        </div>
-                        <h1 className="text-2xl sm:text-3xl font-black uppercase italic tracking-tighter text-[var(--foreground)]">Use <span className="text-blue-500">Code</span></h1>
-                        <p className="text-[10px] font-bold text-[var(--muted)] mt-2 uppercase tracking-wide opacity-50">Add money to your account instantly.</p>
-                    </motion.div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 15 }}

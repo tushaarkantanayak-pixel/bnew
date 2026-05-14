@@ -68,28 +68,23 @@ export default function OrdersTab() {
 
   return (
     <div className="space-y-6">
-      {/* HEADER */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/10 shadow-[0_0_15px_rgba(var(--accent-rgb),0.1)]">
-            <FiTerminal size={18} />
-          </div>
-          <div>
-            <h3 className="text-xl font-[900] uppercase italic tracking-tighter text-[var(--foreground)]">Your Orders</h3>
-            <p className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">
-              {loading ? "Loading your orders..." : `You have ${totalCount} orders`}
-            </p>
+      {/* MINIMAL STATS & SEARCH */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-[var(--border)] pb-8 mb-4">
+        <div>
+          <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 italic leading-none mb-2">Registry Volume</p>
+          <div className="flex items-end gap-2">
+            <span className="text-2xl font-black italic text-[var(--foreground)] leading-none">{loading ? "..." : totalCount}</span>
+            <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest mb-0.5">Confirmed Orders</span>
           </div>
         </div>
 
-        {/* SEARCH ORDERS */}
-        <div className="relative w-full sm:w-64 group">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within:text-[var(--accent)] transition-colors" />
+        <div className="relative w-full sm:w-72 group">
+          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/50 group-focus-within:text-[var(--accent)] transition-all duration-300" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search orders..."
-            className="w-full pl-11 pr-4 py-3 rounded-xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)] text-[11px] uppercase font-bold tracking-widest outline-none transition-all placeholder:text-[var(--muted)] text-[var(--foreground)]"
+            placeholder="FILTER REGISTRY..."
+            className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all placeholder:text-[var(--muted)]/30 text-[var(--foreground)] shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
           />
         </div>
       </div>

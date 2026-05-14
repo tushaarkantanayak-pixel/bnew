@@ -130,7 +130,7 @@ export default function DashboardLayout({
                                     </span>
                                 </div>
                                 <h1 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter leading-none">
-                                    MY <span className="text-[var(--accent)]">DASHBOARD</span>
+                                    MY <span className="text-[var(--accent)]">{tabCards.find(t => t.key === activeTab)?.value || "DASHBOARD"}</span>
                                 </h1>
                                 <p className="text-[var(--muted)] text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] opacity-30 italic">
                                     User: {userDetails.name || "Guest"} • Connected
@@ -145,25 +145,6 @@ export default function DashboardLayout({
                                 </Link>
                             </div> */}
                         </motion.div>
-
-                        {/* TACTICAL NAVIGATION */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 mb-6">
-                            {tabCards.map((tab, index) => (
-                                <motion.div
-                                    key={tab.key}
-                                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    transition={{ delay: 0.05 + index * 0.03 }}
-                                >
-                                    <Link href={tab.href} className="block w-full">
-                                        <DashboardCard
-                                            tab={tab}
-                                            activeTab={activeTab === 'dashboard' ? 'orders' : activeTab}
-                                        />
-                                    </Link>
-                                </motion.div>
-                            ))}
-                        </div>
 
                         {/* PAGE CONTENT AREA */}
                         <motion.div

@@ -193,46 +193,33 @@ export async function GET() {
     ];
 
     // manual games that are handled locally
-    const manualGamesLocal = [
-      {
-        gameName: "Clash of Clans",
-        gameSlug: "coc",
-        gameFrom: "Supercell",
-        gameAvailablity: true,
-        gameImageId: { image: COC_IMAGE },
-        isManual: true,
-        tagId: {
-          tagName: "Manual",
-          tagBackground: "#f59e0b",
-          tagColor: "#ffffff",
-        },
-      },
-      {
-        gameName: "Starlight Card",
-        gameSlug: "starlight",
-        gameFrom: "Moonton",
-        gameAvailablity: true,
-        gameImageId: { image: STARLIGHT_IMAGE },
-        isManual: true,
-        tagId: {
-          tagName: "Manual",
-          tagBackground: "#f59e0b",
-          tagColor: "#ffffff",
-        },
-      },
+    const manualGamesLocal: any[] = [
       // {
-      //   gameName: "BGMI",
-      //   gameSlug: "bgmi",
-      //   gameFrom: "Krafton",
+      //   gameName: "Clash of Clans",
+      //   gameSlug: "coc",
+      //   gameFrom: "Supercell",
       //   gameAvailablity: true,
-      //   gameImageId: { image: "/game-assets/bgmi-logo.webp" },
+      //   gameImageId: { image: COC_IMAGE },
       //   isManual: true,
       //   tagId: {
       //     tagName: "Manual",
       //     tagBackground: "#f59e0b",
       //     tagColor: "#ffffff",
       //   },
-      // }
+      // },
+      // {
+      //   gameName: "Starlight Card",
+      //   gameSlug: "starlight",
+      //   gameFrom: "Moonton",
+      //   gameAvailablity: true,
+      //   gameImageId: { image: STARLIGHT_IMAGE },
+      //   isManual: true,
+      //   tagId: {
+      //     tagName: "Manual",
+      //     tagBackground: "#f59e0b",
+      //     tagColor: "#ffffff",
+      //   },
+      // },
     ];
 
     const filteredGames = [

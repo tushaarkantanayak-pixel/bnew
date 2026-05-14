@@ -1,128 +1,138 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiUsers, FiGlobe, FiZap, FiCode, FiArrowRight, FiMessageCircle } from "react-icons/fi";
+import { FiCpu, FiCode, FiCloud, FiTrendingUp, FiShoppingCart, FiArrowRight, FiMessageCircle, FiZap } from "react-icons/fi";
 
 export default function ServicesPage() {
   const whatsappLink = "https://wa.me/919178521537";
 
   const services = [
     {
-      title: "Reseller Program",
-      desc: "Get our lowest prices for your business. Fast delivery and big profits.",
-      icon: FiUsers,
-      badge: "BEST PRICE",
+      title: "API Integration",
+      desc: "High-speed, automated API connections for top-ups, game data, and seamless business workflows.",
+      icon: FiCpu,
+      badge: "ELITE SPEED",
       active: true,
     },
     {
-      title: "Whitelabel Site",
-      desc: "Start your own brand. Get a full website with your name and easy payments.",
-      icon: FiGlobe,
-      badge: "FAST SETUP",
-      active: true,
-    },
-    {
-      title: "Custom Design",
-      desc: "We build special top-up websites with the look and features you want.",
-      icon: FiZap,
-      badge: "EXCLUSIVE",
-      active: true,
-    },
-    {
-      title: "Business API",
-      desc: "Connect your system for automatic orders. Available for Elite Members.",
+      title: "Custom Website Development",
+      desc: "Bespoke web applications built for scale, performance, and high-conversion gaming storefronts.",
       icon: FiCode,
-      badge: "API ACCESS",
+      badge: "ENTERPRISE",
+      active: true,
+    },
+    {
+      title: "Cloud Infrastructure",
+      desc: "Secure, high-uptime server solutions optimized for heavy traffic and instant digital delivery.",
+      icon: FiCloud,
+      badge: "ULTRA STABLE",
+      active: true,
+    },
+    {
+      title: "SEO Mastery",
+      desc: "Dominating search rankings with advanced industry-specific strategies to drive organic growth.",
+      icon: FiTrendingUp,
+      badge: "MARKET LEADER",
+      active: true,
+    },
+    {
+      title: "Automated Marketplaces",
+      desc: "End-to-end white-label solutions for launching your own branded gaming digital armory.",
+      icon: FiShoppingCart,
+      badge: "WHITELABEL",
       active: true,
     },
   ];
 
   return (
-    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] pb-20 transition-colors duration-300 px-6">
-      <div className="max-w-3xl mx-auto pt-12 md:pt-16 relative z-10">
+    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] pb-32 transition-colors duration-300 px-6">
+      {/* BACKGROUND DECOR */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-20">
+        <div className="absolute top-[-10%] right-[-10%] w-[60%] aspect-square bg-[var(--accent)]/10 blur-[150px] rounded-full" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[60%] aspect-square bg-[var(--accent)]/5 blur-[150px] rounded-full" />
+      </div>
 
+      <div className="max-w-4xl mx-auto pt-24 md:pt-32 relative z-10">
         {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-20 text-left"
         >
-          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[var(--accent)]/5 border border-[var(--accent)]/10 mb-2">
-            <FiZap className="text-[var(--accent)]" size={10} />
-            <span className="text-[8px] font-black uppercase tracking-widest text-[var(--accent)]">Enterprise</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 mb-6">
+            <FiZap className="text-[var(--accent)]" size={12} />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent)]">Professional Services</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase leading-none">
-            <span className="text-[var(--accent)]">OUR</span> SERVICES
+          <h1 className="text-4xl md:text-[5rem] font-black italic tracking-tighter uppercase leading-[0.8] mb-6">
+            <span className="text-[var(--accent)]">OUR</span> <br /> SOLUTIONS
           </h1>
-          <p className="text-[var(--muted)] text-[9px] font-bold uppercase tracking-widest opacity-40 mt-1 italic font-sans italic">
-            Scale your business.
+          <p className="max-w-xl text-[var(--muted)] text-[12px] font-bold uppercase tracking-[0.2em] leading-relaxed opacity-60">
+            Scale your gaming infrastructure with enterprise-grade technology and expert-level implementation. We build the backbone of modern gaming businesses.
           </p>
         </motion.div>
 
         {/* SERVICES LIST */}
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: i * 0.1 }}
                 onClick={() => service.active && window.open(whatsappLink, "_blank")}
-                className={`group relative p-4 sm:p-5 rounded-2xl bg-[var(--card)]/30 border border-white/5 transition-all duration-300 flex items-center gap-5 ${service.active
-                  ? "cursor-pointer hover:border-[var(--accent)]/30 hover:bg-[var(--card)]/50"
-                  : "opacity-30 grayscale cursor-not-allowed border-dashed"
-                  }`}
+                className={`group relative p-8 rounded-[2.5rem] bg-[var(--card)]/40 border border-[var(--border)] transition-all duration-500 flex flex-col justify-between aspect-square md:aspect-auto min-h-[300px] hover:border-[var(--accent)]/50 hover:shadow-2xl hover:-translate-y-1 shadow-sm`}
               >
-                {/* Icon */}
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-[var(--accent)]/60 group-hover:text-[var(--accent)] group-hover:bg-[var(--accent)]/10 transition-all flex-shrink-0">
-                  <Icon size={18} />
+                {/* Top Row */}
+                <div className="flex justify-between items-start">
+                  <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-white transition-all duration-500">
+                    <Icon size={28} />
+                  </div>
+                  <span className="text-[8px] font-black px-3 py-1 rounded-full bg-white/5 text-[var(--muted)] border border-white/10 tracking-widest uppercase group-hover:text-[var(--accent)] group-hover:border-[var(--accent)]/30 transition-colors">
+                    {service.badge}
+                  </span>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm md:text-base font-black uppercase tracking-tighter italic text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-none">
-                      {service.title}
-                    </h3>
-                    <span className="text-[7px] font-black px-1.5 py-0.5 rounded bg-[var(--accent)]/5 text-[var(--accent)]/40 border border-[var(--accent)]/10 tracking-widest uppercase">
-                      {service.badge}
-                    </span>
-                  </div>
-                  <p className="text-[var(--muted)] text-[10px] md:text-[11px] leading-tight opacity-40 font-bold uppercase tracking-tight">
+                {/* Bottom Section */}
+                <div className="space-y-4">
+                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter italic text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-[var(--muted)] text-[11px] leading-relaxed opacity-60 font-bold uppercase tracking-tight">
                     {service.desc}
                   </p>
-                </div>
-
-                {/* Arrow */}
-                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] group-hover:border-[var(--accent)]/30 transition-all flex-shrink-0">
-                  <FiArrowRight size={14} />
+                  <div className="pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity">
+                    Inquire Now <FiArrowRight />
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* CTA */}
+        {/* CTA SECTION */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="mt-12 p-6 rounded-3xl border border-white/5 bg-[var(--card)]/20 text-center space-y-4"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="mt-24 p-12 rounded-[3rem] border border-[var(--accent)]/20 bg-gradient-to-br from-[var(--card)]/60 to-[var(--background)] relative overflow-hidden text-center"
         >
-          <div>
-            <h4 className="text-base font-black italic uppercase tracking-tighter mb-1">Need more?</h4>
-            <p className="text-[var(--muted)] text-[8px] font-black uppercase tracking-widest opacity-30 italic">Contact us for custom deals.</p>
+          <div className="absolute inset-0 bg-[var(--accent)]/5 blur-[80px] pointer-events-none" />
+          <div className="relative z-10 space-y-8">
+            <h4 className="text-3xl md:text-4xl font-black italic uppercase tracking-tighter">Ready to <span className="text-[var(--accent)]">Ascend?</span></h4>
+            <p className="text-[var(--muted)] text-[11px] font-black uppercase tracking-[0.3em] opacity-60 max-w-md mx-auto">
+              Our experts are ready to architect your next big digital move.
+            </p>
+            <button
+              onClick={() => window.open(whatsappLink, "_blank")}
+              className="px-12 py-5 rounded-2xl bg-[var(--accent)] text-white font-black uppercase tracking-[0.3em] text-[11px] italic shadow-2xl hover:scale-[1.05] active:scale-95 transition-all flex items-center gap-3 mx-auto"
+            >
+              <FiMessageCircle size={16} />
+              Consult With Us
+            </button>
           </div>
-          <button
-            onClick={() => window.open(whatsappLink, "_blank")}
-            className="px-6 py-2.5 rounded-xl bg-[var(--accent)] text-black font-black uppercase tracking-widest text-[9px] italic shadow-lg hover:scale-[1.03] active:scale-95 transition-all flex items-center gap-2 mx-auto"
-          >
-            <FiMessageCircle size={12} />
-            WhatsApp Us
-          </button>
         </motion.div>
-
       </div>
     </section>
   );

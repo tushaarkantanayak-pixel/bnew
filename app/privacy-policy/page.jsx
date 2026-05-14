@@ -18,23 +18,23 @@ export default function PrivacyPolicy() {
   const policies = [
     {
       icon: <FiDatabase />,
-      title: "Data Collection",
-      description: "We collect essential account details (Email, Phone, Game ID) and technical data (IP, Browser) exclusively for order delivery and fraud prevention."
+      title: "What we collect",
+      description: "We only collect what we need, like your Game ID, Phone, and Email. This helps us send your order and keep your account safe."
     },
     {
       icon: <FiLock />,
-      title: "Usage Protocol",
-      description: "Your data is used solely to process orders and improve platform security. We never sell, trade, or share your personal information with third-party marketers."
+      title: "How we use it",
+      description: "Your data is safe with us. We only use it to process your orders. We never sell or share your personal information with anyone else."
     },
     {
       icon: <FiServer />,
-      title: "Security Measures",
-      description: "We utilize 256-bit SSL encryption and secure gateways. Logs are retained only as long as legally required for transaction verification and auditing."
+      title: "Safe and Secure",
+      description: "We use high-quality security to protect your information. We only keep your data for as long as we need to for your orders."
     },
     {
       icon: <FiGlobe />,
-      title: "Third-Party Integration",
-      description: "Our platform integrates with verified payment and analytics providers who operate under their own strict privacy standards and compliance certifications."
+      title: "Our Partners",
+      description: "We work with trusted payment partners to keep your money safe. They follow very strict safety rules just like we do."
     }
   ];
 

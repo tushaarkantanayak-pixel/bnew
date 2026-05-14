@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { formatPrice } from "@/utils/currency";
 
-import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiSearch } from "react-icons/fi";
+import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift } from "react-icons/fi";
 
 /* ================= CONFIG ================= */
 const HEADER_CONFIG = {
@@ -20,20 +20,48 @@ const HEADER_CONFIG = {
 
   nav: [
     { label: "Top-Up", href: "/games", icon: <FiShoppingBag size={14} /> },
-    { label: "Region Check", href: "/region", icon: <FiCompass size={14} /> },
     { label: "News", href: "/blog", icon: <FiLayers size={14} /> },
     { label: "Services", href: "/services", icon: <FiGrid size={14} /> },
+    { label: "Out Proucts", href: "/ourproducts", icon: <FiGrid size={14} /> },
+
+
   ],
 
   userMenu: {
-    common: [
-      { label: "My Orders", href: "/dashboard/orders", icon: <FiShoppingBag size={14} />, desc: "Track your top-ups" },
-      { label: "My Wallet", href: "/dashboard/wallet", icon: <FiLayers size={14} />, desc: "Balance & Recharge" },
-      { label: "Redeem Code", href: "/dashboard/redeem", icon: <FiGift size={14} />, desc: "Use your codes" },
-      // { label: "Refer & Earn", href: "/dashboard/referral", icon: <FiUsers size={14} />, desc: "Earn rewards" },
-      { label: "API Setup", href: "/dashboard/api-keys", icon: <FiKey size={14} />, desc: "Developer API Access" },
-      // { label: "Membership", href: "/admin-panal", icon: <FiShield size={14} />, desc: "Member Benefits" },
-      { label: "Support", href: "/dashboard/support", icon: <FiMessageSquare size={14} />, desc: "Get help 24/7" },
+    sections: [
+      {
+        title: "My Dashboard",
+        items: [
+          { label: "Account Overview", href: "/dashboard", icon: <FiCompass size={14} />, desc: "Central Hub" },
+        ]
+      },
+      {
+        title: "Digital Game Topup",
+        items: [
+          { label: "API Setup", href: "/dashboard/digital-gametopup/api-keys", icon: <FiKey size={14} />, desc: "Automatic game topups" },
+          { label: "My Wallet", href: "/dashboard/digital-gametopup/wallet", icon: <FiLayers size={14} />, desc: "Balance & Recharge" },
+          { label: "My Orders", href: "/dashboard/digital-gametopup/orders", icon: <FiShoppingBag size={14} />, desc: "Track your top-ups" },
+        ]
+      },
+      {
+        title: "Support",
+        items: [
+          { label: "Help Center", href: "/dashboard/support", icon: <FiMessageSquare size={14} />, desc: "Get help 24/7" },
+        ]
+      },
+      {
+        title: "Earning",
+        items: [
+          { label: "Refer & Earn", href: "/dashboard/earning/referral", icon: <FiUsers size={14} />, desc: "Invite & Rewards" },
+          { label: "Redeem Code", href: "/dashboard/earning/redeem", icon: <FiGift size={14} />, desc: "Use vouchers" },
+        ]
+      },
+      {
+        title: "Gateway",
+        items: [
+          { label: "XYZPay.site", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Contact to avail subscription" },
+        ]
+      }
     ],
     roles: {
       owner: { label: "Admin Console", href: "/owner-panal", icon: <FiZap size={14} /> },
@@ -48,12 +76,7 @@ export default function Header() {
   const [user, setUser] = useState(null);
   const [activeNav, setActiveNav] = useState("/");
   const [walletBalance, setWalletBalance] = useState(0);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [allGames, setAllGames] = useState([]);
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+
 
   const dropdownRef = useRef(null);
 
@@ -155,34 +178,7 @@ export default function Header() {
     };
   }, []);
 
-  /* ================= GAME SEARCH LOGIC ================= */
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const res = await fetch("/api/games");
-        const data = await res.json();
-        if (data.success && data.data?.games) {
-          setAllGames(data.data.games);
-        }
-      } catch (err) {
-        console.error("Failed to fetch games for search", err);
-      }
-    };
-    fetchGames();
-  }, []);
 
-  useEffect(() => {
-    if (searchTerm.trim().length > 0) {
-      setIsSearching(true);
-      const filtered = allGames.filter(game =>
-        game.gameName.toLowerCase().includes(searchTerm.toLowerCase())
-      ).slice(0, 8);
-      setSearchResults(filtered);
-      setIsSearching(false);
-    } else {
-      setSearchResults([]);
-    }
-  }, [searchTerm, allGames]);
 
   const [showLogoutToast, setShowLogoutToast] = useState(false);
 
@@ -212,11 +208,7 @@ export default function Header() {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setUserMenuOpen(false);
       }
-      // Click outside search
-      const searchContainer = document.querySelector('.lg\\:flex-1.max-w-md');
-      if (searchContainer && !searchContainer.contains(e.target)) {
-        setIsSearchFocused(false);
-      }
+
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -281,125 +273,6 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-
-          <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3 pr-2">
-            {user && (
-              <Link href="/dashboard/wallet">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative w-auto h-9 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-300 group bg-[var(--foreground)]/5 hover:bg-[var(--foreground)]/10"
-                >
-                  <span className="text-xs font-black text-[var(--accent)]">{formatPrice(walletBalance)}</span>
-                  <span className="text-lg text-[var(--accent)] group-hover:scale-110 transition-transform">+</span>
-                </motion.button>
-              </Link>
-            )}
-
-            <div className="lg:hidden">
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--foreground)]/[0.05] text-[var(--foreground)]/60"
-              >
-                {mobileSearchOpen ? <FiX size={18} /> : <FiSearch size={18} />}
-              </motion.button>
-            </div>
-
-            <div className="hidden lg:flex max-w-[140px] xl:max-w-[180px] relative group">
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  placeholder="Search games..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onFocus={() => setIsSearchFocused(true)}
-                  className={`w-full h-10 pl-10 pr-4 rounded-full bg-[var(--foreground)]/[0.04] border border-[var(--border)] text-xs font-medium focus:bg-[var(--foreground)]/[0.08] focus:border-[var(--accent)]/30 focus:ring-4 focus:ring-[var(--accent)]/5 outline-none transition-all placeholder:text-[var(--muted)]/40`}
-                />
-                <FiSearch className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isSearchFocused ? 'text-[var(--accent)]' : 'text-[var(--muted)]/40'}`} size={14} />
-
-                <AnimatePresence>
-                  {searchTerm && isSearchFocused && (
-                    <button
-                      onClick={() => setSearchTerm("")}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center bg-[var(--foreground)]/[0.05] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
-                    >
-                      <FiX size={10} />
-                    </button>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Global Search Results */}
-              <AnimatePresence>
-                {isSearchFocused && (searchTerm || isSearching) && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 5, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                    className="absolute top-full left-0 w-full mt-2 bg-[var(--background)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden z-[1100] backdrop-blur-3xl"
-                  >
-                    <div className="p-2 border-b border-[var(--border)] bg-[var(--foreground)]/[0.02]">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]/60 px-2 italic">All Games</span>
-                    </div>
-
-                    <div className="max-h-[60vh] overflow-y-auto custom-scrollbar">
-                      {searchResults.length > 0 ? (
-                        <div className="p-2 space-y-1">
-                          {searchResults.map((game, idx) => (
-                            <Link
-                              key={game.gameSlug}
-                              href={`/games/${game.gameSlug}`}
-                              onClick={() => {
-                                setIsSearchFocused(false);
-                                setSearchTerm("");
-                              }}
-                            >
-                              <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.05 }}
-                                className="flex items-center gap-3 p-2 rounded-xl hover:bg-[var(--foreground)]/[0.04] transition-all group border border-transparent hover:border-[var(--border)]"
-                              >
-                                <div className="w-10 h-10 rounded-lg overflow-hidden border border-[var(--border)] shrink-0">
-                                  <Image
-                                    src={game.gameImageId?.image || "/logoBB.png"}
-                                    alt={game.gameName}
-                                    width={40}
-                                    height={40}
-                                    className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                  />
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <p className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">{game.gameName}</p>
-                                  <p className="text-[9px] text-[var(--muted)]/50 italic uppercase tracking-tighter">{game.gameFrom}</p>
-                                </div>
-                                <FiChevronRight size={14} className="text-[var(--muted)] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                              </motion.div>
-                            </Link>
-                          ))}
-                        </div>
-                      ) : searchTerm ? (
-                        <div className="py-10 text-center">
-                          <div className="w-12 h-12 rounded-2xl bg-[var(--foreground)]/[0.03] flex items-center justify-center mx-auto mb-3 text-[var(--muted)]/20">
-                            <FiSearch size={20} />
-                          </div>
-                          <p className="text-xs font-bold text-[var(--muted)]/40 uppercase tracking-widest">No games found</p>
-                        </div>
-                      ) : null}
-                    </div>
-
-                    <div className="p-3 bg-[var(--foreground)]/[0.02] border-t border-[var(--border)] text-center">
-                      <p className="text-[8px] font-black text-[var(--muted)]/40 uppercase tracking-widest italic flex items-center justify-center gap-1.5">
-                        <FiZap size={10} className="text-[var(--accent)]" /> Blue Buff Search
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-          </div>
 
           <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3" ref={dropdownRef}>
             <ThemeToggle />
@@ -490,27 +363,53 @@ export default function Header() {
                         </div>
                       ) : (
                         <>
-                          <div className="grid grid-cols-2 gap-2.5 mb-6">
+                          <div className="grid grid-cols-3 gap-2 mb-8">
                             {HEADER_CONFIG.nav.map((item) => (
-                              <Link key={item.label} href={item.href} onClick={() => setUserMenuOpen(false)} className="flex flex-col items-center justify-center p-2.5 rounded-[1.2rem] bg-[var(--foreground)]/[0.03] border border-[var(--border)] hover:bg-[var(--accent)] hover:text-white transition-all group">
-                                <span className="text-[var(--accent)] group-hover:text-white mb-1">{item.icon}</span>
-                                <span className="text-[10px] font-bold">{item.label}</span>
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                target={item.href.startsWith("http") ? "_blank" : undefined}
+                                onClick={() => setUserMenuOpen(false)}
+                                className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[var(--foreground)]/[0.03] border border-white/5 hover:bg-[var(--accent)] hover:text-black transition-all group"
+                              >
+                                <span className="text-[var(--accent)] group-hover:text-black mb-1.5 transition-colors">{item.icon}</span>
+                                <span className="text-[8px] font-black uppercase tracking-tight leading-none text-center">{item.label}</span>
                               </Link>
                             ))}
                           </div>
 
-                          <div className="space-y-1.5">
-                            {HEADER_CONFIG.userMenu.common.map((item) => (
-                              <Link key={item.label} href={item.href} onClick={() => setUserMenuOpen(false)} className="flex items-center justify-between p-3 rounded-xl bg-[var(--foreground)]/[0.02] border border-transparent hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group">
-                                <div className="flex items-center gap-3">
-                                  <div className="w-8 h-8 rounded-lg bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all">{item.icon}</div>
-                                  <div className="flex flex-col">
-                                    <p className="text-xs font-bold text-[var(--foreground)] leading-tight">{item.label}</p>
-                                    <p className="text-[9px] text-[var(--muted)]">{item.desc}</p>
-                                  </div>
+                          <div className="space-y-6">
+                            {HEADER_CONFIG.userMenu.sections.map((section) => (
+                              <div key={section.title} className="space-y-2.5">
+                                <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 ml-3">{section.title}</h4>
+                                <div className="space-y-1.5">
+                                  {section.items.map((item) => (
+                                    <Link
+                                      key={item.label}
+                                      href={item.href}
+                                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                                      onClick={() => setUserMenuOpen(false)}
+                                      className="flex items-center justify-between p-3 rounded-xl bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group"
+                                    >
+                                      <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded-lg bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all">{item.icon}</div>
+                                        <div className="flex flex-col">
+                                          <p className="text-xs font-bold text-[var(--foreground)] leading-tight">{item.label}</p>
+                                          <p className="text-[9px] text-[var(--muted)] opacity-50">{item.desc}</p>
+                                        </div>
+                                      </div>
+                                      <div className="flex items-center gap-2">
+                                        {item.label === "My Wallet" && (
+                                          <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
+                                            {formatPrice(walletBalance)}
+                                          </span>
+                                        )}
+                                        <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
+                                      </div>
+                                    </Link>
+                                  ))}
                                 </div>
-                                <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
-                              </Link>
+                              </div>
                             ))}
                           </div>
 
@@ -572,63 +471,7 @@ export default function Header() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {mobileSearchOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden absolute top-14 left-0 w-full bg-[var(--background)] border-b border-[var(--border)] shadow-2xl z-[900] p-4 space-y-4"
-          >
-            <div className="relative">
-              <input
-                autoFocus
-                type="text"
-                placeholder="Search games..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full h-12 pl-12 pr-4 rounded-2xl bg-[var(--foreground)]/[0.04] border border-[var(--border)] text-sm font-bold focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
-              />
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--accent)]" size={18} />
-              {searchTerm && (
-                <button onClick={() => setSearchTerm("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--muted)]">
-                  <FiX size={16} />
-                </button>
-              )}
-            </div>
 
-            <div className="max-h-[60vh] overflow-y-auto custom-scrollbar space-y-2">
-              {searchResults.length > 0 ? (
-                searchResults.map((game) => (
-                  <Link
-                    key={game.gameSlug}
-                    href={`/games/${game.gameSlug}`}
-                    onClick={() => {
-                      setMobileSearchOpen(false);
-                      setSearchTerm("");
-                    }}
-                  >
-                    <div className="flex items-center gap-4 p-3 rounded-2xl bg-[var(--foreground)]/[0.02] border border-[var(--border)] active:bg-[var(--accent)]/5 transition-all">
-                      <div className="w-12 h-12 rounded-xl overflow-hidden border border-[var(--border)]">
-                        <Image src={game.gameImageId?.image || "/logoBB.png"} alt={game.gameName} width={48} height={48} className="object-cover w-full h-full" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-bold text-xs text-[var(--foreground)] truncate">{game.gameName}</p>
-                        <p className="text-[10px] text-[var(--muted)] uppercase tracking-widest">{game.gameFrom}</p>
-                      </div>
-                      <FiChevronRight size={16} className="text-[var(--muted)]/30" />
-                    </div>
-                  </Link>
-                ))
-              ) : searchTerm ? (
-                <div className="py-10 text-center text-[var(--muted)]/40 text-[10px] font-black uppercase tracking-widest">No matching games found</div>
-              ) : (
-                <div className="py-6 text-center text-[var(--muted)]/30 text-[9px] font-black uppercase tracking-widest italic italic">Type to search global games</div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.header>
   );
 }

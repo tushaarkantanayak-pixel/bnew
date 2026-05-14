@@ -23,8 +23,17 @@ const FOOTER_LINKS = [
       { label: "Home", href: "/" },
       { label: "Store", href: "/games" },
       { label: "Services", href: "/services" },
-      { label: "Scanner", href: "/region" },
+
       { label: "Blog", href: "/blog" },
+    ],
+  },
+  {
+    title: "Account",
+    links: [
+      { label: "My Dashboard", href: "/dashboard" },
+      { label: "Topup-Auto", href: "/dashboard/digital-gametopup" },
+      { label: "Earning", href: "/dashboard/earning" },
+      { label: "API Hub", href: "/dashboard/digital-gametopup/api-keys" },
     ],
   },
   {
@@ -33,7 +42,7 @@ const FOOTER_LINKS = [
       { label: "About", href: "/about" },
       { label: "Privacy", href: "/privacy-policy" },
       { label: "Terms", href: "/terms-and-conditions" },
-      { label: "Support", href: "/contact" },
+      { label: "Support", href: "/dashboard/support" },
       { label: "Refunds", href: "/refund-policy" },
     ],
   },
@@ -58,7 +67,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
 
           {/* BRAND BLOCK - REFINED SPACE */}
-          <div className="md:col-span-4 space-y-6">
+          <div className="md:col-span-3 space-y-6">
             <Link href="/" className="group block">
               <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase leading-none bg-gradient-to-r from-[var(--accent)] via-[var(--foreground)] to-[var(--accent)] bg-clip-text text-transparent group-hover:brightness-110 transition-all">
                 {BRAND}
@@ -99,7 +108,7 @@ export default function Footer() {
           </div>
 
           {/* LINKS GRID - SYMMETRICAL */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-4">
+          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
             {FOOTER_LINKS.map((section) => (
               <div key={section.title} className="space-y-4">
                 <div className="flex items-center gap-2">

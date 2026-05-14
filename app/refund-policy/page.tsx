@@ -16,23 +16,23 @@ export default function RefundPolicy() {
   const policies = [
     {
       icon: <FiCpu />,
-      title: "Digital Delivery Standard",
-      description: "All top-ups are digital assets delivered instantly to your account. Once the credits are successfully added, the transaction is considered final and generally non-refundable."
+      title: "Digital Items",
+      description: "Most items are sent instantly. Once you get your diamonds or credits, the sale is final. We cannot take them back or give a refund."
     },
     {
       icon: <FiAlertTriangle />,
-      title: "Eligible Refund Scenarios",
-      description: "Refunds are strictly limited to technical failures where payment was deducted from your bank but no in-game credit was received after 24 hours."
+      title: "When we refund",
+      description: "We only give refunds if your money was taken but you did not get your items after 24 hours. This is for technical errors only."
     },
     {
       icon: <FiShield />,
-      title: "User Responsibility",
-      description: "Mistakes made by the user, such as entering an incorrect Player ID, Game Zone, or Region, are not eligible for refunds. Please double-check details before purchasing."
+      title: "Your Mistakes",
+      description: "If you give us the wrong Player ID or Game Zone, we cannot give a refund. Please double-check your details before you buy!"
     },
     {
       icon: <FiRefreshCw />,
-      title: "Processing Timeline",
-      description: "Approved refunds are processed within 5–7 business days and will be reversed to the original payment method used during the transaction."
+      title: "How long it takes",
+      description: "If we approve your refund, it will take 5 to 7 days to reach your bank or wallet account."
     }
   ];
 

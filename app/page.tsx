@@ -1,6 +1,3 @@
-// app/page.tsx
-import HomeSection from "@/components/Home/Home";
-import WhatsAppQRPopup from "@/components/WhatsAppQRPopup";
 
 export const metadata = {
   title: "BlueBuff | India's #1 Premium Gaming Top-Up Store – Instant & Safe",
@@ -204,12 +201,14 @@ export const metadata = {
   ],
 };
 
+import LandingPage from "@/components/Landing/LandingPage";
+import WhatsAppQRPopup from "@/components/WhatsAppQRPopup";
+
 export default function Page() {
   return (
-    <main>
+    <>
       <WhatsAppQRPopup />
-
-      <HomeSection />
-    </main>
+      <LandingPage />
+    </>
   );
 }

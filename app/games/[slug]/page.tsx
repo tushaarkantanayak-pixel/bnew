@@ -5,6 +5,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 import Loader from "@/components/Loader/Loader";
+import GameSkeleton from "@/components/Skeleton/GameSkeleton";
 import MLBBPurchaseGuide from "@/components/HelpImage/MLBBPurchaseGuide";
 
 import GameSwitcher from "@/components/GameDetail/GameSwitcher";
@@ -107,7 +108,7 @@ function GameDetailContent() {
   }, [game, isWeeklyPass]);
 
   if (loading) {
-    return <Loader />;
+    return <GameSkeleton />;
   }
 
   if (error || !game || !activeItem) {
@@ -302,7 +303,7 @@ function GameDetailContent() {
 
 export default function GameDetailPage() {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<GameSkeleton />}>
       <GameDetailContent />
     </Suspense>
   );

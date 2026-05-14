@@ -119,64 +119,79 @@ export default function GameSwitcher() {
                 className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide snap-x no-scrollbar"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-                {games.map((game, idx) => {
-                    const isVariant = game._variant === "weekly-pass";
-                    const isActive = (isVariant && isWeeklyPassQuery && game.gameSlug === currentSlug) ||
-                        (!isVariant && !isWeeklyPassQuery && game.gameSlug === currentSlug);
-
-                    return (
-                        <div
-                            key={`${game.gameSlug}-${idx}-${isVariant ? 'wp' : 'reg'}`}
-                            className="flex-shrink-0 flex flex-col items-center gap-1.5 snap-center transition-all duration-500"
-                        >
-                            <motion.button
-                                onClick={() => handleSwitch(game)}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: idx * 0.05 }}
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                className={`
-                                    relative w-14 h-14 md:w-16 md:h-16 rounded-[1.25rem] transition-all duration-500 group
-                                    ${isActive
-                                        ? "ring-2 ring-[var(--accent)] shadow-[0_8px_20px_-5px_rgba(var(--accent-rgb),0.4)]"
-                                        : "opacity-50 hover:opacity-100 grayscale hover:grayscale-0"
-                                    }
-                                `}
-                            >
-                                {/* Reflection Shimmer */}
-                                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.25rem] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-full skew-x-[-20deg]" />
-                                </div>
-
-                                <div className="relative w-full h-full rounded-[1.25rem] overflow-hidden bg-[var(--card)] ring-1 ring-white/10 group-hover:ring-white/20">
-                                    <Image
-                                        src={game.gameImageId?.image || "/placeholder.jpg"}
-                                        alt={game.gameName}
-                                        fill
-                                        unoptimized
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isActive ? 'opacity-100' : ''}`} />
-                                </div>
-
-                                {/* Active Glow Backdrop */}
-                                {isActive && (
-                                    <div className="absolute inset-0 -z-10 bg-[var(--accent)] blur-xl opacity-20 scale-125 rounded-[1.25rem]" />
-                                )}
-                            </motion.button>
-
-                            {/* Game Name Label - Always Visible */}
-                            <p className={`
-                                text-[7px] md:text-[8px] font-black uppercase tracking-wider text-center transition-colors duration-300
-                                ${isActive ? 'text-[var(--accent)]' : 'text-[var(--muted)] opacity-60 group-hover:opacity-100'}
-                            `}>
-                                {game.gameName}
-                            </p>
-                        </div>
-                    );
-                })}
+                {games.map((game, idx) => (
+                    <SwitcherItem 
+                        key={`${game.gameSlug}-${idx}`}
+                        game={game}
+                        idx={idx}
+                        isActive={(game._variant === "weekly-pass" && isWeeklyPassQuery && game.gameSlug === currentSlug) ||
+                                  (game._variant !== "weekly-pass" && !isWeeklyPassQuery && game.gameSlug === currentSlug)}
+                        handleSwitch={handleSwitch}
+                    />
+                ))}
             </div>
+        </div>
+    );
+}
+
+function SwitcherItem({ game, idx, isActive, handleSwitch }) {
+    const [imgError, setImgError] = useState(false);
+
+    return (
+        <div
+            className="flex-shrink-0 flex flex-col items-center gap-1.5 snap-center transition-all duration-500"
+        >
+            <motion.button
+                onClick={() => handleSwitch(game)}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className={`
+                    relative w-14 h-14 md:w-16 md:h-16 rounded-[1.25rem] transition-all duration-500 group
+                    ${isActive
+                        ? "ring-2 ring-[var(--accent)] shadow-[0_8px_20px_-5px_rgba(var(--accent-rgb),0.4)]"
+                        : "opacity-50 hover:opacity-100 grayscale hover:grayscale-0"
+                    }
+                `}
+            >
+                {/* Reflection Shimmer */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.25rem] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-full skew-x-[-20deg]" />
+                </div>
+
+                <div className="relative w-full h-full rounded-[1.25rem] overflow-hidden bg-[var(--card)] ring-1 ring-white/10 group-hover:ring-white/20 flex items-center justify-center">
+                    {(!game.gameImageId?.image || imgError) ? (
+                        <div className="w-full h-full flex items-center justify-center bg-[var(--accent)]/10 text-[var(--accent)] font-black text-lg italic uppercase">
+                            {game.gameName?.charAt(0)}
+                        </div>
+                    ) : (
+                        <Image
+                            src={game.gameImageId?.image || "/placeholder.jpg"}
+                            alt={game.gameName}
+                            fill
+                            unoptimized
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            onError={() => setImgError(true)}
+                        />
+                    )}
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isActive ? 'opacity-100' : ''}`} />
+                </div>
+
+                {/* Active Glow Backdrop */}
+                {isActive && (
+                    <div className="absolute inset-0 -z-10 bg-[var(--accent)] blur-xl opacity-20 scale-125 rounded-[1.25rem]" />
+                )}
+            </motion.button>
+
+            {/* Game Name Label - Always Visible */}
+            <p className={`
+                text-[7px] md:text-[8px] font-black uppercase tracking-wider text-center transition-colors duration-300
+                ${isActive ? 'text-[var(--accent)]' : 'text-[var(--muted)] opacity-60 group-hover:opacity-100'}
+            `}>
+                {game.gameName}
+            </p>
         </div>
     );
 }

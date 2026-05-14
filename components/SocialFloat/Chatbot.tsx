@@ -140,82 +140,94 @@ export default function ChatBot() {
 
     if (msg === "prices") {
       ctx.topic = "pricing";
-      return `I can certainly help with that! 💰 MLBB Diamonds start from ${formatPrice(99)}. Which game package are you looking for?`;
+      return `Our prices are very low! Game items start at only ${formatPrice(99)}. What game are you looking for?`;
     }
 
     if (msg === "track") {
       ctx.topic = "tracking";
-      return "To track your order, please provide your Order ID. 📦 Most orders are delivered within 5-15 minutes.";
+      return "Please send your Order ID to track your order. Most orders arrive in 5 to 15 minutes. 📦";
     }
 
     if (msg === "support") {
       ctx.topic = "support";
-      return `Our support team is available 24/7. \n📞 WhatsApp: ${SUPPORT_PHONE}\n📧 Email: ${SUPPORT_EMAIL}`;
+      return `We are here to help you 24/7! \n📞 WhatsApp: ${SUPPORT_PHONE}\n📧 Email: ${SUPPORT_EMAIL}`;
     }
 
     if (msg === "delivery") {
-      return "Delivery is near-instant! ⚡ Once your payment is confirmed, diamonds are typically credited within 2 to 10 minutes.";
+      return "Our delivery is very fast! ⚡ You will get your items in 2 to 10 minutes after you pay.";
     }
 
     if (msg === "wallet") {
-      return `For wallet top-ups: Please contact support if you are facing a hard time or want to pay via methods other than INR. \n📞 WhatsApp: ${SUPPORT_PHONE}`;
+      return `Need help with your wallet? Just message us on WhatsApp and we will help you add money. \n📞 WhatsApp: ${SUPPORT_PHONE}`;
     }
 
     if (msg === "referral") {
-      return "To learn more about our rewards program, please check the 'Refer and Earn' section in your dashboard. 🎁";
+      return "You can earn rewards by inviting friends! Check the 'Refer and Earn' section in your dashboard. 🎁";
+    }
+
+    if (msg === "services") {
+      return "We build websites, connect APIs, and manage social media for your business. Visit /services to see more! 🛠️";
+    }
+
+    if (msg === "products") {
+      return "We have great tools like 'Topup Web' and 'Payment Gateway' for your store. Check them out at /ourproducts! 🚀";
     }
 
     const nameMatch = msg.match(/my name is (\w+)/);
     if (nameMatch) {
       ctx.userName = nameMatch[1];
       ctx.unknownCount = 0;
-      return `Got it, ${ctx.userName}! 🎯 How can I help you?`;
+      return `Nice to meet you, ${ctx.userName}! 😊 How can I help you today?`;
     }
 
     if (/^(hi|hello|hey)/.test(msg)) {
       ctx.unknownCount = 0;
       return random([
-        "Hey! 👋 Looking for a top-up?",
-        "Hi there! 😊 How can I help you today?",
-        "Hello! What can I do for you?",
+        "Hi! 👋 Need help with a top-up or a website?",
+        "Hello! 😊 How can I help you today?",
+        "Hey! What can I do for you?",
       ]);
     }
 
     if (msg.includes("price") || msg.includes("cost") || msg.includes("diamond")) {
       ctx.topic = "pricing";
       ctx.unknownCount = 0;
-      return "We offer the most competitive prices! 💎 Standard MLBB pack (284 Diamonds) is currently our best seller. Want to see all prices?";
+      return "We have the best prices! 💎 Our MLBB packs are very popular right now. Do you want to see all our prices?";
     }
 
     if (msg.includes("mlbb"))
-      return "MLBB Top-ups are processed instantly. ⚡ Just select your package and provide your Zone ID.";
+      return "We send MLBB items instantly. ⚡ Just pick your pack and give us your Zone ID.";
 
     if (msg.includes("support") || msg.includes("issue") || msg.includes("help")) {
       ctx.topic = "support";
       ctx.unknownCount = 0;
-      return "Got it. 🔧 If you have an issue, please contact us on WhatsApp and we'll sort it out quickly.";
+      return "Don't worry, we can help! 🔧 Just message us on WhatsApp and we will fix it for you.";
     }
 
     if (msg.includes("wallet") || msg.includes("add money") || msg.includes("topup")) {
-      return `For wallet top-ups: Please contact support if you are facing a hard time or want to pay via methods other than INR. \n📞 WhatsApp: ${SUPPORT_PHONE}`;
+      return `Need to add money? Just message us on WhatsApp and we'll help you quickly. \n📞 WhatsApp: ${SUPPORT_PHONE}`;
     }
 
-    if (msg.includes("refer") || msg.includes("earn") || msg.includes("invite")) {
-      return "To learn more about our rewards program, please check the 'Refer and Earn' section in your dashboard. 🎁";
+    if (msg.includes("service")) {
+      return "We offer many services like website making and marketing. Check them out at /services! 🛠️";
+    }
+
+    if (msg.includes("product")) {
+      return "Check out our 'Topup Web' and 'Payment Gateway' products at /ourproducts! 🚀";
     }
 
     ctx.unknownCount++;
     if (ctx.unknownCount >= 2) {
       return (
-        "I'm not sure about that one. 😅\n\n" +
-        `Contact us directly:\n📞 ${SUPPORT_PHONE}\n📧 ${SUPPORT_EMAIL}`
+        "I'm not sure how to help with that. 😅\n\n" +
+        `You can talk to us directly here:\n📞 ${SUPPORT_PHONE}\n📧 ${SUPPORT_EMAIL}`
       );
     }
 
-      return random([
-        "Can you give more details? 🤔",
-        "Could you explain a bit more? 🤖",
-      ]);
+    return random([
+      "Can you tell me more? 🤔",
+      "I didn't quite get that. Could you explain? 🤖",
+    ]);
   };
 
   /* ================= SEND MESSAGE ================= */

@@ -7,7 +7,12 @@ import logo from "@/public/logo.png";
 import { FiArrowRight, FiZap, FiShield } from "react-icons/fi";
 
 export default function GameCardList({ game, isOutOfStock, index = 0 }) {
+  const [imgError, setImgError] = useState(false);
   const disabled = isOutOfStock(game.gameName);
+
+  const getFallbackLetter = (name) => {
+    return name ? name.charAt(0).toUpperCase() : "?";
+  };
 
   return (
     <div>
@@ -22,19 +27,28 @@ export default function GameCardList({ game, isOutOfStock, index = 0 }) {
         {/* AVATAR SYSTEM */}
         <div className="relative flex-shrink-0">
           <div className={`
-            relative w-18 h-18 sm:w-20 sm:h-20 rounded-[1.4rem] overflow-hidden border z-10
+            relative w-18 h-18 sm:w-20 sm:h-20 rounded-[1.4rem] overflow-hidden border z-10 bg-[var(--background)]
             ${disabled
               ? "border-white/10"
               : "border-white/10 group-hover:border-[var(--accent)]/30"
             }
           `}>
-            <Image
-              src={game.gameImageId?.image || logo}
-              alt={game.gameName}
-              fill
-              sizes="120px"
-              className="object-cover"
-            />
+            {!imgError && game.gameImageId?.image ? (
+              <Image
+                src={game.gameImageId.image}
+                alt={game.gameName}
+                fill
+                sizes="120px"
+                className="object-cover"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--accent)]/20 to-transparent">
+                <span className="text-2xl font-black italic tracking-tighter text-[var(--accent)] opacity-40">
+                  {getFallbackLetter(game.gameName)}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -50,19 +64,7 @@ export default function GameCardList({ game, isOutOfStock, index = 0 }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            {!disabled && game.tagId && !game.gameSlug?.toLowerCase().includes('bgmi') && (
-              <span
-                className="text-[8px] font-black uppercase tracking-[0.1em] px-2 py-0.5 rounded-md backdrop-blur-xl border border-white/10 flex items-center gap-1.5 shadow-sm"
-                style={{
-                  background: `linear-gradient(135deg, ${game.tagId.tagBackground}dd, ${game.tagId.tagBackground}99)`,
-                  color: "#ffffff",
-                  borderColor: `${game.tagId.tagBackground}66`,
-                }}
-              >
-                {game.tagId.tagName === "Manual" && <FiZap size={10} fill="#ffffff" />}
-                {game.tagId.tagName}
-              </span>
-            )}
+            {/* TAGS REMOVED */}
             {disabled && (
               <span className="px-3 py-1.5 rounded-xl bg-red-400/10 border border-red-400/20 text-red-500/60 text-[8px] font-black uppercase tracking-widest italic">
                 Out of Stock

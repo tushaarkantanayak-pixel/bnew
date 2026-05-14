@@ -29,17 +29,16 @@ import Maintaince from "@/components/Seasonal/Maintaince";
 import MaintenanceWrapper from "@/components/Layout/MaintenanceWrapper";
 import { FEATURE_FLAGS } from "@/lib/featureFlags";
 import { getAppSettings } from "@/lib/settings";
-import BottomNav from "@/components/Layout/BottomNav";
 
 
 
 export const metadata: Metadata = {
   title: {
-    default: "BlueBuff | Premium Gaming Top-Up & Insights – India's Most Trusted Store",
-    template: "%s | BlueBuff Gaming",
+    default: "BlueBuff | Game Topups, Automated Websites & API Solutions",
+    template: "%s | BlueBuff Tactical Gaming",
   },
   description:
-    "Instant, safe, and cheapest top-ups for MLBB, Honor of Kings, and more. Experience elite 2-minute delivery, secure UPI payments, and expert gaming insights on India's premier top-up platform.",
+    "The best place for automatic game top-ups, custom gaming websites, and safe payment gateways. Build your gaming business with our fast API integration and tactical tools.",
   keywords: [
     "mlbb recharge india cheap",
     "mlbb top up india instant",
@@ -235,6 +234,17 @@ export const metadata: Metadata = {
     "mlbb recharge no delay india",
     "mlbb diamonds instant india cheap",
     "mlbb top up legit website india",
+    "automated game topup website",
+    "build gaming website india",
+    "game topup api integration",
+    "custom game store development",
+    "safe payment gateway for gaming",
+    "gaming digital marketing india",
+    "gaming brand graphic design",
+    "social media management for gamers",
+    "topup web product",
+    "automated gaming infrastructure",
+    "start gaming business india"
   ],
   metadataBase: new URL("https://bluebuff.in"),
   openGraph: {
@@ -369,7 +379,6 @@ export default async function RootLayout({
           <Footer />
           <SocialFloat />
           <ChatbotWrapper />
-          <BottomNav />
 
 
           <div />

@@ -8,7 +8,7 @@ import {
     FiEdit2, FiSave, FiX, FiBarChart, FiMapPin
 } from "react-icons/fi";
 import Link from "next/link";
-import { useUser } from "../layout";
+import { useUser } from "../../layout";
 import { formatPrice } from "@/utils/currency";
 
 
