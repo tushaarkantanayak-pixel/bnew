@@ -73,7 +73,6 @@ export default function LandingPage() {
   return (
     <div className="bg-[var(--background)] text-[var(--foreground)] min-h-screen font-sans selection:bg-[var(--accent)]/30 overflow-x-hidden">
 
-      {/* --- DYNAMIC BACKGROUND ELEMENTS --- */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[var(--accent)]/5 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/5 rounded-full blur-[120px]" />
@@ -149,9 +148,9 @@ export default function LandingPage() {
             <button className="relative group w-full sm:w-auto px-10 py-3.5 rounded-2xl bg-gradient-to-r from-[var(--accent)] via-emerald-500 to-[var(--accent)] bg-[length:200%_auto] text-white font-[1000] uppercase tracking-[0.3em] text-[12px] italic transition-all duration-700 hover:bg-right hover:shadow-[0_0_40px_rgba(var(--accent-rgb),0.4)] hover:-translate-y-1 active:scale-95 overflow-hidden shadow-xl">
               {/* Internal Shimmer */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
-              
+
               <span className="relative z-10 flex items-center justify-center gap-3">
-                Request Service 
+                Request Service
                 <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-[var(--accent)] group-hover:translate-x-1.5 transition-all duration-500">
                   <FiArrowRight size={13} />
                 </div>
