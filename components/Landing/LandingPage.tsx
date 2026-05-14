@@ -51,16 +51,16 @@ export default function LandingPage() {
   const pricingData = {
     gaming: [
       { name: "Starter", subtitle: "Manual Store", price: "999", features: ["Manual Delivery", "Name Check", "Easy Admin", "WhatsApp Help"] },
-      { name: "Growth", subtitle: "Auto Wallet", price: "4,999", features: ["Wallet System", "User Dashboard", "Orders Panel", "24/7 Support"], popular: true },
-      { name: "Pro", subtitle: "Full Auto Hub", price: "9,999", features: ["Auto Delivery", "Bulk API", "Elite Analytics", "Priority SLA"] }
+      { name: "Growth", subtitle: "Auto Wallet", price: "4,999", features: ["Everything in Starter", "Wallet System", "Advanced Admin", "Analytics", "24/7 Support"], popular: true },
+      { name: "Pro", subtitle: "Full Auto Hub", price: "9,999", features: ["Everything in Growth", "Auto Delivery", "Perfect SEO", "Priority Support", "Custom Design"] }
     ],
     billing: [
-      { name: "Nano API", subtitle: "Basic Access", price: "49", features: ["API Keys", "Single Node", "Basic Logs", "Email Help"] },
+      { name: "NANO", subtitle: "49rs /month", price: "49", features: ["API Key", "All Log", "Merchant Add", "Customer Support"] },
       { name: "Whitelabel", subtitle: "Your Brand", price: "Custom", features: ["Custom Brand", "Full Control", "Unlimited Nodes", "Direct Support"] }
     ],
     business: [
-      { name: "Landing", subtitle: "Single Page", price: "999", features: ["Modern Design", "Contact Form", "Mobile Ready", "Easy Setup"] },
-      { name: "Blog", subtitle: "Content Hub", price: "1,499", features: ["Admin Panel", "SEO Ready", "Fast Loading", "Easy Writing"], popular: true },
+      { name: "Landing", subtitle: "Single Page", price: "999", features: ["Responsive Design", "Landing Pages", "No Backend / No DB", "Easy Setup"] },
+      { name: "Blog", subtitle: "Content Hub", price: "2,999", features: ["Admin Panel", "SEO Ready", "Fast Loading", "Easy Writing"], popular: true },
       { name: "Custom Web", subtitle: "Any Project", price: "Contact", features: ["Specific Tools", "Complex Logic", "Full Hosting", "Long Support"] }
     ],
     esports: [
@@ -108,15 +108,30 @@ export default function LandingPage() {
             EMPIRE <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] via-purple-400 to-blue-400">TODAY</span>
           </motion.h1>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="max-w-xl mx-auto text-[var(--muted)] text-sm md:text-base font-bold uppercase tracking-widest opacity-60 leading-relaxed mb-12 italic"
+            className="flex flex-wrap justify-center gap-2 max-w-lg mx-auto mb-12"
           >
-            Automated Top-ups • Tournament Brackets • Safe Payments.
-            The only tools you need to run a professional gaming business.
-          </motion.p>
+            {[
+              "Game Top-up API",
+              "Custom Websites",
+              "Safe Hosting",
+              "Payment Gateway",
+              "Logo & Design",
+              "Esports Tools",
+              "Marketing & SEO",
+              "24/7 Support",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 text-[var(--muted)] text-[8px] font-black uppercase tracking-widest opacity-70"
+              >
+                {tag}
+              </span>
+            ))}
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -145,94 +160,82 @@ export default function LandingPage() {
               ))}
             </div>
 
-            <button className="relative group w-full sm:w-auto px-10 py-3.5 rounded-2xl bg-gradient-to-r from-[var(--accent)] via-emerald-500 to-[var(--accent)] bg-[length:200%_auto] text-white font-[1000] uppercase tracking-[0.3em] text-[12px] italic transition-all duration-700 hover:bg-right hover:shadow-[0_0_40px_rgba(var(--accent-rgb),0.4)] hover:-translate-y-1 active:scale-95 overflow-hidden shadow-xl">
-              {/* Internal Shimmer */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
+            <Link href="/contact" className="relative group w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-br from-indigo-700 via-blue-800 to-indigo-900 text-white font-[1000] uppercase tracking-[0.3em] text-[12px] italic transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(30,58,138,0.5)] hover:-translate-y-1 active:scale-95 overflow-hidden shadow-2xl">
+              {/* Premium Shimmer Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
 
-              <span className="relative z-10 flex items-center justify-center gap-3">
+              <span className="relative z-10 flex items-center justify-center gap-3 drop-shadow-md">
                 Request Service
-                <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-[var(--accent)] group-hover:translate-x-1.5 transition-all duration-500">
+                <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-indigo-900 group-hover:translate-x-1.5 transition-all duration-500 border border-white/10">
                   <FiArrowRight size={13} />
                 </div>
               </span>
-            </button>
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* --- TRUSTED BY SECTION --- */}
-      <section className="py-20 border-b border-[var(--border)] bg-[var(--card)]/5 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-24 border-b border-[var(--border)] bg-[var(--card)]/5 relative overflow-hidden">
+        {/* Ambient background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full mx-auto mb-6" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[8px] font-black uppercase tracking-[0.4em] mb-6">
+              <FiUsers size={10} />
+              Community Trusted
+            </div>
             <h2 className="text-3xl md:text-6xl font-[1000] italic tracking-tighter uppercase mb-4 leading-none">
               TEAMS THAT <span className="text-[var(--accent)]">DEPEND ON US</span>
             </h2>
             <p className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.5em] opacity-40 italic">From solo developers to growing gaming platforms</p>
           </div>
+        </div>
 
-          <div className="flex flex-col items-center gap-3 md:gap-4">
-            {/* Row 1 — 3 items */}
-            <div className="flex justify-center gap-3 md:gap-4 w-full">
-              {["MLBB Topup", "Meowji Official", "Scammers Official"].map((team, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="flex-1 max-w-[220px] px-4 py-5 rounded-2xl bg-[var(--card)]/40 border border-white/5 backdrop-blur-sm text-[var(--muted)] font-[1000] uppercase tracking-wider text-[10px] md:text-[11px] italic hover:border-[var(--accent)]/30 hover:text-[var(--accent)] transition-all cursor-default text-center flex items-center justify-center"
-                >
-                  {team}
-                </motion.div>
-              ))}
-            </div>
-            {/* Row 2 — 2 items */}
-            <div className="flex justify-center gap-3 md:gap-4">
-              {["Yuji MLBB", "Topup Memo"].map((team, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: (i + 3) * 0.05 }}
-                  className="w-[220px] px-4 py-5 rounded-2xl bg-[var(--card)]/40 border border-white/5 backdrop-blur-sm text-[var(--muted)] font-[1000] uppercase tracking-wider text-[10px] md:text-[11px] italic hover:border-[var(--accent)]/30 hover:text-[var(--accent)] transition-all cursor-default text-center flex items-center justify-center"
-                >
-                  {team}
-                </motion.div>
-              ))}
-            </div>
-            {/* Row 3 — 3 items */}
-            <div className="flex justify-center gap-3 md:gap-4 w-full">
-              {["Vampenttic Games", "Tronics Official", "BlueBuff"].map((team, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: (i + 5) * 0.05 }}
-                  className="flex-1 max-w-[220px] px-4 py-5 rounded-2xl bg-[var(--card)]/40 border border-white/5 backdrop-blur-sm text-[var(--muted)] font-[1000] uppercase tracking-wider text-[10px] md:text-[11px] italic hover:border-[var(--accent)]/30 hover:text-[var(--accent)] transition-all cursor-default text-center flex items-center justify-center"
-                >
-                  {team}
-                </motion.div>
-              ))}
-            </div>
-            {/* Row 4 — 1 item */}
-            <div className="flex justify-center">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-3 gap-3 md:gap-6">
+            {[
+              "MLBB Topup",
+              "Meowji Official",
+              "Scammers Official",
+              "Yuji MLBB",
+              "Topup Memo",
+              "Vampenttic Games",
+              "Tronics Official",
+              "BlueBuff",
+              "Happy Official Store"
+            ].map((team, i) => (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="w-[220px] px-4 py-5 rounded-2xl bg-[var(--card)]/40 border border-white/5 backdrop-blur-sm text-[var(--muted)] font-[1000] uppercase tracking-wider text-[10px] md:text-[11px] italic hover:border-[var(--accent)]/30 hover:text-[var(--accent)] transition-all cursor-default text-center flex items-center justify-center"
+                transition={{ delay: i * 0.05 }}
+                className="group relative p-6 md:p-8 rounded-[2rem] bg-[var(--card)]/40 border border-white/5 backdrop-blur-xl hover:border-[var(--accent)]/30 hover:bg-[var(--card)]/60 transition-all duration-500 flex flex-col items-center justify-center text-center gap-4"
               >
-                Happy Store
+                {/* stylized icon fallback - first letter */}
+                <div className="w-12 h-12 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] font-black text-xl border border-[var(--accent)]/20 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_-5px_rgba(var(--accent-rgb),0.3)]">
+                  {team.charAt(0)}
+                </div>
+                
+                <div className="space-y-1">
+                  <h3 className="text-[10px] md:text-[11px] font-[1000] uppercase italic tracking-widest text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors">
+                    {team}
+                  </h3>
+                  <div className="flex justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {[1, 2, 3, 4, 5].map(s => (
+                      <div key={s} className="w-1 h-1 rounded-full bg-[var(--accent)]" />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Corner accent */}
+                <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-[var(--accent)] opacity-20 group-hover:opacity-100 transition-opacity" />
               </motion.div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
-
       {/* --- SOLUTIONS SECTION --- */}
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
@@ -266,12 +269,18 @@ export default function LandingPage() {
                 </div>
 
                 <div className="relative z-10">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] mb-6 md:mb-8 border border-[var(--accent)]/20 shadow-[0_0_20px_-5px_rgba(var(--accent-rgb),0.3)]">
-                    <item.icon className="w-5 h-5 md:w-6 md:h-6" />
+                  <div className="flex items-center gap-4 md:gap-6 mb-6 md:mb-8">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/20 shadow-[0_10px_30px_-10px_rgba(var(--accent-rgb),0.3)] shrink-0 group-hover:scale-110 transition-transform duration-500">
+                      <item.icon className="w-5 h-5 md:w-7 md:h-7" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="inline-block px-2 py-0.5 rounded-full bg-[var(--accent)]/5 text-[7px] md:text-[8px] font-black uppercase tracking-widest text-[var(--accent)] mb-1.5 border border-[var(--accent)]/10">{item.tag}</div>
+                      <h4 className="text-xl md:text-2xl font-[1000] uppercase italic tracking-tighter group-hover:text-[var(--accent)] transition-colors leading-none truncate">
+                        {item.title}
+                      </h4>
+                    </div>
                   </div>
-                  <div className="inline-block px-3 py-1 rounded-full bg-white/5 text-[8px] font-black uppercase tracking-widest text-[var(--muted)] mb-3 md:mb-4 border border-white/5">{item.tag}</div>
-                  <h4 className="text-xl md:text-2xl font-[900] uppercase italic tracking-tighter mb-3 md:mb-4 group-hover:text-[var(--accent)] transition-colors">{item.title}</h4>
-                  <p className="text-[12px] text-[var(--muted)] leading-relaxed font-bold uppercase tracking-tight opacity-50">{item.desc}</p>
+                  <p className="text-[11px] md:text-[13px] text-[var(--muted)] leading-relaxed font-bold uppercase tracking-tight opacity-40 italic">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -381,7 +390,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-2 md:gap-3 mb-10 md:mb-16">
             {[
               { id: "gaming", label: "Gaming Stores", icon: FiLayers },
-              { id: "billing", label: "Billing Systems", icon: FiZap },
+              { id: "billing", label: "Payment Gateway", icon: FiZap },
               { id: "business", label: "Business Sites", icon: FiGrid },
               { id: "esports", label: "Esports", icon: FiAward }
             ].map((tab) => (
@@ -428,8 +437,8 @@ export default function LandingPage() {
 
                 <div className="w-full space-y-3 md:space-y-5 mb-8 md:mb-12 text-left">
                   {plan.features.map((f: string, j: number) => (
-                    <div key={j} className="flex items-center gap-3 text-[9px] md:text-[10px] font-black text-[var(--muted)] uppercase tracking-tight opacity-50 italic">
-                      <FiCheck className="text-[var(--accent)] flex-shrink-0" size={14} />
+                    <div key={j} className={`flex items-center gap-3 text-[9px] md:text-[10px] font-black uppercase tracking-tight italic transition-all duration-300 ${j === 0 ? 'text-[var(--foreground)] opacity-100' : 'text-[var(--muted)] opacity-50'}`}>
+                      <FiCheck className={`${j === 0 ? 'text-[var(--accent)] drop-shadow-[0_0_8px_rgba(var(--accent-rgb),0.8)]' : 'text-[var(--accent)]/60'} flex-shrink-0`} size={14} />
                       <span className="truncate">{f}</span>
                     </div>
                   ))}
@@ -445,31 +454,54 @@ export default function LandingPage() {
       </section>
 
       {/* --- TRANSFORMATION SECTION --- */}
-      <section className="py-24 md:py-40 bg-[var(--background)] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-500/5 blur-[140px] rounded-full pointer-events-none" />
+      <section className="py-16 md:py-24 bg-[var(--background)] relative overflow-hidden">
+        {/* Ambient Glows */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
             <div className="relative group">
-              <div className="absolute inset-0 bg-[var(--accent)]/20 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <img
-                src="/landing/transformation.png"
-                alt="Transformation"
-                className="relative w-full max-w-xl mx-auto rounded-[4rem] shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000"
-              />
+              <div className="relative rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-white/5 shadow-2xl">
+                <img
+                  src="/landing/transformation.png"
+                  alt="Transformation"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                />
+              </div>
+              <div className="absolute -inset-4 border border-[var(--accent)]/10 rounded-[3rem] md:rounded-[4.5rem] pointer-events-none -z-10 group-hover:scale-105 transition-transform duration-500" />
             </div>
 
-            <div className="space-y-10">
-              <div className="w-12 h-1 bg-[var(--accent)] rounded-full mb-6" />
-              <h2 className="text-4xl md:text-8xl font-[1000] uppercase italic tracking-tighter leading-[0.8] mb-6">
-                OUR <span className="text-[var(--accent)]">MISSION</span>
-              </h2>
-              <p className="text-[13px] md:text-lg text-[var(--muted)] leading-relaxed font-bold uppercase tracking-widest opacity-60 italic">
-                BlueBuff helps the next generation of gaming store owners. We build the tools that help you grow your business with speed and safety.
-              </p>
-              <button className="relative group px-12 py-5 rounded-2xl border border-[var(--accent)]/30 text-[var(--accent)] font-[1000] uppercase tracking-[0.3em] text-[11px] italic overflow-hidden transition-all hover:text-white">
-                <div className="absolute inset-0 bg-[var(--accent)] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                <span className="relative z-10">Learn More</span>
+            <div className="space-y-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[9px] font-[1000] uppercase tracking-widest mb-6">
+                  Our Purpose
+                </div>
+                <h2 className="text-4xl md:text-7xl font-[1000] uppercase italic tracking-tighter leading-[0.8] mb-6">
+                  OUR <span className="text-[var(--accent)]">MISSION</span>
+                </h2>
+                <p className="text-[13px] md:text-base text-[var(--muted)] leading-relaxed font-bold uppercase tracking-widest opacity-60 italic max-w-lg">
+                  BlueBuff helps new game shop owners grow fast and safe with professional tools.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  { title: "Safe Systems", icon: FiShield },
+                  { title: "Fast Growth", icon: FiTrendingUp }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 group/item">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-[var(--muted)] group-hover/item:text-[var(--accent)] group-hover/item:border-[var(--accent)]/30 transition-all shrink-0">
+                      <item.icon size={18} />
+                    </div>
+                    <h4 className="text-[11px] font-[1000] uppercase tracking-widest italic group-hover/item:text-[var(--foreground)] transition-colors">{item.title}</h4>
+                  </div>
+                ))}
+              </div>
+
+              <button className="group px-10 py-4 rounded-xl bg-white text-black font-[1000] uppercase tracking-[0.2em] text-[10px] italic transition-all hover:shadow-xl hover:-translate-y-0.5 active:scale-95">
+                <span className="flex items-center gap-3">
+                  Learn More <FiArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </span>
               </button>
             </div>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaInstagram, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { FaInstagram, FaTwitter, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import { FiArrowRight, FiInfo } from "react-icons/fi";
 
 export default function ContactPage() {
@@ -41,10 +41,10 @@ export default function ContactPage() {
                 <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] opacity-60">Direct Email</h2>
               </div>
               <a
-                href="mailto:aamonvss@gmail.com"
+                href="mailto:crew.bluebuffofficial@gmail.com"
                 className="inline-flex items-center gap-2 text-xl md:text-2xl font-[900] italic uppercase tracking-tighter text-[var(--foreground)] hover:text-[var(--accent)] transition-colors break-all"
               >
-                aamonvss@gmail.com
+                crew.bluebuffofficial@gmail.com
                 <FiArrowRight />
               </a>
             </motion.div>
@@ -61,6 +61,7 @@ export default function ContactPage() {
                 {[
                   { icon: FaInstagram, link: "https://www.instagram.com/bluebuff.in", label: "INSTAGRAM" },
                   { icon: FaTwitter, link: "https://x.com/tk_dev_", label: "TWITTER" },
+                  { icon: FaWhatsapp, link: "https://wa.me/919178521537", label: "WHATSAPP" },
                 ].map((social, i) => (
                   <a
                     key={i}
