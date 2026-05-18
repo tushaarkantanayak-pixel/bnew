@@ -34,10 +34,10 @@ export default function BlogPage() {
 
       <section className="pt-12">
         <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The God Tier <span className="text-[var(--accent)]">Lineup</span></h2>
+          <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The God Tier <span className="text-[var(--accent)]">Lineup</span></h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
             { name: "Nolan", role: "Jungle", desc: "The fastest farmer in the game. His rift-jumping allows for unmatched jungle clear and gank potential." },
@@ -46,12 +46,12 @@ export default function BlogPage() {
             { name: "Cici", role: "Exp Lane", desc: "Maximum mobility and %HP damage. She shreds tanks while dancing around the battlefield." }
           ].map((hero, i) => (
             <div key={i} className="group p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)] italic">{hero.role}</span>
-                    <FiStar className="text-[var(--accent)] opacity-40 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <h3 className="text-xl font-black uppercase italic tracking-tighter mb-2">{hero.name}</h3>
-                <p className="text-[11px] leading-relaxed opacity-60 m-0">{hero.desc}</p>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)] italic">{hero.role}</span>
+                <FiStar className="text-[var(--accent)] opacity-40 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <h3 className="text-xl font-black uppercase italic tracking-tighter mb-2">{hero.name}</h3>
+              <p className="text-[11px] leading-relaxed opacity-60 m-0">{hero.desc}</p>
             </div>
           ))}
         </div>
@@ -60,34 +60,34 @@ export default function BlogPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Top <span className="text-[var(--accent)]">Hero Synergies</span></h2>
         <p className="opacity-70 leading-relaxed">
-            Drafting a good hero is great, but pairing them with the right teammates is what wins games in <strong>Mythic Rank</strong>. Here are the most dominant <strong>duo and trio combinations</strong> in the March 2026 meta:
+          Drafting a good hero is great, but pairing them with the right teammates is what wins games in <strong>Mythic Rank</strong>. Here are the most dominant <strong>duo and trio combinations</strong> in the March 2026 meta:
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] italic">
-                <h4 className="text-[var(--accent)] font-black text-sm uppercase mb-2">The 'Infinite CC' Duo</h4>
-                <p className="text-[11px] leading-relaxed opacity-60"><strong>Arlott + Tigreal:</strong> When Tigreal pulls the entire enemy team, Arlott can dash up to 5 times instantly, deleting the backline before they can even flicker away. This is the <strong>best duo for rank climbing</strong>.</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] italic">
-                <h4 className="text-[var(--accent)] font-black text-sm uppercase mb-2">The 'Global Pressure' Trio</h4>
-                <p className="text-[11px] leading-relaxed opacity-60"><strong>Novaria + Nolan + Aldous:</strong> With Novaria and Aldous providing <strong>complete map vision</strong>, Nolan is free to invade with zero risk. This trio forces enemies to play defensively under their towers.</p>
-            </div>
+          <div className="p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] italic">
+            <h4 className="text-[var(--accent)] font-black text-sm uppercase mb-2">The 'Infinite CC' Duo</h4>
+            <p className="text-[11px] leading-relaxed opacity-60"><strong>Arlott + Tigreal:</strong> When Tigreal pulls the entire enemy team, Arlott can dash up to 5 times instantly, deleting the backline before they can even flicker away. This is the <strong>best duo for rank climbing</strong>.</p>
+          </div>
+          <div className="p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] italic">
+            <h4 className="text-[var(--accent)] font-black text-sm uppercase mb-2">The 'Global Pressure' Trio</h4>
+            <p className="text-[11px] leading-relaxed opacity-60"><strong>Novaria + Nolan + Aldous:</strong> With Novaria and Aldous providing <strong>complete map vision</strong>, Nolan is free to invade with zero risk. This trio forces enemies to play defensively under their towers.</p>
+          </div>
         </div>
       </section>
 
       <section className="pt-12 space-y-6">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter"><FiSettings className="inline mr-2 text-[var(--accent)]" /> Laning Phase <span className="text-[var(--accent)]">Deep Dive</span></h2>
         <p className="opacity-70 leading-relaxed">
-            The first 5 minutes define the game. If you lose your lane, you lose your pressure. mastering the <strong>MLBB laning phase</strong> is about more than just last-hitting minions; it's about <strong>wave management</strong> and knowing when to rotate.
+          The first 5 minutes define the game. If you lose your lane, you lose your pressure. mastering the <strong>MLBB laning phase</strong> is about more than just last-hitting minions; it's about <strong>wave management</strong> and knowing when to rotate.
         </p>
         <div className="space-y-4">
-            <div className="p-5 border-l-2 border-[var(--border)] hover:border-[var(--accent)] transition-colors">
-                <h4 className="font-bold text-xs uppercase italic tracking-wider mb-1">1. Frozen Wave Strategy</h4>
-                <p className="text-[11px] opacity-60 leading-relaxed">If you have the <strong>hero advantage</strong> (e.g., Terizla vs. a weak early-game hero), don't push the wave. Stand near the enemy's melee minions and prevent them from getting gold/XP. This forces them to overextend or fall behind by 500+ gold early.</p>
-            </div>
-            <div className="p-5 border-l-2 border-[var(--border)] hover:border-[var(--accent)] transition-colors">
-                <h4 className="font-bold text-xs uppercase italic tracking-wider mb-1">2. Rotation Windows</h4>
-                <p className="text-[11px] opacity-60 leading-relaxed">Clear your wave as fast as possible 30 seconds before the <strong>Turtle spawns</strong>. Always prioritize help over tower plating if you're the Exp Laner. Your presence during the Turtle fight can secure a <strong>Global Gold lead</strong> for your team.</p>
-            </div>
+          <div className="p-5 border-l-2 border-[var(--border)] hover:border-[var(--accent)] transition-colors">
+            <h4 className="font-bold text-xs uppercase italic tracking-wider mb-1">1. Frozen Wave Strategy</h4>
+            <p className="text-[11px] opacity-60 leading-relaxed">If you have the <strong>hero advantage</strong> (e.g., Terizla vs. a weak early-game hero), don't push the wave. Stand near the enemy's melee minions and prevent them from getting gold/XP. This forces them to overextend or fall behind by 500+ gold early.</p>
+          </div>
+          <div className="p-5 border-l-2 border-[var(--border)] hover:border-[var(--accent)] transition-colors">
+            <h4 className="font-bold text-xs uppercase italic tracking-wider mb-1">2. Rotation Windows</h4>
+            <p className="text-[11px] opacity-60 leading-relaxed">Clear your wave as fast as possible 30 seconds before the <strong>Turtle spawns</strong>. Always prioritize help over tower plating if you're the Exp Laner. Your presence during the Turtle fight can secure a <strong>Global Gold lead</strong> for your team.</p>
+          </div>
         </div>
       </section>
 
@@ -99,7 +99,7 @@ export default function BlogPage() {
             <h3 className="italic font-black uppercase text-[var(--accent)] m-0">India Gaming Insight: Safe Diamonds 💎</h3>
           </div>
           <p className="text-sm italic opacity-70 mb-4 font-medium">
-            Climbing to Mythic often requires the right skins and hero unlocks. For <strong>MLBB players in India</strong>, ensuring a <strong>safe and cheap MLBB diamond top-up</strong> is crucial. 
+            Climbing to Mythic often requires the right skins and hero unlocks. For <strong>MLBB players in India</strong>, ensuring a <strong>safe and cheap MLBB diamond top-up</strong> is crucial.
           </p>
           <p className="text-sm italic opacity-70 m-0">
             Always use trusted platforms like <strong>BlueBuff</strong> to get the best value on your diamond bundles instantly with <strong>MLBB recharge India UPI</strong>.
@@ -110,12 +110,12 @@ export default function BlogPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Solo Queue <span className="text-[var(--accent)]">Mental Edge</span></h2>
         <p className="opacity-70 leading-relaxed">
-            The biggest enemy in solo rank isn't the enemy Nolan—it's <strong>tilt</strong>. Maintaining a <strong>pro mindset</strong> is what separates Mythic players from Epic hardstucks. 
+          The biggest enemy in solo rank isn't the enemy Nolan—it's <strong>tilt</strong>. Maintaining a <strong>pro mindset</strong> is what separates Mythic players from Epic hardstucks.
         </p>
         <div className="p-8 rounded-[32px] bg-[var(--card)]/40 border border-[var(--border)] border-dashed">
-            <p className="text-[11px] leading-relaxed opacity-80 italic">
-                <strong>The 2-Loss Rule:</strong> If you lose two ranked games in a row, stop. Play a Brawl, watch a pro replay, or go for a walk. Negative momentum is real, and <strong>frustration leads to risky plays</strong>. Remember, even the <strong>top global players</strong> have losing streaks. Your goal is to be consistent, not perfect.
-            </p>
+          <p className="text-[11px] leading-relaxed opacity-80 italic">
+            <strong>The 2-Loss Rule:</strong> If you lose two ranked games in a row, stop. Play a Brawl, watch a pro replay, or go for a walk. Negative momentum is real, and <strong>frustration leads to risky plays</strong>. Remember, even the <strong>top global players</strong> have losing streaks. Your goal is to be consistent, not perfect.
+          </p>
         </div>
       </section>
 
@@ -150,24 +150,24 @@ export default function BlogPage() {
             Magic Penetration vs. Hybrid Armor. Items like <strong>Divine Glaive</strong> and <strong>Genius Wand</strong> are seeing record pick rates as players realize the power of flat penetration against squishy cores. If you're playing an assassin like <strong>Gusion</strong> or <strong>Nolan</strong>, <strong>Sky Piercer</strong> is mandatory for your early-to-mid transition. The execuction threshold at 20 stacks is basically a "free win" button in teamfights.
           </p>
         </div>
-        
+
         <div className="p-8 rounded-[32px] bg-[var(--accent)]/5 border border-[var(--border)]">
-            <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm mb-4">Final Verdict: Consistency is King</h4>
-            <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
-                The <strong>Mobile Legends Tier List 2026</strong> is always evolving. Whether you're mastering an assassin or holding the line as a tank, consistency is your greatest weapon. Keep practicing your combos, maintain map awareness, and stay positive. The rank of <strong>Mythic Immortal</strong> is not just for the pros—it's for anyone with the discipline to master the current meta. See you in the Land of Dawn!
-            </p>
+          <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm mb-4">Final Verdict: Consistency is King</h4>
+          <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
+            The <strong>Mobile Legends Tier List 2026</strong> is always evolving. Whether you're mastering an assassin or holding the line as a tank, consistency is your greatest weapon. Keep practicing your combos, maintain map awareness, and stay positive. The rank of <strong>Mythic Immortal</strong> is not just for the pros—it's for anyone with the discipline to master the current meta. See you in the Land of Dawn!
+          </p>
         </div>
       </section>
 
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want to dominate the arena? Grab your gear.</p>
         <div className="flex justify-center">
-            <Link 
-                href="/games/mobile-legends988" 
-                className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
-            >
-                Get MLBB Diamonds Now
-            </Link>
+          <Link
+            href="/games/mobile-legends270"
+            className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
+          >
+            Get MLBB Diamonds Now
+          </Link>
         </div>
       </section>
 

@@ -286,7 +286,7 @@ export async function POST(req: Request) {
 
 
         // Check if we should use Smile One for Weekly Pass
-        const isWeeklyPass = finalOrder.gameSlug === "mobile-legends988" && (baseItemSlug.toLowerCase().includes("weekly") || baseItemSlug.includes("pass"));
+        const isWeeklyPass = finalOrder.gameSlug === "mobile-legends270" && (baseItemSlug.toLowerCase().includes("weekly") || baseItemSlug.includes("pass"));
 
         if (useSmileOne && isWeeklyPass) {
           console.log(`[fulfillment] Using SmileOne for Weekly Pass`);

@@ -34,10 +34,10 @@ export default function BlogPage() {
 
       <section className="pt-12 space-y-6">
         <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Recharge <span className="text-[var(--accent)]">Value Comparison</span></h2>
+          <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Recharge <span className="text-[var(--accent)]">Value Comparison</span></h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             { name: "Weekly Pass", value: "400% ROI", icon: FiZap, desc: "The ultimate value play. Substantially higher diamond-per-rupee ratio than any other pack." },
@@ -45,12 +45,12 @@ export default function BlogPage() {
             { name: "Bulk Packs", value: "Best Rate", icon: FiDatabase, desc: "For the professional skin collector. Massive savings on 5000+ diamond bundles." }
           ].map((pack, i) => (
             <div key={i} className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <div className="flex items-center justify-between mb-3">
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-1 rounded">{pack.value}</span>
-                    <pack.icon className="text-[var(--accent)]" />
-                </div>
-                <h3 className="text-lg font-black uppercase italic tracking-tighter mb-2">{pack.name}</h3>
-                <p className="text-[10px] leading-relaxed opacity-60 m-0">{pack.desc}</p>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-1 rounded">{pack.value}</span>
+                <pack.icon className="text-[var(--accent)]" />
+              </div>
+              <h3 className="text-lg font-black uppercase italic tracking-tighter mb-2">{pack.name}</h3>
+              <p className="text-[10px] leading-relaxed opacity-60 m-0">{pack.desc}</p>
             </div>
           ))}
         </div>
@@ -59,10 +59,10 @@ export default function BlogPage() {
       <section className="pt-12 space-y-6 text-sm">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Why Direct Recharge <span className="text-[var(--accent)]">is Restricted?</span></h2>
         <p className="opacity-80 leading-relaxed">
-            Due to ongoing regulatory shifts and local restrictions, <strong>Indian MLBB players</strong> frequently encounter "item not available" errors. This isn't just a technical glitch; it's a result of the complex digital service taxes and regional licensing agreements. In 2026, the <strong>best way to buy MLBB diamonds in India</strong> is through a dedicated gaming partner that uses <strong>direct-to-player API integration</strong>.
+          Due to ongoing regulatory shifts and local restrictions, <strong>Indian MLBB players</strong> frequently encounter "item not available" errors. This isn't just a technical glitch; it's a result of the complex digital service taxes and regional licensing agreements. In 2026, the <strong>best way to buy MLBB diamonds in India</strong> is through a dedicated gaming partner that uses <strong>direct-to-player API integration</strong>.
         </p>
         <p className="opacity-80 leading-relaxed">
-            This method bypasses the standard app store hurdles, allowing for <strong>instant UPI settlement</strong> and immediate diamond delivery to your Game ID. Platforms like <strong>BlueBuff</strong> have pioneered this "Direct-API" approach, ensuring that your transaction is logged directly into the Moonton servers without the need for high-risk login sharing.
+          This method bypasses the standard app store hurdles, allowing for <strong>instant UPI settlement</strong> and immediate diamond delivery to your Game ID. Platforms like <strong>BlueBuff</strong> have pioneered this "Direct-API" approach, ensuring that your transaction is logged directly into the Moonton servers without the need for high-risk login sharing.
         </p>
       </section>
 
@@ -74,7 +74,7 @@ export default function BlogPage() {
             <h3 className="italic font-black uppercase text-[var(--accent)] m-0">Value Hack: The Weekly Pass 💎</h3>
           </div>
           <p className="text-sm italic opacity-70 mb-4 font-medium">
-            In 2026, the <strong>Weekly Diamond Pass</strong> remains the #1 way to save. For a small price, you get 210 diamonds over 7 days, plus exclusive rewards. 
+            In 2026, the <strong>Weekly Diamond Pass</strong> remains the #1 way to save. For a small price, you get 210 diamonds over 7 days, plus exclusive rewards.
           </p>
           <p className="text-sm italic opacity-70 m-0">
             Combine this with the <strong>Monthly Pass</strong> for a complete <strong>diamond-farming strategy</strong> that costs less than a single fast-food meal!
@@ -85,7 +85,7 @@ export default function BlogPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Recharge <span className="text-[var(--accent)]">Safety Checklist</span></h2>
         <p className="opacity-70 leading-relaxed text-sm">
-            Your account security is worth more than a few cheap diamonds. Follow these <strong>golden rules for safe MLBB recharge</strong> to ensure your account never gets banned:
+          Your account security is worth more than a few cheap diamonds. Follow these <strong>golden rules for safe MLBB recharge</strong> to ensure your account never gets banned:
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {[
@@ -116,24 +116,24 @@ export default function BlogPage() {
             Scammers often create fake "discount" pages that look like official recharge portals. If a site asks you to <strong>log in to your Google account</strong> to "verify" your purchase, leave immediately. Authenticated top-up services like <strong>BlueBuff</strong> only require your public Player ID to send diamonds. Your security is our priority.
           </p>
         </div>
-        
+
         <div className="p-8 rounded-[32px] bg-[var(--accent)]/5 border border-[var(--border)]">
-            <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm mb-4">Conclusion: Your Mythic Journey Starts Here</h4>
-            <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
-                Topping up your <strong>MLBB diamonds in India</strong> should be a seamless, stress-free part of your gaming routine. By using a trusted, <strong>low-cost recharge shop</strong>, you can focus on mastering the meta and climbing the ranks. Stay safe, spend wisely, and we'll see you on the leaderboards!
-            </p>
+          <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm mb-4">Conclusion: Your Mythic Journey Starts Here</h4>
+          <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
+            Topping up your <strong>MLBB diamonds in India</strong> should be a seamless, stress-free part of your gaming routine. By using a trusted, <strong>low-cost recharge shop</strong>, you can focus on mastering the meta and climbing the ranks. Stay safe, spend wisely, and we'll see you on the leaderboards!
+          </p>
         </div>
       </section>
 
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Ready to rank up? Get your diamonds instantly.</p>
         <div className="flex justify-center">
-            <Link 
-                href="/games/mobile-legends988" 
-                className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
-            >
-                View MLBB Diamond Prices
-            </Link>
+          <Link
+            href="/games/mobile-legends270"
+            className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
+          >
+            View MLBB Diamond Prices
+          </Link>
         </div>
       </section>
 

@@ -69,7 +69,7 @@ export async function POST(req) {
 
         if (isValid) {
             // ⚡ REGION RESTRICTION CHECK (Only for specific MLBB slugs)
-            const restrictedSlugs = ["mobile-legends988", "mlbb-double332", "weeklymonthly-bundle931"];
+            const restrictedSlugs = ["mobile-legends270", "mlbb-double332", "weeklymonthly-bundle261"];
             if (restrictedSlugs.includes(gameSlug)) {
                 const playerRegion = region.toUpperCase();
                 const restrictedRegions = ["INDO", "ID", "PH", "SG", "RU", "MY", "MM"];

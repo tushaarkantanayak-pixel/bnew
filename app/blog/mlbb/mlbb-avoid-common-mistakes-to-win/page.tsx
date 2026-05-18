@@ -34,10 +34,10 @@ export default function BlogPage() {
 
       <section className="pt-12 space-y-6">
         <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Mistake <span className="text-[var(--accent)]">vs. Pro Fix</span></h2>
+          <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Mistake <span className="text-[var(--accent)]">vs. Pro Fix</span></h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
             { mistake: "Facechecking Bushes", fix: "Use skills/vision items", icon: FiAlertCircle, desc: "Never walk blindly into a late-game bush. Use Novaria's S1 or Selena's traps first." },
@@ -46,13 +46,13 @@ export default function BlogPage() {
             { mistake: "Solo Pushing", fix: "Follow the 4-Man Rule", icon: FiCheck, desc: "Only cross the river line if you have vision of at least 4 enemy heroes on the map." }
           ].map((item, i) => (
             <div key={i} className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <div className="flex items-center justify-between mb-3">
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-red-500 bg-red-500/10 px-2 py-1 rounded">Mistake</span>
-                    <item.icon className="text-[var(--accent)]" />
-                </div>
-                <h3 className="text-lg font-black uppercase italic tracking-tighter mb-1">{item.mistake}</h3>
-                <p className="text-[11px] leading-relaxed font-bold text-[var(--accent)] uppercase italic mb-2 tracking-wide">Fix: {item.fix}</p>
-                <p className="text-[10px] leading-relaxed opacity-60 m-0 italic">{item.desc}</p>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-red-500 bg-red-500/10 px-2 py-1 rounded">Mistake</span>
+                <item.icon className="text-[var(--accent)]" />
+              </div>
+              <h3 className="text-lg font-black uppercase italic tracking-tighter mb-1">{item.mistake}</h3>
+              <p className="text-[11px] leading-relaxed font-bold text-[var(--accent)] uppercase italic mb-2 tracking-wide">Fix: {item.fix}</p>
+              <p className="text-[10px] leading-relaxed opacity-60 m-0 italic">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -61,10 +61,10 @@ export default function BlogPage() {
       <section className="pt-12 space-y-6 text-sm">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">1. Overextending & <span className="text-[var(--accent)]">Minimap Tunnel Vision</span></h2>
         <p className="opacity-80 leading-relaxed">
-            The #1 reason games are thrown in the mid-to-late game is <strong>overextending without vision</strong>. Many players, especially in the Gold Lane, get "kill hunger" and push towers blindly. In the high-mobility meta of 2026, an enemy assassin like <strong>Nolan</strong> or <strong>Gusion</strong> can rotate from the opposite side of the map in under 5 seconds.
+          The #1 reason games are thrown in the mid-to-late game is <strong>overextending without vision</strong>. Many players, especially in the Gold Lane, get "kill hunger" and push towers blindly. In the high-mobility meta of 2026, an enemy assassin like <strong>Nolan</strong> or <strong>Gusion</strong> can rotate from the opposite side of the map in under 5 seconds.
         </p>
         <p className="opacity-80 leading-relaxed">
-            <strong>The Pro Habit:</strong> Develop the habit of glancing at the minimap every 3-5 seconds. If you only see two enemies on the map, assume the other three are waiting in the bush next to you. This <strong>map awareness in MLBB</strong> is what separates high-skill roamers from those who are constantly caught out of position.
+          <strong>The Pro Habit:</strong> Develop the habit of glancing at the minimap every 3-5 seconds. If you only see two enemies on the map, assume the other three are waiting in the bush next to you. This <strong>map awareness in MLBB</strong> is what separates high-skill roamers from those who are constantly caught out of position.
         </p>
       </section>
 
@@ -76,7 +76,7 @@ export default function BlogPage() {
             <h3 className="italic font-black uppercase text-[var(--accent)] m-0">Master Habit: The 4-Man Rule 💎</h3>
           </div>
           <p className="text-sm italic opacity-70 mb-4 font-medium">
-            In 2026 pro play, the "4-Man Rule" is standard: If you don't have vision of at least 4 enemies, do NOT cross the river line. 
+            In 2026 pro play, the "4-Man Rule" is standard: If you don't have vision of at least 4 enemies, do NOT cross the river line.
           </p>
           <p className="text-sm italic opacity-70 m-0">
             Staying alive preserves your gold lead; dying gives the enemy an <strong>MLBB comeback opportunity</strong> that can flip the game instantly.
@@ -87,7 +87,7 @@ export default function BlogPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Strategic <span className="text-[var(--accent)]">Target Priority</span></h2>
         <p className="opacity-70 leading-relaxed text-sm">
-            Dumping all your skills on the enemy tank is the fastest way to lose a group fight. Your <strong>teamfight targeting</strong> should follow a strict hierarchy to ensure the enemy's damage source is eliminated first:
+          Dumping all your skills on the enemy tank is the fastest way to lose a group fight. Your <strong>teamfight targeting</strong> should follow a strict hierarchy to ensure the enemy's damage source is eliminated first:
         </p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {[
@@ -108,10 +108,10 @@ export default function BlogPage() {
       <section className="pt-12 space-y-6 text-sm">
         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Psychological Warfare: <span className="text-[var(--accent)]">Avoiding Tilt</span></h2>
         <p className="opacity-80 leading-relaxed">
-            Toxic communication is a massive <strong>strategic disadvantage</strong>. When you start typing to blame a teammate, you stop playing the game. More importantly, you tilt your teammates, causing them to play even worse and potentially <strong>AFK or troll match</strong>.
+          Toxic communication is a massive <strong>strategic disadvantage</strong>. When you start typing to blame a teammate, you stop playing the game. More importantly, you tilt your teammates, causing them to play even worse and potentially <strong>AFK or troll match</strong>.
         </p>
         <p className="opacity-80 leading-relaxed">
-            <strong>The Pro Fix:</strong> Use the "Mute" button aggressively. If someone starts flaming, mute them instantly and focus purely on your win condition. A silent, focused team is statistically <strong>70% more likely to win</strong> a losing game than a shouting one. Keep your eyes on the map, not the chat.
+          <strong>The Pro Fix:</strong> Use the "Mute" button aggressively. If someone starts flaming, mute them instantly and focus purely on your win condition. A silent, focused team is statistically <strong>70% more likely to win</strong> a losing game than a shouting one. Keep your eyes on the map, not the chat.
         </p>
       </section>
 
@@ -123,17 +123,17 @@ export default function BlogPage() {
             Mastering <strong>MLBB pro strategies in 2026</strong> requires a mix of mechanical skill and disciplined decision-making. By avoiding these five mistakes, you'll find your win rate climbing and your losing streaks disappearing. Consistency is built on the repeatable habits of not dying, pushing towers, and keeping a cool head.
           </p>
         </div>
-        
+
         <div className="py-10 border-t border-[var(--border)] border-dashed text-center">
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want to unlock a counter-pick hero or skin? Gear up.</p>
-            <div className="flex justify-center">
-                <Link 
-                    href="/games/mobile-legends988" 
-                    className="px-12 py-4 rounded-2xl bg-[var(--foreground)] text-[var(--background)] text-[11px] font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-[var(--foreground)]/20"
-                >
-                    Get MLBB Diamonds Now
-                </Link>
-            </div>
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want to unlock a counter-pick hero or skin? Gear up.</p>
+          <div className="flex justify-center">
+            <Link
+              href="/games/mobile-legends270"
+              className="px-12 py-4 rounded-2xl bg-[var(--foreground)] text-[var(--background)] text-[11px] font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-[var(--foreground)]/20"
+            >
+              Get MLBB Diamonds Now
+            </Link>
+          </div>
         </div>
       </section>
 

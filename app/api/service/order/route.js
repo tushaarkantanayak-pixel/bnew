@@ -74,7 +74,7 @@ export async function POST(req) {
                 }
 
                 // ⚡ REGION RESTRICTION CHECK (Only for specific MLBB slugs)
-                const restrictedSlugs = ["mobile-legends988", "mlbb-double332", "weeklymonthly-bundle931"];
+                const restrictedSlugs = ["mobile-legends270", "mlbb-double332", "weeklymonthly-bundle261"];
                 if (isValidPlayer && restrictedSlugs.includes(gameSlug)) {
                     const finalRegion = playerRegion.toUpperCase();
                     const restrictedRegions = ["INDO", "ID", "PH", "SG", "RU", "MY", "MM"];
@@ -186,7 +186,7 @@ export async function POST(req) {
             // 2. Call external fulfillment service
             const settings = await getAppSettings();
             const useSmileOne = settings.mlbbWeeklyProvider === "smileone";
-            const isWeeklyPass = gameSlug === "mobile-legends988" && (itemSlug.toLowerCase().includes("weekly") || itemSlug.includes("pass"));
+            const isWeeklyPass = gameSlug === "mobile-legends270" && (itemSlug.toLowerCase().includes("weekly") || itemSlug.includes("pass"));
 
             let gameData;
             let isSuccess = false;

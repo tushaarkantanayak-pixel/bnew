@@ -22,7 +22,7 @@ export default function LandingPage() {
           "genshin-impact742",
           "honor-of-kings57",
           "where-winds-meet280",
-          "mobile-legends988"
+          "mobile-legends270"
         ];
 
         const filtered = prioritySlugs
@@ -217,7 +217,7 @@ export default function LandingPage() {
                 <div className="w-12 h-12 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] font-black text-xl border border-[var(--accent)]/20 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_-5px_rgba(var(--accent-rgb),0.3)]">
                   {team.charAt(0)}
                 </div>
-                
+
                 <div className="space-y-1">
                   <h3 className="text-[10px] md:text-[11px] font-[1000] uppercase italic tracking-widest text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors">
                     {team}

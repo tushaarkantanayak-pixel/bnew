@@ -16,7 +16,7 @@ const flashSaleData = [
         image: "/game-assets/weeklypass.jpg",
         price: "142",
         originalPrice: "175",
-        slug: "mobile-legends988?type=weekly-pass",
+        slug: "mobile-legends270?type=weekly-pass",
         badge: "Hot"
     },
 
@@ -57,7 +57,7 @@ const flashSaleData = [
         image: "/game-assets/weekly-monthly-bundle.jpg",
         price: "79",
         originalPrice: "100",
-        slug: "weeklymonthly-bundle931",
+        slug: "weeklymonthly-bundle261",
         badge: "Value"
     },
 

@@ -16,7 +16,7 @@ export default function GameSwitcher() {
 
     const isWeeklyPassQuery = searchParams.get("type") === "weekly-pass";
     const currentSlug = params?.slug;
-    const WEEKLY_PASS_SLUG = "mobile-legends988";
+    const WEEKLY_PASS_SLUG = "mobile-legends270";
 
     useEffect(() => {
         let mounted = true;
@@ -120,12 +120,12 @@ export default function GameSwitcher() {
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {games.map((game, idx) => (
-                    <SwitcherItem 
+                    <SwitcherItem
                         key={`${game.gameSlug}-${idx}`}
                         game={game}
                         idx={idx}
                         isActive={(game._variant === "weekly-pass" && isWeeklyPassQuery && game.gameSlug === currentSlug) ||
-                                  (game._variant !== "weekly-pass" && !isWeeklyPassQuery && game.gameSlug === currentSlug)}
+                            (game._variant !== "weekly-pass" && !isWeeklyPassQuery && game.gameSlug === currentSlug)}
                         handleSwitch={handleSwitch}
                     />
                 ))}
