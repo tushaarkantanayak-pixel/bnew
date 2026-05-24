@@ -416,20 +416,20 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-32 relative overflow-hidden border-y border-[var(--border)] bg-[var(--background)]">
+      <section className="py-16 md:py-24 relative overflow-hidden border-y border-[var(--border)] bg-[var(--background)]">
         {/* Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent)]/5 blur-[160px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--accent)]/5 blur-[160px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase mb-4 leading-none">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-[1000] tracking-tighter uppercase mb-4 leading-none">
               CHOOSE A <span className="text-[var(--accent)]">PLAN</span>
             </h2>
-            <p className="text-sm text-[var(--muted)] max-w-lg mx-auto">Scalable solutions designed for every stage of your business.</p>
+            <p className="text-xs md:text-sm text-[var(--muted)] max-w-lg mx-auto">Scalable solutions designed for every stage of your business.</p>
           </div>
 
           {/* TAB SELECTOR */}
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 md:mb-16">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-12">
             {[
               { id: "gaming", label: "Gaming Stores", icon: FiLayers },
               { id: "billing", label: "Payment Gateway", icon: FiZap },
@@ -439,12 +439,12 @@ export default function LandingPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveCategory(tab.id)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold uppercase tracking-wider text-[11px] transition-all border ${activeCategory === tab.id
+                className={`flex items-center gap-1.5 md:gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full font-bold uppercase tracking-wider text-[9px] md:text-[10px] transition-all border ${activeCategory === tab.id
                   ? 'bg-[var(--accent)] text-white border-[var(--accent)] shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]'
                   : 'bg-[var(--card)]/50 text-[var(--muted)] border-white/5 hover:border-[var(--accent)]/30 hover:bg-[var(--card)]'
                   }`}
               >
-                <tab.icon className="w-3.5 h-3.5" />
+                <tab.icon className="w-3 h-3 md:w-3.5 md:h-3.5" />
                 {tab.label}
               </button>
             ))}
@@ -454,7 +454,7 @@ export default function LandingPage() {
             key={activeCategory}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
           >
             {pricingData[activeCategory as keyof typeof pricingData].map((plan: any, i: number) => (
               <motion.div
@@ -463,32 +463,32 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`group p-8 md:p-10 rounded-3xl bg-[var(--card)]/40 backdrop-blur-xl border ${plan.popular ? 'border-[var(--accent)] shadow-[0_0_30px_rgba(var(--accent-rgb),0.15)] scale-105 z-10' : 'border-white/5 hover:border-[var(--accent)]/30'} flex flex-col relative transition-all duration-500`}
+                className={`group p-6 md:p-8 rounded-3xl bg-[var(--card)]/40 backdrop-blur-xl border ${plan.popular ? 'border-[var(--accent)] shadow-[0_0_30px_rgba(var(--accent-rgb),0.15)] lg:scale-105 z-10' : 'border-white/5 hover:border-[var(--accent)]/30'} flex flex-col relative transition-all duration-500`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-[var(--accent)] text-white text-[9px] font-bold rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(var(--accent-rgb),0.4)]">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-[var(--accent)] text-white text-[9px] font-bold rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(var(--accent-rgb),0.4)] whitespace-nowrap">
                     Most Popular
                   </div>
                 )}
-                <div className="text-center mb-8">
-                  <h4 className="text-xl font-[1000] tracking-tight mb-2">{plan.name}</h4>
-                  <p className="text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider">{plan.subtitle}</p>
+                <div className="text-center mb-5">
+                  <h4 className="text-lg md:text-xl font-[1000] tracking-tight mb-1">{plan.name}</h4>
+                  <p className="text-[10px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider">{plan.subtitle}</p>
                 </div>
 
-                <div className="text-center text-4xl md:text-5xl font-[1000] tracking-tighter mb-8 text-[var(--foreground)]">
-                  {plan.price !== "Contact" && plan.price !== "Custom" && <span className="text-2xl mr-1 text-[var(--accent)]">₹</span>}{plan.price}
+                <div className="text-center text-3xl md:text-4xl font-[1000] tracking-tighter mb-6 text-[var(--foreground)]">
+                  {plan.price !== "Contact" && plan.price !== "Custom" && <span className="text-xl md:text-2xl mr-1 text-[var(--accent)]">₹</span>}{plan.price}
                 </div>
 
-                <div className="w-full space-y-4 mb-10 flex-grow">
+                <div className="w-full space-y-3 mb-8 flex-grow">
                   {plan.features.map((f: string, j: number) => (
-                    <div key={j} className={`flex items-start gap-3 text-sm font-medium transition-all duration-300 ${j === 0 ? 'text-[var(--foreground)]' : 'text-[var(--muted)]'}`}>
-                      <FiCheck className={`mt-0.5 ${j === 0 ? 'text-[var(--accent)] drop-shadow-[0_0_5px_rgba(var(--accent-rgb),0.5)]' : 'text-[var(--accent)]/60'} flex-shrink-0`} size={16} />
+                    <div key={j} className={`flex items-start gap-3 text-xs md:text-sm font-medium transition-all duration-300 ${j === 0 ? 'text-[var(--foreground)]' : 'text-[var(--muted)]'}`}>
+                      <FiCheck className={`mt-0.5 ${j === 0 ? 'text-[var(--accent)] drop-shadow-[0_0_5px_rgba(var(--accent-rgb),0.5)]' : 'text-[var(--accent)]/60'} flex-shrink-0`} size={14} />
                       <span className="leading-tight">{f}</span>
                     </div>
                   ))}
                 </div>
 
-                <button className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-[11px] transition-all ${plan.popular ? 'bg-[var(--accent)] text-white hover:shadow-[0_10px_20px_rgba(var(--accent-rgb),0.3)]' : 'bg-white/5 hover:bg-white/10 text-[var(--foreground)] border border-white/5 hover:border-white/10'}`}>
+                <button className={`w-full py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] md:text-[11px] transition-all ${plan.popular ? 'bg-[var(--accent)] text-white hover:shadow-[0_10px_20px_rgba(var(--accent-rgb),0.3)]' : 'bg-white/5 hover:bg-white/10 text-[var(--foreground)] border border-white/5 hover:border-white/10'}`}>
                   Get Started
                 </button>
               </motion.div>
@@ -501,50 +501,82 @@ export default function LandingPage() {
       <section className="py-24 bg-[var(--background)] relative overflow-hidden">
         {/* Ambient Glows */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div className="relative group">
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl">
+            
+            {/* Left Image Side */}
+            <div className="relative group perspective-[1000px] lg:order-1 order-2 mt-8 lg:mt-0">
+              {/* Glow behind image */}
+              <div className="absolute inset-0 bg-[var(--accent)]/20 blur-[60px] rounded-full group-hover:bg-[var(--accent)]/30 transition-colors duration-700" />
+              
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 bg-[var(--card)]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-[var(--background)]/20 to-transparent opacity-80 z-10 pointer-events-none" />
                 <img
                   src="/landing/transformation.png"
                   alt="Transformation"
-                  className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                  className="w-full h-[400px] md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-1000"
                 />
-              </div>
-              <div className="absolute -inset-4 border border-[var(--accent)]/20 rounded-[2.5rem] pointer-events-none -z-10 group-hover:scale-105 transition-transform duration-500" />
+              </motion.div>
+              
+              {/* Decorative Tech Corners */}
+              <div className="absolute -top-6 -left-6 w-24 h-24 border-t-2 border-l-2 border-[var(--accent)] rounded-tl-[2rem] opacity-50 group-hover:opacity-100 group-hover:-top-8 group-hover:-left-8 transition-all duration-500 pointer-events-none z-0" />
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 border-b-2 border-r-2 border-[var(--accent)] rounded-br-[2rem] opacity-50 group-hover:opacity-100 group-hover:-bottom-8 group-hover:-right-8 transition-all duration-500 pointer-events-none z-20" />
             </div>
 
-            <div className="space-y-8">
+            {/* Right Text Side */}
+            <div className="space-y-8 lg:order-2 order-1">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[10px] font-bold uppercase tracking-widest mb-6">
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[10px] font-bold uppercase tracking-widest mb-6"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
                   Our Purpose
-                </div>
+                </motion.div>
                 <h2 className="text-4xl md:text-6xl font-[1000] tracking-tighter leading-[1] mb-6 uppercase">
-                  DRIVING <span className="text-[var(--accent)]">INNOVATION</span>
+                  DRIVING <br/>
+                  <span className="text-[var(--accent)] drop-shadow-[0_0_20px_rgba(var(--accent-rgb),0.4)]">INNOVATION</span>
                 </h2>
-                <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-lg">
+                <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-lg font-medium">
                   BlueBuff provides visionary game shop owners with the advanced infrastructure required to scale securely and efficiently in a competitive market.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-4">
                 {[
-                  { title: "Bank-Grade Security", icon: FiShield },
-                  { title: "Accelerated Growth", icon: FiTrendingUp }
+                  { title: "Bank-Grade Security", desc: "Military-grade encryption for all transactions.", icon: FiShield },
+                  { title: "Accelerated Growth", desc: "Scale your userbase with intelligent tools.", icon: FiTrendingUp }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 group/item">
-                    <div className="w-12 h-12 rounded-xl bg-[var(--card)]/40 border border-white/5 flex items-center justify-center text-[var(--accent)] group-hover/item:border-[var(--accent)]/30 group-hover/item:bg-[var(--accent)]/10 transition-all shrink-0">
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                    key={i} 
+                    className="flex items-start gap-5 p-5 rounded-3xl bg-[var(--card)]/30 backdrop-blur-md border border-white/5 hover:border-[var(--accent)]/40 hover:bg-[var(--card)]/50 transition-all group/item"
+                  >
+                    <div className="w-12 h-12 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] shrink-0 group-hover/item:scale-110 transition-transform shadow-[0_0_15px_rgba(var(--accent-rgb),0.2)] border border-[var(--accent)]/20">
                       <item.icon size={20} />
                     </div>
-                    <h4 className="text-sm font-bold tracking-wide group-hover/item:text-[var(--accent)] transition-colors">{item.title}</h4>
-                  </div>
+                    <div>
+                      <h4 className="text-base font-[1000] tracking-tight mb-1 group-hover/item:text-[var(--accent)] transition-colors uppercase italic">{item.title}</h4>
+                      <p className="text-xs text-[var(--muted)] font-bold">{item.desc}</p>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
 
-              <button className="group px-8 py-4 rounded-xl bg-[var(--foreground)] text-[var(--background)] font-bold uppercase tracking-widest text-[11px] transition-all hover:shadow-xl hover:-translate-y-1 active:scale-95 flex items-center gap-3">
+              <motion.button 
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+                className="group px-8 py-4 rounded-xl border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] font-bold uppercase tracking-widest text-[11px] transition-all hover:bg-[var(--accent)] hover:!text-white hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.4)] hover:-translate-y-1 active:scale-95 flex items-center gap-3"
+              >
                 Discover More <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
