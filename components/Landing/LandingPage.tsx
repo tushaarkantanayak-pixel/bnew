@@ -81,97 +81,160 @@ export default function LandingPage() {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-8 md:pt-32 pb-32 md:pb-40 overflow-hidden border-b border-[var(--border)]">
-        {/* Animated Grid lines */}
-        <div className="absolute inset-0 z-0 opacity-20">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-full bg-gradient-to-b from-transparent via-[var(--accent)] to-transparent" />
-          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent" />
+      <section className="relative pt-24 pb-12 md:pb-16 overflow-hidden bg-[var(--background)] text-[var(--foreground)] min-h-[60vh] flex items-center border-b border-[var(--border)]">
+        
+        {/* Background glow effects */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent)]/10 blur-[150px] rounded-full" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[10px] font-black uppercase tracking-[0.3em] mb-8"
-          >
-            <FiShield size={12} />
-            India's Most Trusted Gaming Infrastructure
-          </motion.div>
+        <div className="max-w-[1400px] mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Left Column (Text) */}
+          <div className="flex flex-col items-start text-left relative z-20">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[10px] font-black uppercase tracking-[0.3em] mb-6 md:mb-8"
+            >
+              <FiShield size={12} />
+              India's Most Trusted Gaming Infrastructure
+            </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-[4.8rem] font-[1000] tracking-tighter mb-8 leading-[0.85] italic uppercase"
-          >
-            BUILD YOUR <span className="text-[var(--accent)]">STORE & ESPORTS</span> <br />
-            EMPIRE <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] via-purple-400 to-blue-400">TODAY</span>
-          </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-3xl md:text-4xl lg:text-[3.5rem] font-[1000] mb-3 leading-[1.1] tracking-tighter uppercase italic"
+            >
+              BUILD YOUR <span className="text-[var(--accent)]">STORE & ESPORTS</span> <br />
+              EMPIRE <span className="text-[var(--accent)]">TODAY</span>
+            </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-2 max-w-lg mx-auto mb-12"
-          >
-            {[
-              "Game Top-up API",
-              "Custom Websites",
-              "Safe Hosting",
-              "Payment Gateway",
-              "Logo & Design",
-              "Esports Tools",
-              "Marketing & SEO",
-              "24/7 Support",
-            ].map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 text-[var(--muted)] text-[8px] font-black uppercase tracking-widest opacity-70"
-              >
-                {tag}
-              </span>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col items-center gap-8"
-          >
-            <div className="flex items-center justify-center gap-6 px-4">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-wrap gap-2 max-w-lg mb-4"
+            >
               {[
-                { label: "Services", href: "/services", icon: FiGrid },
-                { label: "Products", href: "/ourproducts", icon: FiLayers },
-                { label: "Dashboard", href: "/dashboard", icon: FiCompass },
-              ].map((item, i) => (
-                <Link
-                  key={i}
-                  href={item.href}
-                  className="group flex items-center gap-2.5 text-[var(--muted)] hover:text-[var(--foreground)] font-black uppercase tracking-[0.15em] text-[9px] italic transition-all duration-300"
+                "Game Top-up API",
+                "Custom Websites",
+                "Safe Hosting",
+                "Payment Gateway",
+                "Logo & Design",
+                "Esports Tools",
+                "Marketing & SEO",
+                "24/7 Support",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 text-[var(--muted)] text-[8px] font-black uppercase tracking-widest opacity-80"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent)]/10 transition-all duration-400 shrink-0">
-                    <item.icon className="text-[var(--accent)] group-hover:scale-110 transition-all duration-300" size={13} />
-                  </div>
-                  <span className="group-hover:translate-x-0.5 transition-transform duration-300 whitespace-nowrap">
-                    {item.label}
-                  </span>
-                </Link>
+                  {tag}
+                </span>
               ))}
-            </div>
+            </motion.div>
 
-            <Link href="/contact" className="relative group w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-br from-indigo-700 via-blue-800 to-indigo-900 text-white font-[1000] uppercase tracking-[0.3em] text-[12px] italic transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(30,58,138,0.5)] hover:-translate-y-1 active:scale-95 overflow-hidden shadow-2xl">
-              {/* Premium Shimmer Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col gap-4 w-full"
+            >
+              <div className="flex flex-wrap items-center gap-4">
+                {[
+                  { label: "Services", href: "/services", icon: FiGrid },
+                  { label: "Products", href: "/ourproducts", icon: FiLayers },
+                  { label: "Dashboard", href: "/dashboard", icon: FiCompass },
+                ].map((item, i) => (
+                  <Link
+                    key={i}
+                    href={item.href}
+                    className="group flex items-center gap-2.5 text-[var(--muted)] hover:text-[var(--foreground)] font-black uppercase tracking-[0.15em] text-[9px] italic transition-all duration-300"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-[var(--foreground)]/5 flex items-center justify-center border border-[var(--border)] group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent)]/10 transition-all duration-400 shrink-0">
+                      <item.icon className="text-[var(--accent)] group-hover:scale-110 transition-all duration-300" size={13} />
+                    </div>
+                    <span className="group-hover:translate-x-0.5 transition-transform duration-300 whitespace-nowrap">
+                      {item.label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
 
-              <span className="relative z-10 flex items-center justify-center gap-3 drop-shadow-md">
-                Request Service
-                <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-indigo-900 group-hover:translate-x-1.5 transition-all duration-500 border border-white/10">
-                  <FiArrowRight size={13} />
-                </div>
-              </span>
-            </Link>
-          </motion.div>
+              <Link href="/contact" className="relative group w-full sm:w-auto self-start px-10 py-4 rounded-2xl bg-[var(--accent)] !text-white font-bold uppercase tracking-[0.3em] text-[13px] md:text-[14px] italic transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(var(--accent-rgb),0.5)] hover:-translate-y-1 active:scale-95 overflow-hidden shadow-xl">
+                <span className="relative z-10 flex items-center justify-center gap-4">
+                  Request Service
+                  <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:!text-[var(--accent)] group-hover:translate-x-1.5 transition-all duration-500">
+                    <FiArrowRight size={15} />
+                  </div>
+                </span>
+              </Link>
+            </motion.div>
+            
+            {/* The sweeping arc line decoration */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 1 }}
+              className="absolute top-[90%] left-[-20%] w-[120%] h-[200px] pointer-events-none hidden md:block"
+            >
+               <svg viewBox="0 0 500 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full opacity-60">
+                 <path d="M -100 100 Q 250 200 450 50" stroke="url(#accentGradient)" strokeWidth="1.5" fill="none" />
+                 <circle cx="450" cy="50" r="4" fill="var(--accent)" />
+                 <defs>
+                   <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                     <stop offset="0%" stopColor="var(--accent)" stopOpacity="0" />
+                     <stop offset="100%" stopColor="var(--accent)" stopOpacity="1" />
+                   </linearGradient>
+                 </defs>
+               </svg>
+            </motion.div>
+          </div>
+
+          {/* Right Column (Slanted Images) */}
+          <div className="relative h-[300px] md:h-[400px] lg:h-[450px] w-full flex items-center justify-end lg:-mr-[15%] z-10 perspective-[1000px] mt-6 lg:mt-0">
+             {/* Container for the skewed cards */}
+             <div className="flex gap-2 md:gap-4 transform -skew-x-[15deg] h-full overflow-hidden lg:overflow-visible w-[120%] lg:w-[130%] justify-center lg:justify-end ml-[-10%] lg:ml-0">
+               
+               {/* Card 1 */}
+               <motion.div 
+                 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                 className="relative w-[70px] md:w-[130px] lg:w-[160px] h-full overflow-hidden shadow-2xl group hover:w-[100px] md:hover:w-[180px] lg:hover:w-[220px] transition-all duration-500 border-2 border-[var(--border)]"
+               >
+                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-colors duration-500 z-10" />
+                 <img src="/landing/hero_mage.png" className="absolute w-[250%] md:w-[180%] lg:w-[160%] h-full max-w-none object-cover transform skew-x-[15deg] -ml-[75%] md:-ml-[40%] lg:-ml-[30%] group-hover:scale-105 transition-transform duration-700" alt="Mage" />
+               </motion.div>
+
+               {/* Card 2 */}
+               <motion.div 
+                 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+                 className="relative w-[70px] md:w-[130px] lg:w-[160px] h-[95%] self-center overflow-hidden shadow-2xl group hover:w-[100px] md:hover:w-[180px] lg:hover:w-[220px] transition-all duration-500 border-2 border-[var(--border)]"
+               >
+                 <div className="absolute inset-0 bg-red-900/50 group-hover:bg-black/0 transition-colors duration-500 z-10 mix-blend-multiply" />
+                 <img src="/landing/hero_rogue.png" className="absolute w-[250%] md:w-[180%] lg:w-[160%] h-full max-w-none object-cover transform skew-x-[15deg] -ml-[75%] md:-ml-[40%] lg:-ml-[30%] group-hover:scale-105 transition-transform duration-700" alt="Rogue" />
+               </motion.div>
+
+               {/* Card 3 */}
+               <motion.div 
+                 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+                 className="relative w-[70px] md:w-[130px] lg:w-[160px] h-[90%] self-center overflow-hidden shadow-2xl group hover:w-[100px] md:hover:w-[180px] lg:hover:w-[220px] transition-all duration-500 border-2 border-[var(--border)]"
+               >
+                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-colors duration-500 z-10" />
+                 <img src="/landing/hero_tactical.png" className="absolute w-[250%] md:w-[180%] lg:w-[160%] h-full max-w-none object-cover transform skew-x-[15deg] -ml-[75%] md:-ml-[40%] lg:-ml-[30%] group-hover:scale-105 transition-transform duration-700" alt="Tactical" />
+               </motion.div>
+
+               {/* Card 4 */}
+               <motion.div 
+                 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+                 className="relative w-[70px] md:w-[130px] lg:w-[160px] h-[85%] self-center overflow-hidden shadow-2xl group hover:w-[100px] md:hover:w-[180px] lg:hover:w-[220px] transition-all duration-500 border-2 border-[var(--border)]"
+               >
+                 <div className="absolute inset-0 bg-[var(--accent)]/30 group-hover:bg-black/0 transition-colors duration-500 z-10 mix-blend-overlay" />
+                 <img src="/landing/hero_cyborg.png" className="absolute w-[250%] md:w-[180%] lg:w-[160%] h-full max-w-none object-cover transform skew-x-[15deg] -ml-[75%] md:-ml-[40%] lg:-ml-[30%] group-hover:scale-105 transition-transform duration-700" alt="Cyborg" />
+               </motion.div>
+
+             </div>
+          </div>
         </div>
       </section>
 
