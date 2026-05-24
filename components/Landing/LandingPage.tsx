@@ -238,86 +238,66 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-24 border-b border-[var(--border)] bg-[var(--card)]/5 relative overflow-hidden">
-        {/* Ambient background glow */}
+      <section className="py-24 border-b border-[var(--border)] bg-[var(--background)] relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[8px] font-black uppercase tracking-[0.4em] mb-6">
-              <FiUsers size={10} />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[10px] font-bold uppercase tracking-widest mb-4">
+              <FiUsers size={12} />
               Community Trusted
             </div>
-            <h2 className="text-3xl md:text-6xl font-[1000] italic tracking-tighter uppercase mb-4 leading-none">
+            <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase mb-4 leading-none">
               TEAMS THAT <span className="text-[var(--accent)]">DEPEND ON US</span>
             </h2>
-            <p className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.5em] opacity-40 italic">From solo developers to growing gaming platforms</p>
+            <p className="text-sm text-[var(--muted)] max-w-lg mx-auto">From solo developers to growing gaming platforms.</p>
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-3 gap-3 md:gap-6">
+        <div className="relative w-full overflow-hidden flex flex-col gap-6 z-10">
+          {/* Fading edges for marquee */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--background)] to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--background)] to-transparent z-20 pointer-events-none" />
+          
+          <div className="animate-marquee flex gap-6 w-max">
             {[
-              "MLBB Topup",
-              "Meowji Official",
-              "Scammers Official",
-              "Yuji MLBB",
-              "Topup Memo",
-              "Vampenttic Games",
-              "Tronics Official",
-              "BlueBuff",
-              "Happy Official Store"
+              "MLBB Topup", "Meowji Official", "Scammers Official", "Yuji MLBB", "Topup Memo", "Vampenttic Games", "Tronics Official", "BlueBuff", "Happy Official Store",
+              "MLBB Topup", "Meowji Official", "Scammers Official", "Yuji MLBB", "Topup Memo", "Vampenttic Games", "Tronics Official", "BlueBuff", "Happy Official Store"
             ].map((team, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="group relative p-6 md:p-8 rounded-[2rem] bg-[var(--card)]/40 border border-white/5 backdrop-blur-xl hover:border-[var(--accent)]/30 hover:bg-[var(--card)]/60 transition-all duration-500 flex flex-col items-center justify-center text-center gap-4"
+                className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-[var(--card)]/40 border border-white/5 backdrop-blur-md hover:border-[var(--accent)]/30 transition-all cursor-default group"
               >
-                {/* stylized icon fallback - first letter */}
-                <div className="w-12 h-12 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] font-black text-xl border border-[var(--accent)]/20 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_-5px_rgba(var(--accent-rgb),0.3)]">
+                <div className="w-8 h-8 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] font-bold text-sm border border-[var(--accent)]/20 group-hover:scale-110 transition-transform">
                   {team.charAt(0)}
                 </div>
-
-                <div className="space-y-1">
-                  <h3 className="text-[10px] md:text-[11px] font-[1000] uppercase italic tracking-widest text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors">
-                    {team}
-                  </h3>
-                  <div className="flex justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {[1, 2, 3, 4, 5].map(s => (
-                      <div key={s} className="w-1 h-1 rounded-full bg-[var(--accent)]" />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Corner accent */}
-                <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-[var(--accent)] opacity-20 group-hover:opacity-100 transition-opacity" />
-              </motion.div>
+                <span className="text-sm font-bold tracking-wider text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors whitespace-nowrap">
+                  {team}
+                </span>
+              </div>
             ))}
           </div>
         </div>
       </section>
+
       {/* --- SOLUTIONS SECTION --- */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden bg-[var(--background)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full mx-auto mb-6" />
-            <h2 className="text-3xl md:text-6xl font-[1000] italic tracking-tighter uppercase mb-4 leading-none">
-              HELP YOUR <span className="text-[var(--accent)]">STORE</span>
+            <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase mb-4 leading-none">
+              POWER YOUR <span className="text-[var(--accent)]">STORE</span>
             </h2>
-            <p className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.5em] opacity-40 italic">Easy tools to grow your business</p>
+            <p className="text-sm text-[var(--muted)] max-w-lg mx-auto">Premium tools built specifically to scale your gaming business.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: FiCpu, title: "Fast API", desc: "Connect your store to top-up providers with very fast and reliable systems.", tag: "Very Fast" },
-              { icon: FiCode, title: "Easy Websites", desc: "We build beautiful and fast websites made for your game store.", tag: "Simple" },
-              { icon: FiCloud, title: "Safe Hosting", desc: "Safe and strong servers that keep your website online all the time.", tag: "Always Online" },
-              { icon: FiTrendingUp, title: "Marketing", desc: "Help more customers find your store on Google and social media.", tag: "Get Customers" },
-              { icon: FiSmartphone, title: "Logo & Design", desc: "We make professional logos and banners to make your store look amazing.", tag: "Design" },
-              { icon: FiAward, title: "Esports Tools", desc: "We build tournament brackets and player stat systems for your gaming events.", tag: "Pro Events" }
+              { icon: FiCpu, title: "Fast API", desc: "Connect your store to top-up providers with blazing fast and reliable systems.", tag: "Lightning Fast" },
+              { icon: FiCode, title: "Custom Websites", desc: "We build beautiful, highly-performant websites tailored to your gaming brand.", tag: "Bespoke" },
+              { icon: FiCloud, title: "Safe Hosting", desc: "Secure and robust server infrastructure that keeps your platform online 24/7.", tag: "99.9% Uptime" },
+              { icon: FiTrendingUp, title: "Marketing & SEO", desc: "Expand your reach and acquire more customers through targeted digital marketing.", tag: "Growth" },
+              { icon: FiSmartphone, title: "Brand Identity", desc: "Professional logos, banners, and UI design to make your store stand out.", tag: "Design" },
+              { icon: FiAward, title: "Esports Tools", desc: "Integrated tournament brackets, team management, and automated stat tracking.", tag: "Pro Events" }
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -325,25 +305,26 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group relative p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-[var(--card)]/30 backdrop-blur-sm border border-white/5 hover:border-[var(--accent)]/40 hover:bg-[var(--card)]/50 transition-all duration-500"
+                className="group relative p-8 rounded-3xl bg-[var(--card)]/40 backdrop-blur-xl border border-white/5 hover:border-[var(--accent)]/30 hover:bg-[var(--card)]/60 transition-all duration-500"
               >
-                <div className="absolute top-0 right-0 p-10 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity text-[var(--foreground)]">
-                  <item.icon size={120} />
-                </div>
+                {/* Glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
 
                 <div className="relative z-10">
-                  <div className="flex items-center gap-4 md:gap-6 mb-6 md:mb-8">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/20 shadow-[0_10px_30px_-10px_rgba(var(--accent-rgb),0.3)] shrink-0 group-hover:scale-110 transition-transform duration-500">
-                      <item.icon className="w-5 h-5 md:w-7 md:h-7" />
+                  <div className="flex items-start justify-between mb-8">
+                    <div className="w-14 h-14 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/20 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)] transition-all duration-500">
+                      <item.icon className="w-6 h-6" />
                     </div>
-                    <div className="min-w-0">
-                      <div className="inline-block px-2 py-0.5 rounded-full bg-[var(--accent)]/5 text-[7px] md:text-[8px] font-black uppercase tracking-widest text-[var(--accent)] mb-1.5 border border-[var(--accent)]/10">{item.tag}</div>
-                      <h4 className="text-xl md:text-2xl font-[1000] uppercase italic tracking-tighter group-hover:text-[var(--accent)] transition-colors leading-none truncate">
-                        {item.title}
-                      </h4>
+                    <div className="px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[10px] font-bold uppercase tracking-widest text-[var(--accent)] border border-[var(--accent)]/20">
+                      {item.tag}
                     </div>
                   </div>
-                  <p className="text-[11px] md:text-[13px] text-[var(--muted)] leading-relaxed font-bold uppercase tracking-tight opacity-40 italic">{item.desc}</p>
+                  <h4 className="text-2xl font-[1000] uppercase tracking-tighter mb-3 group-hover:text-[var(--accent)] transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -352,18 +333,19 @@ export default function LandingPage() {
       </section>
 
       {/* --- MISSION STATS BAR --- */}
-      <section className="py-20 border-y border-[var(--border)] bg-[var(--card)]/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+      <section className="py-16 bg-[var(--card)]/10 border-y border-[var(--border)] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-transparent to-[var(--background)] pointer-events-none z-10" />
+        <div className="max-w-7xl mx-auto px-6 relative z-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
               { label: "Business Clients", value: "10+" },
               { label: "Combined Orders", value: "1,000+" },
               { label: "Success Rate", value: "99.9%" },
               { label: "Fast Systems", value: "24/7" }
             ].map((stat, i) => (
-              <div key={i} className="text-center space-y-2">
-                <div className="text-3xl md:text-5xl font-[1000] italic tracking-tighter text-[var(--accent)] uppercase">{stat.value}</div>
-                <div className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.3em] opacity-40">{stat.label}</div>
+              <div key={i} className="text-center space-y-2 group">
+                <div className="text-4xl md:text-5xl font-[1000] tracking-tighter text-[var(--accent)] drop-shadow-[0_0_15px_rgba(var(--accent-rgb),0.3)] group-hover:scale-105 transition-transform">{stat.value}</div>
+                <div className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-[0.2em]">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -371,31 +353,28 @@ export default function LandingPage() {
       </section>
 
       {/* --- PRODUCTS SECTION --- */}
-      <section id="products" className="py-20 md:py-32 bg-[var(--background)] relative">
+      <section id="products" className="py-24 bg-[var(--background)] relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full mx-auto mb-6" />
-            <h2 className="text-3xl md:text-6xl font-[1000] italic tracking-tighter uppercase mb-4 leading-none">
+            <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase mb-4 leading-none">
               BEST <span className="text-[var(--accent)]">TOOLS</span>
             </h2>
-            <p className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.5em] opacity-40 italic">Simple systems to help your store</p>
+            <p className="text-sm text-[var(--muted)] max-w-lg mx-auto">Core systems powering the next generation of esports platforms.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
-                name: "Game Topupweb",
-                desc: "The best way to sell game items. Fully automatic, very fast, and easy for customers to use.",
+                name: "Game Topup System",
+                desc: "The ultimate solution for selling game items. Fully automated, lightning fast, and highly secure for high-volume transactions.",
                 icon: FiLayers,
-                features: ["Check IDs quickly", "Support many games", "Automatic delivery", "Easy admin panel"],
-                accent: "var(--accent)"
+                features: ["Real-time ID verification", "Multi-game support", "Instant delivery", "Comprehensive dashboard"],
               },
               {
                 name: "Payment Gateway",
-                desc: "A safe and fast way to take payments for your game store orders.",
+                desc: "A secure, robust payment infrastructure designed specifically to handle gaming transactions with zero downtime.",
                 icon: FiZap,
-                features: ["Get money fast", "Very low fees", "Safe and secure", "Always working"],
-                accent: "#a855f7"
+                features: ["Instant settlements", "Ultra-low fees", "Bank-grade security", "99.99% uptime SLA"],
               }
             ].map((product, i) => (
               <motion.div
@@ -403,31 +382,32 @@ export default function LandingPage() {
                 initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="group relative p-6 md:p-12 rounded-[2.5rem] md:rounded-[4rem] bg-[var(--card)]/40 border border-white/5 hover:border-[var(--accent)]/30 transition-all duration-700"
+                className="group relative p-8 md:p-12 rounded-3xl bg-[var(--card)]/40 border border-white/5 hover:border-[var(--accent)]/30 hover:bg-[var(--card)]/60 transition-all duration-700 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[4rem]" />
+                {/* Background glow effect */}
+                <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[var(--accent)]/5 rounded-full blur-[80px] -mr-20 -mt-20 pointer-events-none group-hover:bg-[var(--accent)]/10 transition-colors duration-700" />
 
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] mb-6 md:mb-10 group-hover:scale-110 transition-transform">
-                    <product.icon className="w-8 h-8 md:w-10 md:h-10" />
+                  <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] mb-8 border border-[var(--accent)]/20 shadow-[0_0_20px_rgba(var(--accent-rgb),0.2)] group-hover:scale-110 transition-transform">
+                    <product.icon className="w-8 h-8" />
                   </div>
 
-                  <h3 className="text-2xl md:text-5xl font-[1000] uppercase italic tracking-tighter mb-4 md:mb-6">{product.name}</h3>
-                  <p className="text-[12px] md:text-[13px] text-[var(--muted)] font-bold uppercase tracking-widest opacity-60 leading-relaxed mb-8 md:mb-10">
+                  <h3 className="text-3xl font-[1000] tracking-tighter mb-4 group-hover:text-[var(--accent)] transition-colors">{product.name}</h3>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed mb-8">
                     {product.desc}
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-8 md:mb-12">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                     {product.features.map((f, j) => (
-                      <div key={j} className="flex items-center gap-2 md:gap-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[var(--muted)]/40 italic">
-                        <FiCheck className="text-[var(--accent)]" />
+                      <div key={j} className="flex items-center gap-3 text-xs font-bold text-[var(--muted)]">
+                        <FiCheck className="text-[var(--accent)]" size={14} />
                         {f}
                       </div>
                     ))}
                   </div>
 
-                  <button className="inline-flex items-center gap-4 text-[12px] font-[1000] uppercase italic tracking-[0.2em] text-[var(--accent)] group-hover:gap-6 transition-all">
-                    See More Details <FiArrowRight />
+                  <button className="mt-auto self-start inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[10px] font-bold uppercase tracking-widest text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all group/btn">
+                    Explore Details <FiArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </motion.div>
@@ -436,21 +416,20 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-32 relative overflow-hidden border-y border-[var(--border)]">
+      <section className="py-20 md:py-32 relative overflow-hidden border-y border-[var(--border)] bg-[var(--background)]">
         {/* Ambient Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent)]/5 blur-[160px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full mx-auto mb-6" />
-            <h2 className="text-3xl md:text-6xl font-[1000] italic tracking-tighter uppercase mb-4 leading-none">
+            <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase mb-4 leading-none">
               CHOOSE A <span className="text-[var(--accent)]">PLAN</span>
             </h2>
-            <p className="text-[10px] font-black text-[var(--muted)] uppercase tracking-[0.5em] opacity-40 italic">Simple prices for every business</p>
+            <p className="text-sm text-[var(--muted)] max-w-lg mx-auto">Scalable solutions designed for every stage of your business.</p>
           </div>
 
           {/* TAB SELECTOR */}
-          <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-2 md:gap-3 mb-10 md:mb-16">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 md:mb-16">
             {[
               { id: "gaming", label: "Gaming Stores", icon: FiLayers },
               { id: "billing", label: "Payment Gateway", icon: FiZap },
@@ -460,12 +439,12 @@ export default function LandingPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveCategory(tab.id)}
-                className={`flex items-center gap-2 md:gap-3 px-4 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-[1000] uppercase italic tracking-widest text-[8px] md:text-[9px] transition-all border ${activeCategory === tab.id
-                  ? 'bg-[var(--accent)] text-white border-[var(--accent)]'
-                  : 'bg-white/5 text-[var(--muted)] border-white/5 hover:border-[var(--accent)]/30'
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold uppercase tracking-wider text-[11px] transition-all border ${activeCategory === tab.id
+                  ? 'bg-[var(--accent)] text-white border-[var(--accent)] shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]'
+                  : 'bg-[var(--card)]/50 text-[var(--muted)] border-white/5 hover:border-[var(--accent)]/30 hover:bg-[var(--card)]'
                   }`}
               >
-                <tab.icon className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                <tab.icon className="w-3.5 h-3.5" />
                 {tab.label}
               </button>
             ))}
@@ -473,8 +452,8 @@ export default function LandingPage() {
 
           <motion.div
             key={activeCategory}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
           >
             {pricingData[activeCategory as keyof typeof pricingData].map((plan: any, i: number) => (
@@ -484,30 +463,32 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`group p-6 md:p-10 rounded-[2.5rem] md:rounded-[3rem] bg-[var(--card)]/40 backdrop-blur-xl border ${plan.popular ? 'border-[var(--accent)] shadow-[0_0_40px_-10px_rgba(var(--accent-rgb),0.3)] scale-105 z-10' : 'border-white/5'} flex flex-col items-center text-center relative hover:border-[var(--accent)]/40 transition-all duration-500`}
+                className={`group p-8 md:p-10 rounded-3xl bg-[var(--card)]/40 backdrop-blur-xl border ${plan.popular ? 'border-[var(--accent)] shadow-[0_0_30px_rgba(var(--accent-rgb),0.15)] scale-105 z-10' : 'border-white/5 hover:border-[var(--accent)]/30'} flex flex-col relative transition-all duration-500`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-[var(--accent)] text-white text-[8px] font-[1000] rounded-full uppercase tracking-[0.2em] italic shadow-lg">
-                    Best Value
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-[var(--accent)] text-white text-[9px] font-bold rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(var(--accent-rgb),0.4)]">
+                    Most Popular
                   </div>
                 )}
-                <h4 className="text-2xl font-[1000] uppercase italic tracking-tighter mb-1">{plan.name}</h4>
-                <p className="text-[9px] font-black text-[var(--muted)] uppercase tracking-widest mb-6 md:mb-10 opacity-40">{plan.subtitle}</p>
-
-                <div className="text-4xl md:text-5xl font-[1000] italic tracking-tighter mb-8 md:mb-12 text-[var(--foreground)]">
-                  {plan.price !== "Contact" && plan.price !== "Custom" && <span className="text-xl mr-1 text-[var(--accent)]">₹</span>}{plan.price}
+                <div className="text-center mb-8">
+                  <h4 className="text-xl font-[1000] tracking-tight mb-2">{plan.name}</h4>
+                  <p className="text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider">{plan.subtitle}</p>
                 </div>
 
-                <div className="w-full space-y-3 md:space-y-5 mb-8 md:mb-12 text-left">
+                <div className="text-center text-4xl md:text-5xl font-[1000] tracking-tighter mb-8 text-[var(--foreground)]">
+                  {plan.price !== "Contact" && plan.price !== "Custom" && <span className="text-2xl mr-1 text-[var(--accent)]">₹</span>}{plan.price}
+                </div>
+
+                <div className="w-full space-y-4 mb-10 flex-grow">
                   {plan.features.map((f: string, j: number) => (
-                    <div key={j} className={`flex items-center gap-3 text-[9px] md:text-[10px] font-black uppercase tracking-tight italic transition-all duration-300 ${j === 0 ? 'text-[var(--foreground)] opacity-100' : 'text-[var(--muted)] opacity-50'}`}>
-                      <FiCheck className={`${j === 0 ? 'text-[var(--accent)] drop-shadow-[0_0_8px_rgba(var(--accent-rgb),0.8)]' : 'text-[var(--accent)]/60'} flex-shrink-0`} size={14} />
-                      <span className="truncate">{f}</span>
+                    <div key={j} className={`flex items-start gap-3 text-sm font-medium transition-all duration-300 ${j === 0 ? 'text-[var(--foreground)]' : 'text-[var(--muted)]'}`}>
+                      <FiCheck className={`mt-0.5 ${j === 0 ? 'text-[var(--accent)] drop-shadow-[0_0_5px_rgba(var(--accent-rgb),0.5)]' : 'text-[var(--accent)]/60'} flex-shrink-0`} size={16} />
+                      <span className="leading-tight">{f}</span>
                     </div>
                   ))}
                 </div>
 
-                <button className={`w-full py-4 md:py-5 rounded-xl md:rounded-2xl font-[1000] uppercase tracking-widest text-[10px] italic transition-all ${plan.popular ? 'bg-[var(--accent)] text-white hover:shadow-[0_10px_20px_rgba(var(--accent-rgb),0.3)]' : 'bg-white/5 hover:bg-white/10 text-[var(--foreground)]'}`}>
+                <button className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-[11px] transition-all ${plan.popular ? 'bg-[var(--accent)] text-white hover:shadow-[0_10px_20px_rgba(var(--accent-rgb),0.3)]' : 'bg-white/5 hover:bg-white/10 text-[var(--foreground)] border border-white/5 hover:border-white/10'}`}>
                   Get Started
                 </button>
               </motion.div>
@@ -517,54 +498,52 @@ export default function LandingPage() {
       </section>
 
       {/* --- TRANSFORMATION SECTION --- */}
-      <section className="py-16 md:py-24 bg-[var(--background)] relative overflow-hidden">
+      <section className="py-24 bg-[var(--background)] relative overflow-hidden">
         {/* Ambient Glows */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative group">
-              <div className="relative rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-white/5 shadow-2xl">
+              <div className="relative rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl">
                 <img
                   src="/landing/transformation.png"
                   alt="Transformation"
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                  className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
                 />
               </div>
-              <div className="absolute -inset-4 border border-[var(--accent)]/10 rounded-[3rem] md:rounded-[4.5rem] pointer-events-none -z-10 group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute -inset-4 border border-[var(--accent)]/20 rounded-[2.5rem] pointer-events-none -z-10 group-hover:scale-105 transition-transform duration-500" />
             </div>
 
             <div className="space-y-8">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[9px] font-[1000] uppercase tracking-widest mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-[10px] font-bold uppercase tracking-widest mb-6">
                   Our Purpose
                 </div>
-                <h2 className="text-4xl md:text-7xl font-[1000] uppercase italic tracking-tighter leading-[0.8] mb-6">
-                  OUR <span className="text-[var(--accent)]">MISSION</span>
+                <h2 className="text-4xl md:text-6xl font-[1000] tracking-tighter leading-[1] mb-6 uppercase">
+                  DRIVING <span className="text-[var(--accent)]">INNOVATION</span>
                 </h2>
-                <p className="text-[13px] md:text-base text-[var(--muted)] leading-relaxed font-bold uppercase tracking-widest opacity-60 italic max-w-lg">
-                  BlueBuff helps new game shop owners grow fast and safe with professional tools.
+                <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-lg">
+                  BlueBuff provides visionary game shop owners with the advanced infrastructure required to scale securely and efficiently in a competitive market.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {[
-                  { title: "Safe Systems", icon: FiShield },
-                  { title: "Fast Growth", icon: FiTrendingUp }
+                  { title: "Bank-Grade Security", icon: FiShield },
+                  { title: "Accelerated Growth", icon: FiTrendingUp }
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 group/item">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-[var(--muted)] group-hover/item:text-[var(--accent)] group-hover/item:border-[var(--accent)]/30 transition-all shrink-0">
-                      <item.icon size={18} />
+                    <div className="w-12 h-12 rounded-xl bg-[var(--card)]/40 border border-white/5 flex items-center justify-center text-[var(--accent)] group-hover/item:border-[var(--accent)]/30 group-hover/item:bg-[var(--accent)]/10 transition-all shrink-0">
+                      <item.icon size={20} />
                     </div>
-                    <h4 className="text-[11px] font-[1000] uppercase tracking-widest italic group-hover/item:text-[var(--foreground)] transition-colors">{item.title}</h4>
+                    <h4 className="text-sm font-bold tracking-wide group-hover/item:text-[var(--accent)] transition-colors">{item.title}</h4>
                   </div>
                 ))}
               </div>
 
-              <button className="group px-10 py-4 rounded-xl bg-white text-black font-[1000] uppercase tracking-[0.2em] text-[10px] italic transition-all hover:shadow-xl hover:-translate-y-0.5 active:scale-95">
-                <span className="flex items-center gap-3">
-                  Learn More <FiArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </span>
+              <button className="group px-8 py-4 rounded-xl bg-[var(--foreground)] text-[var(--background)] font-bold uppercase tracking-widest text-[11px] transition-all hover:shadow-xl hover:-translate-y-1 active:scale-95 flex items-center gap-3">
+                Discover More <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
