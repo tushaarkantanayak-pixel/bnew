@@ -253,7 +253,13 @@ export default function AdminPanalPage() {
 
             <div className="mt-1 flex items-end gap-2">
               <p className="text-2xl font-bold text-[var(--foreground)]">
-                {balance !== null ? formatPrice(balance) : "Loading…"}
+                {balance !== null
+                  ? (() => {
+                      // balance is already a USD string like "20.87 USD" from the game API
+                      const num = parseFloat(String(balance).replace(/[^\d.]/g, ""));
+                      return isNaN(num) ? String(balance) : `$${num.toFixed(2)}`;
+                    })()
+                  : "Loading…"}
               </p>
 
               <span className="text-sm font-medium text-green-500">

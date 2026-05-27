@@ -29,7 +29,7 @@ import WhatsAppQRPopup from "@/components/WhatsAppQRPopup";
 export default function Page() {
   return (
     <>
-      <WhatsAppQRPopup />
+      {/* <WhatsAppQRPopup /> */}
       <LandingPage />
     </>
   );
