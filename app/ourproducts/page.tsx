@@ -3,7 +3,7 @@
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { motion } from "framer-motion";
-import { FiLayers, FiZap, FiChevronRight, FiCheckCircle, FiShield, FiGlobe, FiCpu } from "react-icons/fi";
+import { FiLayers, FiZap, FiChevronRight, FiCheckCircle, FiShield, FiGlobe, FiCpu, FiShare2 } from "react-icons/fi";
 import Link from "next/link";
 
 export default function OurProductsPage() {
@@ -39,6 +39,23 @@ export default function OurProductsPage() {
         "24/7 monitoring"
       ],
       color: "from-purple-600 to-indigo-400"
+    },
+    {
+      id: "social-store-builder",
+      name: "Social Store Builder",
+      tagline: "Sell on Instagram, WhatsApp & Telegram",
+      desc: "Launch your own branded social commerce storefront and sell gaming products directly on Instagram, WhatsApp, and Telegram — no coding required, up in minutes.",
+      icon: FiShare2,
+      features: [
+        "Instagram & WhatsApp ready",
+        "One-click product sharing",
+        "Built-in order tracking",
+        "No-code setup",
+        "Branded storefront link",
+        "Real-time notifications"
+      ],
+      color: "from-pink-500 to-rose-400",
+      isNew: true,
     }
   ];
 
@@ -77,9 +94,16 @@ export default function OurProductsPage() {
                   viewport={{ once: true }}
                   className="flex-1 space-y-6"
                 >
-                  <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+                  <div className="relative inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20">
                     <product.icon className="text-[var(--accent)]" size={16} />
-                    <span className="text-[9px] font-black uppercase tracking-widest text-[var(--accent)] italic">Product 0{i + 1}</span>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-[var(--accent)] italic">
+                      {(product as any).isNew ? "✦ New Product" : `Product 0${i + 1}`}
+                    </span>
+                    {(product as any).isNew && (
+                      <span className="ml-1 px-2 py-0.5 bg-[var(--accent)] text-white text-[8px] font-black rounded-full uppercase tracking-widest animate-pulse shadow-[0_0_10px_rgba(var(--accent-rgb),0.5)]">
+                        NEW
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-2">

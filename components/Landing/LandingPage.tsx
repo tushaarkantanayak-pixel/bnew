@@ -80,8 +80,164 @@ export default function LandingPage() {
           style={{ backgroundImage: `radial-gradient(var(--accent) 0.5px, transparent 0.5px)`, backgroundSize: '24px 24px' }} />
       </div>
 
-      {/* --- HERO SECTION --- */}
-      <section className="relative pt-24 pb-12 md:pb-16 overflow-hidden bg-[var(--background)] text-[var(--foreground)] min-h-[60vh] flex items-center border-b border-[var(--border)]">
+      {/* ============================================================ */}
+      {/* MOBILE HERO — full-bleed, shown only below md breakpoint      */}
+      {/* ============================================================ */}
+      <section className="relative md:hidden overflow-hidden" style={{ height: "100svh", minHeight: "640px" }}>
+
+        {/* ── Background image ── */}
+        <img
+          src="/landing/1.png"
+          alt="Hero"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ zIndex: 0 }}
+        />
+
+        {/* ── Heavy dark gradient from bottom so text always readable ── */}
+        <div
+          className="absolute inset-0"
+          style={{
+            zIndex: 1,
+            background: "linear-gradient(to top, #000000 0%, #000000cc 38%, #00000066 60%, transparent 100%)"
+          }}
+        />
+        {/* left-side dark strip for badge readability */}
+        <div
+          className="absolute inset-0"
+          style={{ zIndex: 1, background: "linear-gradient(to right, #000000aa 0%, transparent 70%)" }}
+        />
+
+        {/* ── TOP badge ── */}
+        <div className="absolute top-0 left-0 right-0 pt-4 px-5" style={{ zIndex: 2 }}>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20"
+            style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(12px)" }}
+          >
+            <FiShield size={10} color="var(--accent)" />
+            <span style={{ color: "var(--accent)", fontSize: "9px", fontWeight: 900, letterSpacing: "0.22em", textTransform: "uppercase" }}>
+              India&apos;s Most Trusted Gaming Infrastructure
+            </span>
+          </motion.div>
+        </div>
+
+        {/* ── BOTTOM content: heading + subtitle + CTAs ── */}
+        <div
+          className="absolute bottom-0 left-0 right-0 px-5 flex flex-col gap-4"
+          style={{ zIndex: 2, paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 80px)" }}
+        >
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            style={{
+              fontSize: "clamp(2.2rem, 10vw, 3rem)",
+              fontWeight: 1000,
+              lineHeight: 1,
+              letterSpacing: "-0.03em",
+              textTransform: "uppercase",
+              fontStyle: "italic",
+              color: "#ffffff",
+              margin: 0,
+            }}
+          >
+            BUILD YOUR{" "}
+            <span style={{ color: "var(--accent)" }}>STORE &amp;<br />ESPORTS</span>
+            <br />EMPIRE{" "}
+            <span style={{ color: "var(--accent)" }}>TODAY</span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            style={{ color: "rgba(255,255,255,0.65)", fontSize: "12px", fontWeight: 500, lineHeight: 1.5, margin: 0 }}
+          >
+            Dominate the game. We handle the infrastructure.
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.26 }}
+            className="flex flex-col gap-3 w-full"
+          >
+            {/* Primary — Request Service */}
+            <Link
+              href="/contact"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "12px",
+                padding: "14px 24px",
+                borderRadius: "16px",
+                background: "var(--accent)",
+                color: "#ffffff",
+                fontWeight: 900,
+                fontSize: "13px",
+                textTransform: "uppercase",
+                letterSpacing: "0.22em",
+                fontStyle: "italic",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                textDecoration: "none",
+              }}
+            >
+              <span style={{ color: "#ffffff" }}>Request Service</span>
+              <span style={{
+                width: 30, height: 30, borderRadius: "50%",
+                background: "rgba(255,255,255,0.22)",
+                display: "flex", alignItems: "center", justifyContent: "center"
+              }}>
+                <FiArrowRight size={15} color="#ffffff" />
+              </span>
+            </Link>
+
+            {/* Secondary — Build Your Own Store */}
+            <a
+              href="https://web.bluebuff.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                padding: "13px 24px",
+                borderRadius: "16px",
+                border: "1.5px solid rgba(255,255,255,0.25)",
+                background: "rgba(255,255,255,0.07)",
+                backdropFilter: "blur(12px)",
+                color: "#ffffff",
+                fontWeight: 900,
+                fontSize: "11px",
+                textTransform: "uppercase",
+                letterSpacing: "0.18em",
+                fontStyle: "italic",
+                textDecoration: "none",
+              }}
+            >
+              <span style={{
+                width: 7, height: 7, borderRadius: "50%",
+                background: "var(--accent)",
+                flexShrink: 0,
+                boxShadow: "0 0 8px var(--accent)"
+              }} />
+              <span style={{ color: "#ffffff" }}>Build Your Own Store</span>
+              <FiArrowRight size={13} color="#ffffff" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* DESKTOP HERO — shown only on md+                             */}
+      {/* ============================================================ */}
+      <section className="relative hidden md:flex pt-14 pb-12 md:pb-16 overflow-hidden bg-[var(--background)] text-[var(--foreground)] min-h-[60vh] items-center border-b border-[var(--border)]">
         
         {/* Background glow effects */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -119,6 +275,7 @@ export default function LandingPage() {
               {[
                 "Game Top-up API",
                 "Custom Websites",
+                "Social Store Builder",
                 "Safe Hosting",
                 "Payment Gateway",
                 "Logo & Design",
@@ -170,6 +327,18 @@ export default function LandingPage() {
                   </div>
                 </span>
               </Link>
+
+              {/* Build Your Own Store secondary CTA */}
+              <a
+                href="https://web.bluebuff.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group w-full sm:w-auto self-start inline-flex items-center gap-3 px-8 py-3.5 rounded-2xl border border-[var(--accent)]/40 bg-[var(--accent)]/5 text-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] md:text-[12px] italic transition-all duration-300 hover:bg-[var(--accent)]/15 hover:border-[var(--accent)]/70 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_-5px_rgba(var(--accent-rgb),0.3)]"
+              >
+                <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse shrink-0" />
+                Build Your Own Store
+                <FiArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
             </motion.div>
             
             {/* The sweeping arc line decoration */}
@@ -362,42 +531,73 @@ export default function LandingPage() {
             <p className="text-sm text-[var(--muted)] max-w-lg mx-auto">Core systems powering the next generation of esports platforms.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {[
               {
                 name: "Game Topup System",
                 desc: "The ultimate solution for selling game items. Fully automated, lightning fast, and highly secure for high-volume transactions.",
                 icon: FiLayers,
                 features: ["Real-time ID verification", "Multi-game support", "Instant delivery", "Comprehensive dashboard"],
+                tag: "Core Product",
+                color: "from-blue-500 to-cyan-400",
               },
               {
                 name: "Payment Gateway",
                 desc: "A secure, robust payment infrastructure designed specifically to handle gaming transactions with zero downtime.",
                 icon: FiZap,
                 features: ["Instant settlements", "Ultra-low fees", "Bank-grade security", "99.99% uptime SLA"],
-              }
+                tag: "Infrastructure",
+                color: "from-purple-500 to-indigo-400",
+              },
+              {
+                name: "Social Store Builder",
+                desc: "Launch your own branded social commerce store and sell gaming products directly through Instagram, WhatsApp, and Telegram with zero friction.",
+                icon: FiUsers,
+                features: ["Instagram & WhatsApp ready", "One-click product sharing", "Built-in order tracking", "No-code setup"],
+                tag: "New",
+                color: "from-pink-500 to-rose-400",
+                isNew: true,
+              },
             ].map((product, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group relative p-8 md:p-12 rounded-3xl bg-[var(--card)]/40 border border-white/5 hover:border-[var(--accent)]/30 hover:bg-[var(--card)]/60 transition-all duration-700 overflow-hidden"
+                transition={{ delay: i * 0.1 }}
+                className={`group relative p-8 md:p-10 rounded-3xl bg-[var(--card)]/40 border ${
+                  (product as any).isNew
+                    ? 'border-[var(--accent)]/40 shadow-[0_0_40px_rgba(var(--accent-rgb),0.1)]'
+                    : 'border-white/5 hover:border-[var(--accent)]/30'
+                } hover:bg-[var(--card)]/60 transition-all duration-700 overflow-hidden`}
               >
                 {/* Background glow effect */}
-                <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[var(--accent)]/5 rounded-full blur-[80px] -mr-20 -mt-20 pointer-events-none group-hover:bg-[var(--accent)]/10 transition-colors duration-700" />
+                <div className={`absolute top-0 right-0 w-[300px] h-[300px] bg-gradient-to-br ${(product as any).color} opacity-5 rounded-full blur-[80px] -mr-20 -mt-20 pointer-events-none group-hover:opacity-10 transition-opacity duration-700`} />
+
+                {(product as any).isNew && (
+                  <div className="absolute -top-3 -right-3 z-20">
+                    <div className="px-3 py-1 bg-[var(--accent)] text-white text-[9px] font-black rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(var(--accent-rgb),0.5)] animate-pulse">
+                      NEW
+                    </div>
+                  </div>
+                )}
 
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] mb-8 border border-[var(--accent)]/20 shadow-[0_0_20px_rgba(var(--accent-rgb),0.2)] group-hover:scale-110 transition-transform">
-                    <product.icon className="w-8 h-8" />
+                  <div className="flex items-start justify-between mb-8">
+                    <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/20 shadow-[0_0_20px_rgba(var(--accent-rgb),0.2)] group-hover:scale-110 transition-transform">
+                      <product.icon className="w-8 h-8" />
+                    </div>
+                    <span className="px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[9px] font-black uppercase tracking-widest text-[var(--accent)]">
+                      {(product as any).tag}
+                    </span>
                   </div>
 
-                  <h3 className="text-3xl font-[1000] tracking-tighter mb-4 group-hover:text-[var(--accent)] transition-colors">{product.name}</h3>
-                  <p className="text-sm text-[var(--muted)] leading-relaxed mb-8">
+                  <h3 className="text-2xl md:text-3xl font-[1000] tracking-tighter mb-4 group-hover:text-[var(--accent)] transition-colors">{product.name}</h3>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed mb-8 flex-grow">
                     {product.desc}
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
                     {product.features.map((f, j) => (
                       <div key={j} className="flex items-center gap-3 text-xs font-bold text-[var(--muted)]">
                         <FiCheck className="text-[var(--accent)]" size={14} />
@@ -406,9 +606,9 @@ export default function LandingPage() {
                     ))}
                   </div>
 
-                  <button className="mt-auto self-start inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[10px] font-bold uppercase tracking-widest text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all group/btn">
+                  <Link href="/ourproducts" className="mt-auto self-start inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[10px] font-bold uppercase tracking-widest text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all group/btn">
                     Explore Details <FiArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             ))}
