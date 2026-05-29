@@ -104,11 +104,11 @@ export default function GameSwitcher() {
     );
 
     return (
-        <div className="w-full mb-8 relative z-20">
-            <div className="flex items-center justify-between mb-4 px-1">
-                <div className="flex items-center gap-3">
-                    <div className="w-8 h-[2px] bg-[var(--accent)]" />
-                    <h3 className="text-[10px] md:text-xs font-black text-[var(--foreground)] uppercase tracking-[0.3em] opacity-50">
+        <div className="w-full mb-5 relative z-20">
+            <div className="flex items-center justify-between mb-2.5 px-1">
+                <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-[2px] bg-[var(--accent)]" />
+                    <h3 className="text-[9px] md:text-[10px] font-black text-[var(--foreground)] uppercase tracking-[0.3em] opacity-50">
                         Quick Switch
                     </h3>
                 </div>
@@ -116,7 +116,7 @@ export default function GameSwitcher() {
 
             <div
                 ref={scrollContainerRef}
-                className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide snap-x no-scrollbar"
+                className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide snap-x no-scrollbar"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {games.map((game, idx) => (
@@ -139,7 +139,7 @@ function SwitcherItem({ game, idx, isActive, handleSwitch }) {
 
     return (
         <div
-            className="flex-shrink-0 flex flex-col items-center gap-1.5 snap-center transition-all duration-500"
+            className="flex-shrink-0 flex flex-col items-center gap-1.5 snap-center transition-all duration-500 w-[52px] md:w-[60px]"
         >
             <motion.button
                 onClick={() => handleSwitch(game)}
@@ -149,7 +149,7 @@ function SwitcherItem({ game, idx, isActive, handleSwitch }) {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className={`
-                    relative w-14 h-14 md:w-16 md:h-16 rounded-[1.25rem] transition-all duration-500 group
+                    relative w-12 h-12 md:w-14 md:h-14 rounded-2xl transition-all duration-500 group
                     ${isActive
                         ? "ring-2 ring-[var(--accent)] shadow-[0_8px_20px_-5px_rgba(var(--accent-rgb),0.4)]"
                         : "opacity-50 hover:opacity-100 grayscale hover:grayscale-0"
@@ -157,11 +157,11 @@ function SwitcherItem({ game, idx, isActive, handleSwitch }) {
                 `}
             >
                 {/* Reflection Shimmer */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.25rem] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent w-full skew-x-[-20deg]" />
                 </div>
 
-                <div className="relative w-full h-full rounded-[1.25rem] overflow-hidden bg-[var(--card)] ring-1 ring-white/10 group-hover:ring-white/20 flex items-center justify-center">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[var(--card)] ring-1 ring-white/10 group-hover:ring-white/20 flex items-center justify-center">
                     {(!game.gameImageId?.image || imgError) ? (
                         <div className="w-full h-full flex items-center justify-center bg-[var(--accent)]/10 text-[var(--accent)] font-black text-lg italic uppercase">
                             {game.gameName?.charAt(0)}
@@ -181,13 +181,13 @@ function SwitcherItem({ game, idx, isActive, handleSwitch }) {
 
                 {/* Active Glow Backdrop */}
                 {isActive && (
-                    <div className="absolute inset-0 -z-10 bg-[var(--accent)] blur-xl opacity-20 scale-125 rounded-[1.25rem]" />
+                    <div className="absolute inset-0 -z-10 bg-[var(--accent)] blur-xl opacity-20 scale-125 rounded-2xl" />
                 )}
             </motion.button>
 
             {/* Game Name Label - Always Visible */}
             <p className={`
-                text-[7px] md:text-[8px] font-black uppercase tracking-wider text-center transition-colors duration-300
+                text-[7px] md:text-[8px] font-black uppercase tracking-wider text-center transition-colors duration-300 w-full line-clamp-2 break-words leading-tight
                 ${isActive ? 'text-[var(--accent)]' : 'text-[var(--muted)] opacity-60 group-hover:opacity-100'}
             `}>
                 {game.gameName}

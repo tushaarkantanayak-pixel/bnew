@@ -71,7 +71,7 @@ export default function UsdtTab() {
            Crypto Deposits
         </h2>
         
-        <div className="flex gap-2 bg-[var(--background)] p-1 rounded-xl border border-[var(--border)] overflow-x-auto no-scrollbar max-w-full">
+        <div className="grid grid-cols-3 md:flex md:flex-row gap-1 md:gap-2 bg-[var(--background)] p-1 rounded-xl border border-[var(--border)] w-full md:w-auto">
           {[
             { id: "waiting", label: "Waiting" },
             { id: "submitted", label: "Submitted" },
@@ -82,9 +82,9 @@ export default function UsdtTab() {
             <button
               key={s.id}
               onClick={() => { setStatus(s.id); setPage(1); }}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap flex-shrink-0 ${
+              className={`px-1 py-1.5 md:px-4 md:py-1.5 rounded-lg text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap text-center ${
                 status === s.id 
-                  ? "bg-green-500 text-black shadow-lg" 
+                  ? "bg-green-500 text-black shadow-sm md:shadow-lg" 
                   : "text-[var(--muted)] hover:text-[var(--foreground)]"
               }`}
             >

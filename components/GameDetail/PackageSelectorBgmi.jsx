@@ -20,21 +20,21 @@ export default function PackageSelector({
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-0">
       {/* ================= HEADER & VIEW TOGGLE ================= */}
-      <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="mb-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <h2 className="text-xl font-[950] tracking-tighter text-[var(--foreground)] lowercase">
-            select <span className="text-[var(--accent)] drop-shadow-[0_0_10px_rgba(var(--accent-rgb),0.3)]">package</span>
+             <span className="text-[var(--accent)] drop-shadow-[0_0_10px_rgba(var(--accent-rgb),0.3)]">package</span>
           </h2>
           <span className="hidden sm:block w-4 h-[1px] bg-[var(--border)]" />
           <p className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]/50">
-            {items.length} options
+            {items.length} packs
           </p>
         </div>
 
         {/* Compact Glass Toggle */}
-        <div className="bg-[var(--card)]/30 backdrop-blur-xl p-0.5 rounded-xl border border-[var(--border)] flex relative w-max ring-1 ring-white/5 shadow-xl">
+        <div className="bg-[var(--card)]/30 backdrop-blur-xl p-0.5 rounded-[10px] border border-[var(--border)] flex relative w-max ring-1 ring-white/5 shadow-xl">
           <motion.div
-            className="absolute top-0.5 bottom-0.5 bg-[var(--accent)] rounded-[10px] z-0"
+            className="absolute top-0.5 bottom-0.5 bg-[var(--accent)] rounded-lg z-0"
             initial={false}
             animate={{
               x: viewMode === "grid" ? 0 : "100%",
@@ -45,16 +45,18 @@ export default function PackageSelector({
 
           <button
             onClick={() => setViewMode("grid")}
-            className={`relative z-10 px-4 py-1 flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${viewMode === "grid" ? "text-white" : "text-[var(--muted)] hover:text-[var(--foreground)]"}`}
+            title="Grid View"
+            className={`relative z-10 w-9 h-7 flex items-center justify-center transition-all duration-300 ${viewMode === "grid" ? "text-white" : "text-[var(--muted)] hover:text-[var(--foreground)]"}`}
           >
-            <FiGrid size={11} /> Grid
+            <FiGrid size={14} />
           </button>
 
           <button
             onClick={() => setViewMode("slider")}
-            className={`relative z-10 px-4 py-1 flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${viewMode === "slider" ? "text-white" : "text-[var(--muted)] hover:text-[var(--foreground)]"}`}
+            title="Slider View"
+            className={`relative z-10 w-9 h-7 flex items-center justify-center transition-all duration-300 ${viewMode === "slider" ? "text-white" : "text-[var(--muted)] hover:text-[var(--foreground)]"}`}
           >
-            <FiList size={11} /> Slider
+            <FiList size={14} />
           </button>
         </div>
       </div>
@@ -75,7 +77,7 @@ export default function PackageSelector({
                 const isActive = activeItem.itemSlug === item.itemSlug;
 
                 return (
-                  <motion.div
+                  <div
                     key={item.itemSlug}
                     onClick={() => {
                       setActiveItem(item);
@@ -84,24 +86,12 @@ export default function PackageSelector({
                         block: "center",
                       });
                     }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`relative group rounded-2xl p-4 cursor-pointer border transition-all duration-500 overflow-hidden
+                    className={`relative group rounded-2xl p-4 cursor-pointer border transition-all duration-200 overflow-hidden active:scale-[0.98]
                     ${isActive
                         ? "border-[var(--accent)] bg-[var(--accent)]/[0.04] shadow-[0_10px_30px_-10px_rgba(var(--accent-rgb),0.3)] ring-1 ring-[var(--accent)]/30"
                         : "border-[var(--border)] bg-[var(--card)]/40 hover:border-[var(--accent)]/30"
                       }`}
                   >
-                    {isActive && (
-                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                        <motion.div
-                          initial={{ x: "-100%" }}
-                          animate={{ x: "200%" }}
-                          transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
-                          className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent skew-x-[-20deg]"
-                        />
-                      </div>
-                    )}
-
                     {isActive && (
                       <div className="absolute top-2 right-2 text-[var(--accent)] opacity-80">
                         <FiCheckCircle size={12} />
@@ -149,7 +139,7 @@ export default function PackageSelector({
                         )}
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
@@ -165,17 +155,17 @@ export default function PackageSelector({
                   const isActive = activeItem.itemSlug === item.itemSlug;
 
                   return (
-                    <motion.div
+                    <div
                       key={item.itemSlug}
                       onClick={() => scrollToItem(item)}
-                      className={`relative snap-center min-w-[200px] rounded-3xl p-6 cursor-pointer transition-all duration-500 border flex flex-col justify-between overflow-hidden
+                      className={`relative snap-center min-w-[120px] rounded-2xl p-3 cursor-pointer transition-all duration-200 border flex flex-col justify-between overflow-hidden active:scale-[0.98]
                       ${isActive
-                          ? "border-[var(--accent)] bg-[var(--accent)]/[0.04] scale-[1.03] shadow-[0_20px_40px_-15px_rgba(var(--accent-rgb),0.3)] ring-1 ring-[var(--accent)]/30"
+                          ? "border-[var(--accent)] bg-[var(--accent)]/[0.04] shadow-[0_20px_40px_-15px_rgba(var(--accent-rgb),0.3)] ring-1 ring-[var(--accent)]/30"
                           : "border-[var(--border)] bg-[var(--card)]/40 opacity-70 hover:opacity-100 hover:border-[var(--accent)]/30"
                         }`}
                     >
-                      <div className="mb-8">
-                        <div className={`relative w-10 h-10 rounded-2xl overflow-hidden mb-4 transition-all duration-500 ${isActive ? "shadow-xl shadow-[var(--accent)]/30 ring-1 ring-[var(--accent)]" : "bg-[var(--card)] border border-[var(--border)]"}`}>
+                      <div className="mb-2">
+                        <div className={`relative w-7 h-7 rounded-[10px] overflow-hidden mb-1.5 transition-all duration-500 ${isActive ? "shadow-xl shadow-[var(--accent)]/30 ring-1 ring-[var(--accent)]" : "bg-[var(--card)] border border-[var(--border)]"}`}>
                           <Image
                             src={item?.itemImageId?.image || item?.image || "/logo.png"}
                             alt={item.itemName}
@@ -184,37 +174,37 @@ export default function PackageSelector({
                             className={`object-cover ${item.itemAvailablity === false ? "grayscale opacity-50" : ""}`}
                           />
                         </div>
-                        <p className={`text-xs font-[900] tracking-tight transition-colors duration-300 ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]"}`}>
+                        <p className={`text-[10px] sm:text-[11px] font-[900] tracking-tight line-clamp-2 leading-snug transition-colors duration-300 ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]"}`}>
                           {item.itemName}
                         </p>
                       </div>
 
                       {item.itemAvailablity === false && (
-                        <div className="absolute top-4 right-4 z-30">
-                          <span className="bg-rose-500 text-white text-[7px] font-[1000] px-2 py-0.5 rounded-full uppercase tracking-widest border border-rose-400">
+                        <div className="absolute top-2 right-2 z-30">
+                          <span className="bg-rose-500 text-white text-[6px] font-[1000] px-1.5 py-0.5 rounded-full uppercase tracking-widest border border-rose-400">
                             Out of Stock
                           </span>
                         </div>
                       )}
 
-                      <div className={`pt-4 border-t border-[var(--border)] ${item.itemAvailablity === false ? "opacity-30" : ""}`}>
-                        <div className="flex items-baseline gap-2">
-                          <p className={`text-3xl font-[1000] tracking-tighter ${isActive ? "text-[var(--accent)]" : "text-[var(--foreground)]"}`}>
+                      <div className={`pt-2 border-t border-[var(--border)] ${item.itemAvailablity === false ? "opacity-30" : ""}`}>
+                        <div className="flex items-baseline gap-1.5">
+                          <p className={`text-xl font-[1000] tracking-tighter ${isActive ? "text-[var(--accent)]" : "text-[var(--foreground)]"}`}>
                             {formatPrice(item.sellingPrice)}
                           </p>
                           {item.dummyPrice && (
-                            <p className="text-[11px] font-bold text-[var(--muted)] line-through opacity-20">
+                            <p className="text-[9px] font-bold text-[var(--muted)] line-through opacity-20">
                               {formatPrice(item.dummyPrice)}
                             </p>
                           )}
                         </div>
                         {discount > 0 && item.itemAvailablity !== false && (
-                          <p className="text-[8px] font-black text-[var(--accent)] uppercase tracking-[0.2em] mt-1">
+                          <p className="text-[6px] font-black text-[var(--accent)] uppercase tracking-[0.2em] mt-0.5">
                             save {discount}% now
                           </p>
                         )}
                       </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>

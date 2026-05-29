@@ -25,6 +25,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "1gamestopup.com",
+      },
+      {
+        protocol: "https",
+        hostname: "elitedias.com",
       }
     ],
   },

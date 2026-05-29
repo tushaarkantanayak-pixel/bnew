@@ -349,63 +349,52 @@ export default function PromotionalTab() {
   return (
     <div className="space-y-6 pb-10">
       {/* ================= PREMIUM DASHBOARD HEADER ================= */}
-      <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[var(--foreground)] flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-[var(--accent)] flex items-center justify-center text-white shadow-lg shadow-[var(--accent)]/20">
-                <Send size={20} />
-              </div>
-              Promotional Hub
-            </h2>
-            <p className="text-xs sm:text-sm text-[var(--muted)]/60 font-medium mt-1 ml-[52px]">
-              Advanced audience segmentation & automated campaign delivery.
-            </p>
-          </div>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-lg sm:text-xl font-black tracking-tight text-[var(--foreground)] flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-[var(--accent)] flex items-center justify-center text-white shadow-sm shadow-[var(--accent)]/20">
+              <Send size={14} />
+            </div>
+            Promo Mail
+          </h2>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <button 
                onClick={syncAllTags}
                disabled={tagUpdateLoading}
-               className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 hover:bg-indigo-500 text-indigo-500 hover:text-white transition-all group disabled:opacity-40 shadow-xl shadow-indigo-500/5 active:scale-95"
-               title="Initialize tags for all users in database"
+               className="p-1.5 sm:p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-500 hover:bg-indigo-500 hover:text-white transition-all disabled:opacity-40 shadow-sm outline-none active:scale-95 group"
+               title="Sync Database (Add missing tags)"
             >
-              <div className={`p-1.5 rounded-lg ${tagUpdateLoading ? '' : 'bg-indigo-500/10 group-hover:bg-white/20'}`}>
-                <RefreshCcw size={16} className={tagUpdateLoading ? "animate-spin" : "group-hover:rotate-180 transition-transform duration-700"} />
-              </div>
-              <div className="flex flex-col items-start leading-tight">
-                 <span className="text-[11px] font-black uppercase tracking-wider">Sync Database</span>
-                 <span className="text-[9px] font-bold opacity-60">Add missing category tags</span>
-              </div>
+              <RefreshCcw size={14} className={tagUpdateLoading ? "animate-spin" : "group-hover:rotate-180 transition-transform duration-700"} />
             </button>
           </div>
         </div>
 
         {/* STATS TILES */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <StatTile 
-            icon={<Send size={18} />} 
+            icon={<Send size={14} />} 
             label="Mails Today" 
             value={stats.todayEmails.toLocaleString()} 
             sub="Active Campaign"
             color="emerald"
           />
           <StatTile 
-            icon={<Mail size={18} />} 
+            icon={<Mail size={14} />} 
             label="Total reach" 
             value={stats.totalEmails.toLocaleString()} 
             sub="Past Lifetime"
             color="amber"
           />
           <StatTile 
-            icon={<Globe size={18} />} 
+            icon={<Globe size={14} />} 
             label="External" 
             value={manualEmails.length.toLocaleString()} 
             sub="Manual Added"
             color="blue"
           />
           <StatTile 
-            icon={<Users size={18} />} 
+            icon={<Users size={14} />} 
             label="Database" 
             value={totalRecords.toLocaleString()} 
             sub="Total Contacts"
@@ -822,14 +811,14 @@ function StatTile({ icon, label, value, sub, color }) {
   };
 
   return (
-    <div className={`p-4 rounded-3xl border ${colors[color]} bg-[var(--card)] flex items-center gap-4 transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-${color}-500/5`}>
-      <div className={`w-10 h-10 rounded-2xl ${colors[color].split(' ')[0]} flex items-center justify-center shrink-0`}>
+    <div className={`p-2.5 sm:p-3 rounded-xl border ${colors[color]} bg-[var(--card)] flex items-center gap-2.5 sm:gap-3 transition-all hover:scale-[1.02] shadow-sm`}>
+      <div className={`w-8 h-8 rounded-lg ${colors[color].split(' ')[0]} flex items-center justify-center shrink-0`}>
         {icon}
       </div>
       <div className="flex flex-col min-w-0">
-        <span className="text-[10px] font-black uppercase tracking-widest opacity-60 leading-none mb-1">{label}</span>
-        <span className="text-lg font-black text-[var(--foreground)] leading-none truncate">{value}</span>
-        <span className="text-[8px] font-bold opacity-40 uppercase tracking-tighter mt-1">{sub}</span>
+        <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest opacity-60 leading-none mb-0.5">{label}</span>
+        <span className="text-sm sm:text-base font-black text-[var(--foreground)] leading-none truncate">{value}</span>
+        <span className="text-[7px] sm:text-[8px] font-bold opacity-40 uppercase tracking-tighter mt-0.5">{sub}</span>
       </div>
     </div>
   );

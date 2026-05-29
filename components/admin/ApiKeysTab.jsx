@@ -47,26 +47,21 @@ export default function ApiKeysTab() {
     return (
         <div className="space-y-6 pb-10">
             {/* ================= HEADER ================= */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
-                <div>
-                    <h2 className="text-xl font-black tracking-tight text-[var(--foreground)] uppercase bg-gradient-to-r from-[var(--foreground)] to-[var(--foreground)]/60 bg-clip-text text-transparent">API Keys</h2>
-                    <p className="text-[10px] text-[var(--muted)] font-bold uppercase tracking-widest opacity-40 mt-1">
-                        Developer monitoring dashboard.
-                    </p>
-                </div>
+            <div className="flex items-center justify-between gap-4 pb-2">
+                <h2 className="text-lg sm:text-xl font-black tracking-tight text-[var(--foreground)] uppercase bg-gradient-to-r from-[var(--foreground)] to-[var(--foreground)]/60 bg-clip-text text-transparent">API Keys</h2>
 
-                <div className="flex items-center gap-2">
-                    <div className="px-4 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center gap-3 shadow-sm">
-                        <Key size={14} className="text-[var(--accent)]" />
-                        <span className="text-sm font-black text-[var(--foreground)] tabular-nums">
-                            {keys.length} <span className="text-[9px] text-[var(--muted)] uppercase tracking-tighter opacity-40 ml-1">Active</span>
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] flex items-center gap-1.5 sm:gap-2 shadow-sm">
+                        <Key size={12} className="text-[var(--accent)]" />
+                        <span className="text-[11px] sm:text-sm font-semibold text-[var(--muted)]">
+                            <span className="text-[var(--foreground)]">{keys.length}</span> <span className="hidden sm:inline">Active</span>
                         </span>
                     </div>
                     <button
                         onClick={fetchKeys}
-                        className="w-10 h-10 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/30 active:scale-95 transition-all outline-none flex items-center justify-center"
+                        className="p-1.5 sm:p-2.5 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] active:scale-95 transition-all outline-none"
                     >
-                        <RefreshCcw size={16} className={loading ? "animate-spin" : ""} />
+                        <RefreshCcw size={14} className={loading ? "animate-spin" : ""} />
                     </button>
                 </div>
             </div>
@@ -195,44 +190,44 @@ export default function ApiKeysTab() {
                         </div>
  
                         {/* MOBILE LIST */}
-                        <div className="lg:hidden space-y-4">
+                        <div className="lg:hidden space-y-3">
                             {keys.map((k, idx) => (
                                 <motion.div
                                     key={k._id}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: idx * 0.05 }}
-                                    className="group relative p-4.5 rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all overflow-hidden"
+                                    className="group relative p-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)] transition-all overflow-hidden"
                                 >
-                                    <div className="flex justify-between items-center mb-4 pb-3 border-b border-[var(--border)]/50">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-[var(--foreground)]/[0.05] border border-[var(--border)] flex items-center justify-center text-[var(--muted)]">
-                                                <User size={18} />
+                                    <div className="flex justify-between items-center mb-2.5 pb-2.5 border-b border-[var(--border)]/50">
+                                        <div className="flex items-center gap-2.5">
+                                            <div className="w-8 h-8 rounded-lg bg-[var(--foreground)]/[0.05] border border-[var(--border)] flex items-center justify-center text-[var(--muted)]">
+                                                <User size={14} />
                                             </div>
                                             <div className="flex flex-col min-w-0">
-                                                <span className="text-sm font-black text-[var(--foreground)] truncate uppercase leading-tight">{k.userDetails?.name || "Unknown User"}</span>
-                                                <span className="text-[10px] text-[var(--muted)]/60 font-medium truncate lowercase">{k.userDetails?.email || "No email"}</span>
+                                                <span className="text-xs font-black text-[var(--foreground)] truncate uppercase leading-tight">{k.userDetails?.name || "Unknown User"}</span>
+                                                <span className="text-[9px] text-[var(--muted)]/60 font-medium truncate lowercase">{k.userDetails?.email || "No email"}</span>
                                             </div>
                                         </div>
                                         {k.hasRecentOrder ? (
-                                            <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-emerald-500/10 text-emerald-500 font-black">
+                                            <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 font-black">
                                                 <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
-                                                <span className="text-[8px] uppercase tracking-widest">Active</span>
+                                                <span className="text-[7px] uppercase tracking-widest">Active</span>
                                             </div>
                                         ) : (
-                                            <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)]/40 px-2">Offline</div>
+                                            <div className="text-[7px] font-black uppercase tracking-widest text-[var(--muted)]/40 px-1">Offline</div>
                                         )}
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4 pb-4">
-                                        <div className="flex flex-col gap-1">
+                                    <div className="grid grid-cols-2 gap-3 pb-2.5">
+                                        <div className="flex flex-col gap-0.5">
                                             <span className="text-[8px] font-black uppercase tracking-[0.1em] text-[var(--muted)] opacity-30">Key Name</span>
-                                            <span className="text-xs font-black text-[var(--foreground)] truncate uppercase">{k.name}</span>
-                                            <span className="text-[10px] font-mono text-[var(--muted)] opacity-30 italic">•••• {k.lastFour}</span>
+                                            <span className="text-[11px] font-black text-[var(--foreground)] truncate uppercase">{k.name}</span>
+                                            <span className="text-[9px] font-mono text-[var(--muted)] opacity-30 italic">•••• {k.lastFour}</span>
                                         </div>
-                                        <div className="flex flex-col gap-1 text-right">
+                                        <div className="flex flex-col gap-0.5 text-right">
                                             <span className="text-[8px] font-black uppercase tracking-[0.1em] text-[var(--muted)] opacity-30">Last Used</span>
-                                            <span className="text-xs font-bold text-[var(--foreground)]">
+                                            <span className="text-[11px] font-bold text-[var(--foreground)]">
                                                 {k.lastUsed ? new Date(k.lastUsed).toLocaleDateString() : "Never"}
                                             </span>
                                             <span className="text-[9px] text-[var(--muted)] font-medium tabular-nums">
@@ -241,7 +236,7 @@ export default function ApiKeysTab() {
                                         </div>
                                     </div>
 
-                                    <div className="pt-2">
+                                    <div className="pt-0.5">
                                         <div className="flex justify-between items-center text-[9px] mb-1.5">
                                             <span className="font-bold text-[var(--muted)] uppercase tracking-tighter opacity-40">Daily Usage</span>
                                             <span className="font-black text-[var(--foreground)] tabular-nums tracking-tighter shadow-sm">
