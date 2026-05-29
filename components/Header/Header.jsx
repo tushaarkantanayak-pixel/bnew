@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { formatPrice } from "@/utils/currency";
 
-import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift } from "react-icons/fi";
+import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiGlobe } from "react-icons/fi";
 
 /* ================= CONFIG ================= */
 const HEADER_CONFIG = {
@@ -22,9 +22,7 @@ const HEADER_CONFIG = {
     { label: "Top-Up", href: "/games", icon: <FiShoppingBag size={14} /> },
     { label: "News", href: "/blog", icon: <FiLayers size={14} /> },
     { label: "Services", href: "/services", icon: <FiGrid size={14} /> },
-    { label: "Out Proucts", href: "/ourproducts", icon: <FiGrid size={14} /> },
-
-
+    { label: "Our Products", href: "/ourproducts", icon: <FiGrid size={14} /> },
   ],
 
   userMenu: {
@@ -60,6 +58,7 @@ const HEADER_CONFIG = {
         title: "Gateway",
         items: [
           { label: "XYZPay.site", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Contact to avail subscription" },
+          { label: "web.bluebuff.in", href: "https://web.bluebuff.in", icon: <FiGlobe size={14} />, desc: "Make your own customised web" },
         ]
       }
     ],
@@ -133,6 +132,7 @@ export default function Header() {
       email: localStorage.getItem("email"),
       userId: localStorage.getItem("userId"),
       avatar: localStorage.getItem("avatar"),
+      userType: localStorage.getItem("userType") || "user",
     };
     if (savedUser.name) setUser(savedUser);
 
@@ -331,7 +331,10 @@ export default function Header() {
                               )}
                             </div>
                             <div className="flex flex-col min-w-0">
-                              <span className="text-sm font-bold text-[var(--foreground)] truncate max-w-[140px] leading-tight">{user.name}</span>
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-bold text-[var(--foreground)] truncate max-w-[140px] leading-tight">{user.name}</span>
+                                <span className="text-[8px] font-black uppercase tracking-wider text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded border border-[var(--accent)]/20">{user.userType || "User"}</span>
+                              </div>
                               <span className="text-[10px] text-[var(--muted)] truncate max-w-[140px] italic">{user.email}</span>
                             </div>
                           </>
@@ -363,14 +366,14 @@ export default function Header() {
                         </div>
                       ) : (
                         <>
-                          <div className="grid grid-cols-3 gap-2 mb-8">
+                          <div className="grid grid-cols-4 gap-1.5 mb-6">
                             {HEADER_CONFIG.nav.map((item) => (
                               <Link
                                 key={item.label}
                                 href={item.href}
                                 target={item.href.startsWith("http") ? "_blank" : undefined}
                                 onClick={() => setUserMenuOpen(false)}
-                                className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[var(--foreground)]/[0.03] border border-white/5 hover:bg-[var(--accent)] hover:text-black transition-all group"
+                                className="flex flex-col items-center justify-center p-2 rounded-xl bg-[var(--foreground)]/[0.03] border border-white/5 hover:bg-[var(--accent)] hover:text-black transition-all group"
                               >
                                 <span className="text-[var(--accent)] group-hover:text-black mb-1.5 transition-colors">{item.icon}</span>
                                 <span className="text-[8px] font-black uppercase tracking-tight leading-none text-center">{item.label}</span>
@@ -378,34 +381,36 @@ export default function Header() {
                             ))}
                           </div>
 
-                          <div className="space-y-6">
+                          <div className="space-y-2.5">
                             {HEADER_CONFIG.userMenu.sections.map((section) => (
-                              <div key={section.title} className="space-y-2.5">
-                                <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 ml-3">{section.title}</h4>
-                                <div className="space-y-1.5">
+                              <div key={section.title} className="space-y-1">
+                                <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 ml-2">{section.title}</h4>
+                                <div className={section.title === "Earning" ? "grid grid-cols-2 gap-1.5" : "space-y-0.5"}>
                                   {section.items.map((item) => (
                                     <Link
                                       key={item.label}
                                       href={item.href}
                                       target={item.href.startsWith("http") ? "_blank" : undefined}
                                       onClick={() => setUserMenuOpen(false)}
-                                      className="flex items-center justify-between p-3 rounded-xl bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group"
+                                      className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1.5 px-1.5" : "justify-between py-1.5 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group`}
                                     >
-                                      <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-lg bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all">{item.icon}</div>
-                                        <div className="flex flex-col">
-                                          <p className="text-xs font-bold text-[var(--foreground)] leading-tight">{item.label}</p>
-                                          <p className="text-[9px] text-[var(--muted)] opacity-50">{item.desc}</p>
+                                      <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-2"} min-w-0`}>
+                                        <div className="w-6 h-6 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
+                                        <div className="flex flex-col min-w-0">
+                                          <p className="text-xs font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
+                                          <p className="text-[8px] text-[var(--muted)] opacity-50 truncate">{item.desc}</p>
                                         </div>
                                       </div>
-                                      <div className="flex items-center gap-2">
-                                        {item.label === "My Wallet" && (
-                                          <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
-                                            {formatPrice(walletBalance)}
-                                          </span>
-                                        )}
-                                        <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
-                                      </div>
+                                      {section.title !== "Earning" && (
+                                        <div className="flex items-center gap-2 flex-shrink-0">
+                                          {item.label === "My Wallet" && (
+                                            <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
+                                              {formatPrice(walletBalance)}
+                                            </span>
+                                          )}
+                                          <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
+                                        </div>
+                                      )}
                                     </Link>
                                   ))}
                                 </div>
