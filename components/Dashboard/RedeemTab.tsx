@@ -46,10 +46,10 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
     };
 
     return (
-        <div className="max-w-4xl mx-auto py-8 sm:py-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-start px-4">
+        <div className="max-w-4xl mx-auto py-4 sm:py-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start px-4">
                 {/* LEFT: FORM SIDE */}
-                <div className="space-y-8">
+                <div className="space-y-4">
 
                     <motion.div
                         initial={{ opacity: 0, y: 15 }}
@@ -57,7 +57,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                         transition={{ delay: 0.2 }}
                         className="w-full"
                     >
-                        <form onSubmit={handleRedeem} className="space-y-4">
+                        <form onSubmit={handleRedeem} className="space-y-3">
                             <div className="space-y-1.5">
                                 <label className="text-[9px] uppercase tracking-widest font-black text-blue-500/40 ml-1">Enter Code</label>
                                 <input
@@ -68,7 +68,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                                         if (status.type) setStatus({ type: null, message: "" });
                                     }}
                                     placeholder="TK-XXXX-XXXX"
-                                    className="w-full bg-[var(--card)]/30 border border-white/5 rounded-xl px-4 py-4 text-lg font-black tracking-widest text-[var(--foreground)] placeholder:text-[var(--muted)]/20 focus:border-blue-500/30 outline-none transition-all"
+                                    className="w-full bg-[var(--card)]/30 border border-white/5 rounded-xl px-3 py-2 text-base font-black tracking-widest text-[var(--foreground)] placeholder:text-[var(--muted)]/20 focus:border-blue-500/30 outline-none transition-all"
                                     autoFocus
                                     disabled={loading}
                                 />
@@ -77,7 +77,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                             <button
                                 type="submit"
                                 disabled={loading || !code.trim()}
-                                className="w-full h-14 rounded-xl bg-blue-600 text-white font-black uppercase tracking-widest italic text-[11px] shadow-lg shadow-blue-500/10 hover:bg-blue-500 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-20"
+                                className="w-full h-10 rounded-lg bg-blue-600 text-white font-black uppercase tracking-widest italic text-[10px] shadow-lg shadow-blue-500/10 hover:bg-blue-500 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-20"
                             >
                                 {loading ? (
                                     <FiLoader className="animate-spin" size={16} />
@@ -96,7 +96,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
-                                    className={`mt-4 p-3 rounded-xl border flex items-center gap-2.5 shadow-sm ${status.type === 'success'
+                                    className={`mt-3 p-2 rounded-lg border flex items-center gap-2.5 shadow-sm ${status.type === 'success'
                                         ? 'bg-emerald-500/10 border-emerald-500/10 text-emerald-400'
                                         : 'bg-rose-500/10 border-rose-500/10 text-rose-400'
                                         }`}
@@ -116,11 +116,11 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                     transition={{ delay: 0.3 }}
                     className="space-y-4"
                 >
-                    <div className="p-6 rounded-3xl bg-[var(--card)]/40 border border-white/5 space-y-6 relative overflow-hidden">
+                    <div className="p-4 rounded-xl bg-[var(--card)]/40 border border-white/5 space-y-4 relative overflow-hidden">
                         <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--muted)] opacity-30">How it works</h3>
 
-                        <div className="space-y-6">
-                            <div className="flex gap-4">
+                        <div className="space-y-4">
+                            <div className="flex gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-blue-500/5 border border-blue-500/10 flex items-center justify-center text-[10px] font-black text-blue-400 shrink-0">1</div>
                                 <div>
                                     <p className="text-[11px] font-black uppercase tracking-tight text-[var(--foreground)]">Enter Code</p>
@@ -128,7 +128,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                                 </div>
                             </div>
 
-                            <div className="flex gap-4">
+                            <div className="flex gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-blue-500/5 border border-blue-500/10 flex items-center justify-center text-[10px] font-black text-blue-400 shrink-0">2</div>
                                 <div>
                                     <p className="text-[11px] font-black uppercase tracking-tight text-[var(--foreground)]">Get Balance</p>
@@ -136,7 +136,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                                 </div>
                             </div>
 
-                            <div className="flex gap-4">
+                            <div className="flex gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-blue-500/5 border border-blue-500/10 flex items-center justify-center text-[10px] font-black text-blue-400 shrink-0">3</div>
                                 <div>
                                     <p className="text-[11px] font-black uppercase tracking-tight text-[var(--foreground)]">Use Instantly</p>
@@ -146,7 +146,7 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
                         </div>
                     </div>
 
-                    <div className="px-5 py-3.5 rounded-2xl bg-blue-500/5 border border-blue-500/10 flex items-center gap-3">
+                    <div className="px-3 py-2 rounded-lg bg-blue-500/5 border border-blue-500/10 flex items-center gap-2">
                         <FiShield className="text-blue-500/60" size={12} />
                         <p className="text-[8px] font-black text-blue-400/60 uppercase tracking-[0.2em]">Your code is safe & secure</p>
                     </div>

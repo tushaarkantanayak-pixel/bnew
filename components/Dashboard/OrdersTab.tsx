@@ -67,9 +67,9 @@ export default function OrdersTab() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* MINIMAL STATS & SEARCH */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-[var(--border)] pb-8 mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--border)] pb-6 mb-2">
         <div>
           <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 italic leading-none mb-2">Registry Volume</p>
           <div className="flex items-end gap-2">
@@ -84,7 +84,7 @@ export default function OrdersTab() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="FILTER REGISTRY..."
-            className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all placeholder:text-[var(--muted)]/30 text-[var(--foreground)] shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
+            className="w-full pl-11 pr-4 py-3 rounded-xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all placeholder:text-[var(--muted)]/30 text-[var(--foreground)] shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
           />
         </div>
       </div>
@@ -113,13 +113,13 @@ export default function OrdersTab() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex flex-col items-center justify-center py-20 border border-dashed border-[var(--border)] rounded-[2.5rem]"
+            className="flex flex-col items-center justify-center py-16 border border-dashed border-[var(--border)] rounded-[2rem]"
           >
             <FiLayers size={32} className="text-[var(--muted)]/20 mb-4" />
             <p className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)]">No orders found</p>
           </motion.div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             <AnimatePresence mode="popLayout">
               {orders.map((order, idx) => (
                 <motion.div
@@ -139,7 +139,7 @@ export default function OrdersTab() {
 
       {/* PAGINATION */}
       {totalPages > 1 && (
-        <div className="pt-8 border-t border-[var(--border)] flex justify-center items-center gap-3">
+        <div className="pt-6 border-t border-[var(--border)] flex justify-center items-center gap-3">
           <button
             disabled={page === 1}
             onClick={() => setPage((p) => p - 1)}

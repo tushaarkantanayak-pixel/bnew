@@ -284,11 +284,11 @@ export default function WalletTab({
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-10">
+    <div className="max-w-2xl mx-auto space-y-6">
       {/* BALANCE */}
       <div className="relative group overflow-hidden">
         <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent blur-3xl opacity-20 pointer-events-none" />
-        <div className="relative p-6 sm:p-8 rounded-[2.5rem] bg-[var(--card)] border border-[var(--border)] flex items-center justify-between overflow-hidden shadow-sm">
+        <div className="relative p-5 sm:p-6 rounded-[2rem] bg-[var(--card)] border border-[var(--border)] flex items-center justify-between overflow-hidden shadow-sm">
           <div className="absolute right-[-20px] top-[-20px] text-[var(--accent)]/5 rotate-12">
             <FiZap size={140} />
           </div>
@@ -314,8 +314,8 @@ export default function WalletTab({
       </div>
 
       {/* ADD MONEY */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-        <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        <div className="space-y-4">
           <AnimatePresence mode="wait">
             {/* ─── INR Input (UPI / no method selected) ─── */}
             {method !== "usdt" && (
@@ -349,7 +349,7 @@ export default function WalletTab({
                         setAmountError("");
                       }
                     }}
-                    className="w-full p-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] focus:bg-[var(--foreground)]/[0.02] focus:border-[var(--accent)]/40 text-2xl font-black italic tracking-tight text-[var(--foreground)] placeholder:text-[var(--muted)]/30 outline-none transition-all"
+                    className="w-full p-3 rounded-xl border border-[var(--border)] bg-[var(--card)] focus:bg-[var(--foreground)]/[0.02] focus:border-[var(--accent)]/40 text-xl font-black italic tracking-tight text-[var(--foreground)] placeholder:text-[var(--muted)]/30 outline-none transition-all"
                   />
                   <div className="absolute right-5 top-1/2 -translate-y-1/2 text-[10px] font-black text-[var(--muted)] uppercase tracking-widest">
                     USD
@@ -379,7 +379,7 @@ export default function WalletTab({
                 <button
                   onClick={handleProceed}
                   disabled={loading}
-                  className="w-full mt-2 p-4 rounded-2xl bg-[var(--accent)] text-black font-black uppercase tracking-[0.2em] italic text-xs shadow-[0_20px_40px_-10px_rgba(var(--accent-rgb),0.3)] hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:grayscale transition-all flex items-center justify-center gap-3"
+                  className="w-full mt-2 p-3 rounded-xl bg-[var(--accent)] text-black font-black uppercase tracking-[0.2em] italic text-xs shadow-[0_20px_40px_-10px_rgba(var(--accent-rgb),0.3)] hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:grayscale transition-all flex items-center justify-center gap-3"
                 >
                   {loading ? <FiLoader className="animate-spin" size={18} /> : "Add Funds"}
                 </button>
@@ -416,7 +416,7 @@ export default function WalletTab({
                     min="1"
                     max="10000000"
                     onChange={(e) => { setUsdtAmount(e.target.value); setUsdtError(""); }}
-                    className="w-full p-4 rounded-2xl border border-green-500/20 bg-[var(--card)] focus:border-green-500/60 text-2xl font-black italic tracking-tight text-[var(--foreground)] placeholder:text-[var(--muted)]/30 outline-none transition-all"
+                    className="w-full p-3 rounded-xl border border-green-500/20 bg-[var(--card)] focus:border-green-500/60 text-xl font-black italic tracking-tight text-[var(--foreground)] placeholder:text-[var(--muted)]/30 outline-none transition-all"
                   />
                   <div className="absolute right-5 top-1/2 -translate-y-1/2 text-[10px] font-black text-green-400 uppercase tracking-widest">USDT</div>
                 </div>
@@ -446,7 +446,7 @@ export default function WalletTab({
                 <button
                   onClick={handleUsdtInitiate}
                   disabled={usdtLoading}
-                  className="w-full p-4 rounded-2xl bg-green-500 text-black font-black uppercase tracking-[0.2em] italic text-xs hover:scale-[1.02] active:scale-95 disabled:opacity-50 transition-all flex items-center justify-center gap-3"
+                  className="w-full p-3 rounded-xl bg-green-500 text-black font-black uppercase tracking-[0.2em] italic text-xs hover:scale-[1.02] active:scale-95 disabled:opacity-50 transition-all flex items-center justify-center gap-3"
                 >
                   {usdtLoading ? <FiLoader className="animate-spin" size={18} /> : "Get Deposit Address →"}
                 </button>
@@ -455,7 +455,7 @@ export default function WalletTab({
           </AnimatePresence>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div>
             <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] flex items-center gap-2 mb-4">
               <FiCreditCard className="text-[var(--accent)]" /> Payment Method
@@ -489,7 +489,7 @@ export default function WalletTab({
               {/* USDT (Available to Everyone) */}
               <button
                 onClick={() => { setMethod("usdt"); setUsdtStep("amount"); }}
-                className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300
+                className={`flex items-center justify-between p-3 rounded-xl border transition-all duration-300
                   ${method === "usdt"
                     ? "border-green-500 bg-green-500/10 shadow-[0_0_20px_rgba(34,197,94,0.15)]"
                     : "border-[var(--border)] bg-[var(--card)] hover:bg-green-500/5 hover:border-green-500/30"
@@ -514,7 +514,7 @@ export default function WalletTab({
           </div>
 
           {/* PENDING NOTICE */}
-          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex gap-3 items-start">
+          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 flex gap-3 items-start">
             <div className="p-1 rounded-full bg-amber-500/20 text-amber-500 mt-0.5">
               <FiLoader size={12} className="animate-spin-slow" />
             </div>
@@ -536,7 +536,7 @@ export default function WalletTab({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
-              className="col-span-full rounded-3xl border border-green-500/20 bg-green-500/5 p-6 space-y-5"
+              className="col-span-full rounded-2xl border border-green-500/20 bg-green-500/5 p-4 md:p-5 space-y-4"
             >
 
               {/* STEP: Show Deposit Address */}
@@ -674,7 +674,7 @@ function TransactionHistorySection({ onResumeUsdt }: { onResumeUsdt: (txn: any) 
   const [filter, setFilter] = useState("all"); // all, inr, usdt
 
   return (
-    <div className="pt-8 border-t border-[var(--border)]/20">
+    <div className="pt-6 border-t border-[var(--border)]/20">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
         <h3 className="text-lg font-bold tracking-tight text-[var(--foreground)] flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />

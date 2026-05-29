@@ -319,8 +319,8 @@ export default function Header() {
                     <div className="absolute inset-0 bg-[var(--foreground)]/[0.02] pointer-events-none" />
 
                     {/* Compact Profile Header */}
-                    <div className="relative z-10 p-5 flex items-center justify-between border-b border-[var(--border)]">
-                      <div className="flex items-center gap-3">
+                    <div className="relative z-10 p-4 flex items-center justify-between border-b border-[var(--border)]">
+                      <div className="flex items-center gap-3 min-w-0">
                         {user ? (
                           <>
                             <div className="w-10 h-10 rounded-xl overflow-hidden border border-[var(--border)] shadow-sm">
@@ -345,7 +345,7 @@ export default function Header() {
                           </div>
                         )}
                       </div>
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
                         {user && (
                           <button onClick={handleLogout} className="w-9 h-9 rounded-full hover:bg-red-500/10 flex items-center justify-center text-red-500 transition-colors" title="Logout"><FiLogOut size={18} /></button>
                         )}
@@ -353,7 +353,7 @@ export default function Header() {
                       </div>
                     </div>
 
-                    <div className="relative z-10 flex-1 overflow-y-auto p-5 space-y-6 custom-scrollbar">
+                    <div className="relative z-10 flex-1 overflow-y-auto p-4 space-y-5 custom-scrollbar">
 
                       {!user ? (
                         <div className="flex flex-col items-center justify-center text-center py-10 space-y-6">
@@ -366,7 +366,7 @@ export default function Header() {
                         </div>
                       ) : (
                         <>
-                          <div className="grid grid-cols-4 gap-1.5 mb-6">
+                          <div className="grid grid-cols-4 gap-1.5 mb-5">
                             {HEADER_CONFIG.nav.map((item) => (
                               <Link
                                 key={item.label}
@@ -381,7 +381,7 @@ export default function Header() {
                             ))}
                           </div>
 
-                          <div className="space-y-2.5">
+                          <div className="space-y-2">
                             {HEADER_CONFIG.userMenu.sections.map((section) => (
                               <div key={section.title} className="space-y-1">
                                 <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 ml-2">{section.title}</h4>
@@ -419,8 +419,7 @@ export default function Header() {
                           </div>
 
                           {user?.userType === "owner" && (
-                            <div className="relative mt-8 group">
-                              <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--accent)] to-purple-600 rounded-[1.5rem] blur opacity-30 group-hover:opacity-60 transition duration-500 group-hover:duration-200"></div>
+                            <div className="relative mt-6 group">
                               <Link
                                 href="/owner-panal"
                                 onClick={() => setUserMenuOpen(false)}

@@ -123,11 +123,11 @@ export default function OrderItem({ order }: { order: OrderType }) {
   const config = getStatusConfig(rawStatus);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-[var(--card)]/40 backdrop-blur-xl transition-all duration-300">
+    <div className="relative overflow-hidden rounded-xl border border-white/5 bg-[var(--card)]/40 backdrop-blur-xl transition-all duration-300">
 
       {/* TOP STATUS BAR */}
       <div
-        className="px-4 py-1.5 flex items-center justify-between border-b border-white/[0.02]"
+        className="px-3 py-1 flex items-center justify-between border-b border-white/[0.02]"
         style={{ backgroundColor: `${config.color}03` }}
       >
         <div className="flex items-center gap-3">
@@ -163,7 +163,7 @@ export default function OrderItem({ order }: { order: OrderType }) {
       </div>
 
       {/* CONTENT AREA */}
-      <div className="p-3.5 cursor-pointer" onClick={() => setOpen(!open)}>
+      <div className="p-2.5 cursor-pointer" onClick={() => setOpen(!open)}>
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-black text-[var(--foreground)] uppercase leading-none mb-1.5">
@@ -199,9 +199,9 @@ export default function OrderItem({ order }: { order: OrderType }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="px-5 pb-5 overflow-hidden"
+            className="px-4 pb-4 overflow-hidden"
           >
-            <div className="border-t border-[var(--border)] pt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="border-t border-[var(--border)] pt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
               <InfoNode label="Player ID" value={order.playerId} icon={FiUser} mono />
               <InfoNode label="Zone ID" value={order.zoneId} icon={FiGrid} mono />
               <InfoNode label="Payment" value={order.paymentMethod.toUpperCase()} icon={FiCreditCard} />
@@ -209,7 +209,7 @@ export default function OrderItem({ order }: { order: OrderType }) {
 
             {/* Additional info for pending UPI status */}
             {config.label === 'PENDING' && order.paymentMethod?.toLowerCase() === 'upi' && (
-              <div className="mt-4 p-3 rounded-xl bg-amber-500/5 border border-amber-500/10">
+              <div className="mt-3 p-2 rounded-lg bg-amber-500/5 border border-amber-500/10">
                 <p className="text-[9px] font-medium text-amber-500/80 uppercase tracking-widest leading-relaxed">
                   Paid via UPI but still showing pending? Click the **Check Now** button above to update your order status.
                 </p>
@@ -224,7 +224,7 @@ export default function OrderItem({ order }: { order: OrderType }) {
 
 function InfoNode({ label, value, icon: Icon, mono }: any) {
   return (
-    <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--background)] border border-[var(--border)]">
+    <div className="flex items-center justify-between p-2 rounded-lg bg-[var(--background)] border border-[var(--border)]">
       <div className="flex items-center gap-2 text-[var(--muted)] font-bold uppercase text-[9px] tracking-widest">
         <Icon size={14} />
         {label}

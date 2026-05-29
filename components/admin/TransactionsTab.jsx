@@ -133,26 +133,20 @@ export default function TransactionsTab() {
   return (
     <div className="space-y-6 pb-10">
       {/* ================= HEADER ================= */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Transaction History</h2>
-          <p className="text-xs text-[var(--muted)] font-medium mt-1">
-            Monitor and track all user payments and order logs.
-          </p>
-        </div>
-
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Transaction</h2>
         <div className="flex items-center gap-3">
-          <div className="px-3 py-1.5 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] flex items-center gap-2">
+          <div className="px-2.5 py-1 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[10px] font-bold text-[var(--muted)] uppercase">
-              {pagination.total} TOTAL TXNS
+              {pagination.total} Total
             </span>
           </div>
           <button
             onClick={() => { fetchTransactionsStats(); fetchTransactionsList(); }}
-            className="p-2.5 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] active:scale-95 transition-all"
+            className="p-2 rounded-lg bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/[0.08] active:scale-95 transition-all"
           >
-            <RefreshCcw size={16} className={loading ? "animate-spin" : ""} />
+            <RefreshCcw size={14} className={loading ? "animate-spin" : ""} />
           </button>
         </div>
       </div>

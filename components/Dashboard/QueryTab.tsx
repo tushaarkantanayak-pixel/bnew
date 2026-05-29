@@ -74,9 +74,9 @@ export default function QueryTab() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-4">
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* CONTACTS */}
         <div className="space-y-4">
           <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--muted)] flex items-center gap-2">
@@ -115,7 +115,7 @@ export default function QueryTab() {
         </div>
 
         {/* FORM */}
-        <div className="p-5 sm:p-6 rounded-3xl bg-[var(--card)]/40 border border-white/5 space-y-4 shadow-xl">
+        <div className="p-4 sm:p-5 rounded-2xl bg-[var(--card)]/40 border border-white/5 space-y-3 shadow-xl">
           <div className="flex items-center gap-2">
             <FiMail className="text-[var(--accent)]" size={14} />
             <h3 className="text-lg font-black uppercase italic tracking-tighter text-[var(--foreground)]">Send Message</h3>
@@ -132,7 +132,7 @@ export default function QueryTab() {
           <div className="space-y-3">
             <input
               type="tel"
-              className="w-full p-3.5 rounded-xl bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
+              className="w-full p-3 rounded-lg bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
               placeholder="Phone No *"
               value={queryPhone}
               onChange={(e) => setQueryPhone(e.target.value)}
@@ -140,7 +140,7 @@ export default function QueryTab() {
 
             <input
               type="text"
-              className="w-full p-3.5 rounded-xl bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
+              className="w-full p-3 rounded-lg bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
               placeholder="Order ID (Optional)"
               value={queryOrderId}
               onChange={(e) => setQueryOrderId(e.target.value)}
@@ -150,7 +150,7 @@ export default function QueryTab() {
               <select
                 value={queryType}
                 onChange={(e) => setQueryType(e.target.value)}
-                className="w-full p-3.5 rounded-xl bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] appearance-none cursor-pointer text-[var(--foreground)]"
+                className="w-full p-3 rounded-lg bg-[var(--background)]/50 border border-white/5 text-[10px] font-black uppercase tracking-widest outline-none focus:border-[var(--accent)] appearance-none cursor-pointer text-[var(--foreground)]"
               >
                 <option value="" className="bg-[var(--card)]">Select Category</option>
                 {SUPPORT_CONFIG.queryTypes.map((type) => (
@@ -161,7 +161,7 @@ export default function QueryTab() {
             </div>
 
             <textarea
-              className="w-full p-4 rounded-2xl h-24 bg-[var(--background)]/50 border border-white/5 text-[11px] font-bold tracking-wider outline-none focus:border-[var(--accent)] resize-none transition-all placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
+              className="w-full p-3 rounded-xl h-20 bg-[var(--background)]/50 border border-white/5 text-[11px] font-bold tracking-wider outline-none focus:border-[var(--accent)] resize-none transition-all placeholder:text-[var(--muted)]/40 text-[var(--foreground)]"
               placeholder="Tell us what's happening..."
               value={queryMessage}
               onChange={(e) => setQueryMessage(e.target.value)}
@@ -170,7 +170,7 @@ export default function QueryTab() {
             <button
               disabled={!canSubmit || isSubmitting}
               onClick={handleSubmit}
-              className="w-full p-3.5 rounded-2xl bg-[var(--accent)] text-black font-black uppercase tracking-widest italic text-[10px] shadow-lg hover:shadow-[0_8px_16px_-4px_rgba(var(--accent-rgb),0.3)] hover:scale-[1.01] active:scale-95 disabled:opacity-30 transition-all flex items-center justify-center gap-2"
+              className="w-full p-3 rounded-xl bg-[var(--accent)] text-black font-black uppercase tracking-widest italic text-[10px] shadow-lg hover:shadow-[0_8px_16px_-4px_rgba(var(--accent-rgb),0.3)] hover:scale-[1.01] active:scale-95 disabled:opacity-30 transition-all flex items-center justify-center gap-2"
             >
               {isSubmitting ? <FiZap className="animate-spin" size={14} /> : "Send Message"}
             </button>

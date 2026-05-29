@@ -119,17 +119,7 @@ const SettingsTab = () => {
                 )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 opacity-50 cursor-not-allowed">
-                {/* Placeholder for future settings */}
-                <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--background)]">
-                    <h4 className="text-xs font-bold uppercase text-[var(--muted)]">System Health</h4>
-                    <p className="text-lg font-bold text-green-500">Optimal</p>
-                </div>
-                <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--background)]">
-                    <h4 className="text-xs font-bold uppercase text-[var(--muted)]">Cache Status</h4>
-                    <p className="text-lg font-bold text-[var(--foreground)]">Syncing...</p>
-                </div>
-            </div>
+
         </div>
     );
 };

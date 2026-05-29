@@ -193,14 +193,8 @@ export default function ApiKeysPage() {
 
 
     return (
-        <div className="space-y-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h2 className="text-2xl font-black italic uppercase tracking-tight">API Command Center</h2>
-                    <p className="text-[var(--muted)] text-xs font-bold uppercase tracking-widest opacity-60">
-                        {keys.length >= 2 ? "Maximum limit (2) reached" : "Secure server-to-server endpoints for your business"}
-                    </p>
-                </div>
+        <div className="space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-end gap-4">
                 <div className="flex gap-2">
                     {keys.length < 2 && (
                         (userDetails.userType === "member" || userDetails.userType === "owner") ? (
@@ -249,7 +243,7 @@ export default function ApiKeysPage() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="p-6 rounded-[2rem] bg-[var(--accent)]/10 border border-[var(--accent)]/30 space-y-4 shadow-[0_0_30px_rgba(0,229,255,0.1)]"
+                    className="p-5 rounded-2xl bg-[var(--accent)]/10 border border-[var(--accent)]/30 space-y-3 shadow-[0_0_30px_rgba(0,229,255,0.1)]"
                 >
                     <div className="flex items-center justify-between">
                         <div>
@@ -275,7 +269,7 @@ export default function ApiKeysPage() {
                 </motion.div>
             )}
 
-            <div className="grid gap-6">
+            <div className="grid gap-4">
                 {loading ? (
                     <div className="h-40 animate-pulse bg-white/5 rounded-2xl border border-white/5" />
                 ) : keys.length === 0 ? (
@@ -291,12 +285,12 @@ export default function ApiKeysPage() {
                                 layout
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="group p-1 rounded-3xl bg-gradient-to-br from-white/10 to-transparent border border-white/5 hover:border-[var(--accent)]/30 transition-all shadow-xl"
+                                className="group p-0.5 rounded-2xl bg-gradient-to-br from-white/10 to-transparent border border-white/5 hover:border-[var(--accent)]/30 transition-all shadow-xl"
                             >
-                                <div className="p-6 rounded-[1.4rem] bg-[var(--card-bg)]/80 backdrop-blur-sm">
-                                    <div className="flex flex-col md:flex-row gap-6">
+                                <div className="p-4 rounded-xl bg-[var(--card-bg)]/80 backdrop-blur-sm">
+                                    <div className="flex flex-col md:flex-row gap-4">
                                         {/* Main Info */}
-                                        <div className="flex-1 space-y-4">
+                                        <div className="flex-1 space-y-3">
                                             <div className="flex items-center justify-between">
                                                 <div className="flex items-center gap-3">
                                                     <div className="p-2 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
@@ -344,12 +338,12 @@ export default function ApiKeysPage() {
                                                 </div>
                                             </div>
 
-                                            <div className="grid grid-cols-2 gap-4">
-                                                <div className="p-3 rounded-2xl bg-white/5 border border-white/5">
-                                                    <p className="text-[8px] font-bold uppercase text-white/30 mb-1 flex items-center gap-1"><FiGlobe /> Last IP</p>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+                                                    <p className="text-[8px] font-bold uppercase text-white/30 mb-0.5 flex items-center gap-1"><FiGlobe /> Last IP</p>
                                                     <p className="text-xs font-mono text-white/80">{key.lastUsedIp || "Never used"}</p>
                                                 </div>
-                                                <div className="p-3 rounded-2xl bg-white/5 border border-white/5">
+                                                <div className="p-2 rounded-xl bg-white/5 border border-white/5">
                                                     <p className="text-[8px] font-bold uppercase text-white/30 mb-1 flex items-center gap-1"><FiMapPin /> Status</p>
                                                     <p className="text-xs font-black italic uppercase text-green-500">Live & Secure</p>
                                                 </div>
@@ -357,9 +351,9 @@ export default function ApiKeysPage() {
                                         </div>
 
                                         {/* Actions or Edit Form */}
-                                        <div className="w-full md:w-72 border-t md:border-t-0 md:border-l border-white/5 pt-4 md:pt-0 md:pl-6 flex flex-col justify-between">
+                                        <div className="w-full md:w-72 border-t md:border-t-0 md:border-l border-white/5 pt-3 md:pt-0 md:pl-4 flex flex-col justify-between">
                                             {editingId === key._id ? (
-                                                <div className="space-y-3">
+                                                <div className="space-y-2">
                                                     <div className="space-y-1">
                                                         <label className="text-[9px] font-black uppercase text-white/40 ml-1">Daily Cap ($)</label>
                                                         <input
@@ -390,16 +384,16 @@ export default function ApiKeysPage() {
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <div className="space-y-3">
+                                                <div className="space-y-2">
                                                     <button
                                                         onClick={() => handleRegenerateKey(key._id)}
-                                                        className="w-full p-3 rounded-2xl bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 transition-all flex items-center justify-center gap-2 text-xs font-black uppercase italic"
+                                                        className="w-full p-2.5 rounded-xl bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 transition-all flex items-center justify-center gap-2 text-xs font-black uppercase italic"
                                                     >
                                                         <FiRefreshCw size={14} /> Regenerate
                                                     </button>
                                                     <button
                                                         onClick={() => handleRevokeKey(key._id)}
-                                                        className="w-full p-3 rounded-2xl bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-all flex items-center justify-center gap-2 text-xs font-black uppercase italic"
+                                                        className="w-full p-2.5 rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-all flex items-center justify-center gap-2 text-xs font-black uppercase italic"
                                                     >
                                                         <FiTrash2 size={14} /> Revoke Key
                                                     </button>
@@ -419,7 +413,7 @@ export default function ApiKeysPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-                <div className="p-6 rounded-[2rem] bg-amber-500/5 border border-amber-500/10 space-y-2">
+                <div className="p-5 rounded-2xl bg-amber-500/5 border border-amber-500/10 space-y-2">
                     <h4 className="text-amber-500 text-xs font-black uppercase tracking-widest flex items-center gap-2 text-balance">
                         <FiAlertCircle /> 3-Layer Protection Active
                     </h4>
@@ -430,7 +424,7 @@ export default function ApiKeysPage() {
                     </p>
                 </div>
 
-                <div className="p-6 rounded-[2rem] bg-[var(--accent)]/5 border border-[var(--accent)]/10 space-y-4">
+                <div className="p-5 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/10 space-y-3">
                     <div className="flex items-center justify-between">
                         <h4 className="text-[var(--accent)] text-xs font-black uppercase tracking-widest flex items-center gap-2">
                             <FiKey /> Integration Assets
