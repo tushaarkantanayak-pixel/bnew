@@ -279,7 +279,7 @@ export default function Header() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => user ? setUserMenuOpen((p) => !p) : window.location.href = "/login"}
+              onClick={() => setUserMenuOpen((p) => !p)}
               className="relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 group"
             >
               <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-[var(--foreground)]/5 group-hover:bg-[var(--foreground)]/10 transition-colors">
@@ -355,103 +355,102 @@ export default function Header() {
 
                     <div className="relative z-10 flex-1 overflow-y-auto p-4 space-y-5 custom-scrollbar">
 
-                      {!user ? (
-                        <div className="flex flex-col items-center justify-center text-center py-10 space-y-6">
-                          <div className="w-16 h-16 rounded-[2rem] bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]"><FiZap size={32} /></div>
-                          <div className="space-y-1">
-                            <h3 className="text-lg font-bold text-[var(--foreground)]">Sign in required</h3>
-                            <p className="text-xs text-[var(--muted)]">Login to access your dashboard</p>
+                      {/* Login Banner for guests */}
+                      {!user && (
+                        <div className="flex items-center justify-between p-3 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/15 mb-1">
+                          <div className="flex items-center gap-2">
+                            <div className="w-7 h-7 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]"><FiZap size={14} /></div>
+                            <span className="text-xs font-bold text-[var(--foreground)]">Sign in to access all features</span>
                           </div>
-                          <Link href="/login" onClick={() => setUserMenuOpen(false)} className="w-full py-3.5 rounded-2xl bg-[var(--accent)] text-white text-xs font-bold hover:brightness-110 active:scale-[0.98] transition-all">Login Now</Link>
+                          <Link href="/login" onClick={() => setUserMenuOpen(false)} className="px-3 py-1.5 rounded-lg bg-[var(--accent)] text-black text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all flex-shrink-0">Login</Link>
                         </div>
-                      ) : (
-                        <>
-                          <div className="grid grid-cols-4 gap-1.5 mb-5">
-                            {HEADER_CONFIG.nav.map((item) => (
-                              <Link
-                                key={item.label}
-                                href={item.href}
-                                target={item.href.startsWith("http") ? "_blank" : undefined}
-                                onClick={() => setUserMenuOpen(false)}
-                                className="flex flex-col items-center justify-center p-2 rounded-xl bg-[var(--foreground)]/[0.03] border border-white/5 hover:bg-[var(--accent)] hover:text-black transition-all group"
-                              >
-                                <span className="text-[var(--accent)] group-hover:text-black mb-1.5 transition-colors">{item.icon}</span>
-                                <span className="text-[8px] font-black uppercase tracking-tight leading-none text-center">{item.label}</span>
-                              </Link>
-                            ))}
-                          </div>
+                      )}
 
-                          <div className="space-y-2">
-                            {HEADER_CONFIG.userMenu.sections.map((section) => (
-                              <div key={section.title} className="space-y-1">
-                                <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 ml-2">{section.title}</h4>
-                                <div className={section.title === "Earning" ? "grid grid-cols-2 gap-1.5" : "space-y-0.5"}>
-                                  {section.items.map((item) => (
-                                    <Link
-                                      key={item.label}
-                                      href={item.href}
-                                      target={item.href.startsWith("http") ? "_blank" : undefined}
-                                      onClick={() => setUserMenuOpen(false)}
-                                      className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1.5 px-1.5" : "justify-between py-1.5 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group`}
-                                    >
-                                      <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-2"} min-w-0`}>
-                                        <div className="w-6 h-6 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
-                                        <div className="flex flex-col min-w-0">
-                                          <p className="text-xs font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
-                                          <p className="text-[8px] text-[var(--muted)] opacity-50 truncate">{item.desc}</p>
-                                        </div>
-                                      </div>
-                                      {section.title !== "Earning" && (
-                                        <div className="flex items-center gap-2 flex-shrink-0">
-                                          {item.label === "My Wallet" && (
-                                            <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
-                                              {formatPrice(walletBalance)}
-                                            </span>
-                                          )}
-                                          <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
-                                        </div>
+                      {/* Nav Quick Links — always visible */}
+                      <div className="grid grid-cols-4 gap-1.5 mb-5">
+                        {HEADER_CONFIG.nav.map((item) => (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            target={item.href.startsWith("http") ? "_blank" : undefined}
+                            onClick={() => setUserMenuOpen(false)}
+                            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[var(--foreground)]/[0.03] border border-white/5 hover:bg-[var(--accent)] hover:text-black transition-all group"
+                          >
+                            <span className="text-[var(--accent)] group-hover:text-black mb-1.5 transition-colors">{item.icon}</span>
+                            <span className="text-[8px] font-black uppercase tracking-tight leading-none text-center">{item.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+
+                      {/* Menu sections — always visible */}
+                      <div className="space-y-2">
+                        {HEADER_CONFIG.userMenu.sections.map((section) => (
+                          <div key={section.title} className="space-y-1">
+                            <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 ml-2">{section.title}</h4>
+                            <div className={section.title === "Earning" ? "grid grid-cols-2 gap-1.5" : "space-y-0.5"}>
+                              {section.items.map((item) => (
+                                <Link
+                                  key={item.label}
+                                  href={user ? item.href : "/login"}
+                                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                                  onClick={() => setUserMenuOpen(false)}
+                                  className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1.5 px-1.5" : "justify-between py-1.5 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
+                                >
+                                  <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-2"} min-w-0`}>
+                                    <div className="w-6 h-6 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
+                                    <div className="flex flex-col min-w-0">
+                                      <p className="text-xs font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
+                                      <p className="text-[8px] text-[var(--muted)] opacity-50 truncate">{item.desc}</p>
+                                    </div>
+                                  </div>
+                                  {section.title !== "Earning" && (
+                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                      {item.label === "My Wallet" && user && (
+                                        <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
+                                          {formatPrice(walletBalance)}
+                                        </span>
                                       )}
-                                    </Link>
-                                  ))}
+                                      <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
+                                    </div>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Admin Console — only for owner */}
+                      {user?.userType === "owner" && (
+                        <div className="relative mt-6 group">
+                          <Link
+                            href="/owner-panal"
+                            onClick={() => setUserMenuOpen(false)}
+                            className="relative flex items-center justify-between p-4 bg-[var(--background)] border border-[var(--border)] rounded-[1.5rem] overflow-hidden transition-all duration-300"
+                          >
+                            <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="flex items-center gap-3 relative z-10 w-full">
+                              <div className="relative flex-shrink-0">
+                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent)] to-purple-600 flex items-center justify-center shadow-lg">
+                                  <FiZap size={18} className="text-white" />
+                                </div>
+                                <div className="absolute -bottom-1 -right-1 flex h-3 w-3">
+                                  <div className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-[var(--background)]"></div>
                                 </div>
                               </div>
-                            ))}
-                          </div>
-
-                          {user?.userType === "owner" && (
-                            <div className="relative mt-6 group">
-                              <Link
-                                href="/owner-panal"
-                                onClick={() => setUserMenuOpen(false)}
-                                className="relative flex items-center justify-between p-4 bg-[var(--background)] border border-[var(--border)] rounded-[1.5rem] overflow-hidden transition-all duration-300"
-                              >
-                                <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="flex items-center gap-3 relative z-10 w-full">
-                                  <div className="relative flex-shrink-0">
-                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent)] to-purple-600 flex items-center justify-center shadow-lg">
-                                      <FiZap size={18} className="text-white" />
-                                    </div>
-                                    <div className="absolute -bottom-1 -right-1 flex h-3 w-3">
-                                      <div className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-[var(--background)]"></div>
-                                    </div>
-                                  </div>
-
-                                  <div className="flex flex-col min-w-0 flex-1">
-                                    <h4 className="text-xs font-black uppercase tracking-widest text-[var(--foreground)] mb-1">Admin Console</h4>
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-[9px] font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded-md border border-[var(--accent)]/20 uppercase">Owner</span>
-                                      <span className="text-[9px] font-bold text-[#22c55e] flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-[#22c55e]"></span>Active</span>
-                                    </div>
-                                  </div>
-
-                                  <div className="w-8 h-8 rounded-full bg-[var(--foreground)]/5 group-hover:bg-[var(--accent)]/10 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">
-                                    <FiChevronRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-                                  </div>
+                              <div className="flex flex-col min-w-0 flex-1">
+                                <h4 className="text-xs font-black uppercase tracking-widest text-[var(--foreground)] mb-1">Admin Console</h4>
+                                <div className="flex items-center gap-2">
+                                  <span className="text-[9px] font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded-md border border-[var(--accent)]/20 uppercase">Owner</span>
+                                  <span className="text-[9px] font-bold text-[#22c55e] flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-[#22c55e]"></span>Active</span>
                                 </div>
-                              </Link>
+                              </div>
+                              <div className="w-8 h-8 rounded-full bg-[var(--foreground)]/5 group-hover:bg-[var(--accent)]/10 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">
+                                <FiChevronRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                              </div>
                             </div>
-                          )}
-                        </>
+                          </Link>
+                        </div>
                       )}
                     </div>
 

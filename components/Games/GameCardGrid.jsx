@@ -9,6 +9,7 @@ import { useState } from "react";
  
 export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
   const [imgError, setImgError] = useState(false);
+  if (!game) return null;
   const disabled = isOutOfStock(game.gameName);
  
   const getFallbackLetter = (name) => {
