@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { useAuthStore } from "../../store/useAuthStore";
 
 // Dynamic import for the heavy overlay component
 const Maintaince = dynamic(() => import("@/components/Seasonal/Maintaince"), {
@@ -11,29 +12,18 @@ const Maintaince = dynamic(() => import("@/components/Seasonal/Maintaince"), {
 
 export default function MaintenanceWrapper({ maintenanceMode }) {
     const pathname = usePathname();
+    const { userDetails } = useAuthStore();
     const [userType, setUserType] = useState(null);
 
     useEffect(() => {
-        // 1. Check localStorage for an immediate hint
-        const cachedRole = localStorage.getItem("userType");
-        if (cachedRole) setUserType(cachedRole);
-
-        // 2. Verified check from API
-        const token = localStorage.getItem("token");
-        if (token) {
-            fetch("/api/auth/me", {
-                headers: { Authorization: `Bearer ${token}` },
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success && data.user?.userType) {
-                        setUserType(data.user.userType);
-                        localStorage.setItem("userType", data.user.userType);
-                    }
-                })
-                .catch(err => console.error("Role verify failed", err));
+        // Use Zustand state if available, fallback to localStorage
+        if (userDetails.userType) {
+            setUserType(userDetails.userType);
+        } else {
+            const cachedRole = localStorage.getItem("userType");
+            if (cachedRole) setUserType(cachedRole);
         }
-    }, [pathname]); // Re-verify on navigation if needed, though once per session is usually enough
+    }, [userDetails.userType]);
 
     // If maintenance is OFF, do nothing
     if (!maintenanceMode) return null;

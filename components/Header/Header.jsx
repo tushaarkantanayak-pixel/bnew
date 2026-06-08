@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { formatPrice } from "@/utils/currency";
+import { useAuthStore } from "../../store/useAuthStore";
 
 import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiGlobe } from "react-icons/fi";
 
@@ -71,11 +72,20 @@ const HEADER_CONFIG = {
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
   const [activeNav, setActiveNav] = useState("/");
-  const [walletBalance, setWalletBalance] = useState(0);
 
+  const { userDetails, walletBalance, isAuthenticated, token, logout, fetchUser } = useAuthStore();
+  
+  // Map useAuthStore state to the legacy `user` variable expected by Header.jsx
+  const user = isAuthenticated ? {
+    name: userDetails.name,
+    email: userDetails.email,
+    userId: userDetails.userId,
+    userType: userDetails.userType,
+    avatar: typeof window !== "undefined" ? localStorage.getItem("avatar") : "",
+  } : null;
+
+  const loading = false; // Handled smoothly by Zustand now
 
   const dropdownRef = useRef(null);
 
@@ -121,71 +131,15 @@ export default function Header() {
 
   /* ================= AUTH ================= */
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-
-    const savedUser = {
-      name: localStorage.getItem("userName"),
-      email: localStorage.getItem("email"),
-      userId: localStorage.getItem("userId"),
-      avatar: localStorage.getItem("avatar"),
-      userType: localStorage.getItem("userType") || "user",
-    };
-    if (savedUser.name) setUser(savedUser);
-
-    const savedBalance = localStorage.getItem("walletBalance");
-    if (savedBalance) setWalletBalance(Number(savedBalance));
-
-    fetch("/api/auth/me", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.success) {
-          setUser(d.user);
-          localStorage.setItem("userName", d.user.name);
-          localStorage.setItem("email", d.user.email);
-          localStorage.setItem("userId", d.user.id || d.user.userId);
-          localStorage.setItem("avatar", d.user.avatar || "");
-          localStorage.setItem("userType", d.user.userType || "user");
-          if (d.user.phone) localStorage.setItem("phone", d.user.phone);
-
-          if (d.user.wallet !== undefined) {
-            setWalletBalance(d.user.wallet);
-            localStorage.setItem("walletBalance", String(d.user.wallet));
-          }
-        } else {
-          ["token", "userName", "email", "userId", "phone", "avatar", "walletBalance"].forEach(key => localStorage.removeItem(key));
-          setUser(null);
-          setWalletBalance(0);
-        }
-      })
-      .finally(() => setLoading(false));
-
-    const handleWalletSync = () => {
-      const balance = localStorage.getItem("walletBalance");
-      if (balance !== null) setWalletBalance(Number(balance));
-    };
-
-    window.addEventListener("walletUpdated", handleWalletSync);
-    window.addEventListener("storage", handleWalletSync);
-    return () => {
-      window.removeEventListener("walletUpdated", handleWalletSync);
-      window.removeEventListener("storage", handleWalletSync);
-    };
-  }, []);
-
-
+    // Rely on global Zustand store for authentication.
+    fetchUser();
+  }, [fetchUser]);
 
   const [showLogoutToast, setShowLogoutToast] = useState(false);
 
   const handleLogout = () => {
-    ["token", "userName", "email", "userId", "phone", "userType", "pending_topup_order", "walletBalance", "mlbb_verified_players"].forEach(key => localStorage.removeItem(key));
-    setUser(null);
-    setWalletBalance(0);
+    logout();
+    setUserMenuOpen(false);
     setShowLogoutToast(true);
     setTimeout(() => {
       window.location.href = "/";

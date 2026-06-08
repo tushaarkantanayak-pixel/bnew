@@ -11,6 +11,7 @@ import {
   FiLayers,
 } from "react-icons/fi";
 import OrderItem, { OrderType } from "./OrderItem";
+import apiClient from "@/utils/apiClient";
 
 export default function OrdersTab() {
   const [orders, setOrders] = useState<OrderType[]>([]);
@@ -22,33 +23,22 @@ export default function OrdersTab() {
 
   const totalPages = Math.ceil(totalCount / limit);
 
-  const token =
-    typeof window !== "undefined"
-      ? localStorage.getItem("token")
-      : null;
-
   /* ================= LOAD ORDERS ================= */
   useEffect(() => {
-    if (!token) return;
-
     setLoading(true);
-    fetch("/api/order/user", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ page, limit, search }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    apiClient.post("/api/order/user", { page, limit, search })
+      .then((res) => {
+        const data = res.data;
         if (!data.success) return;
 
         setOrders(data.orders || []);
         setTotalCount(data.totalCount || 0);
       })
+      .catch((err) => {
+        console.error("Failed to load orders", err);
+      })
       .finally(() => setLoading(false));
-  }, [token, page, search, limit]);
+  }, [page, search, limit]);
 
   /* ================= RESET PAGE ON SEARCH ================= */
   useEffect(() => {

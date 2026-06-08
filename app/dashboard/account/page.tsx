@@ -1,11 +1,11 @@
 "use client";
 
 import AccountTab from "../../../components/Dashboard/AccountTab";
-import { useUser } from "../layout";
+import { useAuthStore } from "../../../store/useAuthStore";
 import AuthGuard from "../../../components/AuthGuard";
 
 export default function AccountPage() {
-    const { userDetails } = useUser();
+    const { userDetails } = useAuthStore();
     return (
         <AuthGuard>
             <AccountTab userDetails={userDetails} />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     FiPlus, FiTrash2, FiCopy, FiCheck, FiKey, FiLock,
@@ -8,8 +8,9 @@ import {
     FiEdit2, FiSave, FiX, FiBarChart, FiMapPin
 } from "react-icons/fi";
 import Link from "next/link";
-import { useUser } from "../../layout";
+import { useAuthStore } from "../../../../store/useAuthStore";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 interface ApiKey {
@@ -27,7 +28,7 @@ interface ApiKey {
 }
 
 export default function ApiKeysPage() {
-    const { userDetails } = useUser();
+    const { userDetails } = useAuthStore();
     const [keys, setKeys] = useState<ApiKey[]>([]);
     const [loading, setLoading] = useState(true);
     const [newKeyName, setNewKeyName] = useState("");
@@ -44,14 +45,12 @@ export default function ApiKeysPage() {
         allowedIpString: ""
     });
     const [isUpdating, setIsUpdating] = useState(false);
+    const hasFetched = useRef(false);
 
     const fetchKeys = async () => {
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch("/api/user/keys", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const data = await res.json();
+            const res = await apiClient.get("/api/user/keys");
+            const data = res.data;
             if (data.success) {
                 setKeys(data.keys);
             }
@@ -63,7 +62,10 @@ export default function ApiKeysPage() {
     };
 
     useEffect(() => {
-        fetchKeys();
+        if (!hasFetched.current) {
+            hasFetched.current = true;
+            fetchKeys();
+        }
     }, []);
 
     const handleCreateKey = async (e: React.FormEvent) => {
@@ -80,16 +82,8 @@ export default function ApiKeysPage() {
         setError(null);
 
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch("/api/user/keys", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ name: newKeyName }),
-            });
-            const data = await res.json();
+            const res = await apiClient.post("/api/user/keys", { name: newKeyName });
+            const data = res.data;
             if (data.success) {
                 setKeys([data.key, ...keys]);
                 setNewlyCreatedKey(data.key.rawKey);
@@ -108,20 +102,12 @@ export default function ApiKeysPage() {
         setIsUpdating(true);
         setError(null);
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch(`/api/user/keys/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    name: editValues.name,
-                    dailyLimit: editValues.dailyLimit,
-                    allowedIps: editValues.allowedIpString.split(',').map(ip => ip.trim()).filter(ip => ip !== '')
-                }),
+            const res = await apiClient.put(`/api/user/keys/${id}`, {
+                name: editValues.name,
+                dailyLimit: editValues.dailyLimit,
+                allowedIps: editValues.allowedIpString.split(',').map(ip => ip.trim()).filter(ip => ip !== '')
             });
-            const data = await res.json();
+            const data = res.data;
             if (data.success) {
                 setKeys(keys.map(k => k._id === id ? data.key : k));
                 setEditingId(null);
@@ -139,12 +125,8 @@ export default function ApiKeysPage() {
         if (!confirm("Are you sure you want to revoke this API key? This cannot be undone.")) return;
 
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch(`/api/user/keys/${id}`, {
-                method: "DELETE",
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const data = await res.json();
+            const res = await apiClient.delete(`/api/user/keys/${id}`);
+            const data = res.data;
             if (data.success) {
                 setKeys(keys.filter((k: any) => k._id !== id));
             }
@@ -158,12 +140,8 @@ export default function ApiKeysPage() {
 
         setError(null);
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch(`/api/user/keys/${id}`, {
-                method: "PATCH",
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const data = await res.json();
+            const res = await apiClient.patch(`/api/user/keys/${id}`);
+            const data = res.data;
             if (data.success) {
                 setKeys(keys.map(k => k._id === id ? data.key : k));
                 setNewlyCreatedKey(data.key.rawKey);

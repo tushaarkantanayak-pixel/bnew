@@ -1,11 +1,11 @@
 "use client";
 
 import WalletTab from "../../../../components/Dashboard/WalletTab";
-import { useUser } from "../../layout";
+import { useAuthStore } from "../../../../store/useAuthStore";
 import AuthGuard from "../../../../components/AuthGuard";
 
 export default function WalletPage() {
-    const { walletBalance, setWalletBalance, userDetails } = useUser();
+    const { walletBalance, setWalletBalance, userDetails } = useAuthStore();
     return (
         <AuthGuard>
             <WalletTab
