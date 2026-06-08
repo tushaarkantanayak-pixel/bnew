@@ -108,7 +108,7 @@ export default function Footer() {
           </div>
 
           {/* LINKS GRID - SYMMETRICAL */}
-          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 gap-y-8 gap-x-4">
             {FOOTER_LINKS.map((section) => (
               <div key={section.title} className="space-y-4">
                 <div className="flex items-center gap-2">
@@ -131,11 +131,36 @@ export default function Footer() {
                 </ul>
               </div>
             ))}
+
+            {/* Mobile-only Find Us (fills the 4th grid slot next to Legal) */}
+            <div className="md:hidden space-y-4">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-[1px] bg-[var(--accent)]/40 rounded-full" />
+                <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]/80 italic">
+                  Find Us
+                </h3>
+              </div>
+              <div className="flex items-center gap-2.5">
+                {SOCIALS.map(({ label, href, icon: Icon }) => (
+                  <motion.a
+                    key={label}
+                    whileHover={{ y: -3, scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-xl bg-[var(--card)]/40 backdrop-blur-sm border border-[var(--border)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-all shadow-sm"
+                  >
+                    <Icon size={15} />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* FIND US & ACTION BLOCK */}
-          <div className="md:col-span-3 flex flex-col md:items-end gap-8">
-            <div className="space-y-4 md:text-right">
+          {/* FIND US & ACTION BLOCK (Desktop) / ACTION BLOCK ONLY (Mobile) */}
+          <div className="md:col-span-3 flex flex-col md:items-end gap-8 mt-4 md:mt-0">
+            <div className="hidden md:block space-y-4 md:text-right">
               <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]/80 italic">
                 Find Us
               </h3>
