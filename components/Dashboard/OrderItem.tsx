@@ -16,6 +16,7 @@ import {
   FiCheck,
 } from "react-icons/fi";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 /* ================= TYPES ================= */
@@ -63,21 +64,13 @@ export default function OrderItem({ order }: { order: OrderType }) {
     e.stopPropagation();
     if (verifyLoading) return;
 
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
     setVerifyLoading(true);
     try {
-      const res = await fetch("/api/order/verify-topup-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ orderId: order.orderId }),
+      const res = await apiClient.post("/api/order/verify-topup-payment", {
+        orderId: order.orderId,
       });
 
-      const data = await res.json();
+      const data = res.data;
       if (data.success || data.topupStatus === "success" || data.topupStatus === "SUCCESS") {
         setLocalStatus("success");
         setLocalTopupStatus("success");

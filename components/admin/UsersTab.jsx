@@ -26,6 +26,7 @@ import {
   Tag,
   Plus
 } from "lucide-react";
+import apiClient from "@/utils/apiClient";
 
 export default function UsersTab() {
   const [users, setUsers] = useState([]);
@@ -86,12 +87,9 @@ export default function UsersTab() {
 
   const fetchUsersStats = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/admin/users`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await apiClient.get(`/api/admin/users`);
 
-      const data = await res.json();
+      const data = res.data;
       if (data.success) {
         setActiveStats(data.activeStats || { day: 0, week: 0, month: 0 });
         setNewStats(data.newStats || { day: 0, week: 0, month: 0 });
@@ -105,7 +103,6 @@ export default function UsersTab() {
   const fetchUsersList = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
 
       const params = new URLSearchParams({
         page,
@@ -118,11 +115,9 @@ export default function UsersTab() {
         ...(filters.to && { to: filters.to }),
       });
 
-      const res = await fetch(`/api/admin/users/data?${params.toString()}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await apiClient.get(`/api/admin/users/data?${params.toString()}`);
 
-      const data = await res.json();
+      const data = res.data;
       setUsers(data?.data || []);
       setPagination(
         data?.pagination || { total: 0, page: 1, totalPages: 1 }
@@ -148,19 +143,11 @@ export default function UsersTab() {
   const changeUserRole = async (userId, newUserType) => {
     try {
       setUpdatingUserId(userId);
-      const token = localStorage.getItem("token");
 
-      const res = await fetch("/api/admin/users/change-role", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ userId, newUserType }),
-      });
+      const res = await apiClient.patch("/api/admin/users/change-role", { userId, newUserType });
 
-      if (!res.ok) {
-        const data = await res.json();
+      if (res.status !== 200 && res.status !== 201) {
+        const data = res.data;
         alert(data.message || "Failed to update role");
         return;
       }
@@ -174,16 +161,8 @@ export default function UsersTab() {
   const handleUpdateTags = async (userId, tags) => {
     try {
       setUpdatingUserId(userId);
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/admin/users/tags", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ userId, tags }),
-      });
-      const data = await res.json();
+      const res = await apiClient.post("/api/admin/users/tags", { userId, tags });
+      const data = res.data;
       if (data.success) {
         setUsers(prev => prev.map(u => u._id === userId ? { ...u, tags: data.tags } : u));
         if (selectedUser?._id === userId) {

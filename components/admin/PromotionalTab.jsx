@@ -20,6 +20,7 @@ import {
   RefreshCcw,
   Info
 } from "lucide-react";
+import apiClient from "@/utils/apiClient";
 
 export default function PromotionalTab() {
   const [users, setUsers] = useState([]);
@@ -50,11 +51,9 @@ export default function PromotionalTab() {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/admin/users/data?page=${page}&limit=50&role=${selectedRole === 'all' ? '' : selectedRole}&tag=${selectedTag || ''}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
+      setLoading(true);
+      const res = await apiClient.get(`/api/admin/users/data?page=${page}&limit=50&role=${selectedRole === 'all' ? '' : selectedRole}&tag=${selectedTag || ''}`);
+      const data = res.data;
       if (data.success) {
         setUsers(data.data.filter(u => u.email));
         setTotalPages(data.pagination?.totalPages || 1);
@@ -77,11 +76,8 @@ export default function PromotionalTab() {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/admin/promo-mail/stats", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
+      const res = await apiClient.get("/api/admin/promo-mail/stats");
+      const data = res.data;
       if (data.success) {
         setStats(data.stats);
         setRecentLogs(data.recentLogs || []);
@@ -146,16 +142,8 @@ export default function PromotionalTab() {
         return;
       }
 
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/admin/users/tags", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ userId, tags }),
-      });
-      const data = await res.json();
+      const res = await apiClient.post("/api/admin/users/tags", { userId, tags });
+      const data = res.data;
       if (data.success) {
         setUsers(prev => prev.map(u => u._id === userId ? { ...u, tags: data.tags } : u));
         setEditingTagsUserId(null);
@@ -187,12 +175,8 @@ export default function PromotionalTab() {
   const syncAllTags = async () => {
     try {
       setTagUpdateLoading(true);
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/admin/users/migrate-tags", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
+      const res = await apiClient.post("/api/admin/users/migrate-tags");
+      const data = res.data;
       if (data.success) {
         setStatus({ type: "success", message: data.message });
         fetchUsers();
@@ -295,22 +279,15 @@ export default function PromotionalTab() {
           message: `Sending batch ${batchNumber}/${totalBatches} (${currentBatch.length} users)...`
         });
 
-        const res = await fetch("/api/admin/promo-mail", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            emails: currentBatch,
-            subject,
-            promoTitle,
-            content,
-            imageUrl,
-          }),
+        const res = await apiClient.post("/api/admin/promo-mail", {
+          emails: currentBatch,
+          subject,
+          promoTitle,
+          content,
+          imageUrl,
         });
 
-        const data = await res.json();
+        const data = res.data;
         if (data.success) {
           totalSuccess += data.report.success;
           totalFailed += data.report.failed;

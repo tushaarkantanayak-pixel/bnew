@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { FiClock, FiCheckCircle, FiXCircle, FiRefreshCw, FiExternalLink, FiSearch } from "react-icons/fi";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 export default function UsdtTab() {
   const [deposits, setDeposits] = useState([]);
@@ -15,11 +16,8 @@ export default function UsdtTab() {
   const fetchDeposits = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/admin/wallet/usdt?status=${status}&page=${page}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
+      const res = await apiClient.get(`/api/admin/wallet/usdt?status=${status}&page=${page}`);
+      const data = res.data;
       if (data.success) {
         setDeposits(data.deposits || []);
         setTotalPages(data.pagination?.totalPages || 1);
@@ -40,16 +38,8 @@ export default function UsdtTab() {
 
     try {
       setActionLoading(depositId);
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/admin/wallet/usdt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ depositId, action })
-      });
-      const data = await res.json();
+      const res = await apiClient.post("/api/admin/wallet/usdt", { depositId, action });
+      const data = res.data;
       if (data.success) {
         alert(data.message);
         fetchDeposits(); // Refresh

@@ -52,12 +52,12 @@ export default function ServicesPage() {
         <div className="absolute bottom-[-10%] left-[-10%] w-[60%] aspect-square bg-[var(--accent)]/5 blur-[150px] rounded-full" />
       </div>
 
-      <div className="max-w-4xl mx-auto pt-24 md:pt-32 relative z-10">
+      <div className="max-w-5xl mx-auto pt-16 md:pt-24 relative z-10">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-20 text-left"
+          className="mb-12 text-left"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 mb-6">
             <FiZap className="text-[var(--accent)]" size={12} />
@@ -72,7 +72,7 @@ export default function ServicesPage() {
         </motion.div>
 
         {/* SERVICES LIST */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
@@ -82,12 +82,12 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 onClick={() => service.active && window.open(whatsappLink, "_blank")}
-                className={`group relative p-8 rounded-[2.5rem] bg-[var(--card)]/40 border border-[var(--border)] transition-all duration-500 flex flex-col justify-between aspect-square md:aspect-auto min-h-[300px] hover:border-[var(--accent)]/50 hover:shadow-2xl hover:-translate-y-1 shadow-sm`}
+                className={`group relative p-5 rounded-3xl bg-[var(--card)]/40 border border-[var(--border)] transition-all duration-500 flex flex-col gap-4 hover:border-[var(--accent)]/50 hover:shadow-2xl hover:-translate-y-1 shadow-sm`}
               >
                 {/* Top Row */}
                 <div className="flex justify-between items-start">
-                  <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-white transition-all duration-500">
-                    <Icon size={28} />
+                  <div className="w-12 h-12 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-white transition-all duration-500">
+                    <Icon size={22} />
                   </div>
                   <span className="text-[8px] font-black px-3 py-1 rounded-full bg-white/5 text-[var(--muted)] border border-white/10 tracking-widest uppercase group-hover:text-[var(--accent)] group-hover:border-[var(--accent)]/30 transition-colors">
                     {service.badge}
@@ -95,8 +95,8 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="space-y-4">
-                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter italic text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-tight">
+                <div className="space-y-2 mt-2">
+                  <h3 className="text-base md:text-lg font-black uppercase tracking-tighter italic text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-tight">
                     {service.title}
                   </h3>
                   <p className="text-[var(--muted)] text-[11px] leading-relaxed opacity-60 font-bold uppercase tracking-tight">
@@ -116,20 +116,20 @@ export default function ServicesPage() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="mt-24 p-12 rounded-[3rem] border border-[var(--accent)]/20 bg-gradient-to-br from-[var(--card)]/60 to-[var(--background)] relative overflow-hidden text-center"
+          className="mt-12 p-6 md:p-8 rounded-3xl border border-[var(--accent)]/20 bg-gradient-to-br from-[var(--card)]/60 to-[var(--background)] relative overflow-hidden text-center"
         >
           <div className="absolute inset-0 bg-[var(--accent)]/5 blur-[80px] pointer-events-none" />
-          <div className="relative z-10 space-y-8">
-            <h4 className="text-3xl md:text-4xl font-black italic uppercase tracking-tighter">Ready to <span className="text-[var(--accent)]">Ascend?</span></h4>
-            <p className="text-[var(--muted)] text-[11px] font-black uppercase tracking-[0.3em] opacity-60 max-w-md mx-auto">
-              Our experts are ready to architect your next big digital move.
+          <div className="relative z-10 space-y-4">
+            <h4 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter">Ready to <span className="text-[var(--accent)]">Start?</span></h4>
+            <p className="text-[var(--muted)] text-[11px] font-bold uppercase tracking-wider opacity-80 max-w-sm mx-auto">
+              Our team is here to help you build and grow your business.
             </p>
             <button
               onClick={() => window.open(whatsappLink, "_blank")}
-              className="px-12 py-5 rounded-2xl bg-[var(--accent)] text-white font-black uppercase tracking-[0.3em] text-[11px] italic shadow-2xl hover:scale-[1.05] active:scale-95 transition-all flex items-center gap-3 mx-auto"
+              className="mt-2 px-8 py-3.5 rounded-xl bg-[var(--accent)] text-white font-black uppercase tracking-wider text-[11px] italic shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 mx-auto"
             >
               <FiMessageCircle size={16} />
-              Consult With Us
+              Message Us
             </button>
           </div>
         </motion.div>

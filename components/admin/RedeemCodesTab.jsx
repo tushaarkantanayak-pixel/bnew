@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiGift, FiPlus, FiCopy, FiCheck, FiClock, FiUser, FiTrash2 } from "react-icons/fi";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 export default function RedeemCodesTab() {
@@ -24,11 +25,8 @@ export default function RedeemCodesTab() {
     const fetchCodes = async (targetPage = page) => {
         try {
             setLoading(true);
-            const token = localStorage.getItem("token");
-            const res = await fetch(`/api/admin/redeem-codes?page=${targetPage}&limit=10`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            const data = await res.json();
+            const res = await apiClient.get(`/api/admin/redeem-codes?page=${targetPage}&limit=10`);
+            const data = res.data;
             if (data.success) {
                 setRecentCodes(data.codes);
                 setSummary(data.summary);
@@ -48,25 +46,17 @@ export default function RedeemCodesTab() {
     const handleGenerate = async (e) => {
         e.preventDefault();
         setIsGenerating(true);
-        const token = localStorage.getItem("token");
 
         try {
             const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
-            const res = await fetch("/api/admin/redeem-codes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    amount: Math.round(Number(amount) * rate),
-                    quantity: isSeries ? 1 : Number(quantity),
-                    isSeries,
-                    customCode: isSeries ? customCode : "",
-                    maxUses: isSeries ? Number(maxUses) : 1
-                })
+            const res = await apiClient.post("/api/admin/redeem-codes", {
+                amount: Math.round(Number(amount) * rate),
+                quantity: isSeries ? 1 : Number(quantity),
+                isSeries,
+                customCode: isSeries ? customCode : "",
+                maxUses: isSeries ? Number(maxUses) : 1
             });
-            const data = await res.json();
+            const data = res.data;
             if (data.success) {
                 alert(data.message + (isSeries ? "" : "\n\nGenerated Codes:\n" + data.codes.join("\n")));
                 setAmount("");
@@ -88,12 +78,8 @@ export default function RedeemCodesTab() {
         if (!confirm("Are you sure you want to expire/delete this code?")) return;
 
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch(`/api/admin/redeem-codes?id=${codeId}`, {
-                method: "DELETE",
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            const data = await res.json();
+            const res = await apiClient.delete(`/api/admin/redeem-codes?id=${codeId}`);
+            const data = res.data;
             if (data.success) {
                 fetchCodes();
             } else {

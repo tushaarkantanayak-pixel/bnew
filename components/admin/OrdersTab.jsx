@@ -26,6 +26,7 @@ import {
   Target
 } from "lucide-react";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 export default function OrdersTab() {
@@ -74,11 +75,8 @@ export default function OrdersTab() {
   /* ================= FETCH ORDERS STATS ================= */
   const fetchOrdersStats = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/admin/orders`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
+      const res = await apiClient.get(`/api/admin/orders`);
+      const data = res.data;
       if (data.success) {
         setOrderStats(data.orderStats || {
           revenue: { day: 0, week: 0, month: 0 },
@@ -95,8 +93,6 @@ export default function OrdersTab() {
   const fetchOrdersList = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
-
       const params = new URLSearchParams({
         page,
         limit,
@@ -107,12 +103,11 @@ export default function OrdersTab() {
         ...(filters.to && { to: filters.to }),
       });
 
-      const res = await fetch(
-        `/api/admin/orders/data?${params.toString()}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const res = await apiClient.get(
+        `/api/admin/orders/data?${params.toString()}`
       );
 
-      const data = await res.json();
+      const data = res.data;
       setOrders(data?.data || []);
       setPagination(
         data?.pagination || { total: 0, page: 1, totalPages: 1 }
@@ -129,20 +124,10 @@ export default function OrdersTab() {
   const updateOrderStatus = async (orderId, status) => {
     try {
       setUpdating(true);
-      const token = localStorage.getItem("token");
+      const res = await apiClient.patch("/api/admin/orders", { orderId, status });
 
-      const res = await fetch("/api/admin/orders", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ orderId, status }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        alert(data.message || "Failed to update order");
+      if (res.status !== 200 && res.status !== 201) {
+        alert("Failed to update order");
         return;
       }
 

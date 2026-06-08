@@ -9,6 +9,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { FiChevronDown, FiZap, FiTarget, FiMail } from "react-icons/fi";
+import apiClient from "@/utils/apiClient";
 
 const SUPPORT_CONFIG = {
   header: {
@@ -48,18 +49,14 @@ export default function QueryTab() {
     setIsSubmitting(true);
     const storedEmail = localStorage.getItem("email");
     try {
-      const res = await fetch("/api/support/query", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: storedEmail,
-          phone: queryPhone.trim(),
-          orderId: queryOrderId.trim() || null,
-          type: queryType,
-          message: queryMessage,
-        }),
+      const res = await apiClient.post("/api/support/query", {
+        email: storedEmail,
+        phone: queryPhone.trim(),
+        orderId: queryOrderId.trim() || null,
+        type: queryType,
+        message: queryMessage,
       });
-      const data = await res.json();
+      const data = res.data;
       if (data.success) setQuerySuccess("Message sent successfully!");
       else setQuerySuccess(data.message || "Failed to send. Try again.");
       setQueryType("");

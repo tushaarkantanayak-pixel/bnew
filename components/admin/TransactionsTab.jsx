@@ -23,6 +23,7 @@ import {
   ShoppingBag
 } from "lucide-react";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 export default function TransactionsTab() {
@@ -63,11 +64,8 @@ export default function TransactionsTab() {
 
   const fetchTransactionsStats = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/admin/transactions`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
+      const res = await apiClient.get(`/api/admin/transactions`);
+      const data = res.data;
       if (data.success) {
         setStats(data.stats || {
           counts: { day: 0, week: 0, month: 0 },
@@ -83,18 +81,12 @@ export default function TransactionsTab() {
   const fetchTransactionsList = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
 
-      const res = await fetch(
-        `/api/admin/transactions/data?page=${page}&limit=${limit}&search=${search}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const res = await apiClient.get(
+        `/api/admin/transactions/data?page=${page}&limit=${limit}&search=${search}`
       );
 
-      const data = await res.json();
+      const data = res.data;
 
       setTransactions(data?.data || []);
       setPagination(

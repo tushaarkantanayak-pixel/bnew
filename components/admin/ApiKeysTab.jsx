@@ -16,6 +16,7 @@ import {
     Clock
 } from "lucide-react";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 export default function ApiKeysTab() {
@@ -25,11 +26,8 @@ export default function ApiKeysTab() {
     const fetchKeys = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem("token");
-            const res = await fetch("/api/admin/api-keys", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const data = await res.json();
+            const res = await apiClient.get("/api/admin/api-keys");
+            const data = res.data;
             if (data.success) {
                 setKeys(data.data || []);
             }

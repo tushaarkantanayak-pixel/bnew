@@ -18,6 +18,7 @@ import {
   Filter,
   Inbox
 } from "lucide-react";
+import apiClient from "@/utils/apiClient";
 
 export default function SupportQueriesTab() {
   const [queries, setQueries] = useState([]);
@@ -52,11 +53,8 @@ export default function SupportQueriesTab() {
   /* ================= FETCH QUERIES STATS ================= */
   const fetchQueriesStats = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/admin/support-queries`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
+      const res = await apiClient.get(`/api/admin/support-queries`);
+      const data = res.data;
       if (data.success) {
         setStats(data.stats || { total: 0, open: 0, today: 0 });
         setPagination(prev => ({ ...prev, total: data.stats?.total || 0 }));
@@ -70,14 +68,12 @@ export default function SupportQueriesTab() {
   const fetchQueriesList = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
 
-      const res = await fetch(
-        `/api/admin/support-queries/data?page=${page}&limit=${limit}&search=${search}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const res = await apiClient.get(
+        `/api/admin/support-queries/data?page=${page}&limit=${limit}&search=${search}`
       );
 
-      const data = await res.json();
+      const data = res.data;
       setQueries(data?.data || []);
       setPagination(
         data?.pagination || { total: 0, page: 1, totalPages: 1 }
@@ -94,19 +90,11 @@ export default function SupportQueriesTab() {
   const updateQueryStatus = async (id, status) => {
     try {
       setUpdating(true);
-      const token = localStorage.getItem("token");
 
-      const res = await fetch("/api/admin/support-queries/status", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ id, status }),
-      });
+      const res = await apiClient.patch("/api/admin/support-queries/status", { id, status });
 
-      if (!res.ok) {
-        const data = await res.json();
+      if (res.status !== 200 && res.status !== 201) {
+        const data = res.data;
         alert(data.message || "Failed to update status");
         return;
       }

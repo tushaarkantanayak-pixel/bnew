@@ -25,6 +25,7 @@ import {
 import { Loader2, Zap, ArrowUpRight, ArrowDownRight, User, Wallet } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 export default function StatsTab() {
@@ -69,11 +70,8 @@ export default function StatsTab() {
     const fetchStats = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem("token");
-            const res = await fetch(`/api/admin/stats`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const json = await res.json();
+            const res = await apiClient.get(`/api/admin/stats`);
+            const json = res.data;
             if (json.success) {
                 setData(prev => ({
                     ...prev,
@@ -94,17 +92,14 @@ export default function StatsTab() {
     const fetchWallets = async () => {
         try {
             setWalletLoading(true);
-            const token = localStorage.getItem("token");
             const params = new URLSearchParams({
                 page: walletPage,
                 limit: 10,
                 search: walletSearch
             });
 
-            const res = await fetch(`/api/admin/stats/data?${params}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const json = await res.json();
+            const res = await apiClient.get(`/api/admin/stats/data?${params}`);
+            const json = res.data;
             if (json.success) {
                 setData(prev => ({
                     ...prev,
@@ -123,7 +118,6 @@ export default function StatsTab() {
     const fetchHistory = async () => {
         try {
             setHistoryLoading(true);
-            const token = localStorage.getItem("token");
             const params = new URLSearchParams({
                 page: historyPage,
                 limit: 10,
@@ -132,10 +126,8 @@ export default function StatsTab() {
                 status: historyStatus
             });
 
-            const res = await fetch(`/api/admin/wallet/history?${params}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const json = await res.json();
+            const res = await apiClient.get(`/api/admin/wallet/history?${params}`);
+            const json = res.data;
             if (json.success) {
                 setHistory(json.data || []);
                 setHistoryTotalPages(json.pagination?.totalPages || 1);
@@ -159,25 +151,17 @@ export default function StatsTab() {
 
         try {
             setUpdating(true);
-            const token = localStorage.getItem("token");
             const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
 
-            const res = await fetch("/api/admin/wallet/manage", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    email: finalEmail,
-                    amount: Math.round(Number(finalAmount) * rate),
-                    action,
-                }),
+            const res = await apiClient.post("/api/admin/wallet/manage", {
+                email: finalEmail,
+                amount: Math.round(Number(finalAmount) * rate),
+                action,
             });
 
-            const json = await res.json();
+            const json = res.data;
 
-            if (!res.ok) {
+            if (res.status !== 200 && res.status !== 201) {
                 alert(json.message || "Failed to update wallet");
             } else {
                 // If it's a quick action, we might not want alerts, but for now keep it simple
@@ -203,16 +187,8 @@ export default function StatsTab() {
         if (!confirm(`Are you sure you want to mark this transaction as ${newStatus}?`)) return;
 
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch("/api/admin/wallet/update-status", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ id, status: newStatus }),
-            });
-            const json = await res.json();
+            const res = await apiClient.post("/api/admin/wallet/update-status", { id, status: newStatus });
+            const json = res.data;
 
             if (json.success) {
                 alert(json.message);
@@ -513,13 +489,8 @@ export default function StatsTab() {
                                                                     onClick={async () => {
                                                                         if (!confirm("Verify with Gateway?")) return;
                                                                         try {
-                                                                            const token = localStorage.getItem("token");
-                                                                            const res = await fetch("/api/admin/wallet/verify", {
-                                                                                method: "POST",
-                                                                                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                                                                                body: JSON.stringify({ transactionId: txn._id })
-                                                                            });
-                                                                            const json = await res.json();
+                                                                            const res = await apiClient.post("/api/admin/wallet/verify", { transactionId: txn._id });
+                                                                            const json = res.data;
                                                                             alert(json.message);
                                                                             if (json.success) fetchHistory();
                                                                         } catch (e) {
@@ -645,13 +616,8 @@ export default function StatsTab() {
                                                                         onClick={async () => {
                                                                             if (!confirm("Verify this Pending Transaction with Gateway?")) return;
                                                                             try {
-                                                                                const token = localStorage.getItem("token");
-                                                                                const res = await fetch("/api/admin/wallet/verify", {
-                                                                                    method: "POST",
-                                                                                    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                                                                                    body: JSON.stringify({ transactionId: txn._id })
-                                                                                });
-                                                                                const json = await res.json();
+                                                                                const res = await apiClient.post("/api/admin/wallet/verify", { transactionId: txn._id });
+                                                                                const json = res.data;
                                                                                 alert(json.message);
                                                                                 if (json.success) fetchHistory();
                                                                             } catch (e) {

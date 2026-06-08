@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { FiSettings, FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/fi";
+import apiClient from "@/utils/apiClient";
 
 const SettingsTab = () => {
     const [settings, setSettings] = useState({ maintenanceMode: false });
@@ -16,11 +17,8 @@ const SettingsTab = () => {
     const fetchSettings = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem("token");
-            const res = await fetch("/api/admin/settings", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            const data = await res.json();
+            const res = await apiClient.get("/api/admin/settings");
+            const data = res.data;
             if (data.success) {
                 setSettings(data.data);
             }
@@ -35,19 +33,10 @@ const SettingsTab = () => {
         try {
             setSaving(true);
             setMessage({ type: "", text: "" });
-            const token = localStorage.getItem("token");
             const newValue = !settings.maintenanceMode;
 
-            const res = await fetch("/api/admin/settings", {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ maintenanceMode: newValue }),
-            });
-
-            const data = await res.json();
+            const res = await apiClient.patch("/api/admin/settings", { maintenanceMode: newValue });
+            const data = res.data;
             if (data.success) {
                 setSettings(data.data);
                 setMessage({ type: "success", text: `Maintenance mode ${newValue ? "enabled" : "disabled"} successfully!` });

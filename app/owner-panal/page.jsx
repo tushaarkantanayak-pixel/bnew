@@ -7,6 +7,7 @@ import {
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";
+import apiClient from "@/utils/apiClient";
 
 import AuthGuard from "@/components/AuthGuard";
 import UsersTab from "@/components/admin/UsersTab";
@@ -45,11 +46,9 @@ export default function AdminPanalPage() {
         return;
       }
 
-      fetch("/api/auth/me", {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-        .then(res => res.json())
-        .then(data => {
+      apiClient.get("/api/auth/me")
+        .then(res => {
+          const data = res.data;
           if (data.success && data.user?.userType === "owner") {
             setIsOwner(true);
             localStorage.setItem("userType", "owner");
@@ -92,8 +91,8 @@ export default function AdminPanalPage() {
   /* ================= FETCH BALANCE ================= */
   const fetchBalance = async () => {
     try {
-      const res = await fetch("/api/game/balance");
-      const data = await res.json();
+      const res = await apiClient.get("/api/game/balance");
+      const data = res.data;
       if (data.success) {
         setBalance(data?.balance?.data?.balance ?? data.balance);
       }
@@ -104,11 +103,8 @@ export default function AdminPanalPage() {
 
 
   const fetchBanners = async () => {
-    const token = localStorage.getItem("token");
-    const res = await fetch("/api/admin/banners/game-banners", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await res.json();
+    const res = await apiClient.get("/api/admin/banners/game-banners");
+    const data = res.data;
     setBanners(data.data || []);
   };
 
@@ -117,11 +113,8 @@ export default function AdminPanalPage() {
 
   /* ================= FETCH PRICING ================= */
   const fetchPricing = async (type) => {
-    const token = localStorage.getItem("token");
-    const res = await fetch(`/api/admin/pricing?userType=${type}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await res.json();
+    const res = await apiClient.get(`/api/admin/pricing?userType=${type}`);
+    const data = res.data;
 
     if (data.success) {
       const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
@@ -149,16 +142,9 @@ export default function AdminPanalPage() {
   const savePricing = async () => {
     try {
       setSavingPricing(true);
-      const token = localStorage.getItem("token");
 
         const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
-        const res = await fetch("/api/admin/pricing", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
+        const res = await apiClient.patch("/api/admin/pricing", {
           userType: pricingType,
           slabs: normalizeSlabs(slabs).map(s => ({
             ...s,
@@ -169,16 +155,16 @@ export default function AdminPanalPage() {
             ...o,
             fixedPrice: Math.round(o.fixedPrice * rate)
           })),
-        }),
-      });
+        });
 
 
-      if (!res.ok) {
-        const data = await res.json();
-        alert(data.message || "Failed");
-      } else {
-        alert("Pricing updated successfully");
-      }
+        if (res.data.success) {
+          alert("Pricing updated successfully");
+        } else {
+          alert(res.data.message || "Failed");
+        }
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed");
     } finally {
       setSavingPricing(false);
     }

@@ -17,6 +17,7 @@ import {
   FiClock,
 } from "react-icons/fi";
 import { formatPrice } from "@/utils/currency";
+import apiClient from "@/utils/apiClient";
 
 
 interface WalletTabProps {
@@ -86,11 +87,8 @@ export default function WalletTab({
 
   const fetchStatus = async (id: string) => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/wallet/usdt/status?depositId=${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await res.json();
+      const res = await apiClient.get(`/api/wallet/usdt/status?depositId=${id}`);
+      const data = res.data;
       if (data.success) {
         setUsdtDeposit(data.deposit);
         if (data.deposit.status === "confirmed") {
@@ -131,10 +129,8 @@ export default function WalletTab({
        const token = localStorage.getItem("token");
        if (!token) return;
        try {
-         const res = await fetch("/api/wallet/history?filter=usdt&page=1&limit=5", {
-           headers: { Authorization: `Bearer ${token}` }
-         });
-         const data = await res.json();
+         const res = await apiClient.get("/api/wallet/history?filter=usdt&page=1&limit=5");
+         const data = res.data;
          if (data.success && data.data?.[0]?.status === "waiting") {
             handleResumeUsdt(data.data[0]);
          }
@@ -170,12 +166,17 @@ export default function WalletTab({
       return;
     }
 
-    const res = await fetch("/api/wallet/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-      body: JSON.stringify({ amount: Math.round(Number(amount) * rate) }),
-    });
-    const data = await res.json();
+    let data;
+    try {
+      const res = await apiClient.post("/api/wallet/create-order", {
+        amount: Math.round(Number(amount) * rate),
+      });
+      data = res.data;
+    } catch (err) {
+      alert("Failed to create order");
+      setLoading(false);
+      return;
+    }
     setLoading(false);
     if (!data.success) { alert(data.message); return; }
     localStorage.setItem("pending_order", data.orderId);
@@ -196,13 +197,11 @@ export default function WalletTab({
     setUsdtLoading(true);
     setUsdtError("");
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/wallet/usdt/initiate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ usdtAmount: num, network: usdtNetwork }),
+      const res = await apiClient.post("/api/wallet/usdt/initiate", {
+        usdtAmount: num,
+        network: usdtNetwork,
       });
-      const data = await res.json();
+      const data = res.data;
       if (!data.success) {
         setUsdtError(data.message || "Failed to initiate deposit");
         return;
@@ -224,13 +223,11 @@ export default function WalletTab({
     setUsdtLoading(true);
     setUsdtError("");
     try {
-      const token = localStorage.getItem("token");
-      const res = await fetch("/api/wallet/usdt/submit-hash", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ depositId: usdtDeposit.depositId, txHash: txHash.trim() }),
+      const res = await apiClient.post("/api/wallet/usdt/submit-hash", {
+        depositId: usdtDeposit.depositId,
+        txHash: txHash.trim(),
       });
-      const data = await res.json();
+      const data = res.data;
       if (!data.success) {
         setUsdtError(data.message || "Failed to submit hash");
         return;
@@ -248,11 +245,8 @@ export default function WalletTab({
     if (pollRef.current) clearInterval(pollRef.current);
     pollRef.current = setInterval(async () => {
       try {
-        const token = localStorage.getItem("token");
-        const res = await fetch(`/api/wallet/usdt/status?depositId=${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await res.json();
+        const res = await apiClient.get(`/api/wallet/usdt/status?depositId=${id}`);
+        const data = res.data;
         if (data.success && data.deposit?.status === "confirmed") {
           clearInterval(pollRef.current!);
           setUsdtStep("confirmed");
@@ -761,11 +755,8 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
   const fetchHistory = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
-      const res = await fetch(`/api/wallet/history?page=${page}&limit=5&filter=${filter}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
+      const res = await apiClient.get(`/api/wallet/history?page=${page}&limit=5&filter=${filter}`);
+      const json = res.data;
       if (json.success) {
         setHistory(json.data);
         if (json.pagination) {
@@ -798,15 +789,10 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
       try {
         // We reuse the existing check-status API usually meant for payment-complete page
         // This API calls gateway and updates DB if success
-        const res = await fetch("/api/wallet/check-status", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-          body: JSON.stringify({ orderId: txn.referenceId })
+        const res = await apiClient.post("/api/wallet/check-status", {
+          orderId: txn.referenceId,
         });
-        const data = await res.json();
+        const data = res.data;
         if (data.success) updated = true;
       } catch (e) {
         console.error("Auto-check failed for", txn._id);
@@ -818,10 +804,8 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
       // prevent infinite loop by not calling fetchHistory directly here if possible, 
       // but since we updated state, a re-fetch is needed.
       // Let's just create a new fetch to update UI
-      const res = await fetch(`/api/wallet/history?page=${page}&limit=5`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
+      const res = await apiClient.get(`/api/wallet/history?page=${page}&limit=5`);
+      const json = res.data;
       if (json.success) setHistory(json.data);
 
       // Also update wallet balance

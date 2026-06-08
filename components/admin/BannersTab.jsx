@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   XCircle
 } from "lucide-react";
+import apiClient from "@/utils/apiClient";
 
 export default function BannersTab({ banners, onRefresh }) {
   const [form, setForm] = useState({
@@ -44,21 +45,14 @@ export default function BannersTab({ banners, onRefresh }) {
 
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/admin/banners", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          ...form,
-          gameId: form.gameId
-            ? form.gameId.split(",").map((g) => g.trim())
-            : [],
-        }),
+      const res = await apiClient.post("/api/admin/banners", {
+        ...form,
+        gameId: form.gameId
+          ? form.gameId.split(",").map((g) => g.trim())
+          : [],
       });
 
-      if (res.ok) {
+      if (res.status === 200 || res.status === 201) {
         resetForm();
         onRefresh();
       }
@@ -86,21 +80,14 @@ export default function BannersTab({ banners, onRefresh }) {
 
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/admin/banners/editbanner", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          ...form,
-          gameId: form.gameId
-            ? form.gameId.split(",").map((g) => g.trim())
-            : [],
-        }),
+      const res = await apiClient.put("/api/admin/banners/editbanner", {
+        ...form,
+        gameId: form.gameId
+          ? form.gameId.split(",").map((g) => g.trim())
+          : [],
       });
 
-      if (res.ok) {
+      if (res.status === 200 || res.status === 201) {
         resetForm();
         onRefresh();
       }
@@ -112,16 +99,12 @@ export default function BannersTab({ banners, onRefresh }) {
   const toggleShow = async (slug, isShow) => {
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/admin/banners/editbanner", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ bannerSlug: slug, isShow: !isShow }),
+      const res = await apiClient.put("/api/admin/banners/editbanner", {
+        bannerSlug: slug,
+        isShow: !isShow,
       });
 
-      if (res.ok) {
+      if (res.status === 200 || res.status === 201) {
         onRefresh();
       }
     } finally {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiGift, FiLoader, FiCheckCircle, FiXCircle, FiArrowRight, FiShield } from "react-icons/fi";
+import apiClient from "@/utils/apiClient";
 
 interface RedeemTabProps {
     setWalletBalance: (balance: number) => void;
@@ -19,16 +20,8 @@ export default function RedeemTab({ setWalletBalance }: RedeemTabProps) {
         setStatus({ type: null, message: "" });
 
         try {
-            const token = localStorage.getItem("token");
-            const res = await fetch("/api/user/redeem", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ code: code.trim() })
-            });
-            const data = await res.json();
+            const res = await apiClient.post("/api/user/redeem", { code: code.trim() });
+            const data = res.data;
 
             if (data.success) {
                 setStatus({ type: 'success', message: data.message });

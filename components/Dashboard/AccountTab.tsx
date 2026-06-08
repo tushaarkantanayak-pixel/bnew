@@ -12,6 +12,7 @@ import {
   FiAlertCircle,
   FiZap,
 } from "react-icons/fi";
+import apiClient from "@/utils/apiClient";
 
 interface UserDetails {
   name: string;
@@ -36,15 +37,11 @@ export default function AccountTab({ userDetails }: AccountTabProps) {
     }
     setLoadingPass(true);
     try {
-      const res = await fetch("/api/auth/update-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          identifier: userDetails.email || userDetails.phone,
-          newPassword: newPass,
-        }),
+      const res = await apiClient.post("/api/auth/update-password", {
+        identifier: userDetails.email || userDetails.phone,
+        newPassword: newPass,
       });
-      const data = await res.json();
+      const data = res.data;
       setLoadingPass(false);
       if (!data.success) {
         setPassError(data.message || "Password update failed");
