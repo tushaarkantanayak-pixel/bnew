@@ -385,7 +385,7 @@ const BGMI_CONFIG = {
 
 /* ================= ROLE → PRICING (FIXED) ================= */
 const resolvePricingRole = (role) => {
-  if (["user", "member", "admin"].includes(role)) return role;
+  if (["user", "member"].includes(role)) return role;
   return null; // owner → base price
 };
 

@@ -32,7 +32,7 @@ export async function PATCH(req) {
     }
 
     // ✅ member added
-    const allowedRoles = ["user", "member", "admin", "owner"];
+    const allowedRoles = ["user", "member", "owner"];
 
     if (!allowedRoles.includes(newUserType)) {
       return Response.json(

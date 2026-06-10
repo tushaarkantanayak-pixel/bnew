@@ -73,7 +73,7 @@ export default function AdminPanalPage() {
   const limit = 10;
 
   /* ================= PRICING STATE ================= */
-  const [pricingType, setPricingType] = useState("admin");
+  const [pricingType, setPricingType] = useState("user");
   const [slabs, setSlabs] = useState([{ min: 0, max: 100, percent: 0 }]);
   const [overrides, setOverrides] = useState([]);
   const [savingPricing, setSavingPricing] = useState(false);

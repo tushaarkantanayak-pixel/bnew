@@ -132,15 +132,15 @@ export default function PricingTab({
   }, [overrides, fixedGameFilter, fixedItemFilter]);
 
   const updateOverridePrice = (i, value) => {
-    const next = [...overrides];
-    next[i].fixedPrice = Math.max(0, Number(value) || 0);
-    setOverrides(next);
+    setOverrides(prev => prev.map((item, idx) => 
+      idx === i ? { ...item, fixedPrice: Math.max(0, Number(value) || 0) } : item
+    ));
   };
 
   const toggleOverride = (i) => {
-    const next = [...overrides];
-    next[i].useOverride = !next[i].useOverride;
-    setOverrides(next);
+    setOverrides(prev => prev.map((item, idx) => 
+      idx === i ? { ...item, useOverride: !item.useOverride } : item
+    ));
   };
 
   const applyBulkPercentage = () => {
@@ -205,7 +205,7 @@ export default function PricingTab({
               <h3 className="text-xs font-bold text-[var(--muted)]">Target Roles</h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {["user", "member", "admin"].map((type) => (
+              {["user", "member"].map((type) => (
                 <button
                   key={type}
                   onClick={() => setPricingType(type)}

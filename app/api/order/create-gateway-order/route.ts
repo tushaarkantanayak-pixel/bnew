@@ -146,7 +146,7 @@ async function resolvePrice(
           o.gameSlug === gameSlug && o.itemSlug === itemSlug
       );
 
-      if (fixed?.fixedPrice != null) {
+      if (fixed?.fixedPrice != null && fixed.useOverride) {
         price = Number(fixed.fixedPrice);
       } else if (pricingConfig.slabs?.length) {
         const slab = pricingConfig.slabs.find(

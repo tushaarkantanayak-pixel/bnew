@@ -72,7 +72,7 @@ export async function GET(req) {
       );
     }
 
-    if (!["user", "member", "admin"].includes(userType)) {
+    if (!["user", "member"].includes(userType)) {
       return NextResponse.json(
         { success: false, message: "Invalid userType" },
         { status: 400 }
@@ -127,7 +127,7 @@ export async function PATCH(req) {
 
     userType = userType.trim().toLowerCase();
 
-    const validRoles = ["user", "member", "admin", "owner"];
+    const validRoles = ["user", "member", "owner"];
     if (!validRoles.includes(userType)) {
       return NextResponse.json(
         {
