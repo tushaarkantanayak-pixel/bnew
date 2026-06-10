@@ -24,7 +24,7 @@ export async function POST(req) {
         const dailyLimit = keyDoc?.dailyLimit || 0;
 
         const body = await req.json();
-        const { gameSlug, itemSlug, playerId, zoneId } = body;
+        const { gameSlug, itemSlug, playerId, zoneId, playerName } = body;
 
         if (!gameSlug || !itemSlug || !playerId) {
             return NextResponse.json({ success: false, status: "failed", message: "Missing required fields (gameSlug, itemSlug, playerId)" }, { status: 400 });
@@ -163,6 +163,7 @@ export async function POST(req) {
                 gameSlug,
                 itemSlug,
                 itemName,
+                playerName: playerName || "",
                 playerId,
                 zoneId: zoneId || "",
                 price,
