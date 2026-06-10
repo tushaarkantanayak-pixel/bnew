@@ -11,6 +11,7 @@ import ReviewAndPaymentStep from "./ReviewAndPaymentStep";
 import { saveVerifiedPlayer } from "@/utils/storage/verifiedPlayerStorage";
 import { formatPrice } from "@/utils/currency";
 import { useAuthStore } from "@/store/useAuthStore";
+import apiClient from "@/utils/apiClient";
 
 function BuyFlowContent() {
   const { slug, itemSlug } = useParams();
@@ -56,16 +57,9 @@ function BuyFlowContent() {
   useEffect(() => {
     if (!slug || !itemSlug) return;
 
-    const token = localStorage.getItem("token");
-
-    fetch(`/api/games/${slug}`, {
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const gameData = data?.data;
+    apiClient.get(`/api/games/${slug}`)
+      .then((res) => {
+        const gameData = res.data?.data;
         if (!gameData) return;
 
         const foundItem = gameData.itemId.find(
@@ -150,16 +144,12 @@ function BuyFlowContent() {
 
       // 1. Always check name for ALL games (including MLBB)
       const productId = `${game?.gameId || slug}_${item?.itemId || itemSlug}`;
-      const nameRes = await fetch("/api/check-region/namecheck", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const nameRes = await apiClient.post("/api/check-region/namecheck", {
           productId,
           playerId,
           zoneId: zoneId || "NA",
-        }),
       });
-      const nameData = await nameRes.json();
+      const nameData = nameRes.data;
 
       if (
         (nameData?.success === 200 || nameData?.success === true) &&
@@ -173,12 +163,8 @@ function BuyFlowContent() {
 
       // 2. Extra check for MLBB to verify region
       if (isMLBB) {
-        const regionRes = await fetch("/api/check-region", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: playerId, zone: zoneId }),
-        });
-        const regionData = await regionRes.json();
+        const regionRes = await apiClient.post("/api/check-region", { id: playerId, zone: zoneId });
+        const regionData = regionRes.data;
 
         if (regionData?.success === 200 && (regionData?.data?.username || regionData?.data?.region)) {
           region = regionData.data.region || region;
@@ -240,19 +226,15 @@ function BuyFlowContent() {
   /* ================= PAYMENT ================= */
   const handlePayment = async () => {
     // Example secure order creation
-    const res = await fetch("/api/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const res = await apiClient.post("/api/create-order", {
         slug,
         itemSlug,
         price: totalPrice, // ✅ VERIFIED PRICE
         playerId,
         zoneId,
-      }),
     });
 
-    const data = await res.json();
+    const data = res.data;
 
     if (data.success) {
       setShowSuccess(true);

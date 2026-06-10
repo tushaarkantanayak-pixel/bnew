@@ -18,6 +18,8 @@ import BuyPanelBgmi from "@/components/GameDetail/BuyPanelBgmi";
 
 import { Suspense } from "react";
 
+import apiClient from "@/utils/apiClient";
+
 function GameDetailContent() {
   const { slug } = useParams();
   const router = useRouter();
@@ -55,17 +57,12 @@ function GameDetailContent() {
 
   /* ================= FETCH GAME ================= */
   useEffect(() => {
-    const token = localStorage.getItem("token");
     setLoading(true);
     setError(null);
 
-    fetch(`/api/games/${slug}`, {
-      headers: {
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    apiClient.get(`/api/games/${slug}`)
+      .then((res) => {
+        const data = res.data;
         if (!data.data || !data.data.itemId || data.data.itemId.length === 0) {
           setError("No data found for this game");
           setLoading(false);

@@ -7,7 +7,7 @@ import { FiCreditCard, FiSmartphone, FiUser, FiInfo, FiCheck, FiShield } from "r
 import { Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 import { formatPrice } from "@/utils/currency";
-
+import apiClient from "@/utils/apiClient";
 
 export default function ReviewAndPaymentStep({
   game,
@@ -77,17 +77,9 @@ export default function ReviewAndPaymentStep({
         currency: "INR",
       };
 
-      const token = localStorage.getItem("token");
+      const res = await apiClient.post("/api/order/create-gateway-order", orderPayload);
 
-      const res = await fetch("/api/order/create-gateway-order", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(orderPayload),
-      });
-
-      const data = await res.json();
+      const data = res.data;
 
       if (!data.success) {
         alert("Order failed: " + data.message);

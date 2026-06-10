@@ -8,6 +8,7 @@ import GameGrid from "@/components/Games/GameGrid";
 import GameList from "@/components/Games/GameList";
 import FilterModal from "@/components/Games/FilterModal";
 import ServiceGridSection from "@/components/Games/ServiceGridSection";
+import apiClient from "@/utils/apiClient";
 
 export default function GamesPage() {
   /* ================= STATE ================= */
@@ -48,8 +49,8 @@ export default function GamesPage() {
 
     const loadGames = async () => {
       try {
-        const res = await fetch("/api/games");
-        const json = await res.json();
+        const res = await apiClient.get("/api/games");
+        const json = res.data;
         if (!mounted) return;
 
         let fetchedGames = json?.data?.games || [];
