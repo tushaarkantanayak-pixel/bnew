@@ -22,6 +22,7 @@ export default function OurProductsPage() {
         "Make it look like your brand",
         "Safe and secure payments"
       ],
+      link: "https://mlbbtopup.in",
       color: "from-blue-600 to-cyan-400"
     },
     {
@@ -38,6 +39,7 @@ export default function OurProductsPage() {
         "Easy to connect to your site",
         "24/7 monitoring"
       ],
+      link: "https://xyzpay.site",
       color: "from-purple-600 to-indigo-400"
     },
     {
@@ -54,6 +56,7 @@ export default function OurProductsPage() {
         "Branded storefront link",
         "Real-time notifications"
       ],
+      link: "https://web.bluebuff.in",
       color: "from-pink-500 to-rose-400",
       isNew: true,
     }
@@ -128,9 +131,9 @@ export default function OurProductsPage() {
                 </div>
 
                 <div className="flex items-center gap-3 pt-6 mt-auto">
-                  <button className="flex-1 py-2.5 rounded-xl bg-[var(--accent)] text-white text-[9px] font-black uppercase italic tracking-widest hover:brightness-110 shadow-lg shadow-[var(--accent)]/20 transition-all text-center">
+                  <a href={product.link || "#"} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 rounded-xl bg-[var(--accent)] text-white text-[9px] font-black uppercase italic tracking-widest hover:brightness-110 shadow-lg shadow-[var(--accent)]/20 transition-all text-center">
                     Get Started
-                  </button>
+                  </a>
                   <button className="px-4 py-2.5 rounded-xl bg-white/5 text-[9px] font-black uppercase italic tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] transition-all">
                     Docs
                   </button>

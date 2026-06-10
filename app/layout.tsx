@@ -22,7 +22,6 @@ import ChristmasPopup from "@/components/Seasonal/ChristmasPopup";
 import { Poppins } from "next/font/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // import ChatBot from "@/components/SocialFloat/Chatbot"; // Removed as we use wrapper
-import ChatbotWrapper from "@/components/Layout/ChatbotWrapper";
 import ValentinePopup from "@/components/Seasonal/ValentinePopup";
 import ValentineEffect from "@/components/Seasonal/ValentineEffect";
 import Maintaince from "@/components/Seasonal/Maintaince";
@@ -189,7 +188,6 @@ export default async function RootLayout({
 
           <Footer />
           <SocialFloat />
-          <ChatbotWrapper />
 
 
           <div />
