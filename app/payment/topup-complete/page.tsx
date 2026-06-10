@@ -13,6 +13,7 @@ import {
   FaHistory,
 } from "react-icons/fa";
 import { formatPrice } from "@/utils/currency";
+import confetti from "canvas-confetti";
 
 
 // --- Types ---
@@ -116,6 +117,24 @@ export default function TopupComplete() {
           setMessage("Payment successful!");
           localStorage.removeItem("pending_topup_order");
           fetchOrderDetails(orderId);
+          // Trigger confetti!
+          const duration = 2000;
+          const animationEnd = Date.now() + duration;
+          const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
+
+          const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+          const interval: any = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+              return clearInterval(interval);
+            }
+
+            const particleCount = 50 * (timeLeft / duration);
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+          }, 250);
         }
         return;
       }
@@ -251,7 +270,7 @@ export default function TopupComplete() {
                       TOP-UP SUCCESSFUL
                     </motion.h1>
                     <motion.p variants={itemVariants} className="text-[var(--muted)] text-xs">
-                      Your high-priority order has been fulfilled.
+                      Your order has been completed successfully.
                     </motion.p>
                   </div>
 
@@ -385,26 +404,7 @@ export default function TopupComplete() {
             </AnimatePresence>
           </div>
 
-          {/* Bottom Footer Info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="mt-6 flex justify-center items-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]"
-          >
-            <div className="flex items-center gap-1.5 focus:outline-none cursor-pointer hover:text-[var(--accent)] transition-colors"
-              onClick={() => {
-                if (orderId) navigator.clipboard.writeText(orderId);
-              }}>
-              <FaRegClipboard className="text-xs" />
-              Copy Ref ID
-            </div>
-            <div className="w-1.5 h-1.5 rounded-full bg-[var(--border)]" />
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              Secure Link
-            </div>
-          </motion.div>
+
         </div>
       </motion.div>
     </div>

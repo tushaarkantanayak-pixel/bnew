@@ -25,6 +25,7 @@ export type OrderType = {
   orderId: string;
   gameSlug: string;
   itemName: string;
+  playerName?: string;
   playerId: string;
   zoneId: string;
   paymentMethod: string;
@@ -194,7 +195,8 @@ export default function OrderItem({ order }: { order: OrderType }) {
             exit={{ height: 0, opacity: 0 }}
             className="px-4 pb-4 overflow-hidden"
           >
-            <div className="border-t border-[var(--border)] pt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="border-t border-[var(--border)] pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+              <InfoNode label="Player Name" value={order.playerName} icon={FiUser} mono />
               <InfoNode label="Player ID" value={order.playerId} icon={FiUser} mono />
               <InfoNode label="Zone ID" value={order.zoneId} icon={FiGrid} mono />
               <InfoNode label="Payment" value={order.paymentMethod.toUpperCase()} icon={FiCreditCard} />

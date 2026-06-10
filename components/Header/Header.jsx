@@ -73,6 +73,16 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("/");
+  const [expandedSections, setExpandedSections] = useState(() => 
+    HEADER_CONFIG.userMenu.sections.reduce((acc, sec) => ({ 
+      ...acc, 
+      [sec.title]: sec.title === "My Dashboard" || sec.title === "Gateway"
+    }), {})
+  );
+
+  const toggleSection = (title) => {
+    setExpandedSections(prev => ({ ...prev, [title]: !prev[title] }));
+  };
 
   const { userDetails, walletBalance, isAuthenticated, token, logout, fetchUser } = useAuthStore();
   
@@ -340,36 +350,59 @@ export default function Header() {
                       <div className="space-y-2">
                         {HEADER_CONFIG.userMenu.sections.map((section) => (
                           <div key={section.title} className="space-y-1">
-                            <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 ml-2">{section.title}</h4>
-                            <div className={section.title === "Earning" ? "grid grid-cols-2 gap-1.5" : "space-y-0.5"}>
-                              {section.items.map((item) => (
-                                <Link
-                                  key={item.label}
-                                  href={user ? item.href : "/login"}
-                                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                                  onClick={() => setUserMenuOpen(false)}
-                                  className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1.5 px-1.5" : "justify-between py-1.5 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
+                            <button 
+                              onClick={() => toggleSection(section.title)}
+                              className="w-full flex items-center justify-between text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 pl-2 pr-4 py-1 hover:text-[var(--muted)]/70 transition-colors"
+                            >
+                              <span>{section.title}</span>
+                              <motion.div
+                                animate={{ rotate: expandedSections[section.title] ? 90 : 0 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <FiChevronRight size={10} />
+                              </motion.div>
+                            </button>
+                            <AnimatePresence initial={false}>
+                              {expandedSections[section.title] && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="overflow-hidden"
                                 >
-                                  <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-2"} min-w-0`}>
-                                    <div className="w-6 h-6 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
-                                    <div className="flex flex-col min-w-0">
-                                      <p className="text-xs font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
-                                      <p className="text-[8px] text-[var(--muted)] opacity-50 truncate">{item.desc}</p>
-                                    </div>
+                                  <div className={section.title === "Earning" ? "grid grid-cols-2 gap-1.5" : "space-y-0.5"}>
+                                    {section.items.map((item) => (
+                                      <Link
+                                        key={item.label}
+                                        href={user ? item.href : "/login"}
+                                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                                        onClick={() => setUserMenuOpen(false)}
+                                        className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1.5 px-1.5" : "justify-between py-1.5 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
+                                      >
+                                        <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-2"} min-w-0`}>
+                                          <div className="w-6 h-6 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
+                                          <div className="flex flex-col min-w-0">
+                                            <p className="text-xs font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
+                                            <p className="text-[8px] text-[var(--muted)] opacity-50 truncate">{item.desc}</p>
+                                          </div>
+                                        </div>
+                                        {section.title !== "Earning" && (
+                                          <div className="flex items-center gap-2 flex-shrink-0">
+                                            {item.label === "My Wallet" && user && (
+                                              <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
+                                                {formatPrice(walletBalance)}
+                                              </span>
+                                            )}
+                                            <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
+                                          </div>
+                                        )}
+                                      </Link>
+                                    ))}
                                   </div>
-                                  {section.title !== "Earning" && (
-                                    <div className="flex items-center gap-2 flex-shrink-0">
-                                      {item.label === "My Wallet" && user && (
-                                        <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
-                                          {formatPrice(walletBalance)}
-                                        </span>
-                                      )}
-                                      <FiChevronRight className="text-[var(--muted)] opacity-20 group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all" />
-                                    </div>
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                           </div>
                         ))}
                       </div>

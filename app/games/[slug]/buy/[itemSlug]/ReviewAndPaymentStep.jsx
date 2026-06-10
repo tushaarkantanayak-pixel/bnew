@@ -68,6 +68,7 @@ export default function ReviewAndPaymentStep({
         gameSlug: slug,
         itemSlug,
         itemName,
+        playerName: reviewData.userName, // ✅ Added playerName
         playerId: reviewData.playerId,
         zoneId: reviewData.zoneId,
         paymentMethod,
@@ -129,45 +130,43 @@ export default function ReviewAndPaymentStep({
           className="space-y-4"
         >
           {/* USER & ACCOUNT DETAILS */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-4 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-[var(--accent)]/5 rounded-full blur-2xl -z-10 group-hover:bg-[var(--accent)]/10 transition-all" />
-              <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-3 flex items-center gap-2">
-                <FiUser className="text-base" /> User Details
-              </h3>
-              <div className="space-y-2">
+          <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-3 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/5 rounded-full blur-2xl -z-10 group-hover:bg-[var(--accent)]/10 transition-all" />
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* User Details */}
+              <div>
+                <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-2">
+                  <FiUser className="text-[14px]" /> User Details
+                </h3>
                 <div>
                   <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Email Address</p>
                   <p className="font-bold truncate text-xs">{userEmail || "Not provided"}</p>
                 </div>
-                <div>
-                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Phone Number</p>
-                  <p className="font-bold truncate text-xs">{userPhone || "Not provided"}</p>
-                </div>
               </div>
-            </div>
 
-            <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-4 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-full blur-2xl -z-10 group-hover:bg-blue-500/10 transition-all" />
-              <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-3 flex items-center gap-2">
-                <FiShield className="text-base" /> Game Account
-              </h3>
-              <div className="space-y-2">
-                <div>
-                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{(isManual && !slug?.includes('bgmi')) ? "Order Details" : "Username"}</p>
-                  <p className="font-bold text-[var(--accent)] truncate text-xs leading-none mt-0.5">{reviewData.userName || "Player"}</p>
-                </div>
-                <div className="flex gap-6">
+              {/* Game Account */}
+              <div>
+                <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-2">
+                  <FiShield className="text-[14px]" /> Game Account
+                </h3>
+                <div className="space-y-2">
                   <div>
-                    <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{fieldOneLabel}</p>
-                    <p className="font-bold truncate text-xs">{reviewData.playerId}</p>
+                    <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{(isManual && !slug?.includes('bgmi')) ? "Order Details" : "Username"}</p>
+                    <p className="font-bold text-[var(--accent)] truncate text-xs leading-none mt-0.5">{reviewData.userName || "Player"}</p>
                   </div>
-                  {reviewData.zoneId && (
+                  <div className="flex gap-6">
                     <div>
-                      <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{fieldTwoLabel || "Secondary ID"}</p>
-                      <p className="font-bold truncate text-xs">{reviewData.zoneId}</p>
+                      <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{fieldOneLabel}</p>
+                      <p className="font-bold truncate text-xs">{reviewData.playerId}</p>
                     </div>
-                  )}
+                    {reviewData.zoneId && (
+                      <div>
+                        <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">{fieldTwoLabel || "Secondary ID"}</p>
+                        <p className="font-bold truncate text-xs">{reviewData.zoneId}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

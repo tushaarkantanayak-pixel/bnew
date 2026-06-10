@@ -498,7 +498,8 @@ export default function OrdersTab() {
                 </DrawerSection>
 
                 <DrawerSection icon={<Smartphone size={16} />} title="Player ID Info">
-                  <DrawerDetail label="Player ID" value={selectedOrder.playerId} emphasize />
+                  <DrawerDetail label="Player Name" value={selectedOrder.playerName || "N/A"} emphasize />
+                  <DrawerDetail label="Player ID" value={selectedOrder.playerId} />
                   <DrawerDetail label="Server/Zone" value={selectedOrder.zoneId || "GLOBAL"} />
                 </DrawerSection>
 

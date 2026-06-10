@@ -7,6 +7,7 @@ const OrderSchema = new mongoose.Schema(
     gameSlug: String,
     itemSlug: String,
     itemName: String,
+    playerName: String, // ✅ Added playerName
     playerId: String,
     zoneId: String,
     paymentMethod: String,

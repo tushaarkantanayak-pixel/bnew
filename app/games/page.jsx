@@ -174,14 +174,12 @@ export default function GamesPage() {
 
   return (
     <main className="min-h-screen bg-[var(--background)] px-4 py-4 sm:py-6 relative overflow-hidden">
-      {/* Background Decorative Glows */}
-      <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-[var(--accent)]/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[-10%] w-[400px] h-[400px] bg-purple-500/10 blur-[100px] rounded-full pointer-events-none" />
+      {/* Background Decorative Glows Removed */}
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* ================= COMPACT SEARCH & CONTROLS ================= */}
         <div className="space-y-4 mb-16">
-          <div className="bg-[var(--card)]/90 backdrop-blur-3xl border border-[var(--border)] rounded-[1.8rem] p-1.5 sm:p-2 shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex items-center gap-2 transition-all">
+          <div className="flex items-center gap-2 transition-all">
             {/* SEARCH */}
             <div className="relative flex-1 group/search">
               <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within/search:text-[var(--accent)] transition-colors" size={15} />
@@ -250,8 +248,6 @@ export default function GamesPage() {
             <TabButton id="all" label="All" icon={FiGrid} />
             <TabButton id="mlbb" label="MLBB" icon={FiZap} />
             <TabButton id="others" label="Others" icon={FiPackage} />
-            <TabButton id="streaming" label="Stream" icon={FiTv} />
-            <TabButton id="memberships" label="Member" icon={FiTrendingUp} />
           </div>
         </div>
 

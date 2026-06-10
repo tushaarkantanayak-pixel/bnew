@@ -10,6 +10,7 @@ import ValidationStep from "./ValidationStep";
 import ReviewAndPaymentStep from "./ReviewAndPaymentStep";
 import { saveVerifiedPlayer } from "@/utils/storage/verifiedPlayerStorage";
 import { formatPrice } from "@/utils/currency";
+import { useAuthStore } from "@/store/useAuthStore";
 
 function BuyFlowContent() {
   const { slug, itemSlug } = useParams();
@@ -30,7 +31,7 @@ function BuyFlowContent() {
 
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
-  const [walletBalance, setWalletBalance] = useState(0);
+  const { walletBalance } = useAuthStore(); // ✅ Use global state instead of local state
 
   /* ================= VERIFIED ITEM STATE ================= */
   const [game, setGame] = useState(null);
@@ -49,7 +50,6 @@ function BuyFlowContent() {
     window.scrollTo(0, 0);
     setUserEmail(localStorage.getItem("email") || "");
     setUserPhone(localStorage.getItem("phone") || "");
-    setWalletBalance(Number(localStorage.getItem("walletBalance") || 0));
   }, []);
 
   /* ================= FETCH GAME & VERIFY PRICE ================= */
@@ -267,15 +267,15 @@ function BuyFlowContent() {
 
           {/* ================= HEADER & PROGRESS ================= */}
           <div className="mb-4 relative">
-            <div className="max-w-md mx-auto px-6">
+            <div className="max-w-[220px] mx-auto px-2">
               <div className="flex items-center justify-between relative text-center">
                 {/* Progress Line Background */}
-                <div className="absolute top-[20px] left-0 w-full h-[1.5px] bg-[var(--border)]/10 -z-10" />
+                <div className="absolute top-[16px] left-0 w-full h-[1px] bg-[var(--border)]/10 -z-10" />
 
                 {/* Animated Progress Line */}
-                <div className="absolute top-[20px] left-0 w-full h-[1.5px] -z-10">
+                <div className="absolute top-[16px] left-0 w-full h-[1px] -z-10">
                   <motion.div
-                    className="h-full bg-[var(--accent)] shadow-[0_0_15px_var(--accent)]"
+                    className="h-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent)]"
                     initial={{ width: "0%" }}
                     animate={{
                       width: step === 1 ? "0%" : step === 2 ? "50%" : "100%"
@@ -294,13 +294,13 @@ function BuyFlowContent() {
                   const isCompleted = step > s.id;
 
                   return (
-                    <div key={s.id} className="flex flex-col items-center gap-2">
+                    <div key={s.id} className="flex flex-col items-center gap-1.5">
                       <div className="relative">
                         {/* Elegant Active Glow */}
                         {isActive && (
                           <motion.div
                             layoutId="step-glow"
-                            className="absolute -inset-1.5 bg-[var(--accent)]/15 blur-md rounded-full"
+                            className="absolute -inset-1.5 bg-[var(--accent)]/15 blur-[6px] rounded-full"
                           />
                         )}
 
@@ -310,24 +310,24 @@ function BuyFlowContent() {
                             borderColor: isActive || isCompleted ? "var(--accent)" : "var(--border)"
                           }}
                           className={`
-                            w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 relative z-10 backdrop-blur-md
+                            w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 relative z-10 backdrop-blur-md
                             ${isCompleted
-                              ? "bg-[var(--accent)] text-[var(--background)] shadow-[0_0_15px_rgba(var(--accent-rgb),0.3)]"
+                              ? "bg-[var(--accent)] text-[var(--background)] shadow-[0_0_10px_rgba(var(--accent-rgb),0.3)]"
                               : isActive
-                                ? "bg-[var(--foreground)] text-[var(--background)] shadow-xl border-[var(--foreground)]/20"
+                                ? "bg-[var(--foreground)] text-[var(--background)] shadow-lg border-[var(--foreground)]/20"
                                 : "bg-[var(--foreground)]/[0.03] text-[var(--muted)] border-[var(--foreground)]/5"
                             }
                           `}
                         >
                           {isCompleted ? (
-                            <FiCheck className="text-base stroke-[3]" />
+                            <FiCheck className="text-xs stroke-[3]" />
                           ) : (
-                            <s.icon className={`text-base ${isActive ? "opacity-100" : "opacity-30"}`} />
+                            <s.icon className={`text-xs ${isActive ? "opacity-100" : "opacity-30"}`} />
                           )}
                         </motion.div>
                       </div>
 
-                      <span className={`text-[8px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${isActive || isCompleted ? "text-[var(--foreground)] opacity-100" : "text-[var(--muted)] opacity-20"}`}>
+                      <span className={`text-[7px] font-black uppercase tracking-[0.15em] transition-all duration-500 ${isActive || isCompleted ? "text-[var(--foreground)] opacity-100" : "text-[var(--muted)] opacity-30"}`}>
                         {s.label}
                       </span>
                     </div>
@@ -439,7 +439,7 @@ function BuyFlowContent() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.3 }}
-                      className="bg-[var(--card)]/40 backdrop-blur-md border border-[var(--border)] rounded-[2rem] p-6 md:p-8 shadow-xl relative overflow-hidden"
+                      className="bg-[var(--card)]/40 backdrop-blur-md border border-[var(--border)] rounded-[2rem] p-4 md:p-6 shadow-xl relative overflow-hidden"
                     >
                       <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/5 rounded-full blur-3xl -z-10" />
                       {(step === 2 || step === 3) && reviewData && (
