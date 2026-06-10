@@ -295,15 +295,13 @@ export default function StatsTab() {
                             icon={<Zap size={20} />}
                             description="Number of accounts with active balances"
                         />
-                        <div className="hidden lg:block">
-                            <PremiumInsightCard
-                                label="Total Transactions"
-                                value={data.pagination?.total || 0}
-                                color="purple"
-                                icon={<FiActivity size={20} />}
-                                description="Total recorded wallet operations"
-                            />
-                        </div>
+                        <PremiumInsightCard
+                            label="Total Transactions"
+                            value={data.pagination?.total || 0}
+                            color="purple"
+                            icon={<FiActivity size={20} />}
+                            description="Total recorded wallet operations"
+                        />
                     </div>
 
                     {/* SNAPSHOT GRID */}
@@ -464,80 +462,88 @@ export default function StatsTab() {
                                     <div className="py-12 text-center text-[var(--muted)]">No transactions found.</div>
                                 ) : (
                                     history.map((txn) => (
-                                        <div key={txn._id} className="p-4 rounded-xl bg-[var(--card)] border border-[var(--border)] space-y-3 relative overflow-hidden">
-
+                                        <div key={txn._id} className="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--border)] relative overflow-hidden flex flex-col gap-1.5">
+                                            
                                             <div className="flex justify-between items-start z-10 relative">
-                                                <div>
-                                                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border ${txn.type === 'credit'
-                                                        ? 'bg-emerald-500/5 text-emerald-500 border-emerald-500/20'
-                                                        : 'bg-red-500/5 text-red-500 border-red-500/20'
-                                                        }`}>
-                                                        {txn.type === 'credit' ? <FiArrowUp size={10} /> : <FiArrowDown size={10} />}
-                                                        {txn.type}
-                                                    </span>
-                                                    <p className="text-[10px] text-[var(--muted)] font-mono mt-2 tracking-wide uppercase opacity-70">TXN ID</p>
-                                                    <p className="text-xs font-mono text-[var(--foreground)]">{txn.transactionId}</p>
+                                                <div className="flex flex-col gap-1">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border ${txn.type === 'credit'
+                                                            ? 'bg-emerald-500/5 text-emerald-500 border-emerald-500/20'
+                                                            : 'bg-red-500/5 text-red-500 border-red-500/20'
+                                                            }`}>
+                                                            {txn.type === 'credit' ? <FiArrowUp size={8} /> : <FiArrowDown size={8} />}
+                                                            {txn.type}
+                                                        </span>
+                                                        <span className="text-[8px] text-[var(--muted)] font-bold tracking-widest uppercase opacity-60">TXN ID</span>
+                                                    </div>
+                                                    
+                                                    <div className="flex flex-col gap-0.5">
+                                                        <p className="text-[10px] font-mono text-[var(--foreground)] leading-none">{txn.transactionId}</p>
+                                                        {txn.referenceId && (
+                                                            <p className="text-[9px] font-mono text-[var(--muted)] opacity-80 leading-none">REF: {txn.referenceId}</p>
+                                                        )}
+                                                    </div>
                                                 </div>
-                                                <div className="text-right">
-                                                    <div className={`text-lg font-mono font-bold ${txn.type === 'credit' ? 'text-emerald-500' : 'text-red-500'}`}>
+                                                
+                                                <div className="flex flex-col items-end gap-1.5">
+                                                    <div className={`text-sm font-mono font-black tracking-tight leading-none ${txn.type === 'credit' ? 'text-emerald-500' : 'text-red-500'}`}>
                                                         {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}
                                                     </div>
-                                                    <div className="mt-2 flex justify-end gap-2">
-                                                        <div className="mt-2 flex justify-end gap-2">
-                                                            {txn.status === 'pending' && (
-                                                                <button
-                                                                    onClick={async () => {
-                                                                        if (!confirm("Verify with Gateway?")) return;
-                                                                        try {
-                                                                            const res = await apiClient.post("/api/admin/wallet/verify", { transactionId: txn._id });
-                                                                            const json = res.data;
-                                                                            alert(json.message);
-                                                                            if (json.success) fetchHistory();
-                                                                        } catch (e) {
-                                                                            alert("Verification Failed");
-                                                                        }
-                                                                    }}
-                                                                    className="p-1.5 rounded-lg bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 transition-colors"
-                                                                    title="Check & Auto Approve"
-                                                                >
-                                                                    <FiRefreshCw size={14} />
-                                                                </button>
-                                                            )}
-                                                            {txn.status !== 'success' && (
-                                                                <button
-                                                                    onClick={() => handleStatusUpdate(txn._id, 'success')}
-                                                                    className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 transition-colors"
-                                                                    title="Manually Mark Success"
-                                                                >
-                                                                    <FiCheckCircle size={14} />
-                                                                </button>
-                                                            )}
-                                                            {txn.status !== 'failed' && (
-                                                                <button
-                                                                    onClick={() => handleStatusUpdate(txn._id, 'failed')}
-                                                                    className="p-1.5 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
-                                                                    title="Mark Failed & Deduct"
-                                                                >
-                                                                    <FiXCircle size={14} />
-                                                                </button>
-                                                            )}
-                                                        </div>
+                                                    <div className="flex justify-end gap-1">
+                                                        {txn.status === 'pending' && (
+                                                            <button
+                                                                onClick={async () => {
+                                                                    if (!confirm("Verify with Gateway?")) return;
+                                                                    try {
+                                                                        const res = await apiClient.post("/api/admin/wallet/verify", { transactionId: txn._id });
+                                                                        const json = res.data;
+                                                                        alert(json.message);
+                                                                        if (json.success) fetchHistory();
+                                                                    } catch (e) {
+                                                                        alert("Verification Failed");
+                                                                    }
+                                                                }}
+                                                                className="p-1 rounded bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 transition-colors"
+                                                                title="Check & Auto Approve"
+                                                            >
+                                                                <FiRefreshCw size={10} />
+                                                            </button>
+                                                        )}
+                                                        {txn.status !== 'success' && (
+                                                            <button
+                                                                onClick={() => handleStatusUpdate(txn._id, 'success')}
+                                                                className="p-1 rounded bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 transition-colors"
+                                                                title="Manually Mark Success"
+                                                            >
+                                                                <FiCheckCircle size={10} />
+                                                            </button>
+                                                        )}
+                                                        {txn.status !== 'failed' && (
+                                                            <button
+                                                                onClick={() => handleStatusUpdate(txn._id, 'failed')}
+                                                                className="p-1 rounded bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
+                                                                title="Mark Failed & Deduct"
+                                                            >
+                                                                <FiXCircle size={10} />
+                                                            </button>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="flex justify-between items-center text-xs pt-3 mt-1 border-t border-[var(--border)]/40 relative z-10">
-                                                <div>
-                                                    <div className="font-semibold text-[var(--foreground)] mb-0.5">{txn.userId}</div>
-                                                    <div className="text-[10px] text-[var(--muted)] font-mono">{new Date(txn.createdAt).toLocaleString()}</div>
+                                            <div className="flex justify-between items-end pt-1.5 border-t border-[var(--border)]/30 relative z-10 gap-2">
+                                                <div className="flex flex-col min-w-0 flex-1 gap-0.5">
+                                                    <div className="font-bold text-[var(--foreground)] text-[10px] leading-none truncate">{txn.userId}</div>
+                                                    <div className="text-[9px] text-[var(--muted)] opacity-80 line-clamp-1 leading-tight" title={txn.description}>{txn.description}</div>
+                                                    <div className="text-[8px] text-[var(--muted)] font-mono opacity-50 leading-none">{new Date(txn.createdAt).toLocaleString()}</div>
                                                 </div>
-                                                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${txn.status === 'success'
-                                                    ? 'text-emerald-500'
+                                                <span className={`shrink-0 inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${txn.status === 'success'
+                                                    ? 'text-emerald-500 bg-emerald-500/5'
                                                     : txn.status === 'failed'
-                                                        ? 'text-red-500'
-                                                        : 'text-yellow-500'
+                                                        ? 'text-red-500 bg-red-500/5'
+                                                        : 'text-yellow-500 bg-yellow-500/5'
                                                     }`}>
-                                                    <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${txn.status === 'success' ? 'bg-emerald-500' : txn.status === 'failed' ? 'bg-red-500' : 'bg-yellow-500'}`} />
+                                                    <span className={`w-1 h-1 rounded-full mr-1 ${txn.status === 'success' ? 'bg-emerald-500' : txn.status === 'failed' ? 'bg-red-500' : 'bg-yellow-500'}`} />
                                                     {txn.status || 'success'}
                                                 </span>
                                             </div>
@@ -1022,25 +1028,25 @@ function PremiumInsightCard({ label, value, color, icon, description }) {
     return (
         <motion.div 
             whileHover={{ y: -2 }}
-            className={`relative p-3.5 sm:p-4.5 rounded-[1.5rem] border bg-gradient-to-b ${colors[color]} bg-[var(--card)]/40 backdrop-blur-xl overflow-hidden group transition-all`}
+            className={`relative p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border bg-gradient-to-b ${colors[color]} bg-[var(--card)]/40 backdrop-blur-xl overflow-hidden group transition-all`}
         >
             <div className="relative z-10 flex items-center justify-between">
-                <div className="flex items-center gap-3.5">
-                    <div className={`p-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 text-white shadow-lg`}>
-                        {icon}
+                <div className="flex items-center gap-2.5">
+                    <div className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-md border border-white/10 text-white shadow-sm flex items-center justify-center`}>
+                        <div className="scale-75 sm:scale-90 flex items-center justify-center">{icon}</div>
                     </div>
                     <div>
-                        <p className="text-[9px] font-black uppercase tracking-[0.15em] opacity-40 mb-0.5">{label}</p>
-                        <p className="text-xl sm:text-2xl font-black tabular-nums tracking-tighter text-[var(--foreground)] leading-none">{value}</p>
+                        <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-[0.1em] opacity-50 mb-0.5">{label}</p>
+                        <p className="text-base sm:text-lg font-black tabular-nums tracking-tight text-[var(--foreground)] leading-none">{value}</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/5 text-[7px] font-black uppercase tracking-[0.1em] opacity-50 shrink-0">
-                    <FiTrendingUp className="text-emerald-500" /> Live
+                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-black/5 text-[6px] sm:text-[7px] font-black uppercase tracking-[0.1em] opacity-60 shrink-0">
+                    <FiTrendingUp className="text-emerald-500" size={8} /> Live
                 </div>
             </div>
             
             {description && (
-                <div className="relative z-10 mt-3 pt-2 text-[9px] font-medium opacity-30 border-t border-white/5 truncate">
+                <div className="relative z-10 mt-2 pt-1.5 text-[8px] sm:text-[9px] font-medium opacity-40 border-t border-white/5 truncate">
                     {description}
                 </div>
             )}

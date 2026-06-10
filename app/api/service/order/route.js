@@ -119,7 +119,7 @@ export async function POST(req) {
 
         const { price, itemName } = priceData;
 
-        const orderId = `API-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+        const orderId = `APIBB-2026-${Math.random().toString(36).substring(2, 11).toUpperCase().padStart(9, '0')}`;
 
         // ⚡ ATOMIC WALLET DEDUCTION
         const updatedUser = await User.findOneAndUpdate(
