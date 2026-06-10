@@ -153,7 +153,8 @@ export default function AdminPanalPage() {
           })),
           overrides: overrides.map(o => ({
             ...o,
-            fixedPrice: Math.round(o.fixedPrice * rate)
+            fixedPrice: Math.round(o.fixedPrice * rate),
+            useOverride: Boolean(o.useOverride)
           })),
         });
 

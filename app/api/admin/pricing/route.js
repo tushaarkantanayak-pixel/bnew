@@ -191,6 +191,7 @@ export async function PATCH(req) {
         gameSlug: o.gameSlug,
         itemSlug: o.itemSlug,
         fixedPrice: o.fixedPrice,
+        useOverride: Boolean(o.useOverride),
       });
     }
 

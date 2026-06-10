@@ -107,6 +107,7 @@ export default function PricingTab({
           itemSlug: item.itemSlug,
           itemName: item.itemName,
           fixedPrice: existing?.fixedPrice ?? Number(item.sellingPrice) ?? 0,
+          useOverride: existing?.useOverride ?? false,
         };
       });
       setOverrides(hydrated);
@@ -133,6 +134,12 @@ export default function PricingTab({
   const updateOverridePrice = (i, value) => {
     const next = [...overrides];
     next[i].fixedPrice = Math.max(0, Number(value) || 0);
+    setOverrides(next);
+  };
+
+  const toggleOverride = (i) => {
+    const next = [...overrides];
+    next[i].useOverride = !next[i].useOverride;
     setOverrides(next);
   };
 
@@ -388,17 +395,28 @@ export default function PricingTab({
                           transition={{ delay: idx * 0.01 }}
                           className="p-3 sm:p-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--foreground)]/[0.02] transition-all group"
                         >
-                          <div className="flex items-center gap-3 mb-3">
-                            <div className="w-8 h-8 rounded-lg bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--accent)]">
-                              <Package size={14} />
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-3">
+                              <div className="min-w-0">
+                                <p className="text-xs font-black text-[var(--foreground)] truncate">{o.itemName || o.itemSlug}</p>
+                                <p className="text-[9px] font-bold text-[var(--muted)]/40 uppercase tracking-widest truncate">{o.gameSlug}</p>
+                              </div>
                             </div>
-                            <div className="min-w-0">
-                              <p className="text-[10px] font-bold text-[var(--muted)]/40 uppercase truncate">{o.gameSlug}</p>
-                              <p className="text-xs font-bold text-[var(--foreground)] truncate">{o.itemName || o.itemSlug}</p>
+                            <div className="flex flex-col items-center gap-1">
+                              <button
+                                onClick={() => toggleOverride(overrides.findIndex((x) => x.itemSlug === o.itemSlug))}
+                                className={`w-9 h-5 rounded-full flex items-center p-1 transition-colors ${o.useOverride ? 'bg-[var(--accent)]' : 'bg-[var(--foreground)]/10'}`}
+                              >
+                                <div className={`w-3.5 h-3.5 rounded-full bg-white transition-transform ${o.useOverride ? 'translate-x-3.5' : 'translate-x-0'}`} />
+                              </button>
+                              <span className={`text-[8px] font-black uppercase tracking-widest ${o.useOverride ? 'text-[var(--accent)]' : 'text-[var(--muted)]/40'}`}>Use Override</span>
                             </div>
                           </div>
-                          <div className="relative">
-                            <DollarSign size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--accent)]" />
+                          
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-bold text-[var(--muted)]/60 uppercase tracking-widest ml-1">Selling Price (INR)</label>
+                            <div className="relative opacity-100 transition-opacity" style={{ opacity: o.useOverride ? 1 : 0.4 }}>
+                              <DollarSign size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--accent)]" />
 
                             <input
                               type="number"
@@ -411,7 +429,9 @@ export default function PricingTab({
                               }
                               className="w-full h-10 pl-11 pr-4 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--foreground)] font-bold text-sm tabular-nums outline-none focus:bg-[var(--foreground)]/[0.06] transition-all font-mono"
                               placeholder="0"
+                              disabled={!o.useOverride}
                             />
+                            </div>
                           </div>
                         </motion.div>
                       ))
