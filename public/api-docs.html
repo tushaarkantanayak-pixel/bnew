@@ -381,17 +381,16 @@
                     <div class="code-label">Sample Response (200 OK)</div>
                     <pre>{
   <span class="key">"success"</span>: <span class="bool">true</span>,
-  <span class="key">"user"</span>: {
-    <span class="key">"userId"</span>: <span class="str">"TK1001"</span>,
-    <span class="key">"name"</span>: <span class="str">"John Doe"</span>,
-    <span class="key">"userType"</span>: <span class="str">"member"</span>,
-    <span class="key">"wallet"</span>: <span class="num">49.24</span>,
-    <span class="key">"currency"</span>: <span class="str">"USD"</span>
-  },
-  <span class="key">"apiKey"</span>: {
-    <span class="key">"name"</span>: <span class="str">"My Website"</span>,
-    <span class="key">"dailyLimit"</span>: <span class="num">101.52</span>,
-    <span class="key">"usedToday"</span>: <span class="num">1.52</span>
+  <span class="key">"wallet"</span>: <span class="num">4.84</span>,
+  <span class="key">"currency"</span>: <span class="str">"USD"</span>,
+  <span class="key">"userType"</span>: <span class="str">"member"</span>,
+  <span class="key">"name"</span>: <span class="str">"John Doe"</span>,
+  <span class="key">"userId"</span>: <span class="str">"TK1001"</span>,
+  <span class="key">"usage"</span>: {
+    <span class="key">"usedToday"</span>: <span class="num">0</span>,
+    <span class="key">"dailyLimit"</span>: <span class="num">1000</span>,
+    <span class="key">"remaining"</span>: <span class="num">1000</span>,
+    <span class="key">"isLimitReached"</span>: <span class="bool">false</span>
   }
 }</pre>
                 </div>
@@ -417,17 +416,11 @@
                     <pre>{
   <span class="key">"success"</span>: <span class="bool">true</span>,
   <span class="key">"games"</span>: [
-    {
-      <span class="key">"slug"</span>: <span class="str">"mobile-legends270"</span>,
-      <span class="key">"name"</span>: <span class="str">"Mobile Legends: Bang Bang"</span>,
-      <span class="key">"category"</span>: <span class="str">"game"</span>
-    },
-    {
-      <span class="key">"slug"</span>: <span class="str">"free-fire"</span>,
-      <span class="key">"name"</span>: <span class="str">"Free Fire"</span>,
-      <span class="key">"category"</span>: <span class="str">"game"</span>
-    },
- 
+    { <span class="k">"name"</span>: <span class="s">"PUBG Mobile"</span>,              <span class="k">"slug"</span>: <span class="s">"pubg-mobile138"</span>,              <span class="k">"publisher"</span>: <span class="s">"Krafton"</span>,     <span class="k">"available"</span>: <span class="b">true</span> },
+    { <span class="k">"name"</span>: <span class="s">"Genshin Impact"</span>,           <span class="k">"slug"</span>: <span class="s">"genshin-impact742"</span>,           <span class="k">"publisher"</span>: <span class="s">"Hoyoverse"</span>,   <span class="k">"available"</span>: <span class="b">true</span> },
+    { <span class="k">"name"</span>: <span class="s">"MLBB Double"</span>,              <span class="k">"slug"</span>: <span class="s">"mlbb-double332"</span>,             <span class="k">"publisher"</span>: <span class="s">"Moonton"</span>,     <span class="k">"available"</span>: <span class="b">true</span> },
+    { <span class="k">"name"</span>: <span class="s">"Mobile Legends"</span>,           <span class="k">"slug"</span>: <span class="s">"mobile-legends270"</span>,          <span class="k">"publisher"</span>: <span class="s">"Moonton"</span>,     <span class="k">"available"</span>: <span class="b">true</span> },
+
   ]
 }</pre>
                 </div>

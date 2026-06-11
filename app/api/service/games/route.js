@@ -31,11 +31,6 @@ export async function GET(req) {
             available: g.gameAvailablity
         }));
 
-        // Include manual games supported by bluebuff.in orders
-        internalGames.push(
-            { name: "Starlight Card", slug: "starlight-card-manual", publisher: "Moonton", available: true },
-            { name: "BGMI", slug: "bgmi-manual", publisher: "Krafton", available: true }
-        );
 
         return NextResponse.json({
             success: true,
