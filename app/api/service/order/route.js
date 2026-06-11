@@ -271,7 +271,6 @@ export async function POST(req) {
                     currency: "USD",
                     status: newOrder.status,
                     topupStatus: newOrder.topupStatus,
-                    deliveryResponse: gameData
                 },
                 usage: {
                     usedToday: Number(((usedToday + (isSuccess ? price : 0)) / rate).toFixed(2)),

@@ -444,25 +444,19 @@
                 <div>
                     <div class="code-label">Sample Response (200 OK)</div>
                     <pre>{
-  <span class="key">"success"</span>: <span class="bool">true</span>,
-  <span class="key">"game"</span>: {
-    <span class="key">"slug"</span>: <span class="str">"mobile-legends270"</span>,
-    <span class="key">"name"</span>: <span class="str">"Mobile Legends: Bang Bang"</span>
-  },
-  <span class="key">"items"</span>: [
-    {
-      <span class="key">"slug"</span>: <span class="str">"weekly-pass816"</span>,
-      <span class="key">"name"</span>: <span class="str">"Weekly Diamond Pass"</span>,
-      <span class="key">"price"</span>: <span class="num">1.68</span>,       <span class="cm">// Your member price in $</span>
-      <span class="key">"currency"</span>: <span class="str">"USD"</span>
-    },
-    {
-      <span class="key">"slug"</span>: <span class="str">"86-diamonds"</span>,
-      <span class="key">"name"</span>: <span class="str">"86 Diamonds"</span>,
-      <span class="key">"price"</span>: <span class="num">0.91</span>,
-      <span class="key">"currency"</span>: <span class="str">"USD"</span>
-    }
-  ]
+  <span class="k">"success"</span>: <span class="b">true</span>,
+  <span class="k">"game"</span>: {
+    <span class="k">"name"</span>: <span class="s">"MLBB Double"</span>,
+    <span class="k">"slug"</span>: <span class="s">"mlbb-double332"</span>,
+    <span class="k">"publisher"</span>: <span class="s">"Moonton"</span>,
+    <span class="k">"currency"</span>: <span class="s">"USD"</span>,
+    <span class="k">"items"</span>: [
+      { <span class="k">"name"</span>: <span class="s">"55 Diamonds"</span>,  <span class="k">"slug"</span>: <span class="s">"55--first-time-5050-else-55601"</span>,         <span class="k">"price"</span>: <span class="n">0.75</span>, <span class="k">"available"</span>: <span class="b">true</span> },
+      { <span class="k">"name"</span>: <span class="s">"165 Diamonds"</span>, <span class="k">"slug"</span>: <span class="s">"165-first-time-150150-else-165242"</span>,       <span class="k">"price"</span>: <span class="n">2.23</span>, <span class="k">"available"</span>: <span class="b">true</span> },
+      { <span class="k">"name"</span>: <span class="s">"275 Diamonds"</span>, <span class="k">"slug"</span>: <span class="s">"275-first-time-250250-else-275322"</span>,       <span class="k">"price"</span>: <span class="n">3.59</span>, <span class="k">"available"</span>: <span class="b">true</span> },
+      { <span class="k">"name"</span>: <span class="s">"565 Diamonds"</span>, <span class="k">"slug"</span>: <span class="s">"565-first-time-500500-else-565749"</span>,       <span class="k">"price"</span>: <span class="n">7.30</span>, <span class="k">"available"</span>: <span class="b">true</span> }
+    ]
+  }
 }</pre>
                 </div>
             </div>
@@ -480,20 +474,25 @@
                 <div>
                     <div class="code-label">Sample Request</div>
                     <pre>POST https://bluebuff.in/api/service/validate
-<span class="key">x-api-key</span><span class="str">: TK_your_api_key_here</span>
+<span class="k">x-api-key</span>: <span class="s">TK_your_api_key_here</span>
 
 {
-  <span class="key">"gameSlug"</span>: <span class="str">"mobile-legends270"</span>,
-  <span class="key">"playerId"</span>: <span class="str">"12345678"</span>,
-  <span class="key">"zoneId"</span>: <span class="str">"1234"</span>
+  <span class="k">"gameSlug"</span>: <span class="s">"mobile-legends270"</span>,
+  <span class="k">"playerId"</span>: <span class="s">"1540134133"</span>,
+  <span class="k">"zoneId"</span>: <span class="s">"16461"</span>
 }</pre>
                 </div>
                 <div>
                     <div class="code-label">Sample Response (200 OK)</div>
                     <pre>{
-  <span class="key">"success"</span>: <span class="bool">true</span>,
-  <span class="key">"playerName"</span>: <span class="str">"ProGamer123"</span>,
-  <span class="key">"playerId"</span>: <span class="str">"12345678"</span>
+  <span class="k">"success"</span>: <span class="n">200</span>,
+  <span class="k">"message"</span>: <span class="s">"Validation successful"</span>,
+  <span class="k">"data"</span>: {
+    <span class="k">"username"</span>: <span class="s">"PlayerName"</span>,
+    <span class="k">"region"</span>: <span class="s">"🇮🇳"</span>,
+    <span class="k">"playerId"</span>: <span class="s">"1540134133"</span>,
+    <span class="k">"zoneId"</span>: <span class="s">"16461"</span>
+  }
 }</pre>
                 </div>
             </div>
@@ -525,29 +524,44 @@
                 <div>
                     <div class="code-label">Sample Response — Success (200 OK)</div>
                     <pre>{
-  <span class="key">"success"</span>: <span class="bool">true</span>,
-  <span class="key">"status"</span>: <span class="str">"success"</span>,
-  <span class="key">"message"</span>: <span class="str">"Order fulfilled successfully"</span>,
-  <span class="key">"order"</span>: {
-    <span class="key">"orderId"</span>: <span class="str">"API-XK9P2A1B"</span>,
-    <span class="key">"itemName"</span>: <span class="str">"Weekly Diamond Pass"</span>,
-    <span class="key">"price"</span>: <span class="num">1.68</span>,
-    <span class="key">"currency"</span>: <span class="str">"USD"</span>,
-    <span class="key">"status"</span>: <span class="str">"success"</span>,
-    <span class="key">"topupStatus"</span>: <span class="str">"success"</span>
+  <span class="k">"success"</span>: <span class="b">true</span>,
+  <span class="k">"status"</span>: <span class="s">"success"</span>,
+  <span class="k">"message"</span>: <span class="s">"Order fulfilled successfully"</span>,
+  <span class="k">"order"</span>: {
+    <span class="k">"orderId"</span>: <span class="s">"APIBB-2026-8TSHA7LMR"</span>,
+    <span class="k">"itemName"</span>: <span class="s">"Weekly Pass"</span>,
+    <span class="k">"price"</span>: <span class="n">1.45</span>,
+    <span class="k">"currency"</span>: <span class="s">"USD"</span>,
+    <span class="k">"status"</span>: <span class="s">"success"</span>,
+    <span class="k">"topupStatus"</span>: <span class="s">"success"</span>
+  },
+  <span class="k">"usage"</span>: {
+    <span class="k">"usedToday"</span>: <span class="n">1.45</span>,
+    <span class="k">"dailyLimit"</span>: <span class="n">1000</span>,
+    <span class="k">"remaining"</span>: <span class="n">998.55</span>,
+    <span class="k">"isLimitReached"</span>: <span class="b">false</span>
   }
 }</pre>
                 </div>
                 <div>
-                    <div class="code-label">Sample Response — Failure (e.g. 403 or 200 with error)</div>
+                    <div class="code-label">❌ Failure Response</div>
                     <pre>{
-  <span class="key">"success"</span>: <span class="bool">false</span>,
-  <span class="key">"status"</span>: <span class="str">"failed"</span>,
-  <span class="key">"message"</span>: <span class="str">"Order failed. Wallet balance has been preserved."</span>,
-  <span class="key">"order"</span>: {
-    <span class="key">"orderId"</span>: <span class="str">"API-XK9P2A1B"</span>,
-    <span class="key">"status"</span>: <span class="str">"failed"</span>,
-    <span class="key">"topupStatus"</span>: <span class="str">"failed"</span>
+  <span class="k">"success"</span>: <span class="b">false</span>,
+  <span class="k">"status"</span>: <span class="s">"failed"</span>,
+  <span class="k">"message"</span>: <span class="s">"Order failed. Wallet balance has been preserved."</span>,
+  <span class="k">"order"</span>: {
+    <span class="k">"orderId"</span>: <span class="s">"APIBB-2026-8TSHA7LMR"</span>,
+    <span class="k">"itemName"</span>: <span class="s">"Weekly Pass"</span>,
+    <span class="k">"price"</span>: <span class="n">1.45</span>,
+    <span class="k">"currency"</span>: <span class="s">"USD"</span>,
+    <span class="k">"status"</span>: <span class="s">"failed"</span>,
+    <span class="k">"topupStatus"</span>: <span class="s">"failed"</span>
+  },
+  <span class="k">"usage"</span>: {
+    <span class="k">"usedToday"</span>: <span class="n">0</span>,
+    <span class="k">"dailyLimit"</span>: <span class="n">1000</span>,
+    <span class="k">"remaining"</span>: <span class="n">1000</span>,
+    <span class="k">"isLimitReached"</span>: <span class="b">false</span>
   }
 }</pre>
                 </div>
