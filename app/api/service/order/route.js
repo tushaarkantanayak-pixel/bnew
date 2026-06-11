@@ -260,25 +260,42 @@ export async function POST(req) {
 
             const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5;
 
-            return NextResponse.json({
-                success: isSuccess,
-                status: isSuccess ? "success" : "failed",
-                message: isSuccess ? "Order fulfilled successfully" : "Order failed. Wallet balance has been preserved.",
-                order: {
-                    orderId: newOrder.orderId,
-                    itemName,
-                    price: Number((price / rate).toFixed(2)),
-                    currency: "USD",
-                    status: newOrder.status,
-                    topupStatus: newOrder.topupStatus,
-                },
-                usage: {
-                    usedToday: Number(((usedToday + (isSuccess ? price : 0)) / rate).toFixed(2)),
-                    dailyLimit: Number((dailyLimit / rate).toFixed(2)),
-                    remaining: Number((Math.max(0, dailyLimit - (usedToday + (isSuccess ? price : 0))) / rate).toFixed(2)),
-                    isLimitReached: (usedToday + (isSuccess ? price : 0)) >= dailyLimit
-                }
-            });
+            if (isSuccess) {
+                return NextResponse.json({
+                    success: true,
+                    status: "success",
+                    message: "Order fulfilled successfully",
+                    order: {
+                        orderId: newOrder.orderId,
+                        itemName,
+                        price: Number((price / rate).toFixed(2)),
+                        currency: "USD",
+                        status: "success",
+                        topupStatus: "success",
+                    },
+                    usage: {
+                        usedToday: Number(((usedToday + price) / rate).toFixed(2)),
+                        dailyLimit: Number((dailyLimit / rate).toFixed(2)),
+                        remaining: Number((Math.max(0, dailyLimit - (usedToday + price)) / rate).toFixed(2)),
+                        isLimitReached: (usedToday + price) >= dailyLimit
+                    }
+                });
+            } else {
+                return NextResponse.json({
+                    success: false,
+                    status: "failed",
+                    message: "Order failed. Wallet balance has been preserved.",
+                    order: {
+                        orderId: newOrder.orderId,
+                        itemName,
+                        price: Number((price / rate).toFixed(2)),
+                        currency: "USD",
+                        status: "failed",
+                        topupStatus: "failed",
+                        description: gameData?.message || gameData?.data?.message || "Order could not be fulfilled",
+                    }
+                });
+            }
 
         } catch (error) {
             console.error("Internal Order Processing Error:", error);
