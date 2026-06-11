@@ -163,7 +163,7 @@ export default function ApiKeysPage() {
         setEditingId(key._id);
         setEditValues({
             name: key.name,
-            dailyLimit: key.dailyLimit || 10000,
+            dailyLimit: key.dailyLimit || 1000,
             allowedIpString: (key.allowedIps || []).join(', ')
         });
     };
@@ -305,13 +305,13 @@ export default function ApiKeysPage() {
                                             <div className="space-y-1.5 pt-2">
                                                 <div className="flex justify-between text-[10px] font-black uppercase italic">
                                                     <span className="text-white/40 flex items-center gap-1"><FiBarChart /> Daily Budget</span>
-                                                    <span className="text-[var(--accent)]">{formatPrice(key.usedToday || 0)} / {formatPrice(key.dailyLimit || 10000)}</span>
+                                                    <span className="text-[var(--accent)]">{formatPrice(key.usedToday || 0)} / {formatPrice(key.dailyLimit || 1000)}</span>
                                                 </div>
                                                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                                                     <motion.div
                                                         initial={{ width: 0 }}
-                                                        animate={{ width: `${Math.min(((key.usedToday || 0) / (key.dailyLimit || 10000)) * 100, 100)}%` }}
-                                                        className={`h-full rounded-full ${(key.usedToday || 0) > (key.dailyLimit || 10000) * 0.8 ? 'bg-red-500' : 'bg-[var(--accent)]'}`}
+                                                        animate={{ width: `${Math.min(((key.usedToday || 0) / (key.dailyLimit || 1000)) * 100, 100)}%` }}
+                                                        className={`h-full rounded-full ${(key.usedToday || 0) > (key.dailyLimit || 1000) * 0.8 ? 'bg-red-500' : 'bg-[var(--accent)]'}`}
                                                     />
                                                 </div>
                                             </div>
@@ -336,8 +336,10 @@ export default function ApiKeysPage() {
                                                         <label className="text-[9px] font-black uppercase text-white/40 ml-1">Daily Cap ($)</label>
                                                         <input
                                                             type="number"
+                                                            min={1}
+                                                            max={1000}
                                                             value={editValues.dailyLimit}
-                                                            onChange={(e) => setEditValues({ ...editValues, dailyLimit: parseInt(e.target.value) })}
+                                                            onChange={(e) => setEditValues({ ...editValues, dailyLimit: Math.min(parseInt(e.target.value) || 1, 1000) })}
                                                             className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-[var(--accent)] transition-all"
                                                         />
                                                     </div>
@@ -397,8 +399,7 @@ export default function ApiKeysPage() {
                     </h4>
                     <p className="text-[var(--muted)] text-[10px] leading-relaxed font-bold opacity-60">
                         1. <b>IP Whitelisting (Optional):</b> Restrict access to your own servers for enhanced security.<br />
-                        2. <b>Daily Limits:</b> Automated safety cap to protect your wallet.<br />
-                        3. <b>Atomic Daily Limits:</b> Concurrent orders are safe — each deduction uses MongoDB's atomic operations, preventing double-spends even under high load.
+                        2. <b>Daily Limits:</b> Automated safety cap to protect your wallet.
                     </p>
                 </div>
 

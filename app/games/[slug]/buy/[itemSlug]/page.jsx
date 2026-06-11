@@ -133,16 +133,12 @@ function BuyFlowContent() {
       return;
     }
 
-    // Determine if MLBB based on slug and name
-    const name = game?.gameName?.toLowerCase() || "";
-    const isMLBB = slug.includes("mlbb") || name.includes("mlbb") || slug.includes("legends988") || slug.includes("weeklymonthly-bundle");
-
     try {
       let username = "Unknown";
       let region = "Global";
       let isValid = false;
 
-      // 1. Always check name for ALL games (including MLBB)
+      // Check name for ALL games via namecheck
       const productId = `${game?.gameId || slug}_${item?.itemId || itemSlug}`;
       const nameRes = await apiClient.post("/api/check-region/namecheck", {
           productId,
@@ -159,24 +155,6 @@ function BuyFlowContent() {
         username = nameData?.data?.username || nameData?.data?.name || "Unknown";
         region = nameData?.data?.region || "Global";
         isValid = true;
-      }
-
-      // 2. Extra check for MLBB to verify region
-      if (isMLBB) {
-        const regionRes = await apiClient.post("/api/check-region", { id: playerId, zone: zoneId });
-        const regionData = regionRes.data;
-
-        if (regionData?.success === 200 && (regionData?.data?.username || regionData?.data?.region)) {
-          region = regionData.data.region || region;
-          username = regionData.data.username || username;
-          isValid = true; // Even if namecheck fails, if region check succeeds it counts
-        } else if (!isValid) {
-          // If namecheck failed AND region check failed, it's truly invalid
-          const serverMsg = regionData?.message || nameData?.message || "Player not found";
-          setError(serverMsg.toLowerCase().includes("success") ? "Player not found. Check your ID." : serverMsg);
-          setLoading(false);
-          return;
-        }
       }
 
       if (isValid) {
@@ -211,13 +189,12 @@ function BuyFlowContent() {
         setLoading(false);
         setStep(2);
       } else {
-        // If we got here and it's not valid, use the error from nameData
         const serverMsg = nameData?.message || "Player not found";
         setError(serverMsg.toLowerCase().includes("success") ? "Player ID not found." : serverMsg);
         setLoading(false);
       }
     } catch (err) {
-      console.error("Complete Validation Error:", err);
+      console.error("Validation Error:", err);
       setError("Validation failed. Please try again.");
       setLoading(false);
     }

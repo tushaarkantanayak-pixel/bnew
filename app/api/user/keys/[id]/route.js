@@ -97,7 +97,7 @@ export async function PUT(req, { params }) {
         const updateData = {};
 
         if (name) updateData.name = name;
-        if (dailyLimit !== undefined) updateData.dailyLimit = Number(dailyLimit);
+        if (dailyLimit !== undefined) updateData.dailyLimit = Math.min(Number(dailyLimit), 1000);
         if (allowedIps && Array.isArray(allowedIps)) {
             updateData.allowedIps = allowedIps.filter(ip => typeof ip === 'string' && ip.trim() !== '');
         }

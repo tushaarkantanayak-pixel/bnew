@@ -11,7 +11,7 @@ export async function POST(req) {
         const body = await req.json();
         const { gameSlug, playerId, zoneId, itemSlug } = body;
 
-        const isMLBB = gameSlug.includes("mlbb") || gameSlug.includes("legends988") || gameSlug.includes("weeklymonthly-bundle");
+        const isMLBB = gameSlug.includes("mlbb") || gameSlug.includes("legends270") || gameSlug.includes("weeklymonthly-bundle");
 
         let nameData = null;
         let regionData = null;
