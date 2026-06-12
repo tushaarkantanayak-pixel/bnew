@@ -298,6 +298,7 @@ export default function OrdersTab() {
                             <div className="flex flex-col">
                               <span className="text-[var(--foreground)] font-bold uppercase text-xs">{o.gameSlug}</span>
                               <span className="text-[10px] text-[var(--muted)] font-medium truncate max-w-[120px] lowercase">{o.email}</span>
+                              <span className="text-[9px] text-[var(--accent)] font-mono mt-0.5 truncate max-w-[120px]">ID: {o.playerId}</span>
                             </div>
                           </div>
                         </td>
@@ -361,7 +362,8 @@ export default function OrdersTab() {
                         </div>
                         <div className="flex flex-col min-w-0">
                           <p className="font-bold text-[var(--foreground)] uppercase text-[11px] leading-none mb-0.5 truncate">{o.gameSlug}</p>
-                          <p className="text-[10px] text-[var(--muted)] font-medium truncate max-w-[140px] lowercase leading-none">{o.email}</p>
+                          <p className="text-[10px] text-[var(--muted)] font-medium truncate max-w-[140px] lowercase leading-none mb-0.5">{o.email}</p>
+                          <p className="text-[9px] text-[var(--accent)] font-mono truncate max-w-[140px] leading-none">ID: {o.playerId}</p>
                         </div>
                       </div>
                       <div className="flex flex-col items-end">

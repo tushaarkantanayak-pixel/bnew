@@ -165,18 +165,18 @@ export default function BannersTab({ banners, onRefresh }) {
           </div>
         </div>
 
-        <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="p-5 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
           {/* FORM FIELDS */}
-          <div className="lg:col-span-7 space-y-5">
+          <div className="lg:col-span-7 space-y-3">
 
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-[var(--muted)] ml-1">Title</label>
                 <input
                   value={form.bannerTitle}
                   onChange={(e) => setForm({ ...form, bannerTitle: e.target.value })}
-                  className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
+                  className="w-full h-10 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
                   placeholder="Banner Title"
                 />
               </div>
@@ -187,7 +187,7 @@ export default function BannersTab({ banners, onRefresh }) {
                   value={form.bannerSlug}
                   onChange={(e) => setForm({ ...form, bannerSlug: e.target.value })}
                   disabled={!!editingId}
-                  className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none disabled:opacity-50 placeholder:text-[var(--muted)]/40"
+                  className="w-full h-10 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none disabled:opacity-50 placeholder:text-[var(--muted)]/40"
                   placeholder="banner-slug"
                 />
               </div>
@@ -198,18 +198,18 @@ export default function BannersTab({ banners, onRefresh }) {
               <input
                 value={form.bannerImage}
                 onChange={(e) => setForm({ ...form, bannerImage: e.target.value })}
-                className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
+                className="w-full h-10 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
                 placeholder="https://..."
               />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-[var(--muted)] ml-1">Banner Link</label>
                 <input
                   value={form.bannerLink}
                   onChange={(e) => setForm({ ...form, bannerLink: e.target.value })}
-                  className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
+                  className="w-full h-10 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
                   placeholder="/games/..."
                 />
               </div>
@@ -219,7 +219,7 @@ export default function BannersTab({ banners, onRefresh }) {
                 <input
                   value={form.gameId}
                   onChange={(e) => setForm({ ...form, gameId: e.target.value })}
-                  className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
+                  className="w-full h-10 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none placeholder:text-[var(--muted)]/40"
                   placeholder="mlbb, bgmi"
                 />
               </div>
@@ -230,7 +230,7 @@ export default function BannersTab({ banners, onRefresh }) {
               <textarea
                 value={form.bannerSummary}
                 onChange={(e) => setForm({ ...form, bannerSummary: e.target.value })}
-                className="w-full min-h-[90px] bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl p-4 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none resize-none placeholder:text-[var(--muted)]/40"
+                className="w-full min-h-[70px] bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl p-3 text-sm text-[var(--foreground)] focus:border-[var(--accent)]/50 transition-all outline-none resize-none placeholder:text-[var(--muted)]/40"
                 placeholder="Short description..."
               />
             </div>

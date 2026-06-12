@@ -409,7 +409,7 @@ export default function UsersTab() {
             </div>
 
             {/* MOBILE LIST */}
-            <div className="lg:hidden space-y-3">
+            <div className="lg:hidden space-y-2.5">
               {users.map((u, idx) => (
                 <motion.div
                   key={u._id}
@@ -417,40 +417,39 @@ export default function UsersTab() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.03 }}
                   onClick={() => setSelectedUser(u)}
-                  className="p-3.5 sm:p-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.04] transition-all relative"
+                  className="p-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.04] transition-all relative"
                 >
-                  <div className="flex justify-between items-start mb-2.5 gap-3">
+                  <div className="flex justify-between items-start mb-2 gap-2">
                     <div className="flex items-center gap-2.5 min-w-0">
                       <Avatar user={u} size="sm" />
                         <div className="min-w-0">
                           <p className="font-bold text-[var(--foreground)] text-xs truncate leading-tight">{u.name}</p>
                           <p className="text-[10px] text-[var(--muted)]/40 font-mono truncate lowercase leading-tight">{u.userId}</p>
-                          <div className="flex flex-wrap gap-1 mt-1">
+                          <div className="flex flex-wrap gap-1 mt-0.5">
                                {u.tags?.map(tag => (
-                                 <span key={tag} className={`px-1.5 py-0.5 rounded text-[7px] font-black lowercase tracking-tight ${getTagColor(tag)}`}>
+                                 <span key={tag} className={`px-1 py-0.5 rounded text-[7px] font-black lowercase tracking-tight ${getTagColor(tag)}`}>
                                    #{tag}
                                  </span>
                                ))}
                             </div>
                         </div>
                       </div>
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-[8px] font-black uppercase tracking-wider ${getRoleClass(u.userType)}`}>
-                        {u.userType}
-                      </span>
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md border border-[var(--border)] bg-blue-500/5 text-blue-400 text-[8px] font-black uppercase tracking-wider">
-                        {u.totalOrders || 0}
+                    <div className="flex flex-col items-end gap-1.5 shrink-0">
+                      <span className="inline-flex items-center justify-center px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider bg-[var(--foreground)]/[0.05] text-[var(--muted)]">
+                        {u.totalOrders || 0} Orders
                       </span>
                     </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-[var(--muted)]/60 px-0.5">
-                      <Mail size={10} className="shrink-0 text-[var(--accent)]" />
-                      <span className="text-[10px] font-medium break-all lowercase">{u.email}</span>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-[var(--muted)]/60 px-0.5">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <Mail size={10} className="shrink-0 text-[var(--accent)]" />
+                        <span className="text-[10px] font-medium break-all lowercase">{u.email}</span>
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between gap-4 pt-2.5 border-t border-[var(--border)]" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between gap-3 pt-2 border-t border-[var(--border)]" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-1 text-[var(--muted)]/40">
                           <Calendar size={10} className="text-[var(--accent)]/50" />
