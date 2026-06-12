@@ -68,7 +68,7 @@ const SIDEBAR_CATEGORIES = [
 
 export default function AdminPanalPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("users");
+  const [activeTab, setActiveTab] = useState("orders");
   const [isOwner, setIsOwner] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

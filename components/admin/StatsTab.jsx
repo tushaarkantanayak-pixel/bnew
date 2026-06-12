@@ -479,8 +479,9 @@ export default function StatsTab() {
                                                     
                                                     <div className="flex flex-col gap-0.5">
                                                         <p className="text-[10px] font-mono text-[var(--foreground)] leading-none">{txn.transactionId}</p>
+                                                        <p className="text-[9px] text-[var(--muted)] opacity-80 leading-tight" title={txn.description}>{txn.description}</p>
                                                         {txn.referenceId && (
-                                                            <p className="text-[9px] font-mono text-[var(--muted)] opacity-80 leading-none">REF: {txn.referenceId}</p>
+                                                            <p className="text-[9px] font-mono text-[var(--muted)] opacity-60 leading-none">REF: {txn.referenceId}</p>
                                                         )}
                                                     </div>
                                                 </div>
@@ -534,8 +535,8 @@ export default function StatsTab() {
                                             <div className="flex justify-between items-end pt-1.5 border-t border-[var(--border)]/30 relative z-10 gap-2">
                                                 <div className="flex flex-col min-w-0 flex-1 gap-0.5">
                                                     <div className="font-bold text-[var(--foreground)] text-[10px] leading-none truncate">{txn.userId}</div>
-                                                    <div className="text-[9px] text-[var(--muted)] opacity-80 line-clamp-1 leading-tight" title={txn.description}>{txn.description}</div>
-                                                    <div className="text-[8px] text-[var(--muted)] font-mono opacity-50 leading-none">{new Date(txn.createdAt).toLocaleString()}</div>
+                                                    {txn.email && <div className="text-[9px] text-[var(--muted)]/80 truncate leading-none">{txn.email}</div>}
+                                                    <div className="text-[8px] text-[var(--muted)] font-mono opacity-50 leading-none mt-1">{new Date(txn.createdAt).toLocaleString()}</div>
                                                 </div>
                                                 <span className={`shrink-0 inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${txn.status === 'success'
                                                     ? 'text-emerald-500 bg-emerald-500/5'
@@ -584,12 +585,13 @@ export default function StatsTab() {
                                             ) : (
                                                 history.map((txn) => (
                                                     <tr key={txn._id} className="group hover:bg-[var(--foreground)]/[0.02] transition-colors">
-                                                        <td className="px-6 py-4 text-[11px] font-mono text-[var(--muted)]">
-                                                            {txn.transactionId}
+                                                        <td className="px-6 py-4">
+                                                            <span className="text-[11px] font-mono text-[var(--muted)] block">{txn.transactionId}</span>
+                                                            <span className="text-[10px] text-[var(--muted)] block mt-0.5">{txn.description}</span>
                                                         </td>
                                                         <td className="px-6 py-4">
                                                             <span className="text-xs font-medium text-[var(--foreground)] block">{txn.userId}</span>
-                                                            <span className="text-[10px] text-[var(--muted)]">{txn.description}</span>
+                                                            {txn.email && <span className="text-[10px] text-[var(--muted)]/80 block">{txn.email}</span>}
                                                         </td>
                                                         <td className="px-6 py-4">
                                                             <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${txn.type === 'credit'
