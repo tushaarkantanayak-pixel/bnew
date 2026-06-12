@@ -23,6 +23,15 @@ export async function POST(req) {
         const usedToday = keyDoc?.usedToday || 0;
         const dailyLimit = keyDoc?.dailyLimit || 0;
 
+        const settings = await getAppSettings();
+        if (settings && settings.apiServiceEnabled === false) {
+            return NextResponse.json({
+                success: false,
+                status: "failed",
+                message: "API service is temporarily down for maintenance. No order was processed."
+            }, { status: 503 });
+        }
+
         const body = await req.json();
         const { gameSlug, itemSlug, playerId, zoneId, playerName } = body;
 

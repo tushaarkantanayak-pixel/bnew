@@ -5,7 +5,7 @@ import { FiSettings, FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/
 import apiClient from "@/utils/apiClient";
 
 const SettingsTab = () => {
-    const [settings, setSettings] = useState({ maintenanceMode: false });
+    const [settings, setSettings] = useState({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true });
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState({ type: "", text: "" });
@@ -40,6 +40,50 @@ const SettingsTab = () => {
             if (data.success) {
                 setSettings(data.data);
                 setMessage({ type: "success", text: `Maintenance mode ${newValue ? "enabled" : "disabled"} successfully!` });
+            } else {
+                setMessage({ type: "error", text: data.message || "Failed to update settings" });
+            }
+        } catch (err) {
+            console.error("Failed to update settings", err);
+            setMessage({ type: "error", text: "Something went wrong" });
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const toggleApiService = async () => {
+        try {
+            setSaving(true);
+            setMessage({ type: "", text: "" });
+            const newValue = !settings.apiServiceEnabled;
+
+            const res = await apiClient.patch("/api/admin/settings", { apiServiceEnabled: newValue });
+            const data = res.data;
+            if (data.success) {
+                setSettings(data.data);
+                setMessage({ type: "success", text: `API Service ${newValue ? "enabled" : "disabled"} successfully!` });
+            } else {
+                setMessage({ type: "error", text: data.message || "Failed to update settings" });
+            }
+        } catch (err) {
+            console.error("Failed to update settings", err);
+            setMessage({ type: "error", text: "Something went wrong" });
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const toggleWebsiteOrders = async () => {
+        try {
+            setSaving(true);
+            setMessage({ type: "", text: "" });
+            const newValue = !settings.websiteOrdersEnabled;
+
+            const res = await apiClient.patch("/api/admin/settings", { websiteOrdersEnabled: newValue });
+            const data = res.data;
+            if (data.success) {
+                setSettings(data.data);
+                setMessage({ type: "success", text: `Website Orders ${newValue ? "enabled" : "disabled"} successfully!` });
             } else {
                 setMessage({ type: "error", text: data.message || "Failed to update settings" });
             }
@@ -108,6 +152,58 @@ const SettingsTab = () => {
                 )}
             </div>
 
+            <div className="bg-[var(--background)] border border-[var(--border)] rounded-xl overflow-hidden">
+                <div className="p-6 flex items-center justify-between gap-6 border-b border-[var(--border)]">
+                    <div>
+                        <h3 className="font-semibold text-[var(--foreground)]">B2B API Service</h3>
+                        <p className="text-xs text-[var(--muted)] mt-1">
+                            When disabled, new external API orders will be instantly rejected without deducting wallet balances. (Frontend website orders will still work normally).
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={toggleApiService}
+                        disabled={saving}
+                        className={`
+              relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
+              ${settings.apiServiceEnabled ? "bg-emerald-500" : "bg-gray-700"}
+              ${saving ? "opacity-50 cursor-not-allowed" : ""}
+            `}
+                    >
+                        <span
+                            className={`
+                pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+                ${settings.apiServiceEnabled ? "translate-x-5" : "translate-x-0"}
+              `}
+                        />
+                    </button>
+                </div>
+                <div className="p-6 flex items-center justify-between gap-6 border-b border-[var(--border)]">
+                    <div>
+                        <h3 className="font-semibold text-[var(--foreground)]">Website Orders</h3>
+                        <p className="text-xs text-[var(--muted)] mt-1">
+                            When disabled, new orders from your direct website checkout will be instantly rejected without deducting wallet balances.
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={toggleWebsiteOrders}
+                        disabled={saving}
+                        className={`
+              relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
+              ${settings.websiteOrdersEnabled ? "bg-blue-500" : "bg-gray-700"}
+              ${saving ? "opacity-50 cursor-not-allowed" : ""}
+            `}
+                    >
+                        <span
+                            className={`
+                pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+                ${settings.websiteOrdersEnabled ? "translate-x-5" : "translate-x-0"}
+              `}
+                        />
+                    </button>
+                </div>
+            </div>
 
         </div>
     );

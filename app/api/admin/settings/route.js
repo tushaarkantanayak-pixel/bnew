@@ -41,7 +41,7 @@ export async function GET(req) {
 
         let settings = await AppSettings.findOne({});
         if (!settings) {
-            settings = await AppSettings.create({ maintenanceMode: false });
+            settings = await AppSettings.create({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true });
         }
 
         return NextResponse.json({
@@ -71,11 +71,11 @@ export async function PATCH(req) {
         }
 
         const body = await req.json();
-        const { maintenanceMode, mlbbWeeklyProvider } = body;
+        const { maintenanceMode, mlbbWeeklyProvider, apiServiceEnabled, websiteOrdersEnabled } = body;
 
         let settings = await AppSettings.findOne({});
         if (!settings) {
-            settings = new AppSettings({ maintenanceMode: false, mlbbWeeklyProvider: "1game" });
+            settings = new AppSettings({ maintenanceMode: false, mlbbWeeklyProvider: "1game", apiServiceEnabled: true, websiteOrdersEnabled: true });
         }
 
         if (typeof maintenanceMode === "boolean") {
@@ -84,6 +84,14 @@ export async function PATCH(req) {
 
         if (mlbbWeeklyProvider && ["1game", "smileone"].includes(mlbbWeeklyProvider)) {
             settings.mlbbWeeklyProvider = mlbbWeeklyProvider;
+        }
+
+        if (typeof apiServiceEnabled === "boolean") {
+            settings.apiServiceEnabled = apiServiceEnabled;
+        }
+
+        if (typeof websiteOrdersEnabled === "boolean") {
+            settings.websiteOrdersEnabled = websiteOrdersEnabled;
         }
 
         await settings.save();

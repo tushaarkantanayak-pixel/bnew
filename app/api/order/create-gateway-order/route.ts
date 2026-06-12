@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { getAppSettings } from "@/lib/settings";
 import { connectDB } from "@/lib/mongodb";
 import Order from "@/models/Order";
 import User from "@/models/User";
@@ -193,6 +194,14 @@ export async function POST(req: Request) {
 
     const userId = decoded.userId || null;
     const userType = decoded.userType || "user";
+
+    const settings = await getAppSettings();
+    if (settings && settings.websiteOrdersEnabled === false) {
+      return NextResponse.json({
+        success: false,
+        message: "Website orders are temporarily disabled. Please try again later.",
+      }, { status: 503 });
+    }
 
     /* ---------- BODY ---------- */
     const body = await req.json();
