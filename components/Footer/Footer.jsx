@@ -18,7 +18,7 @@ const TRUSTPILOT_URL = "https://www.trustpilot.com/evaluate/bluebuff.in";
 
 const FOOTER_LINKS = [
   {
-    title: "Market",
+    title: "Main Links",
     links: [
       { label: "Home", href: "/" },
       { label: "Store", href: "/games" },
@@ -30,10 +30,10 @@ const FOOTER_LINKS = [
   {
     title: "Account",
     links: [
-      { label: "My Dashboard", href: "/dashboard" },
-      { label: "Topup-Auto", href: "/dashboard/digital-gametopup" },
-      { label: "Earning", href: "/dashboard/earning" },
-      { label: "API Hub", href: "/dashboard/digital-gametopup/api-keys" },
+      { label: "Dashboard", href: "/dashboard" },
+      { label: "Auto Top-Ups", href: "/dashboard/digital-gametopup" },
+      { label: "Rewards", href: "/dashboard/earning" },
+      { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys" },
     ],
   },
   {

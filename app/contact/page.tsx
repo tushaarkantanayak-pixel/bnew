@@ -38,7 +38,7 @@ export default function ContactPage() {
                 <div className="w-10 h-10 rounded-xl bg-[var(--background)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)]/60 group-hover:text-[var(--accent)] group-hover:bg-[var(--accent)]/10 transition-colors">
                   <FaEnvelope size={16} />
                 </div>
-                <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] opacity-60">Direct Email</h2>
+                <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] opacity-60">Email Us</h2>
               </div>
               <a
                 href="mailto:crew.bluebuffofficial@gmail.com"
@@ -56,7 +56,7 @@ export default function ContactPage() {
               transition={{ delay: 0.1 }}
               className="p-8 rounded-3xl bg-[var(--card)]/40 border border-[var(--border)] group hover:border-[var(--accent)]/30 transition-all"
             >
-              <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] opacity-60 mb-6">Social Network</h2>
+              <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] opacity-60 mb-6">Social Media</h2>
               <div className="flex flex-wrap gap-3">
                 {[
                   { icon: FaInstagram, link: "https://www.instagram.com/bluebuff.in", label: "INSTAGRAM" },
@@ -104,7 +104,7 @@ export default function ContactPage() {
           className="mt-12 flex items-center justify-center gap-3 text-[var(--muted)] opacity-30"
         >
           <FiInfo size={14} />
-          <span className="text-[9px] font-black uppercase tracking-[0.3em] italic">Response Window: 24H</span>
+          <span className="text-[9px] font-black uppercase tracking-[0.3em] italic">We reply within 24 hours</span>
         </motion.div>
 
       </div>

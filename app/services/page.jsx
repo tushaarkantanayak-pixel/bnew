@@ -8,36 +8,36 @@ export default function ServicesPage() {
 
   const services = [
     {
-      title: "API Integration",
-      desc: "High-speed, automated API connections for top-ups, game data, and seamless business workflows.",
+      title: "API Connections",
+      desc: "Fast, automatic connections for top-ups and game data.",
       icon: FiCpu,
       badge: "ELITE SPEED",
       active: true,
     },
     {
-      title: "Custom Website Development",
-      desc: "Bespoke web applications built for scale, performance, and high-conversion gaming storefronts.",
+      title: "Custom Websites",
+      desc: "Custom websites built to handle traffic and sell more.",
       icon: FiCode,
       badge: "ENTERPRISE",
       active: true,
     },
     {
-      title: "Cloud Infrastructure",
-      desc: "Secure, high-uptime server solutions optimized for heavy traffic and instant digital delivery.",
+      title: "Cloud Hosting",
+      desc: "Fast, secure servers built to handle heavy traffic.",
       icon: FiCloud,
       badge: "ULTRA STABLE",
       active: true,
     },
     {
-      title: "SEO Mastery",
-      desc: "Dominating search rankings with advanced industry-specific strategies to drive organic growth.",
+      title: "SEO Marketing",
+      desc: "Get to the top of search results and get more customers.",
       icon: FiTrendingUp,
       badge: "MARKET LEADER",
       active: true,
     },
     {
-      title: "Automated Marketplaces",
-      desc: "End-to-end white-label solutions for launching your own branded gaming digital armory.",
+      title: "Gaming Store Setup",
+      desc: "Everything you need to launch your own gaming store.",
       icon: FiShoppingCart,
       badge: "WHITELABEL",
       active: true,
@@ -61,13 +61,13 @@ export default function ServicesPage() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 mb-6">
             <FiZap className="text-[var(--accent)]" size={12} />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent)]">Professional Services</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent)]">Our Services</span>
           </div>
           <h1 className="text-4xl md:text-[5rem] font-black italic tracking-tighter uppercase leading-[0.8] mb-6">
             <span className="text-[var(--accent)]">OUR</span> <br /> SOLUTIONS
           </h1>
           <p className="max-w-xl text-[var(--muted)] text-[12px] font-bold uppercase tracking-[0.2em] leading-relaxed opacity-60">
-            Scale your gaming infrastructure with enterprise-grade technology and expert-level implementation. We build the backbone of modern gaming businesses.
+            Grow your gaming business with our expert technology. We build the tools you need to succeed.
           </p>
         </motion.div>
 

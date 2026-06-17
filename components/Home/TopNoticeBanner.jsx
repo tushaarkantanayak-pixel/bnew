@@ -15,7 +15,7 @@ const BANNERS = [
   {
     id: "diamonds",
     title: "MLBB DIAMOND TOP-UP",
-    subtitle: "INSTANT RECHARGE & 24/7 SUPPORT",
+    subtitle: "Instant Top-Up & 24/7 Help",
     badge: "INSTANT",
     icon: <FiZap />,
     color: "#a855f7",
@@ -34,7 +34,7 @@ const BANNERS = [
   {
     id: "support",
     title: "CHAT WITH US ON WHATSAPP",
-    subtitle: "Instant support & help",
+    subtitle: "Fast Help",
     badge: "24/7 LIVE",
     icon: <FiZap />,
     color: "#3b82f6",

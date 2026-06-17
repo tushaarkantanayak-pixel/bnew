@@ -333,7 +333,7 @@ export default function ApiKeysPage() {
                                             {editingId === key._id ? (
                                                 <div className="space-y-2">
                                                     <div className="space-y-1">
-                                                        <label className="text-[9px] font-black uppercase text-white/40 ml-1">Daily Cap ($)</label>
+                                                        <label className="text-[9px] font-black uppercase text-white/40 ml-1">Daily Limit ($)</label>
                                                         <input
                                                             type="number"
                                                             min={1}
@@ -395,18 +395,18 @@ export default function ApiKeysPage() {
             <div className="grid md:grid-cols-2 gap-4">
                 <div className="p-5 rounded-2xl bg-amber-500/5 border border-amber-500/10 space-y-2">
                     <h4 className="text-amber-500 text-xs font-black uppercase tracking-widest flex items-center gap-2 text-balance">
-                        <FiAlertCircle /> 3-Layer Protection Active
+                        <FiAlertCircle /> Security is Active
                     </h4>
                     <p className="text-[var(--muted)] text-[10px] leading-relaxed font-bold opacity-60">
-                        1. <b>IP Whitelisting (Optional):</b> Restrict access to your own servers for enhanced security.<br />
-                        2. <b>Daily Limits:</b> Automated safety cap to protect your wallet.
+                        1. <b>Lock by IP (Optional):</b> Only allow certain computers to use your key.<br />
+                        2. <b>Daily Limits:</b> Stop spending if it goes over your limit.
                     </p>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/10 space-y-3">
                     <div className="flex items-center justify-between">
                         <h4 className="text-[var(--accent)] text-xs font-black uppercase tracking-widest flex items-center gap-2">
-                            <FiKey /> Integration Assets
+                            <FiKey /> Developer Files
                         </h4>
                         <a href="/api-docs.html" target="_blank" className="text-[10px] font-black uppercase italic text-[var(--accent)] hover:underline">
                             v1.0 API Specs 📄
@@ -414,7 +414,7 @@ export default function ApiKeysPage() {
                     </div>
                     <div className="space-y-3">
                         <div className="space-y-1">
-                            <p className="text-[10px] font-bold text-white/40 uppercase">Endpoint Prefix</p>
+                            <p className="text-[10px] font-bold text-white/40 uppercase">API URL</p>
                             <code className="text-[10px] bg-black/30 px-2 py-1 rounded block truncate text-[var(--accent)] font-mono">
                                 https://bluebuff.in/api/service
                             </code>

@@ -60,14 +60,6 @@ export default function OrdersTab() {
     <div className="space-y-4">
       {/* MINIMAL STATS & SEARCH */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--border)] pb-6 mb-2">
-        <div>
-          <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 italic leading-none mb-2">Total Orders</p>
-          <div className="flex items-end gap-2">
-            <span className="text-2xl font-black italic text-[var(--foreground)] leading-none">{loading ? "..." : totalCount}</span>
-            <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest mb-0.5"> Orders</span>
-          </div>
-        </div>
-
         <div className="relative w-full sm:w-72 group">
           <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/50 group-focus-within:text-[var(--accent)] transition-all duration-300" />
           <input
@@ -76,6 +68,14 @@ export default function OrdersTab() {
             placeholder="SEARCH ORDERS..."
             className="w-full pl-11 pr-4 py-3 rounded-xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all placeholder:text-[var(--muted)]/30 text-[var(--foreground)] shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
           />
+        </div>
+
+        <div className="flex flex-col items-end">
+          <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 italic leading-none mb-2">Total Orders</p>
+          <div className="flex items-end gap-2">
+            <span className="text-2xl font-black italic text-[var(--foreground)] leading-none">{loading ? "..." : totalCount}</span>
+            <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest mb-0.5"> Orders</span>
+          </div>
         </div>
       </div>
 

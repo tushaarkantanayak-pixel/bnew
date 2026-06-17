@@ -47,8 +47,7 @@ export default function AboutPage() {
             ABOUT <span className="text-[var(--accent)]">{BRAND.toUpperCase()}</span>
           </h1>
           <p className="text-[var(--muted)] text-[10px] md:text-xs font-[900] uppercase tracking-[0.4em] opacity-60 italic leading-relaxed max-w-xl">
-            YOUR TACTICAL PARTNER FOR GAME TOPUPS & AUTOMATED INFRASTRUCTURE
-            YOUR TACTICAL PARTNER FOR GAME TOPUPS & AUTOMATED INFRASTRUCTURE
+            YOUR PARTNER FOR FAST GAME TOP-UPS AND CUSTOM WEBSITES
           </p>
         </motion.div>
 

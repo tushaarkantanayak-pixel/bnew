@@ -313,7 +313,7 @@ export default function GamesPage() {
                 {(activeTab === "all" || activeTab === "others") && (processedGames.filter(g => activeTab !== "others" || !isMlbbGame(g)).length > 0) && (
                   <div className="mb-20">
                     <SectionHeader
-                      title="Full Armory"
+                      title="All Games"
                       icon={FiPackage}
                       count={processedGames.filter(g => activeTab !== "others" || !isMlbbGame(g)).length}
                       gradient="from-[var(--accent)] to-cyan-600"
@@ -329,7 +329,7 @@ export default function GamesPage() {
                 {(activeTab === "all" || activeTab === "streaming") && otts?.items?.length > 0 && !searchQuery && (
                   <div className="mb-10 border-t border-[var(--border)]/50 pt-10">
                     <SectionHeader
-                      title="Streaming Assets"
+                      title="Streaming Apps"
                       icon={FiTv}
                       count={otts.items.length}
                       gradient="from-purple-500 to-indigo-600"
@@ -347,7 +347,7 @@ export default function GamesPage() {
                 {(activeTab === "all" || activeTab === "memberships") && memberships?.items?.length > 0 && !searchQuery && (
                   <div className="mb-10 border-t border-[var(--border)]/50 pt-10">
                     <SectionHeader
-                      title="Elite Memberships"
+                      title="Memberships"
                       icon={FiPackage}
                       count={memberships.items.length}
                       gradient="from-amber-500 to-yellow-600"
@@ -358,7 +358,7 @@ export default function GamesPage() {
                       items={memberships.items}
                       hrefPrefix="/games"
                       showCategory={false}
-                      ctaText="Join the Elite →"
+                      ctaText="Join Now →"
                     />
                   </div>
                 )}

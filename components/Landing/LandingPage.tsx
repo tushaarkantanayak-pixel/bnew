@@ -288,7 +288,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-7 py-4 rounded-2xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
               >
-                Create free website
+                Create your free website
                 <FiArrowUpRight size={13} />
               </a>
             </motion.div>
