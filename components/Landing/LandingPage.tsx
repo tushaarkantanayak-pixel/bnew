@@ -36,14 +36,14 @@ const SERVICES = [
     icon: FiCpu,
     tag: "API",
     title: "Game Top-Up API",
-    desc: "Plug into top-up providers instantly. Automated, real-time, zero downtime.",
-    items: ["Auto delivery", "Multi-game", "Live logs"],
+    desc: "Connect to game top-ups instantly. Fast, automatic, and always online.",
+    items: ["Auto delivery", "Many games", "Live updates"],
   },
   {
     icon: FiCode,
     tag: "WEB",
-    title: "Custom Storefronts",
-    desc: "We craft fast, branded web stores that convert visitors into buyers.",
+    title: "Custom Stores",
+    desc: "We build fast, beautiful game stores for your business.",
     items: ["Admin dashboard", "SEO ready", "Mobile first"],
     highlight: true,
   },
@@ -51,7 +51,7 @@ const SERVICES = [
     icon: FiTrendingUp,
     tag: "GROWTH",
     title: "Marketing & SEO",
-    desc: "Grow your audience with strategy-first digital marketing.",
+    desc: "Get more customers with smart online marketing.",
     items: ["Search ranking", "Social ads", "Brand kit"],
   },
 ];
@@ -229,7 +229,7 @@ export default function LandingPage() {
             >
               <div className="w-8 h-[2px] bg-[var(--accent)]" />
               <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-                India's Gaming Infrastructure
+                India's Gaming Platform
               </span>
             </motion.div>
 
@@ -240,11 +240,11 @@ export default function LandingPage() {
               transition={{ delay: 0.08 }}
               className="text-[clamp(2.4rem,7vw,5rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic"
             >
-              Launch your
+              Start your
               <br />
               <span className="text-[var(--accent)]">Gaming Store</span>
               <br />
-              & Scale Fast.
+              & Grow Fast.
             </motion.h1>
 
             {/* sub */}
@@ -254,7 +254,7 @@ export default function LandingPage() {
               transition={{ delay: 0.16 }}
               className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-md"
             >
-              Custom storefronts, automated top-up APIs, payment gateways and esports tools — everything you need to dominate.
+              Custom stores, automatic top-ups, easy payments, and tools for gamers — everything you need.
             </motion.p>
 
             {/* CTAs */}
@@ -269,7 +269,7 @@ export default function LandingPage() {
                 style={{ color: "#000" }}
                 className="group flex items-center gap-3 px-7 py-4 rounded-2xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-[0_10px_40px_-10px_rgba(var(--accent-rgb),0.5)]"
               >
-                Business Enquiry
+                Contact Us
                 <span className="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
                   <FiArrowRight size={14} style={{ color: "#000" }} />
                 </span>
@@ -288,7 +288,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-7 py-4 rounded-2xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
               >
-                Make ur own free web
+                Create free website
                 <FiArrowUpRight size={13} />
               </a>
             </motion.div>
@@ -406,7 +406,7 @@ export default function LandingPage() {
           {/* section label */}
           <div className="flex items-center gap-4 mb-14">
             <div className="w-6 h-[2px] bg-[var(--accent)]" />
-            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">What we do</span>
+            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Our Services</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)]">
@@ -530,7 +530,7 @@ export default function LandingPage() {
                   <span className="text-[var(--accent)]">Empire</span> with us
                 </h2>
                 <p className="text-sm text-[var(--muted)] leading-relaxed">
-                  Let's architect your next big digital move — storefronts, APIs, esports tools, all under one roof.
+                  Let's build your next big project together — stores, APIs, and gaming tools all in one place.
                 </p>
               </div>
 

@@ -29,17 +29,17 @@ const HEADER_CONFIG = {
   userMenu: {
     sections: [
       {
-        title: "My Dashboard",
+        title: "Dashboard",
         items: [
-          { label: "Account Overview", href: "/dashboard", icon: <FiCompass size={14} />, desc: "Central Hub" },
+          { label: "Account", href: "/dashboard", icon: <FiCompass size={14} />, desc: "Your account hub" },
         ]
       },
       {
-        title: "Digital Game Topup",
+        title: "Game Top-Ups",
         items: [
-          { label: "API Setup", href: "/dashboard/digital-gametopup/api-keys", icon: <FiKey size={14} />, desc: "Automatic game topups" },
-          { label: "My Wallet", href: "/dashboard/digital-gametopup/wallet", icon: <FiLayers size={14} />, desc: "Balance & Recharge" },
-          { label: "My Orders", href: "/dashboard/digital-gametopup/orders", icon: <FiShoppingBag size={14} />, desc: "Track your top-ups" },
+          { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: <FiKey size={14} />, desc: "Auto top-ups" },
+          { label: "Wallet", href: "/dashboard/digital-gametopup/wallet", icon: <FiLayers size={14} />, desc: "Add funds" },
+          { label: "Orders", href: "/dashboard/digital-gametopup/orders", icon: <FiShoppingBag size={14} />, desc: "Past orders" },
         ]
       },
       {
@@ -49,17 +49,17 @@ const HEADER_CONFIG = {
         ]
       },
       {
-        title: "Earning",
+        title: "Rewards",
         items: [
-          { label: "Refer & Earn", href: "/dashboard/earning/referral", icon: <FiUsers size={14} />, desc: "Invite & Rewards" },
+          { label: "Refer Friends", href: "/dashboard/earning/referral", icon: <FiUsers size={14} />, desc: "Invite & earn" },
           { label: "Redeem Code", href: "/dashboard/earning/redeem", icon: <FiGift size={14} />, desc: "Use vouchers" },
         ]
       },
       {
-        title: "Gateway",
+        title: "Extras",
         items: [
-          { label: "XYZPay.site", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Contact to avail subscription" },
-          { label: "web.bluebuff.in", href: "https://web.bluebuff.in", icon: <FiGlobe size={14} />, desc: "Make your own customised web" },
+          { label: "XYZPay", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Get subscription" },
+          { label: "BlueBuff Web", href: "https://web.bluebuff.in", icon: <FiGlobe size={14} />, desc: "Create your website" },
         ]
       }
     ],
@@ -76,7 +76,7 @@ export default function Header() {
   const [expandedSections, setExpandedSections] = useState(() => 
     HEADER_CONFIG.userMenu.sections.reduce((acc, sec) => ({ 
       ...acc, 
-      [sec.title]: sec.title !== "Earning"
+      [sec.title]: sec.title !== "Rewards"
     }), {})
   );
 
@@ -372,23 +372,23 @@ export default function Header() {
                                   transition={{ duration: 0.2 }}
                                   className="overflow-hidden"
                                 >
-                                  <div className={section.title === "Earning" ? "grid grid-cols-2 gap-1.5" : "space-y-0.5"}>
+                                  <div className={section.title === "Rewards" ? "grid grid-cols-2 gap-1.5" : "space-y-0.5"}>
                                     {section.items.map((item) => (
                                       <Link
                                         key={item.label}
                                         href={user ? item.href : "/login"}
                                         target={item.href.startsWith("http") ? "_blank" : undefined}
                                         onClick={() => setUserMenuOpen(false)}
-                                        className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1 px-1.5" : "justify-between py-1 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
+                                        className={`flex items-center ${section.title === "Rewards" ? "justify-start gap-1.5 py-1 px-1.5" : "justify-between py-1 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
                                       >
-                                        <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-1.5"} min-w-0`}>
+                                        <div className={`flex items-center ${section.title === "Rewards" ? "gap-1.5" : "gap-1.5"} min-w-0`}>
                                           <div className="w-5 h-5 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
                                           <div className="flex flex-col min-w-0">
                                             <p className="text-[11px] font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
                                             <p className="text-[8px] text-[var(--muted)] opacity-50 truncate leading-[10px]">{item.desc}</p>
                                           </div>
                                         </div>
-                                        {section.title !== "Earning" && (
+                                        {section.title !== "Rewards" && (
                                           <div className="flex items-center gap-2 flex-shrink-0">
                                             {item.label === "My Wallet" && user && (
                                               <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
