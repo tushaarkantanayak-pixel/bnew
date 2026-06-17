@@ -182,10 +182,10 @@ function AuthContent() {
             className="px-6 pb-4 sm:px-8 sm:pb-4"
           >
             {/* HEADER */}
-            <div className="flex flex-col items-center text-center mb-8">
+            <div className="flex flex-col items-center text-center mb-5">
               <motion.div
                 variants={itemVariants}
-                className="relative mb-6"
+                className="relative mb-3"
               >
                 <div className="bg-[var(--background)] p-2 rounded-full border border-[var(--border)] shadow-xl">
                   <Image
@@ -197,11 +197,11 @@ function AuthContent() {
                 </div>
               </motion.div>
 
-              <motion.div variants={itemVariants} className="space-y-2">
+              <motion.div variants={itemVariants} className="space-y-0.5">
                 <h1 className="text-4xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[var(--foreground)] to-[var(--foreground)]/60 drop-shadow-sm">
                   {showOtpField ? "Check Email" : "Login"}
                 </h1>
-                <p className="text-xs font-medium text-[var(--muted)]/80 tracking-wide uppercase">
+                <p className="text-[11px] font-medium text-[var(--muted)]/80 tracking-wide uppercase">
                   {showOtpField ? "Enter the code we sent" : "Welcome back"}
                 </p>
               </motion.div>
@@ -361,8 +361,9 @@ function AuthContent() {
 
                 {/* TERMS */}
                 <motion.div variants={itemVariants} className="pt-4 text-center">
-                  <p className="text-[9px] font-bold text-[var(--muted)]/50 uppercase tracking-widest leading-relaxed">
-                    By continuing you agree to our <a href="/terms" className="text-[var(--accent)] hover:underline">Terms</a>
+                  <p className="text-[11px] font-medium text-[var(--muted)]/80 leading-relaxed">
+                    By logging in, you agree to our <br />
+                    <a href="/terms" className="font-bold text-[var(--accent)] hover:underline">Terms & Conditions</a> and <a href="/privacy" className="font-bold text-[var(--accent)] hover:underline">Privacy Policy</a>
                   </p>
                 </motion.div>
 

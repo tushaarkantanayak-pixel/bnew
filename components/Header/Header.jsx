@@ -76,7 +76,7 @@ export default function Header() {
   const [expandedSections, setExpandedSections] = useState(() => 
     HEADER_CONFIG.userMenu.sections.reduce((acc, sec) => ({ 
       ...acc, 
-      [sec.title]: sec.title === "My Dashboard" || sec.title === "Gateway"
+      [sec.title]: sec.title !== "Earning"
     }), {})
   );
 
@@ -244,13 +244,14 @@ export default function Header() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setUserMenuOpen((p) => !p)}
-              className="relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 group"
+              className="relative flex items-center gap-2 pl-3 pr-1 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--foreground)]/5 backdrop-blur-md transition-all duration-300 shadow-sm group"
             >
-              <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-[var(--foreground)]/5 group-hover:bg-[var(--foreground)]/10 transition-colors">
+              <FiMenu className="text-[var(--foreground)]/70 group-hover:text-[var(--foreground)] transition-colors ml-0.5" size={18} />
+              <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-[var(--accent)]/10 shadow-inner">
                 {user?.avatar ? (
-                  <Image src={user.avatar} alt="Avatar" width={36} height={36} className="object-cover" />
+                  <Image src={user.avatar} alt="Avatar" width={32} height={32} className="object-cover w-full h-full" />
                 ) : (
-                  <FiUser className="text-[var(--foreground)]/60 text-lg" />
+                  <FiUser className="text-[var(--accent)] text-sm" />
                 )}
               </div>
             </motion.button>
@@ -317,7 +318,7 @@ export default function Header() {
                       </div>
                     </div>
 
-                    <div className="relative z-10 flex-1 overflow-y-auto p-4 space-y-5 custom-scrollbar">
+                    <div className="relative z-10 flex-1 overflow-y-auto p-3 space-y-3 custom-scrollbar">
 
                       {/* Login Banner for guests */}
                       {!user && (
@@ -326,12 +327,12 @@ export default function Header() {
                             <div className="w-7 h-7 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]"><FiZap size={14} /></div>
                             <span className="text-xs font-bold text-[var(--foreground)]">Sign in to access all features</span>
                           </div>
-                          <Link href="/login" onClick={() => setUserMenuOpen(false)} className="px-3 py-1.5 rounded-lg bg-[var(--accent)] text-black text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all flex-shrink-0">Login</Link>
+                          <Link href="/login" onClick={() => setUserMenuOpen(false)} className="px-3 py-1.5 rounded-lg bg-[var(--accent)] !text-[var(--background)] text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all flex-shrink-0">Login</Link>
                         </div>
                       )}
 
                       {/* Nav Quick Links — always visible */}
-                      <div className="grid grid-cols-4 gap-1.5 mb-5">
+                      <div className="grid grid-cols-4 gap-1.5 mb-3">
                         {HEADER_CONFIG.nav.map((item) => (
                           <Link
                             key={item.label}
@@ -347,12 +348,12 @@ export default function Header() {
                       </div>
 
                       {/* Menu sections — always visible */}
-                      <div className="space-y-2">
+                      <div className="space-y-1">
                         {HEADER_CONFIG.userMenu.sections.map((section) => (
-                          <div key={section.title} className="space-y-1">
+                          <div key={section.title} className="space-y-0.5">
                             <button 
                               onClick={() => toggleSection(section.title)}
-                              className="w-full flex items-center justify-between text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 pl-2 pr-4 py-1 hover:text-[var(--muted)]/70 transition-colors"
+                              className="w-full flex items-center justify-between text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 pl-2 pr-4 py-0.5 hover:text-[var(--muted)]/70 transition-colors"
                             >
                               <span>{section.title}</span>
                               <motion.div
@@ -378,13 +379,13 @@ export default function Header() {
                                         href={user ? item.href : "/login"}
                                         target={item.href.startsWith("http") ? "_blank" : undefined}
                                         onClick={() => setUserMenuOpen(false)}
-                                        className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1.5 px-1.5" : "justify-between py-1.5 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
+                                        className={`flex items-center ${section.title === "Earning" ? "justify-start gap-1.5 py-1 px-1.5" : "justify-between py-1 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
                                       >
-                                        <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-2"} min-w-0`}>
-                                          <div className="w-6 h-6 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
+                                        <div className={`flex items-center ${section.title === "Earning" ? "gap-1.5" : "gap-1.5"} min-w-0`}>
+                                          <div className="w-5 h-5 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
                                           <div className="flex flex-col min-w-0">
-                                            <p className="text-xs font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
-                                            <p className="text-[8px] text-[var(--muted)] opacity-50 truncate">{item.desc}</p>
+                                            <p className="text-[11px] font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
+                                            <p className="text-[8px] text-[var(--muted)] opacity-50 truncate leading-[10px]">{item.desc}</p>
                                           </div>
                                         </div>
                                         {section.title !== "Earning" && (
@@ -409,11 +410,11 @@ export default function Header() {
 
                       {/* Admin Console — only for owner */}
                       {user?.userType === "owner" && (
-                        <div className="relative mt-6 group">
+                        <div className="relative mt-3 group">
                           <Link
                             href="/owner-panal"
                             onClick={() => setUserMenuOpen(false)}
-                            className="relative flex items-center justify-between p-4 bg-[var(--background)] border border-[var(--border)] rounded-[1.5rem] overflow-hidden transition-all duration-300"
+                            className="relative flex items-center justify-between p-3 bg-[var(--background)] border border-[var(--border)] rounded-2xl overflow-hidden transition-all duration-300"
                           >
                             <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div className="flex items-center gap-3 relative z-10 w-full">

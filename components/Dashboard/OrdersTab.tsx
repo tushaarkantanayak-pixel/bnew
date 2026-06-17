@@ -61,10 +61,10 @@ export default function OrdersTab() {
       {/* MINIMAL STATS & SEARCH */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--border)] pb-6 mb-2">
         <div>
-          <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 italic leading-none mb-2">Registry Volume</p>
+          <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 italic leading-none mb-2">Total Orders</p>
           <div className="flex items-end gap-2">
             <span className="text-2xl font-black italic text-[var(--foreground)] leading-none">{loading ? "..." : totalCount}</span>
-            <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest mb-0.5">Confirmed Orders</span>
+            <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest mb-0.5"> Orders</span>
           </div>
         </div>
 
@@ -73,7 +73,7 @@ export default function OrdersTab() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="FILTER REGISTRY..."
+            placeholder="SEARCH ORDERS..."
             className="w-full pl-11 pr-4 py-3 rounded-xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all placeholder:text-[var(--muted)]/30 text-[var(--foreground)] shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
           />
         </div>

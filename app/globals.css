@@ -40,8 +40,8 @@ html[data-theme="dark"] {
 html[data-theme="light"] {
   --background: #ffffff;
   --foreground: #0f172a;
-  --accent: #10b981;
-  --accent-hover: #059669;
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
   --muted: #64748b;
   --border: #e2e8f0;
   --card: #f8fafc;

@@ -176,7 +176,13 @@ export default function OrderItem({ order }: { order: OrderType }) {
             <div className="flex flex-col items-end leading-none">
               <div className="text-base font-black text-[var(--foreground)]">{formatPrice(order.price)}</div>
               <div className="text-[8px] font-bold text-[var(--muted)] uppercase mt-1">
-                {new Date(order.createdAt).toLocaleDateString()}
+                {new Date(order.createdAt).toLocaleString(undefined, { 
+                  year: 'numeric', 
+                  month: '2-digit', 
+                  day: '2-digit', 
+                  hour: '2-digit', 
+                  minute: '2-digit' 
+                })}
               </div>
             </div>
             <motion.div animate={{ rotate: open ? 180 : 0 }} className="text-[var(--muted)] opacity-50">
