@@ -268,7 +268,7 @@ function BlogCard({ blog, index }) {
             </h2>
 
             <div className="flex items-center gap-2">
-              <p className="text-[var(--muted)] text-[10px] leading-tight opacity-50 flex-1">
+              <p className="text-[var(--muted)] text-[10px] leading-tight opacity-50 flex-1 line-clamp-2">
                 {blog.excerpt}
               </p>
               
