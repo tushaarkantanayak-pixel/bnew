@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
-import { FiStar, FiZap, FiShield, FiTarget, FiTrendingUp, FiDatabase, FiDollarSign, FiActivity, FiRefreshCw, FiGrid } from "react-icons/fi";
+import Script from "next/script";
+import { FiStar, FiZap, FiShield, FiTarget, FiTrendingUp, FiDatabase, FiDollarSign, FiActivity, FiRefreshCw, FiGrid, FiHelpCircle } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: "How Pity System Works in Genshin Impact (Explained Simply) – 2026",
@@ -10,19 +11,52 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is soft pity in Genshin Impact?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Soft pity starts at the 74th wish on the character banner. The base drop rate of 0.6% dramatically increases to roughly 32% per pull, making it highly likely to get a 5-star character before reaching 90 wishes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the 50/50 rule work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When you pull a 5-star on the limited banner, there is a 50% chance it will be the featured character and a 50% chance it will be a standard character. If you lose the 50/50, your next 5-star is 100% guaranteed to be the featured character."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does pity reset when the banner changes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, your pity count carries over to the next limited character banner. If you did 50 pulls on the current banner without getting a 5-star, you will start the next banner at 50 pity."
+        }
+      }
+    ]
+  };
+
   return (
-    <BlogPostLayout
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <BlogPostLayout
       title="HOW PITY SYSTEM WORKS IN GENSHIN IMPACT (EXPLAINED SIMPLY)"
       category="Gacha Guide"
       readTime="12 min read"
       date="March 31, 2026"
-      image="/blog/genshin-pity.png"
+      image="/blog/genshin-pity-v2.png"
       game="Genshin"
     >
       <section className="space-y-8">
-        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><FiStar size={80} /></div>
-          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
+        <div className="relative p-5 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg">
+          <div className="absolute top-0 right-0 p-3 opacity-10"><FiStar size={40} /></div>
+          <p className="text-sm md:text-base font-bold tracking-tight italic leading-snug m-0 text-[var(--foreground)] relative z-10">
             "GENSHIN IMPACT ISN'T just a game; it's a game of calculated risks. Understanding <strong>Soft Pity and Hard Pity</strong> in 2026 is the difference between getting your favorite C6 character and wasting thousands of <strong>Primogems</strong>."
           </p>
         </div>
@@ -110,6 +144,28 @@ export default function BlogPage() {
         </div>
       </div>
 
+      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed">
+        <div className="flex items-center gap-3 mb-8">
+          <FiHelpCircle size={24} className="text-[var(--accent)]" />
+          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions ❓</span></h2>
+        </div>
+        
+        <div className="space-y-4">
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">What is soft pity in Genshin Impact?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">Soft pity starts at the 74th wish on the character banner. The base drop rate of 0.6% dramatically increases to roughly 32% per pull, making it highly likely to get a 5-star character before reaching 90 wishes.</p>
+          </div>
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">Does pity reset when the banner changes?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">No, your pity count carries over to the next limited character banner. If you did 50 pulls on the current banner without getting a 5-star, you will start the next banner at 50 pity.</p>
+          </div>
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">Where is the best place to buy Genesis Crystals in India?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">For fast, safe, and legal top-ups, BlueBuff offers cheap Genesis Crystals with instant UPI payments for players in India.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Need Primogems for your guaranteed 5-star? Gear up.</p>
         <div className="flex justify-center">
@@ -126,5 +182,6 @@ export default function BlogPage() {
         Providing the most <strong>trusted Genshin recharge India</strong> services with localized UPI support. Secure your primogems today and start your journey through <strong>Teyvat</strong> with your favorite 5-stars.
       </p>
     </BlogPostLayout>
+    </>
   );
 }

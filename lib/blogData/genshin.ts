@@ -11,7 +11,7 @@ export const GENSHIN_BLOGS_DATA: BlogPost[] = [
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "12 min read",
-        image: "/blog/genshin-pity.png",
+        image: "/blog/genshin-pity-v2.png",
         featured: true,
         keywords: ["Genshin Impact Pity System Explained", "Genshin 50/50 rule", "soft pity genshin luck", "genshin primogem top-up India", "hard pity count genshin"],
         tags: ["Genshin Impact", "Gacha" , "Guide", "Value Packs"]

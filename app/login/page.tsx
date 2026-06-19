@@ -127,7 +127,7 @@ function AuthContent() {
         setError(data.message);
       }
     } catch {
-      setError("Authentication failed");
+      setError("Login failed");
     }
     setLoading(false);
   };
@@ -340,7 +340,7 @@ function AuthContent() {
                 {/* DIVIDER */}
                 <div className="relative flex items-center gap-4 py-2">
                   <div className="h-[1px] flex-1 bg-[var(--border)]/30" />
-                  <span className="text-[9px] font-black text-[var(--muted)] uppercase tracking-[0.2em]">Social Connect</span>
+                  <span className="text-[9px] font-black text-[var(--muted)] uppercase tracking-[0.2em]">Log in with</span>
                   <div className="h-[1px] flex-1 bg-[var(--border)]/30" />
                 </div>
 

@@ -67,7 +67,7 @@ export default function BlogListing({ initialGame = "all" }) {
   }, [search, selectedType, selectedGame]);
 
   return (
-    <section className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
+    <main className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
       <div className="max-w-4xl mx-auto pt-0 relative z-10">
         <motion.div
           className="mb-2"
@@ -112,7 +112,7 @@ export default function BlogListing({ initialGame = "all" }) {
         </motion.div>
 
         {/* 🔖 COMPACT FILTERS */}
-        <div className="space-y-5 mb-10">
+        <aside aria-label="Blog filters" className="space-y-5 mb-10">
             {initialGame === "all" && (
                 <div className="space-y-2">
                     <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50 italic">SELECT GAME</div>
@@ -152,7 +152,7 @@ export default function BlogListing({ initialGame = "all" }) {
                     ))}
                 </div>
             </div>
-        </div>
+        </aside>
 
         {/* 📄 BLOG GRID */}
         <div className="space-y-3">
@@ -176,7 +176,7 @@ export default function BlogListing({ initialGame = "all" }) {
 
         {/* 🔢 PAGINATION - NUMBERED */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-12 mb-20">
+          <nav aria-label="Pagination" className="flex justify-center items-center gap-2 mt-12 mb-20">
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => p - 1)}
@@ -208,11 +208,11 @@ export default function BlogListing({ initialGame = "all" }) {
             >
               <FiChevronRight size={16} />
             </button>
-          </div>
+          </nav>
         )}
 
         {/* 🏔️ SEO FOOTER */}
-        <motion.div 
+        <motion.footer 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="mt-32 pt-16 border-t border-[var(--border)]/30"
@@ -223,16 +223,16 @@ export default function BlogListing({ initialGame = "all" }) {
             <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed italic max-w-2xl opacity-40">
                 All our <strong className="text-[var(--foreground)]">{initialGame === "all" ? "game" : initialGame} top up guides</strong>, price lists, and safety tips. Stay updated with the latest <strong className="text-[var(--foreground)]">mobile legends recharge india fast</strong> tips and diamond bundle value comparisons. We provide the correct info for <strong>Mobile Legends players in India</strong> to make sure you get cheap diamond top-ups safely.
             </p>
-        </motion.div>
+        </motion.footer>
       </div>
-    </section>
+    </main>
   );
 }
 
 /* ================= BLOG CARD ================= */
 function BlogCard({ blog, index }) {
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
@@ -263,12 +263,12 @@ function BlogCard({ blog, index }) {
               </span>
             </div>
 
-            <h2 className="text-base md:text-lg font-[900] uppercase tracking-tighter italic text-[var(--foreground)] leading-tight group-hover:text-[var(--accent)] transition-colors mb-0.5 line-clamp-1">
+            <h2 className="text-base md:text-lg font-[900] uppercase tracking-tighter italic text-[var(--foreground)] leading-tight group-hover:text-[var(--accent)] transition-colors mb-0.5">
               {blog.title}
             </h2>
 
             <div className="flex items-center gap-2">
-              <p className="text-[var(--muted)] text-[10px] leading-none opacity-50 line-clamp-1 flex-1">
+              <p className="text-[var(--muted)] text-[10px] leading-tight opacity-50 flex-1">
                 {blog.excerpt}
               </p>
               
@@ -291,6 +291,6 @@ function BlogCard({ blog, index }) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 }

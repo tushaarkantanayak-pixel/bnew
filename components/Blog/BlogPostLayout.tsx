@@ -42,7 +42,7 @@ export default function BlogPostLayout({
     }, [pathname]);
 
     return (
-        <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--accent)]/30 pb-32 transition-colors duration-300">
+        <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--accent)]/30 pb-32 transition-colors duration-300">
 
             {/* Background Lighting */}
             <div className="fixed inset-0 pointer-events-none">
@@ -50,7 +50,7 @@ export default function BlogPostLayout({
                 <div className="absolute top-[20%] right-[0%] w-[40%] h-[40%] bg-purple-500/5 rounded-full blur-[120px]" />
             </div>
 
-            <article className="max-w-4xl mx-auto px-6 pt-6 md:pt-12 relative z-10">
+            <article className="max-w-6xl mx-auto px-6 pt-6 md:pt-12 relative z-10">
 
                 {/* BREADCRUMB SYSTEM */}
                 <motion.div
@@ -118,14 +118,14 @@ export default function BlogPostLayout({
                 </header>
 
                 {/* CONTENT SECTION */}
-                <section className="max-w-2xl mx-auto">
-                    <div className="prose prose-invert prose-p:text-[var(--muted)] prose-p:opacity-80 prose-p:leading-relaxed prose-headings:text-[var(--foreground)] prose-headings:italic prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-strong:text-[var(--accent)] prose-ul:list-disc prose-ul:marker:text-[var(--accent)] prose-ol:list-decimal prose-ol:marker:text-[var(--accent)] space-y-10 selection:bg-[var(--accent)]/20 transition-colors">
+                <section className="max-w-6xl mx-auto">
+                    <div className="max-w-none prose prose-invert prose-p:text-[var(--muted)] prose-p:opacity-80 prose-p:leading-relaxed prose-headings:text-[var(--foreground)] prose-headings:italic prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-strong:text-[var(--accent)] prose-ul:list-disc prose-ul:marker:text-[var(--accent)] prose-ol:list-decimal prose-ol:marker:text-[var(--accent)] space-y-10 selection:bg-[var(--accent)]/20 transition-colors">
                         {children}
                     </div>
                 </section>
 
                 {/* RELATED ARTICLES */}
-                <section className="mt-20 max-w-4xl mx-auto">
+                <section className="mt-20 max-w-6xl mx-auto">
                     <div className="flex items-center gap-2 mb-6">
                         <div className="w-8 h-[1px] bg-[var(--accent)]" />
                         <span className="text-[8px] font-black uppercase tracking-[0.3em] text-[var(--accent)] italic opacity-60">Elevate your game</span>
@@ -180,6 +180,6 @@ export default function BlogPostLayout({
                     </div>
                 </footer>
             </article>
-        </div>
+        </main>
     );
 }

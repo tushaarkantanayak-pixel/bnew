@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
-import { FiZap, FiShield, FiTarget, FiStar, FiActivity, FiTrendingUp, FiDatabase, FiGrid, FiFeather, FiLayers } from "react-icons/fi";
+import Script from "next/script";
+import { FiZap, FiShield, FiTarget, FiStar, FiActivity, FiTrendingUp, FiDatabase, FiGrid, FiFeather, FiLayers, FiHelpCircle } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: "How to Farm Primogems Fast in Genshin Impact (Complete Guide) – 2026",
@@ -10,8 +11,41 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the fastest way to farm Primogems in Genshin Impact?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The fastest Free-to-Play methods are completing limited-time events, pushing through the Spiral Abyss (up to 1200 gems per month), and thoroughly exploring new regions like Natlan for chests and quests."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to get emergency Primogems in India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you are running out of time on a banner, you can instantly top-up Genesis Crystals via secure API platforms like BlueBuff or mlbbtopup.in using local Indian payment methods like UPI."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many Primogems can a F2P player get per patch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dedicated F2P player can earn approximately 8,000 to 10,000 Primogems (50-60 pulls) per update cycle by doing dailies, events, Abyss, and exploration."
+        }
+      }
+    ]
+  };
+
   return (
-    <BlogPostLayout
+    <>
+      <Script id="genshin-primo-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <BlogPostLayout
       title="HOW TO FARM PRIMOGEMS FAST IN GENSHIN IMPACT (COMPLETE GUIDE) – 2026"
       category="Farming"
       readTime="11 min read"
@@ -100,7 +134,7 @@ export default function BlogPage() {
             Sometimes, even the best farming routine isn't enough. If you are 5 pulls away from a limited 5-star character and the banner ends tonight, the fastest 'Farm' is a direct <strong>Genesis Crystal top-up</strong>.
         </p>
         <p className="opacity-80 leading-relaxed italic">
-            For **Genshin Impact players in India**, the most secure way to handle these 'Clutch Pulls' is via <strong>BlueBuff</strong>. We offer specialized <strong>Genshin Primogem UPI recharge</strong> with instant 2-minute delivery, so you never lose your pity streak.
+            For **Genshin Impact players in India**, the most secure way to handle these 'Clutch Pulls' is via <strong>BlueBuff</strong> or <strong>mlbbtopup.in</strong>. We offer specialized <strong>Genshin Primogem UPI recharge</strong> with instant 2-minute delivery, so you never lose your pity streak.
         </p>
       </section>
 
@@ -116,6 +150,28 @@ export default function BlogPage() {
           <p className="text-[11px] opacity-60 m-0 leading-relaxed italic">Leveling up your Serenitea Pot rank provides 60 gems per level. It's a passive farm—don't ignore it.</p>
         </div>
       </div>
+
+      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed">
+        <div className="flex items-center gap-3 mb-8">
+          <FiHelpCircle size={24} className="text-[var(--accent)]" />
+          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions ❓</span></h2>
+        </div>
+        
+        <div className="space-y-4">
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">What is the fastest way to farm Primogems in Genshin Impact?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">The fastest Free-to-Play methods are completing limited-time events, pushing through the Spiral Abyss (up to 1200 gems per month), and thoroughly exploring new regions like Natlan for chests and quests.</p>
+          </div>
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">How to get emergency Primogems in India?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">If you are running out of time on a banner, you can instantly top-up Genesis Crystals via secure API platforms like BlueBuff or mlbbtopup.in using local Indian payment methods like UPI.</p>
+          </div>
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">How many Primogems can a F2P player get per patch?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">A dedicated F2P player can earn approximately 8,000 to 10,000 Primogems (50-60 pulls) per update cycle by doing dailies, events, Abyss, and exploration.</p>
+          </div>
+        </div>
+      </section>
 
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Need gems right now? We handle the heavy lifting.</p>
@@ -133,5 +189,6 @@ export default function BlogPage() {
         The complete <strong>Genshin Impact India</strong> Primogem farming bible. Join thousands who trust <strong>BlueBuff</strong> for the most efficient and safe **Genshin Impact top-ups** in 2026.
       </p>
     </BlogPostLayout>
+    </>
   );
 }

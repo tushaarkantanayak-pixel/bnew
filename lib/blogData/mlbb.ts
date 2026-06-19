@@ -46,7 +46,7 @@ export const MLBB_BLOGS_DATA: BlogPost[] = [
     publishedAt: "2026-03-28",
     author: "Safety First",
     readingTime: "6 min read",
-    image: "/blog/mlbb-recharge.png",
+    image: "/blog/mlbb-recharge-v2.png",
     featured: false,
     keywords: ["cheap mlbb diamonds india", "how to topup mlbb after ban", "safe recharge 2026"],
     tags: ["Ranking", "Pricing", "Savings"],

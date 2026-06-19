@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
-import { FiTrendingUp, FiZap, FiStar, FiDatabase, FiDollarSign, FiCheck, FiAlertCircle } from "react-icons/fi";
+import Script from "next/script";
+import { FiTrendingUp, FiZap, FiStar, FiDatabase, FiDollarSign, FiCheck, FiAlertCircle, FiHelpCircle } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: "The Ultimate Guide to Cheap MLBB Diamond Top-Ups in India – 2026",
@@ -10,19 +11,52 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to top up MLBB diamonds in India after the ban?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The safest and cheapest way to top up MLBB diamonds in India is through third-party trusted providers like BlueBuff, which use direct API integration to send diamonds straight to your Player ID without requiring your account login."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to top up MLBB diamonds using third-party sites?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, as long as you use a verified service that only asks for your Player ID and Zone ID. Never share your Moonton or Google account passwords."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the cheapest way to get MLBB diamonds?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Weekly Diamond Pass provides the best value, giving you 210 diamonds over 7 days for a very low price. Buying it through BlueBuff gives you instant UPI checkout."
+        }
+      }
+    ]
+  };
+
   return (
-    <BlogPostLayout
+    <>
+      <Script id="mlbb-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <BlogPostLayout
       title="THE ULTIMATE GUIDE TO CHEAP MLBB DIAMOND TOP-UPS IN INDIA – 2026"
       category="Guide"
       readTime="10 min read"
       date="March 28, 2026"
-      image="/blog/mlbb-recharge.png"
+      image="/blog/mlbb-recharge-v2.png"
       game="MLBB"
     >
       <section className="space-y-8">
-        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><FiTrendingUp size={80} /></div>
-          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
+        <div className="relative p-5 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg">
+          <div className="absolute top-0 right-0 p-3 opacity-10"><FiTrendingUp size={40} /></div>
+          <p className="text-sm md:text-base font-bold tracking-tight italic leading-snug m-0 text-[var(--foreground)] relative z-10">
             "NAVIGATING the 2026 diamond market in India requires more than just a UPI app; it requires a trusted partner. Direct in-game purchases are nearly impossible, making secure third-party recharge the only <strong>S-tier strategy</strong> for competitive players."
           </p>
         </div>
@@ -62,7 +96,7 @@ export default function BlogPage() {
           Due to ongoing regulatory shifts and local restrictions, <strong>Indian MLBB players</strong> frequently encounter "item not available" errors. This isn't just a technical glitch; it's a result of the complex digital service taxes and regional licensing agreements. In 2026, the <strong>best way to buy MLBB diamonds in India</strong> is through a dedicated gaming partner that uses <strong>direct-to-player API integration</strong>.
         </p>
         <p className="opacity-80 leading-relaxed">
-          This method bypasses the standard app store hurdles, allowing for <strong>instant UPI settlement</strong> and immediate diamond delivery to your Game ID. Platforms like <strong>BlueBuff</strong> have pioneered this "Direct-API" approach, ensuring that your transaction is logged directly into the Moonton servers without the need for high-risk login sharing.
+          This method bypasses the standard app store hurdles, allowing for <strong>instant UPI settlement</strong> and immediate diamond delivery to your Game ID. Platforms like <strong>BlueBuff</strong> and <strong>mlbbtopup.in</strong> have pioneered this "Direct-API" approach, ensuring that your transaction is logged directly into the Moonton servers without the need for high-risk login sharing.
         </p>
       </section>
 
@@ -125,6 +159,28 @@ export default function BlogPage() {
         </div>
       </section>
 
+      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed">
+        <div className="flex items-center gap-3 mb-8">
+          <FiHelpCircle size={24} className="text-[var(--accent)]" />
+          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions ❓</span></h2>
+        </div>
+        
+        <div className="space-y-4">
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">How to top up MLBB diamonds in India after the ban?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">The safest and cheapest way to top up MLBB diamonds in India is through third-party trusted providers like BlueBuff, which use direct API integration to send diamonds straight to your Player ID without requiring your account login.</p>
+          </div>
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">Is it safe to top up MLBB diamonds using third-party sites?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">Yes, as long as you use a verified service that only asks for your Player ID and Zone ID. Never share your Moonton or Google account passwords.</p>
+          </div>
+          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">What is the cheapest way to get MLBB diamonds?</h3>
+            <p className="text-[11px] opacity-70 m-0 leading-relaxed">The Weekly Diamond Pass provides the best value, giving you 210 diamonds over 7 days for a very low price. Buying it through BlueBuff gives you instant UPI checkout.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Ready to rank up? Get your diamonds instantly.</p>
         <div className="flex justify-center">
@@ -141,5 +197,6 @@ export default function BlogPage() {
         Specializing in <strong>MLBB recharge India UPI</strong> and safe gaming transactions. Trusted by thousands of Indian Mythic Immortal players in 2026.
       </p>
     </BlogPostLayout>
+    </>
   );
 }
