@@ -6,7 +6,22 @@ import { FiTrendingUp, FiStar, FiShield, FiCheck, FiAlertCircle, FiSettings } fr
 export const metadata: Metadata = {
   title: "MLBB Meta Tier List: Best Heroes for Solo Rank July 2026",
   description: "Discover the top meta heroes in Mobile Legends for March 2026. Carry your way to Mythic with these S-tier picks.",
-  alternates: { canonical: "https://bluebuff.in/blog/mlbb/mlbb-meta-tier-list-march-2026" },
+  alternates: { canonical: "https://bluebuff.in/blog/mlbb/mlbb-meta-tier-list-july-2026" },
+  openGraph: {
+    title: "MLBB Meta Tier List: Best Heroes for Solo Rank July 2026",
+    description: "Discover the top meta heroes in Mobile Legends for March 2026. Carry your way to Mythic with these S-tier picks.",
+    url: "https://bluebuff.in/blog/mlbb/mlbb-meta-tier-list-july-2026",
+    siteName: "BlueBuff",
+    images: [{ url: "/blog/mlbb/mlbb-meta.png" }],
+    locale: "en_IN",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MLBB Meta Tier List: Best Heroes for Solo Rank July 2026",
+    description: "Discover the top meta heroes in Mobile Legends for March 2026. Carry your way to Mythic with these S-tier picks.",
+    images: ["/blog/mlbb/mlbb-meta.png"],
+  },
 };
 
 export default function BlogPage() {
