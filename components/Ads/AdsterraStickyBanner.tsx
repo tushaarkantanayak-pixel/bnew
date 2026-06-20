@@ -50,6 +50,7 @@ export default function AdsterraStickyBanner() {
             height="100"
             style={{ border: "none", overflow: "hidden", background: "transparent" }}
             scrolling="no"
+            loading="eager"
           />
         </div>
       </div>
