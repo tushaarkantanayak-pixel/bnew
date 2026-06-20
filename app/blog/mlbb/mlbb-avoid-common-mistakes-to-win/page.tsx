@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import AdsterraBanner from "@/components/Ads/AdsterraBanner";
+import AdsterraClassicBanner from "@/components/Ads/AdsterraClassicBanner";
 import Link from "next/link";
 import { FiTrendingUp, FiAlertCircle, FiCheck, FiXCircle, FiTarget, FiShield, FiMessageSquare, FiZap, FiSettings } from "react-icons/fi";
 
@@ -21,24 +22,26 @@ export default function BlogPage() {
       game="MLBB"
     >
       <section className="space-y-8">
-        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><FiTrendingUp size={80} /></div>
-          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
-            "THROWS AREN'T ACCIDENTS; they're the result of predictable strategic failures. In 2026, the <strong>difference between a Mythic Immortal and an Epic hardstuck</strong> isn't just mechanical skill—it's the discipline to avoid these five game-losing mistakes."
+        <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg mx-auto">
+          <div className="absolute top-0 right-0 p-3 opacity-10"><FiTrendingUp size={50} /></div>
+          <p className="text-base font-semibold tracking-tight italic leading-snug m-0 text-[var(--foreground)]">
+            "THROWS AREN'T ACCIDENTS. The <strong>difference between a Mythic Immortal and an Epic hardstuck</strong> isn't just mechanical skill—it's the discipline to avoid these 5 game-losing mistakes."
           </p>
         </div>
 
         <p className="opacity-80 leading-relaxed">
           Losing a game you should have won is one of the most frustrating experiences in <strong>Mobile Legends: Bang Bang (MLBB)</strong>. Even at the highest competitive levels, basic strategic errors continue to be the primary cause of "throws." If you're stuck in a losing streak, it's likely because you're falling into one of these traps. This guide identifies the <strong>top 5 MLBB mistakes</strong> and provides pro-level fixes to help you <strong>win more games in ranked</strong>.
         </p>
+        <AdsterraClassicBanner />
       </section>
 
       <section className="pt-12 space-y-6">
+        <div className="w-full flex justify-center mb-3">
+          <AdsterraBanner />
+        </div>
         <div className="flex items-center gap-3 mb-8">
           <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-                <AdsterraBanner />
-
-      <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Mistake <span className="text-[var(--accent)]">vs. Pro Fix</span></h2>
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Mistake <span className="text-[var(--accent)]">vs. Pro Fix</span></h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

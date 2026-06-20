@@ -15,14 +15,15 @@ export default function AdsterraBanner() {
   `;
 
   return (
-    <div className="flex justify-center w-full my-8 overflow-hidden">
+    <div className="flex justify-center w-full my-2 overflow-hidden bg-[var(--background)] py-1 rounded-xl shadow-inner border border-[var(--border)] max-w-[250px] mx-auto">
       <iframe
         title="Adsterra Native Banner"
         srcDoc={adHtml}
         width="100%"
-        height="250"
+        height="150"
         style={{ border: "none", overflow: "hidden", background: "transparent" }}
         scrolling="no"
+        loading="eager"
       />
     </div>
   );

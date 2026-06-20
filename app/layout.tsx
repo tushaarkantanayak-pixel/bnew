@@ -116,7 +116,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={poppins.variable}>
-
+      <head>
+        <link rel="preconnect" href="https://pl29812869.effectivecpmnetwork.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.highperformanceformat.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://pl29812869.effectivecpmnetwork.com" />
+        <link rel="dns-prefetch" href="https://www.highperformanceformat.com" />
+      </head>
 
       <body className="bg-black text-white">
         <AdSenseScript />

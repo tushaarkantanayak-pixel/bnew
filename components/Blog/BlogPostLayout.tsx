@@ -156,14 +156,14 @@ export default function BlogPostLayout({
                     <div className="mt-16 border-t border-[var(--border)] border-dashed pt-8 space-y-8">
                         
                         {/* Smartlink CTA Block */}
-                        <div className="bg-gradient-to-r from-[var(--accent)]/10 to-transparent p-6 md:p-8 rounded-2xl border border-[var(--accent)]/20 flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div>
-                                <h3 className="text-xl font-black italic uppercase tracking-tighter text-[var(--foreground)] mb-2 flex items-center gap-2">
-                                    <FiGift className="text-[var(--accent)]" /> Claim Free Rewards
+                        <div className="bg-gradient-to-r from-[var(--accent)]/10 to-transparent p-4 sm:p-5 rounded-2xl border border-[var(--accent)]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div className="text-center sm:text-left">
+                                <h3 className="text-lg font-black italic uppercase tracking-tighter text-[var(--foreground)] mb-1 flex items-center justify-center sm:justify-start gap-2">
+                                    <FiGift className="text-[var(--accent)]" /> TOPUP NOW
                                 </h3>
-                                <p className="text-sm opacity-70 m-0">Support the site and unlock exclusive daily gaming offers.</p>
+                                <p className="text-xs opacity-70 m-0 leading-snug">Support the site and unlock exclusive daily gaming offers.</p>
                             </div>
-                            <AdsterraSmartlink text="Unlock Offers" />
+                            <AdsterraSmartlink text="TOPUP NOW" />
                         </div>
                     </div>
                 </section>
