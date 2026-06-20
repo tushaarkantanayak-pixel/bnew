@@ -172,7 +172,7 @@ export default function BlogPostLayout({
                     </div>
                 </section>
 
-                {/* RELATED ARTICLES */}
+               
                 <section className="mt-20 max-w-4xl mx-auto">
                     <div className="flex items-center gap-2 mb-6">
                         <div className="w-8 h-[1px] bg-[var(--accent)]" />
