@@ -165,8 +165,6 @@ export default function BlogPostLayout({
                             </div>
                             <AdsterraSmartlink text="Unlock Offers" />
                         </div>
-
-                        <AdsterraBanner />
                     </div>
                 </section>
 
