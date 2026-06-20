@@ -3,19 +3,19 @@ import { BlogPost } from "./types";
 export const MLBB_BLOGS_DATA: BlogPost[] = [
   {
     id: "mlbb-1",
-    title: "MLBB Meta Tier List: Best Heroes for Solo Rank March 2026",
-    slug: "mlbb-meta-tier-list-march-2026",
+    title: "MLBB Meta Tier List: Best Heroes for Solo Rank JULY 2026",
+    slug: "mlbb-meta-tier-list-july-2026",
     game: "mlbb",
     type: "Tier List",
     excerpt:
-      "Looking for the best hero to carry your team? Our latest MLBB Tier List for March 2026 covers the top meta picks that will help you reach Mythic Immortal in record time.",
+      "Looking for the best hero to carry your team? Our latest MLBB Tier List for July 2026 covers the top meta picks that will help you reach Mythic Immortal in record time.",
     publishedAt: "2026-03-29",
     author: "Expert Player 'Axel'",
     authorRole: "Expert Player",
     readingTime: "8 min read",
     image: "/blog/mlbb-meta.png",
     featured: true,
-    keywords: ["mlbb meta tier list march 2026", "best heroes for solo rank mlbb", "reach mythic immortal mlbb", "cheap mlbb diamond top-up india", "mlbb recharge india upi"],
+    keywords: ["mlbb meta tier list july 2026", "best heroes for solo rank mlbb", "reach mythic immortal mlbb", "cheap mlbb diamond top-up india", "mlbb recharge india upi"],
     tags: ["Tier List", "Meta", "Ranking", "Solo Rank"],
   },
   {

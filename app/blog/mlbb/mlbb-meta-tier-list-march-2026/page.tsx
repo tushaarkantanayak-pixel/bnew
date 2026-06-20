@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FiTrendingUp, FiStar, FiShield, FiCheck, FiAlertCircle, FiSettings } from "react-icons/fi";
 
 export const metadata: Metadata = {
-  title: "MLBB Meta Tier List: Best Heroes for Solo Rank March 2026",
+  title: "MLBB Meta Tier List: Best Heroes for Solo Rank July 2026",
   description: "Discover the top meta heroes in Mobile Legends for March 2026. Carry your way to Mythic with these S-tier picks.",
   alternates: { canonical: "https://bluebuff.in/blog/mlbb/mlbb-meta-tier-list-march-2026" },
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <BlogPostLayout
-      title="MLBB META TIER LIST: BEST HEROES FOR SOLO RANK MARCH 2026"
+      title="MLBB META TIER LIST: BEST HEROES FOR SOLO RANK JULY 2026"
       category="Tier List"
       readTime="12 min read"
       date="March 29, 2026"
