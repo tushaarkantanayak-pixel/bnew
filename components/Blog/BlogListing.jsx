@@ -78,22 +78,7 @@ export default function BlogListing({ initialGame = "all" }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          {/* 📍 COMPACT BREADCRUMB WITH BACK ARROW */}
-          <div className="flex items-center gap-2 mb-2 text-[9px] font-[1000] uppercase tracking-widest opacity-40 italic">
-              <button 
-                onClick={() => router.back()} 
-                className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-all group outline-none"
-              >
-                <FiChevronLeft size={10} className="group-hover:-translate-x-1 transition-transform" />
-                <span>Back</span>
-              </button>
-              {initialGame !== "all" && (
-                  <>
-                      <span className="opacity-20">/</span>
-                      <span className="text-[var(--accent)] opacity-100">{initialGame}</span>
-                  </>
-              )}
-          </div>
+
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <h2 className="text-3xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
@@ -292,33 +277,49 @@ function BlogCard({ blog, index }) {
           <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pr-2">
             
             {/* Title */}
-            <h2 className="text-sm sm:text-lg font-bold text-[var(--foreground)] leading-snug line-clamp-2 group-hover:text-[var(--accent)] transition-colors mt-1">
-              {blog.title}
-            </h2>
+            <div className="mt-1">
+              <h2 className="text-sm sm:text-lg font-bold text-[var(--foreground)] leading-snug line-clamp-2 group-hover:text-[var(--accent)] transition-colors">
+                {blog.title}
+              </h2>
+              {/* Excerpt */}
+              {blog.excerpt && (
+                <p className="text-[10px] sm:text-xs text-[var(--muted)] opacity-70 line-clamp-1 mt-1 leading-snug">
+                  {blog.excerpt}
+                </p>
+              )}
+            </div>
 
             {/* Footer / Author Row */}
-            <div className="flex items-center justify-between mt-auto mb-1 gap-2">
-              <div className="flex items-center gap-2 min-w-0">
+            <div className="flex items-center justify-between mt-auto mb-1 gap-1">
+              <div className="flex items-center gap-1.5 min-w-0">
                 {/* Avatar */}
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center text-[10px] font-bold flex-shrink-0">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center text-[8px] font-bold flex-shrink-0">
                   {authorInitials}
                 </div>
                 {/* Author Info */}
-                <div className="flex flex-col min-w-0">
-                  <span className="text-[10px] sm:text-[11px] font-bold text-[var(--foreground)] truncate">by {blog.author || "BlueBuff"}</span>
-                  <span className="text-[9px] sm:text-[10px] text-[var(--muted)] opacity-60">
+                <div className="flex flex-col min-w-0 leading-none gap-0.5">
+                  <span className="text-[9px] sm:text-[10px] font-bold text-[var(--foreground)] truncate">by {blog.author || "BlueBuff"}</span>
+                  <span className="text-[8px] sm:text-[9px] text-[var(--muted)] opacity-60">
                     {new Date(blog.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-1.5 flex-shrink-0">
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm hover:bg-blue-600 transition-colors">
-                  <FiShare2 size={12} className="ml-[1px]" />
-                </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[var(--card)] text-[var(--muted)] border border-[var(--border)] flex items-center justify-center shadow-sm hover:bg-[var(--background)] transition-colors">
-                  <FiMoreHorizontal size={14} />
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const url = `${window.location.origin}/blog/${blog.game}/${blog.slug}`;
+                    navigator.clipboard.writeText(url);
+                    alert("Link copied to clipboard!");
+                  }}
+                  className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm hover:bg-blue-600 transition-colors cursor-pointer"
+                >
+                  <FiShare2 size={10} className="ml-[1px]" />
+                </button>
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[var(--card)] text-[var(--muted)] border border-[var(--border)] flex items-center justify-center shadow-sm hover:bg-[var(--background)] transition-colors">
+                  <FiMoreHorizontal size={12} />
                 </div>
               </div>
             </div>

@@ -35,9 +35,9 @@ export default function BlogPage() {
       game="MLBB"
     >
       <section className="space-y-8">
-        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><FiTrendingUp size={80} /></div>
-          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
+        <div className="relative p-5 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg">
+          <div className="absolute top-0 right-0 p-3 opacity-10"><FiTrendingUp size={40} /></div>
+          <p className="text-sm md:text-base font-bold tracking-tight italic leading-snug m-0 text-[var(--foreground)] relative z-10">
             "The LAND OF DAWN is shifting! With the massive MARCH 2026 update, the power dynamics in rank are completely different. If you aren't picking these <strong>S-Tier MLBB Meta Heroes</strong>, you're essentially playing with a handicap."
           </p>
         </div>
@@ -177,12 +177,14 @@ export default function BlogPage() {
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want to dominate the arena? Grab your gear.</p>
         <div className="flex justify-center">
-          <Link
-            href="/games/mobile-legends270"
+          <a
+            href="https://mlbbtopup.in"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
           >
             Get MLBB Diamonds Now
-          </Link>
+          </a>
         </div>
       </section>
 

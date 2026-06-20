@@ -215,12 +215,14 @@ export default function BlogPage() {
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Ready to rank up? Get your diamonds instantly.</p>
         <div className="flex justify-center">
-          <Link
-            href="/games/mobile-legends270"
+          <a
+            href="https://mlbbtopup.in"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
           >
             View MLBB Diamond Prices
-          </Link>
+          </a>
         </div>
       </section>
 

@@ -1,25 +1,29 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 export default function AdsterraBanner() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Inject the script manually to prevent React hydration issues with ad networks
-    if (containerRef.current && !containerRef.current.querySelector("script")) {
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.async = true;
-      script.dataset.cfasync = "false";
-      script.src = "https://pl29812869.effectivecpmnetwork.com/cb982bcb51b4be1c3dba75c08c7fcf90/invoke.js";
-      containerRef.current.appendChild(script);
-    }
-  }, []);
+  const adHtml = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>body { margin: 0; padding: 0; display: flex; justify-content: center; background: transparent; }</style>
+      </head>
+      <body>
+        <script async="async" data-cfasync="false" src="https://pl29812869.effectivecpmnetwork.com/cb982bcb51b4be1c3dba75c08c7fcf90/invoke.js"></script>
+        <div id="container-cb982bcb51b4be1c3dba75c08c7fcf90"></div>
+      </body>
+    </html>
+  `;
 
   return (
     <div className="flex justify-center w-full my-8 overflow-hidden">
-      <div ref={containerRef} id="container-cb982bcb51b4be1c3dba75c08c7fcf90"></div>
+      <iframe
+        title="Adsterra Banner"
+        srcDoc={adHtml}
+        width="100%"
+        height="100"
+        style={{ border: "none", overflow: "hidden", background: "transparent" }}
+        scrolling="no"
+      />
     </div>
   );
 }

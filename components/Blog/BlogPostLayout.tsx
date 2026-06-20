@@ -110,7 +110,7 @@ export default function BlogPostLayout({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <div className="flex items-center flex-nowrap gap-2 md:gap-4 mb-6 mt-1 text-[8px] sm:text-[9px] md:text-[10px] font-black uppercase tracking-[0.05em] sm:tracking-[0.1em] overflow-x-auto whitespace-nowrap pb-1">
+                        <div className="flex items-center flex-nowrap gap-2 md:gap-4 mb-6 mt-1 text-[8px] sm:text-[9px] md:text-[10px] font-black uppercase tracking-[0.05em] sm:tracking-[0.1em] overflow-x-auto no-scrollbar whitespace-nowrap pb-1">
                             <span className="text-[var(--accent)] italic flex-shrink-0"># {category}</span>
                             <span className="opacity-10 text-[var(--foreground)] flex-shrink-0">|</span>
                             <span className="flex items-center gap-1.5 text-[var(--muted)] opacity-50 flex-shrink-0"><FiClock size={11} className="text-[var(--accent)] opacity-40" /> {readTime}</span>
@@ -144,9 +144,7 @@ export default function BlogPostLayout({
                         </motion.div>
                     )}
                     
-                    <div className="mt-8">
-                        <AdsterraBanner />
-                    </div>
+
                 </header>
 
                 {/* CONTENT SECTION */}
