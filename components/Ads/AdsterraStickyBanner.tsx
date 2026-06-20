@@ -15,8 +15,16 @@ export default function AdsterraStickyBanner() {
         <style>body { margin: 0; padding: 0; display: flex; justify-content: center; background: transparent; overflow: hidden; }</style>
       </head>
       <body>
-        <script async="async" data-cfasync="false" src="https://pl29812869.effectivecpmnetwork.com/cb982bcb51b4be1c3dba75c08c7fcf90/invoke.js"></script>
-        <div id="container-cb982bcb51b4be1c3dba75c08c7fcf90"></div>
+        <script>
+          atOptions = {
+            'key' : '75da51e743f311aa177c2d9f662b4310',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+          };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/75da51e743f311aa177c2d9f662b4310/invoke.js"></script>
       </body>
     </html>
   `;

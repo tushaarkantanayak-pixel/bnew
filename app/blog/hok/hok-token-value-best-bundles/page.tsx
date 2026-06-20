@@ -35,7 +35,9 @@ export default function BlogPage() {
       <section className="pt-12 space-y-6">
         <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Token Value <span className="text-[var(--accent)]">Breakdown 📊</span></h2>
+                  <AdsterraBanner />
+
+      <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Token Value <span className="text-[var(--accent)]">Breakdown 📊</span></h2>
         </div>
         
         <p className="opacity-80 leading-relaxed text-sm">

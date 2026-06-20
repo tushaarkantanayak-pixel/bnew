@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
 import { FiCompass, FiZap, FiShield, FiTarget, FiStar, FiMap, FiAnchor, FiActivity, FiGlobe } from "react-icons/fi";
+import AdsterraBanner from "@/components/Ads/AdsterraBanner";
 
 export const metadata: Metadata = {
   title: "How to Unlock Inazuma in Genshin Impact Step by Step – 2026",
@@ -35,7 +36,9 @@ export default function BlogPage() {
       <section className="pt-12 space-y-6">
         <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-            <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The <span className="text-[var(--accent)]">Prerequisites 📋</span></h2>
+                  <AdsterraBanner />
+
+      <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">The <span className="text-[var(--accent)]">Prerequisites 📋</span></h2>
         </div>
         
         <p className="opacity-80 leading-relaxed text-sm">

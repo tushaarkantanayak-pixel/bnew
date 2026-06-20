@@ -1,4 +1,5 @@
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
+import AdsterraBanner from "@/components/Ads/AdsterraBanner";
 
 export default function WhyTopupFailingPost() {
   return (
@@ -18,6 +19,8 @@ export default function WhyTopupFailingPost() {
       <p>
         Since the ban of certain apps and stricter payment policies in India, millions of gamers face daily struggles trying to top-up their favorite games. In this guide, we break down exactly why your payments are failing and how you can permanently fix the issue using instant UPI alternatives.
       </p>
+
+            <AdsterraBanner />
 
       <h2>The #1 Reason: Region Locks and Play Store Bans</h2>
       <p>

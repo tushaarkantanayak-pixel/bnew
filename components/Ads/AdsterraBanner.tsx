@@ -17,10 +17,10 @@ export default function AdsterraBanner() {
   return (
     <div className="flex justify-center w-full my-8 overflow-hidden">
       <iframe
-        title="Adsterra Banner"
+        title="Adsterra Native Banner"
         srcDoc={adHtml}
         width="100%"
-        height="100"
+        height="250"
         style={{ border: "none", overflow: "hidden", background: "transparent" }}
         scrolling="no"
       />
