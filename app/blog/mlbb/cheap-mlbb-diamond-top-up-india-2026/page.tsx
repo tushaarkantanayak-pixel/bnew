@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
+import AdsterraBanner from "@/components/Ads/AdsterraBanner";
 import Link from "next/link";
 import Script from "next/script";
 import { FiTrendingUp, FiZap, FiStar, FiDatabase, FiDollarSign, FiCheck, FiAlertCircle, FiHelpCircle } from "react-icons/fi";
