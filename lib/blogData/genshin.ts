@@ -3,93 +3,93 @@ import { BlogPost } from "./types";
 export const GENSHIN_BLOGS_DATA: BlogPost[] = [
     {
         id: "genshin-1",
-        title: "How Pity System Works in Genshin Impact (Explained Simply) – 2026",
+        title: "How Genshin Impact Pity Works (Simple 2026 Guide)",
         slug: "genshin-pity-system-explained",
         game: "genshin",
         type: "Gacha Guide",
-        excerpt: "Confused by Soft Pity vs. Hard Pity in Genshin Impact? Learn the math behind the gacha and the 50/50 rule in our easy-to-follow guide.",
+        excerpt: "Learn how the Genshin Impact Pity system works. We explain soft pity, hard pity, and the 50/50 rule in simple terms for beginners to save Primogems.",
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "12 min read",
         image: "/blog/genshin/genshin-pity-v2.png",
         featured: true,
         keywords: ["Genshin Impact Pity System Explained", "Genshin 50/50 rule", "soft pity genshin luck", "genshin primogem top-up India", "hard pity count genshin"],
-        tags: ["Genshin Impact", "Gacha" , "Guide", "Value Packs"]
+        tags: ["Genshin Pity", "50/50 Rule", "Soft Pity", "Genshin Guide", "Save Primogems"]
     },
     {
         id: "genshin-2",
-        title: "How to Increase Adventure Rank Fast in Genshin Impact – 2026",
+        title: "Increase Adventure Rank Fast in Genshin Impact (Guide)",
         slug: "genshin-increase-ar-fast",
         game: "genshin",
         type: "AR Leveling",
-        excerpt: "Stuck at Adventure Rank 35? Learn the fastest ways to gain AR EXP with our simple guide to Resin management, commissions, and world exploration.",
+        excerpt: "Stuck at low AR? Learn the fastest ways to level up your Adventure Rank in Genshin Impact. We cover commissions, Resin, quests, and exploration tricks.",
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "10 min read",
         image: "/blog/genshin/genshin-ar-fast.png",
         featured: false,
         keywords: ["increase adventure rank fast genshin", "fastest way to level up genshin impact", "genshin ar exp guide", "genshin primogem recharge india", "unlock world level fast genshin"],
-        tags: ["Genshin Impact", "Leveling", "Guide", "Adventure Rank"]
+        tags: ["Genshin AR Fast", "Level Up Genshin", "Adventure Rank Guide", "Daily Commissions", "Genshin Resin"]
     },
     {
         id: "genshin-3",
-        title: "How to Unlock Inazuma in Genshin Impact Step by Step – 2026",
+        title: "How to Unlock Inazuma in Genshin Impact (Step by Step)",
         slug: "how-to-unlock-inazuma-genshin",
         game: "genshin",
         type: "Quest Guide",
-        excerpt: "Finally ready to reach Inazuma? Here is a simple, step-by-step guide to unlocking Inazuma, finishing the Archon Quests, and getting into Ritou.",
+        excerpt: "Trying to reach the Electro nation? Here is the complete step-by-step guide to unlocking Inazuma in Genshin Impact, including required Adventure Rank and quests.",
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "8 min read",
         image: "/blog/genshin/genshin-inazuma-unlock.png",
         featured: false,
         keywords: ["how to unlock inazuma genshin", "genshin impact inazuma unlock quest", "reach inazuma step by step", "ar levels for inazuma", "inazuma archon quest guide"],
-        tags: ["Genshin Impact", "Inazuma", "Guide", "Quests"]
+        tags: ["Unlock Inazuma", "Genshin Impact Guide", "Inazuma Quest", "Adventure Rank 30", "Autumn Winds"]
     },
     {
         id: "genshin-4",
-        title: "Is Buying Genesis Crystals Worth It in Genshin Impact? – 2026",
+        title: "Are Genesis Crystals Worth It in Genshin Impact? (2026)",
         slug: "is-buying-genesis-crystals-worth-it",
         game: "genshin",
         type: "Value Guide",
-        excerpt: "Should you buy Genesis Crystals or stick to Welkin? We break down the cost per pull, 2x bonuses, and the most efficient ways to spend your money in 2026.",
+        excerpt: "Wondering if buying Genesis Crystals is worth your money? We break down the math, Top-Up Center bonuses, Welkin Moon, and the best ways to get Primogems.",
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "9 min read",
         image: "/blog/genshin/genshin-crystal-value.png",
         featured: false,
-        keywords: ["is buying genesis crystals worth it", "genshin impact crystal cost per pull", "best value bundles genshin", "genshin primogem top-up India cheap", "genesis crystals vs welkin moon"],
-        tags: ["Genshin Impact", "Economy", "Guide", "Value Packs"]
+        keywords: ["is buying genesis crystals worth it", "genshin impact primogem value", "welkin moon vs genesis crystals", "genshin double bonus reset", "buy genesis crystals india"],
+        tags: ["Genesis Crystals", "Genshin Top-Up", "Primogems Guide", "Welkin Moon", "Genshin Shop"]
     },
     {
         id: "genshin-5",
-        title: "How to Farm Primogems Fast in Genshin Impact (Complete Guide) – 2026",
-        slug: "farm-primogems-fast-genshin-guide",
+        title: "How to Farm Primogems Fast in Genshin Impact (2026)",
+        slug: "how-to-farm-primogems-fast",
         game: "genshin",
-        type: "Farming",
-        excerpt: "Ran out of wishes? Find every Primogem source in Teyvat with our guide to Spiral Abyss, events, and achievement hunting.",
+        type: "Farming Guide",
+        excerpt: "Need Primogems quickly? Learn the absolute fastest ways to farm Primogems in Genshin Impact, from Spiral Abyss to daily commissions and exploration.",
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "11 min read",
-        image: "/blog/genshin/genshin-farm-primos.png",
-        featured: true,
-        keywords: ["how to farm primogems fast genshin", "genshin impact free primogems 2026", "fastest way to get primogems", "genshin achievement hunting guide", "genshin top-up India UPI cheap"],
-        tags: ["Genshin Impact", "Farming", "Guide", "Primogems"]
+        image: "/blog/genshin/genshin-primogem-farm.png",
+        featured: false,
+        keywords: ["how to farm primogems fast", "genshin impact daily primogems", "spiral abyss primogem rewards", "genshin promo codes", "fastest way to get wishes genshin"],
+        tags: ["Farm Primogems", "Genshin Primogem Guide", "Fast Primogems", "Spiral Abyss", "Genshin F2P"]
     },
     {
         id: "genshin-6",
-        title: "All Active Genshin Impact Redeem Codes (Updated Daily) – 2026",
+        title: "All Active Genshin Impact Redeem Codes (2026)",
         slug: "all-active-genshin-impact-redeem-codes",
         game: "genshin",
         type: "Redeem Codes",
-        excerpt: "Never miss a free Primogem! Bookmark this page for the newest active Genshin Impact redeem codes and step-by-step instructions on how to claim them.",
+        excerpt: "Get the latest active Genshin Impact promo codes for free Primogems, Mora, and Hero's Wits. We update this list daily so you never miss a free reward.",
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
-        readingTime: "15 min read",
+        readingTime: "4 min read",
         image: "/blog/genshin/genshin-redeem-codes.png",
         featured: true,
         keywords: ["genshin impact redeem codes march 2026", "active genshin codes 60 primogems", "how to redeem codes genshin", "genshin impact promo codes List", "free primogems code genshin"],
-        tags: ["Genshin Impact", "Redeem Codes", "Guide", "Free Primogems"]
+        tags: ["Genshin Impact Codes", "Genshin Promo Codes", "Free Primogems", "Genshin Redeem Codes", "Genshin Rewards"]
     }
 ];
 

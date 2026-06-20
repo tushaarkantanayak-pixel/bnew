@@ -2,34 +2,14 @@ import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
 import Script from "next/script";
-import { FiStar, FiZap, FiShield, FiTarget, FiTrendingUp, FiDatabase, FiDollarSign, FiActivity, FiRefreshCw, FiGrid, FiHelpCircle } from "react-icons/fi";
+import { FiStar, FiZap, FiShield, FiTarget, FiTrendingUp, FiDatabase, FiDollarSign, FiActivity, FiRefreshCw, FiGrid, FiHelpCircle, FiCheckCircle } from "react-icons/fi";
 import AdsterraBanner from "@/components/Ads/AdsterraBanner";
+import AdsterraClassicBanner from "@/components/Ads/AdsterraClassicBanner";
 
 export const metadata: Metadata = {
-  title: "How Pity System Works in Genshin Impact (Explained Simply) – 2026",
-  description: "Learn the secrets of the Genshin Impact Pity system. Soft pity, hard pity, and the 50/50 rule explained for India primogem top-ups.",
+  title: "How Genshin Impact Pity System Works (Simple 2026 Guide)",
+  description: "Learn how the Genshin Impact Pity system works. We explain soft pity, hard pity, and the 50/50 rule in simple terms for beginners to save Primogems.",
   alternates: { canonical: "https://bluebuff.in/blog/genshin/genshin-pity-system-explained" },
-  openGraph: {
-    title: "How Pity System Works in Genshin Impact (Explained Simply) – 2026",
-    description: "Learn the secrets of the Genshin Impact Pity system. Soft pity, hard pity, and the 50/50 rule explained.",
-    url: "https://bluebuff.in/blog/genshin/genshin-pity-system-explained",
-    siteName: "BlueBuff",
-    images: [
-      {
-        url: "https://bluebuff.in/blog/genshin/genshin-pity-v2.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: "en_IN",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "How Pity System Works in Genshin Impact",
-    description: "Learn the secrets of the Genshin Impact Pity system.",
-    images: ["https://bluebuff.in/blog/genshin/genshin-pity-v2.png"],
-  },
 };
 
 export default function BlogPage() {
@@ -60,6 +40,22 @@ export default function BlogPage() {
           "@type": "Answer",
           "text": "No, your pity count carries over to the next limited character banner. If you did 50 pulls on the current banner without getting a 5-star, you will start the next banner at 50 pity."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "How many Primogems do I need for a guaranteed 5-star?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To hit hard pity (90 pulls) you need 14,400 Primogems. To guarantee the featured character (worst-case scenario of 180 pulls), you need exactly 28,800 Primogems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the weapon banner pity different?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Hard pity on the weapon banner is 80 pulls instead of 90. Additionally, it uses a 75/25 chance system and the Epitomized Path to guarantee your chosen weapon after 2 failed 5-star pulls."
+        }
       }
     ]
   };
@@ -76,77 +72,96 @@ export default function BlogPage() {
       game="Genshin"
     >
       <section className="space-y-8">
-        <div className="relative p-5 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg">
-          <div className="absolute top-0 right-0 p-3 opacity-10"><FiStar size={40} /></div>
-          <p className="text-sm md:text-base font-bold tracking-tight italic leading-snug m-0 text-[var(--foreground)] relative z-10">
-            "GENSHIN IMPACT ISN'T just a game; it's a game of calculated risks. Understanding <strong>Soft Pity and Hard Pity</strong> in 2026 is the difference between getting your favorite C6 character and wasting thousands of <strong>Primogems</strong>."
+        <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg mx-auto">
+          <div className="absolute top-0 right-0 p-3 opacity-10"><FiStar size={50} /></div>
+          <p className="text-base font-semibold tracking-tight italic leading-snug m-0 text-[var(--foreground)]">
+            "Genshin Impact isn't just a game; it's a game of calculated risks. Understanding <strong>Soft Pity and Hard Pity</strong> is the difference between getting your favorite C6 character and wasting thousands of Primogems for nothing."
           </p>
         </div>
+
+        <p className="opacity-80 leading-relaxed text-lg">
+          For many players, the Genshin Impact gacha system can feel completely random. You might see your friends pull a 5-star in their first ten pulls, while you spend months saving up just to get a character you didn't even want.
+        </p>
 
         <p className="opacity-80 leading-relaxed">
-          For many players in India, the <strong>Genshin Impact gacha system</strong> can feel like pure luck. However, behind the flashy animations of the Wanderlust Invocation and Character Event Banners lies a deterministic mathematical system designed to guarantee you high-rarity drops. This guide breaks down the <strong>Genshin Pity System</strong> into simple, actionable steps so you can plan your pulls like a pro.
+          However, behind the flashy animations of the Wish screen lies a deterministic mathematical system designed to guarantee you high-rarity drops. This guide breaks down the <strong>Genshin Pity System</strong> into simple, easy-to-understand rules so you can plan your pulls and manage your Primogems perfectly.
         </p>
+        
+        <AdsterraClassicBanner />
       </section>
 
-      <section className="pt-12 space-y-6">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-                <AdsterraBanner />
-
-      <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Pity System <span className="text-[var(--accent)]">Breakdown</span></h2>
-        </div>
-
-        <p className="opacity-80 leading-relaxed text-sm">
-          The pity system ensures that you eventually receive a 4-star or 5-star item even if you have terrible luck. In 2026, the <strong>Genshin banner mechanics</strong> remain the core foundation of account progression. Here is the data-driven breakdown of how many pulls you need for a guaranteed drop.
+      <section className="pt-8 space-y-6">
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Pity System Breakdown: Hard Pity vs. Soft Pity</h2>
+        <p className="opacity-80 leading-relaxed">
+          The term "Pity" simply refers to a safety net built into the game. It ensures that if you have terrible luck, the game will eventually take pity on you and give you a guaranteed high-tier item.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            { type: "4-Star Pity", count: "10 Pulls", icon: FiGrid, desc: "Guarantees a 4-star character or weapon every 10 wishes. If you get one early, the counter resets instantly." },
-            { type: "5-Star Hard Pity", count: "90 Pulls", icon: FiShield, desc: "The absolute maximum. On your 90th wish, a 5-star is 100% guaranteed. Note: Weapon banners have a lower 80-pull ceiling." }
-          ].map((item, i) => (
-            <div key={i} className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-              <div className="flex items-center justify-between mb-3 text-[var(--accent)]">
-                <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-[var(--accent)]/10 px-2 py-1 rounded">{item.count}</span>
-                <item.icon />
-              </div>
-              <h3 className="text-lg font-black uppercase italic tracking-tighter mb-2">{item.type}</h3>
-              <p className="text-[10px] leading-relaxed opacity-60 m-0 italic">{item.desc}</p>
+        <div className="overflow-x-auto rounded-xl border border-[var(--border)] mt-6">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-[var(--accent)]/10">
+                <th className="p-4 border-b border-[var(--border)] font-bold">Banner Type</th>
+                <th className="p-4 border-b border-[var(--border)] font-bold">Soft Pity Starts</th>
+                <th className="p-4 border-b border-[var(--border)] font-bold">Hard Pity (Guarantee)</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm opacity-90">
+              <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                <td className="p-4 font-semibold text-[var(--accent)]">Character Event</td>
+                <td className="p-4">Wish #74</td>
+                <td className="p-4">Wish #90</td>
+              </tr>
+              <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                <td className="p-4 font-semibold text-[var(--accent)]">Weapon Event</td>
+                <td className="p-4">Wish #65</td>
+                <td className="p-4">Wish #80</td>
+              </tr>
+              <tr className="hover:bg-[var(--foreground)]/5 transition-colors">
+                <td className="p-4 font-semibold text-[var(--accent)]">Standard Banner</td>
+                <td className="p-4">Wish #74</td>
+                <td className="p-4">Wish #90</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul className="space-y-4 my-8">
+          <li className="flex gap-4 items-start bg-[var(--card)] p-4 rounded-xl border border-[var(--border)]">
+            <FiZap className="text-[var(--accent)] shrink-0 mt-1" size={20} />
+            <div>
+              <strong className="block text-lg mb-1">Soft Pity Explained</strong>
+              <span className="opacity-80 text-sm">From wish 1 to 73, your chance of getting a 5-star is only 0.6%. But starting at wish 74, the game drastically increases your odds to roughly 32% per pull. Most players get their 5-star in this range.</span>
             </div>
-          ))}
-        </div>
+          </li>
+          <li className="flex gap-4 items-start bg-[var(--card)] p-4 rounded-xl border border-[var(--border)]">
+            <FiShield className="text-[var(--accent)] shrink-0 mt-1" size={20} />
+            <div>
+              <strong className="block text-lg mb-1">Hard Pity Explained</strong>
+              <span className="opacity-80 text-sm">If you somehow have incredibly bad luck and fail the soft pity checks, your 90th pull is mathematically guaranteed to be a 5-star character. Hitting exactly 90 is actually extremely rare!</span>
+            </div>
+          </li>
+        </ul>
       </section>
 
-      <div className="bg-[var(--card)] border border-[var(--border)] p-10 rounded-[40px] my-16 shadow-xl relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
-        <div className="relative z-10 text-sm">
-          <div className="flex items-center gap-3 mb-4">
-            <FiZap size={20} className="text-[var(--accent)]" />
-            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">Pro Tip: The "Soft Pity" Range</h3>
-          </div>
-          <p className="opacity-80 leading-relaxed mb-4">
-            Did you know that 5-star characters almost never wait until the 90th pull? In the <strong>Genshin community strategy</strong>, we call this "Soft Pity."
-          </p>
-          <ul className="space-y-3 opacity-80 list-none p-0 italic text-[11px]">
-            <li className="flex gap-3 items-center"><FiActivity className="text-[var(--accent)] flex-shrink-0" /> <strong>Wishes 1-73:</strong> Base drop rate is a low 0.6%.</li>
-            <li className="flex gap-3 items-center"><FiActivity className="text-[var(--accent)] flex-shrink-0" /> <strong>Wishes 74-85:</strong> Drop rates jump significantly to ~30%+ per pull.</li>
-            <li className="flex gap-3 items-center"><FiActivity className="text-[var(--accent)] flex-shrink-0" /> <strong>Strategic Advice:</strong> If you are saving for a future banner, stop pulling at 70 wishes to avoid "accidentally" triggering your pity.</li>
-          </ul>
-        </div>
+      <div className="w-full flex justify-center my-10">
+        <AdsterraBanner />
       </div>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">The Dreaded <span className="text-[var(--accent)]">50/50 Rule</span></h2>
+      <section className="pt-8 space-y-6">
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">The Dreaded 50/50 Rule</h2>
         <p className="opacity-80 leading-relaxed">
-          The most important concept to master is the <strong>50/50 probability</strong> on the Limited Character Banner. When you finally hit that gold animation, there is only a 50% chance it is the featured character (e.g., Focalors or Raiden Shogun). The other 50% chance is a "Standard" 5-star character from the permanent pool (like Jean or Diluc).
+          The most important concept to master is the <strong>50/50 probability</strong> on the Limited Character Banner. When you finally see that glorious gold shooting star, there is only a 50% chance it is the featured character (like Arlecchino or Raiden Shogun). The other 50% chance is a "Standard" 5-star character from the permanent pool (like Jean, Diluc, or Qiqi).
         </p>
         <p className="opacity-80 leading-relaxed">
-          <strong>The Guarantee (Guaranteed Pity):</strong> If you "lose" your 50/50 and get a standard character, your NEXT 5-star is guaranteed to be the featured character on the banner. This guarantee carries over across different banners! If you lost the 50/50 in March, you will have a <strong>guaranteed pull</strong> for the new character release in April.
+          <strong>The Guarantee:</strong> If you "lose" your 50/50 and get a standard character, don't despair! Your NEXT 5-star pull is 100% guaranteed to be the featured character on the banner. 
+        </p>
+        <p className="opacity-80 leading-relaxed">
+          Even better, this guarantee carries over. If you lose the 50/50 today, you can save that 100% guarantee for a completely different character releasing months from now.
         </p>
       </section>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">How to Track Your <span className="text-[var(--accent)]">Pity Count</span></h2>
+      <section className="pt-8 space-y-6">
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">How to Track Your Pity Count</h2>
         <p className="opacity-80 leading-relaxed">
           Genshin Impact doesn't explicitly tell you your exact pity number on the main screen, but tracking it is incredibly simple. To find out how close you are to a guaranteed 5-star, open the Wish menu and click the <strong>History</strong> button at the bottom. 
         </p>
@@ -155,80 +170,74 @@ export default function BlogPage() {
         </p>
       </section>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Weapon Banner <span className="text-[var(--accent)]">(Epitome Invocation)</span></h2>
-        <p className="opacity-80 leading-relaxed">
-          The Weapon Banner operates under slightly different mathematical rules compared to the Character Banners. Hard pity on the weapon banner is reduced from 90 to <strong>80 wishes</strong>, and soft pity kicks in earlier, around wish 65.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-          However, the Weapon Banner features a <strong>75/25 probability</strong> instead of 50/50. When you hit a 5-star, there is a 75% chance it will be one of the two featured promotional weapons. To combat bad luck, Genshin uses the <em>Epitomized Path</em> system, where you select your desired weapon. If you fail to get it twice (earning 2 Fate Points), your third 5-star is absolutely guaranteed to be the weapon you chose.
-        </p>
-      </section>
-
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Budgeting <span className="text-[var(--accent)]">Primogems in India</span></h2>
-        <p className="opacity-80 leading-relaxed">
-          Unlocking C6 characters or R5 weapons requires a massive investment of <strong>Primogems</strong>. For <strong>Genshin Impact players in India</strong>, the most cost-effective way to stack your gems is through the **Welkin Moon** and the **Battle Pass**. These offer a 5x or 10x value compared to direct gem purchases.
-        </p>
-        <p className="opacity-80 leading-relaxed italic">
-          However, for those "pity emergencies" where a banner is ending in 2 hours, direct top-ups are necessary. Always ensure you use a <strong>safe Genshin top-up India</strong> service that supports UPI. Secure your Genesis Crystals through <strong>BlueBuff</strong> to get instant delivery and localized Indian pricing without international transaction fees.
-        </p>
-      </section>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-16">
-        <div className="p-8 rounded-[32px] bg-[var(--accent)]/5 border border-[var(--border)]">
-          <FiDatabase size={32} className="text-[var(--accent)] mb-4" />
-          <h4 className="text-xl font-black uppercase italic mb-2 tracking-tighter">Epitomized Path</h4>
-          <p className="text-[11px] opacity-60 m-0 leading-relaxed">The weapon banner's pity system. You can "Fate Point" your desired weapon, guaranteeing it on the 2nd 5-star pull if the first one was wrong.</p>
+      <section className="pt-12 space-y-6">
+        <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-4">
+          <FiHelpCircle className="text-[var(--accent)]" size={28} />
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter m-0">Frequently Asked Questions</h2>
         </div>
-        <div className="p-8 rounded-[32px] bg-[var(--accent)]/5 border border-[var(--border)]">
-          <FiRefreshCw size={32} className="text-[var(--accent)] mb-4" />
-          <h4 className="text-xl font-black uppercase italic mb-2 tracking-tighter">Pity Carry-Over</h4>
-          <p className="text-[11px] opacity-60 m-0 leading-relaxed">Your wish count NEVER resets when a banner changes. If you are at 50 pity today, you will still be at 50 pity when the new banner starts next week.</p>
-        </div>
-      </div>
 
-      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed">
-        <div className="flex items-center gap-3 mb-8">
-          <FiHelpCircle size={24} className="text-[var(--accent)]" />
-          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions</span></h2>
-        </div>
-        
         <div className="space-y-4">
-          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
-            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">What is soft pity in Genshin Impact?</h3>
-            <p className="text-[11px] opacity-70 m-0 leading-relaxed">Soft pity starts at the 74th wish on the character banner. The base drop rate of 0.6% dramatically increases to roughly 32% per pull, making it highly likely to get a 5-star character before reaching 90 wishes.</p>
+          <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">1. What is soft pity in Genshin Impact?</h3>
+            <p className="text-sm opacity-80 leading-relaxed">Soft pity starts at the 74th wish on the character banner. The base drop rate of 0.6% dramatically increases to roughly 32% per pull, making it highly likely to get a 5-star character before reaching 90 wishes.</p>
           </div>
-          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
-            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">Does pity reset when the banner changes?</h3>
-            <p className="text-[11px] opacity-70 m-0 leading-relaxed">No, your pity count carries over to the next limited character banner. If you did 50 pulls on the current banner without getting a 5-star, you will start the next banner at 50 pity.</p>
+          
+          <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">2. How does the 50/50 rule work?</h3>
+            <p className="text-sm opacity-80 leading-relaxed">When you pull a 5-star on the limited banner, there is a 50% chance it will be the featured character and a 50% chance it will be a standard character. If you lose the 50/50, your next 5-star is 100% guaranteed to be the featured character.</p>
           </div>
-          <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)]">
-            <h3 className="text-sm font-bold uppercase tracking-tight text-[var(--foreground)] mb-2">Where is the best place to buy Genesis Crystals in India?</h3>
-            <p className="text-[11px] opacity-70 m-0 leading-relaxed">For fast, safe, and legal top-ups, BlueBuff offers cheap Genesis Crystals with instant UPI payments for players in India.</p>
+
+          <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">3. Does pity reset when the banner changes?</h3>
+            <p className="text-sm opacity-80 leading-relaxed">No, your pity count carries over to the next limited character banner. If you did 50 pulls on the current banner without getting a 5-star, you will start the next banner at exactly 50 pity.</p>
+          </div>
+
+          <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">4. How many Primogems do I need for a guaranteed 5-star?</h3>
+            <p className="text-sm opacity-80 leading-relaxed">To hit hard pity (90 pulls) you need 14,400 Primogems. To guarantee the featured character (worst-case scenario of losing the 50/50 and doing 180 pulls), you need exactly 28,800 Primogems.</p>
+          </div>
+
+          <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+            <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">5. Is the weapon banner pity different?</h3>
+            <p className="text-sm opacity-80 leading-relaxed">Yes. Hard pity on the weapon banner is 80 pulls instead of 90. Additionally, it uses a 75/25 chance system and an Epitomized Path feature to guarantee your chosen weapon after 2 failed 5-star pulls.</p>
           </div>
         </div>
       </section>
 
-      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Need Primogems for your guaranteed 5-star? Gear up.</p>
-        <div className="flex justify-center">
-          <a
-            href="https://mlbbtopup.in"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-12 py-4 rounded-2xl bg-[var(--foreground)] text-[var(--background)] text-[11px] font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-[var(--foreground)]/20"
-          >
-            Genshin Top-Up India UPI
-          </a>
+      <section className="pt-12 space-y-6">
+        <div className="p-8 rounded-3xl bg-gradient-to-br from-[var(--background)] to-[var(--card)] border border-[var(--accent)]/30 relative overflow-hidden">
+          <div className="absolute -top-12 -right-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+          
+          <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter mb-4">Conclusion & Key Takeaways</h2>
+          <p className="opacity-80 leading-relaxed mb-6">
+            Understanding the math behind Genshin Impact's gacha system transforms the game from gambling to strategic resource management. By knowing your pity count, you can plan months in advance and guarantee you never miss your favorite characters.
+          </p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <ul className="space-y-2 text-sm opacity-90">
+              <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Soft Pity starts at 74 pulls.</span></li>
+              <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Hard Pity guarantees a 5-star at 90 pulls.</span></li>
+            </ul>
+            <ul className="space-y-2 text-sm opacity-90">
+              <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Losing the 50/50 guarantees the next character.</span></li>
+              <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Pity count always carries over between banners.</span></li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <p className="mt-8 text-xs opacity-50 italic text-center">
-        Providing the most <strong>trusted Genshin recharge India</strong> services with localized UPI support. Secure your primogems today and start your journey through <strong>Teyvat</strong> with your favorite 5-stars.
-      </p>
+      <div className="flex justify-center mt-12 mb-8 relative z-10">
+        <a
+          href="https://mlbbtopup.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-8 md:px-12 py-4 rounded-2xl bg-[var(--accent)] !text-white font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-transform shadow-xl shadow-[var(--accent)]/30 border-2 border-[var(--accent)] no-underline"
+        >
+          Top-Up Primogems Now
+        </a>
+      </div>
     </BlogPostLayout>
     </>
   );
 }
-

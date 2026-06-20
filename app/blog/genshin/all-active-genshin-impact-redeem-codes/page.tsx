@@ -1,177 +1,245 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 import Link from "next/link";
-import { FiKey, FiZap, FiShield, FiTarget, FiStar, FiActivity, FiCopy, FiCheckCircle, FiExternalLink, FiLayers } from "react-icons/fi";
+import Script from "next/script";
+import { FiGift, FiZap, FiTarget, FiDatabase, FiHelpCircle, FiCheckCircle, FiUnlock } from "react-icons/fi";
 import AdsterraBanner from "@/components/Ads/AdsterraBanner";
+import AdsterraClassicBanner from "@/components/Ads/AdsterraClassicBanner";
 
 export const metadata: Metadata = {
-  title: "All Active Genshin Impact Redeem Codes (Updated Daily) – 2026",
-  description: "Never miss free Primogems! Get the latest active Genshin Impact redeem codes here with our step-by-step redemption guide for India travelers.",
+  title: "All Active Genshin Impact Redeem Codes (2026)",
+  description: "Get the latest active Genshin Impact promo codes for free Primogems, Mora, and Hero's Wits. We update this list daily so you never miss a free reward.",
   alternates: { canonical: "https://bluebuff.in/blog/genshin/all-active-genshin-impact-redeem-codes" },
 };
 
-export default function BlogPage() {
+export default function GenshinCodesPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I redeem Genshin Impact codes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can redeem codes in-game by going to Settings > Account > Redeem Code, or by logging into the official HoYoverse gift redemption website."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is my Genshin Impact promo code invalid?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The code may be expired, entered incorrectly, or already redeemed on your account. Livestream codes expire very quickly, usually within 12 to 24 hours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What Adventure Rank is required to redeem codes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You must reach Adventure Rank 10 to unlock the ability to redeem promotional codes and receive the items in your in-game mailbox."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often does Genshin release new codes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HoYoverse releases three new codes during every Special Program Livestream (every 6 weeks), and usually drops 1-2 minor codes at the start of a new patch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I redeem Genshin codes on PlayStation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, PS4 and PS5 players can redeem codes directly through the in-game Settings menu under the Account tab."
+        }
+      }
+    ]
+  };
+
   return (
-    <BlogPostLayout
-      title="ALL ACTIVE GENSHIN IMPACT REDEEM CODES (UPDATED DAILY) – 2026"
-      category="Redeem Codes"
-      readTime="15 min read"
-      date="March 31, 2026"
-      image="/blog/genshin/genshin-redeem-codes.png"
-      game="Genshin"
-    >
-      <section className="space-y-8">
-        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><FiKey size={80} /></div>
-          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)] text-center">
-            "FREE PRIMOGEMS are every player's best friend. Bookmark this page and never miss a code before it expires."
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <BlogPostLayout
+        title="ALL ACTIVE GENSHIN IMPACT REDEEM CODES (UPDATED DAILY)"
+        category="Redeem Codes"
+        readTime="4 min read"
+        date="March 31, 2026"
+        image="/blog/genshin/genshin-redeem-codes.png"
+        game="Genshin"
+      >
+        <section className="space-y-8">
+          <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg mx-auto">
+            <div className="absolute top-0 right-0 p-3 opacity-10"><FiGift size={50} /></div>
+            <p className="text-base font-semibold tracking-tight italic leading-snug m-0 text-[var(--foreground)]">
+              "Never pay full price for Primogems if you don't have to. Bookmark this page, because we hunt down every single free promo code HoYoverse drops so you can stack wishes for free."
+            </p>
+          </div>
+
+          <p className="opacity-80 leading-relaxed text-lg">
+            HoYoverse loves to give back to the <strong>Genshin Impact</strong> community by regularly dropping promotional codes. These codes are packed with free Primogems, Mora, Hero's Wits, and Mystic Enhancement Ores.
           </p>
+
+          <p className="opacity-80 leading-relaxed">
+            However, most of these codes expire incredibly fast. Livestream codes, for example, are only valid for 12 hours! To ensure you never miss out, we update this master list of active Genshin Impact redeem codes every single day.
+          </p>
+
+          <AdsterraClassicBanner />
+        </section>
+
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">Current Active Codes</h2>
+          <p className="opacity-80 leading-relaxed">
+            Here are all the currently active promo codes. Be sure to copy them exactly as they are written, as they are case-sensitive.
+          </p>
+
+          <div className="overflow-x-auto rounded-xl border border-[var(--border)] mt-6">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-[var(--accent)]/10">
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Promo Code</th>
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Rewards</th>
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Status</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm opacity-90">
+                <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-mono font-bold text-[var(--accent)] text-lg tracking-widest">GENSHINGIFT</td>
+                  <td className="p-4">50 Primogems, 3x Hero's Wit</td>
+                  <td className="p-4 text-green-400 font-bold">Permanent</td>
+                </tr>
+                <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-mono font-bold text-[var(--accent)] text-lg tracking-widest">WAZGIQ9M</td>
+                  <td className="p-4">10,000 Mora, 10x Adventurer's Experience</td>
+                  <td className="p-4 text-green-400 font-bold">Active</td>
+                </tr>
+                <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-mono font-bold text-[var(--accent)] text-lg tracking-widest">CT2BDW7JD</td>
+                  <td className="p-4">60 Primogems, 5x Adventurer's Experience</td>
+                  <td className="p-4 text-yellow-400 font-bold">Expiring Soon</td>
+                </tr>
+                <tr className="hover:bg-[var(--foreground)]/5 transition-colors opacity-50">
+                  <td className="p-4 font-mono font-bold line-through">PT8SG36HK</td>
+                  <td className="p-4 line-through">100 Primogems, 10x Mystic Ore</td>
+                  <td className="p-4 text-red-400 font-bold">Expired</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">How to Redeem Your Codes</h2>
+          <p className="opacity-80 leading-relaxed">
+            Redeeming your codes is simple, but there is one major catch: <strong>You must be Adventure Rank 10</strong> or higher to use the redemption system. Once you hit AR 10, you have two ways to claim your loot.
+          </p>
+          
+          <ul className="space-y-4 my-8">
+            <li className="flex gap-4 items-start bg-[var(--card)] p-4 rounded-xl border border-[var(--border)]">
+              <FiUnlock className="text-[var(--accent)] shrink-0 mt-1" size={20} />
+              <div>
+                <strong className="block text-lg mb-1">Method 1: In-Game (Fastest)</strong>
+                <span className="opacity-80 text-sm">Open the Paimon Menu. Go to Settings (the gear icon) &gt; Account &gt; Redeem Code. Paste your code and hit exchange. The items will be sent to your in-game mailbox immediately.</span>
+              </div>
+            </li>
+            <li className="flex gap-4 items-start bg-[var(--card)] p-4 rounded-xl border border-[var(--border)]">
+              <FiDatabase className="text-[var(--accent)] shrink-0 mt-1" size={20} />
+              <div>
+                <strong className="block text-lg mb-1">Method 2: Official Website</strong>
+                <span className="opacity-80 text-sm">Go to the official HoYoverse gift redemption website. Log in with your account details, select your server region, and paste the promo code.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <div className="w-full flex justify-center my-10">
+          <AdsterraBanner />
         </div>
 
-        <p className="opacity-80 leading-relaxed text-center">
-            While farming is great, <strong>Redeem Codes</strong> are the easiest way to get free rewards. From regular 60-Primogem codes to special livestream 300-Primogem codes, we track every active code in <strong>Genshin Impact 2026</strong>.
-        </p>
-      </section>
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">The 300 Primogem Livestream Codes</h2>
+          <p className="opacity-80 leading-relaxed">
+            The most important codes of the entire game drop during the Special Program Livestreams. About two weeks before a new version update, HoYoverse hosts a broadcast on Twitch and YouTube.
+          </p>
+          <p className="opacity-80 leading-relaxed">
+            During the broadcast, they drop exactly three unique promo codes, each worth 100 Primogems. These codes are a massive boost, but they are designed to punish players who don't pay attention: <strong>Livestream codes expire in exactly 12 hours.</strong> 
+          </p>
+          <p className="opacity-80 leading-relaxed text-sm italic text-[var(--accent)] font-semibold">
+            Pro Tip: You don't actually have to watch the livestream! Just check back on this page the day of the broadcast, as we update our table within minutes of the codes going live.
+          </p>
+        </section>
 
-      <section className="pt-12 space-y-6">
-        <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-                  <AdsterraBanner />
+        <section className="pt-12 space-y-6">
+          <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-4">
+            <FiHelpCircle className="text-[var(--accent)]" size={28} />
+            <h2 className="text-3xl font-black uppercase italic tracking-tighter m-0">Frequently Asked Questions</h2>
+          </div>
 
-      <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Active <span className="text-[var(--accent)]">Redeem Codes 🔑</span></h2>
-        </div>
-        
-        <p className="opacity-80 leading-relaxed text-xs mb-8 italic">
-            *Code availability subject to server region and account level (Usually requires AR 10+).
-        </p>
-
-        <div className="space-y-4">
-          {[
-            { code: "GENSHINGIFT", rewards: "50 Primogems, 3x Hero's Wit", status: "Active (Ongoing)", color: "text-green-500" },
-            { code: "DAQS99XSHPV5", rewards: "60 Primogems, 5x Adventurer's Experience", status: "Active (Mar 2026)", color: "text-[var(--accent)]" },
-            { code: "XBRU2H3XYZ7C", rewards: "10,000 Mora, 10x Adventurer's Experience", status: "Active (Mar 2026)", color: "text-[var(--accent)]" },
-            { code: "MTNU2H3GHP2V", rewards: "30-Day Food Bundle, 30,000 Mora", status: "Expiring Soon", color: "text-orange-500" }
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col md:flex-row md:items-center justify-between p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all gap-4">
-                <div className="flex flex-col gap-1">
-                    <span className={`text-[8px] font-black uppercase tracking-widest ${item.color} italic mb-1 flex items-center gap-1`}>
-                        <FiCheckCircle size={10} /> {item.status}
-                    </span>
-                    <span className="text-2xl font-black tracking-tighter uppercase italic">{item.code}</span>
-                    <span className="text-[10px] opacity-40 uppercase tracking-widest">{item.rewards}</span>
-                </div>
-                <button className="px-6 py-2 rounded-xl bg-[var(--accent)] text-black text-[10px] font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-all text-center">
-                    Copy Code
-                </button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="pt-16 space-y-8 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full italic">How to <span className="text-[var(--accent)]">Redeem Codes 🛠️</span></h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-[32px] bg-[var(--card)] border border-[var(--border)] relative overflow-hidden group">
-                <div className="flex items-center gap-3 mb-6">
-                    <FiZap size={20} className="text-[var(--accent)]" />
-                    <h3 className="italic font-black uppercase m-0 leading-none">Method 1: Browser (Fastest)</h3>
-                </div>
-                <ol className="space-y-4 opacity-80 list-decimal pl-5 text-[11px] italic">
-                    <li>Visit the official <strong>Genshin Impact Code Redemption</strong> site.</li>
-                    <li>Log in to your <strong>HoYoverse account</strong> and select your server (Asia, EU, NA).</li>
-                    <li>Enter the code exactly as shown above.</li>
-                    <li>Click 'Redeem' and check your in-game mailbox in India instantly.</li>
-                </ol>
+          <div className="space-y-4">
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">1. How do I redeem Genshin Impact codes?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">You can redeem codes in-game by going to Settings &gt; Account &gt; Redeem Code, or by logging into the official HoYoverse gift redemption website.</p>
             </div>
             
-            <div className="p-8 rounded-[32px] bg-[var(--card)] border border-[var(--border)] relative overflow-hidden group">
-                <div className="flex items-center gap-3 mb-6">
-                    <FiTarget size={20} className="text-[var(--accent)]" />
-                    <h3 className="italic font-black uppercase m-0 leading-none">Method 2: In-Game</h3>
-                </div>
-                <ol className="space-y-4 opacity-80 list-decimal pl-5 text-[11px] italic">
-                    <li>Open the <strong>Paimon Menu</strong> (Esc / Top-left icon).</li>
-                    <li>Go to <strong>Settings</strong> (Gear Icon) &gt; <strong>Account</strong>.</li>
-                    <li>Find 'Redeem Code' and click 'Redeem Now'.</li>
-                    <li>Paste the code and confirm to receive your free Primogems.</li>
-                </ol>
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">2. Why is my Genshin Impact promo code invalid?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">The code may be expired, entered incorrectly, or already redeemed on your account. Livestream codes expire very quickly, usually within 12 to 24 hours.</p>
             </div>
-        </div>
-      </section>
 
-      <div className="bg-[var(--card)] border border-[var(--border)] p-10 rounded-[40px] my-16 shadow-xl relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
-        <div className="relative z-10 text-sm">
-          <div className="flex items-center gap-3 mb-4">
-            <FiShield size={20} className="text-[var(--accent)]" />
-            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">Redeem Code Expirations & Limits ⏳</h3>
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">3. What Adventure Rank is required to redeem codes?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">You must reach Adventure Rank 10 to unlock the ability to redeem promotional codes and receive the items in your in-game mailbox.</p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">4. How often does Genshin release new codes?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">HoYoverse releases three new codes during every Special Program Livestream (every 6 weeks), and usually drops 1-2 minor codes at the start of a new patch.</p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">5. Can I redeem Genshin codes on PlayStation?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">Yes, PS4 and PS5 players can redeem codes directly through the in-game Settings menu under the Account tab.</p>
+            </div>
           </div>
-          <p className="opacity-80 leading-relaxed mb-4 leading-relaxed">
-            Many new Travelers in India are often confused as to why a code might not work. In 2026, the <strong>Genshin Impact code system</strong> follows strict logic: Each code is <strong>One-Time Use</strong> per account. If you've redeemed "GENSHINGIFT" in 2024, you cannot redeem it again in 2026.
-          </p>
-          <ul className="space-y-3 opacity-80 list-none p-0 italic text-[11px]">
-            <li className="flex gap-3 items-center"><FiCheckCircle className="text-[var(--accent)] flex-shrink-0" /> <strong>Account Level:</strong> Most codes require you to reach Adventure Rank 10.</li>
-            <li className="flex gap-3 items-center"><FiCheckCircle className="text-[var(--accent)] flex-shrink-0" /> <strong>Case Sensitivity:</strong> While most codes are upper-case, always copy-paste to avoid typos.</li>
-            <li className="flex gap-3 items-center"><FiCheckCircle className="text-[var(--accent)] flex-shrink-0" /> <strong>Region Lock:</strong> Some promotional codes are locked to specific servers (Asia/EU/NA). Double-check your server in the Paimon menu.</li>
-          </ul>
-        </div>
-      </div>
+        </section>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter italic">Free <span className="text-[var(--accent)]">Livestream Codes (300 Primos) 📺</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            Every six weeks, HoYoverse does a <strong>Livestream</strong> to show the next game update. During these streams, they share three codes worth a total of <strong>300 Primogems</strong> plus extra materials.
-        </p>
-        <div className="p-6 rounded-2xl bg-[var(--background)] border border-[var(--border)] mb-8 flex flex-col gap-3">
-            <div className="flex items-center gap-2 text-[var(--accent)] text-[9px] font-black uppercase italic italic tracking-widest"><FiLayers /> How to Catch Livestream Codes</div>
-            <p className="text-[10px] opacity-60 leading-relaxed m-0 italic italic leading-relaxed">
-                These codes expire fast — usually in <strong>16 to 24 hours</strong>. We update this page as soon as codes go live. Check back right after any 'Version Update' announcements so you don't miss out.
+        <section className="pt-12 space-y-6">
+          <div className="p-8 rounded-3xl bg-gradient-to-br from-[var(--background)] to-[var(--card)] border border-[var(--accent)]/30 relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+            
+            <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter mb-4">Conclusion & Key Takeaways</h2>
+            <p className="opacity-80 leading-relaxed mb-6">
+              Claiming free promo codes is the easiest way to stack up Primogems for your next 5-star character pull. Always redeem codes the moment you see them to avoid expiration!
             </p>
-        </div>
-      </section>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <ul className="space-y-2 text-sm opacity-90">
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">GENSHINGIFT is permanent and always active.</span></li>
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">You must be Adventure Rank 10 to redeem.</span></li>
+              </ul>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Livestream codes expire in exactly 12 hours.</span></li>
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Redeem quickly in-game via the Account tab.</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter italic">Other Rewards: <span className="text-[var(--accent)]">More Than Just Primogems 💎</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            Primogems are great, but the <strong>other rewards</strong> in these codes matter too. <strong>Mora</strong>, <strong>Hero's Wit</strong>, and <strong>Adventurer's Experience</strong> are all very useful for leveling up your characters.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-            For high-level players in India, Mora is often the main problem. Using these codes for extra Mora lets you spend your Original Resin on farming good artifacts instead of running Ley Lines for gold.
-        </p>
-      </section>
-
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Build Up Your <span className="text-[var(--accent)]">Pity Over Time 🛡️</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            Many experienced players use redeem codes to slowly build up pity. While 60 Primogems might seem small, over 12 months these free codes can add up to 10-15 extra wishes.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-            When you're chasing a C2 character or a signature weapon, that small buffer can be the difference between a successful pull and a wasted 50/50. 
-        </p>
-        <p className="opacity-80 leading-relaxed italic border-l-2 border-[var(--accent)] pl-6 py-2">
-            <strong>Need more Primogems?</strong> If you've used all active codes and are still short before a banner ends, don't worry. Top up your Genesis Crystals through <strong>BlueBuff</strong> using <strong>UPI, Google Pay, or PhonePe</strong> for instant delivery at the best price in India.
-        </p>
-      </section>
-
-      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Codes are only half the battle. Gear up your account with top-ups.</p>
-        <div className="flex justify-center">
-            <a
+        <div className="flex justify-center mt-12 mb-8 relative z-10">
+          <a
             href="https://mlbbtopup.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-12 py-4 rounded-2xl bg-[var(--foreground)] text-[var(--background)] text-[11px] font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-[var(--foreground)]/20 flex items-center gap-2"
+            className="px-8 md:px-12 py-4 rounded-2xl bg-[var(--accent)] !text-white font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-transform shadow-xl shadow-[var(--accent)]/30 border-2 border-[var(--accent)] no-underline"
           >
-            Shop Genesis Crystals <FiExternalLink size={12} />
+            Top-Up Genesis Crystals Now
           </a>
         </div>
-      </section>
-
-      <p className="mt-8 text-xs opacity-50 italic text-center">
-        The definitive **Genshin Impact India** redeem code tracker. Bookmark BlueBuff for the newest codes and the fastest **Genshin Primogem UPI top-up** in 2026.
-      </p>
-    </BlogPostLayout>
+      </BlogPostLayout>
+    </>
   );
 }
-
