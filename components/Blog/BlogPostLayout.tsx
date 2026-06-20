@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiClock, FiCalendar, FiArrowLeft, FiShare2, FiArrowRight } from "react-icons/fi";
 import Script from "next/script";
+import AdsterraBanner from "@/components/Ads/AdsterraBanner";
 import { ReactNode, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { BLOGS_DATA } from "@/lib/blogData";
@@ -147,6 +148,10 @@ export default function BlogPostLayout({
                 <section className="max-w-4xl mx-auto">
                     <div className="max-w-none prose prose-invert prose-p:text-[var(--muted)] prose-p:opacity-80 prose-p:leading-relaxed prose-headings:text-[var(--foreground)] prose-headings:italic prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-strong:text-[var(--accent)] prose-ul:list-disc prose-ul:marker:text-[var(--accent)] prose-ol:list-decimal prose-ol:marker:text-[var(--accent)] space-y-10 selection:bg-[var(--accent)]/20 transition-colors">
                         {children}
+                    </div>
+                    
+                    <div className="mt-16 border-t border-[var(--border)] border-dashed pt-8">
+                        <AdsterraBanner />
                     </div>
                 </section>
 

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import AdsterraPopunder from "@/components/Ads/AdsterraPopunder";
+import AdsterraSocialBar from "@/components/Ads/AdsterraSocialBar";
 
 export const metadata: Metadata = {
   title: "Gaming News & Pro Guides | BlueBuff MLBB & HOK India",
@@ -10,5 +12,11 @@ export default function BlogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <AdsterraPopunder />
+      <AdsterraSocialBar />
+      {children}
+    </>
+  );
 }
