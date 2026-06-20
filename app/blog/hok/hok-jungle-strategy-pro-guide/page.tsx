@@ -1,154 +1,239 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
-import AdsterraBanner from "@/components/Ads/AdsterraBanner";
 import Link from "next/link";
-import { FiTrendingUp, FiZap, FiTarget, FiStar, FiActivity, FiCrosshair } from "react-icons/fi";
+import Script from "next/script";
+import { FiTrendingUp, FiTarget, FiZap, FiMap, FiHelpCircle, FiCheckCircle, FiShield } from "react-icons/fi";
+import AdsterraBanner from "@/components/Ads/AdsterraBanner";
+import AdsterraClassicBanner from "@/components/Ads/AdsterraClassicBanner";
 
 export const metadata: Metadata = {
-  title: "HOK Jungle Guide: Map Control and Moving Better – 2026",
-  description: "Learn how to play jungle in Honor of Kings with our guide on moving around and getting buffs.",
+  title: "HoK Jungle Guide: How to Move and Win (2026)",
+  description: "Master the Jungle role in Honor of Kings! Learn the best jungle rotations, how to secure objectives, and how to carry your team to victory in 2026.",
   alternates: { canonical: "https://bluebuff.in/blog/hok/hok-jungle-strategy-pro-guide" },
 };
 
-export default function BlogPage() {
+export default function HoKJungleGuidePage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which buff should I start with in HoK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on the lane you want to gank first. Always start on the opposite side of the map from your target lane. For example, if you want to gank Clash Lane, start at the buff near the Farm Lane."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the two-minute mark rule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At exactly 2:00, the Overlord and Tyrant spawn. As a Jungler, you must be level 4 and positioned to contest or secure one of these massive neutral objectives."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I tax my teammates' minion waves?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the early game, avoid stealing farm from your laners. However, if you successfully pull off a gank and kill the enemy, you should push the minion wave into the enemy tower together."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who are the best beginner Junglers in HoK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For beginners, heroes like Arthur and Wukong are highly recommended because they have straightforward mechanics, high burst damage, and excellent survivability."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I secure Smite on objectives?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Always combine your Smite spell with your highest damage ability. Hit the monster with your burst skill and Smite at the exact same millisecond to prevent the enemy from stealing it."
+        }
+      }
+    ]
+  };
+
   return (
-    <BlogPostLayout
-      title="HOK JUNGLE GUIDE: HOW TO MOVE AND WIN"
-      category="Pro Guide"
-      readTime="12 min read"
-      date="March 28, 2026"
-      image="/blog/hok/hok-strategy.png"
-      game="HOK"
-    >
-      <section className="space-y-8">
-        <div className="relative p-8 rounded-[32px] bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><FiTrendingUp size={80} /></div>
-          <p className="text-lg md:text-xl font-bold tracking-tight italic leading-relaxed m-0 text-[var(--foreground)]">
-            "THE JUNGLER ISN'T just a role; it controls the whole game. In 2026, reaching <strong>Grandmaster in Honor of Kings</strong> requires more than just good mechanics—you need to control the map and objectives at all times."
-          </p>
-        </div>
-
-        <p className="opacity-80 leading-relaxed">
-            In the fast-paced world of <strong>Honor of Kings (HOK)</strong>, the Jungler is the most important role on the map. Unlike other MOBAs, HOK gives a lot of rewards for smart movement between lanes. To do well in 2026, you need to learn <strong>good pathing</strong> and <strong>how to invade the enemy jungle</strong>. This guide covers the top tips used by pro players in India.
-        </p>
-      </section>
-
-      <section className="pt-12 space-y-6">
-        <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-                  <AdsterraBanner />
-
-      <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Best Jungle <span className="text-[var(--accent)]">Heroes 🏆</span></h2>
-        </div>
-        
-        <p className="opacity-80 leading-relaxed text-sm">
-            Before going into the jungle, picking the right hero for the <strong>2026 meta</strong> is key. Some heroes are strong early, while others become very powerful later and can win games by themselves. Here are the three best jungle heroes with the highest win rates in <strong>ranked matches</strong>.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {[
-            { name: "Han Xin", role: "Fastest Mover", icon: FiZap, desc: "The master of split-pushing and stealing buffs. He can clear the jungle and get away fast. He can move across the map very quickly, making him hard to catch." },
-            { name: "Nakoruru", role: "High Damage", icon: FiTarget, desc: "A late-game monster. She can take down enemies in less than a second. Once she has her items, no one is safe." },
-            { name: "Wukong", role: "Power Carry", icon: FiStar, desc: "High risk, big reward. Once he gets his items, he can win team fights easily. He can turn invisible to surprise his enemies." }
-          ].map((hero, i) => (
-            <div key={i} className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-                <div className="flex items-center justify-between mb-3 text-[var(--accent)]">
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-[var(--accent)]/10 px-2 py-1 rounded">Best</span>
-                    <hero.icon />
-                </div>
-                <h3 className="text-lg font-black uppercase italic tracking-tighter mb-2">{hero.name}</h3>
-                <p className="text-[10px] leading-relaxed opacity-60 m-0 italic">{hero.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="bg-[var(--card)] border border-[var(--border)] p-10 rounded-[40px] my-16 shadow-xl relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
-        <div className="relative z-10 text-sm">
-          <div className="flex items-center gap-3 mb-4">
-            <FiActivity size={20} className="text-[var(--accent)]" />
-            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">The 2-6-10 Rule: Timing is Power ⏳</h3>
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <BlogPostLayout
+        title="HOK JUNGLE GUIDE: HOW TO MOVE AND WIN"
+        category="Strategy Guide"
+        readTime="8 min read"
+        date="March 29, 2026"
+        image="/blog/hok/hok-jungle.png"
+        game="HoK"
+      >
+        <section className="space-y-8">
+          <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg mx-auto">
+            <div className="absolute top-0 right-0 p-3 opacity-10"><FiTrendingUp size={50} /></div>
+            <p className="text-base font-semibold tracking-tight italic leading-snug m-0 text-[var(--foreground)]">
+              "The Jungler dictates the pace of the entire game. If your Jungler is clueless, you lose in 10 minutes. If your Jungler knows how to rotate, they can 1v9 the match. Here is how you become the latter."
+            </p>
           </div>
-          <p className="opacity-80 leading-relaxed mb-4">
-            HOK matches are decided by three key windows. Missing even one of these timings can flip the game and give the enemy a chance to come back. Top junglers always keep these times in mind.
+
+          <p className="opacity-80 leading-relaxed text-lg">
+            In <strong>Honor of Kings (HoK)</strong>, the Jungle role carries the heaviest burden. You are responsible for securing buffs, rescuing losing lanes, and controlling the massive neutral objectives that spawn in the river.
           </p>
-          <ul className="space-y-3 opacity-80 list-none p-0 italic text-[11px]">
-            <li className="flex gap-3 items-center"><FiCrosshair className="text-[var(--accent)] flex-shrink-0" /> <strong>2 Minutes:</strong> Get the first major monster. This helps your team get their ultimate powers before the enemy.</li>
-            <li className="flex gap-3 items-center"><FiCrosshair className="text-[var(--accent)] flex-shrink-0" /> <strong>6 Minutes:</strong> Push out the towers. Taking away the enemy's view of the map is key to winning.</li>
-            <li className="flex gap-3 items-center"><FiCrosshair className="text-[var(--accent)] flex-shrink-0" /> <strong>10 Minutes:</strong> Get the Dark Overlord. This helps you push into the enemy base and win the game.</li>
+
+          <p className="opacity-80 leading-relaxed">
+            Unlike laners who simply farm minions in a straight line, Junglers must constantly read the map and predict enemy movements. If you want to climb to Grandmaster, mechanical skill alone will not save you. You need macro-level strategy. This 2026 guide will teach you the exact pathing and rotations the pros use to win.
+          </p>
+
+          <AdsterraClassicBanner />
+        </section>
+
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">The Golden Rule: Initial Pathing</h2>
+          <p className="opacity-80 leading-relaxed">
+            Your first two minutes determine how the entire early game plays out. Your goal is to hit Level 4 as quickly as possible and arrive at a specific lane for a surprise gank.
+          </p>
+
+          <div className="overflow-x-auto rounded-xl border border-[var(--border)] mt-6">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-[var(--accent)]/10">
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Target Lane</th>
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Start Location</th>
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Rotation Path</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm opacity-90">
+                <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-semibold text-[var(--accent)]">Clash Lane</td>
+                  <td className="p-4">Farm Lane Buff</td>
+                  <td className="p-4 text-green-400 font-bold">Farm to Mid, Mid to Clash</td>
+                </tr>
+                <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-semibold text-[var(--accent)]">Farm Lane</td>
+                  <td className="p-4">Clash Lane Buff</td>
+                  <td className="p-4 text-green-400 font-bold">Clash to Mid, Mid to Farm</td>
+                </tr>
+                <tr className="hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-semibold text-[var(--accent)]">Mid Lane</td>
+                  <td className="p-4">Either Buff</td>
+                  <td className="p-4 text-orange-400 font-bold">Clear entire jungle, ping Mid</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">The 2:00 Minute Mark Objectives</h2>
+          <p className="opacity-80 leading-relaxed">
+            Exactly two minutes into the match, the first major neutral objectives spawn: the <strong>Overlord</strong> and the <strong>Tyrant</strong>. This is where the first major team fight happens.
+          </p>
+          
+          <ul className="space-y-4 my-8">
+            <li className="flex gap-4 items-start bg-[var(--card)] p-4 rounded-xl border border-[var(--border)]">
+              <FiZap className="text-[var(--accent)] shrink-0 mt-1" size={20} />
+              <div>
+                <strong className="block text-lg mb-1">The Tyrant (Gold & Buffs)</strong>
+                <span className="opacity-80 text-sm">Killing the Tyrant grants your entire team extra gold, experience, and a combat buff. This is incredibly powerful in the early game for snowballing a lead.</span>
+              </div>
+            </li>
+            <li className="flex gap-4 items-start bg-[var(--card)] p-4 rounded-xl border border-[var(--border)]">
+              <FiShield className="text-[var(--accent)] shrink-0 mt-1" size={20} />
+              <div>
+                <strong className="block text-lg mb-1">The Overlord (Pushing Power)</strong>
+                <span className="opacity-80 text-sm">The Overlord replaces your standard minion waves with powerful Vanguard minions. This applies massive pushing pressure on all three lanes, forcing the enemy to play defensively.</span>
+              </div>
+            </li>
           </ul>
+        </section>
+
+        <div className="w-full flex justify-center my-10">
+          <AdsterraBanner />
         </div>
-      </div>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Fast Levels & <span className="text-[var(--accent)]">Level 4 Spikes</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            In 2026, the <strong>HOK jungle meta</strong> is all about reaching Level 4 first. Getting your ultimate before the 2-minute objective appears means securing the first team buff. Caster junglers like <strong>Li Bai</strong> or <strong>Luna</strong> should start Blue for ability cooldowns, while fast assassins like <strong>Han Xin</strong> should start Red for early gank pressure.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-            Another good trick is the "Split-Clear." If your laner is in danger, skip a jungle camp and go help them instead. Remember: camps respawn, but a dead teammate loses you map control. Good pathing in HOK is about knowing when to skip a camp to help your team. Always be ready to change your path if an enemy is overextended.
-        </p>
-      </section>
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">How to Track the Enemy Jungler</h2>
+          <p className="opacity-80 leading-relaxed">
+            A high-level Jungler does not just farm their own camps; they mentally track where the enemy Jungler is at all times. This concept is called "Jungle Tracking."
+          </p>
+          <ol className="list-decimal pl-6 space-y-3 opacity-80">
+            <li><strong>Watch the Initial Spawn:</strong> Look at the mini-map right as minions spawn. If the enemy Clash laner shows up to lane late, they were helping their Jungler take the buff on that side.</li>
+            <li><strong>Counter-Ganking:</strong> If you know the enemy started on the Farm side, they will finish their rotation at the Clash side around 1:30. You can hide in a bush nearby and ambush them when they attempt a gank!</li>
+            <li><strong>Stealing Camps:</strong> If you see the enemy Jungler ganking the bottom lane, and you are on the top side of the map, do not just sit there. Immediately walk into their top jungle and steal all their monsters.</li>
+          </ol>
+        </section>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Stealing Buffs: <span className="text-[var(--accent)]">Stopping the Enemy</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            Counter-jungling is the best way to slow down the enemy jungler and take their <strong>gold and XP</strong>. In 2026, invading the enemy jungle is very strong. If you see the enemy jungler going Bot Lane, go steal their Top Lane camps. Taking one <strong>Blue or Red Buff</strong> delays the enemy's power by at least 90 seconds.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-            Tracking buff respawn timers is a skill that many players ignore but top junglers always use. Buffs in HOK respawn exactly <strong>90 seconds</strong> after being killed. Use the in-game timer to arrive at the enemy buff a few seconds before it spawns. Use <strong>Smite (Retribution)</strong> at the right moment to steal it.
-        </p>
-      </section>
+        <section className="pt-12 space-y-6">
+          <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-4">
+            <FiHelpCircle className="text-[var(--accent)]" size={28} />
+            <h2 className="text-3xl font-black uppercase italic tracking-tighter m-0">Frequently Asked Questions</h2>
+          </div>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Vision Control & <span className="text-[var(--accent)]">"The Spirit" Meta</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            Vision is everything in <strong>Honor of Kings</strong>. The "Spirit" monster in the river is often ignored by low-rank players, but at a high level, it is very important. Getting the Spirit gives you a moving ward that shows the enemy jungle entrances, letting you see their movements before they can gank. This helps protect your marksman a lot.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-            Good junglers also use "Bush Baiting" to their advantage. By hiding in a bush near an objective, you can bait the enemy jungler into walking towards you. Hitting your full combo from the bush means an <strong>instant kill</strong>, turning a 5v5 into a 5v4. Controlling river vision means controlling the pace of the game.
-        </p>
-      </section>
+          <div className="space-y-4">
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">1. Which buff should I start with in HoK?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">It depends on the lane you want to gank first. Always start on the opposite side of the map from your target lane. For example, if you want to gank Clash Lane, start at the buff near the Farm Lane.</p>
+            </div>
+            
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">2. What is the two-minute mark rule?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">At exactly 2:00, the Overlord and Tyrant spawn. As a Jungler, you must be level 4 and positioned to contest or secure one of these massive neutral objectives.</p>
+            </div>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Late-Game Teamfighting: <span className="text-[var(--accent)]">Target Lockdown</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            When the game reaches 15 minutes, stop farming and start hunting the enemy carry. Wasting your skills on the enemy tank is a sure way to lose. Your main job is to <strong>kill the enemy carry</strong>. Wait for the enemy tank to use their CC skills, then jump into the backline.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-            Patience is key in late-game fights. Sometimes the best move is to wait for the first 3 seconds and do nothing. Once the enemy marksman shows themselves and uses their "Flash" or escape skill, jump in and clean up. Killing the enemy marksman usually leads to wiping the whole team and pushing for the win.
-        </p>
-      </section>
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">3. Should I tax my teammates' minion waves?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">In the early game, avoid stealing farm from your laners. However, if you successfully pull off a gank and kill the enemy, you should push the minion wave into the enemy tower together.</p>
+            </div>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-2xl font-black uppercase italic tracking-tighter italic italic">The India Pro <span className="text-[var(--accent)]">Token Strategy 🛡️</span></h2>
-        <p className="opacity-80 leading-relaxed">
-            Getting the most out of these top junglers often needs the right <strong>Level 150 Arcana sets</strong> and hero skins. For <strong>HOK players in India</strong>, being competitive means having an account that is always ready for the current meta.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-            Getting your <strong>Honor of Kings Tokens</strong> safely through <strong>BlueBuff</strong> ensures you can always pick the highest-frequency heroes and specialized gear. With instant delivery and <strong>UPI-support (GPay, PhonePe)</strong>, you'll never miss a Cumulative Recharge bonus or a limited-time <strong>Collector Skin</strong> drop that empowers your jungle presence.
-        </p>
-      </section>
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">4. Who are the best beginner Junglers in HoK?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">For beginners, heroes like Arthur and Wukong are highly recommended because they have straightforward mechanics, high burst damage, and excellent survivability.</p>
+            </div>
 
-      <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed text-center">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want the latest jungle carry? Gear up properly.</p>
-        <div className="flex justify-center">
-            <a
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">5. How do I secure Smite on objectives?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">Always combine your Smite spell with your highest damage ability. Hit the monster with your burst skill and Smite at the exact same millisecond to prevent the enemy from stealing it.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="pt-12 space-y-6">
+          <div className="p-8 rounded-3xl bg-gradient-to-br from-[var(--background)] to-[var(--card)] border border-[var(--accent)]/30 relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+            
+            <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter mb-4">Conclusion & Key Takeaways</h2>
+            <p className="opacity-80 leading-relaxed mb-6">
+              Mastering the Jungle means mastering the map. Always have a plan before the game starts, contest objectives relentlessly, and punish the enemy Jungler when they show themselves on the map.
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <ul className="space-y-2 text-sm opacity-90">
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Start your path opposite of the lane you want to gank.</span></li>
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Be ready at the 2:00 mark to secure the Tyrant.</span></li>
+              </ul>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Steal enemy camps if they gank the opposite side of the map.</span></li>
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Time your burst skills with your Smite to secure objectives.</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <div className="flex justify-center mt-12 mb-8 relative z-10">
+          <a
             href="https://mlbbtopup.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-12 py-4 rounded-2xl bg-[var(--foreground)] text-[var(--background)] text-[11px] font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-[var(--foreground)]/20"
+            className="px-8 md:px-12 py-4 rounded-2xl bg-[var(--accent)] !text-white font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-transform shadow-xl shadow-[var(--accent)]/30 border-2 border-[var(--accent)] no-underline"
           >
-            View HOK Shop
+            Top-Up HoK Tokens Safely
           </a>
         </div>
-      </section>
-
-      <p className="mt-8 text-xs opacity-50 italic text-center">
-        Providing the fastest <strong>HOK recharge India UPI</strong> services with <strong>GPay, PhonePe, and Paytm</strong> support. Join thousands of Indian Grandmasters who trust BlueBuff for their <strong>Honor of Kings tokens</strong> and premium skins.
-      </p>
-    </BlogPostLayout>
+      </BlogPostLayout>
+    </>
   );
 }
-

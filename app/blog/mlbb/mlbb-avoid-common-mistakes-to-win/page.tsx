@@ -1,154 +1,233 @@
 import type { Metadata } from "next";
 import BlogPostLayout from "@/components/Blog/BlogPostLayout";
+import Link from "next/link";
+import Script from "next/script";
+import { FiTrendingDown, FiTarget, FiZap, FiMap, FiHelpCircle, FiCheckCircle, FiAlertTriangle } from "react-icons/fi";
 import AdsterraBanner from "@/components/Ads/AdsterraBanner";
 import AdsterraClassicBanner from "@/components/Ads/AdsterraClassicBanner";
-import Link from "next/link";
-import { FiTrendingUp, FiAlertCircle, FiCheck, FiXCircle, FiTarget, FiShield, FiMessageSquare, FiZap, FiSettings } from "react-icons/fi";
 
 export const metadata: Metadata = {
-  title: "Stop Throwing Games! 5 Common Mistakes even Pro MLBB Players Make – 2026",
-  description: "Are you losing games you should have won? We break down the top 5 mistakes that keep players stuck in lower ranks in Mobile Legends.",
+  title: "5 Mistakes Throwing Your MLBB Games (And How to Stop)",
+  description: "Stop losing winning games! Discover the 5 most common mistakes even Mythic Mobile Legends players make, from map awareness to poor drafting.",
   alternates: { canonical: "https://bluebuff.in/blog/mlbb/mlbb-avoid-common-mistakes-to-win" },
 };
 
-export default function BlogPage() {
+export default function MLBBCommonMistakesPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do I always lose in the late game in MLBB?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Late-game losses are usually caused by overextending without vision or failing to secure the Enhanced Lord, allowing the enemy team to wipe you out with long respawn timers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it bad to chase kills in Mobile Legends?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Chasing kills (tunnel vision) often drags you into unrevealed bushes where the enemy team is waiting to ambush you. Always prioritize pushing towers over chasing kills."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I recall to base?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Recall when your HP or Mana is dangerously low, or immediately after wiping the enemy team and pushing a wave, so you can spend your gold and contest the next objective with full health."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is anti-heal so important in MLBB?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Anti-heal items (like Sea Halberd or Necklace of Durance) reduce the enemy's lifesteal and shield generation by 50%. This is mandatory against heroes like Estes, Uranus, and Ruby."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I stop getting tilted in solo queue?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mute toxic teammates immediately, take a 10-minute break after two consecutive losses, and focus solely on your own gameplay and macro decisions rather than your team's mistakes."
+        }
+      }
+    ]
+  };
+
   return (
-    <BlogPostLayout
-      title="STOP THROWING GAMES! 5 COMMON MISTAKES EVEN PRO MLBB PLAYERS MAKE"
-      category="Pro Tips"
-      readTime="12 min read"
-      date="March 27, 2026"
-      image="/blog/mlbb/mlbb-mistakes.png"
-      game="MLBB"
-    >
-      <section className="space-y-8">
-        <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg mx-auto">
-          <div className="absolute top-0 right-0 p-3 opacity-10"><FiTrendingUp size={50} /></div>
-          <p className="text-base font-semibold tracking-tight italic leading-snug m-0 text-[var(--foreground)]">
-            "THROWS AREN'T ACCIDENTS. The <strong>difference between a Mythic Immortal and an Epic hardstuck</strong> isn't just mechanical skill—it's the discipline to avoid these 5 game-losing mistakes."
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <BlogPostLayout
+        title="STOP THROWING GAMES! 5 COMMON MISTAKES EVEN PRO MLBB PLAYERS MAKE"
+        category="Tips & Tricks"
+        readTime="6 min read"
+        date="March 28, 2026"
+        image="/blog/mlbb/mlbb-mistakes.png"
+        game="MLBB"
+      >
+        <section className="space-y-8">
+          <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent border border-[var(--accent)]/20 overflow-hidden shadow-lg mx-auto">
+            <div className="absolute top-0 right-0 p-3 opacity-10"><FiTrendingDown size={50} /></div>
+            <p className="text-base font-semibold tracking-tight italic leading-snug m-0 text-[var(--foreground)]">
+              "You are up 15 kills. You have taken every turtle. The enemy base is exposed. Suddenly, your team fights in the jungle, gets completely wiped, and you lose the game. Sound familiar? Here is why it keeps happening."
+            </p>
+          </div>
+
+          <p className="opacity-80 leading-relaxed text-lg">
+            There is nothing more frustrating in <strong>Mobile Legends: Bang Bang (MLBB)</strong> than an "epic comeback" by the enemy team. You had the game in the palm of your hands, but one tiny mistake threw away a 20-minute effort.
           </p>
-        </div>
 
-        <p className="opacity-80 leading-relaxed">
-          Losing a game you should have won is one of the most frustrating experiences in <strong>Mobile Legends: Bang Bang (MLBB)</strong>. Even at the highest competitive levels, basic strategic errors continue to be the primary cause of "throws." If you're stuck in a losing streak, it's likely because you're falling into one of these traps. This guide identifies the <strong>top 5 MLBB mistakes</strong> and provides pro-level fixes to help you <strong>win more games in ranked</strong>.
-        </p>
-        <AdsterraClassicBanner />
-      </section>
+          <p className="opacity-80 leading-relaxed">
+            The truth is, mechanical skill will only get you so far. The difference between an Epic player and a Mythic Immortal player is macro-level discipline. In this guide, we break down the 5 most common mistakes that cause players to throw winning games, and exactly how to fix them.
+          </p>
 
-      <section className="pt-12 space-y-6">
-        <div className="w-full flex justify-center mb-3">
+          <AdsterraClassicBanner />
+        </section>
+
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">Mistake 1: The "Tunnel Vision" Kill Chase</h2>
+          <p className="opacity-80 leading-relaxed">
+            We have all seen it. The enemy Marksman is at 10% HP and running into their jungle. Your team's Assassin decides to chase them halfway across the map, completely ignoring the fact that none of the other four enemies are visible on the minimap.
+          </p>
+          <p className="opacity-80 leading-relaxed">
+            <strong>The Fix:</strong> Never chase a kill past the river if you do not have vision of the enemy Roamer and Mid Laner. <em>Kills do not win games; destroying the enemy crystal wins games.</em> If the enemy is running away to recall, use that 15-second window to steal their jungle buffs or push a tower for free gold.
+          </p>
+        </section>
+
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">Mistake 2: Ignoring Anti-Heal Items</h2>
+          <p className="opacity-80 leading-relaxed">
+            Imagine trying to fight an Estes, Uranus, and Ruby without a single anti-heal item on your team. It is mathematically impossible to win that team fight, yet players consistently blindly follow their "Pro Builds" and refuse to adapt.
+          </p>
+
+          <div className="overflow-x-auto rounded-xl border border-[var(--border)] mt-6">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-[var(--accent)]/10">
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Your Role</th>
+                  <th className="p-4 border-b border-[var(--border)] font-bold">Required Anti-Heal Item</th>
+                  <th className="p-4 border-b border-[var(--border)] font-bold">When to Buy</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm opacity-90">
+                <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-semibold text-[var(--accent)]">Physical Damage / MM</td>
+                  <td className="p-4">Sea Halberd</td>
+                  <td className="p-4">2nd or 3rd Item</td>
+                </tr>
+                <tr className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-semibold text-[var(--accent)]">Magic Damage / Mage</td>
+                  <td className="p-4">Necklace of Durance (NoD)</td>
+                  <td className="p-4">2nd Item</td>
+                </tr>
+                <tr className="hover:bg-[var(--foreground)]/5 transition-colors">
+                  <td className="p-4 font-semibold text-[var(--accent)]">Tank / Roamer</td>
+                  <td className="p-4">Dominance Ice</td>
+                  <td className="p-4 font-bold text-green-400">1st Item (Mandatory)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div className="w-full flex justify-center my-10">
           <AdsterraBanner />
         </div>
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-          <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Mistake <span className="text-[var(--accent)]">vs. Pro Fix</span></h2>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            { mistake: "Facechecking Bushes", fix: "Use skills/vision items", icon: FiAlertCircle, desc: "Never walk blindly into a late-game bush. Use Novaria's S1 or Selena's traps first." },
-            { mistake: "Rigid Item Builds", fix: "Counter-build dynamic gear", icon: FiShield, desc: "Buying Athena's Shield against a physical assassin team is a waste of 2000+ gold." },
-            { mistake: "Kill Hunger", fix: "Prioritize Tower destruction", icon: FiTarget, desc: "A 10-0 KDA means nothing if the enemy base is still standing while your lanes are pushed." },
-            { mistake: "Solo Pushing", fix: "Follow the 4-Man Rule", icon: FiCheck, desc: "Only cross the river line if you have vision of at least 4 enemy heroes on the map." }
-          ].map((item, i) => (
-            <div key={i} className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/40 transition-all">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-red-500 bg-red-500/10 px-2 py-1 rounded">Mistake</span>
-                <item.icon className="text-[var(--accent)]" />
-              </div>
-              <h3 className="text-lg font-black uppercase italic tracking-tighter mb-1">{item.mistake}</h3>
-              <p className="text-[11px] leading-relaxed font-bold text-[var(--accent)] uppercase italic mb-2 tracking-wide">Fix: {item.fix}</p>
-              <p className="text-[10px] leading-relaxed opacity-60 m-0 italic">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">Mistake 3: Starting Lord Without Zoning</h2>
+          <p className="opacity-80 leading-relaxed">
+            Your team secures a double kill. Your Jungler immediately starts attacking the Lord. The enemy team's remaining three players walk up, their Jungler uses Retribution, steals the Lord, and turns the game around. Sound familiar?
+          </p>
+          <p className="opacity-80 leading-relaxed">
+            <strong>The Fix:</strong> The Roamer and Exp Laner should <em>never</em> hit the Lord. Their job is to stand in the bushes near the river and "zone" the enemy away. If the enemy Jungler cannot get close to the pit, they cannot steal the objective.
+          </p>
+        </section>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-2xl font-black uppercase italic tracking-tighter">1. Overextending & <span className="text-[var(--accent)]">Minimap Tunnel Vision</span></h2>
-        <p className="opacity-80 leading-relaxed">
-          The #1 reason games are thrown in the mid-to-late game is <strong>overextending without vision</strong>. Many players, especially in the Gold Lane, get "kill hunger" and push towers blindly. In the high-mobility meta of 2026, an enemy assassin like <strong>Nolan</strong> or <strong>Gusion</strong> can rotate from the opposite side of the map in under 5 seconds.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-          <strong>The Pro Habit:</strong> Develop the habit of glancing at the minimap every 3-5 seconds. If you only see two enemies on the map, assume the other three are waiting in the bush next to you. This <strong>map awareness in MLBB</strong> is what separates high-skill roamers from those who are constantly caught out of position.
-        </p>
-      </section>
+        <section className="pt-8 space-y-6">
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter">Mistake 4: Not Clearing Super Minions</h2>
+          <p className="opacity-80 leading-relaxed">
+            Late-game super minions deal massive damage to your base. Often, a team will wipe the enemy, rush straight down the middle lane to end the game, and completely ignore the massive wave of super minions destroying their own crystal in the side lane.
+          </p>
+          <p className="opacity-80 leading-relaxed">
+            <strong>The Fix:</strong> Always check your side lanes before committing to a 5-man push. Send your most mobile hero (usually the Assassin or Exp Laner) to quickly clear the side waves while the rest of the team groups up mid.
+          </p>
+        </section>
 
-      <div className="bg-[var(--card)] border border-[var(--border)] p-10 rounded-[40px] my-16 shadow-xl relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <FiShield size={20} className="text-[var(--accent)]" />
-            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">Master Habit: The 4-Man Rule 💎</h3>
+        <section className="pt-12 space-y-6">
+          <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-4">
+            <FiHelpCircle className="text-[var(--accent)]" size={28} />
+            <h2 className="text-3xl font-black uppercase italic tracking-tighter m-0">Frequently Asked Questions</h2>
           </div>
-          <p className="text-sm italic opacity-70 mb-4 font-medium">
-            In 2026 pro play, the "4-Man Rule" is standard: If you don't have vision of at least 4 enemies, do NOT cross the river line.
-          </p>
-          <p className="text-sm italic opacity-70 m-0">
-            Staying alive preserves your gold lead; dying gives the enemy an <strong>MLBB comeback opportunity</strong> that can flip the game instantly.
-          </p>
-        </div>
-      </div>
 
-      <section className="space-y-6">
-        <h2 className="text-2xl font-black uppercase italic tracking-tighter">Strategic <span className="text-[var(--accent)]">Target Priority</span></h2>
-        <p className="opacity-70 leading-relaxed text-sm">
-          Dumping all your skills on the enemy tank is the fastest way to lose a group fight. Your <strong>teamfight targeting</strong> should follow a strict hierarchy to ensure the enemy's damage source is eliminated first:
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-          {[
-            { target: "Marksman", prio: "High", icon: FiTarget },
-            { target: "Mage", prio: "Med-High", icon: FiZap },
-            { target: "Jungler", prio: "Medium", icon: FiSettings },
-            { target: "Tank/Roam", prio: "Low", icon: FiShield }
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col items-center gap-2 p-5 rounded-xl bg-[var(--card)]/40 border border-[var(--border)] text-center group hover:bg-[var(--accent)]/5 transition-all">
-              <item.icon size={24} className="text-[var(--accent)] group-hover:scale-110 transition-transform" />
-              <span className="text-[10px] font-black uppercase tracking-widest">{item.target}</span>
-              <span className="text-[8px] font-bold uppercase tracking-tighter opacity-40 italic">Priority: {item.prio}</span>
+          <div className="space-y-4">
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">1. Why do I always lose in the late game in MLBB?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">Late-game losses are usually caused by overextending without vision or failing to secure the Enhanced Lord, allowing the enemy team to wipe you out with long respawn timers.</p>
             </div>
-          ))}
-        </div>
-      </section>
+            
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">2. Is it bad to chase kills in Mobile Legends?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">Yes. Chasing kills (tunnel vision) often drags you into unrevealed bushes where the enemy team is waiting to ambush you. Always prioritize pushing towers over chasing kills.</p>
+            </div>
 
-      <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-2xl font-black uppercase italic tracking-tighter">Psychological Warfare: <span className="text-[var(--accent)]">Avoiding Tilt</span></h2>
-        <p className="opacity-80 leading-relaxed">
-          Toxic communication is a massive <strong>strategic disadvantage</strong>. When you start typing to blame a teammate, you stop playing the game. More importantly, you tilt your teammates, causing them to play even worse and potentially <strong>AFK or troll match</strong>.
-        </p>
-        <p className="opacity-80 leading-relaxed">
-          <strong>The Pro Fix:</strong> Use the "Mute" button aggressively. If someone starts flaming, mute them instantly and focus purely on your win condition. A silent, focused team is statistically <strong>70% more likely to win</strong> a losing game than a shouting one. Keep your eyes on the map, not the chat.
-        </p>
-      </section>
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">3. When should I recall to base?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">Recall when your HP or Mana is dangerously low, or immediately after wiping the enemy team and pushing a wave, so you can spend your gold and contest the next objective with full health.</p>
+            </div>
 
-      <section className="pt-12 space-y-12">
-        <div className="p-8 rounded-[32px] bg-[var(--accent)]/5 border border-[var(--border)] overflow-hidden relative">
-          <div className="absolute -top-10 -right-10 opacity-5 rotate-12"><FiMessageSquare size={160} /></div>
-          <h4 className="m-0 font-black uppercase italic tracking-tighter text-sm mb-4">Conclusion: Road to Mythic Glory</h4>
-          <p className="text-[11px] leading-relaxed opacity-70 italic m-0">
-            Mastering <strong>MLBB pro strategies in 2026</strong> requires a mix of mechanical skill and disciplined decision-making. By avoiding these five mistakes, you'll find your win rate climbing and your losing streaks disappearing. Consistency is built on the repeatable habits of not dying, pushing towers, and keeping a cool head.
-          </p>
-        </div>
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">4. Why is anti-heal so important in MLBB?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">Anti-heal items (like Sea Halberd or Necklace of Durance) reduce the enemy's lifesteal and shield generation by 50%. This is mandatory against heroes like Estes, Uranus, and Ruby.</p>
+            </div>
 
-        <div className="py-10 border-t border-[var(--border)] border-dashed text-center">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--muted)] opacity-40 mb-6">Want to unlock a counter-pick hero or skin? Gear up.</p>
-          <div className="flex justify-center">
+            <div className="p-5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+              <h3 className="font-bold text-lg mb-2 text-[var(--accent)]">5. How do I stop getting tilted in solo queue?</h3>
+              <p className="text-sm opacity-80 leading-relaxed">Mute toxic teammates immediately, take a 10-minute break after two consecutive losses, and focus solely on your own gameplay and macro decisions rather than your team's mistakes.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="pt-12 space-y-6">
+          <div className="p-8 rounded-3xl bg-gradient-to-br from-[var(--background)] to-[var(--card)] border border-[var(--accent)]/30 relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[var(--accent)]/20 rounded-full blur-3xl"></div>
+            
+            <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter mb-4">Conclusion & Key Takeaways</h2>
+            <p className="opacity-80 leading-relaxed mb-6">
+              Stop playing on autopilot! By actively thinking about your item builds, map vision, and objective control, you will instantly see a massive boost in your ranked win rate.
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <ul className="space-y-2 text-sm opacity-90">
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Towers win games. Do not blindly chase kills.</span></li>
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Always build anti-heal against heavy sustain teams.</span></li>
+              </ul>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Roamers MUST zone the enemy away during Lord attempts.</span></li>
+                <li className="flex items-center gap-2"><FiCheckCircle className="text-[var(--accent)]" /> <span className="font-semibold">Clear side lane super minions before grouping up mid.</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <div className="flex justify-center mt-12 mb-8 relative z-10">
           <a
             href="https://mlbbtopup.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[var(--foreground)]/10"
+            className="px-8 md:px-12 py-4 rounded-2xl bg-[var(--accent)] !text-white font-black uppercase tracking-[0.2em] italic hover:scale-105 active:scale-95 transition-transform shadow-xl shadow-[var(--accent)]/30 border-2 border-[var(--accent)] no-underline"
           >
-            Get MLBB Diamonds Now
+            Buy MLBB Diamonds - BlueBuff Top-Up
           </a>
         </div>
-        </div>
-      </section>
-
-      <p className="mt-8 text-xs opacity-50 italic text-center">
-        Providing the most <strong>trusted MLBB recharge India</strong> services. Secure your diamonds today and start your journey to <strong>Mythic Immortal</strong> with the right gear.
-      </p>
-    </BlogPostLayout>
+      </BlogPostLayout>
+    </>
   );
 }
-
