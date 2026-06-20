@@ -289,7 +289,7 @@ function BlogCard({ blog, index }) {
           </div>
 
           {/* 📝 CONTENT */}
-          <div className="flex flex-col justify-between flex-1 py-1 pr-2">
+          <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pr-2">
             
             {/* Title */}
             <h2 className="text-sm sm:text-lg font-bold text-[var(--foreground)] leading-snug line-clamp-2 group-hover:text-[var(--accent)] transition-colors mt-1">

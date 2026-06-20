@@ -8,6 +8,27 @@ export const metadata: Metadata = {
   title: "The Ultimate Guide to Cheap MLBB Diamond Top-Ups in India – 2026",
   description: "Finding it hard to top up diamonds in India? We provide a step-by-step guide to the safest and cheapest top-up methods available in 2026.",
   alternates: { canonical: "https://bluebuff.in/blog/mlbb/cheap-mlbb-diamond-top-up-india-2026" },
+  openGraph: {
+    title: "The Ultimate Guide to Cheap MLBB Diamond Top-Ups in India – 2026",
+    description: "Step-by-step guide to the safest and cheapest MLBB top-up methods in India.",
+    url: "https://bluebuff.in/blog/mlbb/cheap-mlbb-diamond-top-up-india-2026",
+    siteName: "BlueBuff",
+    images: [
+      {
+        url: "https://bluebuff.in/blog/mlbb/mlbb-recharge-v2.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_IN",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Ultimate Guide to Cheap MLBB Diamond Top-Ups in India – 2026",
+    description: "Step-by-step guide to the safest and cheapest MLBB top-up methods in India.",
+    images: ["https://bluebuff.in/blog/mlbb/mlbb-recharge-v2.png"],
+  },
 };
 
 export default function BlogPage() {
@@ -100,6 +121,16 @@ export default function BlogPage() {
         </p>
       </section>
 
+      <section className="pt-12 space-y-6 text-sm">
+        <h2 className="text-2xl font-black uppercase italic tracking-tighter">Why Choose <span className="text-[var(--accent)]">mlbbtopup.in?</span></h2>
+        <p className="opacity-80 leading-relaxed">
+          If you're looking for the absolute fastest delivery times and exclusive flash sale discounts, we highly recommend checking out <strong><a href="https://mlbbtopup.in" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">mlbbtopup.in</a></strong>. As a trusted partner in the Indian gaming community, they specialize exclusively in Mobile Legends, meaning their API integration with Moonton is lightning fast.
+        </p>
+        <p className="opacity-80 leading-relaxed">
+          Whether you are rushing to complete a recharge event or trying to buy the Weekly Diamond Pass before the server resets, <strong>mlbbtopup.in</strong> provides a dedicated, streamlined experience tailored specifically for MLBB players in India, complete with 24/7 UPI payment support.
+        </p>
+      </section>
+
       <div className="bg-[var(--card)] border border-[var(--border)] p-10 rounded-[40px] my-16 shadow-xl relative overflow-hidden group">
         <div className="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent)]" />
         <div className="relative z-10">
@@ -162,7 +193,7 @@ export default function BlogPage() {
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed">
         <div className="flex items-center gap-3 mb-8">
           <FiHelpCircle size={24} className="text-[var(--accent)]" />
-          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions ❓</span></h2>
+          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions</span></h2>
         </div>
         
         <div className="space-y-4">

@@ -8,6 +8,27 @@ export const metadata: Metadata = {
   title: "How Pity System Works in Genshin Impact (Explained Simply) – 2026",
   description: "Learn the secrets of the Genshin Impact Pity system. Soft pity, hard pity, and the 50/50 rule explained for India primogem top-ups.",
   alternates: { canonical: "https://bluebuff.in/blog/genshin/genshin-pity-system-explained" },
+  openGraph: {
+    title: "How Pity System Works in Genshin Impact (Explained Simply) – 2026",
+    description: "Learn the secrets of the Genshin Impact Pity system. Soft pity, hard pity, and the 50/50 rule explained.",
+    url: "https://bluebuff.in/blog/genshin/genshin-pity-system-explained",
+    siteName: "BlueBuff",
+    images: [
+      {
+        url: "https://bluebuff.in/blog/genshin/genshin-pity-v2.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_IN",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "How Pity System Works in Genshin Impact",
+    description: "Learn the secrets of the Genshin Impact Pity system.",
+    images: ["https://bluebuff.in/blog/genshin/genshin-pity-v2.png"],
+  },
 };
 
 export default function BlogPage() {
@@ -69,7 +90,7 @@ export default function BlogPage() {
       <section className="pt-12 space-y-6">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-12 h-1 bg-[var(--accent)] rounded-full" />
-          <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Pity System <span className="text-[var(--accent)]">Breakdown 📊</span></h2>
+          <h2 className="text-3xl font-black uppercase italic tracking-tighter col-span-full">Pity System <span className="text-[var(--accent)]">Breakdown</span></h2>
         </div>
 
         <p className="opacity-80 leading-relaxed text-sm">
@@ -98,7 +119,7 @@ export default function BlogPage() {
         <div className="relative z-10 text-sm">
           <div className="flex items-center gap-3 mb-4">
             <FiZap size={20} className="text-[var(--accent)]" />
-            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">Pro Tip: The "Soft Pity" Range 📈</h3>
+            <h3 className="italic font-black uppercase text-[var(--accent)] m-0">Pro Tip: The "Soft Pity" Range</h3>
           </div>
           <p className="opacity-80 leading-relaxed mb-4">
             Did you know that 5-star characters almost never wait until the 90th pull? In the <strong>Genshin community strategy</strong>, we call this "Soft Pity."
@@ -112,7 +133,7 @@ export default function BlogPage() {
       </div>
 
       <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">The Dreaded <span className="text-[var(--accent)]">50/50 Rule ⚔️</span></h2>
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">The Dreaded <span className="text-[var(--accent)]">50/50 Rule</span></h2>
         <p className="opacity-80 leading-relaxed">
           The most important concept to master is the <strong>50/50 probability</strong> on the Limited Character Banner. When you finally hit that gold animation, there is only a 50% chance it is the featured character (e.g., Focalors or Raiden Shogun). The other 50% chance is a "Standard" 5-star character from the permanent pool (like Jean or Diluc).
         </p>
@@ -122,7 +143,27 @@ export default function BlogPage() {
       </section>
 
       <section className="pt-12 space-y-6 text-sm">
-        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Budgeting <span className="text-[var(--accent)]">Primogems in India 🇮🇳</span></h2>
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">How to Track Your <span className="text-[var(--accent)]">Pity Count</span></h2>
+        <p className="opacity-80 leading-relaxed">
+          Genshin Impact doesn't explicitly tell you your exact pity number on the main screen, but tracking it is incredibly simple. To find out how close you are to a guaranteed 5-star, open the Wish menu and click the <strong>History</strong> button at the bottom. 
+        </p>
+        <p className="opacity-80 leading-relaxed">
+          Each page in the history log displays exactly 5 wishes. Simply count the number of pages since your last 5-star pull and multiply by 5. For example, if your last 5-star was 8 pages ago, you are at exactly 40 pity. This manual tracking is crucial when you are trying to "build pity" without accidentally pulling a character you don't want!
+        </p>
+      </section>
+
+      <section className="pt-12 space-y-6 text-sm">
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Weapon Banner <span className="text-[var(--accent)]">(Epitome Invocation)</span></h2>
+        <p className="opacity-80 leading-relaxed">
+          The Weapon Banner operates under slightly different mathematical rules compared to the Character Banners. Hard pity on the weapon banner is reduced from 90 to <strong>80 wishes</strong>, and soft pity kicks in earlier, around wish 65.
+        </p>
+        <p className="opacity-80 leading-relaxed">
+          However, the Weapon Banner features a <strong>75/25 probability</strong> instead of 50/50. When you hit a 5-star, there is a 75% chance it will be one of the two featured promotional weapons. To combat bad luck, Genshin uses the <em>Epitomized Path</em> system, where you select your desired weapon. If you fail to get it twice (earning 2 Fate Points), your third 5-star is absolutely guaranteed to be the weapon you chose.
+        </p>
+      </section>
+
+      <section className="pt-12 space-y-6 text-sm">
+        <h2 className="text-3xl font-black uppercase italic tracking-tighter">Budgeting <span className="text-[var(--accent)]">Primogems in India</span></h2>
         <p className="opacity-80 leading-relaxed">
           Unlocking C6 characters or R5 weapons requires a massive investment of <strong>Primogems</strong>. For <strong>Genshin Impact players in India</strong>, the most cost-effective way to stack your gems is through the **Welkin Moon** and the **Battle Pass**. These offer a 5x or 10x value compared to direct gem purchases.
         </p>
@@ -147,7 +188,7 @@ export default function BlogPage() {
       <section className="mt-12 py-10 border-t border-[var(--border)] border-dashed">
         <div className="flex items-center gap-3 mb-8">
           <FiHelpCircle size={24} className="text-[var(--accent)]" />
-          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions ❓</span></h2>
+          <h2 className="text-2xl font-black uppercase italic tracking-tighter col-span-full m-0">Frequently Asked <span className="text-[var(--accent)]">Questions</span></h2>
         </div>
         
         <div className="space-y-4">
