@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { FiClock, FiCalendar, FiArrowLeft, FiShare2, FiArrowRight } from "react-icons/fi";
+import { FiClock, FiCalendar, FiArrowLeft, FiShare2, FiArrowRight, FiGift } from "react-icons/fi";
 import Script from "next/script";
 import AdsterraBanner from "@/components/Ads/AdsterraBanner";
+import AdsterraSmartlink from "@/components/Ads/AdsterraSmartlink";
 import { ReactNode, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { BLOGS_DATA } from "@/lib/blogData";
@@ -142,6 +143,10 @@ export default function BlogPostLayout({
                             />
                         </motion.div>
                     )}
+                    
+                    <div className="mt-8">
+                        <AdsterraBanner />
+                    </div>
                 </header>
 
                 {/* CONTENT SECTION */}
@@ -150,7 +155,19 @@ export default function BlogPostLayout({
                         {children}
                     </div>
                     
-                    <div className="mt-16 border-t border-[var(--border)] border-dashed pt-8">
+                    <div className="mt-16 border-t border-[var(--border)] border-dashed pt-8 space-y-8">
+                        
+                        {/* Smartlink CTA Block */}
+                        <div className="bg-gradient-to-r from-[var(--accent)]/10 to-transparent p-6 md:p-8 rounded-2xl border border-[var(--accent)]/20 flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div>
+                                <h3 className="text-xl font-black italic uppercase tracking-tighter text-[var(--foreground)] mb-2 flex items-center gap-2">
+                                    <FiGift className="text-[var(--accent)]" /> Claim Free Rewards
+                                </h3>
+                                <p className="text-sm opacity-70 m-0">Support the site and unlock exclusive daily gaming offers.</p>
+                            </div>
+                            <AdsterraSmartlink text="Unlock Offers" />
+                        </div>
+
                         <AdsterraBanner />
                     </div>
                 </section>
