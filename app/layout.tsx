@@ -192,7 +192,7 @@ export default async function RootLayout({
 
 
           <Footer />
-          <SocialFloat />
+          {/* <SocialFloat /> */}
 
 
           <div />
