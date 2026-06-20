@@ -50,7 +50,7 @@ export default function BlogPage() {
       category="Farming"
       readTime="11 min read"
       date="March 31, 2026"
-      image="/blog/genshin-farm-primos.png"
+      image="/blog/genshin/genshin-farm-primos.png"
       game="Genshin"
     >
       <section className="space-y-8">
@@ -192,3 +192,4 @@ export default function BlogPage() {
     </>
   );
 }
+

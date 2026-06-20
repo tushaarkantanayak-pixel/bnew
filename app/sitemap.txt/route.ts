@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { BLOGS_DATA } from "@/lib/blogData";
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -17,15 +18,18 @@ export async function GET() {
         `${baseUrl}/terms-and-conditions`,
         `${baseUrl}/refund-policy`,
         `${baseUrl}/blog`,
+        `${baseUrl}/blog/mlbb`,
+        `${baseUrl}/blog/hok`,
+        `${baseUrl}/blog/genshin`,
         `${baseUrl}/idsonsell`,
         `${baseUrl}/leaderboard`,
         `${baseUrl}/check`,
-        `${baseUrl}/blog/is-mlbb-top-up-legal-in-india`,
-        `${baseUrl}/blog/how-to-buy-mlbb-diamonds-safely-in-india`,
-        `${baseUrl}/blog/mlbb-weekly-pass-price-in-india`,
-        `${baseUrl}/blog/how-to-gift-mlbb-diamonds`,
-        `${baseUrl}/blog/best-mlbb-diamond-packages-value-guide`,
     ];
+
+    // 2. Dynamic Blog Routes
+    const blogUrls = BLOGS_DATA.map(
+        (blog) => `${baseUrl}/blog/${blog.game}/${blog.slug}`
+    );
 
     /* ================= OTT & MEMBERSHIP STATIC DATA ================= */
     const OTTS = [
@@ -72,6 +76,7 @@ export async function GET() {
 
     const allUrls = [
         ...staticUrls,
+        ...blogUrls,
         ...gameUrls,
         ...manualUrls,
         ...ottUrls,
@@ -84,3 +89,4 @@ export async function GET() {
         },
     });
 }
+

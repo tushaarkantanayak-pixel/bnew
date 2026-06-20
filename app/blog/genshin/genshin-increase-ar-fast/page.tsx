@@ -16,7 +16,7 @@ export default function BlogPage() {
       category="AR Leveling"
       readTime="10 min read"
       date="March 31, 2026"
-      image="/blog/genshin-ar-fast.png"
+      image="/blog/genshin/genshin-ar-fast.png"
       game="Genshin"
     >
       <section className="space-y-8">
@@ -129,3 +129,4 @@ export default function BlogPage() {
     </BlogPostLayout>
   );
 }
+

@@ -50,7 +50,7 @@ export default function BlogPage() {
       category="Guide"
       readTime="10 min read"
       date="March 28, 2026"
-      image="/blog/mlbb-recharge-v2.png"
+      image="/blog/mlbb/mlbb-recharge-v2.png"
       game="MLBB"
     >
       <section className="space-y-8">
@@ -200,3 +200,4 @@ export default function BlogPage() {
     </>
   );
 }
+

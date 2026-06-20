@@ -11,7 +11,7 @@ export const GENSHIN_BLOGS_DATA: BlogPost[] = [
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "12 min read",
-        image: "/blog/genshin-pity-v2.png",
+        image: "/blog/genshin/genshin-pity-v2.png",
         featured: true,
         keywords: ["Genshin Impact Pity System Explained", "Genshin 50/50 rule", "soft pity genshin luck", "genshin primogem top-up India", "hard pity count genshin"],
         tags: ["Genshin Impact", "Gacha" , "Guide", "Value Packs"]
@@ -26,7 +26,7 @@ export const GENSHIN_BLOGS_DATA: BlogPost[] = [
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "10 min read",
-        image: "/blog/genshin-ar-fast.png",
+        image: "/blog/genshin/genshin-ar-fast.png",
         featured: false,
         keywords: ["increase adventure rank fast genshin", "fastest way to level up genshin impact", "genshin ar exp guide", "genshin primogem recharge india", "unlock world level fast genshin"],
         tags: ["Genshin Impact", "Leveling", "Guide", "Adventure Rank"]
@@ -41,7 +41,7 @@ export const GENSHIN_BLOGS_DATA: BlogPost[] = [
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "8 min read",
-        image: "/blog/genshin-inazuma-unlock.png",
+        image: "/blog/genshin/genshin-inazuma-unlock.png",
         featured: false,
         keywords: ["how to unlock inazuma genshin", "genshin impact inazuma unlock quest", "reach inazuma step by step", "ar levels for inazuma", "inazuma archon quest guide"],
         tags: ["Genshin Impact", "Inazuma", "Guide", "Quests"]
@@ -56,7 +56,7 @@ export const GENSHIN_BLOGS_DATA: BlogPost[] = [
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "9 min read",
-        image: "/blog/genshin-crystal-value.png",
+        image: "/blog/genshin/genshin-crystal-value.png",
         featured: false,
         keywords: ["is buying genesis crystals worth it", "genshin impact crystal cost per pull", "best value bundles genshin", "genshin primogem top-up India cheap", "genesis crystals vs welkin moon"],
         tags: ["Genshin Impact", "Economy", "Guide", "Value Packs"]
@@ -71,7 +71,7 @@ export const GENSHIN_BLOGS_DATA: BlogPost[] = [
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "11 min read",
-        image: "/blog/genshin-farm-primos.png",
+        image: "/blog/genshin/genshin-farm-primos.png",
         featured: true,
         keywords: ["how to farm primogems fast genshin", "genshin impact free primogems 2026", "fastest way to get primogems", "genshin achievement hunting guide", "genshin top-up India UPI cheap"],
         tags: ["Genshin Impact", "Farming", "Guide", "Primogems"]
@@ -86,9 +86,10 @@ export const GENSHIN_BLOGS_DATA: BlogPost[] = [
         publishedAt: "2026-03-31",
         author: "BlueBuff Pro",
         readingTime: "15 min read",
-        image: "/blog/genshin-redeem-codes.png",
+        image: "/blog/genshin/genshin-redeem-codes.png",
         featured: true,
         keywords: ["genshin impact redeem codes march 2026", "active genshin codes 60 primogems", "how to redeem codes genshin", "genshin impact promo codes List", "free primogems code genshin"],
         tags: ["Genshin Impact", "Redeem Codes", "Guide", "Free Primogems"]
     }
 ];
+

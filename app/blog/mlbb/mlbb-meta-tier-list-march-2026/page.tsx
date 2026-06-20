@@ -16,7 +16,7 @@ export default function BlogPage() {
       category="Tier List"
       readTime="12 min read"
       date="March 29, 2026"
-      image="/blog/mlbb-meta.png"
+      image="/blog/mlbb/mlbb-meta.png"
       game="MLBB"
     >
       <section className="space-y-8">
@@ -179,3 +179,4 @@ export default function BlogPage() {
     </BlogPostLayout>
   );
 }
+

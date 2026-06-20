@@ -50,7 +50,7 @@ export default function BlogPage() {
       category="Gacha Guide"
       readTime="12 min read"
       date="March 31, 2026"
-      image="/blog/genshin-pity-v2.png"
+      image="/blog/genshin/genshin-pity-v2.png"
       game="Genshin"
     >
       <section className="space-y-8">
@@ -185,3 +185,4 @@ export default function BlogPage() {
     </>
   );
 }
+

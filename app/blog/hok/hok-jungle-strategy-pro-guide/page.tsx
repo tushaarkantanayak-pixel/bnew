@@ -16,7 +16,7 @@ export default function BlogPage() {
       category="Pro Guide"
       readTime="12 min read"
       date="March 28, 2026"
-      image="/blog/hok-strategy.png"
+      image="/blog/hok/hok-strategy.png"
       game="HOK"
     >
       <section className="space-y-8">
@@ -146,3 +146,4 @@ export default function BlogPage() {
     </BlogPostLayout>
   );
 }
+

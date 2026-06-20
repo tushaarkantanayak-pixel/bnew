@@ -16,7 +16,7 @@ export default function BlogPage() {
       category="Quest Guide"
       readTime="8 min read"
       date="March 31, 2026"
-      image="/blog/genshin-inazuma-unlock.png"
+      image="/blog/genshin/genshin-inazuma-unlock.png"
       game="Genshin"
     >
       <section className="space-y-8">
@@ -138,3 +138,4 @@ export default function BlogPage() {
     </BlogPostLayout>
   );
 }
+

@@ -16,7 +16,7 @@ export default function BlogPage() {
       category="Value Guide"
       readTime="9 min read"
       date="March 31, 2026"
-      image="/blog/genshin-crystal-value.png"
+      image="/blog/genshin/genshin-crystal-value.png"
       game="Genshin"
     >
       <section className="space-y-8">
@@ -131,3 +131,4 @@ export default function BlogPage() {
     </BlogPostLayout>
   );
 }
+

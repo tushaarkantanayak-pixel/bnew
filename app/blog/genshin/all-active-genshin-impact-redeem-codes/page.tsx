@@ -16,7 +16,7 @@ export default function BlogPage() {
       category="Redeem Codes"
       readTime="15 min read"
       date="March 31, 2026"
-      image="/blog/genshin-redeem-codes.png"
+      image="/blog/genshin/genshin-redeem-codes.png"
       game="Genshin"
     >
       <section className="space-y-8">
@@ -169,3 +169,4 @@ export default function BlogPage() {
     </BlogPostLayout>
   );
 }
+

@@ -16,7 +16,7 @@ export default function BlogPage() {
       category="Pro Tips"
       readTime="12 min read"
       date="March 27, 2026"
-      image="/blog/mlbb-mistakes.png"
+      image="/blog/mlbb/mlbb-mistakes.png"
       game="MLBB"
     >
       <section className="space-y-8">
@@ -143,3 +143,4 @@ export default function BlogPage() {
     </BlogPostLayout>
   );
 }
+
