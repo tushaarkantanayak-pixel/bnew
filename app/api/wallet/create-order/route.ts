@@ -50,6 +50,13 @@ export async function POST(req: Request) {
       );
     }
 
+    if (!user.email.toLowerCase().endsWith("@gmail.com")) {
+      return NextResponse.json(
+        { success: false, message: "Only @gmail.com emails are allowed to top up wallet." },
+        { status: 403 }
+      );
+    }
+
     // ============ REQUEST BODY ============
     const { amount } = await req.json();
 

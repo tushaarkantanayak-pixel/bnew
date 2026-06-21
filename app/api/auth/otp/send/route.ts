@@ -13,6 +13,9 @@ export async function POST(request: Request) {
         }
 
         const normalizedEmail = email.toLowerCase().trim();
+        if (!normalizedEmail.endsWith("@gmail.com")) {
+            return Response.json({ success: false, message: "Only @gmail.com addresses are allowed." }, { status: 403 });
+        }
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
         const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
