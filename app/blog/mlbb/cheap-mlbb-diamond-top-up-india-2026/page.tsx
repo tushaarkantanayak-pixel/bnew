@@ -68,7 +68,7 @@ export default function MLBBTopUpIndia2026Page() {
         category="Top-Up Guide"
         readTime="8 min read"
         date="June 21, 2026"
-        image="/mlbb-diamonds.png"
+        image="/blog/mlbb/mlbb-diamonds.png"
         game="MLBB"
       >
         <section className="space-y-8">
