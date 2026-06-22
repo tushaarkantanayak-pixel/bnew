@@ -217,7 +217,7 @@ export default function LandingPage() {
             </div>
 
             {/* headline */}
-            <h1 className="text-[clamp(2.4rem,7vw,5rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
+            <h1 className="text-[clamp(2.2rem,6vw,4.8rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
               Start your
               <br />
               <span className="text-[var(--accent)]">Gaming Store</span>
