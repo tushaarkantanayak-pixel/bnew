@@ -244,6 +244,7 @@ export default function Header() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setUserMenuOpen((p) => !p)}
+              aria-label="User menu"
               className="relative flex items-center gap-2 pl-3 pr-1 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--foreground)]/5 backdrop-blur-md transition-all duration-300 shadow-sm group"
             >
               <FiMenu className="text-[var(--foreground)]/70 group-hover:text-[var(--foreground)] transition-colors ml-0.5" size={18} />

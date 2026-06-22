@@ -87,7 +87,7 @@ export default function BlogPostLayout({
                     animate={{ opacity: 1, x: 0 }}
                     className="mb-4 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50"
                 >
-                    <Link href="/blog" className="flex items-center justify-center w-6 h-6 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 transition-all mr-1">
+                    <Link href="/blog" aria-label="Back to Blog" className="flex items-center justify-center w-6 h-6 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 transition-all mr-1">
                         <FiArrowLeft size={14} />
                     </Link>
                     <Link href="/blog" className="hover:text-[var(--accent)] transition-colors">News</Link>
