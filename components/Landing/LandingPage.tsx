@@ -247,6 +247,7 @@ export default function LandingPage() {
                 href="/games"
                 className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
               >
+                <span>💎</span>
                 Top-Up Now
               </Link>
 

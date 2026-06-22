@@ -304,9 +304,9 @@ export default function Header() {
                         ))}
                       </div>
 
-                      {/* Menu sections — always visible */}
+                      {/* Menu sections */}
                       <div className="space-y-1">
-                        {HEADER_CONFIG.userMenu.sections.map((section) => (
+                        {HEADER_CONFIG.userMenu.sections.filter(section => user || section.title === "Extras").map((section) => (
                           <div key={section.title} className="space-y-0.5">
                             <button 
                               onClick={() => toggleSection(section.title)}
