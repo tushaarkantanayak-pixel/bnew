@@ -72,7 +72,7 @@ export default function Footer() {
               <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase leading-none bg-gradient-to-r from-[var(--accent)] via-[var(--foreground)] to-[var(--accent)] bg-clip-text text-transparent group-hover:brightness-110 transition-all">
                 {BRAND}
               </h2>
-              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.3em] opacity-40 italic leading-relaxed max-w-[260px]">
+              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.3em] opacity-80 italic leading-relaxed max-w-[260px]">
                 THE FASTEST AND CHEAPEST GAME TOP-UPS IN INDIA.
               </p>
             </Link>

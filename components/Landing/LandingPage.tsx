@@ -234,18 +234,13 @@ export default function LandingPage() {
             </motion.div>
 
             {/* headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08 }}
-              className="text-[clamp(2.4rem,7vw,5rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic"
-            >
+            <h1 className="text-[clamp(2.4rem,7vw,5rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
               Start your
               <br />
               <span className="text-[var(--accent)]">Gaming Store</span>
               <br />
               & Grow Fast.
-            </motion.h1>
+            </h1>
 
             {/* sub */}
             <motion.p
@@ -381,7 +376,7 @@ export default function LandingPage() {
       <section className="py-10 border-b border-[var(--border)] overflow-hidden relative bg-[var(--card)]/10">
         <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />
-        <p className="text-center text-[9px] font-black uppercase tracking-[0.45em] text-[var(--muted)]/30 mb-5">
+        <p className="text-center text-[9px] font-black uppercase tracking-[0.45em] text-[var(--muted)]/80 mb-5">
           Trusted across India
         </p>
         <div className="animate-marquee flex gap-3 w-max">
@@ -393,7 +388,7 @@ export default function LandingPage() {
               <div className="w-5 h-5 rounded-md bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] text-[9px] font-black border border-[var(--accent)]/10">
                 {name.charAt(0)}
               </div>
-              <span className="text-[10px] font-bold text-[var(--muted)]/60 whitespace-nowrap group-hover:text-[var(--muted)] transition-colors">{name}</span>
+              <span className="text-[10px] font-bold text-[var(--muted)] whitespace-nowrap group-hover:text-[var(--foreground)] transition-colors">{name}</span>
             </div>
           ))}
         </div>
@@ -406,7 +401,7 @@ export default function LandingPage() {
           {/* section label */}
           <div className="flex items-center gap-4 mb-14">
             <div className="w-6 h-[2px] bg-[var(--accent)]" />
-            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Our Services</span>
+            <h2 className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)] m-0 p-0">Our Services</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)]">

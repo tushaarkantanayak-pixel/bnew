@@ -99,45 +99,6 @@ export default function Header() {
 
   const dropdownRef = useRef(null);
 
-  /* ================= PUSH NOTIFICATIONS ================= */
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [showSubscribeToast, setShowSubscribeToast] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // @ts-ignore
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      // @ts-ignore
-      window.OneSignalDeferred.push(async (OneSignal) => {
-        setIsSubscribed(OneSignal.Notifications.permission === "granted");
-        OneSignal.Notifications.addEventListener("permissionChange", (permission) => {
-          const granted = permission === "granted";
-          setIsSubscribed(granted);
-          if (granted) {
-            setShowSubscribeToast(true);
-            setTimeout(() => setShowSubscribeToast(false), 3000);
-          }
-        });
-      });
-    }
-  }, []);
-
-  const handlePushToggle = () => {
-    if (typeof window !== "undefined") {
-      // @ts-ignore
-      const OneSignal = window.OneSignal;
-      if (OneSignal) {
-        OneSignal.Notifications.requestPermission();
-      } else {
-        // @ts-ignore
-        const OneSignalDeferred = window.OneSignalDeferred || [];
-        // @ts-ignore
-        OneSignalDeferred.push(async (OneSignal) => {
-          await OneSignal.Notifications.requestPermission();
-        });
-      }
-    }
-  };
 
   /* ================= AUTH ================= */
   useEffect(() => {

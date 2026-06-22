@@ -53,44 +53,16 @@ export default function ValentinePopup() {
     return () => clearInterval(timer);
   }, []);
 
-  const triggerOneSignal = async () => {
-    return new Promise<void>((resolve) => {
-      if (typeof window !== "undefined") {
-        // @ts-ignore
-        const OneSignal = window.OneSignal;
-        if (OneSignal) {
-          OneSignal.Slidedown.promptPush().finally(() => resolve());
-        } else {
-          // @ts-ignore
-          const OneSignalDeferred = window.OneSignalDeferred || [];
-          // @ts-ignore
-          OneSignalDeferred.push(async (OneSignal) => {
-            await OneSignal.Slidedown.promptPush();
-            resolve();
-          });
-        }
-      } else {
-        resolve();
-      }
-    });
-  };
 
   const handleClose = async () => {
-    // triggerOneSignal();
     setShow(false);
     localStorage.setItem("valentine_popup_seen", "true");
-    await triggerOneSignal();
-
   };
 
   const handleRedirect = async () => {
-
     setShow(false);
     localStorage.setItem("valentine_popup_seen", "true");
     router.push("/special-leaderboard");
-    await triggerOneSignal();
-
-
   };
 
   return (
