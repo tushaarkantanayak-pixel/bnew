@@ -182,20 +182,7 @@ export default function LandingPage() {
             <div style={{ position: "absolute", inset: 0, border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: "50%", transform: "rotateX(90deg)" }} />
           </motion.div>
 
-          {/* Floating tall prism */}
-          <motion.div
-            animate={{ y: [0, -15, 0], rotateZ: [-10, 10, -10] }}
-            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[25%] right-[25%] hidden md:block"
-          >
-            <div style={{
-              width: 40, height: 100,
-              border: "1px solid rgba(var(--accent-rgb),0.2)",
-              transform: "skewY(-20deg)",
-              background: "linear-gradient(to bottom, rgba(var(--accent-rgb),0.05), transparent)",
-              boxShadow: "-10px 10px 20px rgba(0,0,0,0.5)",
-            }} />
-          </motion.div>
+
 
           {/* Tiny orb cluster */}
           {[["14%","55%","0.5"],["22%","40%","0.3"],["12%","65%","0.4"]].map(([t,l,o],i) => (
@@ -216,7 +203,7 @@ export default function LandingPage() {
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent z-10" />
 
         {/* content grid */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-4 md:pt-16 pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-16 md:pt-16 pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
 
           {/* ── LEFT: text ── */}
           <div className="flex flex-col gap-7">
@@ -285,44 +272,156 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* ── RIGHT: floating game card stack ── */}
+          {/* RIGHT: premium floating dashboard */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="flex items-center justify-center relative h-[300px] md:h-[480px] mt-4 md:mt-0"
+            className="flex items-center justify-center relative h-[340px] md:h-[480px] mt-6 md:mt-0"
           >
-            {/* glow behind cards */}
-            <div className="absolute w-[300px] h-[300px] bg-[var(--accent)]/15 blur-[80px] rounded-full" />
+            {/* Ambient glow pool */}
+            <div className="absolute w-[320px] h-[320px] bg-[var(--accent)]/20 blur-[90px] rounded-full" />
 
-            {/* Abstract 3D Hero Icon */}
-            <div className="relative z-10 hover:-translate-y-2 transition-transform duration-500 group flex items-center justify-center w-[260px] h-[360px]">
-              {/* Outer glow */}
-              <div className="absolute w-[200px] h-[200px] bg-[var(--accent)]/10 blur-[40px] rounded-full group-hover:bg-[var(--accent)]/20 transition-colors duration-500" />
-              
-              {/* SVG 3D Diamond / Gem */}
-              <svg 
-                className="relative z-10 w-44 h-44 drop-shadow-[0_0_15px_rgba(var(--accent-rgb),0.3)] text-[var(--accent)] group-hover:scale-110 transition-transform duration-700"
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="1" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <path d="M12 2L2 12l10 10 10-10L12 2z" fill="currentColor" fillOpacity="0.05" />
-                <path d="M12 2v20" />
-                <path d="M2 12h20" />
-                <path d="M12 2l4 10-4 10-4-10 4-10z" fill="currentColor" fillOpacity="0.15" />
-              </svg>
+            {/* MAIN CARD */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 w-full md:w-[280px] rounded-2xl overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
+                border: "1px solid rgba(168,85,247,0.25)",
+                boxShadow: "0 0 40px rgba(168,85,247,0.15), inset 0 1px 0 rgba(255,255,255,0.08)",
+                backdropFilter: "blur(20px)",
+              }}
+            >
+              {/* card top bar */}
+              <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: "1px solid rgba(168,85,247,0.12)" }}>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" style={{ boxShadow: "0 0 8px rgba(168,85,247,0.8)" }} />
+                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]">BlueBuff Console</span>
+                </div>
+                <div className="flex gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-[var(--foreground)]/10" />
+                  <div className="w-2 h-2 rounded-full bg-[var(--foreground)]/10" />
+                  <div className="w-2 h-2 rounded-full bg-[var(--accent)]/40" />
+                </div>
+              </div>
 
-              {/* Orbital rings */}
-              <div className="absolute w-[220px] h-[220px] border border-[var(--accent)]/30 rounded-full animate-[spin_12s_linear_infinite]" style={{ borderStyle: 'dashed' }} />
-              <div className="absolute w-[180px] h-[180px] border border-[var(--foreground)]/10 rounded-full animate-[spin_18s_linear_infinite_reverse]" style={{ borderStyle: 'dotted' }} />
-            </div>
+              {/* card body */}
+              <div className="p-5 space-y-4">
+                <div>
+                  <p className="text-[8px] uppercase tracking-[0.3em] text-[var(--muted)]/60 font-bold mb-1">Total Orders Processed</p>
+                  <div className="flex items-end gap-2">
+                    <span className="text-4xl font-[1000] tracking-tighter text-[var(--foreground)]">1,247</span>
+                    <span className="text-[10px] font-black text-green-400 mb-1 flex items-center gap-0.5">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 2l3 4H2l3-4z" fill="currentColor"/></svg>
+                      +12%
+                    </span>
+                  </div>
+                </div>
 
+                {/* sparkline bars */}
+                <div className="flex items-end gap-1 h-10">
+                  {[40,65,45,80,55,90,70,85,60,95,75,100].map((h, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ scaleY: 0 }}
+                      animate={{ scaleY: 1 }}
+                      transition={{ delay: 0.4 + i * 0.05, duration: 0.4 }}
+                      className="flex-1 rounded-sm origin-bottom"
+                      style={{
+                        height: `${h}%`,
+                        background: i === 11 ? "var(--accent)" : `rgba(168,85,247,${0.15 + (i / 11) * 0.35})`,
+                      }}
+                    />
+                  ))}
+                </div>
 
+                <div style={{ borderTop: "1px solid rgba(168,85,247,0.1)" }} />
+
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { label: "Uptime", value: "99.9%", color: "#4ade80" },
+                    { label: "Clients", value: "10+", color: "var(--accent)" },
+                  ].map((s) => (
+                    <div key={s.label} className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                      <p className="text-[7px] uppercase tracking-[0.25em] font-black mb-1" style={{ color: "rgba(161,161,170,0.5)" }}>{s.label}</p>
+                      <p className="text-lg font-[1000] tracking-tighter" style={{ color: s.color }}>{s.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* FLOATING CHIP: delivery */}
+            <motion.div
+              animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute top-[10%] -left-[2%] z-20 hidden md:flex items-center gap-2 px-3 py-2 rounded-xl"
+              style={{
+                background: "rgba(10,0,30,0.85)",
+                border: "1px solid rgba(168,85,247,0.3)",
+                backdropFilter: "blur(12px)",
+                boxShadow: "0 8px 32px rgba(168,85,247,0.2)",
+              }}
+            >
+              <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(168,85,247,0.15)" }}>&#9889;</div>
+              <div>
+                <p className="text-[7px] uppercase tracking-widest font-black" style={{ color: "rgba(168,85,247,0.6)" }}>Delivery</p>
+                <p className="text-[11px] font-[1000] text-white leading-none">Instant</p>
+              </div>
+            </motion.div>
+
+            {/* FLOATING CHIP: secure */}
+            <motion.div
+              animate={{ y: [0, 8, 0], x: [0, -4, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute bottom-[12%] -right-[2%] z-20 hidden md:flex items-center gap-2 px-3 py-2 rounded-xl"
+              style={{
+                background: "rgba(10,0,30,0.85)",
+                border: "1px solid rgba(74,222,128,0.25)",
+                backdropFilter: "blur(12px)",
+                boxShadow: "0 8px 32px rgba(74,222,128,0.1)",
+              }}
+            >
+              <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(74,222,128,0.1)" }}>&#128274;</div>
+              <div>
+                <p className="text-[7px] uppercase tracking-widest font-black" style={{ color: "rgba(74,222,128,0.6)" }}>Payment</p>
+                <p className="text-[11px] font-[1000] text-white leading-none">100% Secure</p>
+              </div>
+            </motion.div>
+
+            {/* FLOATING CHIP: support */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              className="absolute top-[52%] -left-[5%] z-20 hidden md:flex items-center gap-2 px-3 py-2 rounded-xl"
+              style={{
+                background: "rgba(10,0,30,0.85)",
+                border: "1px solid rgba(250,204,21,0.2)",
+                backdropFilter: "blur(12px)",
+                boxShadow: "0 8px 32px rgba(250,204,21,0.08)",
+              }}
+            >
+              <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(250,204,21,0.1)" }}>&#127918;</div>
+              <div>
+                <p className="text-[7px] uppercase tracking-widest font-black" style={{ color: "rgba(250,204,21,0.6)" }}>Support</p>
+                <p className="text-[11px] font-[1000] text-white leading-none">24 / 7</p>
+              </div>
+            </motion.div>
+
+            {/* pulsing corner orbs */}
+            {(["top-2 right-2", "bottom-2 left-2"]).map((pos, i) => (
+              <motion.div
+                key={i}
+                animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 2.5, repeat: Infinity, delay: i * 1.2 }}
+                className={`absolute ${pos} w-3 h-3 rounded-full z-30 hidden md:block`}
+                style={{ background: "var(--accent)", boxShadow: "0 0 12px 4px rgba(168,85,247,0.5)" }}
+              />
+            ))}
           </motion.div>
+
         </div>
 
         {/* scroll indicator */}
