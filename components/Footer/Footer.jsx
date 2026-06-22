@@ -78,12 +78,11 @@ export default function Footer() {
             </Link>
 
             {/* Trustpillot Card - Compact High-End */}
-            <motion.a
+            <a
               href={TRUSTPILOT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.02, x: 4 }}
-              className="flex items-center gap-4 p-3.5 rounded-2xl bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all border-dashed group"
+              className="hover:scale-[1.02] hover:translate-x-1 flex items-center gap-4 p-3.5 rounded-2xl bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all border-dashed group"
             >
               <div className="bg-white p-1 rounded-lg shadow-sm group-hover:rotate-2 transition-transform">
                 <QRCodeCanvas
@@ -104,7 +103,7 @@ export default function Footer() {
                   TRUSTED ON TRUSTPILOT <FiExternalLink className="inline mb-0.5 opacity-30" size={8} />
                 </p>
               </div>
-            </motion.a>
+            </a>
           </div>
 
           {/* LINKS GRID - SYMMETRICAL */}
@@ -142,18 +141,16 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 {SOCIALS.map(({ label, href, icon: Icon }) => (
-                  <motion.a
+                  <a
                     key={label}
-                    whileHover={{ y: -3, scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 rounded-xl bg-[var(--card)]/40 backdrop-blur-sm border border-[var(--border)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-all shadow-sm"
+                    className="hover:-translate-y-[3px] hover:scale-110 active:scale-90 w-9 h-9 rounded-xl bg-[var(--card)]/40 backdrop-blur-sm border border-[var(--border)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-all shadow-sm"
                   >
                     <Icon size={15} />
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </div>
@@ -167,18 +164,16 @@ export default function Footer() {
               </h3>
               <div className="flex items-center justify-start md:justify-end gap-2.5">
                 {SOCIALS.map(({ label, href, icon: Icon }) => (
-                  <motion.a
+                  <a
                     key={label}
-                    whileHover={{ y: -3, scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 rounded-xl bg-[var(--card)]/40 backdrop-blur-sm border border-[var(--border)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-all shadow-sm"
+                    className="hover:-translate-y-[3px] hover:scale-110 active:scale-90 w-9 h-9 rounded-xl bg-[var(--card)]/40 backdrop-blur-sm border border-[var(--border)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-all shadow-sm"
                   >
                     <Icon size={15} />
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </div>

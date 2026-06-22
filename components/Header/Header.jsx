@@ -149,10 +149,7 @@ export default function Header() {
   }, [userMenuOpen]);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+    <header
       className={`fixed top-0 w-full transition-all duration-500 ${scrolled
         ? "backdrop-blur-3xl bg-[var(--background)]/80 shadow-2xl border-b border-[var(--border)] active-header"
         : "bg-transparent"
@@ -166,7 +163,7 @@ export default function Header() {
 
           <div className="flex-1 flex items-center justify-start">
             <Link href="/" className="relative z-10 flex-shrink-0">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <div className="hover:scale-105 active:scale-95 transition-transform">
                 <Image
                   src={HEADER_CONFIG.logo.src}
                   alt={HEADER_CONFIG.logo.alt}
@@ -175,7 +172,7 @@ export default function Header() {
                   priority
                   className="h-8 md:h-10 w-auto transition-all duration-300"
                 />
-              </motion.div>
+              </div>
             </Link>
           </div>
 
@@ -201,12 +198,10 @@ export default function Header() {
 
           <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3" ref={dropdownRef}>
             <ThemeToggle />
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => setUserMenuOpen((p) => !p)}
               aria-label="User menu"
-              className="relative flex items-center gap-2 pl-3 pr-1 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--foreground)]/5 backdrop-blur-md transition-all duration-300 shadow-sm group"
+              className="hover:scale-105 active:scale-95 relative flex items-center gap-2 pl-3 pr-1 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--foreground)]/5 backdrop-blur-md transition-all duration-300 shadow-sm group"
             >
               <FiMenu className="text-[var(--foreground)]/70 group-hover:text-[var(--foreground)] transition-colors ml-0.5" size={18} />
               <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-[var(--accent)]/10 shadow-inner">
@@ -216,7 +211,7 @@ export default function Header() {
                   <FiUser className="text-[var(--accent)] text-sm" />
                 )}
               </div>
-            </motion.button>
+            </button>
 
             <AnimatePresence>
               {userMenuOpen && (
@@ -425,6 +420,6 @@ export default function Header() {
       </AnimatePresence>
 
 
-    </motion.header>
+    </header>
   );
 }

@@ -222,16 +222,12 @@ export default function LandingPage() {
           <div className="flex flex-col gap-7">
 
             {/* eyebrow */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-3"
-            >
+            <div className="flex items-center gap-3">
               <div className="w-8 h-[2px] bg-[var(--accent)]" />
               <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
                 India's Gaming Platform
               </span>
-            </motion.div>
+            </div>
 
             {/* headline */}
             <h1 className="text-[clamp(2.4rem,7vw,5rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
@@ -243,22 +239,12 @@ export default function LandingPage() {
             </h1>
 
             {/* sub */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.16 }}
-              className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-md"
-            >
+            <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-md">
               Custom stores, automatic top-ups, easy payments, and tools for gamers — everything you need.
-            </motion.p>
+            </p>
 
             {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.24 }}
-              className="flex flex-wrap gap-3"
-            >
+            <div className="flex flex-wrap gap-3">
               <Link
                 href="/contact"
                 style={{ color: "#000" }}
@@ -286,22 +272,17 @@ export default function LandingPage() {
                 Create your free website
                 <FiArrowUpRight size={13} />
               </a>
-            </motion.div>
+            </div>
 
             {/* micro stats row */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.35 }}
-              className="flex items-center gap-6 pt-2"
-            >
+            <div className="flex items-center gap-6 pt-2">
               {STATS.map((s, i) => (
                 <div key={i} className="flex flex-col">
                   <span className="text-xl font-[1000] tracking-tighter text-[var(--accent)] leading-none">{s.value}</span>
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 mt-0.5">{s.label}</span>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* ── RIGHT: floating game card stack ── */}
