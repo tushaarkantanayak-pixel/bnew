@@ -38,37 +38,19 @@ export const metadata: Metadata = {
   },
   description:
     "Power up your gaming business with BlueBuff. We provide automated top-up websites, esports tournament tools, and secure payment systems. Build your store and esports empire today.",
-  keywords: [
-    "gaming store builder",
-    "esports tournament software",
-    "automated topup website",
-    "game store api integration",
-    "payment gateway for gaming",
-    "esports hub development",
-    "gaming business solutions",
-    "topup panel source code",
-    "esports brackets tool",
-    "gaming storefront platform",
-    "bluebuff solutions",
-    "automated gaming infrastructure",
-    "tournament management system",
-    "custom game store india",
-    "gaming website development",
-    "esports platform builder"
-  ],
   metadataBase: new URL("https://bluebuff.in"),
   openGraph: {
-    title: "MLBB Top Up India – Buy Cheapest Diamonds Instantly | bluebuff.in",
+    title: "BlueBuff | Build Your Gaming Store & Esports Empire",
     description:
-      "Safe & instant MLBB diamond top up in India. Cheapest rates for Weekly Pass, Starlight & skins. Secure UPI/Paytm payments with 5-minute delivery. Trusted by thousands.",
+      "The complete infrastructure for gaming entrepreneurs. Automated top-up websites, esports hubs, and secure payment solutions. Scale your gaming business with BlueBuff.",
     url: "https://bluebuff.in",
-    siteName: "bluebuff.in",
+    siteName: "BlueBuff",
     images: [
       {
         url: "/logoBB.png",
         width: 800,
         height: 600,
-        alt: "bluebuff.in - MLBB Topup India",
+        alt: "BlueBuff - Gaming Store Infrastructure",
       },
     ],
     locale: "en_IN",
@@ -76,8 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MLBB Top Up India – Buy Cheapest Diamonds Instantly | bluebuff.in",
-    description: "Safe & instant MLBB diamond top up in India. Cheapest rates for Weekly Pass, Starlight & skins. Secure UPI/Paytm payments with 5-minute delivery. Trusted by thousands.",
+    title: "BlueBuff | Build Your Gaming Store & Esports Empire",
+    description: "The complete infrastructure for gaming entrepreneurs. Automated top-up websites, esports hubs, and secure payment solutions. Scale your gaming business with BlueBuff.",
     images: ["/logoBB.png"],
     creator: "@bluebuff_india",
   },
