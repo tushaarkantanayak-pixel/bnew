@@ -86,7 +86,7 @@ export default function LandingPage() {
 
       {/* ═══════ HERO ═══════ */}
       <section
-        className="relative min-h-[100svh] flex flex-col justify-end md:justify-center overflow-hidden border-b border-[var(--border)]"
+        className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden border-b border-[var(--border)]"
       >
         {/* ── 3D DECORATIVE BACKGROUND ── */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -216,7 +216,7 @@ export default function LandingPage() {
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent z-10" />
 
         {/* content grid */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-28 pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-4 md:pt-16 pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
 
           {/* ── LEFT: text ── */}
           <div className="flex flex-col gap-7">
@@ -248,7 +248,7 @@ export default function LandingPage() {
               <Link
                 href="/contact"
                 style={{ color: "#000" }}
-                className="group flex items-center gap-3 px-7 py-4 rounded-2xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-[0_10px_40px_-10px_rgba(var(--accent-rgb),0.5)]"
+                className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-[0_10px_40px_-10px_rgba(var(--accent-rgb),0.5)]"
               >
                 Contact Us
                 <span className="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -258,7 +258,7 @@ export default function LandingPage() {
 
               <Link
                 href="/games"
-                className="flex items-center gap-2 px-7 py-4 rounded-2xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
               >
                 Top-Up Now
               </Link>
@@ -267,7 +267,7 @@ export default function LandingPage() {
                 href="https://web.bluebuff.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-7 py-4 rounded-2xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
               >
                 Create your free website
                 <FiArrowUpRight size={13} />
@@ -290,59 +290,38 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="hidden md:flex items-center justify-center relative h-[480px]"
+            className="flex items-center justify-center relative h-[300px] md:h-[480px] mt-4 md:mt-0"
           >
             {/* glow behind cards */}
             <div className="absolute w-[300px] h-[300px] bg-[var(--accent)]/15 blur-[80px] rounded-full" />
 
-            {/* card stack — 3 rotated overlapping cards */}
-            {[
-              { src: "/landing/hero_mage.png",     rotate: -14, x: -80,  y: 20,  z: 1, scale: 0.82 },
-              { src: "/landing/hero_tactical.png", rotate:   0, x: 10,   y: -10, z: 3, scale: 1.00 },
-              { src: "/landing/hero_cyborg.png",   rotate:  12, x: 100,  y: 30,  z: 2, scale: 0.85 },
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.12, type: "spring", stiffness: 80 }}
-                whileHover={{ y: -8, rotate: 0, zIndex: 10 }}
-                style={{
-                  position: "absolute",
-                  rotate: card.rotate,
-                  x: card.x,
-                  y: card.y,
-                  zIndex: card.z,
-                  scale: card.scale,
-                }}
-                className="w-[180px] h-[240px] rounded-[1.5rem] overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.6)] cursor-pointer transition-shadow hover:shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
+            {/* Abstract 3D Hero Icon */}
+            <div className="relative z-10 hover:-translate-y-2 transition-transform duration-500 group flex items-center justify-center w-[260px] h-[360px]">
+              {/* Outer glow */}
+              <div className="absolute w-[200px] h-[200px] bg-[var(--accent)]/10 blur-[40px] rounded-full group-hover:bg-[var(--accent)]/20 transition-colors duration-500" />
+              
+              {/* SVG 3D Diamond / Gem */}
+              <svg 
+                className="relative z-10 w-44 h-44 drop-shadow-[0_0_15px_rgba(var(--accent-rgb),0.3)] text-[var(--accent)] group-hover:scale-110 transition-transform duration-700"
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
               >
-                <img src={card.src} alt="" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              </motion.div>
-            ))}
+                <path d="M12 2L2 12l10 10 10-10L12 2z" fill="currentColor" fillOpacity="0.05" />
+                <path d="M12 2v20" />
+                <path d="M2 12h20" />
+                <path d="M12 2l4 10-4 10-4-10 4-10z" fill="currentColor" fillOpacity="0.15" />
+              </svg>
 
-            {/* floating accent badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 }}
-              className="absolute bottom-10 right-4 z-20 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--background)]/90 border border-[var(--accent)]/30 backdrop-blur-md shadow-xl"
-            >
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--foreground)]">Live Delivery</span>
-            </motion.div>
+              {/* Orbital rings */}
+              <div className="absolute w-[220px] h-[220px] border border-[var(--accent)]/30 rounded-full animate-[spin_12s_linear_infinite]" style={{ borderStyle: 'dashed' }} />
+              <div className="absolute w-[180px] h-[180px] border border-[var(--foreground)]/10 rounded-full animate-[spin_18s_linear_infinite_reverse]" style={{ borderStyle: 'dotted' }} />
+            </div>
 
-            {/* shield badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.7 }}
-              className="absolute top-10 left-2 z-20 flex items-center gap-2 px-3 py-2 rounded-xl bg-[var(--background)]/90 border border-[var(--border)] backdrop-blur-md shadow-xl"
-            >
-              <FiShield size={12} className="text-[var(--accent)]" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--muted)]">Secure & Trusted</span>
-            </motion.div>
+
           </motion.div>
         </div>
 

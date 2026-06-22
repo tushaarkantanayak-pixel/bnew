@@ -72,7 +72,7 @@ export default function Footer() {
               <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase leading-none bg-gradient-to-r from-[var(--accent)] via-[var(--foreground)] to-[var(--accent)] bg-clip-text text-transparent group-hover:brightness-110 transition-all">
                 {BRAND}
               </h2>
-              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.3em] opacity-80 italic leading-relaxed max-w-[260px]">
+              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.3em] text-[var(--foreground)] italic leading-relaxed max-w-[260px]">
                 THE FASTEST AND CHEAPEST GAME TOP-UPS IN INDIA.
               </p>
             </Link>
@@ -191,7 +191,7 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM STRIP - HIGH-END DENSITY */}
-        <div className="pt-6 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-5 opacity-60">
+        <div className="pt-6 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-5 text-[var(--muted-foreground)]">
           <div className="flex items-center gap-3 group/india cursor-default">
             <div className="flex gap-1">
               <div className="w-1 h-3 bg-[#FF9933] rounded-full shadow-[0_0_8px_#FF9933]" />
@@ -199,7 +199,7 @@ export default function Footer() {
               <div className="w-1 h-3 bg-[#138808] rounded-full shadow-[0_0_8px_#138808]" />
             </div>
             <span className="text-[9px] font-black uppercase tracking-[0.15em] italic text-[var(--foreground)]">
-              MADE IN <span className="text-[#FF9933]">IND</span><span className="text-white">I</span><span className="text-[#138808]">A</span> 🇮🇳
+              MADE IN INDIA 🇮🇳
             </span>
           </div>
 
