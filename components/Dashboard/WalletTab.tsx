@@ -282,8 +282,7 @@ export default function WalletTab({
     <div className="max-w-5xl mx-auto space-y-6">
       {/* BALANCE */}
       <div className="relative group overflow-hidden">
-        <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent blur-3xl opacity-20 pointer-events-none" />
-        <div className="relative p-4 sm:p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-between overflow-hidden shadow-sm">
+        <div className="relative p-4 sm:p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-between overflow-hidden">
           <div className="absolute right-[-10px] top-[-10px] text-[var(--accent)]/5 rotate-12">
             <FiZap size={100} />
           </div>

@@ -51,8 +51,7 @@ export default function DashboardLayout({
     return (
         <AuthGuard>
             <section className="min-h-screen px-4 sm:px-6 py-6 sm:py-8 bg-[var(--background)]">
-                    {/* Ambient Glow */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-[200px] bg-[var(--accent)]/5 blur-[100px] rounded-full pointer-events-none" />
+
 
                     <div className="max-w-6xl mx-auto relative z-10">
                         {/* TACTICAL HEADER */}
