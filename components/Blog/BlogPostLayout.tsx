@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+
 import Link from "next/link";
 import Image from "next/image";
 import { FiClock, FiCalendar, FiArrowLeft, FiShare2, FiArrowRight, FiGift } from "react-icons/fi";
@@ -82,9 +82,7 @@ export default function BlogPostLayout({
             <article className="max-w-4xl mx-auto px-6 pt-4 md:pt-8 relative z-10">
 
                 {/* BREADCRUMB SYSTEM */}
-                <motion.div
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
+                <div
                     className="mb-4 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50"
                 >
                     <Link href="/blog" aria-label="Back to Blog" className="flex items-center justify-center w-6 h-6 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 transition-all mr-1">
@@ -101,15 +99,11 @@ export default function BlogPostLayout({
                     )}
                     <span className="opacity-20">/</span>
                     <span className="text-[var(--muted)] line-clamp-1 italic">{title}</span>
-                </motion.div>
+                </div>
 
 
                 <header className="mb-8 md:mb-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                    >
+                    <div>
                         <div className="flex items-center flex-nowrap gap-2 md:gap-4 mb-6 mt-1 text-[8px] sm:text-[9px] md:text-[10px] font-black uppercase tracking-[0.05em] sm:tracking-[0.1em] overflow-x-auto no-scrollbar whitespace-nowrap pb-1">
                             <span className="text-[var(--accent)] italic flex-shrink-0"># {category}</span>
                             <span className="opacity-10 text-[var(--foreground)] flex-shrink-0">|</span>
@@ -125,13 +119,10 @@ export default function BlogPostLayout({
                         <h1 className="text-2xl md:text-4xl font-[1000] italic tracking-tighter uppercase leading-[1.1] text-[var(--foreground)] mb-6 drop-shadow-sm">
                             {title}
                         </h1>
-                    </motion.div>
+                    </div>
 
                     {image && (
-                        <motion.div
-                            initial={{ scale: 0.95, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ delay: 0.2, duration: 0.8 }}
+                        <div
                             className="relative rounded-sm overflow-hidden border border-[var(--border)] aspect-[16/9]"
                         >
                             <Image
@@ -141,7 +132,7 @@ export default function BlogPostLayout({
                                 className="object-cover"
                                 priority
                             />
-                        </motion.div>
+                        </div>
                     )}
                     
 

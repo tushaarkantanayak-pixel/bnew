@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -73,10 +73,8 @@ export default function BlogListing({ initialGame = "all" }) {
   return (
     <main className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
       <div className="max-w-4xl mx-auto pt-0 relative z-10">
-        <motion.div
+        <div
           className="mb-2"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
         >
 
 
@@ -111,16 +109,13 @@ export default function BlogListing({ initialGame = "all" }) {
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* 🔖 TOGGLABLE FILTERS */}
-        <AnimatePresence>
+        <>
           {isFilterOpen && (
-            <motion.aside
-              initial={{ height: 0, opacity: 0, marginTop: 0, marginBottom: 0 }}
-              animate={{ height: "auto", opacity: 1, marginTop: 16, marginBottom: 40 }}
-              exit={{ height: 0, opacity: 0, marginTop: 0, marginBottom: 0 }}
-              className="overflow-hidden"
+            <aside
+              className="overflow-hidden mt-4 mb-10"
               aria-label="Blog filters"
             >
               <div className="p-4 sm:p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm space-y-6">
@@ -164,28 +159,26 @@ export default function BlogListing({ initialGame = "all" }) {
                     </div>
                 </div>
               </div>
-            </motion.aside>
+            </aside>
           )}
-        </AnimatePresence>
+        </>
 
         {/* 📄 BLOG GRID */}
         <div className="space-y-3">
-          <AnimatePresence mode="wait">
+          <>
             {paginatedBlogs.length > 0 ? (
               paginatedBlogs.map((blog, index) => (
                 <BlogCard key={blog.id} blog={blog} index={index} />
               ))
             ) : (
-              <motion.div
+              <div
                 key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
                 className="text-center py-20 text-[var(--muted)] text-[10px] font-black uppercase tracking-[0.3em] italic opacity-20"
               >
                 No Articles Discovered
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
+          </>
         </div>
 
         {/* 🔢 PAGINATION - NUMBERED */}
@@ -237,11 +230,7 @@ function BlogCard({ blog, index }) {
   const firstTag = blog.tags?.[0];
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
-    >
+    <article>
       <Link
         href={`/blog/${blog.game}/${blog.slug}`}
         className="group block relative rounded-2xl bg-[var(--card)] border border-[var(--border)] p-2 sm:p-3 hover:shadow-md hover:border-[var(--accent)]/30 transition-all duration-300"
@@ -314,6 +303,6 @@ function BlogCard({ blog, index }) {
           </div>
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 }
