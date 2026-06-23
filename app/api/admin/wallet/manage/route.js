@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 export async function POST(req) {
     try {
-        const { email, amount, action } = await req.json();
+        const { email, amount, action, description } = await req.json();
 
         if (!email || !amount || !action) {
             return Response.json(
@@ -71,7 +71,7 @@ export async function POST(req) {
             amount: numAmount,
             balanceBefore: currentBalance,
             balanceAfter: updatedUser.wallet,
-            description: `Admin ${action === "add" ? "Credit" : "Debit"} Adjustment`,
+            description: description || `Admin ${action === "add" ? "Credit" : "Debit"} Adjustment`,
             status: "success",
             referenceId: decoded.userId, // Admin ID as reference
             performedBy: "admin",

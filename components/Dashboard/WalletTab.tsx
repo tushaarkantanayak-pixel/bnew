@@ -279,7 +279,7 @@ export default function WalletTab({
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-5xl mx-auto space-y-6">
       {/* BALANCE */}
       <div className="relative group overflow-hidden">
         <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent blur-3xl opacity-20 pointer-events-none" />
@@ -680,7 +680,7 @@ export default function WalletTab({
 
 function TransactionHistorySection({ onResumeUsdt }: { onResumeUsdt: (txn: any) => void }) {
   const [showHistory, setShowHistory] = useState(true);
-  const [filter, setFilter] = useState("all"); // all, inr, usdt
+  const filter = "all";
 
   return (
     <div className="pt-6 border-t border-[var(--border)]/20">
@@ -691,23 +691,6 @@ function TransactionHistorySection({ onResumeUsdt }: { onResumeUsdt: (txn: any) 
         </h3>
         
         <div className="flex items-center gap-2">
-          {showHistory && (
-            <div className="flex items-center gap-1 bg-[var(--card)] border border-[var(--border)] p-1 rounded-xl mr-2">
-              {["all", "inr", "usdt"].map(f => (
-                <button
-                  key={f}
-                  onClick={() => setFilter(f)}
-                  className={`px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${
-                    filter === f 
-                      ? "bg-[var(--accent)] text-black" 
-                      : "text-[var(--muted)] hover:text-[var(--foreground)]"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-          )}
           <div className="flex items-center gap-2">
             {showHistory && <TransactionHistoryRefresh />}
             <button

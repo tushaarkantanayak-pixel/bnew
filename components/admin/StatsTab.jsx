@@ -48,6 +48,7 @@ export default function StatsTab() {
     // Manage Wallet State
     const [manageEmail, setManageEmail] = useState("");
     const [manageAmount, setManageAmount] = useState("");
+    const [manageDesc, setManageDesc] = useState("");
     const [updating, setUpdating] = useState(false);
 
     // History State
@@ -65,6 +66,7 @@ export default function StatsTab() {
     // Modal State
     const [selectedUserForWallet, setSelectedUserForWallet] = useState(null);
     const [quickAmount, setQuickAmount] = useState("");
+    const [quickDesc, setQuickDesc] = useState("");
 
     /* ================= FETCH STATS ================= */
     const fetchStats = async () => {
@@ -140,9 +142,10 @@ export default function StatsTab() {
     };
 
     /* ================= MANAGE WALLET ================= */
-    const handleManageWallet = async (action, overrideEmail = null, overrideAmount = null) => {
+    const handleManageWallet = async (action, overrideEmail = null, overrideAmount = null, overrideDesc = null) => {
         const finalEmail = overrideEmail || manageEmail;
         const finalAmount = overrideAmount || manageAmount;
+        const finalDesc = overrideDesc !== null ? overrideDesc : manageDesc;
 
         if (!finalEmail || !finalAmount || Number(finalAmount) <= 0) {
             alert("Please enter a valid email and amount");
@@ -157,6 +160,7 @@ export default function StatsTab() {
                 email: finalEmail,
                 amount: Math.round(Number(finalAmount) * rate),
                 action,
+                description: finalDesc
             });
 
             const json = res.data;
@@ -168,7 +172,9 @@ export default function StatsTab() {
                 // alert(json.message); 
                 setManageEmail("");
                 setManageAmount("");
+                setManageDesc("");
                 setQuickAmount("");
+                setQuickDesc("");
                 setSelectedUserForWallet(null);
                 fetchStats();
                 fetchWallets();
@@ -340,8 +346,8 @@ export default function StatsTab() {
                             <h3 className="text-base sm:text-lg font-bold text-[var(--foreground)]">Add or Remove Money Manually</h3>
                         </div>
 
-                        <div className="flex flex-col md:flex-row items-stretch md:items-end gap-3 sm:gap-4">
-                            <div className="flex-1 space-y-1.5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-end gap-3 sm:gap-4">
+                            <div className="space-y-1.5">
                                 <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">User Email</label>
                                 <div className="relative">
                                     <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
@@ -355,7 +361,7 @@ export default function StatsTab() {
                                 </div>
                             </div>
 
-                            <div className="w-full md:w-48 space-y-1.5">
+                            <div className="space-y-1.5">
                                 <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">Amount</label>
                                 <div className="relative">
                                     <FiDollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
@@ -370,24 +376,33 @@ export default function StatsTab() {
                                 </div>
                             </div>
 
-                            <div className="flex gap-2 w-full md:w-auto pt-1 sm:pt-0">
+                            <div className="space-y-1.5">
+                                <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">Description <span className="opacity-50">(Opt)</span></label>
+                                <input
+                                    type="text"
+                                    value={manageDesc}
+                                    onChange={(e) => setManageDesc(e.target.value)}
+                                    placeholder="Bonus, Refund..."
+                                    className="w-full h-10 sm:h-11 px-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
+                                />
+                            </div>
+
+                            <div className="flex gap-2 w-full pt-1 sm:pt-0">
                                 <button
                                     onClick={() => handleManageWallet("add")}
                                     disabled={updating}
-                                    className="flex-1 md:flex-none h-10 sm:h-11 px-4 sm:px-5 rounded-xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold text-[11px] flex items-center justify-center gap-2 hover:bg-emerald-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
+                                    className="flex-1 h-10 sm:h-11 px-2 rounded-xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold text-[11px] flex items-center justify-center gap-1.5 hover:bg-emerald-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
                                 >
                                     {updating ? <Loader2 className="animate-spin" size={14} /> : <FiPlus size={14} />}
-                                    <span className="hidden xs:inline">Add Money</span>
-                                    <span className="xs:hidden">Add</span>
+                                    Add
                                 </button>
                                 <button
                                     onClick={() => handleManageWallet("remove")}
                                     disabled={updating}
-                                    className="flex-1 md:flex-none h-10 sm:h-11 px-4 sm:px-5 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[11px] flex items-center justify-center gap-2 hover:bg-red-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
+                                    className="flex-1 h-10 sm:h-11 px-2 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[11px] flex items-center justify-center gap-1.5 hover:bg-red-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
                                 >
                                     {updating ? <Loader2 className="animate-spin" size={14} /> : <FiMinus size={14} />}
-                                    <span className="hidden xs:inline">Remove Money</span>
-                                    <span className="xs:hidden">Deduct</span>
+                                    Deduct
                                 </button>
                             </div>
                         </div>
@@ -966,9 +981,20 @@ export default function StatsTab() {
                                         </div>
                                     </div>
 
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-[var(--muted)] uppercase tracking-widest ml-1">Description (Optional)</label>
+                                        <input
+                                            type="text"
+                                            value={quickDesc}
+                                            onChange={(e) => setQuickDesc(e.target.value)}
+                                            placeholder="Reason for adjustment"
+                                            className="w-full h-12 px-4 rounded-2xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--foreground)] font-semibold text-sm outline-none focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent)]/5 transition-all"
+                                        />
+                                    </div>
+
                                     <div className="grid grid-cols-2 gap-3 pt-4">
                                         <button
-                                            onClick={() => handleManageWallet("remove", selectedUserForWallet.email, quickAmount)}
+                                            onClick={() => handleManageWallet("remove", selectedUserForWallet.email, quickAmount, quickDesc)}
                                             disabled={updating || !quickAmount}
                                             className="h-12 rounded-2xl bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white border border-rose-500/20 font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-30 shadow-lg shadow-transparent hover:shadow-rose-500/20"
                                         >
@@ -976,7 +1002,7 @@ export default function StatsTab() {
                                             Deduct
                                         </button>
                                         <button
-                                            onClick={() => handleManageWallet("add", selectedUserForWallet.email, quickAmount)}
+                                            onClick={() => handleManageWallet("add", selectedUserForWallet.email, quickAmount, quickDesc)}
                                             disabled={updating || !quickAmount}
                                             className="h-12 rounded-2xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white border border-emerald-500/20 font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-30 shadow-lg shadow-transparent hover:shadow-emerald-500/20"
                                         >
