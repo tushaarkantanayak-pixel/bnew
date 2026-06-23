@@ -4,6 +4,7 @@ import WalletTransaction from "@/models/WalletTransaction";
 import User from "@/models/User";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import UsdtDeposit from "@/models/UsdtDeposit";
 
 export async function GET(req) {
     try {
@@ -59,7 +60,7 @@ export async function GET(req) {
 
         // Update any waiting USDT deposits that have expired
         const now = new Date();
-        await mongoose.model("UsdtDeposit").updateMany(
+        await UsdtDeposit.updateMany(
             { 
                 ...baseQuery,
                 status: "waiting", 
@@ -76,7 +77,7 @@ export async function GET(req) {
                 .select("-userObjectId -__v")
                 .lean(),
             (filter === "all" || filter === "usdt") 
-                ? mongoose.model("UsdtDeposit").find({ 
+                ? UsdtDeposit.find({ 
                     ...baseQuery, 
                     status: { $in: ["waiting", "submitted", "confirmed", "failed", "expired"] } 
                 }).lean() 

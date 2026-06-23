@@ -182,13 +182,13 @@ export default function ApiKeysPage() {
                                     placeholder="Key Label (e.g. My Website)"
                                     value={newKeyName}
                                     onChange={(e) => setNewKeyName(e.target.value)}
-                                    className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent)] outline-none transition-all text-sm w-full md:w-64"
+                                    className="px-4 py-2 rounded-xl bg-foreground/5 border border-foreground/10 focus:border-accent outline-none transition-all text-sm w-full md:w-64"
                                     disabled={isCreating}
                                 />
                                 <button
                                     type="submit"
                                     disabled={isCreating || !newKeyName.trim()}
-                                    className="px-4 py-2 rounded-xl bg-[var(--accent)] text-black font-black italic uppercase text-xs flex items-center gap-2 hover:scale-105 transition-all disabled:opacity-50"
+                                    className="px-4 py-2 rounded-xl bg-accent text-background font-black italic uppercase text-xs flex items-center gap-2 hover:scale-105 transition-all disabled:opacity-50"
                                 >
                                     {isCreating ? <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" /> : <FiPlus />}
                                     Create Key
@@ -221,25 +221,25 @@ export default function ApiKeysPage() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="p-5 rounded-2xl bg-[var(--accent)]/10 border border-[var(--accent)]/30 space-y-3 shadow-[0_0_30px_rgba(0,229,255,0.1)]"
+                    className="p-5 rounded-2xl bg-accent/10 border border-accent/30 space-y-3 shadow-[0_0_30px_rgba(0,229,255,0.1)]"
                 >
                     <div className="flex items-center justify-between">
                         <div>
-                            <h3 className="text-[var(--accent)] font-black italic uppercase text-sm">Secret Key Generated</h3>
-                            <p className="text-[var(--muted)] text-[10px] font-bold uppercase tracking-widest">Copy this key safely. You cannot view it again.</p>
+                            <h3 className="text-accent font-black italic uppercase text-sm">Secret Key Generated</h3>
+                            <p className="text-muted text-[10px] font-bold uppercase tracking-widest">Copy this key safely. You cannot view it again.</p>
                         </div>
                         <button
                             onClick={() => setNewlyCreatedKey(null)}
-                            className="text-[var(--muted)] hover:text-white transition-colors"
+                            className="text-muted hover:text-foreground transition-colors"
                         >
                             ✕
                         </button>
                     </div>
-                    <div className="flex items-center gap-2 p-4 rounded-xl bg-black/40 border border-white/10 font-mono text-sm leading-none">
-                        <span className="flex-1 truncate text-[var(--accent)]">{newlyCreatedKey}</span>
+                    <div className="flex items-center gap-2 p-4 rounded-xl bg-foreground/5 border border-foreground/10 font-mono text-sm leading-none">
+                        <span className="flex-1 truncate text-accent">{newlyCreatedKey}</span>
                         <button
                             onClick={() => copyToClipboard(newlyCreatedKey)}
-                            className="p-2 rounded-lg bg-[var(--accent)]/20 text-[var(--accent)] hover:bg-[var(--accent)]/30 transition-all"
+                            className="p-2 rounded-lg bg-accent/20 text-accent hover:bg-accent/30 transition-all"
                         >
                             {copiedKey === newlyCreatedKey ? <FiCheck /> : <FiCopy />}
                         </button>
@@ -249,9 +249,9 @@ export default function ApiKeysPage() {
 
             <div className="grid gap-4">
                 {loading ? (
-                    <div className="h-40 animate-pulse bg-white/5 rounded-2xl border border-white/5" />
+                    <div className="h-40 animate-pulse bg-foreground/5 rounded-2xl border border-foreground/5" />
                 ) : keys.length === 0 ? (
-                    <div className="p-12 text-center rounded-3xl border border-dashed border-white/10 opacity-40">
+                    <div className="p-12 text-center rounded-3xl border border-dashed border-foreground/10 opacity-40">
                         <FiKey className="mx-auto mb-4" size={32} />
                         <p className="text-sm font-bold uppercase tracking-widest">No API keys active</p>
                     </div>
@@ -263,9 +263,9 @@ export default function ApiKeysPage() {
                                 layout
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="group p-0.5 rounded-2xl bg-gradient-to-br from-white/10 to-transparent border border-white/5 hover:border-[var(--accent)]/30 transition-all shadow-xl"
+                                className="group p-0.5 rounded-2xl bg-gradient-to-br from-foreground/10 to-transparent border border-foreground/5 hover:border-accent/30 transition-all shadow-xl"
                             >
-                                <div className="p-4 rounded-xl bg-[var(--card-bg)]/80 backdrop-blur-sm">
+                                <div className="p-4 rounded-xl bg-card/80 backdrop-blur-sm">
                                     <div className="flex flex-col md:flex-row gap-4">
                                         {/* Main Info */}
                                         <div className="flex-1 space-y-3">
@@ -277,15 +277,15 @@ export default function ApiKeysPage() {
                                                     <div>
                                                         <h3 className="font-black italic uppercase text-base leading-none mb-1">{key.name}</h3>
                                                         <div className="flex items-center gap-2">
-                                                            <span className="text-[10px] bg-black/40 px-2 py-0.5 rounded font-mono text-white/40">TK_****{key.lastFour}</span>
+                                                            <span className="text-[10px] bg-foreground/10 px-2 py-0.5 rounded font-mono text-foreground/60">TK_****{key.lastFour}</span>
                                                             <button
                                                                 onClick={() => alert("For security, full API keys are only shown once during creation. If you've lost your key, please use the 'Regenerate' option to get a new one.")}
-                                                                className="text-[8px] font-black uppercase text-[var(--accent)] hover:underline"
+                                                                className="text-[8px] font-black uppercase text-accent hover:underline"
                                                             >
                                                                 Show Full Key?
                                                             </button>
                                                             {key.allowedIps?.length > 0 && (
-                                                                <span className="text-[8px] bg-[var(--accent)] text-black font-black uppercase px-1.5 rounded-sm">IP Locked</span>
+                                                                <span className="text-[8px] bg-accent text-background font-black uppercase px-1.5 rounded-sm">IP Locked</span>
                                                             )}
                                                         </div>
                                                     </div>
@@ -294,7 +294,7 @@ export default function ApiKeysPage() {
                                                 <div className="flex items-center gap-2">
                                                     <button
                                                         onClick={() => editingId === key._id ? setEditingId(null) : startEditing(key)}
-                                                        className={`p-2 rounded-xl transition-all ${editingId === key._id ? 'bg-white/10 text-white' : 'bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20'}`}
+                                                        className={`p-2 rounded-xl transition-all ${editingId === key._id ? 'bg-foreground/10 text-foreground' : 'bg-accent/10 text-accent hover:bg-accent/20'}`}
                                                     >
                                                         {editingId === key._id ? <FiX /> : <FiEdit2 />}
                                                     </button>
@@ -304,60 +304,60 @@ export default function ApiKeysPage() {
                                             {/* Usage Progress */}
                                             <div className="space-y-1.5 pt-2">
                                                 <div className="flex justify-between text-[10px] font-black uppercase italic">
-                                                    <span className="text-white/40 flex items-center gap-1"><FiBarChart /> Daily Budget</span>
-                                                    <span className="text-[var(--accent)]">{formatPrice(key.usedToday || 0)} / {formatPrice(key.dailyLimit || 1000)}</span>
+                                                    <span className="text-foreground/60 flex items-center gap-1"><FiBarChart /> Daily Budget</span>
+                                                    <span className="text-accent">{formatPrice(key.usedToday || 0)} / {formatPrice(key.dailyLimit || 1000)}</span>
                                                 </div>
-                                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                                <div className="h-1.5 w-full bg-foreground/10 rounded-full overflow-hidden">
                                                     <motion.div
                                                         initial={{ width: 0 }}
                                                         animate={{ width: `${Math.min(((key.usedToday || 0) / (key.dailyLimit || 1000)) * 100, 100)}%` }}
-                                                        className={`h-full rounded-full ${(key.usedToday || 0) > (key.dailyLimit || 1000) * 0.8 ? 'bg-red-500' : 'bg-[var(--accent)]'}`}
+                                                        className={`h-full rounded-full ${(key.usedToday || 0) > (key.dailyLimit || 1000) * 0.8 ? 'bg-red-500' : 'bg-accent'}`}
                                                     />
                                                 </div>
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-3">
-                                                <div className="p-2 rounded-xl bg-white/5 border border-white/5">
-                                                    <p className="text-[8px] font-bold uppercase text-white/30 mb-0.5 flex items-center gap-1"><FiGlobe /> Last IP</p>
-                                                    <p className="text-xs font-mono text-white/80">{key.lastUsedIp || "Never used"}</p>
+                                                <div className="p-2 rounded-xl bg-foreground/5 border border-foreground/5">
+                                                    <p className="text-[8px] font-bold uppercase text-foreground/50 mb-0.5 flex items-center gap-1"><FiGlobe /> Last IP</p>
+                                                    <p className="text-xs font-mono text-foreground/80">{key.lastUsedIp || "Never used"}</p>
                                                 </div>
-                                                <div className="p-2 rounded-xl bg-white/5 border border-white/5">
-                                                    <p className="text-[8px] font-bold uppercase text-white/30 mb-1 flex items-center gap-1"><FiMapPin /> Status</p>
+                                                <div className="p-2 rounded-xl bg-foreground/5 border border-foreground/5">
+                                                    <p className="text-[8px] font-bold uppercase text-foreground/50 mb-1 flex items-center gap-1"><FiMapPin /> Status</p>
                                                     <p className="text-xs font-black italic uppercase text-green-500">Live & Secure</p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* Actions or Edit Form */}
-                                        <div className="w-full md:w-72 border-t md:border-t-0 md:border-l border-white/5 pt-3 md:pt-0 md:pl-4 flex flex-col justify-between">
+                                        <div className="w-full md:w-72 border-t md:border-t-0 md:border-l border-foreground/10 pt-3 md:pt-0 md:pl-4 flex flex-col justify-between">
                                             {editingId === key._id ? (
                                                 <div className="space-y-2">
                                                     <div className="space-y-1">
-                                                        <label className="text-[9px] font-black uppercase text-white/40 ml-1">Daily Limit ($)</label>
+                                                        <label className="text-[9px] font-black uppercase text-foreground/60 ml-1">Daily Limit ($)</label>
                                                         <input
                                                             type="number"
                                                             min={1}
                                                             max={1000}
                                                             value={editValues.dailyLimit}
                                                             onChange={(e) => setEditValues({ ...editValues, dailyLimit: Math.min(parseInt(e.target.value) || 1, 1000) })}
-                                                            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-[var(--accent)] transition-all"
+                                                            className="w-full bg-background border border-foreground/20 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-accent transition-all"
                                                         />
                                                     </div>
                                                     <div className="space-y-1">
-                                                        <label className="text-[9px] font-black uppercase text-white/40 ml-1">Allowed IPs (Optional - Comma separated)</label>
+                                                        <label className="text-[9px] font-black uppercase text-foreground/60 ml-1">Allowed IPs (Optional - Comma separated)</label>
                                                         <input
                                                             type="text"
                                                             placeholder="Leave empty for all"
                                                             value={editValues.allowedIpString}
                                                             onChange={(e) => setEditValues({ ...editValues, allowedIpString: e.target.value })}
-                                                            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-[var(--accent)] transition-all font-mono"
+                                                            className="w-full bg-background border border-foreground/20 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-accent transition-all font-mono"
                                                         />
                                                     </div>
                                                     <div className="flex gap-2">
                                                         <button
                                                             onClick={() => handleUpdateKey(key._id)}
                                                             disabled={isUpdating}
-                                                            className="flex-1 bg-[var(--accent)] text-black font-black uppercase italic text-[10px] py-2 rounded-xl flex items-center justify-center gap-2"
+                                                            className="flex-1 bg-accent text-background font-black uppercase italic text-[10px] py-2 rounded-xl flex items-center justify-center gap-2"
                                                         >
                                                             {isUpdating ? "..." : <><FiSave /> Save</>}
                                                         </button>
@@ -378,7 +378,7 @@ export default function ApiKeysPage() {
                                                         <FiTrash2 size={14} /> Revoke Key
                                                     </button>
 
-                                                    <div className="pt-2 text-[8px] text-white/20 text-center font-bold uppercase tracking-widest leading-relaxed">
+                                                    <div className="pt-2 text-[8px] text-foreground/40 text-center font-bold uppercase tracking-widest leading-relaxed">
                                                         Use with caution. Revoking or Regenerating is irreversible.
                                                     </div>
                                                 </div>
@@ -397,25 +397,25 @@ export default function ApiKeysPage() {
                     <h4 className="text-amber-500 text-xs font-black uppercase tracking-widest flex items-center gap-2 text-balance">
                         <FiAlertCircle /> Security is Active
                     </h4>
-                    <p className="text-[var(--muted)] text-[10px] leading-relaxed font-bold opacity-60">
+                    <p className="text-muted text-[10px] leading-relaxed font-bold opacity-60">
                         1. <b>Lock by IP (Optional):</b> Only allow certain computers to use your key.<br />
                         2. <b>Daily Limits:</b> Stop spending if it goes over your limit.
                     </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/10 space-y-3">
+                <div className="p-5 rounded-2xl bg-accent/5 border border-accent/10 space-y-3">
                     <div className="flex items-center justify-between">
-                        <h4 className="text-[var(--accent)] text-xs font-black uppercase tracking-widest flex items-center gap-2">
+                        <h4 className="text-accent text-xs font-black uppercase tracking-widest flex items-center gap-2">
                             <FiKey /> Developer Files
                         </h4>
-                        <a href="/api-docs.html" target="_blank" className="text-[10px] font-black uppercase italic text-[var(--accent)] hover:underline">
+                        <a href="/api-docs.html" target="_blank" className="text-[10px] font-black uppercase italic text-accent hover:underline">
                             v1.0 API Specs 📄
                         </a>
                     </div>
                     <div className="space-y-3">
                         <div className="space-y-1">
-                            <p className="text-[10px] font-bold text-white/40 uppercase">API URL</p>
-                            <code className="text-[10px] bg-black/30 px-2 py-1 rounded block truncate text-[var(--accent)] font-mono">
+                            <p className="text-[10px] font-bold text-foreground/50 uppercase">API URL</p>
+                            <code className="text-[10px] bg-foreground/10 px-2 py-1 rounded block truncate text-accent font-mono">
                                 https://bluebuff.in/api/service
                             </code>
                         </div>
