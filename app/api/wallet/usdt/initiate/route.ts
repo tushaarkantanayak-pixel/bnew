@@ -4,8 +4,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/models/User";
 import UsdtDeposit from "@/models/UsdtDeposit";
 
-// Conversion rate: 1 USDT = 98 coins (wallet balance points)
-const USDT_TO_COINS = 98;
+// Conversion rate dynamically pulled from environment
 
 export async function POST(req: Request) {
     try {
@@ -57,7 +56,8 @@ export async function POST(req: Request) {
             }, { status: 503 });
         }
 
-        const coinsToCredit = Math.floor(numUsdt * USDT_TO_COINS);
+        const usdtToCoins = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
+        const coinsToCredit = Math.floor(numUsdt * usdtToCoins);
 
         // ============ CREATE DEPOSIT ============
         const depositId = `USDT${Date.now()}${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
             network,
             usdtAmount: numUsdt,
             coinsToCredit,
-            rate: `1 USDT = ${USDT_TO_COINS} Coins`,
+            rate: `1 USDT = ${usdtToCoins} Coins`,
             expiresAt: deposit.expiresAt,
         });
 

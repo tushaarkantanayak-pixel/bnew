@@ -38,6 +38,7 @@ export default function WalletTab({
 }: WalletTabProps) {
   const [amount, setAmount] = useState("");
   const [amountError, setAmountError] = useState("");
+  const [showAddFunds, setShowAddFunds] = useState(false);
   // Determine default method: 'member' role uses USDT by default, others use UPI
   const isMemberOnly = userReferral?.userType === "member";
   const isAdminOrOwner = userReferral?.userType === "admin" || userReferral?.userType === "owner";
@@ -282,17 +283,17 @@ export default function WalletTab({
       {/* BALANCE */}
       <div className="relative group overflow-hidden">
         <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent blur-3xl opacity-20 pointer-events-none" />
-        <div className="relative p-5 sm:p-6 rounded-[2rem] bg-[var(--card)] border border-[var(--border)] flex items-center justify-between overflow-hidden shadow-sm">
-          <div className="absolute right-[-20px] top-[-20px] text-[var(--accent)]/5 rotate-12">
-            <FiZap size={140} />
+        <div className="relative p-4 sm:p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-between overflow-hidden shadow-sm">
+          <div className="absolute right-[-10px] top-[-10px] text-[var(--accent)]/5 rotate-12">
+            <FiZap size={100} />
           </div>
 
           <div className="relative z-10">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent)] mb-2 italic">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent)] mb-1 italic">
               Wallet Balance
             </p>
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-[var(--foreground)]">
+              <span className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase text-[var(--foreground)]">
                 {formatPrice(walletBalance)}
               </span>
               <span className="text-[10px] font-bold text-[var(--muted)]/60 uppercase tracking-widest leading-none">
@@ -301,15 +302,24 @@ export default function WalletTab({
             </div>
           </div>
 
-          <div className="relative z-10 w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/20 shadow-[0_0_20px_var(--accent)]/10">
-            <FiDollarSign size={24} />
+          <div className="relative z-10 w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/20 shadow-[0_0_20px_var(--accent)]/10">
+            <FiDollarSign size={20} />
           </div>
         </div>
       </div>
 
-      {/* ADD MONEY */}
+      {/* ADD MONEY TOGGLE */}
+      {!showAddFunds ? (
+        <button
+          onClick={() => setShowAddFunds(true)}
+          className="w-full p-4 rounded-2xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] font-black uppercase tracking-[0.2em] italic text-sm hover:bg-[var(--accent)] hover:text-black transition-all flex items-center justify-center gap-2"
+        >
+          <FiPlusCircle size={18} /> Add Funds to Wallet
+        </button>
+      ) : (
+      <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-        <div className="space-y-4">
+        <div className="space-y-4 order-2">
           <AnimatePresence mode="wait">
             {/* ─── INR Input (UPI / no method selected) ─── */}
             {method !== "usdt" && (
@@ -449,7 +459,7 @@ export default function WalletTab({
           </AnimatePresence>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 order-1">
           <div>
             <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] flex items-center gap-2 mb-4">
               <FiCreditCard className="text-[var(--accent)]" /> Payment Method
@@ -530,7 +540,7 @@ export default function WalletTab({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
-              className="col-span-full rounded-2xl border border-green-500/20 bg-green-500/5 p-4 md:p-5 space-y-4"
+              className="col-span-full rounded-2xl border border-green-500/20 bg-green-500/5 p-4 md:p-5 space-y-4 order-3"
             >
 
               {/* STEP: Show Deposit Address */}
@@ -655,6 +665,11 @@ export default function WalletTab({
           )}
         </AnimatePresence>
       </div>
+        <div className="flex justify-end mt-2">
+          <button onClick={() => setShowAddFunds(false)} className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest hover:text-[var(--foreground)] transition-colors underline underline-offset-2">Cancel / Hide Deposit</button>
+        </div>
+      </div>
+      )}
 
 
       {/* TRANSACTION HISTORY SECTION */}
