@@ -14,6 +14,7 @@ export default function GamesPage() {
   /* ================= STATE ================= */
   const [category, setCategory] = useState([]);
   const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [featuredGames, setFeaturedGames] = useState([]);
   const [mlbbVeriant, setMlbbVeriant] = useState([]);
@@ -90,6 +91,8 @@ export default function GamesPage() {
         setMemberships(json?.data?.memberships || null);
       } catch (err) {
         console.error("Failed to load games:", err);
+      } finally {
+        if (mounted) setLoading(false);
       }
     };
 
@@ -255,7 +258,18 @@ export default function GamesPage() {
         {/* ================= GAME CONTENT ================= */}
         <div className="space-y-20">
           <AnimatePresence mode="wait">
-            {isEmpty ? (
+            {loading ? (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="py-20 text-center flex flex-col items-center justify-center"
+              >
+                <div className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full animate-spin mb-4"></div>
+                <h3 className="text-lg font-black italic uppercase tracking-widest text-[var(--muted)]">Loading Games...</h3>
+              </motion.div>
+            ) : isEmpty ? (
               <motion.div
                 key="empty"
                 initial={{ opacity: 0 }}

@@ -66,14 +66,14 @@ export default function OurProductsPage() {
     <div className="min-h-screen bg-[var(--background)]">
 
 
-      <main className="pt-16 pb-12">
+      <main className="pt-8 md:pt-12 pb-8">
         <div className="max-w-7xl mx-auto px-6">
           {/* Hero Section */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter mb-4"
+              className="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-2"
             >
               Our <span className="text-[var(--accent)]">Products</span>
             </motion.h1>
@@ -95,18 +95,18 @@ export default function OurProductsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col p-6 rounded-[2rem] bg-[var(--card)]/40 border border-white/5 hover:border-[var(--accent)]/50 transition-all shadow-sm"
+                className="flex flex-col p-6 rounded-[2rem] bg-[var(--card)]/40 border border-[var(--foreground)]/5 hover:border-[var(--accent)]/50 transition-all shadow-sm"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div className="w-12 h-12 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center">
                     <product.icon className="text-[var(--accent)]" size={24} />
                   </div>
                   <div className="flex gap-2">
-                    <span className="px-2 py-1 bg-white/5 text-[var(--muted)] border border-white/10 text-[8px] font-black uppercase tracking-widest rounded-full">
+                    <span className="px-2 py-1 bg-[var(--foreground)]/5 text-[var(--muted)] border border-[var(--foreground)]/10 text-[8px] font-black uppercase tracking-widest rounded-full">
                       Product 0{i + 1}
                     </span>
                     {(product as any).isNew && (
-                      <span className="px-2 py-1 bg-[var(--accent)] text-white text-[8px] font-black rounded-full uppercase tracking-widest animate-pulse shadow-[0_0_10px_rgba(var(--accent-rgb),0.5)]">
+                      <span className="px-2 py-1 bg-[var(--accent)] text-black text-[8px] font-black rounded-full uppercase tracking-widest animate-pulse shadow-[0_0_10px_rgba(var(--accent-rgb),0.5)]">
                         NEW
                       </span>
                     )}
@@ -122,7 +122,7 @@ export default function OurProductsPage() {
 
                   <div className="grid grid-cols-1 gap-2 pt-2">
                     {product.features.map((feature, j) => (
-                      <div key={j} className="flex items-center gap-2 p-2 rounded-xl bg-black/20 border border-white/5">
+                      <div key={j} className="flex items-center gap-2 p-2 rounded-xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/10">
                         <FiCheckCircle className="text-[var(--accent)] flex-shrink-0" size={12} />
                         <span className="text-[9px] font-black uppercase tracking-tight text-[var(--foreground)] opacity-70 truncate">{feature}</span>
                       </div>
@@ -131,10 +131,10 @@ export default function OurProductsPage() {
                 </div>
 
                 <div className="flex items-center gap-3 pt-6 mt-auto">
-                  <a href={product.link || "#"} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 rounded-xl bg-[var(--accent)] text-white text-[9px] font-black uppercase italic tracking-widest hover:brightness-110 shadow-lg shadow-[var(--accent)]/20 transition-all text-center">
+                  <a href={product.link || "#"} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 rounded-xl bg-[var(--accent)] !text-black text-[9px] font-black uppercase italic tracking-widest hover:brightness-110 shadow-lg shadow-[var(--accent)]/20 transition-all text-center">
                     Get Started
                   </a>
-                  <button className="px-4 py-2.5 rounded-xl bg-white/5 text-[9px] font-black uppercase italic tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] transition-all">
+                  <button className="px-4 py-2.5 rounded-xl bg-[var(--foreground)]/5 text-[9px] font-black uppercase italic tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] transition-all">
                     Docs
                   </button>
                 </div>
@@ -147,7 +147,7 @@ export default function OurProductsPage() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-12 p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-[var(--card)] to-[var(--background)] border border-white/5 text-center space-y-3 relative overflow-hidden"
+            className="mt-12 p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-[var(--card)] to-[var(--background)] border border-[var(--foreground)]/5 text-center space-y-3 relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent" />
             <div className="space-y-2">

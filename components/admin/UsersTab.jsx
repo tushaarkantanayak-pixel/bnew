@@ -258,7 +258,7 @@ export default function UsersTab() {
       </div>
 
       {/* ================= SEARCH & FILTERS ================= */}
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex gap-2 sm:gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/40" size={16} />
           <input

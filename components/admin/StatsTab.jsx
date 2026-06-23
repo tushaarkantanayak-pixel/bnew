@@ -279,7 +279,7 @@ export default function StatsTab() {
             ) : (
                 <>
                     {/* TOP LEVEL OVERVIEW */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 pb-2 snap-x no-scrollbar w-full">
                         <PremiumInsightCard
                             label="Customer Pool"
                             value={formatPrice(data.totalBalance)}
@@ -1030,7 +1030,7 @@ function PremiumInsightCard({ label, value, color, icon, description }) {
     return (
         <motion.div 
             whileHover={{ y: -2 }}
-            className={`relative p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border bg-gradient-to-b ${colors[color]} bg-[var(--card)]/40 backdrop-blur-xl overflow-hidden group transition-all`}
+            className={`relative p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border bg-gradient-to-b ${colors[color]} bg-[var(--card)]/40 backdrop-blur-xl overflow-hidden group transition-all shrink-0 min-w-[85vw] sm:min-w-0 snap-center sm:snap-align-none`}
         >
             <div className="relative z-10 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
