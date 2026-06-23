@@ -31,47 +31,11 @@ export default function PackageSelector({
           </p>
         </div>
 
-        {/* Compact Glass Toggle */}
-        <div className="bg-[var(--card)]/30 backdrop-blur-xl p-0.5 rounded-[10px] border border-[var(--border)] flex relative w-max ring-1 ring-white/5 shadow-xl">
-          <motion.div
-            className="absolute top-0.5 bottom-0.5 bg-[var(--accent)] rounded-lg z-0"
-            initial={false}
-            animate={{
-              x: viewMode === "grid" ? 0 : "100%",
-              width: "50%"
-            }}
-            transition={{ type: "spring", stiffness: 450, damping: 35 }}
-          />
 
-          <button
-            onClick={() => setViewMode("grid")}
-            title="Grid View"
-            className={`relative z-10 w-9 h-7 flex items-center justify-center transition-all duration-300 ${viewMode === "grid" ? "text-white" : "text-[var(--muted)] hover:text-[var(--foreground)]"}`}
-          >
-            <FiGrid size={14} />
-          </button>
-
-          <button
-            onClick={() => setViewMode("slider")}
-            title="Slider View"
-            className={`relative z-10 w-9 h-7 flex items-center justify-center transition-all duration-300 ${viewMode === "slider" ? "text-white" : "text-[var(--muted)] hover:text-[var(--foreground)]"}`}
-          >
-            <FiList size={14} />
-          </button>
-        </div>
       </div>
 
       {/* ================= CONTENT ================= */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={viewMode}
-          initial={{ opacity: 0, scale: 0.99 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.01 }}
-          transition={{ duration: 0.25 }}
-        >
-          {viewMode === "grid" ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 pb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 pb-10">
               {items.map((item) => {
                 const discount = calculateDiscount(item.sellingPrice, item.dummyPrice);
                 const isActive = activeItem.itemSlug === item.itemSlug;
@@ -143,75 +107,6 @@ export default function PackageSelector({
                 );
               })}
             </div>
-          ) : (
-            <div className="pb-10">
-              <div
-                ref={sliderRef}
-                className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-6 px-1 scrollbar-hide"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                {items.map((item) => {
-                  const discount = calculateDiscount(item.sellingPrice, item.dummyPrice);
-                  const isActive = activeItem.itemSlug === item.itemSlug;
-
-                  return (
-                    <div
-                      key={item.itemSlug}
-                      onClick={() => scrollToItem(item)}
-                      className={`relative snap-center min-w-[120px] rounded-2xl p-3 cursor-pointer transition-all duration-200 border flex flex-col justify-between overflow-hidden active:scale-[0.98]
-                      ${isActive
-                          ? "border-[var(--accent)] bg-[var(--accent)]/[0.04] shadow-[0_20px_40px_-15px_rgba(var(--accent-rgb),0.3)] ring-1 ring-[var(--accent)]/30"
-                          : "border-[var(--border)] bg-[var(--card)]/40 opacity-70 hover:opacity-100 hover:border-[var(--accent)]/30"
-                        }`}
-                    >
-                      <div className="mb-2">
-                        <div className={`relative w-7 h-7 rounded-[10px] overflow-hidden mb-1.5 transition-all duration-500 ${isActive ? "shadow-xl shadow-[var(--accent)]/30 ring-1 ring-[var(--accent)]" : "bg-[var(--card)] border border-[var(--border)]"}`}>
-                          <Image
-                            src={item?.itemImageId?.image || item?.image || "/logo.png"}
-                            alt={item.itemName}
-                            fill
-                            unoptimized
-                            className={`object-cover ${item.itemAvailablity === false ? "grayscale opacity-50" : ""}`}
-                          />
-                        </div>
-                        <p className={`text-[10px] sm:text-[11px] font-[900] tracking-tight line-clamp-2 leading-snug transition-colors duration-300 ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]"}`}>
-                          {item.itemName}
-                        </p>
-                      </div>
-
-                      {item.itemAvailablity === false && (
-                        <div className="absolute top-2 right-2 z-30">
-                          <span className="bg-rose-500 text-white text-[6px] font-[1000] px-1.5 py-0.5 rounded-full uppercase tracking-widest border border-rose-400">
-                            Out of Stock
-                          </span>
-                        </div>
-                      )}
-
-                      <div className={`pt-2 border-t border-[var(--border)] ${item.itemAvailablity === false ? "opacity-30" : ""}`}>
-                        <div className="flex items-baseline gap-1.5">
-                          <p className={`text-xl font-[1000] tracking-tighter ${isActive ? "text-[var(--accent)]" : "text-[var(--foreground)]"}`}>
-                            {formatPrice(item.sellingPrice)}
-                          </p>
-                          {item.dummyPrice && (
-                            <p className="text-[9px] font-bold text-[var(--muted)] line-through opacity-20">
-                              {formatPrice(item.dummyPrice)}
-                            </p>
-                          )}
-                        </div>
-                        {discount > 0 && item.itemAvailablity !== false && (
-                          <p className="text-[6px] font-black text-[var(--accent)] uppercase tracking-[0.2em] mt-0.5">
-                            save {discount}% now
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
     </div>
   );
 }

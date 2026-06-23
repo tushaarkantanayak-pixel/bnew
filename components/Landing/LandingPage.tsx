@@ -78,15 +78,11 @@ export default function LandingPage() {
   return (
     <div className="bg-[var(--background)] text-[var(--foreground)] min-h-screen font-sans overflow-x-hidden selection:bg-[var(--accent)]/20">
 
-      {/* ── fixed ambient glows ── */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute -top-[20%] left-[-10%] w-[50vw] h-[60vh] bg-[var(--accent)]/[0.06] blur-[120px] rounded-full" />
-        <div className="absolute top-[60%] right-[-5%]  w-[35vw] h-[40vh] bg-purple-600/[0.05] blur-[100px] rounded-full" />
-      </div>
+      {/* ── fixed ambient glows removed ── */}
 
       {/* ═══════ HERO ═══════ */}
       <section
-        className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden border-b border-[var(--border)]"
+        className="relative min-h-[100svh] flex flex-col justify-center md:justify-start md:pt-0 overflow-hidden border-b border-[var(--border)]"
       >
         {/* ── 3D DECORATIVE BACKGROUND ── */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -189,15 +185,14 @@ export default function LandingPage() {
             />
           ))}
 
-          {/* Accent glow blob center-right */}
-          <div className="absolute top-[10%] right-[5%] w-[30vw] h-[30vw] max-w-[360px] max-h-[360px] bg-[var(--accent)]/[0.06] blur-[90px] rounded-full" />
+
         </div>
 
         {/* thin top accent line */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent z-10" />
 
         {/* content grid */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-16 md:pt-16 pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-24 md:pt-[72px] pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
 
           {/* ── LEFT: text ── */}
           <div className="flex flex-col gap-7">
@@ -211,7 +206,7 @@ export default function LandingPage() {
             </div>
 
             {/* headline */}
-            <h1 className="text-[clamp(2.2rem,6vw,4.8rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
+            <h1 className="text-[clamp(2.2rem,5vw,4.0rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
               Build Your
               <br />
               <span className="text-[var(--accent)]">Automated Top-Up</span>

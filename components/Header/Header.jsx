@@ -158,7 +158,7 @@ export default function Header() {
     >
       <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/30 to-transparent transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`} />
 
-      <div className="w-full px-4 md:px-8">
+      <div className="max-w-7xl mx-auto w-full px-5 md:px-10">
         <div className="flex items-center justify-between h-14 md:h-16">
 
           <div className="flex-1 flex items-center justify-start">
