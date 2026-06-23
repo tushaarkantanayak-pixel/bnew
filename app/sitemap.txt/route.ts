@@ -21,8 +21,11 @@ export async function GET() {
         `${baseUrl}/blog/mlbb`,
         `${baseUrl}/blog/hok`,
         `${baseUrl}/blog/genshin`,
+        `${baseUrl}/blog/tips`,
+        `${baseUrl}/ourproducts`,
         `${baseUrl}/idsonsell`,
         `${baseUrl}/leaderboard`,
+        `${baseUrl}/special-leaderboard`,
         `${baseUrl}/check`,
     ];
 
