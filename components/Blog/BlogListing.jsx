@@ -81,9 +81,9 @@ export default function BlogListing({ initialGame = "all" }) {
 
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <h2 className="text-3xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
+            <h1 className="text-3xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
               {initialGame === "all" ? "Latest" : initialGame} <span className="text-[var(--accent)]">News</span>
-            </h2>
+            </h1>
             
             {/* 🔍 COMPACT SEARCH & FILTER TOGGLE */}
             <div className="flex items-center gap-2 w-full md:w-auto mt-4 md:mt-0">
@@ -225,19 +225,7 @@ export default function BlogListing({ initialGame = "all" }) {
           </nav>
         )}
 
-        {/* 🏔️ SEO FOOTER */}
-        <motion.footer 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="mt-32 pt-16 border-t border-[var(--border)]/30"
-        >
-            <h1 className="text-4xl md:text-6xl font-[1000] italic tracking-tighter uppercase leading-none mb-6 opacity-20">
-                {initialGame === "all" ? "MLBB" : initialGame.toUpperCase()} <span className="text-[var(--accent)]">NEWS & BLOGS</span>
-            </h1>
-            <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed italic max-w-2xl opacity-40">
-                All our <strong className="text-[var(--foreground)]">{initialGame === "all" ? "game" : initialGame} top up guides</strong>, price lists, and safety tips. Stay updated with the latest <strong className="text-[var(--foreground)]">mobile legends recharge india fast</strong> tips and diamond bundle value comparisons. We provide the correct info for <strong>Mobile Legends players in India</strong> to make sure you get cheap diamond top-ups safely.
-            </p>
-        </motion.footer>
+        {/* SEO Footer Removed per spam policy */}
       </div>
     </main>
   );

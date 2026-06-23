@@ -101,8 +101,7 @@ export default function LandingPage() {
               transform: "perspective(600px) rotateX(55deg)",
               transformOrigin: "bottom center",
               maskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
-            }}
+              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)" }}
           />
 
           {/* Large outer glow ring — top right */}
@@ -115,7 +114,7 @@ export default function LandingPage() {
             {/* dot on ring */}
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--accent)]"
-              style={{ boxShadow: "0 0 12px 4px rgba(var(--accent-rgb),0.5)" }}
+              
             />
           </motion.div>
 
@@ -143,15 +142,12 @@ export default function LandingPage() {
                 width: "100%", height: "100%",
                 border: "1px solid rgba(var(--accent-rgb),0.25)",
                 transform: "rotateX(30deg) rotateY(45deg)",
-                position: "relative",
-                boxShadow: "inset 0 0 20px rgba(var(--accent-rgb),0.05), 0 0 20px rgba(var(--accent-rgb),0.08)",
-              }}
+                position: "relative" }}
             >
               {/* inner face */}
               <div style={{
                 position: "absolute", inset: 12,
-                border: "1px solid rgba(var(--accent-rgb),0.12)",
-              }} />
+                border: "1px solid rgba(var(--accent-rgb),0.12)" }} />
             </div>
           </motion.div>
 
@@ -164,9 +160,7 @@ export default function LandingPage() {
             <div style={{
               width: 28, height: 28,
               border: "1px solid rgba(var(--accent-rgb),0.2)",
-              transform: "rotate(45deg)",
-              boxShadow: "0 0 10px rgba(var(--accent-rgb),0.12)",
-            }} />
+              transform: "rotate(45deg)" }} />
           </motion.div>
 
           {/* Wireframe Sphere (Intersecting rings) */}
@@ -191,7 +185,7 @@ export default function LandingPage() {
               animate={{ scale: [1, 1.4, 1], opacity: [Number(o)*0.6, Number(o), Number(o)*0.6] }}
               transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.8 }}
               className="absolute w-1.5 h-1.5 rounded-full bg-[var(--accent)] hidden md:block"
-              style={{ top: t, left: l, opacity: Number(o), boxShadow: "0 0 8px 2px rgba(var(--accent-rgb),0.3)" }}
+              style={{ top: t, left: l, opacity: Number(o) }}
             />
           ))}
 
@@ -218,11 +212,11 @@ export default function LandingPage() {
 
             {/* headline */}
             <h1 className="text-[clamp(2.2rem,6vw,4.8rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
-              Start your
+              Build Your
               <br />
-              <span className="text-[var(--accent)]">Gaming Store</span>
+              <span className="text-[var(--accent)]">Automated Top-Up</span>
               <br />
-              & Grow Fast.
+              Gaming Store.
             </h1>
 
             {/* sub */}
@@ -235,7 +229,7 @@ export default function LandingPage() {
               <Link
                 href="/contact"
                 style={{ color: "#000" }}
-                className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-[0_10px_40px_-10px_rgba(var(--accent-rgb),0.5)]"
+                className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all "
               >
                 Contact Us
                 <span className="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -280,8 +274,7 @@ export default function LandingPage() {
             transition={{ delay: 0.15 }}
             className="flex items-center justify-center relative h-[340px] md:h-[480px] mt-6 md:mt-0"
           >
-            {/* Ambient glow pool */}
-            <div className="absolute w-[320px] h-[320px] bg-[var(--accent)]/20 blur-[90px] rounded-full" />
+            {/* Ambient glow pool removed per request */}
 
             {/* MAIN CARD */}
             <motion.div
@@ -291,14 +284,12 @@ export default function LandingPage() {
               style={{
                 background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
                 border: "1px solid rgba(168,85,247,0.25)",
-                boxShadow: "0 0 40px rgba(168,85,247,0.15), inset 0 1px 0 rgba(255,255,255,0.08)",
-                backdropFilter: "blur(20px)",
-              }}
+                backdropFilter: "blur(20px)" }}
             >
               {/* card top bar */}
               <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: "1px solid rgba(168,85,247,0.12)" }}>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" style={{ boxShadow: "0 0 8px rgba(168,85,247,0.8)" }} />
+                  <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse"  />
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]">BlueBuff Console</span>
                 </div>
                 <div className="flex gap-1.5">
@@ -332,8 +323,7 @@ export default function LandingPage() {
                       className="flex-1 rounded-sm origin-bottom"
                       style={{
                         height: `${h}%`,
-                        background: i === 11 ? "var(--accent)" : `rgba(168,85,247,${0.15 + (i / 11) * 0.35})`,
-                      }}
+                        background: i === 11 ? "var(--accent)" : `rgba(168,85,247,${0.15 + (i / 11) * 0.35})` }}
                     />
                   ))}
                 </div>
@@ -362,9 +352,7 @@ export default function LandingPage() {
               style={{
                 background: "rgba(10,0,30,0.85)",
                 border: "1px solid rgba(168,85,247,0.3)",
-                backdropFilter: "blur(12px)",
-                boxShadow: "0 8px 32px rgba(168,85,247,0.2)",
-              }}
+                backdropFilter: "blur(12px)" }}
             >
               <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(168,85,247,0.15)" }}>&#9889;</div>
               <div>
@@ -381,9 +369,7 @@ export default function LandingPage() {
               style={{
                 background: "rgba(10,0,30,0.85)",
                 border: "1px solid rgba(74,222,128,0.25)",
-                backdropFilter: "blur(12px)",
-                boxShadow: "0 8px 32px rgba(74,222,128,0.1)",
-              }}
+                backdropFilter: "blur(12px)" }}
             >
               <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(74,222,128,0.1)" }}>&#128274;</div>
               <div>
@@ -400,9 +386,7 @@ export default function LandingPage() {
               style={{
                 background: "rgba(10,0,30,0.85)",
                 border: "1px solid rgba(250,204,21,0.2)",
-                backdropFilter: "blur(12px)",
-                boxShadow: "0 8px 32px rgba(250,204,21,0.08)",
-              }}
+                backdropFilter: "blur(12px)" }}
             >
               <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(250,204,21,0.1)" }}>&#127918;</div>
               <div>
@@ -418,7 +402,7 @@ export default function LandingPage() {
                 animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
                 transition={{ duration: 2.5, repeat: Infinity, delay: i * 1.2 }}
                 className={`absolute ${pos} w-3 h-3 rounded-full z-30 hidden md:block`}
-                style={{ background: "var(--accent)", boxShadow: "0 0 12px 4px rgba(168,85,247,0.5)" }}
+                style={{ background: "var(--accent)" }}
               />
             ))}
           </motion.div>
