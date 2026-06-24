@@ -43,6 +43,7 @@ export async function POST(req) {
         const isMLBB = gameSlug.includes("mlbb") || gameSlug.includes("legends988") || gameSlug.includes("weeklymonthly-bundle");
         let isValidPlayer = false;
         let playerRegion = "Global";
+        let fetchedPlayerName = "";
 
         try {
             // 1. Always check name for ALL games (Universal validator)
@@ -62,6 +63,7 @@ export async function POST(req) {
             const nameData = await nameCheckResp.json();
             if ((nameData?.success === 200 || nameData?.success === true) && (nameData?.data?.username || nameData?.data?.name) && nameData?.data?.valid !== false) {
                 playerRegion = nameData?.data?.region || "Global";
+                fetchedPlayerName = nameData?.data?.username || nameData?.data?.name || "";
                 isValidPlayer = true;
             }
 
@@ -79,6 +81,7 @@ export async function POST(req) {
                 const regionData = await regionCheckResp.json();
                 if (regionData?.success === 200 && (regionData?.data?.username || regionData?.data?.region)) {
                     playerRegion = regionData.data.region || playerRegion;
+                    if (!fetchedPlayerName) fetchedPlayerName = regionData.data.username || "";
                     isValidPlayer = true;
                 }
 
@@ -172,7 +175,7 @@ export async function POST(req) {
                 gameSlug,
                 itemSlug,
                 itemName,
-                playerName: playerName || "",
+                playerName: fetchedPlayerName || playerName || "",
                 playerId,
                 zoneId: zoneId || "",
                 price,
