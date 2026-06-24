@@ -165,14 +165,14 @@ export default function GamesPage() {
   const TabButton = ({ id, label, icon: Icon }) => (
     <button
       onClick={() => setActiveTab(id)}
-      className={`flex-1 flex items-center justify-center gap-1.5 px-1.5 py-2 rounded-lg font-bold tracking-tight text-[10px] transition-all duration-300 border
+      className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold tracking-tight text-[11px] sm:text-[12px] transition-all duration-300
         ${activeTab === id
-          ? "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/40"
-          : "bg-[var(--card)] text-[var(--muted)] border-[var(--border)] hover:bg-[var(--border)]/50"
+          ? "bg-[var(--foreground)] text-[var(--background)] shadow-sm"
+          : "bg-transparent text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5"
         }`}
     >
-      <Icon size={12} className={`shrink-0 ${activeTab === id ? "fill-current" : ""}`} />
-      <span className="truncate">{label}</span>
+      <Icon size={13} className={`shrink-0 ${activeTab === id ? "stroke-[2.5px]" : ""}`} />
+      <span className="whitespace-nowrap">{label}</span>
     </button>
   );
 
@@ -181,77 +181,76 @@ export default function GamesPage() {
       {/* Background Decorative Glows Removed */}
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* ================= COMPACT SEARCH & CONTROLS ================= */}
-        <div className="space-y-4 mb-16">
-          <div className="flex items-center gap-2 transition-all">
-            {/* SEARCH */}
-            <div className="relative flex-1 group/search">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within/search:text-[var(--accent)] transition-colors" size={15} />
-              <input
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search..."
-                className="w-full pl-11 pr-10 py-3 rounded-[1.2rem] bg-[var(--background)] border border-[var(--border)] focus:bg-[var(--card)] focus:border-[var(--accent)]/30 outline-none text-[10px] sm:text-xs font-black tracking-widest transition-all placeholder:text-[var(--muted)]/30 uppercase italic text-[var(--foreground)]"
-              />
-              <AnimatePresence>
-                {searchQuery && (
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-lg hover:bg-red-500/10 text-red-500/60 hover:text-red-500 transition-colors"
-                  >
-                    <FiX size={14} />
-                  </motion.button>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* ACTION GRID - COMPACT */}
-            <div className="flex items-center gap-2">
-              {/* VIEW TOGGLE */}
-              <div className="flex p-1 rounded-xl bg-[var(--border)]/30 border border-[var(--border)]">
-                {[
-                  { id: "grid", icon: FiGrid },
-                  { id: "list", icon: FiList },
-                ].map((mode) => (
-                  <button
-                    key={mode.id}
-                    onClick={() => setViewMode(mode.id)}
-                    className={`p-2 rounded-lg transition-all duration-300 ${viewMode === mode.id
-                      ? "bg-[var(--accent)] text-black shadow-lg"
-                      : "text-[var(--muted)] hover:text-[var(--foreground)]"
-                      }`}
-                  >
-                    <mode.icon size={14} />
-                  </button>
-                ))}
-              </div>
-
-              {/* FILTER BUTTON */}
-              <button
-                onClick={() => setShowFilter(true)}
-                className={`relative flex items-center gap-2 px-3 py-3 rounded-xl font-black uppercase tracking-tight text-[9px] italic border transition-all duration-300 ${activeFilterCount > 0
-                  ? "border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]"
-                  : "border-[var(--border)] bg-[var(--card)] text-[var(--muted)] hover:border-[var(--accent)]/30 hover:text-[var(--accent)]"
-                  }`}
-              >
-                <FiFilter size={13} className={activeFilterCount > 0 ? "animate-pulse" : ""} />
-                {activeFilterCount > 0 && (
-                  <span className="flex h-4 w-4 items-center justify-center bg-[var(--accent)] text-black rounded-md text-[8px] font-black">
-                    {activeFilterCount}
-                  </span>
-                )}
-              </button>
-            </div>
+        {/* ================= UNIFIED COMPACT HEADER ================= */}
+        <div className="flex flex-col md:flex-row items-center gap-2 mb-10 w-full bg-[var(--card)] p-1.5 rounded-2xl border border-[var(--border)] shadow-sm">
+          
+          {/* SEARCH */}
+          <div className="relative flex-1 w-full group/search shrink-0">
+            <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within/search:text-[var(--foreground)] transition-colors" size={14} />
+            <input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search games..."
+              className="w-full pl-9 pr-9 py-2.5 rounded-xl bg-transparent border-none focus:ring-0 outline-none text-[13px] font-medium transition-all placeholder:text-[var(--muted)]/60 text-[var(--foreground)]"
+            />
+            <AnimatePresence>
+              {searchQuery && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                >
+                  <FiX size={14} />
+                </motion.button>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* CATEGORY TABS - ULTRA COMPACT SINGLE ROW */}
-          <div className="flex items-center gap-1.5 w-full">
-            <TabButton id="all" label="All" icon={FiGrid} />
-            <TabButton id="mlbb" label="MLBB" icon={FiZap} />
-            <TabButton id="others" label="Others" icon={FiPackage} />
+          {/* SCROLLABLE ACTION ROW */}
+          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto no-scrollbar scroll-smooth pl-1 md:pl-0 pb-1 md:pb-0">
+            {/* CATEGORY TABS */}
+            <div className="flex items-center p-1 shrink-0 rounded-xl bg-[var(--background)] border border-[var(--border)] shadow-inner">
+              <TabButton id="all" label="All" icon={FiGrid} />
+              <TabButton id="mlbb" label="MLBB" icon={FiZap} />
+              <TabButton id="others" label="Others" icon={FiPackage} />
+            </div>
+
+            {/* VIEW TOGGLE */}
+            <div className="flex items-center p-1 shrink-0 rounded-xl bg-[var(--background)] border border-[var(--border)] shadow-inner">
+              {[
+                { id: "grid", icon: FiGrid },
+                { id: "list", icon: FiList },
+              ].map((mode) => (
+                <button
+                  key={mode.id}
+                  onClick={() => setViewMode(mode.id)}
+                  className={`p-1.5 rounded-lg transition-all duration-300 ${viewMode === mode.id
+                    ? "bg-[var(--foreground)] text-[var(--background)] shadow-sm"
+                    : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5"
+                    }`}
+                >
+                  <mode.icon size={13} className={viewMode === mode.id ? "stroke-[2.5px]" : ""} />
+                </button>
+              ))}
+            </div>
+
+            {/* FILTER BUTTON */}
+            <button
+              onClick={() => setShowFilter(true)}
+              className={`relative shrink-0 flex items-center justify-center w-[34px] h-[34px] rounded-xl transition-all duration-300 border ${activeFilterCount > 0
+                ? "bg-[var(--accent)] text-[var(--background)] border-[var(--accent)] shadow-sm"
+                : "bg-[var(--background)] border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 shadow-inner"
+                }`}
+            >
+              <FiFilter size={13} className={activeFilterCount > 0 ? "stroke-[2.5px]" : ""} />
+              {activeFilterCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center bg-[var(--background)] text-[var(--foreground)] rounded-full text-[9px] font-bold border border-[var(--border)] shadow-sm">
+                  {activeFilterCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
 

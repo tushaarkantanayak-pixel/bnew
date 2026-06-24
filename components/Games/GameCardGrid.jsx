@@ -1,44 +1,17 @@
 "use client";
- 
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { FiChevronRight, FiEye } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import { useState } from "react";
- 
+
 export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
   const [imgError, setImgError] = useState(false);
   
-  // 3D Tilt Setup
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   if (!game) return null;
   const disabled = isOutOfStock(game.gameName);
- 
+
   const getFallbackLetter = (name) => {
     return name ? name.charAt(0).toUpperCase() : "?";
   };
@@ -47,103 +20,87 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
     if (!name) return null;
     const lower = name.toLowerCase();
     if (lower.includes("all region")) {
-      return { text: "ALL REGION", bg: "bg-[#e8d5d5]", textClass: "text-[#7a2021]" };
+      return { text: "All Region", badge: "bg-blue-500 text-white border-blue-600 shadow-sm" };
     }
     if (lower.includes("double") || lower.includes("india") || lower === "mobile legends" || lower.includes("indian")) {
-      return { text: "INDIAN", bg: "bg-[#7db45c]", textClass: "text-white" }; 
+      return { text: "Indian", badge: "bg-emerald-500 text-white border-emerald-600 shadow-sm" }; 
     }
     return null;
   };
 
   const tag = getTag(game.gameName);
- 
+
   return (
-    <motion.div
-      style={{
-        perspective: 1000,
-        transformStyle: "preserve-3d",
-      }}
-      className="h-full"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full">
-        <motion.div
-          style={{ rotateX, rotateY }}
-          className={`group relative flex flex-col h-full rounded-sm overflow-hidden border transition-all shadow-sm
-          ${disabled
-              ? "opacity-60 cursor-not-allowed border-[var(--border)] bg-[var(--background)]"
-              : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)]/50 hover:shadow-md"
-            }`}
+    <div className="h-full">
+      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full group">
+        
+        {/* Ultra-Compact Premium Card */}
+        <div className={`relative h-full bg-[var(--card)] rounded-[14px] p-1 flex flex-col transition-all duration-500 ease-out
+          ${disabled 
+            ? "opacity-60 cursor-not-allowed border border-[var(--border)]" 
+            : "border border-[var(--border)] hover:border-[var(--border)]/80 shadow-sm hover:shadow-md hover:-translate-y-0.5"}`}
         >
-          {/* IMAGE CONTAINER */}
-          <div className="relative w-full aspect-square overflow-hidden bg-[var(--background)]">
+          {/* Top Image Container */}
+          <div className="relative w-full aspect-square sm:aspect-[4/3] rounded-[10px] overflow-hidden bg-[var(--background)]">
+            
+            {/* Tag / Badge */}
             {tag && (
-              <div className={`absolute top-4 left-1/2 -translate-x-1/2 z-20 px-3 py-1 rounded-full text-[9px] font-black tracking-widest uppercase shadow-sm ${tag.bg} ${tag.textClass}`}>
-                {tag.text}
+              <div className="absolute top-1.5 left-1.5 z-20">
+                <span className={`px-1.5 py-0.5 rounded border text-[8px] sm:text-[9px] font-semibold tracking-wide shadow-sm ${tag.badge}`}>
+                  {tag.text}
+                </span>
               </div>
             )}
+
             {!imgError && game.gameImageId?.image ? (
               <Image
                 src={game.gameImageId.image}
                 alt={game.gameName}
                 fill
-                sizes="(max-width: 768px) 33vw, 25vw"
-                className={`object-cover ${disabled ? "grayscale blur-[2px]" : ""}`}
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-105 ${disabled ? "grayscale opacity-80" : ""}`}
                 onError={() => setImgError(true)}
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--accent)]/20 to-transparent">
-                <span className="text-4xl font-black italic tracking-tighter text-[var(--accent)] opacity-40">
+              <div className="absolute inset-0 flex items-center justify-center bg-[var(--accent)]/5">
+                <span className="text-2xl font-medium tracking-tight text-[var(--accent)] opacity-30">
                   {getFallbackLetter(game.gameName)}
                 </span>
               </div>
             )}
-  
-            {/* OVERLAYS */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-40 pointer-events-none" />
-  
-            {/* VIEW BUTTON (HOVER ONLY) */}
-            {!disabled && (
-              <div
-                style={{ transform: "translateZ(30px)" }}
-                className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl">
-                  <FiEye size={18} />
-                </div>
-              </div>
-            )}
-  
-            {/* OUT OF STOCK OVERLAY */}
+            
+            {/* Out of Stock Overlay */}
             {disabled && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[1px] z-30">
-                <span className="px-4 py-2 rounded-xl bg-red-500/90 text-white text-[10px] font-black uppercase tracking-widest italic">
-                  SOLD OUT
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-30">
+                <span className="px-1.5 py-0.5 rounded border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] text-[8px] font-semibold uppercase tracking-widest shadow-sm">
+                  Sold Out
                 </span>
               </div>
             )}
           </div>
-  
-          {/* CONTENT */}
-          <div
-            className="flex-1 p-3.5 relative bg-[var(--card)] flex flex-col justify-center"
-            style={{ transform: "translateZ(20px)" }}
-          >
-            <div className="flex items-center justify-between gap-2">
-              <h3
-                className={`text-[12px] sm:text-[13px] font-[900] uppercase italic leading-tight transition-colors
-                ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)] group-hover:text-[var(--accent)]"}`}
-              >
-                {game.gameName}
-              </h3>
-              {!disabled && (
-                <FiChevronRight className="text-gray-400 group-hover:text-[var(--accent)] flex-shrink-0" size={16} />
-              )}
-            </div>
+
+          {/* Bottom Content Container - ULTRA COMPACT */}
+          <div className="flex-1 p-1.5 sm:p-2 flex flex-col justify-between">
+            {/* break-words fixes the "WEEKLY/MONTHLY" overflow issue */}
+            <h3 className={`text-[11px] sm:text-[13px] font-bold tracking-tight leading-[1.2] break-words whitespace-normal transition-colors duration-300
+              ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)] group-hover:text-[var(--accent)]"}`}
+              style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
+              title={game.gameName}
+            >
+              {game.gameName}
+            </h3>
+
+            {/* Minimal Arrow Bottom Right */}
+            {!disabled && (
+              <div className="flex justify-end mt-1">
+                <div className="w-5 h-5 rounded-full bg-[var(--background)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--foreground)] group-hover:text-[var(--background)] group-hover:border-[var(--foreground)] transition-all duration-300 ease-out">
+                  <FiArrowRight size={10} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                </div>
+              </div>
+            )}
           </div>
-        </motion.div>
+        </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

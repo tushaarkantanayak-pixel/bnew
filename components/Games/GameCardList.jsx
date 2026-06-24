@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/public/logo.png";
-import { FiArrowRight, FiZap, FiShield } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import { useState } from "react";
 
 export default function GameCardList({ game, isOutOfStock, index = 0 }) {
   const [imgError, setImgError] = useState(false);
+  
+  if (!game) return null;
   const disabled = isOutOfStock(game.gameName);
 
   const getFallbackLetter = (name) => {
@@ -19,10 +20,10 @@ export default function GameCardList({ game, isOutOfStock, index = 0 }) {
     if (!name) return null;
     const lower = name.toLowerCase();
     if (lower.includes("all region")) {
-      return { text: "ALL REGION", bg: "bg-[#f5ecec]", textClass: "text-[#872e2e]" };
+      return { text: "All Region", badge: "bg-blue-500 text-white border-blue-600 shadow-sm" };
     }
     if (lower.includes("double") || lower.includes("india") || lower === "mobile legends" || lower.includes("indian")) {
-      return { text: "INDIAN", bg: "bg-[#b1d496]", textClass: "text-white" }; 
+      return { text: "Indian", badge: "bg-emerald-500 text-white border-emerald-600 shadow-sm" }; 
     }
     return null;
   };
@@ -31,73 +32,75 @@ export default function GameCardList({ game, isOutOfStock, index = 0 }) {
 
   return (
     <div className="h-full">
-      <Link
-        href={disabled ? "#" : `/games/${game.gameSlug}`}
-        className={`group relative flex items-center gap-6 p-4 rounded-sm border transition-all overflow-hidden
-        ${disabled
-            ? "opacity-40 grayscale cursor-not-allowed border-[var(--border)] bg-[var(--background)]"
-            : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)]/30 hover:shadow-md"
-            }`}
-      >
-        {/* AVATAR SYSTEM */}
-        <div className="relative flex-shrink-0">
-          <div className={`
-            relative w-24 h-24 sm:w-28 sm:h-28 rounded-sm overflow-hidden bg-transparent
-          `}>
+      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full group">
+        
+        {/* Premium Minimalist Card */}
+        <div className={`relative h-full bg-[var(--card)] rounded-[20px] p-2.5 sm:p-3 flex items-center gap-4 sm:gap-5 transition-all duration-500 ease-out
+          ${disabled 
+            ? "opacity-60 cursor-not-allowed border border-[var(--border)]" 
+            : "border border-[var(--border)] hover:border-[var(--border)]/80 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.03)] hover:-translate-y-0.5"}`}
+        >
+          {/* Left Image Container */}
+          <div className="relative shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-[14px] overflow-hidden bg-[var(--background)] border border-[var(--border)]/50">
             {!imgError && game.gameImageId?.image ? (
               <Image
                 src={game.gameImageId.image}
                 alt={game.gameName}
                 fill
                 sizes="120px"
-                className="object-contain"
+                className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-105 ${disabled ? "grayscale opacity-80" : ""}`}
                 onError={() => setImgError(true)}
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--accent)]/20 to-transparent">
-                <span className="text-2xl font-black italic tracking-tighter text-[var(--accent)] opacity-40">
+              <div className="absolute inset-0 flex items-center justify-center bg-[var(--accent)]/5">
+                <span className="text-3xl font-medium tracking-tight text-[var(--accent)] opacity-30">
                   {getFallbackLetter(game.gameName)}
                 </span>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* INFO SYSTEM */}
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-col mb-1.5">
-            <h3
-              className={`text-[16px] sm:text-[18px] font-[900] uppercase italic leading-tight transition-colors
-              ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)] group-hover:text-[var(--accent)]"}`}
-            >
-              {game.gameName}
-            </h3>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2 mt-1">
-            {tag && (
-              <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${tag.bg} ${tag.textClass}`}>
-                {tag.text}
-              </span>
-            )}
+            
+            {/* Out of Stock Overlay */}
             {disabled && (
-              <span className="px-3 py-1 rounded-full bg-red-400/10 border border-red-400/20 text-red-500/60 text-[10px] font-black uppercase tracking-widest italic">
-                Out of Stock
-              </span>
+              <div className="absolute inset-0 flex items-center justify-center bg-[var(--background)]/80 backdrop-blur-sm z-30">
+                <span className="px-2 py-1 rounded border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] text-[8px] font-semibold uppercase tracking-widest shadow-sm">
+                  Sold Out
+                </span>
+              </div>
             )}
           </div>
-        </div>
 
-        {/* ACTION SYSTEM */}
-        {!disabled && (
-          <div className="relative shrink-0 pr-2">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[var(--background)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--foreground)] group-hover:bg-[var(--accent)]/20 transition-colors">
-              <FiArrowRight size={20} />
+          {/* Right Content Container */}
+          <div className="flex-1 min-w-0 flex flex-col justify-center">
+            {/* Added min-w-0 wrapper ensures truncation works smoothly */}
+            <div className="min-w-0 w-full pr-2">
+              <h3 className={`text-[15px] sm:text-[16px] font-bold tracking-tight leading-snug whitespace-normal transition-colors duration-300 mb-2.5
+                ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)] group-hover:text-[var(--accent)]"}`}
+                style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
+                title={game.gameName}
+              >
+                {game.gameName}
+              </h3>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {tag && (
+                <span className={`px-2.5 py-1 rounded-md border text-[10px] font-semibold tracking-wide shadow-sm ${tag.badge}`}>
+                  {tag.text}
+                </span>
+              )}
             </div>
           </div>
-        )}
+
+          {/* Minimal Arrow */}
+          {!disabled && (
+            <div className="shrink-0 pr-2 sm:pr-3 flex items-center">
+               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--background)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--foreground)] group-hover:text-[var(--background)] group-hover:border-[var(--foreground)] transition-all duration-300 ease-out shadow-sm">
+                 <FiArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+               </div>
+            </div>
+          )}
+        </div>
       </Link>
     </div>
   );
 }
-
