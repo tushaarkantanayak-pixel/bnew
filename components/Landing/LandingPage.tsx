@@ -250,7 +250,7 @@ export default function LandingPage() {
               {STATS.map((s, i) => (
                 <div key={i} className="flex flex-col">
                   <span className="text-xl font-[1000] tracking-tighter text-[var(--accent)] leading-none">{s.value}</span>
-                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 mt-0.5">{s.label}</span>
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)] mt-0.5">{s.label}</span>
                 </div>
               ))}
             </div>
@@ -285,6 +285,7 @@ export default function LandingPage() {
                   value={revenue}
                   onChange={(e) => setRevenue(Number(e.target.value))}
                   className="w-full h-1.5 bg-[var(--border)] rounded-lg appearance-none cursor-pointer accent-[var(--accent)]"
+                  aria-label="Estimated Monthly Revenue"
                 />
               </div>
 
