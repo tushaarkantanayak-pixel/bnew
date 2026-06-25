@@ -246,7 +246,7 @@ export default function LandingPage() {
             </div>
 
             {/* micro stats row */}
-            <div className="flex items-center gap-6 pt-2">
+            <div className="flex flex-wrap items-center gap-4 md:gap-6 pt-2">
               {STATS.map((s, i) => (
                 <div key={i} className="flex flex-col">
                   <span className="text-xl font-[1000] tracking-tighter text-[var(--accent)] leading-none">{s.value}</span>
@@ -288,7 +288,7 @@ export default function LandingPage() {
                 />
               </div>
 
-              <div className="grid md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-3">
                 {/* Fixed monthly fee card */}
                 <div 
                   className={`bg-[var(--card)]/50 backdrop-blur-md rounded-[16px] p-4 flex flex-col transition-all duration-300 ${revenue * 0.015 > 5 ? 'border border-[var(--accent)] shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border border-[var(--border)]'}`}
