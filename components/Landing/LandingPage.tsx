@@ -25,10 +25,12 @@ const PARTNERS = [
 ];
 
 const STATS = [
-  { value: "10+",    label: "Clients" },
-  { value: "1K+",   label: "Orders" },
-  { value: "99.9%", label: "Uptime" },
-  { value: "24/7",  label: "Support" },
+  { value: "₹0",      label: "Setup Cost" },
+  { value: "Free",    label: "API Access" },
+  { value: "10+",     label: "Clients" },
+  { value: "1K+",     label: "Orders" },
+  { value: "99.9%",   label: "Uptime" },
+  { value: "24/7",    label: "Support" },
 ];
 
 const SERVICES = [
@@ -60,6 +62,7 @@ const SERVICES = [
 export default function LandingPage() {
   const [games, setGames]   = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [revenue, setRevenue] = useState<number>(500);
 
   useEffect(() => {
     (async () => {
@@ -201,32 +204,33 @@ export default function LandingPage() {
             <div className="flex items-center gap-3">
               <div className="w-8 h-[2px] bg-[var(--accent)]" />
               <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-                India's Gaming Platform
+                Free to Build, Free API
               </span>
             </div>
 
             {/* headline */}
-            <h1 className="text-[clamp(2.2rem,5vw,4.0rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic">
-              Build Your
+            <h1 className="text-[clamp(2.5rem,5vw,4.2rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic text-[var(--foreground)] mb-3">
+              Your Own Game
               <br />
-              <span className="text-[var(--accent)]">Automated Top-Up</span>
-              <br />
-              Gaming Store.
+              <span className="text-[var(--accent)]">Top-Up Store.</span>
             </h1>
+            <h2 className="text-[clamp(1.5rem,2.5vw,2.2rem)] font-bold leading-[1.2] tracking-tight text-[var(--foreground)]/90">
+              Pay Only When You Earn.
+            </h2>
 
             {/* sub */}
             <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-md">
-              Custom stores, automatic top-ups, easy payments, and tools for gamers — everything you need.
+              Launch a fully automated top-up store under your brand — free setup, free API access, zero upfront cost. Choose a simple monthly plan or pay a small % of your profit. You grow, we grow.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/contact"
+                href="/dashboard/digital-gametopup/api-keys"
                 style={{ color: "#000" }}
                 className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all "
               >
-                Contact Us
+                Get Free API Keys
                 <span className="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
                   <FiArrowRight size={14} style={{ color: "#000" }} />
                 </span>
@@ -237,18 +241,8 @@ export default function LandingPage() {
                 className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
               >
                 <span>💎</span>
-                Top-Up Now
+                Game Topup Now
               </Link>
-
-              <a
-                href="https://web.bluebuff.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
-              >
-                Create your free website
-                <FiArrowUpRight size={13} />
-              </a>
             </div>
 
             {/* micro stats row */}
@@ -262,144 +256,90 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* RIGHT: premium floating dashboard */}
+          {/* RIGHT: Pricing & Value Props */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="flex items-center justify-center relative h-[340px] md:h-[480px] mt-6 md:mt-0"
+            className="flex flex-col gap-4 relative w-full mt-6 md:mt-0"
           >
-            {/* Ambient glow pool removed per request */}
 
-            {/* MAIN CARD */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 w-full md:w-[280px] rounded-2xl overflow-hidden"
-              style={{
-                background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
-                border: "1px solid rgba(168,85,247,0.25)",
-                backdropFilter: "blur(20px)" }}
+            {/* Bottom block: Pay only when you earn */}
+            <div 
+              className="bg-[var(--card)]/40 rounded-[24px] p-4 md:p-5 w-full flex flex-col shadow-2xl relative overflow-hidden backdrop-blur-3xl border border-[var(--border)]"
             >
-              {/* card top bar */}
-              <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: "1px solid rgba(168,85,247,0.12)" }}>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse"  />
-                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]">BlueBuff Console</span>
+              <h3 className="text-2xl md:text-3xl font-[800] text-[var(--foreground)] tracking-tight mb-2">Pay only when you earn</h3>
+              <p className="text-sm md:text-base text-[var(--muted)] mb-5">Choose the plan that fits your store. Switch anytime.</p>
+
+              {/* Interactive Revenue Slider */}
+              <div className="mb-5 p-4 rounded-xl bg-[var(--card)]/50 border border-[var(--border)]">
+                <div className="flex justify-between items-end mb-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">Est. Monthly Revenue</label>
+                  <span className="text-lg font-bold text-[var(--accent)]">${revenue.toLocaleString('en-US')}</span>
                 </div>
-                <div className="flex gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-[var(--foreground)]/10" />
-                  <div className="w-2 h-2 rounded-full bg-[var(--foreground)]/10" />
-                  <div className="w-2 h-2 rounded-full bg-[var(--accent)]/40" />
-                </div>
+                <input
+                  type="range"
+                  min="100"
+                  max="2000"
+                  step="100"
+                  value={revenue}
+                  onChange={(e) => setRevenue(Number(e.target.value))}
+                  className="w-full h-1.5 bg-[var(--border)] rounded-lg appearance-none cursor-pointer accent-[var(--accent)]"
+                />
               </div>
 
-              {/* card body */}
-              <div className="p-5 space-y-4">
-                <div>
-                  <p className="text-[8px] uppercase tracking-[0.3em] text-[var(--muted)]/60 font-bold mb-1">Total Orders Processed</p>
-                  <div className="flex items-end gap-2">
-                    <span className="text-4xl font-[1000] tracking-tighter text-[var(--foreground)]">1,247</span>
-                    <span className="text-[10px] font-black text-green-400 mb-1 flex items-center gap-0.5">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 2l3 4H2l3-4z" fill="currentColor"/></svg>
-                      +12%
-                    </span>
-                  </div>
-                </div>
-
-                {/* sparkline bars */}
-                <div className="flex items-end gap-1 h-10">
-                  {[40,65,45,80,55,90,70,85,60,95,75,100].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ scaleY: 0 }}
-                      animate={{ scaleY: 1 }}
-                      transition={{ delay: 0.4 + i * 0.05, duration: 0.4 }}
-                      className="flex-1 rounded-sm origin-bottom"
-                      style={{
-                        height: `${h}%`,
-                        background: i === 11 ? "var(--accent)" : `rgba(168,85,247,${0.15 + (i / 11) * 0.35})` }}
-                    />
-                  ))}
-                </div>
-
-                <div style={{ borderTop: "1px solid rgba(168,85,247,0.1)" }} />
-
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { label: "Uptime", value: "99.9%", color: "#4ade80" },
-                    { label: "Clients", value: "10+", color: "var(--accent)" },
-                  ].map((s) => (
-                    <div key={s.label} className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}>
-                      <p className="text-[7px] uppercase tracking-[0.25em] font-black mb-1" style={{ color: "rgba(161,161,170,0.5)" }}>{s.label}</p>
-                      <p className="text-lg font-[1000] tracking-tighter" style={{ color: s.color }}>{s.value}</p>
+              <div className="grid md:grid-cols-2 gap-3">
+                {/* Fixed monthly fee card */}
+                <div 
+                  className={`bg-[var(--card)]/50 backdrop-blur-md rounded-[16px] p-4 flex flex-col transition-all duration-300 ${revenue * 0.015 > 5 ? 'border border-[var(--accent)] shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border border-[var(--border)]'}`}
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="text-[var(--muted)]">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                     </div>
-                  ))}
+                    {revenue * 0.015 > 5 && (
+                      <div className="bg-[var(--accent)]/10 text-[var(--accent)] text-[11px] font-bold px-3 py-1 rounded-full border border-[var(--accent)]/20">
+                        Best value for you
+                      </div>
+                    )}
+                  </div>
+                  <h4 className="text-lg font-bold text-[var(--foreground)] tracking-tight mb-2">Fixed monthly fee</h4>
+                  <div className="text-3xl font-[1000] text-[var(--foreground)] mb-2">$5<span className="text-sm font-normal text-[var(--muted)]"> /mo</span></div>
+                  <p className="text-sm text-[var(--muted)] mb-5 flex-1 leading-relaxed">One predictable charge each month. Best once your volume is steady.</p>
+                  <Link href="/contact" className="block text-center w-full py-2.5 rounded-lg border border-[var(--border)] text-sm font-medium text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-colors">Learn more</Link>
+                </div>
+
+                {/* Percentage of profit card */}
+                <div 
+                  className={`bg-[var(--card)]/50 backdrop-blur-md rounded-[16px] p-4 flex flex-col relative overflow-hidden transition-all duration-300 ${revenue * 0.015 <= 5 ? 'border border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.15)]' : 'border border-[var(--border)]'}`}
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    {revenue * 0.015 <= 5 ? (
+                      <div className="bg-blue-500/10 text-blue-500 text-[11px] font-bold px-3 py-1 rounded-full border border-blue-500/20">
+                        Best for new stores
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                    <div className="text-[var(--foreground)]">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    </div>
+                  </div>
+                  <h4 className="text-lg font-bold text-[var(--foreground)] tracking-tight mb-2">Percentage fee</h4>
+                  <div className="text-3xl font-[1000] text-[var(--foreground)] mb-2">
+                    ${(revenue * 0.015).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\.00$/, '')}
+                    <span className="text-sm font-normal text-[var(--muted)]"> /mo (1.5%)</span>
+                  </div>
+                  <p className="text-sm text-[var(--muted)] mb-5 flex-1 leading-relaxed">Pay less when you earn less. Scales naturally as your store grows.</p>
+                  <Link href="/contact" className="block text-center w-full py-2.5 rounded-lg border border-[var(--border)] text-sm font-medium text-[var(--foreground)] hover:bg-[var(--foreground)]/5 transition-colors">Learn more</Link>
                 </div>
               </div>
-            </motion.div>
 
-            {/* FLOATING CHIP: delivery */}
-            <motion.div
-              animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute top-[10%] -left-[2%] z-20 hidden md:flex items-center gap-2 px-3 py-2 rounded-xl"
-              style={{
-                background: "rgba(10,0,30,0.85)",
-                border: "1px solid rgba(168,85,247,0.3)",
-                backdropFilter: "blur(12px)" }}
-            >
-              <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(168,85,247,0.15)" }}>&#9889;</div>
-              <div>
-                <p className="text-[7px] uppercase tracking-widest font-black" style={{ color: "rgba(168,85,247,0.6)" }}>Delivery</p>
-                <p className="text-[11px] font-[1000] text-white leading-none">Instant</p>
+              <div className="mt-4 flex items-center gap-2 text-[11px] md:text-xs text-[var(--muted)]">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <p>Monthly billing begins once your store goes live and starts processing orders.</p>
               </div>
-            </motion.div>
-
-            {/* FLOATING CHIP: secure */}
-            <motion.div
-              animate={{ y: [0, 8, 0], x: [0, -4, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute bottom-[12%] -right-[2%] z-20 hidden md:flex items-center gap-2 px-3 py-2 rounded-xl"
-              style={{
-                background: "rgba(10,0,30,0.85)",
-                border: "1px solid rgba(74,222,128,0.25)",
-                backdropFilter: "blur(12px)" }}
-            >
-              <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(74,222,128,0.1)" }}>&#128274;</div>
-              <div>
-                <p className="text-[7px] uppercase tracking-widest font-black" style={{ color: "rgba(74,222,128,0.6)" }}>Payment</p>
-                <p className="text-[11px] font-[1000] text-white leading-none">100% Secure</p>
-              </div>
-            </motion.div>
-
-            {/* FLOATING CHIP: support */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-              className="absolute top-[52%] -left-[5%] z-20 hidden md:flex items-center gap-2 px-3 py-2 rounded-xl"
-              style={{
-                background: "rgba(10,0,30,0.85)",
-                border: "1px solid rgba(250,204,21,0.2)",
-                backdropFilter: "blur(12px)" }}
-            >
-              <div className="w-6 h-6 rounded-lg flex items-center justify-center text-sm" style={{ background: "rgba(250,204,21,0.1)" }}>&#127918;</div>
-              <div>
-                <p className="text-[7px] uppercase tracking-widest font-black" style={{ color: "rgba(250,204,21,0.6)" }}>Support</p>
-                <p className="text-[11px] font-[1000] text-white leading-none">24 / 7</p>
-              </div>
-            </motion.div>
-
-            {/* pulsing corner orbs */}
-            {(["top-2 right-2", "bottom-2 left-2"]).map((pos, i) => (
-              <motion.div
-                key={i}
-                animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
-                transition={{ duration: 2.5, repeat: Infinity, delay: i * 1.2 }}
-                className={`absolute ${pos} w-3 h-3 rounded-full z-30 hidden md:block`}
-                style={{ background: "var(--accent)" }}
-              />
-            ))}
+            </div>
           </motion.div>
 
         </div>

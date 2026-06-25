@@ -59,7 +59,6 @@ const HEADER_CONFIG = {
         title: "Extras",
         items: [
           { label: "XYZPay", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Get subscription" },
-          { label: "BlueBuff Web", href: "https://web.bluebuff.in", icon: <FiGlobe size={14} />, desc: "Create your website" },
         ]
       }
     ],

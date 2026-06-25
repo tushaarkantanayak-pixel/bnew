@@ -41,24 +41,6 @@ export default function OurProductsPage() {
       ],
       link: "https://xyzpay.site",
       color: "from-purple-600 to-indigo-400"
-    },
-    {
-      id: "social-store-builder",
-      name: "Social Store Builder",
-      tagline: "Sell on Instagram, WhatsApp & Telegram",
-      desc: "Sell gaming products directly on Instagram, WhatsApp, and Telegram. No coding needed, set up in minutes.",
-      icon: FiShare2,
-      features: [
-        "Instagram & WhatsApp ready",
-        "One-click product sharing",
-        "Built-in order tracking",
-        "No-code setup",
-        "Branded storefront link",
-        "Real-time notifications"
-      ],
-      link: "https://web.bluebuff.in",
-      color: "from-pink-500 to-rose-400",
-      isNew: true,
     }
   ];
 
