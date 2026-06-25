@@ -268,8 +268,8 @@ export default function LandingPage() {
             <div 
               className="bg-[var(--card)]/40 rounded-[24px] p-4 md:p-5 w-full flex flex-col shadow-2xl relative overflow-hidden backdrop-blur-3xl border border-[var(--border)]"
             >
-              <h3 className="text-2xl md:text-3xl font-[800] text-[var(--foreground)] tracking-tight mb-2">Pay only when you earn</h3>
-              <p className="text-sm md:text-base text-[var(--muted)] mb-5">Choose the plan that fits your store. Switch anytime.</p>
+              <h3 className="text-2xl md:text-3xl font-[800] text-[var(--foreground)] tracking-tight mb-2">Automatic Top-up Website Cost</h3>
+              <p className="text-sm md:text-base text-[var(--muted)] mb-5">Pay only when you earn. Choose the plan that fits your store.</p>
 
               {/* Interactive Revenue Slider */}
               <div className="mb-5 p-4 rounded-xl bg-[var(--card)]/50 border border-[var(--border)]">
