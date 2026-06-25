@@ -335,8 +335,22 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center gap-2 text-[11px] md:text-xs text-[var(--muted)]">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div className="mt-5 p-4 rounded-xl bg-[var(--background)]/50 border border-[var(--border)]">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--foreground)] mb-3">Requirements to get started:</p>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2 text-xs text-[var(--muted)]">
+                    <svg className="shrink-0 mt-0.5 text-[var(--accent)]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span><strong>Bring your own domain</strong> (or we can provide a subdomain for $20/m)</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-xs text-[var(--muted)]">
+                    <svg className="shrink-0 mt-0.5 text-[var(--accent)]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span><strong>Bring any payment gateway</strong> or business merchant account</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-4 flex items-start gap-2 text-[11px] text-[var(--muted)]">
+                <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                 <p>Monthly billing begins once your store goes live and starts processing orders.</p>
               </div>
             </div>
