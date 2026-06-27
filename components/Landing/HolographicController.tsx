@@ -28,7 +28,7 @@ const HOTSPOTS: Hotspot[] = [
     id: "api",
     label: "Game API",
     desc: "50+ titles · instant delivery",
-    color: "#00f5ff",
+    color: "var(--accent)",
     x: "29%",
     y: "44%",
     tip: "right",
@@ -38,7 +38,7 @@ const HOTSPOTS: Hotspot[] = [
     id: "payments",
     label: "Payments",
     desc: "Any gateway · zero hassle",
-    color: "#a855f7",
+    color: "#f472b6",
     x: "50%",
     y: "30%",
     tip: "below",
@@ -48,7 +48,7 @@ const HOTSPOTS: Hotspot[] = [
     id: "storefront",
     label: "Your Storefront",
     desc: "Branded · live in days",
-    color: "#4ade80",
+    color: "#a78bfa",
     x: "68%",
     y: "44%",
     tip: "left",
@@ -58,7 +58,7 @@ const HOTSPOTS: Hotspot[] = [
     id: "whatsapp",
     label: "WhatsApp Bot",
     desc: "Auto orders · 24/7 support",
-    color: "#25D366",
+    color: "#c084fc",
     x: "23%",
     y: "78%",
     tip: "right",
@@ -68,7 +68,7 @@ const HOTSPOTS: Hotspot[] = [
     id: "telegram",
     label: "Telegram Bot",
     desc: "Alerts · group management",
-    color: "#229ED9",
+    color: "#e879f9",
     x: "77%",
     y: "78%",
     tip: "left",
@@ -232,7 +232,7 @@ function ControllerSVG({ active }: { active: string | null }) {
            C 550 60 570 66 583 78
            C 597 90 604 108 607 132
            C 612 160 608 195 605 230"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.6"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -242,7 +242,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       {/* ── LEFT SIDE DOWN TO GRIP ── */}
       <motion.path
         d="M 195 230 C 192 252 191 264 193 276 L 260 284"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.6"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -251,7 +251,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       {/* ── RIGHT SIDE DOWN TO GRIP ── */}
       <motion.path
         d="M 605 230 C 608 252 609 264 607 276 L 540 284"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.6"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -261,7 +261,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       {/* ── BOTTOM CENTRE BRIDGE ── */}
       <motion.path
         d="M 260 284 Q 330 296 400 296 Q 470 296 540 284"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.6"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -277,7 +277,7 @@ function ControllerSVG({ active }: { active: string | null }) {
            C 265 406 275 386 277 360
            C 279 336 272 310 263 288
            L 260 284"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.6"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -292,7 +292,7 @@ function ControllerSVG({ active }: { active: string | null }) {
            C 535 406 525 386 523 360
            C 521 336 528 310 537 288
            L 540 284"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.6"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -305,7 +305,7 @@ function ControllerSVG({ active }: { active: string | null }) {
            C 198 112 208 105 224 104
            C 244 102 264 110 280 124
            L 308 88"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.4"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -317,7 +317,7 @@ function ControllerSVG({ active }: { active: string | null }) {
            C 602 112 592 105 576 104
            C 556 102 536 110 520 124
            L 492 88"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth="1.4"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -351,7 +351,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       {/* Horizontal arm */}
       <motion.rect
         x="204" y="188" width="64" height="22" rx="5"
-        stroke={active === "api" ? "#00f5ff" : "#00f5ff"}
+        stroke={active === "api" ? "var(--accent)" : "var(--accent)"}
         strokeWidth={active === "api" ? "2" : "1.5"}
         fill="rgba(0,245,255,0.06)"
         filter="url(#hc-glow-c)"
@@ -361,7 +361,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       {/* Vertical arm */}
       <motion.rect
         x="225" y="167" width="22" height="64" rx="5"
-        stroke="#00f5ff"
+        stroke="var(--accent)"
         strokeWidth={active === "api" ? "2" : "1.5"}
         fill="rgba(0,245,255,0.06)"
         filter="url(#hc-glow-c)"
@@ -372,7 +372,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       {/* ═══ LEFT STICK (x=308 y=242) ═══ */}
       <motion.circle
         cx="308" cy="242" r="30"
-        stroke="#00f5ff" strokeWidth="1.5"
+        stroke="var(--accent)" strokeWidth="1.5"
         fill="rgba(0,245,255,0.04)"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -380,7 +380,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       />
       <motion.circle
         cx="308" cy="242" r="13"
-        stroke="#00f5ff" strokeWidth="1"
+        stroke="var(--accent)" strokeWidth="1"
         fill="rgba(0,245,255,0.09)"
         animate={{ opacity: [0.3, 0.65, 0.3] }}
         transition={{ duration: 3.6, repeat: Infinity }}
@@ -389,7 +389,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       {/* ═══ RIGHT STICK (x=462 y=242) ═══ */}
       <motion.circle
         cx="462" cy="242" r="30"
-        stroke="#00f5ff" strokeWidth="1.5"
+        stroke="var(--accent)" strokeWidth="1.5"
         fill="rgba(0,245,255,0.04)"
         filter="url(#hc-glow-c)"
         animate={{ opacity: cyanOpacity }}
@@ -397,7 +397,7 @@ function ControllerSVG({ active }: { active: string | null }) {
       />
       <motion.circle
         cx="462" cy="242" r="13"
-        stroke="#00f5ff" strokeWidth="1"
+        stroke="var(--accent)" strokeWidth="1"
         fill="rgba(0,245,255,0.09)"
         animate={{ opacity: [0.3, 0.65, 0.3] }}
         transition={{ duration: 3.6, repeat: Infinity, delay: 0.6 }}
@@ -455,7 +455,7 @@ function ControllerSVG({ active }: { active: string | null }) {
         <motion.line
           key={`sl-${i}`}
           x1="162" y1={y} x2="638" y2={y}
-          stroke="#00f5ff" strokeWidth="0.4"
+          stroke="var(--accent)" strokeWidth="0.4"
           animate={{ opacity: [0, 0.11, 0] }}
           transition={{ duration: 2.8, repeat: Infinity, delay: i * 0.24 }}
         />
@@ -470,7 +470,7 @@ function ControllerSVG({ active }: { active: string | null }) {
         <motion.circle
           key={`gd-${i}`}
           cx={cx} cy={cy} r="1.8"
-          fill="#00f5ff"
+          fill="var(--accent)"
           animate={{ opacity: [0, 0.45, 0], scale: [0.5, 1.6, 0.5] }}
           transition={{ duration: 3.2, repeat: Infinity, delay: i * 0.38 }}
         />

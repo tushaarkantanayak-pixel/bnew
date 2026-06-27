@@ -30,7 +30,6 @@ const STATS = [
   { value: "₹0",      label: "Setup Cost" },
   { value: "Free",    label: "API Access" },
   { value: "10+",     label: "Clients" },
-  { value: "1K+",     label: "Orders" },
   { value: "99.9%",   label: "Uptime" },
   { value: "24/7",    label: "Support" },
 ];
@@ -100,7 +99,7 @@ export default function LandingPage() {
 
       {/* ═══════ HERO ═══════ */}
       <section
-        className="relative min-h-[100svh] flex flex-col justify-center md:justify-start md:pt-0 overflow-hidden border-b border-[var(--border)]"
+        className="relative min-h-[100svh] flex flex-col justify-start md:justify-start overflow-hidden border-b border-[var(--border)]"
       >
         {/* ── 3D DECORATIVE BACKGROUND ── */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -210,10 +209,10 @@ export default function LandingPage() {
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent z-10" />
 
         {/* content grid */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-24 md:pt-[72px] pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-6 md:pt-[72px] pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
 
           {/* ── LEFT: text ── */}
-          <div className="flex flex-col gap-7">
+          <div className="flex flex-col gap-4 md:gap-7 order-1 md:order-1">
 
             {/* eyebrow */}
             <div className="flex items-center gap-3">
@@ -224,7 +223,7 @@ export default function LandingPage() {
             </div>
 
             {/* headline */}
-            <h1 className="text-[clamp(2.5rem,5vw,4.2rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic text-[var(--foreground)] mb-3">
+            <h1 className="text-[clamp(2.5rem,5vw,4.2rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic text-[var(--foreground)] mb-1 md:mb-3 mt-2 md:mt-0">
               Your Own Game
               <br />
               <span className="text-[var(--accent)]">Top-Up Store.</span>
@@ -234,41 +233,31 @@ export default function LandingPage() {
             </h2>
 
             {/* sub */}
-            <p className="text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-md">
+            <p className="text-xs md:text-base text-[var(--muted)] leading-relaxed max-w-md">
               Launch a fully automated top-up store under your brand — free setup, free API access, zero upfront cost. Choose a simple monthly plan or pay a small % of your profit. You grow, we grow.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-row flex-nowrap items-center gap-2 mt-2 md:mt-0 w-full">
               <Link
                 href="/dashboard/digital-gametopup/api-keys"
                 style={{ color: "#000" }}
-                className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all "
+                className="group flex-1 flex items-center justify-center gap-1.5 px-2 py-3 rounded-xl bg-gradient-to-r from-[var(--accent)] to-[#e879f9] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[9px] md:text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(192,132,252,0.3)] hover:shadow-[0_0_30px_rgba(192,132,252,0.5)] whitespace-nowrap"
               >
-                Get Free API Keys
-                <span className="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                  <FiArrowRight size={14} style={{ color: "#000" }} />
-                </span>
+                Get API Keys
+                <FiArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <Link
                 href="/games"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.2em] text-[11px] italic transition-all"
+                className="group flex-1 flex items-center justify-center gap-1.5 px-2 py-3 rounded-xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 hover:bg-[var(--card)]/50 font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[9px] md:text-[11px] italic transition-all whitespace-nowrap"
               >
-                <span>💎</span>
-                Game Topup Now
+                Topup Now
+                <FiArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
-            {/* micro stats row */}
-            <div className="flex flex-wrap items-center gap-4 md:gap-6 pt-2">
-              {STATS.map((s, i) => (
-                <div key={i} className="flex flex-col">
-                  <span className="text-xl font-[1000] tracking-tighter text-[var(--accent)] leading-none">{s.value}</span>
-                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)] mt-0.5">{s.label}</span>
-                </div>
-              ))}
-            </div>
+
           </div>
 
           {/* RIGHT: Holographic Controller */}
@@ -276,8 +265,32 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="flex flex-col gap-4 relative w-full mt-6 md:mt-0"
+            className="flex flex-col gap-4 relative w-full mt-10 md:mt-0 order-2 md:order-2"
           >
+            {/* Scattered Floating Stats */}
+            <div className="absolute inset-0 z-20 pointer-events-none">
+              {STATS.map((s, i) => {
+                const positions = [
+                  "top-[5%] left-[2%] md:left-[-5%]",
+                  "top-[10%] right-[2%] md:right-[-5%]",
+                  "top-[45%] left-[-2%] md:left-[-15%]",
+                  "top-[55%] right-[-2%] md:right-[-10%]",
+                  "bottom-[15%] left-[5%] md:left-[-5%]",
+                ];
+                return (
+                  <motion.div
+                    key={i}
+                    animate={{ y: [-6, 6, -6], x: [-3, 3, -3] }}
+                    transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }}
+                    className={`absolute flex flex-col items-center text-center ${positions[i]}`}
+                  >
+                    <span className="text-sm md:text-base font-[1000] tracking-tighter text-[var(--accent)] leading-none drop-shadow-[0_0_10px_rgba(192,132,252,0.7)]">{s.value}</span>
+                    <span className="text-[6px] md:text-[7px] font-black uppercase tracking-[0.2em] text-[var(--muted)] mt-1 drop-shadow-md">{s.label}</span>
+                  </motion.div>
+                );
+              })}
+            </div>
+            
             <HolographicController />
           </motion.div>
 
