@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   FiArrowRight, FiShield, FiCpu, FiCode,
-  FiCheck, FiTrendingUp, FiArrowUpRight,
+  FiCheck, FiTrendingUp, FiArrowUpRight, FiMessageCircle, FiSend
 } from "react-icons/fi";
 import GameCardGrid from "../Games/GameCardGrid";
 
@@ -55,6 +55,20 @@ const SERVICES = [
     title: "Marketing & SEO",
     desc: "Get more customers with smart online marketing.",
     items: ["Search ranking", "Social ads", "Brand kit"],
+  },
+  {
+    icon: FiMessageCircle,
+    tag: "BOTS",
+    title: "WhatsApp Bots",
+    desc: "Automated customer support. 150/mo or 1% of revenue.",
+    items: ["Instant replies", "24/7 online", "Auto orders"],
+  },
+  {
+    icon: FiSend,
+    tag: "BOTS",
+    title: "Telegram Bots",
+    desc: "Fast Telegram bot integration. 100/mo or 1% of revenue.",
+    items: ["Secure", "Group management", "Instant alerts"],
   },
 ];
 
@@ -350,7 +364,47 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              <div className="mt-4 flex items-start gap-2 text-[11px] text-[var(--muted)]">
+              <div className="mt-4 flex items-center gap-2">
+                <div className="flex-1 h-px bg-[var(--border)]" />
+                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--muted)] opacity-50 whitespace-nowrap px-2">Power-up with bots</span>
+                <div className="flex-1 h-px bg-[var(--border)]" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {/* WhatsApp Bot Card */}
+                <div className="group relative rounded-2xl p-3.5 border border-[var(--border)] bg-[var(--card)]/30 hover:border-[#25D366]/40 hover:bg-[#25D366]/5 transition-all duration-300 cursor-pointer">
+                  <div className="flex items-start justify-between mb-2.5">
+                    <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-[#25D366]/10 border border-[#25D366]/20 group-hover:bg-[#25D366]/20 transition-colors">
+                      <FiMessageCircle size={15} className="text-[#25D366]" />
+                    </div>
+                    <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 whitespace-nowrap">ADD-ON</span>
+                  </div>
+                  <h5 className="text-xs font-black text-[var(--foreground)] tracking-tight mb-0.5">WhatsApp Bot</h5>
+                  <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug mb-2.5">Auto orders & customer support</p>
+                  <div className="text-[11px] font-black text-[var(--foreground)]">
+                    $150<span className="text-[9px] font-normal text-[var(--muted)]">/mo</span>
+                    <span className="ml-1.5 text-[9px] text-[var(--muted)] opacity-60">or 1% rev</span>
+                  </div>
+                </div>
+
+                {/* Telegram Bot Card */}
+                <div className="group relative rounded-2xl p-3.5 border border-[var(--border)] bg-[var(--card)]/30 hover:border-[#229ED9]/40 hover:bg-[#229ED9]/5 transition-all duration-300 cursor-pointer">
+                  <div className="flex items-start justify-between mb-2.5">
+                    <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-[#229ED9]/10 border border-[#229ED9]/20 group-hover:bg-[#229ED9]/20 transition-colors">
+                      <FiSend size={15} className="text-[#229ED9]" />
+                    </div>
+                    <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#229ED9]/10 text-[#229ED9] border border-[#229ED9]/20 whitespace-nowrap">ADD-ON</span>
+                  </div>
+                  <h5 className="text-xs font-black text-[var(--foreground)] tracking-tight mb-0.5">Telegram Bot</h5>
+                  <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug mb-2.5">Alerts, group mgmt & secure ops</p>
+                  <div className="text-[11px] font-black text-[var(--foreground)]">
+                    $100<span className="text-[9px] font-normal text-[var(--muted)]">/mo</span>
+                    <span className="ml-1.5 text-[9px] text-[var(--muted)] opacity-60">or 1% rev</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2 text-[11px] text-[var(--muted)] mt-1">
                 <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                 <p>Monthly billing begins once your store goes live and starts processing orders.</p>
               </div>

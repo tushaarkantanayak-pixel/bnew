@@ -39,10 +39,24 @@ export default function BlogPostLayout({
     const relatedArticles = useMemo(() => {
         const parts = pathname.split("/");
         const currentSlug = parts[parts.length - 1];
-        const filtered = BLOGS_DATA.filter((b) => b.slug !== currentSlug);
-        // Shuffle and take 3
-        return filtered.sort(() => 0.5 - Math.random()).slice(0, 3);
-    }, [pathname]);
+        
+        const scoredArticles = BLOGS_DATA
+            .filter((b) => b.slug !== currentSlug)
+            .map((b) => {
+                let score = 0;
+                // High priority for same game
+                if (b.game && game && b.game.toLowerCase() === game.toLowerCase()) score += 10;
+                // Medium priority for same category/type
+                if (b.type && category && b.type.toLowerCase() === category.toLowerCase()) score += 5;
+                // Random factor to shuffle articles with the same score
+                score += Math.random(); 
+                return { ...b, score };
+            });
+
+        return scoredArticles
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 3);
+    }, [pathname, game, category]);
 
     const articleSchema = {
         "@context": "https://schema.org",
@@ -201,6 +215,17 @@ export default function BlogPostLayout({
                             </Link>
                         ))}
                     </div>
+
+                    {game && (
+                        <div className="mt-8 flex justify-center">
+                            <Link 
+                                href={`/blog/${game.toLowerCase()}`}
+                                className="px-6 py-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[10px] font-black uppercase tracking-[0.2em] hover:bg-[var(--foreground)] hover:text-[var(--background)] hover:border-[var(--foreground)] transition-all flex items-center gap-2"
+                            >
+                                Explore More {game} News <FiArrowRight size={14} />
+                            </Link>
+                        </div>
+                    )}
                 </section>
 
                 {/* SHARE SECTION */}

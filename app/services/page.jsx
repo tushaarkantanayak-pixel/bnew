@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiCpu, FiCode, FiCloud, FiTrendingUp, FiShoppingCart, FiArrowRight, FiMessageCircle, FiZap } from "react-icons/fi";
+import { FiCpu, FiCode, FiCloud, FiTrendingUp, FiShoppingCart, FiArrowRight, FiMessageCircle, FiZap, FiSend } from "react-icons/fi";
 
 export default function ServicesPage() {
   const whatsappLink = "https://wa.me/919178521537";
@@ -40,6 +40,20 @@ export default function ServicesPage() {
       desc: "Everything you need to launch your own gaming store.",
       icon: FiShoppingCart,
       badge: "WHITELABEL",
+      active: true,
+    },
+    {
+      title: "WhatsApp Bots",
+      desc: "Automated customer support via WhatsApp. (150/mo or 1% of revenue)",
+      icon: FiMessageCircle,
+      badge: "AUTOMATION",
+      active: true,
+    },
+    {
+      title: "Telegram Bots",
+      desc: "Fast and secure Telegram bot integration. (100/mo or 1% of revenue)",
+      icon: FiSend,
+      badge: "AUTOMATION",
       active: true,
     },
   ];
