@@ -13,7 +13,7 @@ import {
   FiExternalLink
 } from "react-icons/fi";
 
-const BRAND = process.env.NEXT_PUBLIC_BRAND_NAME || "Blue Buff";
+const BRAND = process.env.NEXT_PUBLIC_BRAND_NAME || "BLUEBUFF.IN";
 const TRUSTPILOT_URL = "https://www.trustpilot.com/evaluate/bluebuff.in";
 
 const FOOTER_LINKS = [
@@ -72,8 +72,8 @@ export default function Footer() {
               <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase leading-none bg-gradient-to-r from-[var(--accent)] via-[var(--foreground)] to-[var(--accent)] bg-clip-text text-transparent group-hover:brightness-110 transition-all">
                 {BRAND}
               </h2>
-              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.3em] text-[var(--foreground)] italic leading-relaxed max-w-[260px]">
-                THE FASTEST AND CHEAPEST GAME TOP-UPS IN INDIA.
+              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--foreground)] italic leading-relaxed max-w-[260px]">
+                YOUR PREMIUM HUB FOR AUTOMATED GAME TOP-UPS, API KEYS, AND DIGITAL GAMING ASSETS.
               </p>
             </Link>
 
@@ -157,7 +157,7 @@ export default function Footer() {
           </div>
 
           {/* FIND US & ACTION BLOCK (Desktop) / ACTION BLOCK ONLY (Mobile) */}
-          <div className="md:col-span-3 flex flex-col md:items-end gap-8 mt-4 md:mt-0">
+          <div className="md:col-span-3 flex flex-col items-end gap-8 mt-4 md:mt-0">
             <div className="hidden md:block space-y-4 md:text-right">
               <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]/80 italic">
                 Find Us

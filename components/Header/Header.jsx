@@ -20,45 +20,50 @@ const HEADER_CONFIG = {
   },
 
   nav: [
-    { label: "Top-Up", href: "/games", icon: <FiShoppingBag size={14} /> },
-    { label: "News", href: "/blog", icon: <FiLayers size={14} /> },
-    { label: "Services", href: "/services", icon: <FiGrid size={14} /> },
-    { label: "Our Products", href: "/ourproducts", icon: <FiGrid size={14} /> },
+    { label: "Top-Up", href: "/games", icon: <FiShoppingBag size={14} />, color: "#a855f7" }, // Purple
+    { label: "News", href: "/blog", icon: <FiLayers size={14} />, color: "#f43f5e" }, // Rose
+    { label: "Services", href: "/services", icon: <FiGrid size={14} />, color: "#10b981" }, // Emerald
+    { label: "Products", href: "/ourproducts", icon: <FiGrid size={14} />, color: "#00f5ff" }, // Cyan
   ],
 
   userMenu: {
     sections: [
       {
         title: "Dashboard",
+        color: "#3b82f6", // Blue
         items: [
-          { label: "Account", href: "/dashboard", icon: <FiCompass size={14} />, desc: "Your account hub" },
+          { label: "Account", href: "/dashboard", icon: <FiCompass size={14} />, desc: "Your account hub", color: "#3b82f6" },
         ]
       },
       {
         title: "Game Top-Ups",
+        color: "#e879f9", // Fuchsia
         items: [
-          { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: <FiKey size={14} />, desc: "Auto top-ups" },
-          { label: "Wallet", href: "/dashboard/digital-gametopup/wallet", icon: <FiLayers size={14} />, desc: "Add funds" },
-          { label: "Orders", href: "/dashboard/digital-gametopup/orders", icon: <FiShoppingBag size={14} />, desc: "Past orders" },
+          { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: <FiKey size={14} />, desc: "Auto top-ups", color: "#e879f9" },
+          { label: "Wallet", href: "/dashboard/digital-gametopup/wallet", icon: <FiLayers size={14} />, desc: "Add funds", color: "#00f5ff" },
+          { label: "Orders", href: "/dashboard/digital-gametopup/orders", icon: <FiShoppingBag size={14} />, desc: "Past orders", color: "#f97316" },
         ]
       },
       {
         title: "Support",
+        color: "#10b981", // Emerald
         items: [
-          { label: "Help Center", href: "/dashboard/support", icon: <FiMessageSquare size={14} />, desc: "Get help 24/7" },
+          { label: "Help Center", href: "/dashboard/support", icon: <FiMessageSquare size={14} />, desc: "Get help 24/7", color: "#10b981" },
         ]
       },
       {
         title: "Rewards",
+        color: "#eab308", // Yellow
         items: [
-          { label: "Refer Friends", href: "/dashboard/earning/referral", icon: <FiUsers size={14} />, desc: "Invite & earn" },
-          { label: "Redeem Code", href: "/dashboard/earning/redeem", icon: <FiGift size={14} />, desc: "Use vouchers" },
+          { label: "Refer Friends", href: "/dashboard/earning/referral", icon: <FiUsers size={14} />, desc: "Invite & earn", color: "#eab308" },
+          { label: "Redeem Code", href: "/dashboard/earning/redeem", icon: <FiGift size={14} />, desc: "Use vouchers", color: "#f43f5e" },
         ]
       },
       {
         title: "Extras",
+        color: "#6366f1", // Indigo
         items: [
-          { label: "XYZPay", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Get subscription" },
+          { label: "XYZPay", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Get subscription", color: "#6366f1" },
         ]
       }
     ],
@@ -75,7 +80,7 @@ export default function Header() {
   const [expandedSections, setExpandedSections] = useState(() => 
     HEADER_CONFIG.userMenu.sections.reduce((acc, sec) => ({ 
       ...acc, 
-      [sec.title]: sec.title !== "Rewards"
+      [sec.title]: true
     }), {})
   );
 
@@ -295,10 +300,22 @@ export default function Header() {
                             href={item.href}
                             target={item.href.startsWith("http") ? "_blank" : undefined}
                             onClick={() => setUserMenuOpen(false)}
-                            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[var(--foreground)]/[0.03] border border-white/5 hover:bg-[var(--accent)] hover:text-black transition-all group"
+                            className="flex flex-col items-center justify-center p-2 rounded-xl bg-[var(--card)]/40 border border-[var(--border)]/60 hover:-translate-y-0.5 backdrop-blur-md transition-all duration-300 group"
+                            style={{ '--nav-color': item.color }}
                           >
-                            <span className="text-[var(--accent)] group-hover:text-black mb-1.5 transition-colors">{item.icon}</span>
-                            <span className="text-[8px] font-black uppercase tracking-tight leading-none text-center">{item.label}</span>
+                            <span 
+                              className="mb-1 transition-colors"
+                              style={{ color: item.color }}
+                            >
+                              {item.icon}
+                            </span>
+                            <span 
+                              className="text-[8px] font-black uppercase tracking-tight leading-none text-center transition-colors group-hover:!text-[var(--nav-color)]"
+                              style={{ color: 'var(--foreground)' }}
+                            >
+                              {item.label}
+                            </span>
+                            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style={{ boxShadow: `0 0 10px ${item.color}40`, border: `1px solid ${item.color}80`, background: `${item.color}15` }} />
                           </Link>
                         ))}
                       </div>
@@ -309,14 +326,22 @@ export default function Header() {
                           <div key={section.title} className="space-y-0.5">
                             <button 
                               onClick={() => toggleSection(section.title)}
-                              className="w-full flex items-center justify-between text-[8px] font-black uppercase tracking-[0.4em] text-[var(--muted)]/30 pl-2 pr-4 py-0.5 hover:text-[var(--muted)]/70 transition-colors"
+                              className="w-full flex items-center justify-between text-[9px] font-black uppercase tracking-[0.3em] text-[var(--muted)]/60 pl-1 pr-4 py-1 transition-colors group"
                             >
-                              <span>{section.title}</span>
+                              <div className="flex items-center gap-1.5">
+                                <div 
+                                  className={`w-1 h-2.5 rounded-full transition-all duration-300 ${expandedSections[section.title] ? '' : 'bg-[var(--border)] opacity-50 group-hover:opacity-100'}`} 
+                                  style={expandedSections[section.title] ? { backgroundColor: section.color } : {}}
+                                />
+                                <span style={expandedSections[section.title] ? { color: section.color } : {}} className="transition-colors group-hover:text-[var(--foreground)]">{section.title}</span>
+                              </div>
                               <motion.div
                                 animate={{ rotate: expandedSections[section.title] ? 90 : 0 }}
                                 transition={{ duration: 0.2 }}
+                                className={expandedSections[section.title] ? "" : "text-[var(--muted)]/40"}
+                                style={expandedSections[section.title] ? { color: section.color } : {}}
                               >
-                                <FiChevronRight size={10} />
+                                <FiChevronRight size={12} />
                               </motion.div>
                             </button>
                             <AnimatePresence initial={false}>
@@ -335,17 +360,25 @@ export default function Header() {
                                         href={user ? item.href : "/login"}
                                         target={item.href.startsWith("http") ? "_blank" : undefined}
                                         onClick={() => setUserMenuOpen(false)}
-                                        className={`flex items-center ${section.title === "Rewards" ? "justify-start gap-1.5 py-1 px-1.5" : "justify-between py-1 px-2"} rounded-lg bg-[var(--foreground)]/[0.01] border border-white/[0.02] hover:border-[var(--accent)]/10 hover:bg-[var(--accent)]/5 transition-all group ${!user ? "opacity-50" : ""}`}
+                                        className={`relative flex items-center overflow-hidden ${section.title === "Rewards" ? "justify-start gap-1.5 py-1 px-1.5" : "justify-between py-1 px-2"} rounded-lg bg-[var(--card)]/20 border border-transparent transition-all group ${!user ? "opacity-50" : ""}`}
                                       >
-                                        <div className={`flex items-center ${section.title === "Rewards" ? "gap-1.5" : "gap-1.5"} min-w-0`}>
-                                          <div className="w-5 h-5 rounded bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">{item.icon}</div>
-                                          <div className="flex flex-col min-w-0">
-                                            <p className="text-[11px] font-bold text-[var(--foreground)] leading-tight truncate">{item.label}</p>
-                                            <p className="text-[8px] text-[var(--muted)] opacity-50 truncate leading-[10px]">{item.desc}</p>
+                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ backgroundColor: `${item.color}10`, border: `1px solid ${item.color}40` }} />
+                                        <div className={`flex items-center ${section.title === "Rewards" ? "gap-1.5" : "gap-2"} min-w-0 relative z-10`}>
+                                          <div 
+                                            className="w-6 h-6 rounded flex items-center justify-center transition-all flex-shrink-0"
+                                            style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                                          >
+                                            {item.icon}
+                                          </div>
+                                          <div className="flex flex-col min-w-0 justify-center">
+                                            <p className="text-[11px] font-bold text-[var(--foreground)] leading-tight truncate transition-colors" style={{ '--hover-color': item.color }} onMouseEnter={(e) => e.target.style.color = item.color} onMouseLeave={(e) => e.target.style.color = 'var(--foreground)'}>
+                                              {item.label}
+                                            </p>
+                                            <p className="text-[8px] text-[var(--muted)] opacity-70 truncate leading-tight mt-0.5">{item.desc}</p>
                                           </div>
                                         </div>
                                         {section.title !== "Rewards" && (
-                                          <div className="flex items-center gap-2 flex-shrink-0">
+                                          <div className="flex items-center gap-2 flex-shrink-0 relative z-10">
                                             {item.label === "My Wallet" && user && (
                                               <span className="text-[10px] font-black text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-md border border-[var(--accent)]/10 leading-none">
                                                 {formatPrice(walletBalance)}
@@ -375,8 +408,8 @@ export default function Header() {
                             <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-[var(--foreground)]/5 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div className="flex items-center gap-3 relative z-10 w-full">
                               <div className="relative flex-shrink-0">
-                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent)] to-purple-600 flex items-center justify-center shadow-lg">
-                                  <FiZap size={18} className="text-white" />
+                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--accent)] to-purple-600 flex items-center justify-center shadow-lg">
+                                  <FiZap size={14} className="text-white" />
                                 </div>
                                 <div className="absolute -bottom-1 -right-1 flex h-3 w-3">
                                   <div className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-[var(--background)]"></div>

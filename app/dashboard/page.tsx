@@ -13,6 +13,7 @@ interface DashboardItem {
   icon: any;
   desc: string;
   external?: boolean;
+  color?: string;
 }
 
 interface DashboardSection {
@@ -26,32 +27,32 @@ const DASHBOARD_SECTIONS: DashboardSection[] = [
     title: "Game Topup-Auto",
     desc: "Automated delivery & asset management",
     items: [
-      { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: FiKey, desc: "Automatic game topups" },
-      { label: "My Wallet", href: "/dashboard/digital-gametopup/wallet", icon: FiLayers, desc: "Balance & Recharge" },
-      { label: "My Orders", href: "/dashboard/digital-gametopup/orders", icon: FiShoppingBag, desc: "Track your top-ups" },
+      { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: FiKey, desc: "Automatic game topups", color: "#e879f9" },
+      { label: "My Wallet", href: "/dashboard/digital-gametopup/wallet", icon: FiLayers, desc: "Balance & Recharge", color: "#00f5ff" },
+      { label: "My Orders", href: "/dashboard/digital-gametopup/orders", icon: FiShoppingBag, desc: "Track your top-ups", color: "#f97316" },
     ]
   },
   {
     title: "Earning",
     desc: "Reward systems & voucher redemption",
     items: [
-      { label: "Refer & Earn", href: "/dashboard/earning/referral", icon: FiUsers, desc: "Invite & Rewards" },
-      { label: "Redeem Code", href: "/dashboard/earning/redeem", icon: FiGift, desc: "Use vouchers" },
+      { label: "Refer & Earn", href: "/dashboard/earning/referral", icon: FiUsers, desc: "Invite & Rewards", color: "#eab308" },
+      { label: "Redeem Code", href: "/dashboard/earning/redeem", icon: FiGift, desc: "Use vouchers", color: "#f43f5e" },
     ]
   },
   {
     title: "Support",
     desc: "Technical & customer assistance",
     items: [
-      { label: "Help Center", href: "/dashboard/support", icon: FiMessageSquare, desc: "Get help 24/7" },
+      { label: "Help Center", href: "/dashboard/support", icon: FiMessageSquare, desc: "Get help 24/7", color: "#10b981" },
     ]
   },
   {
     title: "Payment Gateway",
     desc: "External billing solutions",
     items: [
-      { label: "XYZPay.site", href: "https://xyzpay.site", icon: FiExternalLink, desc: "Contact to avail subscription", external: true },
-      { label: "web.bluebuff.in", href: "https://web.bluebuff.in", icon: FiGlobe, desc: "Make your own customised web", external: true },
+      { label: "XYZPay.site", href: "https://xyzpay.site", icon: FiExternalLink, desc: "Contact to avail subscription", external: true, color: "#6366f1" },
+      { label: "web.bluebuff.in", href: "https://web.bluebuff.in", icon: FiGlobe, desc: "Make your own customised web", external: true, color: "#a855f7" },
     ]
   }
 ];
@@ -77,19 +78,31 @@ export default function DashboardPage() {
                   key={item.label} 
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
-                  className="group relative p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[var(--accent)]/30 hover:bg-white/[0.04] transition-all duration-300 shadow-sm hover:shadow-xl overflow-hidden flex items-center gap-3"
+                  className="group relative p-3 rounded-2xl bg-white/[0.02] border border-white/5 transition-all duration-300 shadow-sm hover:shadow-xl overflow-hidden flex items-center gap-3"
+                  style={{ '--item-color': item.color || 'var(--accent)' } as React.CSSProperties}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = `${item.color}4D`;
+                    e.currentTarget.style.backgroundColor = `${item.color}0A`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)';
+                  }}
                 >
                   {/* Subtle Background Glow */}
-                  <div className="absolute top-1/2 -right-10 -translate-y-1/2 w-20 h-20 bg-[var(--accent)]/5 blur-2xl rounded-full group-hover:bg-[var(--accent)]/10 transition-all pointer-events-none" />
+                  <div className="absolute top-1/2 -right-10 -translate-y-1/2 w-20 h-20 blur-2xl rounded-full transition-all pointer-events-none opacity-50 group-hover:opacity-100" style={{ backgroundColor: `${item.color}1A` }} />
                   
                   {/* Icon */}
-                  <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-300">
+                  <div 
+                    className="relative z-10 flex-shrink-0 w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center transition-all duration-300 group-hover:!bg-[var(--item-color)] group-hover:!text-black"
+                    style={{ color: item.color || 'var(--muted)' }}
+                  >
                     <item.icon size={18} className="group-hover:scale-110 transition-transform" />
                   </div>
                   
                   {/* Text Content */}
                   <div className="relative z-10 flex-1 min-w-0">
-                    <h4 className="text-sm font-black uppercase tracking-tight text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors flex items-center gap-1.5 leading-tight truncate">
+                    <h4 className="text-sm font-black uppercase tracking-tight text-[var(--foreground)] transition-colors flex items-center gap-1.5 leading-tight truncate group-hover:text-[var(--item-color)]">
                       {item.label}
                       {item.external && <FiExternalLink size={10} className="opacity-40" />}
                     </h4>
