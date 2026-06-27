@@ -8,7 +8,8 @@ import {
   FiCheck, FiTrendingUp, FiArrowUpRight, FiMessageCircle, FiSend
 } from "react-icons/fi";
 import GameCardGrid from "../Games/GameCardGrid";
-import HolographicControllerSection from "./HolographicController";
+import HolographicController from "./HolographicController";
+import PricingSection from "./PricingCard";
 
 /* ─── tiny helpers ─── */
 const PRIORITY_SLUGS = [
@@ -61,14 +62,14 @@ const SERVICES = [
     icon: FiMessageCircle,
     tag: "BOTS",
     title: "WhatsApp Bots",
-    desc: "Automated customer support. 150/mo or 1% of revenue.",
+    desc: "Automated customer support. 1.5/mo or 1% of revenue.",
     items: ["Instant replies", "24/7 online", "Auto orders"],
   },
   {
     icon: FiSend,
     tag: "BOTS",
     title: "Telegram Bots",
-    desc: "Fast Telegram bot integration. 100/mo or 1% of revenue.",
+    desc: "Fast Telegram bot integration. 1/mo or 1% of revenue.",
     items: ["Secure", "Group management", "Instant alerts"],
   },
 ];
@@ -77,8 +78,6 @@ const SERVICES = [
 export default function LandingPage() {
   const [games, setGames]   = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [revenue, setRevenue] = useState<number>(500);
-  const [activeTab, setActiveTab] = useState<"website" | "whatsapp" | "telegram">("website");
 
   useEffect(() => {
     (async () => {
@@ -272,193 +271,14 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* RIGHT: Tabbed Pricing Card */}
+          {/* RIGHT: Holographic Controller */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
             className="flex flex-col gap-4 relative w-full mt-6 md:mt-0"
           >
-            <div className="bg-[var(--card)]/40 rounded-[24px] p-4 md:p-5 w-full flex flex-col shadow-2xl relative overflow-hidden backdrop-blur-3xl border border-[var(--border)]">
-
-              {/* ── Tab header ── */}
-              <div className="flex gap-1 p-1 rounded-2xl bg-[var(--background)]/60 border border-[var(--border)] mb-5">
-                {([
-                  { id: "website",  label: "Website",    icon: "🌐" },
-                  { id: "whatsapp", label: "WhatsApp Bot", icon: "💬" },
-                  { id: "telegram", label: "Telegram Bot", icon: "✈️" },
-                ] as const).map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-200 ${
-                      activeTab === tab.id
-                        ? "bg-[var(--foreground)] text-[var(--background)] shadow-md"
-                        : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--card)]/50"
-                    }`}
-                  >
-                    <span>{tab.icon}</span>
-                    <span className="hidden sm:inline">{tab.label}</span>
-                    <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* ── Website Tab ── */}
-              {activeTab === "website" && (
-                <>
-                  <h3 className="text-xl md:text-2xl font-[800] text-[var(--foreground)] tracking-tight mb-1">Top-Up Website</h3>
-                  <p className="text-xs text-[var(--muted)] mb-4">Pay only when you earn. Choose what fits your store.</p>
-
-                  {/* Revenue slider */}
-                  <div className="mb-4 p-3.5 rounded-xl bg-[var(--card)]/50 border border-[var(--border)]">
-                    <div className="flex justify-between items-end mb-2">
-                      <label className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">Est. Monthly Revenue</label>
-                      <span className="text-base font-bold text-[var(--accent)]">${revenue.toLocaleString("en-US")}</span>
-                    </div>
-                    <input type="range" min="100" max="2000" step="100" value={revenue}
-                      onChange={(e) => setRevenue(Number(e.target.value))}
-                      className="w-full h-1.5 bg-[var(--border)] rounded-lg appearance-none cursor-pointer accent-[var(--accent)]"
-                      aria-label="Estimated Monthly Revenue"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    {/* Fixed plan */}
-                    <div className={`rounded-2xl p-4 flex flex-col transition-all duration-300 ${
-                      revenue * 0.015 > 5 ? "border border-[var(--accent)] bg-[var(--accent)]/5 shadow-[0_0_18px_rgba(168,85,247,0.14)]" : "border border-[var(--border)] bg-[var(--card)]/40"
-                    }`}>
-                      {revenue * 0.015 > 5 && (
-                        <span className="text-[9px] font-black text-[var(--accent)] uppercase tracking-widest mb-2 block">★ Best for you</span>
-                      )}
-                      <div className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1">Fixed</div>
-                      <div className="text-3xl font-[1000] text-[var(--foreground)] leading-none">$5</div>
-                      <div className="text-[10px] text-[var(--muted)] mb-3">/month</div>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug flex-1">One flat charge. Best once volume is steady.</p>
-                    </div>
-
-                    {/* Percentage plan */}
-                    <div className={`rounded-2xl p-4 flex flex-col transition-all duration-300 ${
-                      revenue * 0.015 <= 5 ? "border border-blue-500 bg-blue-500/5 shadow-[0_0_18px_rgba(59,130,246,0.14)]" : "border border-[var(--border)] bg-[var(--card)]/40"
-                    }`}>
-                      {revenue * 0.015 <= 5 && (
-                        <span className="text-[9px] font-black text-blue-400 uppercase tracking-widest mb-2 block">★ Best for you</span>
-                      )}
-                      <div className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1">Revenue %</div>
-                      <div className="text-2xl font-[1000] text-[var(--foreground)] leading-none">
-                        ${(revenue * 0.015).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-                      </div>
-                      <div className="text-[10px] text-[var(--muted)] mb-3">/month (1.5%)</div>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug flex-1">Pay less while you grow. Scales naturally.</p>
-                    </div>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-[var(--background)]/50 border border-[var(--border)] space-y-1.5">
-                    {[
-                      { text: "Bring your own domain", sub: "or subdomain for $20/m" },
-                      { text: "Bring any payment gateway", sub: "or business merchant account" },
-                    ].map((r, i) => (
-                      <div key={i} className="flex items-start gap-2 text-[10px] text-[var(--muted)]">
-                        <svg className="shrink-0 mt-0.5 text-[var(--accent)]" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                        <span><strong className="text-[var(--foreground)]">{r.text}</strong> {r.sub}</span>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {/* ── WhatsApp Bot Tab ── */}
-              {activeTab === "whatsapp" && (
-                <>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-2xl bg-[#25D366]/15 border border-[#25D366]/25 flex items-center justify-center">
-                      <FiMessageCircle size={20} className="text-[#25D366]" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-[800] text-[var(--foreground)] tracking-tight leading-none mb-0.5">WhatsApp Bot</h3>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70">Automate orders &amp; customer support</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    {/* Flat plan */}
-                    <div className="border border-[#25D366]/40 bg-[#25D366]/5 rounded-2xl p-4 flex flex-col shadow-[0_0_18px_rgba(37,211,102,0.1)]">
-                      <div className="text-[10px] font-bold text-[#25D366] uppercase tracking-wider mb-1">Flat Monthly</div>
-                      <div className="text-3xl font-[1000] text-[var(--foreground)] leading-none">$150</div>
-                      <div className="text-[10px] text-[var(--muted)] mb-3">/month</div>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug flex-1">Fixed cost. Best for established businesses with steady traffic.</p>
-                    </div>
-
-                    {/* Revenue plan */}
-                    <div className="border border-[var(--border)] bg-[var(--card)]/40 rounded-2xl p-4 flex flex-col">
-                      <div className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1">Revenue %</div>
-                      <div className="text-3xl font-[1000] text-[var(--foreground)] leading-none">1%</div>
-                      <div className="text-[10px] text-[var(--muted)] mb-3">of monthly revenue</div>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug flex-1">Start light. Scales as your orders grow — risk-free.</p>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 space-y-2">
-                    <p className="text-[10px] font-black uppercase tracking-wider text-[var(--foreground)] mb-2">What's included</p>
-                    {["Auto order confirmations", "24/7 customer replies", "Payment & delivery alerts", "Multi-language support"].map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-[10px] text-[var(--muted)]">
-                        <svg className="shrink-0 text-[#25D366]" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                        {f}
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {/* ── Telegram Bot Tab ── */}
-              {activeTab === "telegram" && (
-                <>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-2xl bg-[#229ED9]/15 border border-[#229ED9]/25 flex items-center justify-center">
-                      <FiSend size={20} className="text-[#229ED9]" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-[800] text-[var(--foreground)] tracking-tight leading-none mb-0.5">Telegram Bot</h3>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70">Alerts, group management &amp; secure ops</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    {/* Flat plan */}
-                    <div className="border border-[#229ED9]/40 bg-[#229ED9]/5 rounded-2xl p-4 flex flex-col shadow-[0_0_18px_rgba(34,158,217,0.1)]">
-                      <div className="text-[10px] font-bold text-[#229ED9] uppercase tracking-wider mb-1">Flat Monthly</div>
-                      <div className="text-3xl font-[1000] text-[var(--foreground)] leading-none">$100</div>
-                      <div className="text-[10px] text-[var(--muted)] mb-3">/month</div>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug flex-1">Predictable cost. Best for active communities and channels.</p>
-                    </div>
-
-                    {/* Revenue plan */}
-                    <div className="border border-[var(--border)] bg-[var(--card)]/40 rounded-2xl p-4 flex flex-col">
-                      <div className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1">Revenue %</div>
-                      <div className="text-3xl font-[1000] text-[var(--foreground)] leading-none">1%</div>
-                      <div className="text-[10px] text-[var(--muted)] mb-3">of monthly revenue</div>
-                      <p className="text-[10px] text-[var(--muted)] opacity-70 leading-snug flex-1">Only pay when you earn. Perfect for new bot deployments.</p>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-2xl border border-[#229ED9]/20 bg-[#229ED9]/5 space-y-2">
-                    <p className="text-[10px] font-black uppercase tracking-wider text-[var(--foreground)] mb-2">What's included</p>
-                    {["Instant top-up notifications", "Group & channel management", "Secure inline payments", "Order status broadcasts"].map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-[10px] text-[var(--muted)]">
-                        <svg className="shrink-0 text-[#229ED9]" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                        {f}
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {/* ── Footer note ── */}
-              <div className="mt-4 flex items-start gap-2 text-[10px] text-[var(--muted)] opacity-60">
-                <svg className="shrink-0 mt-0.5" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                <p>Billing begins once your service goes live.</p>
-              </div>
-            </div>
+            <HolographicController />
           </motion.div>
 
         </div>
@@ -492,7 +312,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <HolographicControllerSection />
+      <PricingSection />
 
       {/* ═══════ SERVICES ═══════ */}
       <section className="py-24 border-b border-[var(--border)]">

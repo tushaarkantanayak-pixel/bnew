@@ -482,124 +482,84 @@ function ControllerSVG({ active }: { active: string | null }) {
 /* ─────────────────────────────────────────────
    Main exported section
 ───────────────────────────────────────────── */
-export default function HolographicControllerSection() {
+export default function HolographicController() {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <section className="relative py-20 md:py-28 border-b border-[var(--border)] overflow-hidden bg-[var(--background)]">
-
-      {/* Ambient radial glow */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[420px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(ellipse, rgba(0,245,255,0.055) 0%, rgba(168,85,247,0.04) 45%, transparent 72%)",
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-5xl mx-auto px-5 md:px-10">
-
-        {/* ── Header ── */}
+    <div className="relative w-full flex flex-col items-center">
+      {/* ── Controller + Hotspots ── */}
+      <motion.div
+        className="relative w-full mx-auto select-none"
+        style={{ aspectRatio: "16/9", maxWidth: "480px" }}
+        initial={{ opacity: 0, scale: 0.94 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        {/* Float + tilt animation wrapper */}
         <motion.div
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          className="w-full h-full"
+          animate={{ y: [-10, 10, -10] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 mb-5">
-            <FiZap size={10} className="text-[var(--accent)]" />
-            <span className="text-[9px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-              Platform Preview
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase italic leading-[1.05] mb-3">
-            Everything Wired
-            <br />
-            <span className="text-[var(--accent)]">Into One Platform</span>
-          </h2>
-          <p className="text-sm text-[var(--muted)] opacity-60">
-            Hover the glowing spots to explore your store's features
-          </p>
-        </motion.div>
-
-        {/* ── Controller + Hotspots ── */}
-        <motion.div
-          className="relative w-full max-w-3xl mx-auto select-none"
-          style={{ aspectRatio: "16/9" }}
-          initial={{ opacity: 0, scale: 0.94 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Float + tilt animation wrapper */}
           <motion.div
             className="w-full h-full"
-            animate={{ y: [-10, 10, -10] }}
-            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ rotateY: [0, 5, 0, -5, 0] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
           >
-            <motion.div
-              className="w-full h-full"
-              animate={{ rotateY: [0, 5, 0, -5, 0] }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-              style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
-            >
-              <ControllerSVG active={active} />
-            </motion.div>
+            <ControllerSVG active={active} />
           </motion.div>
-
-          {/* Hotspot markers — absolutely positioned over the SVG container */}
-          {HOTSPOTS.map((h, i) => (
-            <HotspotMarker
-              key={h.id}
-              h={h}
-              index={i}
-              isActive={active === h.id}
-              onEnter={() => setActive(h.id)}
-              onLeave={() => setActive(null)}
-            />
-          ))}
         </motion.div>
 
-        {/* ── Bottom pill labels ── */}
-        <motion.div
-          className="mt-8 flex flex-wrap justify-center gap-3"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.55 }}
-        >
-          {HOTSPOTS.map((h) => (
-            <motion.button
-              key={h.id}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all duration-200"
-              style={{
-                borderColor: active === h.id ? h.color : `${h.color}35`,
-                backgroundColor: active === h.id ? `${h.color}18` : `${h.color}08`,
-                color: h.color,
-                boxShadow: active === h.id ? `0 0 14px ${h.color}30` : "none",
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              onMouseEnter={() => setActive(h.id)}
-              onMouseLeave={() => setActive(null)}
-            >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: h.color }} />
-              {h.label}
-            </motion.button>
-          ))}
+        {/* Hotspot markers — absolutely positioned over the SVG container */}
+        {HOTSPOTS.map((h, i) => (
+          <HotspotMarker
+            key={h.id}
+            h={h}
+            index={i}
+            isActive={active === h.id}
+            onEnter={() => setActive(h.id)}
+            onLeave={() => setActive(null)}
+          />
+        ))}
+      </motion.div>
 
-          <Link
-            href="/services"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-widest italic hover:opacity-85 transition-all"
+      {/* ── Bottom pill labels ── */}
+      <motion.div
+        className="mt-6 flex flex-wrap justify-center gap-2"
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45, delay: 0.55 }}
+      >
+        {HOTSPOTS.map((h) => (
+          <motion.button
+            key={h.id}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[9px] font-black uppercase tracking-widest transition-all duration-200"
+            style={{
+              borderColor: active === h.id ? h.color : `${h.color}35`,
+              backgroundColor: active === h.id ? `${h.color}18` : `${h.color}08`,
+              color: h.color,
+              boxShadow: active === h.id ? `0 0 14px ${h.color}30` : "none",
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            onMouseEnter={() => setActive(h.id)}
+            onMouseLeave={() => setActive(null)}
           >
-            All Services <FiArrowUpRight size={12} />
-          </Link>
-        </motion.div>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: h.color }} />
+            {h.label}
+          </motion.button>
+        ))}
 
-      </div>
-    </section>
+        <Link
+          href="/services"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[9px] font-black uppercase tracking-widest italic hover:opacity-85 transition-all"
+        >
+          All Services <FiArrowUpRight size={10} />
+        </Link>
+      </motion.div>
+    </div>
   );
 }

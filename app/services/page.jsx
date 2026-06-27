@@ -44,14 +44,14 @@ export default function ServicesPage() {
     },
     {
       title: "WhatsApp Bots",
-      desc: "Automated customer support via WhatsApp. (150/mo or 1% of revenue)",
+      desc: "Automated customer support via WhatsApp. (1.5/mo or 1% of revenue)",
       icon: FiMessageCircle,
       badge: "AUTOMATION",
       active: true,
     },
     {
       title: "Telegram Bots",
-      desc: "Fast and secure Telegram bot integration. (100/mo or 1% of revenue)",
+      desc: "Fast and secure Telegram bot integration. (1/mo or 1% of revenue)",
       icon: FiSend,
       badge: "AUTOMATION",
       active: true,
