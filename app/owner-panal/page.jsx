@@ -8,24 +8,29 @@ import {
   ChevronRight,
   Menu,
   X,
-  Wallet, DollarSign, List, ShoppingCart, Tag, Gift, Users, MessageSquare, Mail, Image, Key, BarChart2, Settings
+  Wallet, DollarSign, List, ShoppingCart, Tag, Gift, Users, MessageSquare, Mail, Image, Key, BarChart2, Settings, FileText
 } from "lucide-react";
 import apiClient from "@/utils/apiClient";
 
 import AuthGuard from "@/components/AuthGuard";
-import UsersTab from "@/components/admin/UsersTab";
-import OrdersTab from "@/components/admin/OrdersTab";
-import PricingTab from "@/components/admin/PricingTab";
-import TransactionsTab from "@/components/admin/TransactionsTab";
-import SupportQueriesTab from "@/components/admin/SupportQueriesTab";
-import BannersTab from "@/components/admin/BannersTab";
-import StatsTab from "@/components/admin/StatsTab";
-import SettingsTab from "@/components/admin/SettingsTab";
-import RedeemCodesTab from "@/components/admin/RedeemCodesTab";
-import ApiKeysTab from "@/components/admin/ApiKeysTab";
-import UsdtTab from "@/components/admin/UsdtTab";
-import PromotionalTab from "@/components/admin/PromotionalTab";
+import dynamic from "next/dynamic";
 import { formatPrice } from "@/utils/currency";
+
+const LoadingFallback = () => <div className="p-10 flex justify-center items-center text-sm text-neutral-500 animate-pulse">Loading module...</div>;
+
+const UsersTab = dynamic(() => import("@/components/admin/UsersTab"), { loading: LoadingFallback });
+const OrdersTab = dynamic(() => import("@/components/admin/OrdersTab"), { loading: LoadingFallback });
+const PricingTab = dynamic(() => import("@/components/admin/PricingTab"), { loading: LoadingFallback });
+const TransactionsTab = dynamic(() => import("@/components/admin/TransactionsTab"), { loading: LoadingFallback });
+const SupportQueriesTab = dynamic(() => import("@/components/admin/SupportQueriesTab"), { loading: LoadingFallback });
+const BannersTab = dynamic(() => import("@/components/admin/BannersTab"), { loading: LoadingFallback });
+const StatsTab = dynamic(() => import("@/components/admin/StatsTab"), { loading: LoadingFallback });
+const SettingsTab = dynamic(() => import("@/components/admin/SettingsTab"), { loading: LoadingFallback });
+const RedeemCodesTab = dynamic(() => import("@/components/admin/RedeemCodesTab"), { loading: LoadingFallback });
+const ApiKeysTab = dynamic(() => import("@/components/admin/ApiKeysTab"), { loading: LoadingFallback });
+const UsdtTab = dynamic(() => import("@/components/admin/UsdtTab"), { loading: LoadingFallback });
+const PromotionalTab = dynamic(() => import("@/components/admin/PromotionalTab"), { loading: LoadingFallback });
+const BlogsTab = dynamic(() => import("@/components/admin/BlogsTab"), { loading: LoadingFallback });
 
 
 
@@ -62,6 +67,12 @@ const SIDEBAR_CATEGORIES = [
       { id: "banners", label: "Banners", icon: <Image /> },
       { id: "stats", label: "Stats", icon: <BarChart2 /> },
       { id: "settings", label: "Settings", icon: <Settings /> },
+    ]
+  },
+  {
+    title: "Content",
+    items: [
+      { id: "blogs", label: "Blogs", icon: <FileText /> },
     ]
   }
 ];
@@ -242,8 +253,8 @@ export default function AdminPanalPage() {
 
   return (
     <AuthGuard>
-      <section className="min-h-screen bg-[var(--background)] px-2 sm:px-6 py-3">
-        <div className="max-w-6xl mx-auto">
+      <section className="min-h-screen bg-[var(--background)] px-2 sm:px-4 py-3">
+        <div className="w-full mx-auto">
           {/* COMPACT HEADER ROW */}
           <div className="mb-4 flex items-center justify-between bg-[var(--card)] py-2 px-3 sm:px-4 rounded-xl border border-[var(--border)] relative overflow-hidden">
             {/* Bottom accent bar */}
@@ -369,6 +380,10 @@ export default function AdminPanalPage() {
 
             {activeTab === "promotional" && (
               <PromotionalTab />
+            )}
+
+            {activeTab === "blogs" && (
+              <BlogsTab />
             )}
 
             {activeTab === "orders" && (

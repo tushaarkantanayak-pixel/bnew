@@ -50,6 +50,7 @@ export default function OrdersTab() {
   const [page, setPage] = useState(1);
   const [limit] = useState(20);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [filters, setFilters] = useState({
     status: "",
     gameSlug: "",
@@ -69,8 +70,15 @@ export default function OrdersTab() {
   }, []);
 
   useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [search]);
+
+  useEffect(() => {
     fetchOrdersList();
-  }, [page, limit, search, filters]);
+  }, [page, limit, debouncedSearch, filters]);
 
   /* ================= FETCH ORDERS STATS ================= */
   const fetchOrdersStats = async () => {
@@ -96,7 +104,7 @@ export default function OrdersTab() {
       const params = new URLSearchParams({
         page,
         limit,
-        search,
+        search: debouncedSearch,
         ...(filters.status && { status: filters.status }),
         ...(filters.gameSlug && { gameSlug: filters.gameSlug }),
         ...(filters.from && { from: filters.from }),

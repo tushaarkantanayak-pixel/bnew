@@ -29,6 +29,20 @@ export default function BlogListing({ initialGame = "all" }) {
   const [selectedGame, setSelectedGame] = useState(initialGame);
   const [currentPage, setCurrentPage] = useState(1);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [dbBlogs, setDbBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchDbBlogs = async () => {
+      try {
+        const res = await fetch("/api/blogs");
+        const json = await res.json();
+        if (json.success) setDbBlogs(json.data);
+      } catch (err) {
+        console.error("Failed to fetch blogs:", err);
+      }
+    };
+    fetchDbBlogs();
+  }, []);
 
   const categories = useMemo(() => {
     return ["all", ...new Set(BLOGS_DATA.map((b) => b.type))];
@@ -39,7 +53,7 @@ export default function BlogListing({ initialGame = "all" }) {
   }, []);
 
   const filteredBlogs = useMemo(() => {
-    let blogs = [...BLOGS_DATA];
+    let blogs = [...BLOGS_DATA, ...dbBlogs];
     if (search) {
       blogs = blogs.filter((b) =>
         b.title.toLowerCase().includes(search.toLowerCase())
@@ -72,7 +86,7 @@ export default function BlogListing({ initialGame = "all" }) {
 
   return (
     <main className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
-      <div className="max-w-4xl mx-auto pt-0 relative z-10">
+      <div className="max-w-7xl mx-auto pt-0 relative z-10">
         <div
           className="mb-2"
         >
@@ -237,7 +251,7 @@ function BlogCard({ blog, index }) {
       >
         <div className="flex gap-4">
           {/* 🖼️ THUMBNAIL WITH TAG BADGE */}
-          <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-xl overflow-hidden flex-shrink-0 bg-[var(--background)] border border-[var(--border)]">
+          <div className="relative w-28 h-20 sm:w-40 sm:h-24 rounded-xl overflow-hidden flex-shrink-0 bg-[var(--background)] border border-[var(--border)]">
             <img 
               src={blog.image} 
               alt={blog.title} 

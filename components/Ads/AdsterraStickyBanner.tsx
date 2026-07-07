@@ -30,24 +30,25 @@ export default function AdsterraStickyBanner() {
   `;
 
   return (
-    <div className="fixed bottom-0 left-0 w-full z-[100] bg-[var(--background)]/80 backdrop-blur-md border-t border-[var(--border)] shadow-[0_-10px_30px_rgba(0,0,0,0.1)] transition-transform duration-500 flex justify-center py-2">
+    <div className="fixed bottom-0 left-0 w-full z-[100] bg-[var(--background)]/80 backdrop-blur-md border-t border-[var(--border)] shadow-[0_-10px_30px_rgba(0,0,0,0.1)] transition-transform duration-500 flex justify-center py-1">
+      {/* Close Button (Absolute to screen right) */}
+      <button 
+        onClick={() => setIsVisible(false)}
+        className="absolute -top-8 right-4 bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] w-6 h-6 rounded-full flex items-center justify-center shadow-md transition-colors z-[101]"
+        aria-label="Close Ad"
+      >
+        <FiX size={12} />
+      </button>
+
       <div className="relative max-w-[728px] w-full flex justify-center">
-        {/* Close Button */}
-        <button 
-          onClick={() => setIsVisible(false)}
-          className="absolute -top-8 right-2 sm:right-0 bg-[var(--card)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] w-6 h-6 rounded-full flex items-center justify-center shadow-md transition-colors z-[101]"
-          aria-label="Close Ad"
-        >
-          <FiX size={12} />
-        </button>
 
         {/* Ad Iframe */}
-        <div className="w-full flex justify-center h-[50px] sm:h-[90px] overflow-hidden bg-transparent">
+        <div className="w-full flex justify-center h-[50px] overflow-hidden bg-transparent">
           <iframe
             title="Adsterra Sticky Banner"
             srcDoc={adHtml}
             width="100%"
-            height="100"
+            height="50"
             style={{ border: "none", overflow: "hidden", background: "transparent" }}
             scrolling="no"
             loading="eager"

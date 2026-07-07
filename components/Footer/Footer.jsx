@@ -58,13 +58,13 @@ export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="relative mt-8 bg-[var(--background)] border-t border-[var(--border)] pt-12 pb-6 overflow-hidden">
+    <footer className="relative mt-2 bg-[var(--background)] border-t border-[var(--border)] pt-6 pb-2 overflow-hidden">
       {/* Subtle Ambient Lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/20 to-transparent" />
       <div className="absolute bottom-0 left-[10%] w-[30%] h-[100px] bg-[var(--accent)]/5 rounded-full blur-[90px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+      <div className="w-full px-6 lg:px-12 xl:px-16 mx-auto relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-4">
 
           {/* BRAND BLOCK - REFINED SPACE */}
           <div className="md:col-span-3 space-y-6">
@@ -107,7 +107,7 @@ export default function Footer() {
           </div>
 
           {/* LINKS GRID - SYMMETRICAL */}
-          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 gap-y-8 gap-x-4">
+          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 gap-y-4 gap-x-4">
             {FOOTER_LINKS.map((section) => (
               <div key={section.title} className="space-y-4">
                 <div className="flex items-center gap-2">
@@ -190,26 +190,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM STRIP - HIGH-END DENSITY */}
-        <div className="pt-6 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-5 text-[var(--muted-foreground)]">
-          <div className="flex items-center gap-3 group/india cursor-default">
-            <div className="flex gap-1">
-              <div className="w-1 h-3 bg-[#FF9933] rounded-full shadow-[0_0_8px_#FF9933]" />
-              <div className="w-1 h-3 bg-white rounded-full shadow-[0_0_8px_white]" />
-              <div className="w-1 h-3 bg-[#138808] rounded-full shadow-[0_0_8px_#138808]" />
-            </div>
-            <span className="text-[9px] font-black uppercase tracking-[0.15em] italic text-[var(--foreground)]">
-              MADE IN INDIA 🇮🇳
-            </span>
-          </div>
-
-          <div className="flex items-center gap-8 text-[8px] font-black uppercase tracking-[0.1em] italic">
-            <span className="tracking-[0.3em]">24/7 AUTOMATED</span>
-          </div>
-        </div>
-
         {/* COPYRIGHT SUB-STRIP */}
-        <div className="mt-6 text-center opacity-20">
+        <div className="pt-3 border-t border-[var(--border)] text-center opacity-20">
           <span className="text-[8px] font-black uppercase tracking-[0.2em] italic">
             © {new Date().getFullYear()} {BRAND.toUpperCase()} • ALL RIGHTS RESERVED
           </span>
