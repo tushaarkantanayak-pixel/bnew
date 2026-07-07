@@ -178,15 +178,6 @@ export default function Footer() {
               </div>
             </div>
 
-            <button
-              onClick={scrollToTop}
-              className="mt-auto group flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-[var(--muted)] hover:text-[var(--accent)] transition-all italic"
-            >
-              Back to Top
-              <div className="w-8 h-8 rounded-xl bg-[var(--card)]/40 border border-[var(--border)] flex items-center justify-center shadow-md group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all">
-                <FiChevronUp size={16} />
-              </div>
-            </button>
           </div>
         </div>
 

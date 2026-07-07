@@ -122,21 +122,10 @@ export default function ReviewAndPaymentStep({
           className="space-y-4"
         >
           {/* USER & ACCOUNT DETAILS */}
-          <div className="bg-[var(--background)] border border-[var(--border)] rounded-2xl p-3 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/5 rounded-full blur-2xl -z-10 group-hover:bg-[var(--accent)]/10 transition-all" />
+          <div className="relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/5 rounded-full blur-2xl -z-10 group-hover:bg-[var(--accent)]/10 transition-all pointer-events-none" />
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* User Details */}
-              <div>
-                <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-2">
-                  <FiUser className="text-[14px]" /> User Details
-                </h3>
-                <div>
-                  <p className="text-[9px] uppercase font-black text-[var(--muted)]/70 tracking-tighter">Email Address</p>
-                  <p className="font-bold truncate text-xs">{userEmail || "Not provided"}</p>
-                </div>
-              </div>
-
+            <div className="w-full">
               {/* Game Account */}
               <div>
                 <h3 className="text-[10px] font-[900] uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-2">

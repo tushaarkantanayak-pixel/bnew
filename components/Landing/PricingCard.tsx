@@ -9,7 +9,7 @@ export default function PricingSection() {
   const [activeTab, setActiveTab] = useState<"website" | "whatsapp" | "telegram">("website");
 
   const renderSlider = () => (
-    <div className="mb-4 md:mb-6 p-3 md:p-5 rounded-2xl bg-black/40 border border-[var(--border)]/50 shadow-inner">
+    <div className="mb-3 md:mb-4 p-3 md:p-4 rounded-2xl bg-[var(--foreground)]/5 border border-[var(--border)]/30 shadow-sm">
       <div className="flex justify-between items-center mb-2 md:mb-4">
         <label className="text-[9px] md:text-[11px] font-black uppercase tracking-widest text-[var(--muted)]">Est. Monthly Revenue</label>
         <span className="text-base md:text-xl font-[1000] text-[var(--accent)]">${revenue.toLocaleString("en-US")}</span>
@@ -23,7 +23,7 @@ export default function PricingSection() {
   );
 
   return (
-    <section className="relative py-20 md:py-28 border-b border-[var(--border)] overflow-hidden bg-[var(--background)]">
+    <section className="relative py-12 md:py-16 border-b border-[var(--border)] overflow-hidden bg-[var(--background)]">
       {/* Ambient radial glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -35,29 +35,27 @@ export default function PricingSection() {
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-5 md:px-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-10">
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-10"
+          className="flex items-end justify-between mb-8 md:mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 mb-5">
-            <FiZap size={10} className="text-[var(--accent)]" />
-            <span className="text-[9px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-              Pricing & Plans
-            </span>
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-6 h-[2px] bg-[var(--accent)]" />
+              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Pricing & Plans</span>
+            </div>
+            <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase mb-2">
+              Simple Pricing, <span className="text-[var(--accent)]">Built to Scale</span>
+            </h2>
+            <p className="text-xs md:text-sm text-[var(--muted)] opacity-80">
+              Choose the perfect plan for your business size.
+            </p>
           </div>
-          <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase italic leading-[1.05] mb-3">
-            Simple Pricing,
-            <br />
-            <span className="text-[var(--accent)]">Built to Scale</span>
-          </h2>
-          <p className="text-sm text-[var(--muted)] opacity-60">
-            Choose the perfect plan for your business size.
-          </p>
         </motion.div>
 
         <motion.div
@@ -67,9 +65,9 @@ export default function PricingSection() {
           transition={{ delay: 0.15, duration: 0.5 }}
           className="flex flex-col gap-4 relative w-full mx-auto"
         >
-          <div className="bg-[var(--card)]/40 rounded-[20px] md:rounded-[24px] p-3 md:p-6 w-full flex flex-col shadow-2xl relative overflow-hidden backdrop-blur-3xl border border-[var(--border)]">
+          <div className="bg-[var(--card)]/40 rounded-[20px] md:rounded-[24px] p-3 md:p-5 w-full flex flex-col shadow-2xl relative overflow-hidden backdrop-blur-3xl border border-[var(--border)]">
             {/* ── Tab header ── */}
-            <div className="flex gap-1 p-1 md:p-1.5 rounded-2xl bg-[var(--background)]/60 border border-[var(--border)] mb-4 md:mb-6 overflow-x-auto scrollbar-hide">
+            <div className="flex gap-1 p-1 md:p-1.5 rounded-2xl bg-[var(--foreground)]/5 border border-[var(--border)] mb-3 md:mb-4 overflow-x-auto scrollbar-hide">
               {([
                 { id: "website", label: "Website", icon: "🌐" },
                 { id: "whatsapp", label: "WhatsApp Bot", icon: "💬" },
@@ -93,169 +91,207 @@ export default function PricingSection() {
 
             {/* ── Website Tab ── */}
             {activeTab === "website" && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                <h3 className="text-xl md:text-2xl font-[800] text-[var(--foreground)] tracking-tight mb-1">Top-Up Website</h3>
-                <p className="text-[10px] md:text-sm text-[var(--muted)] mb-4 md:mb-6">Pay only when you earn. Choose what fits your store.</p>
-
-                {renderSlider()}
-
-                <div className="grid grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-6">
-                  {/* Fixed plan */}
-                  <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
-                    revenue * 0.015 > 5 ? "border-2 border-[var(--accent)] bg-[var(--accent)]/5 shadow-[0_0_20px_rgba(168,85,247,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
-                  }`}>
-                    {revenue * 0.015 > 5 && (
-                      <span className="text-[8px] md:text-[10px] font-black text-[var(--accent)] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
-                    )}
-                    <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Fixed</div>
-                    <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">$5</div>
-                    <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/month</div>
-                    <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">One flat charge. Best once volume is steady.</p>
-                  </div>
-
-                  {/* Percentage plan */}
-                  <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
-                    revenue * 0.015 <= 5 ? "border-2 border-[#e879f9] bg-[#e879f9]/5 shadow-[0_0_20px_rgba(232,121,249,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
-                  }`}>
-                    {revenue * 0.015 <= 5 && (
-                      <span className="text-[8px] md:text-[10px] font-black text-[#e879f9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
-                    )}
-                    <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Revenue %</div>
-                    <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">
-                      ${(revenue * 0.015).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
-                    </div>
-                    <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/mo (1.5%)</div>
-                    <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Pay less while you grow. Scales naturally.</p>
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex flex-col md:flex-row gap-3 md:gap-5">
+                <div className="flex-1 flex flex-col">
+                  <h3 className="text-xl md:text-2xl font-[800] text-[var(--foreground)] tracking-tight mb-1">Top-Up Website</h3>
+                  <p className="text-[10px] md:text-sm text-[var(--muted)] mb-3 md:mb-4">Pay only when you earn. Choose what fits your store.</p>
+                  {renderSlider()}
+                  <div className="p-4 rounded-xl bg-[var(--foreground)]/5 border border-[var(--border)]/30 space-y-2.5 mt-auto hidden md:block">
+                    {[
+                      { text: "Bring your own domain", sub: "or subdomain for $20/m" },
+                      { text: "Bring any payment gateway", sub: "or business merchant account" },
+                    ].map((r, i) => (
+                      <div key={i} className="flex items-start gap-2.5 text-[11px] text-[var(--muted)]">
+                        <FiCheck className="shrink-0 mt-0.5 text-[var(--accent)]" size={14} />
+                        <span><strong className="text-[var(--foreground)] font-bold">{r.text}</strong> {r.sub}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-black/20 border border-[var(--border)]/50 space-y-2.5">
-                  {[
-                    { text: "Bring your own domain", sub: "or subdomain for $20/m" },
-                    { text: "Bring any payment gateway", sub: "or business merchant account" },
-                  ].map((r, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-[11px] text-[var(--muted)]">
-                      <FiCheck className="shrink-0 mt-0.5 text-[var(--accent)]" size={14} />
-                      <span><strong className="text-[var(--foreground)] font-bold">{r.text}</strong> {r.sub}</span>
+                <div className="flex-1 flex flex-col">
+                  <div className="grid grid-cols-2 gap-2 md:gap-4 flex-1">
+                    {/* Fixed plan */}
+                    <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
+                      revenue * 0.015 > 5 ? "border-2 border-[var(--accent)] bg-[var(--accent)]/5 shadow-[0_0_20px_rgba(168,85,247,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
+                    }`}>
+                      {revenue * 0.015 > 5 && (
+                        <span className="text-[8px] md:text-[10px] font-black text-[var(--accent)] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
+                      )}
+                      <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Fixed</div>
+                      <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">$5</div>
+                      <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/month</div>
+                      <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">One flat charge. Best once volume is steady.</p>
                     </div>
-                  ))}
+
+                    {/* Percentage plan */}
+                    <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
+                      revenue * 0.015 <= 5 ? "border-2 border-[#e879f9] bg-[#e879f9]/5 shadow-[0_0_20px_rgba(232,121,249,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
+                    }`}>
+                      {revenue * 0.015 <= 5 && (
+                        <span className="text-[8px] md:text-[10px] font-black text-[#e879f9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
+                      )}
+                      <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Revenue %</div>
+                      <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">
+                        ${(revenue * 0.015).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+                      </div>
+                      <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/mo (1.5%)</div>
+                      <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Pay less while you grow. Scales naturally.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[var(--foreground)]/5 border border-[var(--border)]/30 space-y-2.5 mt-3 md:hidden">
+                    {[
+                      { text: "Bring your own domain", sub: "or subdomain for $20/m" },
+                      { text: "Bring any payment gateway", sub: "or business merchant account" },
+                    ].map((r, i) => (
+                      <div key={i} className="flex items-start gap-2.5 text-[11px] text-[var(--muted)]">
+                        <FiCheck className="shrink-0 mt-0.5 text-[var(--accent)]" size={14} />
+                        <span><strong className="text-[var(--foreground)] font-bold">{r.text}</strong> {r.sub}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
-            )}
-
-            {/* ── WhatsApp Bot Tab ── */}
+            )}                {/* ── WhatsApp Bot Tab ── */}
             {activeTab === "whatsapp" && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center shadow-[0_0_15px_rgba(37,211,102,0.2)]">
-                    <FiMessageCircle className="text-[#25D366] w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-[800] text-[var(--foreground)] tracking-tight leading-none mb-1 md:mb-1.5">WhatsApp Bot</h3>
-                    <p className="text-[9px] md:text-[11px] text-[var(--muted)] opacity-80 uppercase tracking-wider font-bold">Automate orders & customer support</p>
-                  </div>
-                </div>
-
-                {renderSlider()}
-
-                <div className="grid grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-6">
-                  {/* Flat plan */}
-                  <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
-                    revenue * 0.01 > 1.5 ? "border-2 border-[#25D366] bg-[#25D366]/5 shadow-[0_0_20px_rgba(37,211,102,0.15)]" : "border border-[#25D366]/20 bg-[#25D366]/5 hover:bg-[#25D366]/10"
-                  }`}>
-                    {revenue * 0.01 > 1.5 && (
-                      <span className="text-[8px] md:text-[10px] font-black text-[#25D366] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
-                    )}
-                    <div className="text-[9px] md:text-[11px] font-bold text-[#25D366] uppercase tracking-wider mb-1 md:mb-2">Flat Monthly</div>
-                    <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">$1.5</div>
-                    <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/month</div>
-                    <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Fixed cost. Best for established businesses.</p>
-                  </div>
-
-                  {/* Revenue plan */}
-                  <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
-                    revenue * 0.01 <= 1.5 ? "border-2 border-[#e879f9] bg-[#e879f9]/5 shadow-[0_0_20px_rgba(232,121,249,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
-                  }`}>
-                    {revenue * 0.01 <= 1.5 && (
-                      <span className="text-[8px] md:text-[10px] font-black text-[#e879f9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
-                    )}
-                    <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Revenue %</div>
-                    <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">
-                      ${(revenue * 0.01).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex flex-col md:flex-row gap-3 md:gap-5">
+                <div className="flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center shadow-[0_0_15px_rgba(37,211,102,0.2)]">
+                      <FiMessageCircle className="text-[#25D366] w-5 h-5 md:w-6 md:h-6" />
                     </div>
-                    <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/mo (1%)</div>
-                    <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Start light. Scales risk-free.</p>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-[800] text-[var(--foreground)] tracking-tight leading-none mb-1 md:mb-1.5">WhatsApp Bot</h3>
+                      <p className="text-[9px] md:text-[11px] text-[var(--muted)] opacity-80 uppercase tracking-wider font-bold">Automate orders & customer support</p>
+                    </div>
+                  </div>
+                  {renderSlider()}
+                  <div className="p-4 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 space-y-3 mt-auto hidden md:block">
+                    <p className="text-[11px] font-black uppercase tracking-widest text-[#25D366] mb-3">What's included</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {["Auto order confirmations", "24/7 customer replies", "Payment & delivery alerts", "Multi-language support"].map((f) => (
+                        <div key={f} className="flex items-center gap-2.5 text-[11px] text-[var(--muted)] font-medium">
+                          <FiCheck className="shrink-0 text-[#25D366]" size={14} />
+                          {f}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 space-y-3">
-                  <p className="text-[11px] font-black uppercase tracking-widest text-[#25D366] mb-3">What's included</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {["Auto order confirmations", "24/7 customer replies", "Payment & delivery alerts", "Multi-language support"].map((f) => (
-                      <div key={f} className="flex items-center gap-2.5 text-[11px] text-[var(--muted)] font-medium">
-                        <FiCheck className="shrink-0 text-[#25D366]" size={14} />
-                        {f}
+                <div className="flex-1 flex flex-col">
+                  <div className="grid grid-cols-2 gap-2 md:gap-4 flex-1">
+                    {/* Flat plan */}
+                    <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
+                      revenue * 0.01 > 1.5 ? "border-2 border-[#25D366] bg-[#25D366]/5 shadow-[0_0_20px_rgba(37,211,102,0.15)]" : "border border-[#25D366]/20 bg-[#25D366]/5 hover:bg-[#25D366]/10"
+                    }`}>
+                      {revenue * 0.01 > 1.5 && (
+                        <span className="text-[8px] md:text-[10px] font-black text-[#25D366] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
+                      )}
+                      <div className="text-[9px] md:text-[11px] font-bold text-[#25D366] uppercase tracking-wider mb-1 md:mb-2">Flat Monthly</div>
+                      <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">$1.5</div>
+                      <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/month</div>
+                      <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Fixed cost. Best for established businesses.</p>
+                    </div>
+
+                    {/* Revenue plan */}
+                    <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
+                      revenue * 0.01 <= 1.5 ? "border-2 border-[#e879f9] bg-[#e879f9]/5 shadow-[0_0_20px_rgba(232,121,249,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
+                    }`}>
+                      {revenue * 0.01 <= 1.5 && (
+                        <span className="text-[8px] md:text-[10px] font-black text-[#e879f9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
+                      )}
+                      <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Revenue %</div>
+                      <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">
+                        ${(revenue * 0.01).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
                       </div>
-                    ))}
+                      <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/mo (1%)</div>
+                      <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Start light. Scales risk-free.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl border border-[#25D366]/20 bg-[#25D366]/5 space-y-3 mt-3 md:hidden">
+                    <p className="text-[11px] font-black uppercase tracking-widest text-[#25D366] mb-3">What's included</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {["Auto order confirmations", "24/7 customer replies", "Payment & delivery alerts", "Multi-language support"].map((f) => (
+                        <div key={f} className="flex items-center gap-2.5 text-[11px] text-[var(--muted)] font-medium">
+                          <FiCheck className="shrink-0 text-[#25D366]" size={14} />
+                          {f}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>
-            )}
-
-            {/* ── Telegram Bot Tab ── */}
+            )}            {/* ── Telegram Bot Tab ── */}
             {activeTab === "telegram" && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[#229ED9]/15 border border-[#229ED9]/30 flex items-center justify-center shadow-[0_0_15px_rgba(34,158,217,0.2)]">
-                    <FiSend className="text-[#229ED9] w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-[800] text-[var(--foreground)] tracking-tight leading-none mb-1 md:mb-1.5">Telegram Bot</h3>
-                    <p className="text-[9px] md:text-[11px] text-[var(--muted)] opacity-80 uppercase tracking-wider font-bold">Alerts, group management & ops</p>
-                  </div>
-                </div>
-
-                {renderSlider()}
-
-                <div className="grid grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-6">
-                  {/* Flat plan */}
-                  <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
-                    revenue * 0.01 > 1 ? "border-2 border-[#229ED9] bg-[#229ED9]/5 shadow-[0_0_20px_rgba(34,158,217,0.15)]" : "border border-[#229ED9]/20 bg-[#229ED9]/5 hover:bg-[#229ED9]/10"
-                  }`}>
-                    {revenue * 0.01 > 1 && (
-                      <span className="text-[8px] md:text-[10px] font-black text-[#229ED9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
-                    )}
-                    <div className="text-[9px] md:text-[11px] font-bold text-[#229ED9] uppercase tracking-wider mb-1 md:mb-2">Flat Monthly</div>
-                    <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">$1</div>
-                    <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/month</div>
-                    <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Predictable cost. Best for active channels.</p>
-                  </div>
-
-                  {/* Revenue plan */}
-                  <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
-                    revenue * 0.01 <= 1 ? "border-2 border-[#e879f9] bg-[#e879f9]/5 shadow-[0_0_20px_rgba(232,121,249,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
-                  }`}>
-                    {revenue * 0.01 <= 1 && (
-                      <span className="text-[8px] md:text-[10px] font-black text-[#e879f9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
-                    )}
-                    <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Revenue %</div>
-                    <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">
-                      ${(revenue * 0.01).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex flex-col md:flex-row gap-3 md:gap-5">
+                <div className="flex-1 flex flex-col">
+                  <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[#229ED9]/15 border border-[#229ED9]/30 flex items-center justify-center shadow-[0_0_15px_rgba(34,158,217,0.2)]">
+                      <FiSend className="text-[#229ED9] w-5 h-5 md:w-6 md:h-6" />
                     </div>
-                    <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/mo (1%)</div>
-                    <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Only pay when you earn. Perfect for new bots.</p>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-[800] text-[var(--foreground)] tracking-tight leading-none mb-1 md:mb-1.5">Telegram Bot</h3>
+                      <p className="text-[9px] md:text-[11px] text-[var(--muted)] opacity-80 uppercase tracking-wider font-bold">Alerts, group management & ops</p>
+                    </div>
+                  </div>
+                  {renderSlider()}
+                  <div className="p-4 rounded-2xl border border-[#229ED9]/20 bg-[#229ED9]/5 space-y-3 mt-auto hidden md:block">
+                    <p className="text-[11px] font-black uppercase tracking-widest text-[#229ED9] mb-3">What's included</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {["Instant top-up notifications", "Group & channel management", "Secure inline payments", "Order status broadcasts"].map((f) => (
+                        <div key={f} className="flex items-center gap-2.5 text-[11px] text-[var(--muted)] font-medium">
+                          <FiCheck className="shrink-0 text-[#229ED9]" size={14} />
+                          {f}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl border border-[#229ED9]/20 bg-[#229ED9]/5 space-y-3">
-                  <p className="text-[11px] font-black uppercase tracking-widest text-[#229ED9] mb-3">What's included</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {["Instant top-up notifications", "Group & channel management", "Secure inline payments", "Order status broadcasts"].map((f) => (
-                      <div key={f} className="flex items-center gap-2.5 text-[11px] text-[var(--muted)] font-medium">
-                        <FiCheck className="shrink-0 text-[#229ED9]" size={14} />
-                        {f}
+                <div className="flex-1 flex flex-col">
+                  <div className="grid grid-cols-2 gap-2 md:gap-4 flex-1">
+                    {/* Flat plan */}
+                    <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
+                      revenue * 0.01 > 1 ? "border-2 border-[#229ED9] bg-[#229ED9]/5 shadow-[0_0_20px_rgba(34,158,217,0.15)]" : "border border-[#229ED9]/20 bg-[#229ED9]/5 hover:bg-[#229ED9]/10"
+                    }`}>
+                      {revenue * 0.01 > 1 && (
+                        <span className="text-[8px] md:text-[10px] font-black text-[#229ED9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
+                      )}
+                      <div className="text-[9px] md:text-[11px] font-bold text-[#229ED9] uppercase tracking-wider mb-1 md:mb-2">Flat Monthly</div>
+                      <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">$1</div>
+                      <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/month</div>
+                      <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Predictable cost. Best for active channels.</p>
+                    </div>
+
+                    {/* Revenue plan */}
+                    <div className={`rounded-xl md:rounded-2xl p-3 md:p-5 flex flex-col transition-all duration-300 relative overflow-hidden ${
+                      revenue * 0.01 <= 1 ? "border-2 border-[#e879f9] bg-[#e879f9]/5 shadow-[0_0_20px_rgba(232,121,249,0.15)]" : "border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)]/60"
+                    }`}>
+                      {revenue * 0.01 <= 1 && (
+                        <span className="text-[8px] md:text-[10px] font-black text-[#e879f9] uppercase tracking-widest mb-2 md:mb-3 block flex items-center gap-1">★ Best</span>
+                      )}
+                      <div className="text-[9px] md:text-[11px] font-bold text-[var(--muted)] uppercase tracking-wider mb-1 md:mb-2">Revenue %</div>
+                      <div className="text-2xl md:text-4xl font-[1000] text-[var(--foreground)] leading-none mb-1">
+                        ${(revenue * 0.01).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
                       </div>
-                    ))}
+                      <div className="text-[9px] md:text-[11px] text-[var(--muted)] mb-2 md:mb-4">/mo (1%)</div>
+                      <p className="text-[8px] md:text-[11px] text-[var(--muted)] opacity-80 leading-relaxed flex-1">Only pay when you earn. Perfect for new bots.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl border border-[#229ED9]/20 bg-[#229ED9]/5 space-y-3 mt-3 md:hidden">
+                    <p className="text-[11px] font-black uppercase tracking-widest text-[#229ED9] mb-3">What's included</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {["Instant top-up notifications", "Group & channel management", "Secure inline payments", "Order status broadcasts"].map((f) => (
+                        <div key={f} className="flex items-center gap-2.5 text-[11px] text-[var(--muted)] font-medium">
+                          <FiCheck className="shrink-0 text-[#229ED9]" size={14} />
+                          {f}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>

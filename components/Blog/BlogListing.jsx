@@ -86,16 +86,21 @@ export default function BlogListing({ initialGame = "all" }) {
 
   return (
     <main className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
-      <div className="max-w-7xl mx-auto pt-0 relative z-10">
+      <div className="max-w-7xl mx-auto pt-8 md:pt-12 relative z-10">
         <div
           className="mb-2"
         >
 
 
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <h1 className="text-3xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
-              {initialGame === "all" ? "Latest" : initialGame} <span className="text-[var(--accent)]">News</span>
-            </h1>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-3xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
+                {initialGame === "all" ? "Latest" : initialGame} <span className="text-[var(--accent)]">News</span>
+              </h1>
+              <p className="text-[10px] md:text-xs font-bold text-[var(--muted)] uppercase tracking-[0.4em] opacity-50 leading-relaxed max-w-xl mt-1">
+                Stay updated with the latest gaming news and updates.
+              </p>
+            </div>
             
             {/* 🔍 COMPACT SEARCH & FILTER TOGGLE */}
             <div className="flex items-center gap-2 w-full md:w-auto mt-4 md:mt-0">

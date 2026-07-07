@@ -32,13 +32,13 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
 
   return (
     <div className="h-full">
-      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full group">
+      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full">
         
         {/* Ultra-Compact Premium Card */}
-        <div className={`relative h-full bg-[var(--card)] rounded-[14px] p-1 flex flex-col transition-all duration-500 ease-out
+        <div className={`relative h-full bg-[var(--card)] rounded-[14px] p-1 flex flex-col transition-all duration-300 ease-out
           ${disabled 
             ? "opacity-60 cursor-not-allowed border border-[var(--border)]" 
-            : "border border-[var(--border)] hover:border-[var(--border)]/80 shadow-sm hover:shadow-md hover:-translate-y-0.5"}`}
+            : "border border-[var(--border)] shadow-sm"}`}
         >
           {/* Top Image Container */}
           <div className="relative w-full aspect-square sm:aspect-[4/3] rounded-[10px] overflow-hidden bg-[var(--background)]">
@@ -58,7 +58,7 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
                 alt={game.gameName}
                 fill
                 sizes="(max-width: 768px) 50vw, 25vw"
-                className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-105 ${disabled ? "grayscale opacity-80" : ""}`}
+                className={`object-cover ${disabled ? "grayscale opacity-80" : ""}`}
                 onError={() => setImgError(true)}
               />
             ) : (
@@ -83,7 +83,7 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
           <div className="flex-1 p-1.5 sm:p-2 flex flex-col justify-between">
             {/* break-words fixes the "WEEKLY/MONTHLY" overflow issue */}
             <h3 className={`text-[11px] sm:text-[13px] font-bold tracking-tight leading-[1.2] break-words whitespace-normal transition-colors duration-300
-              ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)] group-hover:text-[var(--accent)]"}`}
+              ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)]"}`}
               style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
               title={game.gameName}
             >
@@ -93,8 +93,8 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
             {/* Minimal Arrow Bottom Right */}
             {!disabled && (
               <div className="flex justify-end mt-1">
-                <div className="w-5 h-5 rounded-full bg-[var(--background)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--foreground)] group-hover:text-[var(--background)] group-hover:border-[var(--foreground)] transition-all duration-300 ease-out">
-                  <FiArrowRight size={10} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                <div className="w-5 h-5 rounded-full bg-[var(--background)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)]">
+                  <FiArrowRight size={10} />
                 </div>
               </div>
             )}

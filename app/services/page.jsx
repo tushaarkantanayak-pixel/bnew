@@ -66,23 +66,24 @@ export default function ServicesPage() {
         <div className="absolute bottom-[-10%] left-[-10%] w-[60%] aspect-square bg-[var(--accent)]/5 blur-[150px] rounded-full" />
       </div>
 
-      <div className="max-w-5xl mx-auto pt-16 md:pt-24 relative z-10">
+      <div className="max-w-7xl mx-auto pt-8 md:pt-12 relative z-10">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12 text-left"
+          className="text-left mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 mb-6">
-            <FiZap className="text-[var(--accent)]" size={12} />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--accent)]">Our Services</span>
-          </div>
-          <h1 className="text-4xl md:text-[5rem] font-black italic tracking-tighter uppercase leading-[0.8] mb-6">
-            <span className="text-[var(--accent)]">OUR</span> <br /> SOLUTIONS
+          <h1 className="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-2">
+            Our <span className="text-[var(--accent)]">Solutions</span>
           </h1>
-          <p className="max-w-xl text-[var(--muted)] text-[12px] font-bold uppercase tracking-[0.2em] leading-relaxed opacity-60">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-[10px] md:text-xs font-bold text-[var(--muted)] uppercase tracking-[0.4em] max-w-2xl opacity-50 leading-relaxed"
+          >
             Grow your gaming business with our expert technology. We build the tools you need to succeed.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* SERVICES LIST */}
@@ -96,12 +97,12 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 onClick={() => service.active && window.open(whatsappLink, "_blank")}
-                className={`group relative p-5 rounded-3xl bg-[var(--card)]/40 border border-[var(--border)] transition-all duration-500 flex flex-col gap-4 hover:border-[var(--accent)]/50 hover:shadow-2xl hover:-translate-y-1 shadow-sm`}
+                className={`group relative p-4 md:p-5 rounded-[1.5rem] bg-[var(--card)]/40 border border-[var(--border)] transition-all duration-500 flex flex-col gap-3 hover:border-[var(--accent)]/50 hover:shadow-2xl hover:-translate-y-1 shadow-sm`}
               >
                 {/* Top Row */}
                 <div className="flex justify-between items-start">
-                  <div className="w-12 h-12 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-white transition-all duration-500">
-                    <Icon size={22} />
+                  <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-white transition-all duration-500">
+                    <Icon size={20} />
                   </div>
                   <span className="text-[8px] font-black px-3 py-1 rounded-full bg-white/5 text-[var(--muted)] border border-white/10 tracking-widest uppercase group-hover:text-[var(--accent)] group-hover:border-[var(--accent)]/30 transition-colors">
                     {service.badge}
@@ -109,14 +110,14 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="space-y-2 mt-2">
-                  <h3 className="text-base md:text-lg font-black uppercase tracking-tighter italic text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-tight">
+                <div className="space-y-1.5 mt-1">
+                  <h3 className="text-base font-black uppercase tracking-tighter italic text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-tight">
                     {service.title}
                   </h3>
-                  <p className="text-[var(--muted)] text-[11px] leading-relaxed opacity-60 font-bold uppercase tracking-tight">
+                  <p className="text-[var(--muted)] text-[10px] leading-relaxed opacity-60 font-bold uppercase tracking-tight">
                     {service.desc}
                   </p>
-                  <div className="pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="pt-2 flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity">
                     Inquire Now <FiArrowRight />
                   </div>
                 </div>

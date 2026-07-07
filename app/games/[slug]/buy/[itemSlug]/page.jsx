@@ -222,11 +222,11 @@ function BuyFlowContent() {
   return (
     <AuthGuard>
       <section className="min-h-screen px-4 pt-2 pb-12 md:pt-4 md:pb-16 bg-gradient-to-b from-[var(--background)] to-[var(--card)]/20">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
 
           {/* ================= HEADER & PROGRESS ================= */}
           <div className="mb-4 relative">
-            <div className="max-w-[220px] mx-auto px-2">
+            <div className="max-w-[320px] mx-auto px-2">
               <div className="flex items-center justify-between relative text-center">
                 {/* Progress Line Background */}
                 <div className="absolute top-[16px] left-0 w-full h-[1px] bg-[var(--border)]/10 -z-10" />
@@ -305,7 +305,7 @@ function BuyFlowContent() {
                 animate={{ opacity: 1, x: 0 }}
                 className="w-full md:w-1/3 order-1 md:order-2"
               >
-                <div className="sticky top-24 bg-[var(--card)]/50 backdrop-blur-xl border border-[var(--foreground)]/5 rounded-2xl p-3.5 shadow-2xl overflow-hidden relative group/card">
+                <div className="sticky top-24 bg-[var(--card)]/50 backdrop-blur-xl border border-[var(--foreground)]/5 rounded-2xl p-3.5 shadow-sm overflow-hidden relative group/card">
                   <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
                   <div className="absolute -top-10 -right-10 w-24 h-24 bg-[var(--accent)]/10 blur-2xl rounded-full transition-transform duration-700 group-hover/card:scale-150" />
 
@@ -376,7 +376,7 @@ function BuyFlowContent() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.3 }}
-                      className="bg-[var(--card)]/40 backdrop-blur-md border border-[var(--border)] rounded-[2rem] p-5 md:p-6 shadow-xl relative overflow-hidden"
+                      className="bg-[var(--card)]/40 backdrop-blur-md border border-[var(--border)] rounded-none p-5 md:p-6 shadow-sm relative overflow-hidden"
                     >
                       <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/5 rounded-full blur-3xl -z-10" />
                       <ValidationStep
@@ -398,7 +398,7 @@ function BuyFlowContent() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.3 }}
-                      className="bg-[var(--card)]/40 backdrop-blur-md border border-[var(--border)] rounded-[2rem] p-4 md:p-6 shadow-xl relative overflow-hidden"
+                      className="bg-[var(--card)]/40 backdrop-blur-md border border-[var(--border)] rounded-none p-4 md:p-6 shadow-sm relative overflow-hidden"
                     >
                       <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/5 rounded-full blur-3xl -z-10" />
                       {(step === 2 || step === 3) && reviewData && (

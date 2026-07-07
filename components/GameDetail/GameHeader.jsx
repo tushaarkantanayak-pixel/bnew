@@ -13,7 +13,7 @@ export default function GameHeader({ game }) {
   if (!game) return null;
 
   return (
-    <div className="relative max-w-6xl mx-auto mb-3 mt-0">
+    <div className="relative max-w-7xl mx-auto mb-3 mt-0">
       {/* Subtle Ambient Background Glow */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-48 h-12 bg-[var(--accent)]/10 blur-[40px] opacity-10 -z-10" />
 

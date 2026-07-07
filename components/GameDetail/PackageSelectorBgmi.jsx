@@ -18,9 +18,9 @@ export default function PackageSelector({
   scrollToItem,
 }) {
   return (
-    <div className="max-w-6xl mx-auto px-4 md:px-0">
+    <div className="max-w-7xl mx-auto px-4 md:px-0">
       {/* ================= HEADER & VIEW TOGGLE ================= */}
-      <div className="mb-4 flex items-center justify-between gap-3">
+      <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <h2 className="text-xl font-[950] tracking-tighter text-[var(--foreground)] lowercase">
              <span className="text-[var(--accent)] drop-shadow-[0_0_10px_rgba(var(--accent-rgb),0.3)]">package</span>

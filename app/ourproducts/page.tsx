@@ -41,6 +41,23 @@ export default function OurProductsPage() {
       ],
       link: "https://xyzpay.site",
       color: "from-purple-600 to-indigo-400"
+    },
+    {
+      id: "games-bluebuff",
+      name: "Games BlueBuff",
+      tagline: "Your ultimate gaming destination",
+      desc: "Explore a wide range of games and top-up options seamlessly integrated for the best experience. Play, connect, and enjoy.",
+      icon: FiGlobe,
+      features: [
+        "Wide variety of games",
+        "Instant delivery",
+        "Exclusive rewards",
+        "Safe transactions",
+        "24/7 Support",
+        "User-friendly interface"
+      ],
+      link: "https://games.bluebuff.in",
+      color: "from-green-600 to-emerald-400"
     }
   ];
 
@@ -51,7 +68,7 @@ export default function OurProductsPage() {
       <main className="pt-8 md:pt-12 pb-8">
         <div className="max-w-7xl mx-auto px-6">
           {/* Hero Section */}
-          <div className="text-center mb-8">
+          <div className="text-left mb-8">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -63,7 +80,7 @@ export default function OurProductsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-[10px] md:text-xs font-bold text-[var(--muted)] uppercase tracking-[0.4em] max-w-2xl mx-auto opacity-50 leading-relaxed"
+              className="text-[10px] md:text-xs font-bold text-[var(--muted)] uppercase tracking-[0.4em] max-w-2xl opacity-50 leading-relaxed"
             >
               Tools to grow your gaming business.
             </motion.p>
@@ -77,11 +94,11 @@ export default function OurProductsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col p-6 rounded-[2rem] bg-[var(--card)]/40 border border-[var(--foreground)]/5 hover:border-[var(--accent)]/50 transition-all shadow-sm"
+                className="flex flex-col p-4 md:p-5 rounded-[1.5rem] bg-[var(--card)]/40 border border-[var(--foreground)]/5 hover:border-[var(--accent)]/50 transition-all shadow-sm"
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center">
-                    <product.icon className="text-[var(--accent)]" size={24} />
+                <div className="flex justify-between items-start mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center">
+                    <product.icon className="text-[var(--accent)]" size={20} />
                   </div>
                   <div className="flex gap-2">
                     <span className="px-2 py-1 bg-[var(--foreground)]/5 text-[var(--muted)] border border-[var(--foreground)]/10 text-[8px] font-black uppercase tracking-widest rounded-full">
@@ -95,28 +112,30 @@ export default function OurProductsPage() {
                   </div>
                 </div>
 
-                <div className="space-y-3 flex-1">
-                  <h2 className="text-xl md:text-2xl font-black uppercase italic tracking-tighter leading-tight">{product.name}</h2>
-                  <p className="text-[10px] font-bold text-[var(--accent)] uppercase tracking-wide opacity-80">{product.tagline}</p>
-                  <p className="text-[11px] text-[var(--muted)] font-medium leading-relaxed opacity-60">
+                <div className="space-y-2 flex-1">
+                  <h2 className="text-lg md:text-xl font-black uppercase italic tracking-tighter leading-tight">{product.name}</h2>
+                  <p className="text-[9px] font-bold text-[var(--accent)] uppercase tracking-wide opacity-80">{product.tagline}</p>
+                  <p className="text-[10px] text-[var(--muted)] font-medium leading-relaxed opacity-60">
                     {product.desc}
                   </p>
 
-                  <div className="grid grid-cols-1 gap-2 pt-2">
+                  <div className="grid grid-cols-2 gap-x-2 gap-y-2 pt-2">
                     {product.features.map((feature, j) => (
-                      <div key={j} className="flex items-center gap-2 p-2 rounded-xl bg-[var(--foreground)]/5 border border-[var(--foreground)]/10">
-                        <FiCheckCircle className="text-[var(--accent)] flex-shrink-0" size={12} />
-                        <span className="text-[9px] font-black uppercase tracking-tight text-[var(--foreground)] opacity-70 truncate">{feature}</span>
+                      <div key={j} className="flex items-center gap-1.5">
+                        <div className="w-4 h-4 rounded-full bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                          <FiCheckCircle className="text-[var(--accent)]" size={8} />
+                        </div>
+                        <span className="text-[8px] font-bold uppercase tracking-tight text-[var(--muted)] truncate">{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 pt-6 mt-auto">
-                  <a href={product.link || "#"} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 rounded-xl bg-[var(--accent)] !text-black text-[9px] font-black uppercase italic tracking-widest hover:brightness-110 shadow-lg shadow-[var(--accent)]/20 transition-all text-center">
+                <div className="flex items-center gap-2 pt-4 mt-auto">
+                  <a href={product.link || "#"} target="_blank" rel="noopener noreferrer" className="flex-1 py-2 rounded-lg bg-[var(--accent)] !text-black text-[8px] font-black uppercase italic tracking-widest hover:brightness-110 shadow-lg shadow-[var(--accent)]/20 transition-all text-center">
                     Get Started
                   </a>
-                  <button className="px-4 py-2.5 rounded-xl bg-[var(--foreground)]/5 text-[9px] font-black uppercase italic tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] transition-all">
+                  <button className="px-3 py-2 rounded-lg bg-[var(--foreground)]/5 text-[8px] font-black uppercase italic tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] transition-all">
                     Docs
                   </button>
                 </div>

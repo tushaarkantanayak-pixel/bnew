@@ -99,7 +99,7 @@ export default function LandingPage() {
 
       {/* ═══════ HERO ═══════ */}
       <section
-        className="relative min-h-[100svh] flex flex-col justify-start md:justify-start overflow-hidden border-b border-[var(--border)]"
+        className="relative pt-6 pb-16 md:pt-10 md:pb-20 flex flex-col justify-center overflow-hidden border-b border-[var(--border)]"
       >
         {/* ── 3D DECORATIVE BACKGROUND ── */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -209,7 +209,7 @@ export default function LandingPage() {
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent z-10" />
 
         {/* content grid */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-6 md:pt-[72px] pb-16 md:py-0 grid md:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-2 pb-8 md:pt-4 md:pb-10 grid md:grid-cols-2 gap-12 items-center">
 
           {/* ── LEFT: text ── */}
           <div className="flex flex-col gap-4 md:gap-7 order-1 md:order-1">
@@ -329,12 +329,17 @@ export default function LandingPage() {
 
       {/* ═══════ SERVICES ═══════ */}
       <section className="py-24 border-b border-[var(--border)]">
-        <div className="max-w-6xl mx-auto px-5 md:px-10">
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
 
-          {/* section label */}
-          <div className="flex items-center gap-4 mb-14">
-            <div className="w-6 h-[2px] bg-[var(--accent)]" />
-            <h2 className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)] m-0 p-0">Our Services</h2>
+          {/* header */}
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-6 h-[2px] bg-[var(--accent)]" />
+              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Our Services</span>
+            </div>
+            <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase">
+              Everything You <span className="text-[var(--accent)]">Need</span>
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)]">
@@ -391,7 +396,7 @@ export default function LandingPage() {
 
       {/* ═══════ GAMES ═══════ */}
       <section id="games-section" className="py-24 border-b border-[var(--border)]">
-        <div className="max-w-6xl mx-auto px-5 md:px-10">
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
 
           {/* header */}
           <div className="flex items-end justify-between mb-12">
@@ -434,18 +439,14 @@ export default function LandingPage() {
       </section>
 
       {/* ═══════ CTA ═══════ */}
-      <section className="py-28">
-        <div className="max-w-5xl mx-auto px-3 md:px-10">
+      <section className="py-8 md:py-12">
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[2rem] border border-[var(--border)] px-4 py-8 md:p-16 overflow-hidden"
+            className="relative"
           >
-            {/* bg decoration */}
-            <div className="absolute inset-0 bg-[var(--card)]/20" />
-            <div className="absolute top-0 right-0 w-[50%] h-[100%] bg-[var(--accent)]/[0.04] blur-[80px]" />
-            <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-transparent via-[var(--accent)]/30 to-transparent" />
 
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
               <div className="space-y-4 max-w-xl">
@@ -454,8 +455,8 @@ export default function LandingPage() {
                   <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Ready to grow?</span>
                 </div>
                 <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase leading-none">
-                  Build your<br />
-                  <span className="text-[var(--accent)]">Empire</span> with us
+                  Grow your<br />
+                  <span className="text-[var(--accent)]">Business</span> with us
                 </h2>
                 <p className="text-sm text-[var(--muted)] leading-relaxed">
                   Let's build your next big project together — stores, APIs, and gaming tools all in one place.

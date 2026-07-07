@@ -18,7 +18,7 @@ export default function PackageSelector({
   scrollToItem,
 }) {
   return (
-    <div className="max-w-6xl mx-auto px-4 md:px-0">
+    <div className="max-w-7xl mx-auto px-4 md:px-0">
       {/* ================= HEADER & VIEW TOGGLE ================= */}
       <div className="mb-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">

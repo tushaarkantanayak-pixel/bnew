@@ -214,8 +214,10 @@ function GameDetailContent() {
 
   /* ================= RENDER ================= */
   return (
-    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] px-4 pb-10 pt-2">
-      <GameSwitcher />
+    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] px-4 md:px-0 pb-10 pt-2">
+      <div className="max-w-7xl mx-auto">
+        <GameSwitcher />
+      </div>
       {/* ================= HEADER ================= */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

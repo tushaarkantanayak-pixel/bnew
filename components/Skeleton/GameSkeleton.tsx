@@ -2,98 +2,57 @@
 
 import { motion } from "framer-motion";
 
-const shimmer = {
-  initial: { opacity: 0.5 },
-  animate: {
-    opacity: [0.3, 0.7, 0.3],
-    transition: {
-      duration: 2,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const blockClass = "relative overflow-hidden bg-[var(--card)]/40 border border-white/5";
-
-const ShimmerEffect = () => (
-  <motion.div
-    className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent"
-    animate={{ translateX: ["-100%", "200%"] }}
-    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-  />
-);
-
 export default function GameSkeleton() {
+  const shimmerClass = "relative overflow-hidden bg-[var(--foreground)]/5 rounded-2xl animate-pulse";
+
   return (
-    <div className="min-h-screen bg-[var(--background)] px-4 py-8 overflow-hidden">
-      <div className="max-w-6xl mx-auto space-y-12">
+    <div className="min-h-screen bg-[var(--background)] px-4 md:px-0 py-10 pt-2">
+      <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Game Switcher Skeleton */}
-        <motion.div variants={shimmer} initial="initial" animate="animate" className={`h-12 w-full max-w-md rounded-2xl mx-auto flex items-center justify-between p-1 ${blockClass}`}>
-          <div className="w-1/2 h-full bg-white/5 rounded-xl" />
-          <div className="w-1/2 h-full rounded-xl" />
-          <ShimmerEffect />
-        </motion.div>
-
-        {/* Header Skeleton */}
-        <motion.div variants={shimmer} initial="initial" animate="animate" className="flex flex-col md:flex-row items-center gap-8 pt-8">
-          <div className={`w-40 h-40 md:w-56 md:h-56 rounded-[2.5rem] shadow-[0_0_30px_rgba(255,255,255,0.02)] flex-shrink-0 ${blockClass}`}>
-            <ShimmerEffect />
-          </div>
-          <div className="flex-1 space-y-5 text-center md:text-left w-full flex flex-col items-center md:items-start">
-            <div className={`h-10 w-3/4 max-w-md rounded-xl ${blockClass}`}>
-              <ShimmerEffect />
-            </div>
-            <div className={`h-4 w-1/3 max-w-[150px] bg-[var(--accent)]/10 rounded-full ${blockClass} !border-none`}>
-              <ShimmerEffect />
-            </div>
-            <div className="flex gap-3 justify-center md:justify-start w-full">
-              <div className={`h-8 w-28 rounded-lg ${blockClass}`}>
-                 <ShimmerEffect />
-              </div>
-              <div className={`h-8 w-28 rounded-lg ${blockClass}`}>
-                 <ShimmerEffect />
-              </div>
+        <div className="w-full mb-5 relative z-20">
+          <div className="flex items-center justify-between mb-2.5 px-1">
+            <div className="flex items-center gap-2.5">
+              <div className="w-6 h-[2px] bg-[var(--foreground)]/10" />
+              <div className="h-3 w-24 bg-[var(--foreground)]/10 rounded-full" />
             </div>
           </div>
-        </motion.div>
-
-        {/* Package Selector Skeleton */}
-        <motion.div variants={shimmer} initial="initial" animate="animate" className="space-y-6 pt-4">
-          <div className="flex justify-between items-center">
-            <div className={`h-8 w-48 rounded-xl ${blockClass}`}>
-              <ShimmerEffect />
-            </div>
-            <div className={`h-8 w-24 rounded-xl ${blockClass}`}>
-              <ShimmerEffect />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className={`aspect-[4/5] rounded-2xl p-4 flex flex-col items-center justify-center space-y-4 shadow-lg ${blockClass}`}>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--accent)]/20 to-transparent rotate-12 flex items-center justify-center relative overflow-hidden">
-                   <div className="absolute inset-0 bg-white/5 blur-sm" />
-                </div>
-                <div className={`h-4 w-20 rounded-lg bg-white/5`} />
-                <div className={`h-3 w-12 rounded-lg bg-[var(--accent)]/10`} />
-                <ShimmerEffect />
-              </div>
+          <div className="flex gap-3 overflow-hidden pb-2 px-1">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+              <div key={i} className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[var(--foreground)]/5 animate-pulse" />
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Buy Panel Skeleton */}
-        <motion.div variants={shimmer} initial="initial" animate="animate" className={`max-w-4xl mx-auto p-8 rounded-[3rem] space-y-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] ${blockClass}`}>
-          <ShimmerEffect />
-          <div className="space-y-4 relative z-10">
-            <div className="h-6 w-40 bg-white/5 rounded-lg" />
-            <div className="h-16 w-full bg-white/[0.02] rounded-2xl border border-white/5" />
+        {/* Game Header Skeleton */}
+        <div className="relative mb-6">
+          <div className={`w-full h-16 md:h-20 ${shimmerClass} flex items-center justify-between px-3 py-2 md:px-5 md:py-2`}>
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="w-10 h-10 md:w-13 md:h-13 rounded-xl md:rounded-2xl bg-[var(--foreground)]/10" />
+              <div className="h-5 w-32 md:w-48 bg-[var(--foreground)]/10 rounded-lg" />
+            </div>
+            <div className="flex gap-2">
+              <div className="hidden md:block w-24 h-8 bg-[var(--foreground)]/10 rounded-full" />
+              <div className="hidden md:block w-24 h-8 bg-[var(--foreground)]/10 rounded-full" />
+            </div>
           </div>
-          <div className="h-16 w-full bg-gradient-to-r from-[var(--accent)]/20 via-[var(--accent)]/10 to-[var(--accent)]/20 rounded-2xl relative overflow-hidden">
-             <div className="absolute inset-0 bg-[var(--accent)]/20 blur-xl" />
+        </div>
+
+        {/* Package Selector Skeleton */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-6 w-32 bg-[var(--foreground)]/10 rounded-lg" />
+              <div className="h-4 w-16 bg-[var(--foreground)]/5 rounded-full" />
+            </div>
           </div>
-        </motion.div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+              <div key={i} className={`h-24 md:h-28 ${shimmerClass}`} />
+            ))}
+          </div>
+        </div>
 
       </div>
     </div>
