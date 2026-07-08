@@ -246,6 +246,13 @@ export async function POST(req: Request) {
       });
     }
 
+    if (paymentMethod !== "wallet") {
+      return NextResponse.json({
+        success: false,
+        message: "Invalid payment method.",
+      }, { status: 400 });
+    }
+
     /* ---------- SERVER PRICE ---------- */
     const price = await resolvePrice(gameSlug, itemSlug, userType);
 
