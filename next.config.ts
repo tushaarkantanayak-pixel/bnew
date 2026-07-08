@@ -53,7 +53,7 @@ const nextConfig = {
       },
       // 2. Lock down all other internal APIs to ONLY BlueBuff domain (and localhost for dev)
       {
-        source: "/api/(?!service/).*", // Matches all /api/ routes EXCEPT /api/service/
+        source: "/api/:path((?!service).*)*", // Matches all /api/ routes EXCEPT /api/service/
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           // Note: In a real strict environment without localhost, you'd hardcode https://bluebuff.in
