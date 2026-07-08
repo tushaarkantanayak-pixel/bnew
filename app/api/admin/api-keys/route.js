@@ -92,3 +92,59 @@ export async function GET(req) {
         return Response.json({ success: false, message: "Server error" }, { status: 500 });
     }
 }
+
+export async function PATCH(req) {
+    try {
+        await connectDB();
+        const auth = req.headers.get("authorization");
+        if (!auth?.startsWith("Bearer "))
+            return Response.json({ message: "Unauthorized" }, { status: 401 });
+
+        const token = auth.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        if (decoded.userType !== "owner")
+            return Response.json({ message: "Forbidden" }, { status: 403 });
+
+        const { keyId, status } = await req.json();
+        if (!keyId || !status) {
+            return Response.json({ success: false, message: "Missing keyId or status" }, { status: 400 });
+        }
+
+        await ApiKey.findByIdAndUpdate(keyId, { status });
+
+        return Response.json({ success: true, message: "Key status updated successfully" });
+    } catch (err) {
+        console.error("API Key Patch Error:", err);
+        return Response.json({ success: false, message: "Server error" }, { status: 500 });
+    }
+}
+
+export async function DELETE(req) {
+    try {
+        await connectDB();
+        const auth = req.headers.get("authorization");
+        if (!auth?.startsWith("Bearer "))
+            return Response.json({ message: "Unauthorized" }, { status: 401 });
+
+        const token = auth.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        if (decoded.userType !== "owner")
+            return Response.json({ message: "Forbidden" }, { status: 403 });
+
+        const { searchParams } = new URL(req.url);
+        const keyId = searchParams.get("keyId");
+
+        if (!keyId) {
+            return Response.json({ success: false, message: "Missing keyId" }, { status: 400 });
+        }
+
+        await ApiKey.findByIdAndDelete(keyId);
+
+        return Response.json({ success: true, message: "Key deleted successfully" });
+    } catch (err) {
+        console.error("API Key Delete Error:", err);
+        return Response.json({ success: false, message: "Server error" }, { status: 500 });
+    }
+}

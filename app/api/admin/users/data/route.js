@@ -54,6 +54,7 @@ export async function GET(req) {
                 { email: { $regex: search, $options: "i" } },
                 { phone: { $regex: search, $options: "i" } },
                 { userId: { $regex: search, $options: "i" } },
+                { lastLoginIp: { $regex: search, $options: "i" } },
             ];
         }
 

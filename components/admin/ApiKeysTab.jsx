@@ -13,7 +13,10 @@ import {
     Calendar,
     Wifi,
     WifiOff,
-    Clock
+    Clock,
+    Trash2,
+    Ban,
+    CheckCircle
 } from "lucide-react";
 import { formatPrice } from "@/utils/currency";
 import apiClient from "@/utils/apiClient";
@@ -41,6 +44,39 @@ export default function ApiKeysTab() {
     useEffect(() => {
         fetchKeys();
     }, []);
+
+    const handleRevoke = async (keyId, currentStatus) => {
+        if (!confirm(`Are you sure you want to ${currentStatus === 'active' ? 'revoke' : 'activate'} this API key?`)) return;
+        try {
+            const res = await apiClient.patch("/api/admin/api-keys", {
+                keyId,
+                status: currentStatus === 'active' ? 'revoked' : 'active'
+            });
+            if (res.data.success) {
+                fetchKeys();
+            } else {
+                alert(res.data.message || "Failed to update key status");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("An error occurred while updating the key.");
+        }
+    };
+
+    const handleDelete = async (keyId) => {
+        if (!confirm("Are you sure you want to delete this API key permanently?")) return;
+        try {
+            const res = await apiClient.delete(`/api/admin/api-keys?keyId=${keyId}`);
+            if (res.data.success) {
+                fetchKeys();
+            } else {
+                alert(res.data.message || "Failed to delete key");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("An error occurred while deleting the key.");
+        }
+    };
 
     return (
         <div className="space-y-6 pb-10">
@@ -92,6 +128,7 @@ export default function ApiKeysTab() {
                                         <th className="px-6 py-4">Daily Usage (Today)</th>
                                         <th className="px-6 py-4">Activity (24h)</th>
                                         <th className="px-6 py-4">Last Used</th>
+                                        <th className="px-6 py-4 text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-[var(--border)]">
@@ -181,6 +218,26 @@ export default function ApiKeysTab() {
                                                     </div>
                                                 </div>
                                             </td>
+
+                                            {/* Actions */}
+                                            <td className="px-6 py-5 text-right">
+                                                <div className="flex items-center justify-end gap-2">
+                                                    <button
+                                                        onClick={() => handleRevoke(k._id, k.status)}
+                                                        className="p-2 rounded-lg bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-amber-500 hover:border-amber-500/30 hover:bg-amber-500/10 transition-all outline-none"
+                                                        title={k.status === 'active' ? "Revoke Key" : "Activate Key"}
+                                                    >
+                                                        {k.status === 'active' ? <Ban size={14} /> : <CheckCircle size={14} />}
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDelete(k._id)}
+                                                        className="p-2 rounded-lg bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-rose-500 hover:border-rose-500/30 hover:bg-rose-500/10 transition-all outline-none"
+                                                        title="Delete Key"
+                                                    >
+                                                        <Trash2 size={14} />
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </motion.tr>
                                     ))}
                                 </tbody>
@@ -251,6 +308,21 @@ export default function ApiKeysTab() {
                                                         : 'bg-[var(--accent)]'}`}
                                             />
                                         </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[var(--border)]/50">
+                                        <button
+                                            onClick={() => handleRevoke(k._id, k.status)}
+                                            className="flex-1 py-2 flex items-center justify-center gap-1.5 rounded-lg bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-amber-500 hover:border-amber-500/30 hover:bg-amber-500/10 transition-all outline-none text-xs font-semibold"
+                                        >
+                                            {k.status === 'active' ? <><Ban size={12} /> Revoke</> : <><CheckCircle size={12} /> Activate</>}
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(k._id)}
+                                            className="flex-1 py-2 flex items-center justify-center gap-1.5 rounded-lg bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-rose-500 hover:border-rose-500/30 hover:bg-rose-500/10 transition-all outline-none text-xs font-semibold"
+                                        >
+                                            <Trash2 size={12} /> Delete
+                                        </button>
                                     </div>
                                 </motion.div>
                             ))}
