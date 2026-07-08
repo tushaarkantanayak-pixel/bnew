@@ -6,6 +6,15 @@ import bcrypt from "bcryptjs";
 
 export async function POST(request: Request) {
     try {
+        // 🔒 SECRET HEADER CHECK: Prevent unauthorized bot access
+        const authSecret = request.headers.get("x-auth-secret");
+        if (authSecret !== process.env.HYBRID_AUTH_SECRET) {
+            return Response.json(
+                { success: false, message: "Unauthorized access to this endpoint" },
+                { status: 403 }
+            );
+        }
+
         await connectDB();
         const body = await request.json();
         const { email, password } = body;
