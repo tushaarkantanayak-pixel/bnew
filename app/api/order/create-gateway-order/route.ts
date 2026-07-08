@@ -256,6 +256,14 @@ export async function POST(req: Request) {
     /* ---------- SERVER PRICE ---------- */
     const price = await resolvePrice(gameSlug, itemSlug, userType);
 
+    // 🛡️ CRITICAL HARD CHECK: Prevent negative or zero prices
+    if (!price || isNaN(price) || price <= 0) {
+      return NextResponse.json({
+        success: false,
+        message: "Invalid item price detected",
+      }, { status: 400 });
+    }
+
     /* ---------- ORDER ID ---------- */
     const orderId =
       "TKMLBB" +

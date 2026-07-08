@@ -131,6 +131,15 @@ export async function POST(req) {
 
         const { price, itemName } = priceData;
 
+        // 🛡️ CRITICAL HARD CHECK: Prevent negative or zero prices
+        if (!price || isNaN(price) || price <= 0) {
+            return NextResponse.json({
+                success: false,
+                status: "failed",
+                message: "Invalid item price detected"
+            }, { status: 400 });
+        }
+
         const orderId = `APIBB-2026-${Math.random().toString(36).substring(2, 11).toUpperCase().padStart(9, '0')}`;
 
         // ⚡ ATOMIC WALLET DEDUCTION
