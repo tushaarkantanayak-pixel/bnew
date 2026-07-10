@@ -37,6 +37,18 @@ export async function POST(req: Request) {
 
     /* ================= CREATE USER IF NEW ================= */
     if (!user) {
+      const ip = req.headers.get("x-forwarded-for") || "unknown";
+      
+      if (ip !== "unknown") {
+        const ipCount = await User.countDocuments({ lastLoginIp: ip });
+        if (ipCount >= 2) {
+           return Response.json(
+             { success: false, message: "Account limit reached for this IP address." },
+             { status: 429 }
+           );
+        }
+      }
+
       user = await User.create({
         userId: generateUserId(name || "user", Date.now().toString()),
         name,
@@ -48,6 +60,7 @@ export async function POST(req: Request) {
         wallet: 0,
         order: 0,
         userType: "user",
+        lastLoginIp: ip,
       });
     } else {
       /* ================= UPDATE LAST LOGIN ================= */
