@@ -41,7 +41,7 @@ export async function GET(req) {
 
         let settings = await AppSettings.findOne({});
         if (!settings) {
-            settings = await AppSettings.create({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true });
+            settings = await AppSettings.create({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true, memberOnlyOrdersEnabled: false });
         }
 
         return NextResponse.json({
@@ -71,11 +71,11 @@ export async function PATCH(req) {
         }
 
         const body = await req.json();
-        const { maintenanceMode, mlbbWeeklyProvider, apiServiceEnabled, websiteOrdersEnabled } = body;
+        const { maintenanceMode, mlbbWeeklyProvider, apiServiceEnabled, websiteOrdersEnabled, memberOnlyOrdersEnabled } = body;
 
         let settings = await AppSettings.findOne({});
         if (!settings) {
-            settings = new AppSettings({ maintenanceMode: false, mlbbWeeklyProvider: "1game", apiServiceEnabled: true, websiteOrdersEnabled: true });
+            settings = new AppSettings({ maintenanceMode: false, mlbbWeeklyProvider: "1game", apiServiceEnabled: true, websiteOrdersEnabled: true, memberOnlyOrdersEnabled: false });
         }
 
         if (typeof maintenanceMode === "boolean") {
@@ -92,6 +92,10 @@ export async function PATCH(req) {
 
         if (typeof websiteOrdersEnabled === "boolean") {
             settings.websiteOrdersEnabled = websiteOrdersEnabled;
+        }
+
+        if (typeof memberOnlyOrdersEnabled === "boolean") {
+            settings.memberOnlyOrdersEnabled = memberOnlyOrdersEnabled;
         }
 
         await settings.save();

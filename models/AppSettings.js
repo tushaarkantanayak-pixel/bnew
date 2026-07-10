@@ -19,6 +19,10 @@ const AppSettingsSchema = new mongoose.Schema(
             type: Boolean,
             default: true,
         },
+        memberOnlyOrdersEnabled: {
+            type: Boolean,
+            default: false,
+        },
         // We can add more settings here in the future
     },
     { timestamps: true }

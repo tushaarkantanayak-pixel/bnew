@@ -12,14 +12,16 @@ export const getAppSettings = unstable_cache(
                     maintenanceMode: false, 
                     mlbbWeeklyProvider: "1game",
                     apiServiceEnabled: true,
-                    websiteOrdersEnabled: true
+                    websiteOrdersEnabled: true,
+                    memberOnlyOrdersEnabled: false
                 };
             }
             return {
                 maintenanceMode: !!settings.maintenanceMode,
                 mlbbWeeklyProvider: settings.mlbbWeeklyProvider || "1game",
                 apiServiceEnabled: settings.apiServiceEnabled ?? true,
-                websiteOrdersEnabled: settings.websiteOrdersEnabled ?? true
+                websiteOrdersEnabled: settings.websiteOrdersEnabled ?? true,
+                memberOnlyOrdersEnabled: settings.memberOnlyOrdersEnabled ?? false
             };
         } catch (error) {
             console.error("Error fetching app settings:", error);
@@ -27,7 +29,8 @@ export const getAppSettings = unstable_cache(
                 maintenanceMode: false, 
                 mlbbWeeklyProvider: "1game",
                 apiServiceEnabled: true,
-                websiteOrdersEnabled: true
+                websiteOrdersEnabled: true,
+                memberOnlyOrdersEnabled: false
             };
         }
     },

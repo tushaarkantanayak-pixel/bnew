@@ -5,7 +5,7 @@ import { FiSettings, FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/
 import apiClient from "@/utils/apiClient";
 
 const SettingsTab = () => {
-    const [settings, setSettings] = useState({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true });
+    const [settings, setSettings] = useState({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true, memberOnlyOrdersEnabled: false });
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState({ type: "", text: "" });
@@ -84,6 +84,28 @@ const SettingsTab = () => {
             if (data.success) {
                 setSettings(data.data);
                 setMessage({ type: "success", text: `Website Orders ${newValue ? "enabled" : "disabled"} successfully!` });
+            } else {
+                setMessage({ type: "error", text: data.message || "Failed to update settings" });
+            }
+        } catch (err) {
+            console.error("Failed to update settings", err);
+            setMessage({ type: "error", text: "Something went wrong" });
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const toggleMemberOnlyOrders = async () => {
+        try {
+            setSaving(true);
+            setMessage({ type: "", text: "" });
+            const newValue = !settings.memberOnlyOrdersEnabled;
+
+            const res = await apiClient.patch("/api/admin/settings", { memberOnlyOrdersEnabled: newValue });
+            const data = res.data;
+            if (data.success) {
+                setSettings(data.data);
+                setMessage({ type: "success", text: `Member Only Orders ${newValue ? "enabled" : "disabled"} successfully!` });
             } else {
                 setMessage({ type: "error", text: data.message || "Failed to update settings" });
             }
@@ -199,6 +221,31 @@ const SettingsTab = () => {
                             className={`
                 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
                 ${settings.websiteOrdersEnabled ? "translate-x-5" : "translate-x-0"}
+              `}
+                        />
+                    </button>
+                </div>
+                <div className="p-6 flex items-center justify-between gap-6 border-b border-[var(--border)]">
+                    <div>
+                        <h3 className="font-semibold text-[var(--foreground)]">Members Only Orders</h3>
+                        <p className="text-xs text-[var(--muted)] mt-1">
+                            When enabled, only logged in users with member/reseller access can place orders. Normal users will be rejected.
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={toggleMemberOnlyOrders}
+                        disabled={saving}
+                        className={`
+              relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
+              ${settings.memberOnlyOrdersEnabled ? "bg-purple-500" : "bg-gray-700"}
+              ${saving ? "opacity-50 cursor-not-allowed" : ""}
+            `}
+                    >
+                        <span
+                            className={`
+                pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+                ${settings.memberOnlyOrdersEnabled ? "translate-x-5" : "translate-x-0"}
               `}
                         />
                     </button>

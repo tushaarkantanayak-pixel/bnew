@@ -203,6 +203,13 @@ export async function POST(req: Request) {
       }, { status: 503 });
     }
 
+    if (settings && settings.memberOnlyOrdersEnabled && userType === "user") {
+      return NextResponse.json({
+        success: false,
+        message: "Website orders are currently restricted",
+      }, { status: 403 });
+    }
+
     /* ---------- BODY ---------- */
     const body = await req.json();
 
