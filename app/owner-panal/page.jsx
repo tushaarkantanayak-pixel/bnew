@@ -31,6 +31,7 @@ const ApiKeysTab = dynamic(() => import("@/components/admin/ApiKeysTab"), { load
 const UsdtTab = dynamic(() => import("@/components/admin/UsdtTab"), { loading: LoadingFallback });
 const PromotionalTab = dynamic(() => import("@/components/admin/PromotionalTab"), { loading: LoadingFallback });
 const BlogsTab = dynamic(() => import("@/components/admin/BlogsTab"), { loading: LoadingFallback });
+const BlocklistTab = dynamic(() => import("@/components/admin/BlocklistTab"), { loading: LoadingFallback });
 
 
 
@@ -58,6 +59,7 @@ const SIDEBAR_CATEGORIES = [
       { id: "users", label: "Users", icon: <Users /> },
       { id: "queries", label: "Queries", icon: <MessageSquare /> },
       { id: "promotional", label: "Promotional", icon: <Mail /> },
+      { id: "blocklist", label: "Blocklist", icon: <FileText /> },
     ]
   },
   {
@@ -403,6 +405,10 @@ export default function AdminPanalPage() {
             )}
             {activeTab === "banners" && (
               <BannersTab banners={banners} onRefresh={fetchBanners} />
+            )}
+            
+            {activeTab === "blocklist" && (
+              <BlocklistTab />
             )}
 
 

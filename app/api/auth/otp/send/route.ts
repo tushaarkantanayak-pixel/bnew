@@ -16,12 +16,42 @@ export async function POST(request: Request) {
         if (!normalizedEmail.endsWith("@gmail.com")) {
             return Response.json({ success: false, message: "Only @gmail.com addresses are allowed." }, { status: 403 });
         }
+
+        const ip = request.headers.get("x-forwarded-for") || "unknown";
+
+        /* ================= CHECK BLOCKLIST ================= */
+        const Blocklist = require("@/models/Blocklist").default;
+        const isBlocked = await Blocklist.findOne({
+          $or: [
+            { type: "email", value: normalizedEmail },
+            { type: "ip", value: ip !== "unknown" ? ip : "null" }
+          ]
+        });
+
+        if (isBlocked) {
+          return Response.json({ success: false, message: "Something went wrong. Please try again later." }, { status: 400 });
+        }
+
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
         const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
         let user = await User.findOne({ email: normalizedEmail });
 
         if (!user) {
+            if (ip !== "unknown") {
+                const ipCount = await User.countDocuments({ lastLoginIp: ip });
+                if (ipCount >= 2) {
+                   await Blocklist.updateOne(
+                     { type: "ip", value: ip },
+                     { $setOnInsert: { type: "ip", value: ip, reason: "Auto-blocked: Multiple account creation" } },
+                     { upsert: true }
+                   );
+                   return Response.json(
+                     { success: false, message: "Something went wrong. Please try again later." },
+                     { status: 400 }
+                   );
+                }
+            }
             // Auto-register if not exists
             const name = normalizedEmail.split("@")[0];
             const dummyPhone = Math.floor(1000000000 + Math.random() * 9000000000).toString();

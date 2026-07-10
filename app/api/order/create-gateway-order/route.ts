@@ -254,9 +254,57 @@ export async function POST(req: Request) {
     }
 
     if (paymentMethod !== "wallet") {
+      const ip = req.headers.get("x-forwarded-for") || "unknown";
+      const Blocklist = require("@/models/Blocklist").default;
+      if (ip !== "unknown") {
+        await Blocklist.updateOne(
+          { type: "ip", value: ip },
+          { $setOnInsert: { type: "ip", value: ip, reason: "Auto-blocked: Invalid payment method bypass attempt" } },
+          { upsert: true }
+        );
+      }
       return NextResponse.json({
         success: false,
-        message: "Invalid payment method.",
+        message: "Something went wrong with this transaction.",
+      }, { status: 400 });
+    }
+
+    /* ---------- CHECK PENDING ORDERS LIMIT ---------- */
+    const pendingOrdersCount = await Order.countDocuments({ userId, status: "pending" });
+    if (pendingOrdersCount >= 3) {
+      const ip = req.headers.get("x-forwarded-for") || "unknown";
+      const Blocklist = require("@/models/Blocklist").default;
+      if (ip !== "unknown") {
+        await Blocklist.updateOne(
+          { type: "ip", value: ip },
+          { $setOnInsert: { type: "ip", value: ip, reason: "Auto-blocked: Spammed 3 or more pending orders" } },
+          { upsert: true }
+        );
+      }
+      if (email) {
+        await Blocklist.updateOne(
+          { type: "email", value: email.toLowerCase() },
+          { $setOnInsert: { type: "email", value: email.toLowerCase(), reason: "Auto-blocked: Spammed 3 or more pending orders" } },
+          { upsert: true }
+        );
+      }
+      return NextResponse.json({
+        success: false,
+        message: "Something went wrong with this transaction.",
+      }, { status: 400 });
+    }
+
+    /* ---------- CHECK BLOCKLIST ---------- */
+    const Blocklist = require("@/models/Blocklist").default;
+    const isBlocked = await Blocklist.findOne({
+      type: "gameId",
+      value: playerId
+    });
+
+    if (isBlocked) {
+      return NextResponse.json({
+        success: false,
+        message: "Something went wrong with this transaction.",
       }, { status: 400 });
     }
 
@@ -265,9 +313,25 @@ export async function POST(req: Request) {
 
     // 🛡️ CRITICAL HARD CHECK: Prevent negative or zero prices
     if (!price || isNaN(price) || price <= 0) {
+      const ip = req.headers.get("x-forwarded-for") || "unknown";
+      const Blocklist = require("@/models/Blocklist").default;
+      if (ip !== "unknown") {
+        await Blocklist.updateOne(
+          { type: "ip", value: ip },
+          { $setOnInsert: { type: "ip", value: ip, reason: "Auto-blocked: Negative or zero price exploit attempt" } },
+          { upsert: true }
+        );
+      }
+      if (email) {
+        await Blocklist.updateOne(
+          { type: "email", value: email.toLowerCase() },
+          { $setOnInsert: { type: "email", value: email.toLowerCase(), reason: "Auto-blocked: Negative or zero price exploit attempt" } },
+          { upsert: true }
+        );
+      }
       return NextResponse.json({
         success: false,
-        message: "Invalid item price detected",
+        message: "Something went wrong with this transaction.",
       }, { status: 400 });
     }
 

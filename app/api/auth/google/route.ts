@@ -33,18 +33,38 @@ export async function POST(req: Request) {
       );
     }
 
+    /* ================= CHECK BLOCKLIST ================= */
+    const Blocklist = require("@/models/Blocklist").default;
+    const ip = req.headers.get("x-forwarded-for") || "unknown";
+    const isBlocked = await Blocklist.findOne({
+      $or: [
+        { type: "email", value: email.toLowerCase() },
+        { type: "ip", value: ip !== "unknown" ? ip : "null" }
+      ]
+    });
+
+    if (isBlocked) {
+      return Response.json(
+        { success: false, message: "Something went wrong. Please try again later." },
+        { status: 400 }
+      );
+    }
+
     let user = await User.findOne({ email });
 
     /* ================= CREATE USER IF NEW ================= */
     if (!user) {
-      const ip = req.headers.get("x-forwarded-for") || "unknown";
-      
       if (ip !== "unknown") {
         const ipCount = await User.countDocuments({ lastLoginIp: ip });
         if (ipCount >= 2) {
+           await Blocklist.updateOne(
+             { type: "ip", value: ip },
+             { $setOnInsert: { type: "ip", value: ip, reason: "Auto-blocked: Multiple account creation" } },
+             { upsert: true }
+           );
            return Response.json(
-             { success: false, message: "Account limit reached for this IP address." },
-             { status: 429 }
+             { success: false, message: "Something went wrong. Please try again later." },
+             { status: 400 }
            );
         }
       }
