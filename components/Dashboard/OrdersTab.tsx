@@ -9,6 +9,7 @@ import {
   FiTerminal,
   FiActivity,
   FiLayers,
+  FiFilter,
 } from "react-icons/fi";
 import OrderItem, { OrderType } from "./OrderItem";
 import apiClient from "@/utils/apiClient";
@@ -16,6 +17,8 @@ import apiClient from "@/utils/apiClient";
 export default function OrdersTab() {
   const [orders, setOrders] = useState<OrderType[]>([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
@@ -25,8 +28,16 @@ export default function OrdersTab() {
 
   /* ================= LOAD ORDERS ================= */
   useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [search]);
+
+  /* ================= LOAD ORDERS ================= */
+  useEffect(() => {
     setLoading(true);
-    apiClient.post("/api/order/user", { page, limit, search })
+    apiClient.post("/api/order/user", { page, limit, search: debouncedSearch, status })
       .then((res) => {
         const data = res.data;
         if (!data.success) return;
@@ -38,12 +49,12 @@ export default function OrdersTab() {
         console.error("Failed to load orders", err);
       })
       .finally(() => setLoading(false));
-  }, [page, search, limit]);
+  }, [page, debouncedSearch, limit, status]);
 
-  /* ================= RESET PAGE ON SEARCH ================= */
+  /* ================= RESET PAGE ON SEARCH/FILTER ================= */
   useEffect(() => {
     setPage(1);
-  }, [search]);
+  }, [debouncedSearch, status]);
 
   /* ================= PAGE RANGE ================= */
   const getPageNumbers = () => {
@@ -60,14 +71,32 @@ export default function OrdersTab() {
     <div className="space-y-4">
       {/* MINIMAL STATS & SEARCH */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--border)] pb-6 mb-2">
-        <div className="relative w-full sm:w-72 group">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/50 group-focus-within:text-[var(--accent)] transition-all duration-300" />
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="SEARCH ORDERS..."
-            className="w-full pl-11 pr-4 py-3 rounded-xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all placeholder:text-[var(--muted)]/30 text-[var(--foreground)] shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
-          />
+        <div className="flex flex-row w-full sm:w-auto gap-2 flex-1">
+          <div className="relative flex-[2] sm:w-72 group">
+            <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/50 group-focus-within:text-[var(--accent)] transition-all duration-300" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="SEARCH ORDERS..."
+              className="w-full pl-11 pr-4 py-3 rounded-xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all placeholder:text-[var(--muted)]/30 text-[var(--foreground)] shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
+            />
+          </div>
+          <div className="relative flex-[1] sm:w-48 group">
+            <FiFilter className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/50 group-focus-within:text-[var(--accent)] transition-all duration-300" />
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="w-full pl-11 pr-8 py-3 rounded-xl bg-[var(--background)] border border-[var(--border)] focus:border-[var(--accent)]/50 text-[10px] uppercase font-black tracking-widest outline-none transition-all text-[var(--foreground)] appearance-none shadow-sm focus:shadow-[0_0_20px_rgba(var(--accent-rgb),0.05)]"
+            >
+              <option value="all">ALL STATUSES</option>
+              <option value="success">SUCCESS</option>
+              <option value="pending">PENDING</option>
+              <option value="processing">PROCESSING</option>
+              <option value="failed">FAILED</option>
+              <option value="cancelled">CANCELLED</option>
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--muted)]/50 text-[10px]">▼</div>
+          </div>
         </div>
 
         <div className="flex flex-col items-end">

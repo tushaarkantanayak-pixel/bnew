@@ -15,6 +15,11 @@ import {
   FiArrowLeft,
   FiRefreshCw,
   FiClock,
+  FiSearch,
+  FiFilter,
+  FiArrowDownLeft,
+  FiArrowUpRight,
+  FiXCircle,
 } from "react-icons/fi";
 import { formatPrice } from "@/utils/currency";
 import apiClient from "@/utils/apiClient";
@@ -678,43 +683,79 @@ export default function WalletTab({
 }
 
 function TransactionHistorySection({ onResumeUsdt }: { onResumeUsdt: (txn: any) => void }) {
-  const [showHistory, setShowHistory] = useState(true);
-  const filter = "all";
+  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [type, setType] = useState("all");
+  const [status, setStatus] = useState("all");
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [search]);
 
   return (
     <div className="pt-6 border-t border-[var(--border)]/20">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+      <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-bold tracking-tight text-[var(--foreground)] flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
           Transaction History
         </h3>
-        
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            {showHistory && <TransactionHistoryRefresh />}
-            <button
-              onClick={() => setShowHistory((v) => !v)}
-              className={`px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all ${
-                showHistory
-                  ? "bg-[var(--accent)]/10 border-[var(--accent)]/40 text-[var(--accent)]"
-                  : "bg-[var(--card)] border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/30"
-              }`}
-            >
-              {showHistory ? "Hide History" : "Show History"}
-            </button>
-          </div>
-        </div>
+        <TransactionHistoryRefresh />
       </div>
-
-      {showHistory && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <TransactionHistoryWrapper filter={filter} onResumeUsdt={onResumeUsdt} />
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+             <div className="relative flex-1">
+               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]/60" size={14} />
+               <input 
+                 type="text" 
+                 placeholder="Search ID or description..." 
+                 value={search} 
+                 onChange={(e) => setSearch(e.target.value)} 
+                 className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] focus:bg-[var(--foreground)]/[0.02] focus:border-[var(--accent)]/40 text-xs font-medium text-[var(--foreground)] placeholder:text-[var(--muted)]/50 outline-none transition-all"
+               />
+             </div>
+             <div className="flex gap-3">
+               <div className="relative flex-1 sm:flex-none">
+                 <FiFilter className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]/60" size={14} />
+                 <select 
+                   value={type} 
+                   onChange={(e) => setType(e.target.value)} 
+                   className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] focus:border-[var(--accent)]/40 text-xs font-bold text-[var(--foreground)] outline-none transition-all appearance-none"
+                 >
+                    <option value="all">All Types</option>
+                    <option value="credit">Credit</option>
+                    <option value="debit">Debit</option>
+                 </select>
+                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--muted)]/50 text-[10px]">▼</div>
+               </div>
+               <div className="relative flex-1 sm:flex-none">
+                 <FiFilter className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]/60" size={14} />
+                 <select 
+                   value={status} 
+                   onChange={(e) => setStatus(e.target.value)} 
+                   className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--card)] focus:border-[var(--accent)]/40 text-xs font-bold text-[var(--foreground)] outline-none transition-all appearance-none"
+                 >
+                    <option value="all">All Statuses</option>
+                    <option value="success">Success</option>
+                    <option value="pending">Pending</option>
+                    <option value="failed">Failed</option>
+                    <option value="waiting">Waiting</option>
+                    <option value="expired">Expired</option>
+                 </select>
+                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--muted)]/50 text-[10px]">▼</div>
+               </div>
+             </div>
+          </div>
+
+          <TransactionHistoryWrapper filter={filter} search={debouncedSearch} type={type} status={status} onResumeUsdt={onResumeUsdt} />
         </motion.div>
-      )}
     </div>
   );
 }
@@ -731,7 +772,7 @@ function TransactionHistoryRefresh() {
   );
 }
 
-function TransactionHistoryWrapper({ filter, onResumeUsdt }: { filter: string, onResumeUsdt?: (txn: any) => void }) {
+function TransactionHistoryWrapper({ filter, search, type, status, onResumeUsdt }: { filter: string, search: string, type: string, status: string, onResumeUsdt?: (txn: any) => void }) {
   const [key, setKey] = useState(0);
 
   useEffect(() => {
@@ -740,19 +781,23 @@ function TransactionHistoryWrapper({ filter, onResumeUsdt }: { filter: string, o
     return () => window.removeEventListener("refreshTransactionHistory", handleRefresh);
   }, []);
 
-  return <TransactionHistory key={`${key}-${filter}`} filter={filter} onResumeUsdt={onResumeUsdt} />;
+  return <TransactionHistory key={`${key}-${filter}`} filter={filter} search={search} type={type} status={status} onResumeUsdt={onResumeUsdt} />;
 }
 
-function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResumeUsdt?: (txn: any) => void }) {
+function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { filter: string, search: string, type: string, status: string, onResumeUsdt?: (txn: any) => void }) {
   const [history, setHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  useEffect(() => {
+    setPage(1);
+  }, [search, type, status, filter]);
+
   const fetchHistory = async () => {
     try {
       setLoading(true);
-      const res = await apiClient.get(`/api/wallet/history?page=${page}&limit=5&filter=${filter}`);
+      const res = await apiClient.get(`/api/wallet/history?page=${page}&limit=20&filter=${filter}&search=${encodeURIComponent(search)}&type=${type}&status=${status}`);
       const json = res.data;
       if (json.success) {
         setHistory(json.data);
@@ -801,7 +846,7 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
       // prevent infinite loop by not calling fetchHistory directly here if possible, 
       // but since we updated state, a re-fetch is needed.
       // Let's just create a new fetch to update UI
-      const res = await apiClient.get(`/api/wallet/history?page=${page}&limit=5`);
+      const res = await apiClient.get(`/api/wallet/history?page=${page}&limit=20&filter=${filter}&search=${encodeURIComponent(search)}&type=${type}&status=${status}`);
       const json = res.data;
       if (json.success) setHistory(json.data);
 
@@ -812,7 +857,7 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
 
   useEffect(() => {
     fetchHistory();
-  }, [page]);
+  }, [page, search, type, status, filter]);
 
   if (loading && history.length === 0) {
     return (
@@ -908,45 +953,54 @@ function TransactionHistory({ filter, onResumeUsdt }: { filter: string, onResume
       <div className="sm:hidden space-y-3">
         {history.map((txn) => (
           <div key={txn._id} className="p-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] space-y-3">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-[9px] font-mono text-[var(--muted)] uppercase tracking-tighter">
-                  ID: {txn.transactionId || txn._id?.slice(0, 10)}
-                </p>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className={`px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider border ${
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className={`px-1.5 py-0.5 rounded flex items-center gap-1 text-[8px] font-black uppercase tracking-wider border ${
                     txn.type === 'credit' 
                       ? 'bg-green-500/10 text-green-500 border-green-500/20' 
                       : 'bg-red-500/10 text-red-500 border-red-500/20'
                   }`}>
+                    {txn.type === 'credit' ? <FiArrowDownLeft size={10} /> : <FiArrowUpRight size={10} />}
                     {txn.type}
                   </span>
-                  <p className="text-[11px] font-bold text-[var(--foreground)]">{txn.description}</p>
+                  <p className="text-[9px] font-mono text-[var(--muted)] uppercase tracking-tighter truncate">
+                    ID: {txn.transactionId || txn._id?.slice(0, 10)}
+                  </p>
                 </div>
+                <p className="text-[12px] font-bold text-[var(--foreground)] leading-snug break-words">
+                  {txn.description}
+                </p>
               </div>
-              <span className={`text-[10px] font-black uppercase tracking-widest italic ${
-                txn.status === 'success' ? 'text-green-500'
-                : txn.status === 'failed' ? 'text-red-500'
-                : txn.status === 'waiting' ? 'text-amber-500'
-                : 'text-yellow-500'
-              }`}>
-                {txn.status}
+              <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
+                <span className={`flex items-center gap-1 text-[10px] font-black uppercase tracking-widest italic ${
+                  txn.status === 'success' ? 'text-green-500'
+                  : txn.status === 'failed' ? 'text-red-500'
+                  : txn.status === 'waiting' ? 'text-amber-500'
+                  : 'text-yellow-500'
+                }`}>
+                  {txn.status === 'success' ? <FiCheckCircle size={12} />
+                   : txn.status === 'failed' ? <FiXCircle size={12} />
+                   : txn.status === 'waiting' ? <FiClock size={12} />
+                   : <FiAlertCircle size={12} />}
+                  {txn.status}
+                </span>
                 {txn.status === 'waiting' && onResumeUsdt && (
                   <button 
                     onClick={() => onResumeUsdt(txn)}
-                    className="block mt-1 text-[8px] font-black uppercase tracking-[0.2em] bg-green-500 text-black px-2 py-1 rounded-lg"
+                    className="mt-1 text-[8px] font-black uppercase tracking-[0.2em] bg-green-500 text-black px-2 py-1 rounded-lg"
                   >
                     Submit Hash
                   </button>
                 )}
-              </span>
+              </div>
             </div>
             <div className="flex items-end justify-between border-t border-[var(--border)]/10 pt-3">
               <div className="text-[10px] text-[var(--muted)]">
                 {new Date(txn.createdAt).toLocaleDateString()} • {new Date(txn.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                {txn.balanceAfter !== undefined && (
-                  <p className="mt-1 font-mono">After: {formatPrice(txn.balanceAfter)}</p>
-                )}
+                <p className="mt-1 font-mono text-[var(--foreground)]/70">
+                  After: {txn.balanceAfter !== undefined ? formatPrice(txn.balanceAfter) : "---"}
+                </p>
               </div>
               <div className={`text-sm font-black italic ${txn.type === 'credit' ? 'text-green-500' : 'text-red-500'}`}>
                 {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}

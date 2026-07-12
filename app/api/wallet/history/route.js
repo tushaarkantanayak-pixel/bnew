@@ -32,6 +32,9 @@ export async function GET(req) {
         const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
         const skip = (page - 1) * limit;
         const filter = searchParams.get("filter") || "all"; // all, inr, usdt
+        const search = searchParams.get("search") || "";
+        const type = searchParams.get("type") || "all";
+        const status = searchParams.get("status") || "all";
 
         /* ================= QUERY ================= */
         // Get user details to filter by various user identifiers
@@ -49,13 +52,38 @@ export async function GET(req) {
             ]
         };
 
-        let txnQuery = { ...baseQuery };
+        let txnQuery = {
+            $and: [
+                {
+                    $or: [
+                        { userId: user.userId },
+                        { userObjectId: user._id }
+                    ]
+                }
+            ]
+        };
+
         if (filter === "inr") {
-            // Filter out transactions that have a referenceId starting with "USDT" or are from UsdtDeposit
-            txnQuery.referenceId = { $not: /^USDT/ }; 
+            txnQuery.$and.push({ referenceId: { $not: /^USDT/ } }); 
         } else if (filter === "usdt") {
-            // Only transactions with referenceId starting with "USDT" 
-            txnQuery.referenceId = /^USDT/;
+            txnQuery.$and.push({ referenceId: /^USDT/ });
+        }
+
+        if (type !== "all") {
+            txnQuery.$and.push({ type: type });
+        }
+
+        if (status !== "all") {
+            txnQuery.$and.push({ status: status });
+        }
+
+        if (search) {
+            txnQuery.$and.push({
+                $or: [
+                    { transactionId: { $regex: search, $options: "i" } },
+                    { description: { $regex: search, $options: "i" } }
+                ]
+            });
         }
 
         // Update any waiting USDT deposits that have expired
@@ -76,7 +104,7 @@ export async function GET(req) {
                 .limit(limit)
                 .select("-userObjectId -__v")
                 .lean(),
-            (filter === "all" || filter === "usdt") 
+            (filter === "all" || filter === "usdt") && (type === "all" || type === "credit")
                 ? UsdtDeposit.find({ 
                     ...baseQuery, 
                     status: { $in: ["waiting", "submitted", "confirmed", "failed", "expired"] } 
@@ -86,7 +114,7 @@ export async function GET(req) {
         ]);
 
         // Merge and Map
-        const mappedUsdt = usdtDeposits
+        let mappedUsdt = usdtDeposits
             .filter(d => d.status !== "confirmed") // confirmed ones are already in WalletTransaction
             .map(d => ({
                 _id: d._id,
@@ -99,6 +127,18 @@ export async function GET(req) {
                 updatedAt: d.updatedAt,
                 isUsdt: true
             }));
+
+        // Apply filters to mappedUsdt
+        if (status !== "all") {
+            mappedUsdt = mappedUsdt.filter(d => d.status === status);
+        }
+        if (search) {
+            const searchLower = search.toLowerCase();
+            mappedUsdt = mappedUsdt.filter(d => 
+                (d.transactionId && d.transactionId.toLowerCase().includes(searchLower)) ||
+                (d.description && d.description.toLowerCase().includes(searchLower))
+            );
+        }
 
         const combined = [...mappedUsdt, ...transactions]
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))

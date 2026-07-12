@@ -326,7 +326,7 @@ export default function Header() {
                           <div key={section.title} className="space-y-0.5">
                             <button 
                               onClick={() => toggleSection(section.title)}
-                              className="w-full flex items-center justify-between text-[9px] font-black uppercase tracking-[0.3em] text-[var(--muted)]/60 pl-1 pr-4 py-1 transition-colors group"
+                              className="w-full flex items-center justify-between text-[11px] font-black uppercase tracking-[0.3em] text-[var(--muted)]/60 pl-1 pr-4 py-1 transition-colors group"
                             >
                               <div className="flex items-center gap-1.5">
                                 <div 
@@ -371,10 +371,10 @@ export default function Header() {
                                             {item.icon}
                                           </div>
                                           <div className="flex flex-col min-w-0 justify-center">
-                                            <p className="text-[11px] font-bold text-[var(--foreground)] leading-tight truncate transition-colors" style={{ '--hover-color': item.color }} onMouseEnter={(e) => e.target.style.color = item.color} onMouseLeave={(e) => e.target.style.color = 'var(--foreground)'}>
+                                            <p className="text-[13px] font-bold text-[var(--foreground)] leading-tight truncate transition-colors" style={{ '--hover-color': item.color }} onMouseEnter={(e) => e.target.style.color = item.color} onMouseLeave={(e) => e.target.style.color = 'var(--foreground)'}>
                                               {item.label}
                                             </p>
-                                            <p className="text-[8px] text-[var(--muted)] opacity-70 truncate leading-tight mt-0.5">{item.desc}</p>
+                                            <p className="text-[10px] text-[var(--muted)] opacity-70 truncate leading-tight mt-0.5">{item.desc}</p>
                                           </div>
                                         </div>
                                         {section.title !== "Rewards" && (
@@ -416,10 +416,10 @@ export default function Header() {
                                 </div>
                               </div>
                               <div className="flex flex-col min-w-0 flex-1">
-                                <h4 className="text-xs font-black uppercase tracking-widest text-[var(--foreground)] mb-1">Admin Console</h4>
+                                <h4 className="text-sm font-black uppercase tracking-widest text-[var(--foreground)] mb-1">Admin Console</h4>
                                 <div className="flex items-center gap-2">
-                                  <span className="text-[9px] font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded-md border border-[var(--accent)]/20 uppercase">Owner</span>
-                                  <span className="text-[9px] font-bold text-[#22c55e] flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-[#22c55e]"></span>Active</span>
+                                  <span className="text-[10px] font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded-md border border-[var(--accent)]/20 uppercase">Owner</span>
+                                  <span className="text-[10px] font-bold text-[#22c55e] flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-[#22c55e]"></span>Active</span>
                                 </div>
                               </div>
                               <div className="w-8 h-8 rounded-full bg-[var(--foreground)]/5 group-hover:bg-[var(--accent)]/10 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">
