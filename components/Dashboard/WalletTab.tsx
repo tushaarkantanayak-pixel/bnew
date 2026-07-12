@@ -697,7 +697,7 @@ function TransactionHistorySection({ onResumeUsdt }: { onResumeUsdt: (txn: any) 
   }, [search]);
 
   return (
-    <div className="pt-6 border-t border-[var(--border)]/20">
+    <div id="transaction-history" className="pt-6 border-t border-[var(--border)]/20">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-bold tracking-tight text-[var(--foreground)] flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
@@ -1014,7 +1014,12 @@ function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { fi
       {totalPages > 1 && (
         <div className="flex justify-center gap-2">
           <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            onClick={() => {
+              setPage((p) => Math.max(1, p - 1));
+              setTimeout(() => {
+                document.getElementById("transaction-history")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 50);
+            }}
             disabled={page === 1}
             className="px-3 py-1 rounded-lg bg-[var(--card)] border border-[var(--border)] hover:bg-[var(--foreground)]/[0.05] text-[10px] font-bold text-[var(--muted)] hover:text-[var(--foreground)] uppercase disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
@@ -1024,7 +1029,12 @@ function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { fi
             {page} / {totalPages}
           </span>
           <button
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            onClick={() => {
+              setPage((p) => Math.min(totalPages, p + 1));
+              setTimeout(() => {
+                document.getElementById("transaction-history")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 50);
+            }}
             disabled={page === totalPages}
             className="px-3 py-1 rounded-lg bg-[var(--card)] border border-[var(--border)] hover:bg-[var(--foreground)]/[0.05] text-[10px] font-bold text-[var(--muted)] hover:text-[var(--foreground)] uppercase disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
