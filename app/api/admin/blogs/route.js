@@ -5,7 +5,7 @@ import Blog from "@/models/Blog";
 export async function GET(req) {
   try {
     await connectDB();
-    const blogs = await Blog.find().sort({ publishedAt: -1 });
+    const blogs = await Blog.find().sort({ publishedAt: -1 }).lean();
     return NextResponse.json({ success: true, data: blogs });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });

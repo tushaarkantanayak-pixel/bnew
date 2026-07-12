@@ -28,7 +28,7 @@ export async function GET(req) {
             return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
         }
 
-        const keys = await ApiKey.find({ userId: user._id }).sort({ createdAt: -1 });
+        const keys = await ApiKey.find({ userId: user._id }).sort({ createdAt: -1 }).lean();
 
         // ⚡ Ensure each key's daily limit is reset if it's a new day
         const processedKeys = await Promise.all(keys.map(key => ensureDailyReset(key)));

@@ -51,5 +51,7 @@ const OrderSchema = new mongoose.Schema(
 OrderSchema.index({ createdAt: -1 });
 OrderSchema.index({ status: 1, createdAt: -1 });
 OrderSchema.index({ paymentStatus: 1, createdAt: -1 });
+OrderSchema.index({ userId: 1, createdAt: -1 });
+OrderSchema.index({ orderId: 1 });
 
 export default mongoose.models.Order || mongoose.model("Order", OrderSchema);

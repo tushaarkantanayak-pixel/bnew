@@ -115,7 +115,8 @@ export async function GET(req) {
                 .populate("usedBy", "name userId")
                 .sort({ createdAt: -1 })
                 .skip(skip)
-                .limit(limit),
+                .limit(limit)
+                .lean(),
             RedeemCode.aggregate([
                 { $group: { _id: "$status", count: { $sum: 1 } } }
             ]),

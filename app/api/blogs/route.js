@@ -6,7 +6,7 @@ export async function GET(req) {
   try {
     await connectDB();
     // Only return published blogs to the frontend
-    const blogs = await Blog.find({ isPublished: true }).sort({ publishedAt: -1 });
+    const blogs = await Blog.find({ isPublished: true }).sort({ publishedAt: -1 }).lean();
     
     // Map them to match the structure of static BLOGS_DATA
     const formattedBlogs = blogs.map(blog => ({
