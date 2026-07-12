@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import AuthGuard from "../../components/AuthGuard";
-import { FiZap, FiInbox, FiHelpCircle, FiZap as FiZapIcon, FiUser, FiCreditCard, FiUsers, FiKey, FiGift } from "react-icons/fi";
+import { FiZap, FiInbox, FiHelpCircle, FiUser, FiCreditCard, FiUsers, FiKey, FiGift, FiBarChart2 } from "react-icons/fi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuthStore } from "../../store/useAuthStore";
@@ -43,6 +43,7 @@ export default function DashboardLayout({
         { key: "wallet", label: "Money", value: "Wallet", icon: FiCreditCard, href: "/dashboard/wallet" },
         { key: "redeem", label: "Gift", value: "Redeem", icon: FiGift, href: "/dashboard/redeem" },
         { key: "referral", label: "Invite", value: "Referral", icon: FiUsers, href: "/dashboard/referral" },
+        { key: "analytics", label: "Analytics", value: "Analytics", icon: FiBarChart2, href: "/dashboard/digital-gametopup/analytics" },
         // { key: "account", label: "Identity", value: "Profile", icon: FiUser, href: "/dashboard/account" },
     ];
 

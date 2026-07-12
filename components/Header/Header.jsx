@@ -8,7 +8,7 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { formatPrice } from "@/utils/currency";
 import { useAuthStore } from "../../store/useAuthStore";
 
-import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiGlobe } from "react-icons/fi";
+import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiGlobe, FiBarChart2 } from "react-icons/fi";
 
 /* ================= CONFIG ================= */
 const HEADER_CONFIG = {
@@ -42,6 +42,7 @@ const HEADER_CONFIG = {
           { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: <FiKey size={14} />, desc: "Auto top-ups", color: "#e879f9" },
           { label: "Wallet", href: "/dashboard/digital-gametopup/wallet", icon: <FiLayers size={14} />, desc: "Add funds", color: "#00f5ff" },
           { label: "Orders", href: "/dashboard/digital-gametopup/orders", icon: <FiShoppingBag size={14} />, desc: "Past orders", color: "#f97316" },
+          { label: "Analytics", href: "/dashboard/digital-gametopup/analytics", icon: <FiBarChart2 size={14} />, desc: "Your stats", color: "#3b82f6" },
         ]
       },
       {
@@ -301,21 +302,14 @@ export default function Header() {
                             target={item.href.startsWith("http") ? "_blank" : undefined}
                             onClick={() => setUserMenuOpen(false)}
                             className="flex flex-col items-center justify-center p-2 rounded-xl bg-[var(--card)]/40 border border-[var(--border)]/60 hover:-translate-y-0.5 backdrop-blur-md transition-all duration-300 group"
-                            style={{ '--nav-color': item.color }}
                           >
-                            <span 
-                              className="mb-1 transition-colors"
-                              style={{ color: item.color }}
-                            >
+                            <span className="mb-1 transition-colors text-[var(--foreground)] group-hover:text-[var(--accent)]">
                               {item.icon}
                             </span>
-                            <span 
-                              className="text-[8px] font-black uppercase tracking-tight leading-none text-center transition-colors group-hover:!text-[var(--nav-color)]"
-                              style={{ color: 'var(--foreground)' }}
-                            >
+                            <span className="text-[8px] font-black uppercase tracking-tight leading-none text-center transition-colors text-[var(--foreground)] group-hover:text-[var(--accent)]">
                               {item.label}
                             </span>
-                            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style={{ boxShadow: `0 0 10px ${item.color}40`, border: `1px solid ${item.color}80`, background: `${item.color}15` }} />
+                            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-[var(--accent)]/40 bg-[var(--accent)]/5" />
                           </Link>
                         ))}
                       </div>
@@ -330,16 +324,14 @@ export default function Header() {
                             >
                               <div className="flex items-center gap-1.5">
                                 <div 
-                                  className={`w-1 h-2.5 rounded-full transition-all duration-300 ${expandedSections[section.title] ? '' : 'bg-[var(--border)] opacity-50 group-hover:opacity-100'}`} 
-                                  style={expandedSections[section.title] ? { backgroundColor: section.color } : {}}
+                                  className={`w-1 h-2.5 rounded-full transition-all duration-300 ${expandedSections[section.title] ? 'bg-[var(--accent)]' : 'bg-[var(--border)] opacity-50 group-hover:opacity-100'}`} 
                                 />
-                                <span style={expandedSections[section.title] ? { color: section.color } : {}} className="transition-colors group-hover:text-[var(--foreground)]">{section.title}</span>
+                                <span className={`transition-colors group-hover:text-[var(--foreground)] ${expandedSections[section.title] ? 'text-[var(--accent)]' : ''}`}>{section.title}</span>
                               </div>
                               <motion.div
                                 animate={{ rotate: expandedSections[section.title] ? 90 : 0 }}
                                 transition={{ duration: 0.2 }}
-                                className={expandedSections[section.title] ? "" : "text-[var(--muted)]/40"}
-                                style={expandedSections[section.title] ? { color: section.color } : {}}
+                                className={expandedSections[section.title] ? "text-[var(--accent)]" : "text-[var(--muted)]/40"}
                               >
                                 <FiChevronRight size={12} />
                               </motion.div>
@@ -362,19 +354,18 @@ export default function Header() {
                                         onClick={() => setUserMenuOpen(false)}
                                         className={`relative flex items-center overflow-hidden ${section.title === "Rewards" ? "justify-start gap-1.5 py-1 px-1.5" : "justify-between py-1 px-2"} rounded-lg bg-[var(--card)]/20 border border-transparent transition-all group ${!user ? "opacity-50" : ""}`}
                                       >
-                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ backgroundColor: `${item.color}10`, border: `1px solid ${item.color}40` }} />
+                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-[var(--accent)]/5 border border-[var(--accent)]/20" />
                                         <div className={`flex items-center ${section.title === "Rewards" ? "gap-1.5" : "gap-2"} min-w-0 relative z-10`}>
                                           <div 
-                                            className="w-6 h-6 rounded flex items-center justify-center transition-all flex-shrink-0"
-                                            style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                                            className="w-6 h-6 rounded flex items-center justify-center transition-all flex-shrink-0 bg-[var(--foreground)]/5 text-[var(--foreground)] group-hover:bg-[var(--accent)]/10 group-hover:text-[var(--accent)]"
                                           >
                                             {item.icon}
                                           </div>
                                           <div className="flex flex-col min-w-0 justify-center">
-                                            <p className="text-[13px] font-bold text-[var(--foreground)] leading-tight truncate transition-colors" style={{ '--hover-color': item.color }} onMouseEnter={(e) => e.target.style.color = item.color} onMouseLeave={(e) => e.target.style.color = 'var(--foreground)'}>
+                                            <p className="text-[13px] font-bold text-[var(--foreground)] leading-tight truncate transition-colors group-hover:text-[var(--accent)]">
                                               {item.label}
                                             </p>
-                                            <p className="text-[10px] text-[var(--muted)] opacity-70 truncate leading-tight mt-0.5">{item.desc}</p>
+                                            <p className="text-[10px] text-[var(--muted)] opacity-70 truncate leading-tight mt-0.5 group-hover:text-[var(--accent)]/70">{item.desc}</p>
                                           </div>
                                         </div>
                                         {section.title !== "Rewards" && (
