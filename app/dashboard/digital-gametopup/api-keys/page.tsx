@@ -249,7 +249,7 @@ export default function ApiKeysPage() {
 
             <div className="grid gap-4">
                 {loading ? (
-                    <div className="h-40 animate-pulse bg-foreground/5 rounded-2xl border border-foreground/5" />
+                    <ApiKeysSkeleton />
                 ) : keys.length === 0 ? (
                     <div className="p-12 text-center rounded-3xl border border-dashed border-foreground/10 opacity-40">
                         <FiKey className="mx-auto mb-4" size={32} />
@@ -422,6 +422,56 @@ export default function ApiKeysPage() {
                     </div>
                 </div>
             </div>
+        </div>
+    );
+}
+
+function ApiKeysSkeleton() {
+    return (
+        <div className="grid gap-4">
+            {[1, 2].map((i) => (
+                <div key={i} className="p-0.5 rounded-2xl bg-gradient-to-br from-foreground/5 to-transparent border border-foreground/5 animate-pulse">
+                    <div className="p-4 rounded-xl bg-card/80">
+                        <div className="flex flex-col md:flex-row gap-4">
+                            {/* Main Info */}
+                            <div className="flex-1 space-y-3">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-foreground/10"></div>
+                                    <div className="space-y-2">
+                                        <div className="h-4 w-32 bg-foreground/10 rounded"></div>
+                                        <div className="h-3 w-24 bg-foreground/10 rounded"></div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 border-t border-foreground/5 pt-3">
+                                    <div className="space-y-1">
+                                        <div className="h-2 w-16 bg-foreground/10 rounded"></div>
+                                        <div className="h-3 w-20 bg-foreground/10 rounded"></div>
+                                    </div>
+                                    <div className="space-y-1 border-l border-foreground/5 pl-4">
+                                        <div className="h-2 w-16 bg-foreground/10 rounded"></div>
+                                        <div className="h-3 w-20 bg-foreground/10 rounded"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Actions / Limits */}
+                            <div className="w-full md:w-64 space-y-3 border-t md:border-t-0 md:border-l border-foreground/5 pt-3 md:pt-0 md:pl-4">
+                                <div className="space-y-2">
+                                    <div className="flex justify-between">
+                                        <div className="h-2 w-20 bg-foreground/10 rounded"></div>
+                                        <div className="h-2 w-10 bg-foreground/10 rounded"></div>
+                                    </div>
+                                    <div className="h-2 w-full bg-foreground/10 rounded-full"></div>
+                                </div>
+                                <div className="flex gap-2 pt-2">
+                                    <div className="h-8 flex-1 bg-foreground/10 rounded-lg"></div>
+                                    <div className="h-8 flex-1 bg-foreground/10 rounded-lg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }
