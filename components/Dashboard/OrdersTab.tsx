@@ -111,22 +111,22 @@ export default function OrdersTab() {
       {/* ORDERS LIST */}
       <div className="min-h-[400px] relative">
         {loading ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-            <div className="relative w-12 h-12">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border-2 border-[var(--accent)]/20 border-t-[var(--accent)] rounded-full"
-              />
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-2 bg-[var(--accent)]/10 rounded-full flex items-center justify-center text-[var(--accent)]"
-              >
-                <FiActivity size={16} />
-              </motion.div>
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] animate-pulse">Loading...</span>
+          <div className="space-y-3">
+            {[1, 2, 3].map((_, i) => (
+              <div key={i} className="relative overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--card)]/40 p-3 space-y-3">
+                <div className="flex justify-between items-center border-b border-[var(--border)]/30 pb-2">
+                  <div className="h-3 w-16 bg-[var(--border)] rounded animate-pulse"></div>
+                  <div className="h-3 w-24 bg-[var(--border)] rounded animate-pulse"></div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="space-y-2">
+                    <div className="h-4 w-32 bg-[var(--border)] rounded animate-pulse"></div>
+                    <div className="h-3 w-20 bg-[var(--border)] rounded animate-pulse"></div>
+                  </div>
+                  <div className="h-5 w-16 bg-[var(--border)] rounded animate-pulse"></div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : orders.length === 0 ? (
           <motion.div

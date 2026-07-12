@@ -173,7 +173,11 @@ export default function AnalyticsPage() {
             </div>
 
             {/* METRIC CARDS */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-4">
+            {loading ? (
+                <AnalyticsSkeleton />
+            ) : (
+                <>
+                <div className="grid grid-cols-3 gap-2 sm:gap-4">
                 {/* Credit */}
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }}
@@ -307,6 +311,46 @@ export default function AnalyticsPage() {
                     </div>
                 </motion.div>
             )}
+                </>
+            )}
+        </div>
+    );
+}
+
+function AnalyticsSkeleton() {
+    return (
+        <div className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                {[1, 2, 3].map((i) => (
+                    <div key={i} className="bg-[var(--card)] border border-[var(--border)] p-2 sm:p-5 rounded-xl sm:rounded-2xl h-[70px] sm:h-[120px] animate-pulse">
+                        <div className="h-2 sm:h-3 w-16 bg-[var(--border)] rounded mb-2"></div>
+                        <div className="h-4 sm:h-8 w-24 bg-[var(--border)] rounded"></div>
+                    </div>
+                ))}
+            </div>
+            
+            <div className="bg-[var(--card)] border border-[var(--border)] p-3 sm:p-6 rounded-2xl animate-pulse">
+                <div className="h-3 sm:h-4 w-32 bg-[var(--border)] rounded mb-4 sm:mb-6"></div>
+                <div className="h-[200px] sm:h-[300px] w-full bg-[var(--border)]/50 rounded-xl"></div>
+            </div>
+
+            <div className="bg-[var(--card)] border border-[var(--border)] p-3 sm:p-6 rounded-2xl">
+                <div className="h-3 sm:h-4 w-48 bg-[var(--border)] rounded mb-4 sm:mb-6 animate-pulse"></div>
+                <div className="flex flex-col gap-2">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                        <div key={i} className="flex items-center justify-between p-2 sm:p-3 rounded-xl bg-[var(--background)] border border-[var(--border)] animate-pulse">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[var(--border)]"></div>
+                                <div className="space-y-2">
+                                    <div className="h-3 sm:h-4 w-32 bg-[var(--border)] rounded"></div>
+                                    <div className="h-2 w-20 bg-[var(--border)] rounded"></div>
+                                </div>
+                            </div>
+                            <div className="h-6 w-24 bg-[var(--border)] rounded-md"></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }

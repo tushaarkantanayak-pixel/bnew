@@ -860,11 +860,7 @@ function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { fi
   }, [page, search, type, status, filter]);
 
   if (loading && history.length === 0) {
-    return (
-      <div className="flex justify-center py-10">
-        <FiLoader className="animate-spin text-[var(--accent)]" size={24} />
-      </div>
-    );
+    return <HistorySkeleton />;
   }
 
   if (history.length === 0) {
@@ -895,9 +891,7 @@ function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { fi
                 <tr key={txn._id} className="hover:bg-[var(--foreground)]/[0.02] transition-colors">
                   <td className="px-4 py-3">
                     <span className="font-mono text-[9px] text-[var(--muted)] block">
-                      {txn.transactionId
-                        ? txn.transactionId.slice(0, 14) + "…"
-                        : txn._id?.slice(0, 10) + "…"}
+                      {txn.transactionId || txn._id}
                     </span>
                   </td>
                   <td className="px-4 py-3">
@@ -908,7 +902,7 @@ function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { fi
                     }`}>
                       {txn.type}
                     </span>
-                    <p className="text-[10px] text-[var(--muted)] mt-0.5 max-w-[120px] truncate">
+                    <p className="text-[10px] text-[var(--muted)] mt-0.5 max-w-[300px] break-words">
                       {txn.description}
                     </p>
                   </td>
@@ -938,8 +932,8 @@ function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { fi
                         Submit Hash
                       </button>
                     )}
-                    <p className="text-[8px] opacity-50 block mt-1">
-                      {new Date(txn.createdAt).toLocaleDateString()}
+                    <p className="text-[8px] opacity-50 block mt-1 whitespace-nowrap">
+                      {new Date(txn.createdAt).toLocaleDateString()} • {new Date(txn.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </td>
                 </tr>
@@ -1042,6 +1036,74 @@ function TransactionHistory({ filter, search, type, status, onResumeUsdt }: { fi
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+function HistorySkeleton() {
+  const skeletonRows = Array(5).fill(0);
+
+  return (
+    <div className="space-y-4">
+      {/* DESKTOP SKELETON */}
+      <div className="hidden sm:block rounded-2xl border border-[var(--border)] bg-[var(--card)] overflow-hidden">
+        <table className="w-full text-left text-xs">
+          <thead className="bg-[var(--foreground)]/[0.03] text-[var(--muted)] font-bold uppercase tracking-wider">
+            <tr>
+              <th className="px-4 py-3">Transaction ID</th>
+              <th className="px-4 py-3">Type</th>
+              <th className="px-4 py-3">Amount</th>
+              <th className="px-4 py-3">Balance</th>
+              <th className="px-4 py-3 text-right">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[var(--border)]">
+            {skeletonRows.map((_, i) => (
+              <tr key={i}>
+                <td className="px-4 py-4">
+                  <div className="h-3 w-24 bg-[var(--border)] rounded animate-pulse"></div>
+                </td>
+                <td className="px-4 py-4">
+                  <div className="h-4 w-16 bg-[var(--border)] rounded animate-pulse mb-2"></div>
+                  <div className="h-3 w-32 bg-[var(--border)] rounded animate-pulse"></div>
+                </td>
+                <td className="px-4 py-4">
+                  <div className="h-4 w-12 bg-[var(--border)] rounded animate-pulse"></div>
+                </td>
+                <td className="px-4 py-4">
+                  <div className="h-4 w-10 bg-[var(--border)] rounded animate-pulse"></div>
+                </td>
+                <td className="px-4 py-4 flex flex-col items-end">
+                  <div className="h-4 w-16 bg-[var(--border)] rounded animate-pulse mb-2"></div>
+                  <div className="h-3 w-20 bg-[var(--border)] rounded animate-pulse"></div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* MOBILE SKELETON */}
+      <div className="sm:hidden space-y-3">
+        {skeletonRows.map((_, i) => (
+          <div key={i} className="p-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] space-y-4">
+            <div className="flex justify-between">
+              <div>
+                <div className="h-4 w-20 bg-[var(--border)] rounded animate-pulse mb-2"></div>
+                <div className="h-3 w-32 bg-[var(--border)] rounded animate-pulse"></div>
+              </div>
+              <div className="h-4 w-16 bg-[var(--border)] rounded animate-pulse"></div>
+            </div>
+            <div className="flex justify-between items-end border-t border-[var(--border)]/10 pt-3">
+              <div>
+                <div className="h-3 w-24 bg-[var(--border)] rounded animate-pulse mb-1"></div>
+                <div className="h-3 w-16 bg-[var(--border)] rounded animate-pulse"></div>
+              </div>
+              <div className="h-5 w-12 bg-[var(--border)] rounded animate-pulse"></div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
