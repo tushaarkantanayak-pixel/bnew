@@ -23,8 +23,8 @@ const OrdersTab = dynamic(() => import("@/components/admin/OrdersTab"), { loadin
 const PricingTab = dynamic(() => import("@/components/admin/PricingTab"), { loading: LoadingFallback });
 const TransactionsTab = dynamic(() => import("@/components/admin/TransactionsTab"), { loading: LoadingFallback });
 const SupportQueriesTab = dynamic(() => import("@/components/admin/SupportQueriesTab"), { loading: LoadingFallback });
-const BannersTab = dynamic(() => import("@/components/admin/BannersTab"), { loading: LoadingFallback });
 const StatsTab = dynamic(() => import("@/components/admin/StatsTab"), { loading: LoadingFallback });
+const DashboardTab = dynamic(() => import("@/components/admin/DashboardTab"), { loading: LoadingFallback });
 const SettingsTab = dynamic(() => import("@/components/admin/SettingsTab"), { loading: LoadingFallback });
 const RedeemCodesTab = dynamic(() => import("@/components/admin/RedeemCodesTab"), { loading: LoadingFallback });
 const ApiKeysTab = dynamic(() => import("@/components/admin/ApiKeysTab"), { loading: LoadingFallback });
@@ -66,7 +66,6 @@ const SIDEBAR_CATEGORIES = [
     title: "System & Setup",
     items: [
       { id: "api-keys", label: "API Keys", icon: <Key /> },
-      { id: "banners", label: "Banners", icon: <Image /> },
       { id: "stats", label: "Stats", icon: <BarChart2 /> },
       { id: "settings", label: "Settings", icon: <Settings /> },
     ]
@@ -81,7 +80,7 @@ const SIDEBAR_CATEGORIES = [
 
 export default function AdminPanalPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("orders");
+  const [activeTab, setActiveTab] = useState("stats");
   const [isOwner, setIsOwner] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -117,7 +116,6 @@ export default function AdminPanalPage() {
   const [queries, setQueries] = useState([]);
 
   const [balance, setBalance] = useState(null);
-  const [banners, setBanners] = useState([]);
 
 
   /* ================= TABLE CONTROLS ================= */
@@ -155,13 +153,6 @@ export default function AdminPanalPage() {
   };
 
 
-  const fetchBanners = async () => {
-    const res = await apiClient.get("/api/admin/banners/game-banners");
-    const data = res.data;
-    setBanners(data.data || []);
-  };
-
-
 
 
   /* ================= FETCH PRICING ================= */
@@ -173,12 +164,12 @@ export default function AdminPanalPage() {
       const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98;
       const convertedSlabs = (data.data?.slabs || []).map(s => ({
         ...s,
-        min: s.min / rate,
-        max: s.max / rate
+        min: Number((s.min / rate).toFixed(2)),
+        max: Number((s.max / rate).toFixed(2))
       }));
       const convertedOverrides = (data.data?.overrides || []).map(o => ({
         ...o,
-        fixedPrice: o.fixedPrice / rate
+        fixedPrice: Number((o.fixedPrice / rate).toFixed(2))
       }));
 
       setSlabs(
@@ -233,9 +224,6 @@ export default function AdminPanalPage() {
 
   useEffect(() => {
     resetControls();
-  }, [activeTab]);
-  useEffect(() => {
-    if (activeTab === "banners") fetchBanners();
   }, [activeTab]);
 
 
@@ -403,9 +391,6 @@ export default function AdminPanalPage() {
 
               />
             )}
-            {activeTab === "banners" && (
-              <BannersTab banners={banners} onRefresh={fetchBanners} />
-            )}
             
             {activeTab === "blocklist" && (
               <BlocklistTab />
@@ -423,6 +408,9 @@ export default function AdminPanalPage() {
                 savingPricing={savingPricing}
                 onSave={savePricing}
               />
+            )}
+            {activeTab === "stats" && (
+              <DashboardTab />
             )}
             {activeTab === "settings" && (
               <SettingsTab />

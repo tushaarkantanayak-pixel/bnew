@@ -8,7 +8,7 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { formatPrice } from "@/utils/currency";
 import { useAuthStore } from "../../store/useAuthStore";
 
-import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiGlobe, FiBarChart2 } from "react-icons/fi";
+import { FiChevronRight, FiLogOut, FiCheckCircle, FiShield, FiZap, FiMenu, FiX, FiLayers, FiCompass, FiGrid, FiShoppingBag, FiMessageSquare, FiUser, FiBell, FiUsers, FiKey, FiGift, FiGlobe, FiBarChart2, FiExternalLink, FiCreditCard } from "react-icons/fi";
 
 /* ================= CONFIG ================= */
 const HEADER_CONFIG = {
@@ -26,23 +26,13 @@ const HEADER_CONFIG = {
     { label: "Products", href: "/ourproducts", icon: <FiGrid size={14} />, color: "#00f5ff" }, // Cyan
   ],
 
-  userMenu: {
+    userMenu: {
     sections: [
       {
-        title: "Dashboard",
-        color: "#3b82f6", // Blue
-        items: [
-          { label: "Account", href: "/dashboard", icon: <FiCompass size={14} />, desc: "Your account hub", color: "#3b82f6" },
-        ]
-      },
-      {
-        title: "Game Top-Ups",
+        title: "Main",
         color: "#e879f9", // Fuchsia
         items: [
-          { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: <FiKey size={14} />, desc: "Auto top-ups", color: "#e879f9" },
-          { label: "Wallet", href: "/dashboard/digital-gametopup/wallet", icon: <FiLayers size={14} />, desc: "Add funds", color: "#00f5ff" },
-          { label: "Orders", href: "/dashboard/digital-gametopup/orders", icon: <FiShoppingBag size={14} />, desc: "Past orders", color: "#f97316" },
-          { label: "Analytics", href: "/dashboard/digital-gametopup/analytics", icon: <FiBarChart2 size={14} />, desc: "Your stats", color: "#3b82f6" },
+          { label: "Dashboard", href: "/dashboard", icon: <FiGrid size={14} />, desc: "Go to Dashboard", color: "#e879f9" },
         ]
       },
       {
@@ -50,21 +40,6 @@ const HEADER_CONFIG = {
         color: "#10b981", // Emerald
         items: [
           { label: "Help Center", href: "/dashboard/support", icon: <FiMessageSquare size={14} />, desc: "Get help 24/7", color: "#10b981" },
-        ]
-      },
-      {
-        title: "Rewards",
-        color: "#eab308", // Yellow
-        items: [
-          { label: "Refer Friends", href: "/dashboard/earning/referral", icon: <FiUsers size={14} />, desc: "Invite & earn", color: "#eab308" },
-          { label: "Redeem Code", href: "/dashboard/earning/redeem", icon: <FiGift size={14} />, desc: "Use vouchers", color: "#f43f5e" },
-        ]
-      },
-      {
-        title: "Extras",
-        color: "#6366f1", // Indigo
-        items: [
-          { label: "XYZPay", href: "https://xyzpay.site", icon: <FiZap size={14} />, desc: "Get subscription", color: "#6366f1" },
         ]
       }
     ],
@@ -206,16 +181,16 @@ export default function Header() {
             <button
               onClick={() => setUserMenuOpen((p) => !p)}
               aria-label="User menu"
-              className="hover:scale-105 active:scale-95 relative flex items-center gap-2 pl-3 pr-1 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--foreground)]/5 backdrop-blur-md transition-all duration-300 shadow-sm group"
+              className="hover:scale-105 active:scale-95 relative flex items-center gap-1 pl-1 pr-2 py-1 rounded-full border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--foreground)]/5 backdrop-blur-md transition-all duration-300 shadow-sm group"
             >
-              <FiMenu className="text-[var(--foreground)]/70 group-hover:text-[var(--foreground)] transition-colors ml-0.5" size={18} />
-              <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-[var(--accent)]/10 shadow-inner">
+              <div className="w-7 h-7 rounded-full overflow-hidden flex items-center justify-center bg-[var(--accent)]/10 shadow-inner">
                 {user?.avatar ? (
-                  <Image src={user.avatar} alt="Avatar" width={32} height={32} className="object-cover w-full h-full" />
+                  <Image src={user.avatar} alt="Avatar" width={28} height={28} className="object-cover w-full h-full" />
                 ) : (
-                  <FiUser className="text-[var(--accent)] text-sm" />
+                  <FiUser className="text-[var(--accent)] text-xs" />
                 )}
               </div>
+              <FiChevronRight className="text-[var(--foreground)]/70 group-hover:text-[var(--foreground)] transition-colors" size={14} />
             </button>
 
             <AnimatePresence>
@@ -420,6 +395,59 @@ export default function Header() {
                           </Link>
                         </div>
                       )}
+
+                    </div> {/* End of scrollable content */}
+
+                    {/* Fixed Bottom External Links Marquee */}
+                    <div className="border-t border-[var(--border)] bg-[var(--background)] overflow-hidden w-full flex-shrink-0 mt-auto relative z-10">
+                      <motion.div 
+                        animate={{ x: ["0%", "-50%"] }} 
+                        transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
+                        className="flex gap-2 p-3 w-max hover:[animation-play-state:paused]"
+                      >
+                        {[...Array(2)].map((_, i) => (
+                          <div key={i} className="flex gap-2">
+                            <a href="https://xyzpay.site" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-2 rounded-xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)] hover:shadow-[0_4px_20px_-10px_rgba(var(--accent-rgb),0.3)] transition-all min-w-[200px]">
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] flex-shrink-0">
+                                  <FiCreditCard size={12} />
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="text-[11px] font-black text-[var(--foreground)] tracking-wide">xyzpay.site</span>
+                                  <span className="text-[8px] text-[var(--muted)] font-bold uppercase tracking-widest mt-0.5 truncate max-w-[120px]">Payment gateway</span>
+                                </div>
+                              </div>
+                              <FiExternalLink size={12} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors flex-shrink-0 ml-3" />
+                            </a>
+
+                            <a href="https://games.bluebuff.in" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-2 rounded-xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)] hover:shadow-[0_4px_20px_-10px_rgba(var(--accent-rgb),0.3)] transition-all min-w-[180px]">
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] flex-shrink-0">
+                                  <FiGlobe size={12} />
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="text-[11px] font-black text-[var(--foreground)] tracking-wide">games.bluebuff.in</span>
+                                  <span className="text-[8px] text-[var(--muted)] font-bold uppercase tracking-widest mt-0.5 truncate max-w-[120px]">(for games)</span>
+                                </div>
+                              </div>
+                              <FiExternalLink size={12} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors flex-shrink-0 ml-3" />
+                            </a>
+
+                            <a href="https://web.bluebuff.in" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-2 rounded-xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)] hover:shadow-[0_4px_20px_-10px_rgba(var(--accent-rgb),0.3)] transition-all min-w-[180px]">
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] flex-shrink-0">
+                                  <FiGlobe size={12} />
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="text-[11px] font-black text-[var(--foreground)] tracking-wide">web.bluebuff.in</span>
+                                  <span className="text-[8px] text-[var(--muted)] font-bold uppercase tracking-widest mt-0.5 truncate max-w-[120px]">(manual web free)</span>
+                                </div>
+                              </div>
+                              <FiExternalLink size={12} className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors flex-shrink-0 ml-3" />
+                            </a>
+                          </div>
+                        ))}
+                      </motion.div>
                     </div>
 
 

@@ -23,6 +23,10 @@ const AppSettingsSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        disabledItems: {
+            type: [String],
+            default: [],
+        },
         // We can add more settings here in the future
     },
     { timestamps: true }

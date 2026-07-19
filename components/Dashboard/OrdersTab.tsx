@@ -111,8 +111,8 @@ export default function OrdersTab() {
       {/* ORDERS LIST */}
       <div className="min-h-[400px] relative">
         {loading ? (
-          <div className="space-y-3">
-            {[1, 2, 3].map((_, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {[1, 2, 3, 4, 5].map((i) => (
               <div key={i} className="relative overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--card)]/40 p-3 space-y-3">
                 <div className="flex justify-between items-center border-b border-[var(--border)]/30 pb-2">
                   <div className="h-3 w-16 bg-[var(--border)] rounded animate-pulse"></div>
@@ -138,7 +138,7 @@ export default function OrdersTab() {
             <p className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)]">No orders found</p>
           </motion.div>
         ) : (
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <AnimatePresence mode="popLayout">
               {orders.map((order, idx) => (
                 <motion.div

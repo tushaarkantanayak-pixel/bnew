@@ -167,12 +167,43 @@ export async function GET(req) {
             sold: item.count
         }));
 
+        const totalOrders = await Order.countDocuments({
+            userId,
+            status: "success",
+            createdAt: { $gte: start, $lte: end }
+        });
+
+        // Spend Distribution by Game
+        const spendByGameAgg = await Order.aggregate([
+            { 
+                $match: { 
+                    userId,
+                    status: "success",
+                    createdAt: { $gte: start, $lte: end }
+                } 
+            },
+            {
+                $group: {
+                    _id: "$gameSlug",
+                    spend: { $sum: "$price" }
+                }
+            },
+            { $sort: { spend: -1 } }
+        ]);
+
+        const spendByGame = spendByGameAgg.map(item => ({
+            name: item._id || "Unknown",
+            value: item.spend
+        }));
+
         return NextResponse.json({
             success: true,
             totalCredit,
             totalDebit,
             chartData,
             topItems,
+            totalOrders,
+            spendByGame,
             lastUpdated
         });
 

@@ -8,7 +8,7 @@ import { validateApiKey } from "@/lib/apiKeyAuth";
 import { ensureDailyReset } from "@/lib/apiKeyUtils";
 import { calculateItemPrice } from "@/lib/pricingUtils";
 import { getAppSettings } from "@/lib/settings";
-import { placeSmileOrder } from "@/lib/smileOne";
+import { placeSmileOrder, canFulfillWithSmile } from "@/lib/smileOne";
 
 export async function POST(req) {
     try {
@@ -140,7 +140,18 @@ export async function POST(req) {
             }, { status: 400 });
         }
 
+        // 🔒 DISABLED ITEM CHECK — block before any wallet deduction
+        const disabledItems = settings.disabledItems || [];
+        if (disabledItems.includes(`${gameSlug}_${itemSlug}`)) {
+            return NextResponse.json({
+                success: false,
+                status: "failed",
+                message: "This item is currently out of service. Please try again later.",
+            }, { status: 503 });
+        }
+
         const orderId = `APIBB-2026-${Math.random().toString(36).substring(2, 11).toUpperCase().padStart(9, '0')}`;
+
 
         // ⚡ ATOMIC WALLET DEDUCTION
         const updatedUser = await User.findOneAndUpdate(
@@ -208,12 +219,12 @@ export async function POST(req) {
             // 2. Call external fulfillment service
             const settings = await getAppSettings();
             const useSmileOne = settings.mlbbWeeklyProvider === "smileone";
-            const isWeeklyPass = gameSlug === "mobile-legends270" && (itemSlug.toLowerCase().includes("weekly") || itemSlug.includes("pass"));
 
+            // Check if SmileOne has a registered mapping for this item
             let gameData;
             let isSuccess = false;
 
-            if (useSmileOne && isWeeklyPass) {
+            if (useSmileOne && canFulfillWithSmile(gameSlug, itemSlug)) {
                 const smileResp = await placeSmileOrder({
                     playerId: String(playerId),
                     zoneId: String(zoneId || ""),

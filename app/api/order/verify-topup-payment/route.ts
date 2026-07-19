@@ -4,7 +4,7 @@ import { connectDB } from "@/lib/mongodb";
 import Order from "@/models/Order";
 import User from "@/models/User";
 import { getAppSettings } from "@/lib/settings";
-import { placeSmileOrder } from "@/lib/smileOne";
+import { placeSmileOrder, canFulfillWithSmile } from "@/lib/smileOne";
 
 export async function POST(req: Request) {
   try {
@@ -189,6 +189,24 @@ export async function POST(req: Request) {
       });
     }
 
+    // DISABLED ITEM CHECK
+    const settings = await getAppSettings();
+    const disabledItems: string[] = settings.disabledItems || [];
+    const orderedKey = `${order.gameSlug}_${order.itemSlug}`;
+    if (disabledItems.includes(orderedKey)) {
+      order.status = "failed";
+      order.paymentStatus = order.paymentStatus || "success";
+      order.topupStatus = "failed";
+      await order.save();
+
+      return NextResponse.json({
+        success: false,
+        message: "This item is currently out of service. Please contact support for a refund.",
+        paymentStatus: order.paymentStatus,
+        topupStatus: "failed",
+      });
+    }
+
     // Check if it's a multiplier/combo order (e.g., weekly-2x)
     const comboMatch = order.itemSlug.match(/(.+)-(\d+)x$/i);
     const isMultiplierOrder = !!comboMatch;
@@ -272,8 +290,6 @@ export async function POST(req: Request) {
     const responses = [];
     let successCount = 0;
 
-    // Fetch App Settings for provider check
-    const settings = await getAppSettings();
     const useSmileOne = settings.mlbbWeeklyProvider === "smileone";
 
     for (let i = 0; i < multiplier; i++) {
@@ -285,11 +301,9 @@ export async function POST(req: Request) {
         let isSuccess = false;
 
 
-        // Check if we should use Smile One for Weekly Pass
-        const isWeeklyPass = finalOrder.gameSlug === "mobile-legends270" && (baseItemSlug.toLowerCase().includes("weekly") || baseItemSlug.includes("pass"));
-
-        if (useSmileOne && isWeeklyPass) {
-          console.log(`[fulfillment] Using SmileOne for Weekly Pass`);
+        // Check if SmileOne has a registered mapping for this item
+        if (useSmileOne && canFulfillWithSmile(finalOrder.gameSlug, baseItemSlug)) {
+          console.log(`[fulfillment] Using SmileOne for ${finalOrder.gameSlug}/${baseItemSlug}`);
           const smileResp = await placeSmileOrder({
             playerId: String(finalOrder.playerId),
             zoneId: String(finalOrder.zoneId),
@@ -299,51 +313,6 @@ export async function POST(req: Request) {
           });
           gameData = smileResp.data;
           isSuccess = smileResp.success;
-        } else if (finalOrder.gameSlug === "bgmi-manual") {
-          const mewjiUrl = `${process.env.MEWJI_API_BASE}/order/create`;
-          const mewjiKey = process.env.MEWJI_API_KEY!;
-          const mewjiBody = {
-            gameSlug: "bgmi-manual",
-            itemSlug: baseItemSlug,
-            playerId: String(finalOrder.playerId),
-          };
-
-          const mewjiHeaders = {
-            "Content-Type": "application/json",
-            "X-API-KEY": mewjiKey,
-          };
-
-          console.log(`[fulfillment] === BGMI MEWJI REQUEST START ===`);
-          console.log(`[fulfillment] Order ID: ${orderId}`);
-          console.log(`[fulfillment] Method: POST | URL: ${mewjiUrl}`);
-          console.log(`[fulfillment] Headers:`, JSON.stringify({ ...mewjiHeaders, "X-API-KEY": mewjiKey ? '***' + mewjiKey.slice(-4) : 'MISSING' }, null, 2));
-          console.log(`[fulfillment] Body Payload:`, JSON.stringify(mewjiBody, null, 2));
-          console.log(`[fulfillment] ===============================`);
-
-          const gameResp = await fetch(mewjiUrl, {
-            method: "POST",
-            headers: mewjiHeaders,
-            body: JSON.stringify(mewjiBody),
-          });
-
-          console.log(`[fulfillment] MEWJI RESPONSE STATUS: ${gameResp.status} ${gameResp.statusText}`);
-
-          const responseText = await gameResp.text();
-          console.log(`[fulfillment] MEWJI RAW RESPONSE:`, responseText);
-
-          try {
-            gameData = JSON.parse(responseText);
-            console.log(`[fulfillment] MEWJI PARSED JSON:`, JSON.stringify(gameData, null, 2));
-          } catch (e) {
-            console.error(`[fulfillment] Mewji JSON Parse Error:`, e);
-            gameData = { success: false, message: "Invalid JSON from Mewji" };
-          }
-
-          isSuccess = gameResp.ok && (gameData?.success === true || gameData?.status === "success" || gameData?.order?.status === "success");
-          console.log(`[fulfillment] BGMI SUCCESS CHECK -> isSuccess: ${isSuccess}`);
-          console.log(`[fulfillment] === BGMI MEWJI REQUEST END ===`);
-
-
         } else {
           // Default provider (1game)
           const gameResp = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api-service/order`, {

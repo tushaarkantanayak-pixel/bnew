@@ -15,9 +15,12 @@ import {
   Shield,
   DollarSign,
   Loader2,
-
-  Package
+  Package,
+  Power,
+  PowerOff
 } from "lucide-react";
+
+import apiClient from "@/utils/apiClient";
 
 const API_BASE = "https://game-off-ten.vercel.app/api/v1";
 
@@ -39,6 +42,10 @@ export default function PricingTab({
   const [loadingFixedPrices, setLoadingFixedPrices] = useState(false);
   const [bulkPercent, setBulkPercent] = useState("");
 
+  /* ===== DISABLED ITEMS STATE ===== */
+  const [disabledKeys, setDisabledKeys] = useState(new Set());
+  const [toggling, setToggling] = useState(new Set());
+
   useEffect(() => {
     (async () => {
       try {
@@ -50,6 +57,42 @@ export default function PricingTab({
       }
     })();
   }, []);
+
+  useEffect(() => {
+    // Fetch disabled keys on mount
+    apiClient.get("/api/admin/disabled-items")
+      .then(res => {
+        if (res.data?.success) {
+          setDisabledKeys(new Set(res.data.data || []));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const toggleItem = async (gameSlug, itemSlug) => {
+    const key = `${gameSlug}_${itemSlug}`;
+    const willDisable = !disabledKeys.has(key);
+
+    setToggling(prev => new Set([...prev, key]));
+    try {
+      const res = await apiClient.patch("/api/admin/disabled-items", {
+        itemKey: key,
+        disabled: willDisable,
+      });
+
+      if (res.data?.success) {
+        setDisabledKeys(prev => {
+          const next = new Set(prev);
+          willDisable ? next.add(key) : next.delete(key);
+          return next;
+        });
+      }
+    } catch (err) {
+      console.error("Failed to toggle item", err);
+    } finally {
+      setToggling(prev => { const n = new Set(prev); n.delete(key); return n; });
+    }
+  };
 
   const fetchItemsForGame = async (gameSlug) => {
     if (!gameSlug) return [];
@@ -106,7 +149,9 @@ export default function PricingTab({
           gameSlug,
           itemSlug: item.itemSlug,
           itemName: item.itemName,
-          fixedPrice: existing?.fixedPrice ?? Number(item.sellingPrice) ?? 0,
+          fixedPrice: existing?.fixedPrice !== undefined 
+            ? Number(Number(existing.fixedPrice).toFixed(2)) 
+            : Number(Number(item.sellingPrice || 0).toFixed(2)),
           useOverride: existing?.useOverride ?? false,
         };
       });
@@ -151,7 +196,7 @@ export default function PricingTab({
       if ((fixedGameFilter && o.gameSlug !== fixedGameFilter) || (fixedItemFilter && o.itemSlug !== fixedItemFilter)) {
         return o;
       }
-      return { ...o, fixedPrice: Math.round(o.fixedPrice * multiplier) };
+      return { ...o, fixedPrice: Number((o.fixedPrice * multiplier).toFixed(2)) };
     });
     setOverrides(next);
     setBulkPercent("");
@@ -409,7 +454,23 @@ export default function PricingTab({
                               >
                                 <div className={`w-3.5 h-3.5 rounded-full bg-white transition-transform ${o.useOverride ? 'translate-x-3.5' : 'translate-x-0'}`} />
                               </button>
-                              <span className={`text-[8px] font-black uppercase tracking-widest ${o.useOverride ? 'text-[var(--accent)]' : 'text-[var(--muted)]/40'}`}>Use Override</span>
+                              <span className={`text-[8px] font-black uppercase tracking-widest ${o.useOverride ? 'text-[var(--accent)]' : 'text-[var(--muted)]/40'}`}>Override</span>
+                            </div>
+                            
+                            {/* OUT OF SERVICE TOGGLE */}
+                            <div className="flex flex-col items-center gap-1 ml-2 pl-2 border-l border-[var(--border)]">
+                              <button
+                                onClick={() => toggleItem(o.gameSlug, o.itemSlug)}
+                                disabled={toggling.has(`${o.gameSlug}_${o.itemSlug}`)}
+                                className={`w-9 h-5 rounded-full flex items-center p-1 transition-colors ${disabledKeys.has(`${o.gameSlug}_${o.itemSlug}`) ? 'bg-red-500' : 'bg-green-500'} disabled:opacity-50`}
+                                title={disabledKeys.has(`${o.gameSlug}_${o.itemSlug}`) ? "Currently Out of Service" : "Currently Active"}
+                              >
+                                <div className={`w-3.5 h-3.5 rounded-full bg-white flex items-center justify-center transition-transform ${disabledKeys.has(`${o.gameSlug}_${o.itemSlug}`) ? 'translate-x-3.5' : 'translate-x-0'}`}>
+                                </div>
+                              </button>
+                              <span className={`text-[8px] font-black uppercase tracking-widest ${disabledKeys.has(`${o.gameSlug}_${o.itemSlug}`) ? 'text-red-500' : 'text-green-500'}`}>
+                                {disabledKeys.has(`${o.gameSlug}_${o.itemSlug}`) ? 'Disabled' : 'Active'}
+                              </span>
                             </div>
                           </div>
                           

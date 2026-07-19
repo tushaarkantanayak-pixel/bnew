@@ -6,11 +6,11 @@ import { FiBarChart2, FiCalendar, FiArrowUpRight, FiArrowDownLeft, FiClock, FiSe
 import { useAuthStore } from "@/store/useAuthStore";
 import { formatPrice } from "@/utils/currency";
 import axios from "axios";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
 export default function AnalyticsPage() {
     const { token, walletBalance } = useAuthStore();
-    const [range, setRange] = useState("7d");
+    const [range, setRange] = useState("1d");
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [isCustom, setIsCustom] = useState(false);
@@ -21,6 +21,8 @@ export default function AnalyticsPage() {
         totalDebit: 0,
         chartData: [],
         topItems: [],
+        totalOrders: 0,
+        spendByGame: [],
         lastUpdated: null
     });
 
@@ -44,6 +46,8 @@ export default function AnalyticsPage() {
                     totalDebit: res.data.totalDebit || 0,
                     chartData: res.data.chartData || [],
                     topItems: res.data.topItems || [],
+                    totalOrders: res.data.totalOrders || 0,
+                    spendByGame: res.data.spendByGame || [],
                     lastUpdated: res.data.lastUpdated
                 });
             }
@@ -177,7 +181,7 @@ export default function AnalyticsPage() {
                 <AnalyticsSkeleton />
             ) : (
                 <>
-                <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
                 {/* Credit */}
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }}
@@ -191,11 +195,25 @@ export default function AnalyticsPage() {
                     <p className="text-xs sm:text-2xl font-black italic text-green-500 truncate">{formatPrice(data.totalCredit)}</p>
                 </motion.div>
 
-                {/* Balance */}
+                {/* Total Orders */}
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
+                    className="bg-[var(--card)] border border-[var(--border)] p-2 sm:p-5 rounded-xl sm:rounded-2xl relative overflow-hidden flex flex-col justify-center"
+                >
+                    <div className="absolute top-0 right-0 p-1 sm:p-4 opacity-10">
+                        <FiShoppingBag className="text-blue-500 w-6 h-6 sm:w-12 sm:h-12" />
+                    </div>
+                    <p className="text-[7px] sm:text-[10px] font-black uppercase tracking-widest text-[var(--muted)] mb-0.5 sm:mb-1">Total Orders</p>
+                    <p className="text-xs sm:text-2xl font-black italic text-blue-500 truncate">{data.totalOrders}</p>
+                </motion.div>
+
+                {/* Balance */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
                     className="bg-[var(--accent)] border border-[var(--accent)] p-2 sm:p-5 rounded-xl sm:rounded-2xl relative overflow-hidden text-white flex flex-col justify-center"
                 >
                     <div className="absolute top-0 right-0 w-16 sm:w-32 h-16 sm:h-32 bg-white/10 rounded-full blur-xl sm:blur-2xl -translate-y-1/2 translate-x-1/4"></div>
@@ -207,7 +225,7 @@ export default function AnalyticsPage() {
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
+                    transition={{ delay: 0.3 }}
                     className="bg-[var(--card)] border border-[var(--border)] p-2 sm:p-5 rounded-xl sm:rounded-2xl relative overflow-hidden flex flex-col justify-center"
                 >
                     <div className="absolute top-0 right-0 p-1 sm:p-4 opacity-10">
@@ -215,6 +233,19 @@ export default function AnalyticsPage() {
                     </div>
                     <p className="text-[7px] sm:text-[10px] font-black uppercase tracking-widest text-[var(--muted)] mb-0.5 sm:mb-1">Debit Out</p>
                     <p className="text-xs sm:text-2xl font-black italic text-red-500 truncate">{formatPrice(data.totalDebit)}</p>
+                </motion.div>
+                
+                {/* AOV */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-[var(--card)] border border-[var(--border)] p-2 sm:p-5 rounded-xl sm:rounded-2xl relative overflow-hidden flex flex-col justify-center lg:col-span-4"
+                >
+                    <div className="flex items-center gap-2">
+                        <p className="text-[7px] sm:text-[10px] font-black uppercase tracking-widest text-[var(--muted)]">Average Order Value (AOV): </p>
+                        <p className="text-xs sm:text-lg font-black italic text-[var(--foreground)] truncate">{data.totalOrders > 0 ? formatPrice(data.totalDebit / data.totalOrders) : formatPrice(0)}</p>
+                    </div>
                 </motion.div>
             </div>
 
@@ -277,8 +308,49 @@ export default function AnalyticsPage() {
                 </div>
             </motion.div>
 
-            {/* TOP 5 PURCHASED ITEMS */}
-            {data.topItems && data.topItems.length > 0 && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* SPEND BY GAME PIE CHART */}
+                {data.spendByGame && data.spendByGame.length > 0 && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="bg-[var(--card)] border border-[var(--border)] p-3 sm:p-6 rounded-2xl"
+                    >
+                        <div className="flex items-center gap-2 mb-4 sm:mb-6">
+                            <FiTrendingUp className="text-[var(--accent)]" />
+                            <h3 className="text-[10px] sm:text-sm font-black uppercase tracking-widest text-[var(--foreground)]">Spend By Game</h3>
+                        </div>
+                        <div className="h-[200px] sm:h-[300px] w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={data.spendByGame}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={60}
+                                        outerRadius={80}
+                                        paddingAngle={5}
+                                        dataKey="value"
+                                    >
+                                        {data.spendByGame.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={['#a855f7', '#3b82f6', '#ec4899', '#10b981', '#f59e0b'][index % 5]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip 
+                                        formatter={(value) => formatPrice(value)}
+                                        contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', borderRadius: '0.75rem' }}
+                                        itemStyle={{ color: 'var(--foreground)', fontWeight: 'bold' }}
+                                    />
+                                    <Legend wrapperStyle={{ fontSize: '10px', fontWeight: 'bold', color: 'var(--muted)' }} />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* TOP 5 PURCHASED ITEMS */}
+                {data.topItems && data.topItems.length > 0 && (
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -311,6 +383,7 @@ export default function AnalyticsPage() {
                     </div>
                 </motion.div>
             )}
+            </div>
                 </>
             )}
         </div>
@@ -320,8 +393,8 @@ export default function AnalyticsPage() {
 function AnalyticsSkeleton() {
     return (
         <div className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                {[1, 2, 3].map((i) => (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+                {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="bg-[var(--card)] border border-[var(--border)] p-2 sm:p-5 rounded-xl sm:rounded-2xl h-[70px] sm:h-[120px] animate-pulse">
                         <div className="h-2 sm:h-3 w-16 bg-[var(--border)] rounded mb-2"></div>
                         <div className="h-4 sm:h-8 w-24 bg-[var(--border)] rounded"></div>

@@ -4,10 +4,26 @@ import { useState, useEffect } from "react";
 import { FiSettings, FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/fi";
 import apiClient from "@/utils/apiClient";
 
+const PROVIDER_OPTIONS = [
+    {
+        value: "1game",
+        label: "1Game",
+        description: "Use 1Game as the fulfillment provider for MLBB Weekly Pass orders.",
+        color: "bg-blue-500",
+    },
+    {
+        value: "smileone",
+        label: "Smile One",
+        description: "Use Smile One as the fulfillment provider for MLBB Weekly Pass orders.",
+        color: "bg-purple-500",
+    },
+];
+
 const SettingsTab = () => {
-    const [settings, setSettings] = useState({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true, memberOnlyOrdersEnabled: false });
+    const [settings, setSettings] = useState({ maintenanceMode: false, apiServiceEnabled: true, websiteOrdersEnabled: true, memberOnlyOrdersEnabled: false, mlbbWeeklyProvider: "1game" });
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [providerSaving, setProviderSaving] = useState(false);
     const [message, setMessage] = useState({ type: "", text: "" });
 
     useEffect(() => {
@@ -114,6 +130,28 @@ const SettingsTab = () => {
             setMessage({ type: "error", text: "Something went wrong" });
         } finally {
             setSaving(false);
+        }
+    };
+
+    const switchProvider = async (provider) => {
+        if (provider === settings.mlbbWeeklyProvider) return;
+        try {
+            setProviderSaving(true);
+            setMessage({ type: "", text: "" });
+            const res = await apiClient.patch("/api/admin/settings", { mlbbWeeklyProvider: provider });
+            const data = res.data;
+            if (data.success) {
+                setSettings(data.data);
+                const label = PROVIDER_OPTIONS.find(p => p.value === provider)?.label || provider;
+                setMessage({ type: "success", text: `MLBB Weekly Pass provider switched to ${label} successfully!` });
+            } else {
+                setMessage({ type: "error", text: data.message || "Failed to update provider" });
+            }
+        } catch (err) {
+            console.error("Failed to switch provider", err);
+            setMessage({ type: "error", text: "Something went wrong" });
+        } finally {
+            setProviderSaving(false);
         }
     };
 
@@ -250,6 +288,59 @@ const SettingsTab = () => {
                         />
                     </button>
                 </div>
+            </div>
+
+            {/* ===== MLBB WEEKLY PASS PROVIDER ===== */}
+            <div>
+                <h2 className="text-xl font-bold text-[var(--foreground)] flex items-center gap-2">
+                    <FiSettings className="text-[var(--accent)]" />
+                    MLBB Weekly Pass Provider
+                </h2>
+                <p className="text-sm text-[var(--muted)] mt-1">
+                    Choose which fulfillment service to use for MLBB Weekly Pass orders.
+                </p>
+            </div>
+
+            <div className="bg-[var(--background)] border border-[var(--border)] rounded-xl overflow-hidden">
+                <div className="p-6 flex flex-col gap-3">
+                    {PROVIDER_OPTIONS.map((option) => {
+                        const isActive = settings.mlbbWeeklyProvider === option.value;
+                        return (
+                            <button
+                                key={option.value}
+                                onClick={() => switchProvider(option.value)}
+                                disabled={providerSaving || isActive}
+                                className={`
+                                    w-full flex items-center gap-4 px-5 py-4 rounded-xl border-2 transition-all duration-200 text-left
+                                    ${isActive
+                                        ? "border-[var(--accent)] bg-[var(--accent)]/10"
+                                        : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/5"
+                                    }
+                                    ${providerSaving ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}
+                                `}
+                            >
+                                {/* Indicator dot */}
+                                <span className={`w-3.5 h-3.5 rounded-full shrink-0 ${isActive ? option.color : "bg-gray-600"} transition-colors duration-200`} />
+                                <div className="flex-1 min-w-0">
+                                    <p className={`font-bold text-sm tracking-wide ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]"}`}>
+                                        {option.label}
+                                        {isActive && <span className="ml-2 text-[10px] font-black uppercase tracking-widest text-[var(--accent)] bg-[var(--accent)]/15 px-2 py-0.5 rounded-full">Active</span>}
+                                    </p>
+                                    <p className="text-xs text-[var(--muted)] mt-0.5">{option.description}</p>
+                                </div>
+                                {providerSaving && !isActive && (
+                                    <FiLoader className="animate-spin text-[var(--accent)] shrink-0" />
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
+                {message.text && (
+                    <div className={`px-6 pb-4 flex items-center gap-2 text-sm ${message.type === "success" ? "text-green-500" : "text-red-500"}`}>
+                        {message.type === "success" ? <FiCheckCircle /> : <FiAlertCircle />}
+                        {message.text}
+                    </div>
+                )}
             </div>
 
         </div>

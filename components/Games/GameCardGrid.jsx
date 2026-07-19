@@ -32,21 +32,21 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
 
   return (
     <div className="h-full">
-      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full">
+      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full outline-none">
         
-        {/* Ultra-Compact Premium Card */}
-        <div className={`relative h-full bg-[var(--card)] rounded-[14px] p-1 flex flex-col transition-all duration-300 ease-out
+        {/* Simplified Flush Card */}
+        <div className={`group relative h-full bg-transparent flex flex-col transition-all duration-300 ease-out
           ${disabled 
-            ? "opacity-60 cursor-not-allowed border border-[var(--border)]" 
-            : "border border-[var(--border)] shadow-sm"}`}
+            ? "opacity-60 cursor-not-allowed" 
+            : ""}`}
         >
-          {/* Top Image Container */}
-          <div className="relative w-full aspect-square sm:aspect-[4/3] rounded-[10px] overflow-hidden bg-[var(--background)]">
+          {/* Top Image Container - Flush edges */}
+          <div className="relative w-full aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-[var(--card)] border border-[var(--border)] group-hover:border-[var(--accent)] group-hover:shadow-[0_4px_20px_-10px_rgba(var(--accent-rgb),0.3)] transition-all duration-300">
             
             {/* Tag / Badge */}
             {tag && (
-              <div className="absolute top-1.5 left-1.5 z-20">
-                <span className={`px-1.5 py-0.5 rounded border text-[8px] sm:text-[9px] font-semibold tracking-wide shadow-sm ${tag.badge}`}>
+              <div className="absolute top-2 left-2 z-20">
+                <span className={`px-2 py-1 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-widest shadow-sm ${tag.badge}`}>
                   {tag.text}
                 </span>
               </div>
@@ -58,7 +58,7 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
                 alt={game.gameName}
                 fill
                 sizes="(max-width: 768px) 50vw, 25vw"
-                className={`object-cover ${disabled ? "grayscale opacity-80" : ""}`}
+                className={`object-cover transition-transform duration-500 group-hover:scale-105 ${disabled ? "grayscale opacity-80" : ""}`}
                 onError={() => setImgError(true)}
               />
             ) : (
@@ -72,32 +72,30 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
             {/* Out of Stock Overlay */}
             {disabled && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-30">
-                <span className="px-1.5 py-0.5 rounded border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] text-[8px] font-semibold uppercase tracking-widest shadow-sm">
+                <span className="px-2 py-1 rounded-lg border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] text-[9px] font-black uppercase tracking-widest shadow-sm">
                   Sold Out
                 </span>
               </div>
             )}
           </div>
 
-          {/* Bottom Content Container - ULTRA COMPACT */}
-          <div className="flex-1 p-1.5 sm:p-2 flex flex-col justify-between">
-            {/* break-words fixes the "WEEKLY/MONTHLY" overflow issue */}
-            <h3 className={`text-[11px] sm:text-[13px] font-bold tracking-tight leading-[1.2] break-words whitespace-normal transition-colors duration-300
-              ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)]"}`}
-              style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
-              title={game.gameName}
-            >
-              {game.gameName}
-            </h3>
+          {/* Bottom Content Container - Floating Text */}
+          <div className="flex-1 pt-3 pb-1 px-1 flex flex-col justify-between">
+            <div className="flex items-start justify-between gap-2">
+              <h3 className={`text-[12px] sm:text-[14px] font-black tracking-tight leading-tight transition-colors duration-300 group-hover:text-[var(--accent)]
+                ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)]"}`}
+                style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
+                title={game.gameName}
+              >
+                {game.gameName}
+              </h3>
 
-            {/* Minimal Arrow Bottom Right */}
-            {!disabled && (
-              <div className="flex justify-end mt-1">
-                <div className="w-5 h-5 rounded-full bg-[var(--background)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)]">
-                  <FiArrowRight size={10} />
+              {!disabled && (
+                <div className="w-6 h-6 shrink-0 rounded-full bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] group-hover:border-[var(--accent)] transition-colors mt-0.5">
+                  <FiArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </Link>

@@ -144,21 +144,17 @@ export default function GamesPage() {
   /* ================= RENDER COMPONENTS ================= */
   const SectionHeader = ({ title, icon: Icon, count, gradient }) => (
     <div className="flex items-center gap-3 mb-6">
-      <div className={`w-11 h-11 rounded-[0.9rem] bg-gradient-to-br ${gradient} flex items-center justify-center text-white shadow-xl shrink-0`}>
-        <Icon size={20} />
+      <div className="w-8 h-8 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] shrink-0">
+        <Icon size={16} />
       </div>
-      <div>
-        <h2 className="text-[15px] sm:text-base font-bold text-[var(--foreground)] leading-none mb-1.5">
+      <div className="flex flex-col">
+        <h2 className="text-[15px] sm:text-[16px] font-black tracking-tight text-[var(--foreground)] leading-none mb-1">
           {title}
         </h2>
-        <div className="flex items-center gap-2.5">
-          <div className="h-1 w-8 bg-[var(--accent)] rounded-full shadow-[0_0_10px_rgba(var(--accent-rgb),0.5)]" />
-          <span className="text-[10px] font-bold text-[var(--muted)] tracking-tight">
-            {count} Items Found
-          </span>
-        </div>
+        <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">
+          {count} Items Found
+        </span>
       </div>
-      <div className="flex-1 h-px bg-gradient-to-r from-[var(--border)]/50 to-transparent ml-2" />
     </div>
   );
 
@@ -181,11 +177,11 @@ export default function GamesPage() {
       {/* Background Decorative Glows Removed */}
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* ================= UNIFIED COMPACT HEADER ================= */}
-        <div className="flex flex-col md:flex-row items-center gap-2 mb-10 w-full bg-[var(--card)] p-1.5 rounded-2xl border border-[var(--border)] shadow-sm">
+        {/* ================= SIMPLER HEADER ================= */}
+        <div className="flex flex-col md:flex-row items-center gap-3 mb-10 w-full">
           
           {/* SEARCH */}
-          <div className="relative flex-1 w-full group/search shrink-0">
+          <div className="relative flex-1 w-full group/search shrink-0 bg-[var(--card)] rounded-xl border border-[var(--border)] shadow-sm">
             <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)] group-focus-within/search:text-[var(--foreground)] transition-colors" size={14} />
             <input
               value={searchQuery}
@@ -209,16 +205,16 @@ export default function GamesPage() {
           </div>
 
           {/* SCROLLABLE ACTION ROW */}
-          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto no-scrollbar scroll-smooth pl-1 md:pl-0 pb-1 md:pb-0">
+          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto no-scrollbar scroll-smooth">
             {/* CATEGORY TABS */}
-            <div className="flex items-center p-1 shrink-0 rounded-xl bg-[var(--background)] border border-[var(--border)] shadow-inner">
+            <div className="flex items-center p-1 shrink-0 rounded-xl bg-[var(--card)] border border-[var(--border)] shadow-sm">
               <TabButton id="all" label="All" icon={FiGrid} />
               <TabButton id="mlbb" label="MLBB" icon={FiZap} />
               <TabButton id="others" label="Others" icon={FiPackage} />
             </div>
 
             {/* VIEW TOGGLE */}
-            <div className="flex items-center p-1 shrink-0 rounded-xl bg-[var(--background)] border border-[var(--border)] shadow-inner">
+            <div className="flex items-center p-1 shrink-0 rounded-xl bg-[var(--card)] border border-[var(--border)] shadow-sm">
               {[
                 { id: "grid", icon: FiGrid },
                 { id: "list", icon: FiList },
@@ -239,12 +235,12 @@ export default function GamesPage() {
             {/* FILTER BUTTON */}
             <button
               onClick={() => setShowFilter(true)}
-              className={`relative shrink-0 flex items-center justify-center w-[34px] h-[34px] rounded-xl transition-all duration-300 border ${activeFilterCount > 0
+              className={`relative shrink-0 flex items-center justify-center w-[38px] h-[38px] rounded-xl transition-all duration-300 border ${activeFilterCount > 0
                 ? "bg-[var(--accent)] text-[var(--background)] border-[var(--accent)] shadow-sm"
-                : "bg-[var(--background)] border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 shadow-inner"
+                : "bg-[var(--card)] border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 shadow-sm"
                 }`}
             >
-              <FiFilter size={13} className={activeFilterCount > 0 ? "stroke-[2.5px]" : ""} />
+              <FiFilter size={14} className={activeFilterCount > 0 ? "stroke-[2.5px]" : ""} />
               {activeFilterCount > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center bg-[var(--background)] text-[var(--foreground)] rounded-full text-[9px] font-bold border border-[var(--border)] shadow-sm">
                   {activeFilterCount}

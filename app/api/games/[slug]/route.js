@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { connectDB } from "@/lib/mongodb";
 import PricingConfig from "@/models/PricingConfig";
+import AppSettings from "@/models/AppSettings";
 import { applyPricingToItems } from "@/lib/pricingUtils";
 
 /* ================= MEMBERSHIP CONFIG ================= */
@@ -544,6 +545,30 @@ export async function GET(req, { params }) {
 
     if (slug.includes("8ballpool")) {
       data.data.inputFieldOne = "Player ID";
+    }
+
+    /* ===== FILTER DISABLED ITEMS (invisible to regular users) ===== */
+    const reqUrl = new URL(req.url);
+    const isAdminRequest = reqUrl.searchParams.get("admin") === "true";
+    let isOwner = false;
+    if (isAdminRequest) {
+      try {
+        const auth = req.headers.get("authorization");
+        if (auth?.startsWith("Bearer ")) {
+          const decoded = jwt.verify(auth.split(" ")[1], process.env.JWT_SECRET);
+          if (decoded?.userType === "owner") isOwner = true;
+        }
+      } catch {}
+    }
+
+    if (!isOwner) {
+      const appSettings = await AppSettings.findOne({}).lean();
+      const disabledSet = new Set((appSettings?.disabledItems) || []);
+      if (disabledSet.size > 0) {
+        data.data.itemId = data.data.itemId.filter(
+          (item) => !disabledSet.has(`${gameSlug}_${item.itemSlug}`)
+        );
+      }
     }
 
     // Final sort to keep UI clean

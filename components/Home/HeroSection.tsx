@@ -1,7 +1,6 @@
 "use client";
 
 import GamesPage from "@/app/games/page";
-import GameBannerCarousel from "./GameBannerCarousel";
 import HomeServices from "./HomeServices";
 import TrustHighlights from "./TrustHighlights";
 import TopNoticeBanner from "./TopNoticeBanner";
@@ -19,7 +18,6 @@ export default function HeroSection() {
   return (
     <>
       <TopNoticeBanner />
-      <GameBannerCarousel />
 
       {/* <div className="space-y-2 mt-4">
         <StorySlider />

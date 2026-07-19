@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import AuthGuard from "../../components/AuthGuard";
-import { FiZap, FiInbox, FiHelpCircle, FiUser, FiCreditCard, FiUsers, FiKey, FiGift, FiBarChart2 } from "react-icons/fi";
+import { FiZap, FiInbox, FiHelpCircle, FiUser, FiCreditCard, FiUsers, FiKey, FiGift, FiBarChart2, FiMenu } from "react-icons/fi";
 import Link from "next/link";
+import Sidebar from "../../components/Dashboard/Sidebar";
 import { usePathname } from "next/navigation";
 import { useAuthStore } from "../../store/useAuthStore";
 
@@ -15,6 +16,7 @@ export default function DashboardLayout({
 }) {
     const pathname = usePathname();
     const { fetchUser, userDetails, setWalletBalance } = useAuthStore();
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     useEffect(() => {
         fetchUser();
@@ -51,38 +53,24 @@ export default function DashboardLayout({
 
     return (
         <AuthGuard>
-            <section className="min-h-screen px-4 sm:px-6 py-6 sm:py-8 bg-[var(--background)]">
-
-
-                    <div className="max-w-6xl mx-auto relative z-10">
+            <section className="min-h-screen bg-[var(--background)] flex flex-col md:flex-row overflow-hidden">
+                <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+                <div className="flex-1 min-w-0 px-4 sm:px-6 py-4 max-h-screen overflow-y-auto">
+                    <div className="max-w-6xl mx-auto relative z-10 pb-20 md:pb-0">
                         {/* TACTICAL HEADER */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6"
+                            className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-6"
                         >
-                            <div className="space-y-2">
-                                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[var(--accent)]/5 border border-[var(--accent)]/10">
-                                    <FiZap className="text-[var(--accent)] animate-pulse" size={8} />
-                                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[var(--accent)] italic">
-                                        Online now
-                                    </span>
-                                </div>
+                            <div className="space-y-1">
                                 <h1 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter leading-none">
                                     MY <span className="text-[var(--accent)]">{tabCards.find(t => t.key === activeTab)?.value || "DASHBOARD"}</span>
                                 </h1>
-                                <p className="text-[var(--muted)] text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] opacity-30 italic">
-                                    User: {userDetails.name || "Guest"} • Connected
+                                <p className="text-[var(--muted)] text-[10px] sm:text-xs font-bold uppercase tracking-wider opacity-60">
+                                    {userDetails.name || "Guest"}
                                 </p>
                             </div>
-
-                            {/* QUICK STATS */}
-                            {/* <div className="flex gap-4">
-                                <Link href="/dashboard/wallet" className="px-4 py-2 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm hover:bg-white/10 transition-all group">
-                                    <p className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)]/40 mb-0.5 group-hover:text-[var(--accent)]/60 transition-colors">Wallet Assets</p>
-                                    <p className="text-sm font-black italic text-[var(--accent)] leading-none">{formatPrice(walletBalance)}</p>
-                                </Link>
-                            </div> */}
                         </motion.div>
 
                         {/* PAGE CONTENT AREA */}
@@ -95,7 +83,8 @@ export default function DashboardLayout({
                             {children}
                         </motion.div>
                     </div>
-                </section>
+                </div>
+            </section>
         </AuthGuard>
     );
 }
