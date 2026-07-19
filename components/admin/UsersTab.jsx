@@ -228,34 +228,7 @@ export default function UsersTab() {
         </div>
       </div>
 
-      {/* ================= STATS GRID ================= */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-        {/* Active Users Column */}
-        <div className="space-y-2 sm:space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <Activity size={12} className="text-[var(--accent)]" />
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Active Users</h4>
-          </div>
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <InsightCard label="Today" value={activeStats.day} compact color="blue" pulse={activeStats.day > 0} />
-            <InsightCard label="Week" value={activeStats.week} compact color="blue" />
-            <InsightCard label="Month" value={activeStats.month} compact color="blue" />
-          </div>
-        </div>
 
-        {/* New Signups Column */}
-        <div className="space-y-2 sm:space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <Users size={12} className="text-emerald-500" />
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">New Signups</h4>
-          </div>
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <InsightCard label="Today" value={newStats.day} compact color="emerald" pulse={newStats.day > 0} />
-            <InsightCard label="Week" value={newStats.week} compact color="emerald" />
-            <InsightCard label="Month" value={newStats.month} compact color="emerald" />
-          </div>
-        </div>
-      </div>
 
       {/* ================= SEARCH & FILTERS ================= */}
       <div className="flex gap-2 sm:gap-3">

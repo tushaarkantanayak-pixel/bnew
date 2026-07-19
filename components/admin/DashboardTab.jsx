@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { Loader2, RefreshCcw, DollarSign, Users, Package, TrendingUp, Wallet, ArrowUpRight } from "lucide-react";
+import { Loader2, RefreshCcw, DollarSign, Users, Package, TrendingUp, Wallet, ArrowUpRight, Zap, MessageSquare, Key } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatPrice } from "@/utils/currency";
 import apiClient from "@/utils/apiClient";
@@ -59,24 +59,31 @@ export default function DashboardTab() {
         fetchDashboardData();
     }, [fetchDashboardData]);
 
-    const MetricCard = ({ title, value, icon: Icon, color, delay }) => (
+    const MetricCard = ({ title, value, subValue, icon: Icon, color, delay }) => (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay, duration: 0.3 }}
-            className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] flex flex-col gap-3 relative overflow-hidden group"
+            className="p-4 rounded-2xl bg-[var(--card)] border border-[var(--border)] flex flex-col gap-2 relative overflow-hidden group"
         >
-            <div className={`absolute -right-6 -top-6 w-24 h-24 bg-${color}-500/10 rounded-full blur-2xl group-hover:bg-${color}-500/20 transition-all`} />
+            <div className={`absolute -right-4 -top-4 w-20 h-20 bg-${color}-500/10 rounded-full blur-2xl group-hover:bg-${color}-500/20 transition-all`} />
             <div className="flex justify-between items-start relative z-10">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-${color}-500/10 text-${color}-500`}>
-                    <Icon size={20} />
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center bg-${color}-500/10 text-${color}-500`}>
+                    <Icon size={16} />
                 </div>
             </div>
-            <div className="relative z-10 mt-2">
-                <h4 className="text-xs font-bold text-[var(--muted)] uppercase tracking-widest">{title}</h4>
-                <p className="text-2xl font-black text-[var(--foreground)] mt-1 tracking-tight">
-                    {typeof value === 'number' ? formatPrice(value) : value}
-                </p>
+            <div className="relative z-10 mt-1">
+                <h4 className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest">{title}</h4>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                    <p className="text-lg font-black text-[var(--foreground)] tracking-tight">
+                        {typeof value === 'number' ? formatPrice(value) : value}
+                    </p>
+                    {subValue && (
+                        <p className="text-[10px] font-bold text-[var(--muted)] tracking-wider">
+                            ({subValue})
+                        </p>
+                    )}
+                </div>
             </div>
         </motion.div>
     );
@@ -132,13 +139,30 @@ export default function DashboardTab() {
             ) : (
                 <>
                     {/* KPIS */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-3">
                         <MetricCard 
-                            title={`Total Sell (${timeframe}d)`} 
+                            title={`Total Value (${timeframe}d)`} 
+                            value={data.overallRevenue || 0} 
+                            subValue={(data.overallOrders || 0) + " TX"}
+                            icon={Package} 
+                            color="indigo" 
+                            delay={0.1} 
+                        />
+                        <MetricCard 
+                            title={`Success Sell (${timeframe}d)`} 
                             value={data.totalRevenue} 
+                            subValue={(data.totalOrders || 0) + " TX"}
                             icon={TrendingUp} 
                             color="emerald" 
-                            delay={0.1} 
+                            delay={0.15} 
+                        />
+                        <MetricCard 
+                            title={`Refunded (${timeframe}d)`} 
+                            value={data.refundRevenue || 0} 
+                            subValue={(data.refundOrders || 0) + " TX"}
+                            icon={RefreshCcw} 
+                            color="red" 
+                            delay={0.2} 
                         />
                         <MetricCard 
                             title="My API Balance" 
@@ -148,11 +172,35 @@ export default function DashboardTab() {
                             delay={0.2} 
                         />
                         <MetricCard 
-                            title="User Wallets (Total)" 
+                            title="User Wallets (Active)" 
                             value={data.walletTotalUsers} 
+                            subValue={(data.activeWalletsCount?.toString() || "0") + " Active"}
                             icon={Wallet} 
                             color="purple" 
                             delay={0.3} 
+                        />
+                        <MetricCard 
+                            title={`Users Tracker (${timeframe}d)`} 
+                            value={data.totalUsers?.toString() || "0"} 
+                            subValue={`${data.newUsers || 0} New • ${data.activeUsers || 0} Active`}
+                            icon={Users} 
+                            color="orange" 
+                            delay={0.5} 
+                        />
+                        <MetricCard 
+                            title={`Support Queries (${timeframe}d)`} 
+                            value={`${data.pendingQueries || 0} Pending`} 
+                            subValue={(data.totalQueries || 0) + " Total"}
+                            icon={MessageSquare} 
+                            color="rose" 
+                            delay={0.65} 
+                        />
+                        <MetricCard 
+                            title="API Key Users" 
+                            value={data.apiUsers?.toString() || "0"} 
+                            icon={Key} 
+                            color="blue" 
+                            delay={0.7} 
                         />
                     </div>
 

@@ -284,60 +284,8 @@ export default function StatsTab() {
                 </div>
             ) : (
                 <>
-                    {/* TOP LEVEL OVERVIEW */}
-                    <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 pb-2 snap-x no-scrollbar w-full">
-                        <PremiumInsightCard
-                            label="Customer Pool"
-                            value={formatPrice(data.totalBalance)}
 
-                            color="blue"
-                            icon={<Wallet size={20} />}
-                            description="Total combined balance of all users"
-                        />
-                        <PremiumInsightCard
-                            label="Active Wallets"
-                            value={data.activeWallets || 0}
-                            color="amber"
-                            icon={<Zap size={20} />}
-                            description="Number of accounts with active balances"
-                        />
-                        <PremiumInsightCard
-                            label="Total Transactions"
-                            value={data.pagination?.total || 0}
-                            color="purple"
-                            icon={<FiActivity size={20} />}
-                            description="Total recorded wallet operations"
-                        />
-                    </div>
 
-                    {/* SNAPSHOT GRID */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                        {/* Deposits Volume Column */}
-                        <div className="space-y-2 sm:space-y-3">
-                            <div className="flex items-center gap-2 px-1">
-                                <FiArrowUp size={12} className="text-emerald-500" />
-                                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Money Added</h4>
-                            </div>
-                            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                                <InsightCard label="Today" value={formatPrice(data.deposits?.day)} color="emerald" compact pulse={data.deposits?.day > 0} />
-                                <InsightCard label="Week" value={formatPrice(data.deposits?.week)} color="emerald" compact />
-                                <InsightCard label="Month" value={formatPrice(data.deposits?.month)} color="emerald" compact />
-                            </div>
-                        </div>
-
-                        {/* Usage Snapshot Column */}
-                        <div className="space-y-2 sm:space-y-3">
-                            <div className="flex items-center gap-2 px-1">
-                                <FiArrowDown size={12} className="text-purple-500" />
-                                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Money Spent</h4>
-                            </div>
-                            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                                <InsightCard label="Today" value={formatPrice(data.usage?.day)} color="purple" compact pulse={data.usage?.day > 0} />
-                                <InsightCard label="Week" value={formatPrice(data.usage?.week)} color="purple" compact />
-                                <InsightCard label="Month" value={formatPrice(data.usage?.month)} color="purple" compact />
-                            </div>
-                        </div>
-                    </div>
 
                     {/* MANUAL WALLET ADJUSTMENT */}
                     <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 sm:p-6 relative overflow-hidden">

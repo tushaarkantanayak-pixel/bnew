@@ -144,25 +144,7 @@ export default function SupportQueriesTab() {
           </button>
       </div>
 
-      {/* ================= STATS GRID ================= */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-4">
-        <InsightCard
-          label="Total"
-          value={stats.total}
-          color="blue"
-        />
-        <InsightCard
-          label="Pending"
-          value={stats.open}
-          color="amber"
-          pulse={stats.open > 0}
-        />
-        <InsightCard
-          label="Today"
-          value={stats.today}
-          color="purple"
-        />
-      </div>
+
 
       {/* ================= SEARCH & FILTER ================= */}
       <div className="flex flex-col gap-3">

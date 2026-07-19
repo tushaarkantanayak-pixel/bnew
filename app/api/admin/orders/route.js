@@ -1,5 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import Order from "@/models/Order";
+import User from "@/models/User";
+import WalletTransaction from "@/models/WalletTransaction";
 import jwt from "jsonwebtoken";
 
 /* =========================
@@ -152,9 +154,45 @@ export async function PATCH(req) {
       update.topupStatus = "processing";
     }
 
-    if (status === "refund" || status === "REFUND" || status === "Refund") {
+    const existingOrder = await Order.findOne({ orderId });
+    if (!existingOrder) {
+      return Response.json({ success: false, message: "Order not found" }, { status: 404 });
+    }
+
+    if (existingOrder.status?.toLowerCase() === "refund") {
+      return Response.json({ success: false, message: "Order is permanently locked as refunded and cannot be changed." }, { status: 400 });
+    }
+
+    if (status.toLowerCase() === "refund") {
+
       update.topupStatus = "refund";
       update.paymentStatus = "refund";
+
+      if (existingOrder.userId) {
+        const user = await User.findOne({ userId: existingOrder.userId });
+        if (user) {
+          const refundAmount = Number(existingOrder.price) || 0;
+          if (refundAmount > 0) {
+            const before = user.wallet || 0;
+            user.wallet = before + refundAmount;
+            await user.save();
+
+            await WalletTransaction.create({
+              transactionId: `REF-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+              userId: user.userId,
+              userObjectId: user._id,
+              type: "credit",
+              amount: refundAmount,
+              balanceBefore: before,
+              balanceAfter: user.wallet,
+              description: `Refund for Order #${existingOrder.orderId}`,
+              status: "success",
+              referenceId: existingOrder.orderId,
+              performedBy: "admin"
+            });
+          }
+        }
+      }
     }
 
     const order = await Order.findOneAndUpdate(

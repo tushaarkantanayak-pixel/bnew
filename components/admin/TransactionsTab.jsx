@@ -143,34 +143,7 @@ export default function TransactionsTab() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-        {/* Transaction Volume Column */}
-        <div className="space-y-2 sm:space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <Hash size={12} className="text-blue-500" />
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Transaction Count</h4>
-          </div>
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <InsightCard label="Today" value={stats.counts?.day} color="blue" compact pulse={stats.counts?.day > 0} />
-            <InsightCard label="Week" value={stats.counts?.week} color="blue" compact />
-            <InsightCard label="Month" value={stats.counts?.month} color="blue" compact />
-          </div>
-        </div>
 
-        {/* Revenue Snapshot Column */}
-        <div className="space-y-2 sm:space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <DollarSign size={12} className="text-emerald-500" />
-
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Total Earnings</h4>
-          </div>
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <InsightCard label="Today" value={formatPrice(stats.volume?.day)} color="emerald" compact pulse={stats.volume?.day > 0} />
-            <InsightCard label="Week" value={formatPrice(stats.volume?.week)} color="emerald" compact />
-            <InsightCard label="Month" value={formatPrice(stats.volume?.month)} color="emerald" compact />
-          </div>
-        </div>
-      </div>
 
       {/* ================= SEARCH & FILTER ================= */}
       <div className="flex flex-col md:flex-row gap-3">
