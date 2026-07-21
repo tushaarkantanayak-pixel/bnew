@@ -118,24 +118,9 @@ async function resolvePrice(
     (i: any) => i.itemSlug === itemSlug
   );
 
-  let multiplier = 1;
-  const ALLOWED_MULTIPLIERS = [2, 3]; // Added 3x support
-
-  if (!baseItem && itemSlug.startsWith("weekly-pass816-")) {
-    const match = itemSlug.match(/weekly-pass816-(\d+)x/);
-    if (!match) throw new Error("Invalid combo format");
-
-    multiplier = parseInt(match[1]);
-    if (!ALLOWED_MULTIPLIERS.includes(multiplier)) {
-      throw new Error(`Combo multiplier ${multiplier}x is not allowed`);
-    }
-
-    baseItem = data.data.itemId.find((i: any) => i.itemSlug === "weekly-pass816");
-  }
-
   if (!baseItem) throw new Error("Invalid game item");
 
-  let price = Number(baseItem.sellingPrice) * multiplier;
+  let price = Number(baseItem.sellingPrice);
 
   if (userType !== "owner") {
     await connectDB();

@@ -23,33 +23,6 @@ const STARLIGHT_IMAGE = "/game-assets/starkight.webp";
 const WEEKLY_MONTHLY_IMAGE = "/game-assets/weekly-monthly-bundle.jpg";
 
 
-/* ================= OTT SECTION ================= */
-const OTTS = [
-  {
-    name: "YouTube Premium",
-    slug: "youtube-premium",
-    image: "/ott/youtube.webp",
-    category: "OTT",
-    available: true,
-    isManual: true,
-  },
-  {
-    name: "Netflix",
-    slug: "netflix",
-    image: "/ott/netflix.webp",
-    category: "OTT",
-    available: true,
-    isManual: true,
-  },
-  {
-    name: "Spotify Premium",
-    slug: "spotify",
-    image: "/ott/spotify.webp",
-    category: "OTT",
-    available: true,
-    isManual: true,
-  },
-];
 /* ================= MEMBERSHIP SECTION ================= */
 const MEMBERSHIPS = [
   {

@@ -207,9 +207,6 @@ export async function POST(req: Request) {
       });
     }
 
-    // Check if it's a multiplier/combo order (e.g., weekly-2x)
-    const comboMatch = order.itemSlug.match(/(.+)-(\d+)x$/i);
-    const isMultiplierOrder = !!comboMatch;
 
     // Unified Atomic Locking for ALL orders
     // This prevents double-execution if the user refreshes or parallel requests come in.
@@ -281,11 +278,6 @@ export async function POST(req: Request) {
 
     let multiplier = 1;
     let baseItemSlug = finalOrder.itemSlug;
-
-    if (comboMatch) {
-      baseItemSlug = comboMatch[1];
-      multiplier = parseInt(comboMatch[2]);
-    }
 
     const responses = [];
     let successCount = 0;

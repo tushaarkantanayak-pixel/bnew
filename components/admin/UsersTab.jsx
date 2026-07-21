@@ -229,6 +229,28 @@ export default function UsersTab() {
       </div>
 
 
+      {/* ================= COMPACT STATS ================= */}
+      <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-4 justify-between shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
+            <Activity size={18} />
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-[var(--muted)]/60 uppercase tracking-wider mb-0.5">User Activity</p>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+               <span className="font-semibold"><span className="text-[var(--foreground)] tabular-nums">{pagination.total}</span> <span className="text-[var(--muted)] font-medium">Total Users</span></span>
+               <span className="w-1 h-1 rounded-full bg-[var(--border)] hidden sm:block" />
+               <span className="font-semibold"><span className="text-emerald-500 tabular-nums">{newStats.day}</span> <span className="text-[var(--muted)] font-medium">New Signups</span></span>
+               <span className="w-1 h-1 rounded-full bg-[var(--border)] hidden sm:block" />
+               <span className="font-semibold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                  <span className="text-blue-500 tabular-nums">{activeStats.day}</span> 
+                  <span className="text-[var(--muted)] font-medium">Active Logins</span>
+               </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* ================= SEARCH & FILTERS ================= */}
       <div className="flex gap-2 sm:gap-3">
