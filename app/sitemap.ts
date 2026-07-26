@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
-import { BLOGS_DATA } from "@/lib/blogData";
+import { connectDB } from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 
 
@@ -27,8 +28,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/blog/tips`, lastModified: now, changeFrequency: "daily" as const, priority: 0.8 },
   ];
 
-  // 2. Dynamic Blog Routes from BLOGS_DATA
-  const blogRoutes = BLOGS_DATA.map((blog) => ({
+  await connectDB();
+  const dbBlogs = await Blog.find({ isPublished: true }).select("slug game publishedAt featured").lean();
+  
+  // 2. Dynamic Blog Routes from DB
+  const blogRoutes = dbBlogs.map((blog) => ({
     url: `${baseUrl}/blog/${blog.game}/${blog.slug}`,
     lastModified: new Date(blog.publishedAt),
     changeFrequency: "weekly" as const,

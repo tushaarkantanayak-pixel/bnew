@@ -17,7 +17,7 @@ import {
   FiFilter,
 } from "react-icons/fi";
 
-import { BLOGS_DATA } from "@/lib/blogData";
+
 
 /* ================= SETTINGS ================= */
 const POSTS_PER_PAGE = 25;
@@ -45,15 +45,15 @@ export default function BlogListing({ initialGame = "all" }) {
   }, []);
 
   const categories = useMemo(() => {
-    return ["all", ...new Set(BLOGS_DATA.map((b) => b.type))];
-  }, []);
+    return ["all", ...new Set(dbBlogs.map((b) => b.type))];
+  }, [dbBlogs]);
 
   const games = useMemo(() => {
-    return ["all", ...new Set(BLOGS_DATA.map((b) => b.game))];
-  }, []);
+    return ["all", ...new Set(dbBlogs.map((b) => b.game))];
+  }, [dbBlogs]);
 
   const filteredBlogs = useMemo(() => {
-    let blogs = [...BLOGS_DATA, ...dbBlogs];
+    let blogs = [...dbBlogs];
     if (search) {
       blogs = blogs.filter((b) =>
         b.title.toLowerCase().includes(search.toLowerCase())
@@ -67,7 +67,7 @@ export default function BlogListing({ initialGame = "all" }) {
     }
     blogs.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
     return blogs;
-  }, [search, selectedType, selectedGame]);
+  }, [search, selectedType, selectedGame, dbBlogs]);
 
   const totalPages = Math.ceil(filteredBlogs.length / POSTS_PER_PAGE);
 

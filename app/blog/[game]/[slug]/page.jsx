@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 import Link from "next/link";
-import { FiChevronLeft, FiClock, FiUser, FiShare2 } from "react-icons/fi";
+import { FiChevronLeft, FiClock, FiUser, FiShare2, FiGift, FiArrowRight } from "react-icons/fi";
+import AdsterraBanner from "@/components/Ads/AdsterraBanner";
+import AdsterraSmartlink from "@/components/Ads/AdsterraSmartlink";
 
 // Revalidate this page every 1 hour (3600 seconds)
 export const revalidate = 3600;
@@ -122,6 +124,21 @@ export default async function BlogDetail({ params }) {
           text-[var(--muted)]"
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />
+
+        {/* Smartlink CTA Block */}
+        <div className="mt-16 bg-gradient-to-r from-[var(--accent)]/10 to-transparent p-4 sm:p-5 rounded-2xl border border-[var(--accent)]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left">
+                <h3 className="text-lg font-black italic uppercase tracking-tighter text-[var(--foreground)] mb-1 flex items-center justify-center sm:justify-start gap-2">
+                    <FiGift className="text-[var(--accent)]" /> TOPUP NOW
+                </h3>
+                <p className="text-xs opacity-70 m-0 leading-snug">Support the site and unlock exclusive daily gaming offers.</p>
+            </div>
+            <AdsterraSmartlink text="TOPUP NOW" />
+        </div>
+
+        <div className="w-full flex justify-center my-10">
+          <AdsterraBanner />
+        </div>
 
       </article>
     </main>

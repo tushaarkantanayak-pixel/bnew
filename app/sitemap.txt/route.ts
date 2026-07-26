@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { BLOGS_DATA } from "@/lib/blogData";
+import { connectDB } from "@/lib/mongodb";
+import Blog from "@/models/Blog";
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -29,8 +30,11 @@ export async function GET() {
         `${baseUrl}/check`,
     ];
 
+    await connectDB();
+    const dbBlogs = await Blog.find({ isPublished: true }).select("slug game").lean();
+
     // 2. Dynamic Blog Routes
-    const blogUrls = BLOGS_DATA.map(
+    const blogUrls = dbBlogs.map(
         (blog) => `${baseUrl}/blog/${blog.game}/${blog.slug}`
     );
 
