@@ -72,7 +72,7 @@ export async function GET(req) {
                     lastFour: 1,
                     status: 1,
                     lastUsed: 1,
-                    dailyLimit: { $ifNull: ["$dailyLimit", 10000] },
+                    dailyLimit: { $ifNull: ["$dailyLimit", 985000] },
                     usedToday: { $ifNull: ["$usedToday", 0] },
                     "userDetails.name": 1,
                     "userDetails.userId": 1,

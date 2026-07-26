@@ -178,13 +178,13 @@ export default function ApiKeysTab() {
                                                     <div className="w-full h-1.5 bg-[var(--foreground)]/[0.05] rounded-full overflow-hidden border border-[var(--border)]">
                                                         <motion.div
                                                             initial={{ width: 0 }}
-                                                            animate={{ width: `${Math.min(((k.usedToday || 0) / (k.dailyLimit || 10000)) * 100, 100)}%` }}
-                                                            className={`h-full ${(k.usedToday || 0) > (k.dailyLimit || 10000) * 0.8 ? 'bg-amber-500' : 'bg-[var(--accent)]'}`}
+                                                            animate={{ width: `${Math.min(((k.usedToday || 0) / (k.dailyLimit || 985000)) * 100, 100)}%` }}
+                                                            className={`h-full ${(k.usedToday || 0) > (k.dailyLimit || 985000) * 0.8 ? 'bg-amber-500' : 'bg-[var(--accent)]'}`}
                                                         />
                                                     </div>
                                                     <div className="flex items-center justify-between gap-4">
                                                         <span className="text-[10px] font-bold text-[var(--foreground)]">{formatPrice(k.usedToday || 0)} used</span>
-                                                        <span className="text-[10px] text-[var(--muted)]">Limit: {formatPrice(k.dailyLimit || 10000)}</span>
+                                                        <span className="text-[10px] text-[var(--muted)]">Limit: {formatPrice(k.dailyLimit || 985000)}</span>
                                                     </div>
                                                 </div>
                                             </td>
@@ -295,15 +295,15 @@ export default function ApiKeysTab() {
                                         <div className="flex justify-between items-center text-[9px] mb-1.5">
                                             <span className="font-bold text-[var(--muted)] uppercase tracking-tighter opacity-40">Daily Usage</span>
                                             <span className="font-black text-[var(--foreground)] tabular-nums tracking-tighter shadow-sm">
-                                                {formatPrice(k.usedToday || 0)} <span className="opacity-10">/</span> {formatPrice(k.dailyLimit || 10000)}
+                                                {formatPrice(k.usedToday || 0)} <span className="opacity-10">/</span> {formatPrice(k.dailyLimit || 985000)}
                                             </span>
                                         </div>
                                         <div className="w-full h-1 bg-[var(--foreground)]/[0.05] rounded-full overflow-hidden">
                                             <motion.div
                                                 initial={{ width: 0 }}
-                                                animate={{ width: `${Math.min(((k.usedToday || 0) / (k.dailyLimit || 10000)) * 100, 100)}%` }}
+                                                animate={{ width: `${Math.min(((k.usedToday || 0) / (k.dailyLimit || 985000)) * 100, 100)}%` }}
                                                 className={`h-full rounded-full transition-all duration-700 ease-out
-                                                    ${(k.usedToday || 0) > (k.dailyLimit || 10000) * 0.8 
+                                                    ${(k.usedToday || 0) > (k.dailyLimit || 985000) * 0.8 
                                                         ? 'bg-amber-500' 
                                                         : 'bg-[var(--accent)]'}`}
                                             />
