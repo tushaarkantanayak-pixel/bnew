@@ -164,6 +164,7 @@ export async function GET() {
       "8ballpool498",
       "asphalt9877",
       "mobile-legends-exclusive952", // Exclusive MLBB
+      "bgmi226",
 
     ];
 
@@ -221,7 +222,7 @@ export async function GET() {
 
     // Featured games
     const featuredGames = filteredGames.filter((g: any) =>
-      ["mobile-legends270", "bgmi-manual", "genshin-impact742"].includes(
+      ["mobile-legends270", "genshin-impact742"].includes(
         g.gameSlug
       )
     );

@@ -63,87 +63,6 @@ const COC_CONFIG = {
   ],
 };
 
-/* ================= BGMI CONFIG ================= */
-const BGMI_CONFIG = {
-  gameName: "BGMI",
-  gameFrom: "Krafton",
-  gameImageId: {
-    image: "/game-assets/bgmi-logo.webp",
-  },
-  gameDescription: "Battlegrounds Mobile India. High-speed delivery.",
-  inputFieldOne: "Character ID",
-  inputFieldTwo: "Mobile Number",
-  isValidationRequired: false,
-  gameAvailablity: true,
-  itemId: [
-    {
-      itemName: "60 UC",
-      itemSlug: "bgmi-60",
-      sellingPrice: 73,
-      dummyPrice: 95,
-      itemAvailablity: true,
-      index: 1,
-      itemImageId: {
-        image: "/game-assets/bgmi-logo.webp",
-      },
-    },
-    {
-      itemName: "325 UC",
-      itemSlug: "bgmi-325",
-      sellingPrice: 365,
-      dummyPrice: 490,
-      itemAvailablity: true,
-      index: 2,
-      itemImageId: {
-        image: "/game-assets/bgmi-logo.webp",
-      },
-    },
-    {
-      itemName: "660 UC",
-      itemSlug: "bgmi-660",
-      sellingPrice: 720,
-      dummyPrice: 980,
-      itemAvailablity: true,
-      index: 3,
-      itemImageId: {
-        image: "/game-assets/bgmi-logo.webp",
-      },
-    },
-    {
-      itemName: "1800 UC",
-      itemSlug: "bgmi-1800",
-      sellingPrice: 1800,
-      dummyPrice: 2400,
-      itemAvailablity: true,
-      index: 4,
-      itemImageId: {
-        image: "/game-assets/bgmi-logo.webp",
-      },
-    },
-    {
-      itemName: "3850 UC",
-      itemSlug: "bgmi-3850",
-      sellingPrice: 2650,
-      dummyPrice: 4800,
-      itemAvailablity: true,
-      index: 5,
-      itemImageId: {
-        image: "/game-assets/bgmi-logo.webp",
-      },
-    },
-    {
-      itemName: "8100 UC",
-      itemSlug: "bgmi-8100",
-      sellingPrice: 7200,
-      dummyPrice: 9400,
-      itemAvailablity: true,
-      index: 6,
-      itemImageId: {
-        image: "/game-assets/bgmi-logo.webp",
-      },
-    },
-  ],
-};
 
 /* ================= ROLE → PRICING (FIXED) ================= */
 const resolvePricingRole = (role) => {
@@ -168,12 +87,7 @@ export async function GET(req, { params }) {
 
 
 
-    if (slug === "bgmi-manual" || slug === "bgmi") {
-      return NextResponse.json({
-        success: true,
-        data: { gameSlug: slug, ...BGMI_CONFIG },
-      });
-    }
+
 
 
 

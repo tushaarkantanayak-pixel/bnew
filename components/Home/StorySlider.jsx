@@ -6,14 +6,6 @@ import Image from "next/image";
 
 const storyData = [
   {
-    id: 5,
-    title: "BGMI",
-    badge: "Sale",
-    color: "#f59e0b", // Orange
-    image: "/game-assets/bgmi-logo.webp",
-    link: "/games/bgmi-manual",
-  },
-  {
     id: 0,
     title: "Weekly Pass",
     badge: "Best",

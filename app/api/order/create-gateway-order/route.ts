@@ -59,16 +59,6 @@ const MANUAL_GAMES: Record<string, MembershipConfig> = {
       "starlight-premium": 500,
     },
   },
-  "bgmi-manual": {
-    items: {
-      "bgmi-60": 73,
-      "bgmi-325": 365,
-      "bgmi-660": 720,
-      "bgmi-1800": 1800,
-      "bgmi-3850": 2650,
-      "bgmi-8100": 7200,
-    },
-  },
 };
 
 /* =====================================================

@@ -59,7 +59,7 @@ export async function GET() {
     let gameUrls: string[] = [];
 
     // Manual games
-    const manualGames = ["coc-manual", "starlight-card-manual", "bgmi-manual"];
+    const manualGames = ["coc-manual", "starlight-card-manual"];
     const manualUrls = manualGames.map((slug) => `${baseUrl}/games/${slug}`);
 
     try {

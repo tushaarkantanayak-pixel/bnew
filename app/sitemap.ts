@@ -69,7 +69,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const manualGames = [
     { slug: "coc-manual", priority: 0.9 },
     { slug: "starlight-card-manual", priority: 0.9 },
-    { slug: "bgmi-manual", priority: 0.9 },
   ];
 
   const manualRoutes = manualGames.map((g) => ({
