@@ -163,8 +163,9 @@ export async function GET() {
       "weeklymonthly-bundle261",
       "8ballpool498",
       "asphalt9877",
-      "mobile-legends-exclusive952", // Exclusive MLBB
+      // "mobile-legends-exclusive952", // Exclusive MLBB
       "bgmi226",
+      "mobile-legends-philippines888"
 
     ];
 
