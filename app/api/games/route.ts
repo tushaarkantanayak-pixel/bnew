@@ -159,7 +159,7 @@ export async function GET() {
       "honor-of-kings57",
       "wuthering-of-waves464",
       "where-winds-meet280",
-      "mlbb-smallphp980",
+      // "mlbb-smallphp980",
       "weeklymonthly-bundle261",
       "8ballpool498",
       "asphalt9877",
