@@ -210,42 +210,44 @@ export default function UsersTab() {
     <div className="space-y-4 sm:space-y-6 pb-10">
       {/* ================= HEADER ================= */}
       <div className="flex items-center justify-between gap-4">
-        <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[var(--foreground)]">Users</h2>
+        <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[var(--foreground)] flex items-center gap-2">
+           <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] hidden sm:block" />
+           Users
+        </h2>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-2">
+          <div className="px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)]/60 flex items-center gap-1.5 shadow-sm">
             <Users size={12} className="text-[var(--accent)]" />
-            <span className="text-[11px] sm:text-sm font-semibold text-[var(--muted)]">
-              <span className="text-[var(--foreground)]">{pagination.total}</span> <span className="hidden sm:inline">Users</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-[var(--muted)]">
+              <span className="text-[var(--foreground)]">{pagination.total}</span>
             </span>
           </div>
           <button
             onClick={() => { fetchUsersStats(); fetchUsersList(); }}
-            className="p-1.5 sm:p-2.5 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] active:scale-95 transition-all outline-none"
+            className="w-8 h-8 rounded-full bg-[var(--card)] border border-[var(--border)]/60 text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] flex items-center justify-center transition-all shadow-sm active:scale-95 outline-none"
           >
-            <RefreshCcw size={14} className={loading ? "animate-spin" : ""} />
+            <RefreshCcw size={12} className={loading ? "animate-spin" : ""} strokeWidth={2.5} />
           </button>
         </div>
       </div>
 
-
       {/* ================= COMPACT STATS ================= */}
-      <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-4 justify-between shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
-            <Activity size={18} />
+      <div className="p-3.5 sm:p-5 rounded-[1rem] bg-[var(--card)] border border-[var(--border)]/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative overflow-hidden">
+        <div className="flex items-center gap-3 relative z-10">
+          <div className="w-8 h-8 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0">
+            <Activity size={14} strokeWidth={2.5} />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-[var(--muted)]/60 uppercase tracking-wider mb-0.5">User Activity</p>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-               <span className="font-semibold"><span className="text-[var(--foreground)] tabular-nums">{pagination.total}</span> <span className="text-[var(--muted)] font-medium">Total Users</span></span>
-               <span className="w-1 h-1 rounded-full bg-[var(--border)] hidden sm:block" />
-               <span className="font-semibold"><span className="text-emerald-500 tabular-nums">{newStats.day}</span> <span className="text-[var(--muted)] font-medium">New Signups</span></span>
-               <span className="w-1 h-1 rounded-full bg-[var(--border)] hidden sm:block" />
-               <span className="font-semibold flex items-center gap-1.5">
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[var(--muted)]/50 leading-tight mb-0.5">User Activity</p>
+            <div className="flex flex-wrap items-center gap-2">
+               <span className="text-[11px] font-bold leading-tight"><span className="text-[var(--foreground)] tabular-nums">{pagination.total}</span> <span className="text-[var(--muted)]/60 font-medium text-[9px] uppercase tracking-wider">Total</span></span>
+               <span className="w-1 h-1 rounded-full bg-[var(--border)]/60" />
+               <span className="text-[11px] font-bold leading-tight"><span className="text-emerald-500 tabular-nums">{newStats.day}</span> <span className="text-[var(--muted)]/60 font-medium text-[9px] uppercase tracking-wider">New</span></span>
+               <span className="w-1 h-1 rounded-full bg-[var(--border)]/60 hidden sm:block" />
+               <span className="text-[11px] font-bold flex items-center gap-1.5 leading-tight w-full sm:w-auto mt-0.5 sm:mt-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
                   <span className="text-blue-500 tabular-nums">{activeStats.day}</span> 
-                  <span className="text-[var(--muted)] font-medium">Active Logins</span>
+                  <span className="text-[var(--muted)]/60 font-medium text-[9px] uppercase tracking-wider">Active</span>
                </span>
             </div>
           </div>
@@ -253,34 +255,25 @@ export default function UsersTab() {
       </div>
 
       {/* ================= SEARCH & FILTERS ================= */}
-      <div className="flex gap-2 sm:gap-3">
+      <div className="flex gap-2">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/40" size={16} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--accent)]" size={14} strokeWidth={2.5} />
           <input
             value={search}
             onChange={(e) => {
               setPage(1);
               setSearch(e.target.value);
             }}
-            placeholder="Search by name, email, or user ID..."
-            className="w-full h-11 pl-11 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.02] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
+            placeholder="Search by name, email..."
+            className="w-full h-9 pl-9 pr-4 rounded-full border border-[var(--border)]/60 bg-[var(--card)] shadow-sm text-[var(--foreground)] text-[11px] font-bold outline-none focus:ring-1 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] transition-all placeholder:text-[var(--muted)]/40 placeholder:font-medium"
           />
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setShowFilters(true)}
-            className="h-11 px-5 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.02] text-[var(--foreground)] flex items-center justify-center gap-2.5 hover:bg-[var(--foreground)]/[0.05] transition-all outline-none"
-          >
-            <Filter size={14} className="text-[var(--accent)]" />
-            <span className="text-sm font-semibold">Filters</span>
-          </button>
-          <div className="hidden sm:flex px-4 h-11 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] items-center gap-2.5">
-            <Users size={14} className="text-[var(--accent)]" />
-            <span className="text-xs font-bold text-[var(--foreground)] uppercase tracking-wider">
-              {pagination.total} Records
-            </span>
-          </div>
-        </div>
+        <button
+          onClick={() => setShowFilters(true)}
+          className="w-9 h-9 shrink-0 rounded-full border border-[var(--border)]/60 bg-[var(--card)] shadow-sm text-[var(--accent)] flex items-center justify-center hover:bg-[var(--accent)] hover:text-white transition-all outline-none"
+        >
+          <Filter size={14} strokeWidth={2.5} />
+        </button>
       </div>
 
       {/* ================= CONTENT ================= */}
@@ -404,23 +397,23 @@ export default function UsersTab() {
             </div>
 
             {/* MOBILE LIST */}
-            <div className="lg:hidden space-y-2.5">
+            <div className="lg:hidden space-y-2">
               {users.map((u, idx) => (
                 <motion.div
                   key={u._id}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.03 }}
                   onClick={() => setSelectedUser(u)}
-                  className="p-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.04] transition-all relative"
+                  className="group relative bg-[var(--card)] shadow-sm border border-[var(--border)]/40 rounded-xl p-2.5 overflow-hidden flex flex-col gap-2 active:scale-[0.98] transition-all"
                 >
-                  <div className="flex justify-between items-start mb-2 gap-2">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <Avatar user={u} size="sm" />
-                        <div className="min-w-0">
-                          <p className="font-bold text-[var(--foreground)] text-xs truncate leading-tight">{u.name}</p>
-                          <p className="text-[10px] text-[var(--muted)]/40 font-mono truncate lowercase leading-tight">{u.userId}</p>
-                          <div className="flex flex-wrap gap-1 mt-0.5">
+                  <div className="flex justify-between items-start gap-2 relative z-10">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <Avatar user={u} size="sm" className="shrink-0" />
+                        <div className="min-w-0 flex flex-col justify-center">
+                          <p className="font-bold text-[var(--foreground)] text-[11px] truncate leading-none">{u.name}</p>
+                          <p className="text-[9px] text-[var(--muted)]/60 font-mono truncate lowercase leading-none mt-0.5">{u.userId}</p>
+                          <div className="flex flex-wrap gap-1 mt-1">
                                {u.tags?.map(tag => (
                                  <span key={tag} className={`px-1 py-0.5 rounded text-[7px] font-black lowercase tracking-tight ${getTagColor(tag)}`}>
                                    #{tag}
@@ -429,48 +422,48 @@ export default function UsersTab() {
                             </div>
                         </div>
                       </div>
-                    <div className="flex flex-col items-end gap-1.5 shrink-0">
-                      <span className="inline-flex items-center justify-center px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider bg-[var(--foreground)]/[0.05] text-[var(--muted)]">
+                    <div className="flex flex-col items-end shrink-0">
+                      <span className="text-[9px] font-black uppercase tracking-widest bg-[var(--foreground)]/[0.05] text-[var(--muted)] px-1.5 py-0.5 rounded leading-none">
                         {u.totalOrders || 0} Orders
                       </span>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-[var(--muted)]/60 px-0.5">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <Mail size={10} className="shrink-0 text-[var(--accent)]" />
-                        <span className="text-[10px] font-medium break-all lowercase">{u.email}</span>
-                      </div>
+                  <div className="flex flex-col gap-1.5 relative z-10">
+                    <div className="flex items-center gap-1.5 min-w-0 pl-0.5">
+                      <Mail size={10} className="shrink-0 text-[var(--accent)]" />
+                      <span className="text-[10px] font-medium text-[var(--muted)]/80 break-all lowercase leading-none">{u.email}</span>
                     </div>
 
-                    <div className="flex items-center justify-between gap-3 pt-2 border-t border-[var(--border)]" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between gap-3 pt-1.5 border-t border-[var(--border)]/30" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-1 text-[var(--muted)]/40">
-                          <Calendar size={10} className="text-[var(--accent)]/50" />
+                        <div className="flex items-center gap-1.5 text-[var(--muted)]/60">
+                          <Calendar size={10} strokeWidth={2.5} className="text-[var(--accent)]/70" />
                           <div className="flex flex-col">
-                            <span className="text-[8px] font-bold uppercase tracking-tight">{new Date(u.createdAt).toLocaleDateString()}</span>
-                            <span className="text-[7px] font-medium opacity-60 leading-none">{new Date(u.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                            <span className="text-[8px] font-bold uppercase tracking-widest leading-none">{new Date(u.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+                            <span className="text-[7px] font-medium opacity-60 leading-none mt-0.5">{new Date(u.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                           </div>
                         </div>
-                        <div className="flex items-center gap-1 text-[var(--muted)]/40">
-                          <Activity size={10} className="text-emerald-500/50" />
+                        <div className="flex items-center gap-1.5 text-[var(--muted)]/60">
+                          <Activity size={10} strokeWidth={2.5} className="text-emerald-500/70" />
                           <div className="flex flex-col">
-                            <span className="text-[8px] font-bold uppercase tracking-tight">
-                              {u.lastLogin ? new Date(u.lastLogin).toLocaleDateString() : "Never"}
+                            <span className="text-[8px] font-bold uppercase tracking-widest leading-none">
+                              {u.lastLogin ? new Date(u.lastLogin).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : "Never"}
                             </span>
                             {u.lastLogin && (
-                              <span className="text-[7px] font-medium opacity-60 leading-none">{new Date(u.lastLogin).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                              <span className="text-[7px] font-medium opacity-60 leading-none mt-0.5">{new Date(u.lastLogin).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                             )}
                           </div>
                         </div>
                       </div>
-                      <RoleDropdown
-                        value={u.userType}
-                        compact
-                        disabled={updatingUserId === u.userId || u.userType === "owner"}
-                        onChange={(v) => changeUserRole(u.userId, v)}
-                      />
+                      <div className="scale-90 origin-right">
+                        <RoleDropdown
+                          value={u.userType}
+                          compact
+                          disabled={updatingUserId === u.userId || u.userType === "owner"}
+                          onChange={(v) => changeUserRole(u.userId, v)}
+                        />
+                      </div>
                     </div>
                   </div>
                 </motion.div>

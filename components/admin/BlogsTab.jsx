@@ -116,77 +116,80 @@ export default function BlogsTab() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-black italic uppercase tracking-tighter text-[var(--foreground)]">Blog Management</h2>
-          <p className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mt-1">Manage database-backed blogs</p>
+          <h2 className="text-lg sm:text-xl font-black italic uppercase tracking-tighter text-[var(--foreground)] leading-none">Blog Management</h2>
+          <p className="text-[9px] sm:text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mt-1">Manage database-backed blogs</p>
         </div>
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 bg-[var(--accent)] text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all"
+          className="flex items-center justify-center gap-1.5 bg-[var(--accent)] text-black px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest hover:brightness-110 transition-all shrink-0 self-start sm:self-auto"
         >
-          <Plus size={14} /> Add Blog
+          <Plus size={12} /> Add Blog
         </button>
       </div>
 
-      <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden">
+      <div className="mt-4">
         {loading ? (
-          <div className="p-8 text-center text-[var(--muted)] text-sm">Loading...</div>
+          <div className="p-8 text-center text-[var(--muted)] text-sm bg-[var(--card)] border border-[var(--border)] rounded-xl">Loading...</div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-[var(--foreground)]/[0.02] border-b border-[var(--border)]">
-                  <th className="p-3 text-[10px] font-black uppercase tracking-widest text-[var(--muted)]">Title</th>
-                  <th className="p-3 text-[10px] font-black uppercase tracking-widest text-[var(--muted)]">Game</th>
-                  <th className="p-3 text-[10px] font-black uppercase tracking-widest text-[var(--muted)]">Type</th>
-                  <th className="p-3 text-[10px] font-black uppercase tracking-widest text-[var(--muted)] text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {blogs.map((blog) => (
-                  <tr key={blog._id} className="border-b border-[var(--border)] hover:bg-[var(--foreground)]/[0.02]">
-                    <td className="p-3">
-                      <p className="text-sm font-bold text-[var(--foreground)]">{blog.title}</p>
-                      <p className="text-[10px] text-[var(--muted)]">/{blog.slug}</p>
-                    </td>
-                    <td className="p-3 text-xs uppercase font-bold text-[var(--muted)]">{blog.game}</td>
-                    <td className="p-3 text-xs uppercase font-bold text-[var(--muted)]">{blog.type}</td>
-                    <td className="p-3 text-right">
-                      <div className="flex justify-end gap-2">
-                        <Link
-                          href={`/blog/${blog.game}/${blog.slug}`}
-                          target="_blank"
-                          className="p-2 bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white rounded-lg transition-colors flex items-center justify-center"
-                          title="View Blog"
-                        >
-                          <ExternalLink size={14} />
-                        </Link>
-                        <button
-                          onClick={() => openEditModal(blog)}
-                          className="p-2 bg-[var(--foreground)]/5 text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)] rounded-lg transition-colors flex items-center justify-center"
-                          title="Edit Blog"
-                        >
-                          <Edit size={14} />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(blog._id)}
-                          className="p-2 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-colors flex items-center justify-center"
-                          title="Delete Blog"
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                {blogs.length === 0 && (
-                  <tr>
-                    <td colSpan="4" className="p-6 text-center text-sm text-[var(--muted)]">No blogs found in database.</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {blogs.map((blog) => (
+              <div key={blog._id} className="bg-[var(--card)] rounded-xl border border-[var(--border)] p-5 flex flex-col gap-4 hover:border-[var(--accent)] hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.1)] transition-all duration-300 group relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent)] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300"></div>
+                
+                <div className="flex justify-between items-start gap-4">
+                  <div className="flex-1">
+                    <h3 className="font-bold text-[var(--foreground)] text-sm leading-snug line-clamp-2 group-hover:text-[var(--accent)] transition-colors">{blog.title}</h3>
+                    <p className="text-[10px] text-[var(--muted)] mt-1.5 truncate">/{blog.slug}</p>
+                  </div>
+                  <span className="shrink-0 text-[9px] font-black px-2.5 py-1 bg-[var(--foreground)]/[0.05] rounded-md text-[var(--muted)] uppercase tracking-widest border border-[var(--border)]">
+                    {blog.game}
+                  </span>
+                </div>
+                
+                <div className="mt-auto pt-4 border-t border-[var(--border)]/50 flex justify-between items-center">
+                  <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]/50"></div>
+                    {blog.type}
+                  </span>
+                  
+                  <div className="flex items-center gap-1.5">
+                    <Link
+                      href={`/blog/${blog.game}/${blog.slug}`}
+                      target="_blank"
+                      className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all hover:scale-105"
+                      title="View Blog"
+                    >
+                      <ExternalLink size={14} />
+                    </Link>
+                    <button
+                      onClick={() => openEditModal(blog)}
+                      className="w-8 h-8 rounded-lg bg-[var(--foreground)]/5 text-[var(--foreground)] flex items-center justify-center hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-all hover:scale-105"
+                      title="Edit Blog"
+                    >
+                      <Edit size={14} />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(blog._id)}
+                      className="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all hover:scale-105"
+                      title="Delete Blog"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {blogs.length === 0 && (
+              <div className="col-span-full py-12 text-center flex flex-col items-center justify-center bg-[var(--card)] border border-[var(--border)] rounded-xl">
+                <div className="w-16 h-16 rounded-full bg-[var(--foreground)]/[0.02] flex items-center justify-center mb-4">
+                  <span className="text-2xl opacity-50">📝</span>
+                </div>
+                <p className="text-sm font-bold text-[var(--foreground)]">No blogs found</p>
+                <p className="text-[10px] text-[var(--muted)] uppercase tracking-widest mt-1">Create your first blog post to get started</p>
+              </div>
+            )}
           </div>
         )}
       </div>

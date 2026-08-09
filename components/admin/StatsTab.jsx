@@ -22,7 +22,7 @@ import {
     FiActivity,
     FiMoreVertical
 } from "react-icons/fi";
-import { Loader2, Zap, ArrowUpRight, ArrowDownRight, User, Wallet } from "lucide-react";
+import { Loader2, Zap, ArrowUpRight, ArrowDownRight, User, Wallet, CheckCircle2, XCircle, RefreshCcw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatPrice } from "@/utils/currency";
 import apiClient from "@/utils/apiClient";
@@ -50,6 +50,7 @@ export default function StatsTab() {
     const [manageAmount, setManageAmount] = useState("");
     const [manageDesc, setManageDesc] = useState("");
     const [updating, setUpdating] = useState(false);
+    const [isManageOpen, setIsManageOpen] = useState(false);
 
     // History State
     const [history, setHistory] = useState([]);
@@ -233,29 +234,40 @@ export default function StatsTab() {
     return (
         <div className="space-y-4 sm:space-y-8 pb-10">
 
-            {/* HEADER */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[var(--foreground)]">Wallet Management</h2>
-                    <p className="hidden sm:block text-sm text-[var(--muted)] mt-1">
-                        View stats, add or remove money manually, and check history.
+            {/* HEADER - SIMPLE PREMIUM */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2 border-b border-[var(--border)]/40">
+                <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]" />
+                        <h2 className="text-xl font-semibold tracking-tight text-[var(--foreground)] leading-none">
+                            Wallet Management
+                        </h2>
+                    </div>
+                    <p className="hidden sm:block text-xs text-[var(--muted)] ml-3.5">
+                        Manage user balances & view transaction history
                     </p>
                 </div>
 
-                <div className="flex items-center justify-between sm:justify-end gap-3">
+                <div className="flex items-center gap-3 w-full sm:w-auto">
                     {/* TABS */}
-                    <div className="flex bg-[var(--foreground)]/[0.03] p-1 rounded-xl border border-[var(--border)] flex-1 sm:flex-none">
+                    <div className="flex bg-[var(--foreground)]/[0.03] p-1 rounded-full flex-1 sm:flex-none relative">
                         <button
                             onClick={() => setActiveTab("history")}
-                            className={`flex-1 sm:px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === 'history' ? 'bg-[var(--card)] text-[var(--foreground)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--foreground)]'}`}
+                            className={`relative z-10 flex-1 sm:px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${activeTab === 'history' ? 'text-[var(--background)]' : 'text-[var(--muted)] hover:text-[var(--foreground)]'}`}
                         >
                             History
+                            {activeTab === 'history' && (
+                                <motion.div layoutId="walletTabIndicator" className="absolute inset-0 bg-[var(--foreground)] rounded-full -z-10 shadow-sm" />
+                            )}
                         </button>
                         <button
                             onClick={() => setActiveTab("wallets")}
-                            className={`flex-1 sm:px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activeTab === 'wallets' ? 'bg-[var(--card)] text-[var(--foreground)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--foreground)]'}`}
+                            className={`relative z-10 flex-1 sm:px-5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${activeTab === 'wallets' ? 'text-[var(--background)]' : 'text-[var(--muted)] hover:text-[var(--foreground)]'}`}
                         >
                             Wallets
+                            {activeTab === 'wallets' && (
+                                <motion.div layoutId="walletTabIndicator" className="absolute inset-0 bg-[var(--foreground)] rounded-full -z-10 shadow-sm" />
+                            )}
                         </button>
                     </div>
 
@@ -266,12 +278,13 @@ export default function StatsTab() {
                             else fetchWallets();
                         }}
                         disabled={loading || (activeTab === "history" ? historyLoading : walletLoading)}
-                        className="p-2 sm:p-2.5 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] active:scale-95 transition-all outline-none disabled:opacity-50"
+                        className="p-2 rounded-full text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/[0.05] active:scale-90 transition-all outline-none disabled:opacity-50"
+                        title="Refresh Data"
                     >
                         {loading || (activeTab === "history" ? historyLoading : walletLoading) ? (
-                            <Loader2 className="animate-spin" size={14} />
+                            <Loader2 className="animate-spin" size={16} />
                         ) : (
-                            <FiRefreshCw size={14} />
+                            <FiRefreshCw size={16} />
                         )}
                     </button>
                 </div>
@@ -288,72 +301,92 @@ export default function StatsTab() {
 
 
                     {/* MANUAL WALLET ADJUSTMENT */}
-                    <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 sm:p-6 relative overflow-hidden">
-                        <div className="flex items-center gap-2 mb-4 sm:mb-6">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                            <h3 className="text-base sm:text-lg font-bold text-[var(--foreground)]">Add or Remove Money Manually</h3>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-end gap-3 sm:gap-4">
-                            <div className="space-y-1.5">
-                                <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">User Email</label>
-                                <div className="relative">
-                                    <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
-                                    <input
-                                        type="email"
-                                        value={manageEmail}
-                                        onChange={(e) => setManageEmail(e.target.value)}
-                                        placeholder="user@example.com"
-                                        className="w-full h-10 sm:h-11 pl-9 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
-                                    />
-                                </div>
+                    <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl relative overflow-hidden transition-all duration-300">
+                        <button
+                            onClick={() => setIsManageOpen(!isManageOpen)}
+                            className="w-full flex items-center justify-between p-4 sm:p-6 outline-none"
+                        >
+                            <div className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                <h3 className="text-base sm:text-lg font-bold text-[var(--foreground)]">Add or Remove Money Manually</h3>
                             </div>
-
-                            <div className="space-y-1.5">
-                                <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">Amount</label>
-                                <div className="relative">
-                                    <FiDollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
-                                    <input
-                                        type="number"
-                                        value={manageAmount}
-                                        onChange={(e) => setManageAmount(e.target.value)}
-                                        placeholder="0.00"
-                                        min="0"
-                                        className="w-full h-10 sm:h-11 pl-9 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
-                                    />
-                                </div>
+                            <div className={`text-[var(--muted)] transition-transform duration-300 ${isManageOpen ? "rotate-90" : ""}`}>
+                                <FiChevronRight size={18} />
                             </div>
+                        </button>
 
-                            <div className="space-y-1.5">
-                                <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">Description <span className="opacity-50">(Opt)</span></label>
-                                <input
-                                    type="text"
-                                    value={manageDesc}
-                                    onChange={(e) => setManageDesc(e.target.value)}
-                                    placeholder="Bonus, Refund..."
-                                    className="w-full h-10 sm:h-11 px-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
-                                />
-                            </div>
-
-                            <div className="flex gap-2 w-full pt-1 sm:pt-0">
-                                <button
-                                    onClick={() => handleManageWallet("add")}
-                                    disabled={updating}
-                                    className="flex-1 h-10 sm:h-11 px-2 rounded-xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold text-[11px] flex items-center justify-center gap-1.5 hover:bg-emerald-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
+                        <AnimatePresence>
+                            {isManageOpen && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className="px-4 sm:px-6 pb-4 sm:pb-6"
                                 >
-                                    {updating ? <Loader2 className="animate-spin" size={14} /> : <FiPlus size={14} />}
-                                    Add
-                                </button>
-                                <button
-                                    onClick={() => handleManageWallet("remove")}
-                                    disabled={updating}
-                                    className="flex-1 h-10 sm:h-11 px-2 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[11px] flex items-center justify-center gap-1.5 hover:bg-red-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
-                                >
-                                    {updating ? <Loader2 className="animate-spin" size={14} /> : <FiMinus size={14} />}
-                                    Deduct
-                                </button>
-                            </div>
-                        </div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-end gap-3 sm:gap-4 pt-2 border-t border-[var(--border)]/50">
+                                        <div className="space-y-1.5 mt-2">
+                                            <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">User Email</label>
+                                            <div className="relative">
+                                                <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
+                                                <input
+                                                    type="email"
+                                                    value={manageEmail}
+                                                    onChange={(e) => setManageEmail(e.target.value)}
+                                                    placeholder="user@example.com"
+                                                    className="w-full h-10 sm:h-11 pl-9 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-1.5 mt-2">
+                                            <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">Amount</label>
+                                            <div className="relative">
+                                                <FiDollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
+                                                <input
+                                                    type="number"
+                                                    value={manageAmount}
+                                                    onChange={(e) => setManageAmount(e.target.value)}
+                                                    placeholder="0.00"
+                                                    min="0"
+                                                    className="w-full h-10 sm:h-11 pl-9 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-1.5 mt-2">
+                                            <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">Description <span className="opacity-50">(Opt)</span></label>
+                                            <input
+                                                type="text"
+                                                value={manageDesc}
+                                                onChange={(e) => setManageDesc(e.target.value)}
+                                                placeholder="Bonus, Refund..."
+                                                className="w-full h-10 sm:h-11 px-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
+                                            />
+                                        </div>
+
+                                        <div className="flex gap-2 w-full pt-1 sm:pt-0 mt-2">
+                                            <button
+                                                onClick={() => handleManageWallet("add")}
+                                                disabled={updating}
+                                                className="flex-1 h-10 sm:h-11 px-2 rounded-xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold text-[11px] flex items-center justify-center gap-1.5 hover:bg-emerald-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
+                                            >
+                                                {updating ? <Loader2 className="animate-spin" size={14} /> : <FiPlus size={14} />}
+                                                Add
+                                            </button>
+                                            <button
+                                                onClick={() => handleManageWallet("remove")}
+                                                disabled={updating}
+                                                className="flex-1 h-10 sm:h-11 px-2 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[11px] flex items-center justify-center gap-1.5 hover:bg-red-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
+                                            >
+                                                {updating ? <Loader2 className="animate-spin" size={14} /> : <FiMinus size={14} />}
+                                                Deduct
+                                            </button>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
 
                     {/* TRANSACTION HISTORY */}
@@ -367,47 +400,47 @@ export default function StatsTab() {
                                     </h3>
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                                <div className="flex flex-col sm:flex-row gap-2.5 items-center w-full">
                                     {/* SEARCH */}
-                                    <div className="sm:col-span-6 relative">
-                                        <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
+                                    <div className="relative flex-1 w-full">
+                                        <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)] size-3.5" />
                                         <input
                                             value={historySearch}
                                             onChange={(e) => { setHistorySearch(e.target.value); setHistoryPage(1); }}
                                             placeholder="Search transactions..."
-                                            className="w-full h-10 pl-9 pr-4 rounded-xl bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--foreground)] outline-none focus:border-[var(--accent)] transition-all placeholder:text-[var(--muted)]/50"
+                                            className="w-full h-9 pl-9 pr-4 rounded-full bg-[var(--card)] border border-[var(--border)]/60 text-xs text-[var(--foreground)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all placeholder:text-[var(--muted)]/50 shadow-sm"
                                         />
                                     </div>
-                                    <div className="sm:col-span-3">
-                                        <div className="relative">
+                                    
+                                    {/* FILTERS */}
+                                    <div className="flex gap-2 w-full sm:w-auto overflow-x-auto no-scrollbar pb-1 sm:pb-0 shrink-0">
+                                        <div className="relative shrink-0">
                                             <select
                                                 value={historyType}
                                                 onChange={(e) => { setHistoryType(e.target.value); setHistoryPage(1); }}
-                                                className="w-full h-10 px-3 pr-8 rounded-xl bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--foreground)] outline-none focus:border-[var(--accent)] appearance-none cursor-pointer"
+                                                className="h-9 pl-3 pr-8 rounded-full bg-[var(--card)] border border-[var(--border)]/60 text-xs font-medium text-[var(--foreground)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 appearance-none cursor-pointer transition-all shadow-sm whitespace-nowrap"
                                             >
                                                 <option value="">All Actions</option>
-                                                <option value="credit">Money Added</option>
-                                                <option value="debit">Money Spent</option>
+                                                <option value="credit">Added (+)</option>
+                                                <option value="debit">Spent (-)</option>
                                             </select>
                                             <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--muted)]">
-                                                <FiFilter size={14} />
+                                                <FiFilter size={12} />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="sm:col-span-3">
-                                        <div className="relative">
+                                        <div className="relative shrink-0">
                                             <select
                                                 value={historyStatus}
                                                 onChange={(e) => { setHistoryStatus(e.target.value); setHistoryPage(1); }}
-                                                className="w-full h-10 px-3 pr-8 rounded-xl bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--foreground)] outline-none focus:border-[var(--accent)] appearance-none cursor-pointer"
+                                                className="h-9 pl-3 pr-8 rounded-full bg-[var(--card)] border border-[var(--border)]/60 text-xs font-medium text-[var(--foreground)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 appearance-none cursor-pointer transition-all shadow-sm whitespace-nowrap"
                                             >
                                                 <option value="">All Status</option>
                                                 <option value="success">Success</option>
                                                 <option value="failed">Failed</option>
                                                 <option value="pending">Pending</option>
                                             </select>
-                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center w-4 h-4 rounded-full bg-[var(--foreground)]/10 text-[var(--muted)]">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-current" />
+                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center w-3 h-3 rounded-full bg-[var(--foreground)]/10 text-[var(--muted)]">
+                                                <div className="w-1 h-1 rounded-full bg-current" />
                                             </div>
                                         </div>
                                     </div>
@@ -425,35 +458,63 @@ export default function StatsTab() {
                                     <div className="py-12 text-center text-[var(--muted)]">No transactions found.</div>
                                 ) : (
                                     history.map((txn) => (
-                                        <div key={txn._id} className="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--border)] relative overflow-hidden flex flex-col gap-1.5">
-                                            
-                                            <div className="flex justify-between items-start z-10 relative">
-                                                <div className="flex flex-col gap-1">
-                                                    <div className="flex items-center gap-2">
-                                                        <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border ${txn.type === 'credit'
-                                                            ? 'bg-emerald-500/5 text-emerald-500 border-emerald-500/20'
-                                                            : 'bg-red-500/5 text-red-500 border-red-500/20'
-                                                            }`}>
-                                                            {txn.type === 'credit' ? <FiArrowUp size={8} /> : <FiArrowDown size={8} />}
-                                                            {txn.type}
-                                                        </span>
-                                                        <span className="text-[8px] text-[var(--muted)] font-bold tracking-widest uppercase opacity-60">TXN ID</span>
+                                        <motion.div
+                                            key={txn._id}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="group relative bg-[var(--card)] shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] border border-[var(--border)]/40 hover:border-[var(--accent)]/30 rounded-xl p-2.5 overflow-hidden transition-all duration-500 flex flex-col gap-2"
+                                        >
+                                            {/* Top Row: Icon, User, ID, Amount */}
+                                            <div className="flex justify-between items-center z-10 relative gap-2">
+                                                <div className="flex items-center gap-2.5 min-w-0">
+                                                    <div className={`shrink-0 flex items-center justify-center w-7 h-7 rounded-full shadow-inner ${txn.type === 'credit'
+                                                        ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-500/5 text-emerald-500 border border-emerald-500/20'
+                                                        : 'bg-gradient-to-br from-red-400/20 to-red-500/5 text-red-500 border border-red-500/20'
+                                                        }`}>
+                                                        {txn.type === 'credit' ? <ArrowUpRight size={14} strokeWidth={2.5} /> : <ArrowDownRight size={14} strokeWidth={2.5} />}
                                                     </div>
-                                                    
-                                                    <div className="flex flex-col gap-0.5">
-                                                        <p className="text-[10px] font-mono text-[var(--foreground)] leading-none">{txn.transactionId}</p>
-                                                        <p className="text-[9px] text-[var(--muted)] opacity-80 leading-tight" title={txn.description}>{txn.description}</p>
+                                                    <div className="min-w-0 flex flex-col justify-center gap-0.5">
+                                                        <span className="text-[11px] font-bold text-[var(--foreground)] truncate leading-none">{txn.userId || txn.email}</span>
+                                                        {txn.userId && txn.email && <span className="text-[9px] text-[var(--muted)] opacity-80 truncate lowercase leading-none">{txn.email}</span>}
+                                                        <span className="text-[9px] font-mono font-medium text-[var(--muted)] opacity-60 truncate leading-none mt-0.5">{txn.transactionId}</span>
+                                                    </div>
+                                                </div>
+                                                <div className={`shrink-0 text-sm font-black tabular-nums tracking-tighter ${txn.type === 'credit' ? 'text-emerald-500' : 'text-red-500'}`}>
+                                                    {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}
+                                                </div>
+                                            </div>
+
+                                            {/* Bottom Row: Details, Status, Actions */}
+                                            <div className="flex justify-between items-end z-10 relative">
+                                                <div className="min-w-0 flex-1 pr-3">
+                                                    <p className="text-[10px] text-[var(--muted)] opacity-90 font-medium truncate" title={txn.description}>{txn.description}</p>
+                                                    <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[8px] font-mono text-[var(--muted)] opacity-60">
+                                                        <span>{new Date(txn.createdAt).toLocaleString(undefined, {
+                                                            month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                                                        })}</span>
                                                         {txn.referenceId && (
-                                                            <p className="text-[9px] font-mono text-[var(--muted)] opacity-60 leading-none">REF: {txn.referenceId}</p>
+                                                            <>
+                                                                <span className="opacity-30">•</span>
+                                                                <span className="truncate">REF: {txn.referenceId}</span>
+                                                            </>
                                                         )}
                                                     </div>
                                                 </div>
-                                                
-                                                <div className="flex flex-col items-end gap-1.5">
-                                                    <div className={`text-sm font-mono font-black tracking-tight leading-none ${txn.type === 'credit' ? 'text-emerald-500' : 'text-red-500'}`}>
-                                                        {txn.type === 'credit' ? '+' : '-'}{formatPrice(txn.amount)}
+
+                                                <div className="flex items-center gap-2 shrink-0">
+                                                    {/* Status Badge */}
+                                                    <div className={`flex items-center px-2 py-0.5 rounded-md border text-[8px] font-black uppercase tracking-widest ${txn.status === 'success'
+                                                        ? 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20'
+                                                        : txn.status === 'failed'
+                                                            ? 'text-red-500 bg-red-500/10 border-red-500/20'
+                                                            : 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20'
+                                                        }`}>
+                                                        <span className={`w-1 h-1 rounded-full mr-1 ${txn.status === 'success' ? 'bg-emerald-500' : txn.status === 'failed' ? 'bg-red-500' : 'bg-yellow-500'}`} />
+                                                        {txn.status || 'success'}
                                                     </div>
-                                                    <div className="flex justify-end gap-1">
+
+                                                    {/* Actions */}
+                                                    <div className="flex gap-1.5">
                                                         {txn.status === 'pending' && (
                                                             <button
                                                                 onClick={async () => {
@@ -467,51 +528,37 @@ export default function StatsTab() {
                                                                         alert("Verification Failed");
                                                                     }
                                                                 }}
-                                                                className="p-1 rounded bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 transition-colors"
+                                                                className="flex items-center justify-center w-6 h-6 rounded-md bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white transition-all active:scale-95"
                                                                 title="Check & Auto Approve"
                                                             >
-                                                                <FiRefreshCw size={10} />
+                                                                <RefreshCcw size={12} strokeWidth={2.5} />
                                                             </button>
                                                         )}
                                                         {txn.status !== 'success' && (
                                                             <button
                                                                 onClick={() => handleStatusUpdate(txn._id, 'success')}
-                                                                className="p-1 rounded bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 transition-colors"
+                                                                className="flex items-center justify-center w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all active:scale-95"
                                                                 title="Manually Mark Success"
                                                             >
-                                                                <FiCheckCircle size={10} />
+                                                                <CheckCircle2 size={12} strokeWidth={2.5} />
                                                             </button>
                                                         )}
                                                         {txn.status !== 'failed' && (
                                                             <button
                                                                 onClick={() => handleStatusUpdate(txn._id, 'failed')}
-                                                                className="p-1 rounded bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
+                                                                className="flex items-center justify-center w-6 h-6 rounded-md bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all active:scale-95"
                                                                 title="Mark Failed & Deduct"
                                                             >
-                                                                <FiXCircle size={10} />
+                                                                <XCircle size={12} strokeWidth={2.5} />
                                                             </button>
                                                         )}
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="flex justify-between items-end pt-1.5 border-t border-[var(--border)]/30 relative z-10 gap-2">
-                                                <div className="flex flex-col min-w-0 flex-1 gap-0.5">
-                                                    <div className="font-bold text-[var(--foreground)] text-[10px] leading-none truncate">{txn.userId}</div>
-                                                    {txn.email && <div className="text-[9px] text-[var(--muted)]/80 truncate leading-none">{txn.email}</div>}
-                                                    <div className="text-[8px] text-[var(--muted)] font-mono opacity-50 leading-none mt-1">{new Date(txn.createdAt).toLocaleString()}</div>
-                                                </div>
-                                                <span className={`shrink-0 inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ${txn.status === 'success'
-                                                    ? 'text-emerald-500 bg-emerald-500/5'
-                                                    : txn.status === 'failed'
-                                                        ? 'text-red-500 bg-red-500/5'
-                                                        : 'text-yellow-500 bg-yellow-500/5'
-                                                    }`}>
-                                                    <span className={`w-1 h-1 rounded-full mr-1 ${txn.status === 'success' ? 'bg-emerald-500' : txn.status === 'failed' ? 'bg-red-500' : 'bg-yellow-500'}`} />
-                                                    {txn.status || 'success'}
-                                                </span>
-                                            </div>
-                                        </div>
+                                            {/* Subtle Glow effect on hover */}
+                                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[var(--accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                                        </motion.div>
                                     ))
                                 )}
                             </div>
@@ -696,33 +743,33 @@ export default function StatsTab() {
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: idx * 0.05 }}
-                                            className="group relative bg-gradient-to-br from-[var(--card)] to-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-2xl p-4 overflow-hidden transition-all hover:border-[var(--accent)]/30"
+                                            className="group relative bg-[var(--card)] shadow-sm hover:shadow-md border border-[var(--border)]/60 hover:border-[var(--accent)]/40 rounded-2xl p-4 overflow-hidden transition-all duration-300"
                                         >
-                                            <div className="relative z-10 flex items-center justify-between">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="relative">
+                                            <div className="relative z-10 flex items-center justify-between gap-3">
+                                                <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                                                    <div className="relative shrink-0 ring-2 ring-[var(--foreground)]/[0.04] rounded-full p-0.5 bg-[var(--card)] transition-colors group-hover:ring-[var(--accent)]/20">
                                                         <Avatar name={user.name} type={user.userType} size="md" />
                                                         {user.userType === 'owner' && (
-                                                            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-[var(--card)] shadow-lg shadow-red-500/40" />
+                                                            <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-[var(--card)] shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
                                                         )}
                                                     </div>
                                                     <div className="min-w-0">
                                                         <div className="flex items-center gap-2 mb-0.5">
-                                                            <h4 className="font-black text-[var(--foreground)] text-sm truncate tracking-tight">{user.name || "Unknown"}</h4>
+                                                            <h4 className="font-bold text-[var(--foreground)] text-[15px] truncate tracking-tight leading-none group-hover:text-[var(--accent)] transition-colors duration-300">{user.name || "Unknown"}</h4>
                                                             {user.userType === 'owner' && (
-                                                                <span className="px-1.5 py-0.5 rounded text-[7px] bg-red-500/10 text-red-500 border border-red-500/20 font-black uppercase tracking-widest">
+                                                                <span className="shrink-0 px-1.5 py-0.5 rounded text-[8px] bg-red-500/10 text-red-500 font-bold uppercase tracking-widest">
                                                                     OWNER
                                                                 </span>
                                                             )}
                                                         </div>
-                                                        <p className="text-[10px] text-[var(--muted)] font-medium opacity-60 truncate max-w-[140px] lowercase">{user.email}</p>
+                                                        <p className="text-[11px] text-[var(--muted)] font-medium opacity-80 truncate lowercase w-full mt-1">{user.email}</p>
                                                     </div>
                                                 </div>
 
-                                                <div className="flex items-center gap-4">
+                                                <div className="flex items-center gap-4 shrink-0">
                                                     <div className="text-right">
-                                                        <p className="text-[8px] font-black text-[var(--muted)] uppercase tracking-[0.2em] mb-1 opacity-40">Wallet</p>
-                                                        <p className="text-xl font-black text-[var(--foreground)] tabular-nums tracking-tighter shadow-sm">
+                                                        <p className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-[0.15em] mb-0.5 opacity-70">Balance</p>
+                                                        <p className="text-[15px] sm:text-lg font-black text-[var(--foreground)] tabular-nums tracking-tighter">
                                                             {formatPrice(user.wallet)}
                                                         </p>
                                                     </div>
@@ -732,15 +779,16 @@ export default function StatsTab() {
                                                             setSelectedUserForWallet(user);
                                                             setQuickAmount("");
                                                         }}
-                                                        className="w-10 h-10 rounded-xl bg-[var(--accent)]/10 hover:bg-[var(--accent)] text-[var(--accent)] hover:text-white transition-all flex items-center justify-center shadow-lg shadow-transparent hover:shadow-[var(--accent)]/20 active:scale-95 border border-[var(--accent)]/10"
+                                                        className="shrink-0 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-[var(--accent)] to-[var(--accent)]/80 text-white shadow-lg shadow-[var(--accent)]/20 hover:shadow-[var(--accent)]/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 flex items-center justify-center"
+                                                        title="Manage Wallet"
                                                     >
-                                                        <FiDollarSign size={18} />
+                                                        <FiDollarSign size={18} className="stroke-[2.5]" />
                                                     </button>
                                                 </div>
                                             </div>
 
-                                            {/* Glow effect on hover */}
-                                            <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                                            {/* Subtle Glow effect on hover */}
+                                            <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                         </motion.div>
                                     ))
                                 )}

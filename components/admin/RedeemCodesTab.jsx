@@ -115,93 +115,93 @@ export default function RedeemCodesTab() {
             </div>
 
             {/* GENERATOR CARD */}
-            <div className="p-5 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-[var(--card)] to-[var(--foreground)]/[0.03] shadow-xl shadow-black/5">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-6">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]">
-                            <FiGift size={18} />
+            <div className="p-3.5 sm:p-5 rounded-[1rem] border border-[var(--border)]/40 bg-[var(--card)] shadow-sm">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] shrink-0">
+                            <FiGift size={14} strokeWidth={2.5} />
                         </div>
                         <div>
-                            <h3 className="text-base font-black uppercase tracking-tight text-[var(--foreground)]">Generator</h3>
-                            <p className="text-[9px] font-bold text-[var(--muted)]/40 uppercase tracking-widest leading-none">Create vouchers</p>
+                            <h3 className="text-sm font-black uppercase tracking-tight text-[var(--foreground)] leading-tight">Generator</h3>
+                            <p className="text-[9px] font-bold text-[var(--muted)]/50 uppercase tracking-widest leading-tight">Create vouchers</p>
                         </div>
                     </div>
 
-                    <div className="flex bg-[var(--foreground)]/[0.05] p-1 rounded-lg border border-[var(--border)]">
+                    <div className="flex bg-[var(--foreground)]/[0.03] p-1 rounded-full border border-[var(--border)]/60 shadow-sm w-full sm:w-auto">
                         <button
                             onClick={() => setIsSeries(false)}
-                            className={`px-4 py-1.5 rounded-md text-[9px] font-black uppercase tracking-widest transition-all ${!isSeries ? 'bg-[var(--accent)] text-white shadow-lg' : 'text-[var(--muted)] hover:text-[var(--foreground)]'}`}
+                            className={`flex-1 sm:flex-none px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${!isSeries ? 'bg-[var(--accent)] text-white shadow-[0_2px_10px_rgba(var(--accent-rgb),0.3)] scale-100' : 'text-[var(--muted)] hover:text-[var(--foreground)] scale-95'}`}
                         >
                             Unique
                         </button>
                         <button
                             onClick={() => setIsSeries(true)}
-                            className={`px-4 py-1.5 rounded-md text-[9px] font-black uppercase tracking-widest transition-all ${isSeries ? 'bg-[var(--accent)] text-white shadow-lg' : 'text-[var(--muted)] hover:text-[var(--foreground)]'}`}
+                            className={`flex-1 sm:flex-none px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${isSeries ? 'bg-[var(--accent)] text-white shadow-[0_2px_10px_rgba(var(--accent-rgb),0.3)] scale-100' : 'text-[var(--muted)] hover:text-[var(--foreground)] scale-95'}`}
                         >
                             Series
                         </button>
                     </div>
                 </div>
 
-                <form className="grid grid-cols-1 sm:grid-cols-4 gap-4" onSubmit={handleGenerate}>
-                    <div className="space-y-1.5">
-                        <label className="text-[9px] font-black uppercase text-[var(--muted)]/50 ml-1 tracking-[0.1em]">Value ($)</label>
+                <form className="grid grid-cols-1 sm:grid-cols-12 gap-3" onSubmit={handleGenerate}>
+                    <div className="col-span-1 sm:col-span-3 space-y-1">
+                        <label className="text-[9px] font-black uppercase text-[var(--muted)]/70 ml-1 tracking-widest">Value ($)</label>
                         <input
                             type="number"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
                             placeholder="500"
-                            className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm focus:border-[var(--accent)]/40 outline-none transition-all font-bold text-[var(--foreground)]"
+                            className="w-full h-8 bg-[var(--foreground)]/[0.02] border border-[var(--border)]/60 rounded-lg px-3 text-xs focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/20 outline-none transition-all font-bold tabular-nums text-[var(--foreground)] shadow-sm"
                             required
                         />
                     </div>
 
                     {isSeries ? (
                         <>
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-[var(--muted)]/50 ml-1 tracking-[0.1em]">Code String</label>
+                            <div className="col-span-1 sm:col-span-4 space-y-1">
+                                <label className="text-[9px] font-black uppercase text-[var(--muted)]/70 ml-1 tracking-widest">Code String</label>
                                 <input
                                     type="text"
                                     value={customCode}
                                     onChange={(e) => setCustomCode(e.target.value)}
                                     placeholder="BONUS500"
-                                    className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm focus:border-[var(--accent)]/40 outline-none transition-all font-bold uppercase text-[var(--foreground)]"
+                                    className="w-full h-8 bg-[var(--foreground)]/[0.02] border border-[var(--border)]/60 rounded-lg px-3 text-xs focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/20 outline-none transition-all font-bold uppercase text-[var(--foreground)] shadow-sm"
                                     required={isSeries}
                                 />
                             </div>
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-[var(--muted)]/50 ml-1 tracking-[0.1em]">Max Uses</label>
+                            <div className="col-span-1 sm:col-span-2 space-y-1">
+                                <label className="text-[9px] font-black uppercase text-[var(--muted)]/70 ml-1 tracking-widest">Max Uses</label>
                                 <input
                                     type="number"
                                     value={maxUses}
                                     onChange={(e) => setMaxUses(e.target.value)}
                                     placeholder="100"
-                                    className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm focus:border-[var(--accent)]/40 outline-none transition-all font-bold text-[var(--foreground)]"
+                                    className="w-full h-8 bg-[var(--foreground)]/[0.02] border border-[var(--border)]/60 rounded-lg px-3 text-xs focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/20 outline-none transition-all font-bold tabular-nums text-[var(--foreground)] shadow-sm"
                                     required={isSeries}
                                 />
                             </div>
                         </>
                     ) : (
-                        <div className="space-y-1.5 col-span-1 sm:col-span-2">
-                            <label className="text-[9px] font-black uppercase text-[var(--muted)]/50 ml-1 tracking-[0.1em]">Code Count</label>
+                        <div className="col-span-1 sm:col-span-6 space-y-1">
+                            <label className="text-[9px] font-black uppercase text-[var(--muted)]/70 ml-1 tracking-widest">Code Count</label>
                             <input
                                 type="number"
                                 value={quantity}
                                 onChange={(e) => setQuantity(e.target.value)}
                                 placeholder="10"
-                                className="w-full h-11 bg-[var(--foreground)]/[0.03] border border-[var(--border)] rounded-xl px-4 text-sm focus:border-[var(--accent)]/40 outline-none transition-all font-bold text-[var(--foreground)]"
+                                className="w-full h-8 bg-[var(--foreground)]/[0.02] border border-[var(--border)]/60 rounded-lg px-3 text-xs focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/20 outline-none transition-all font-bold tabular-nums text-[var(--foreground)] shadow-sm"
                                 required={!isSeries}
                             />
                         </div>
                     )}
 
-                    <div className="flex items-end">
+                    <div className="col-span-1 sm:col-span-3 flex items-end">
                         <button
                             type="submit"
                             disabled={isGenerating}
-                            className="w-full h-11 bg-[var(--accent)] text-white font-black uppercase text-[11px] rounded-xl flex items-center justify-center gap-2 hover:bg-[var(--accent-hover)] transition-all shadow-lg active:scale-95 disabled:opacity-50"
+                            className="w-full h-8 bg-[var(--accent)] text-white font-black uppercase tracking-widest text-[10px] rounded-lg flex items-center justify-center gap-1.5 hover:shadow-[0_2px_12px_rgba(var(--accent-rgb),0.3)] transition-all active:scale-95 disabled:opacity-50"
                         >
-                            {isGenerating ? "Processing" : <><FiPlus size={14} /> {isSeries ? "Create series" : "Generate unique"}</>}
+                            {isGenerating ? "Processing" : <><FiPlus size={12} strokeWidth={3} /> {isSeries ? "Series" : "Generate"}</>}
                         </button>
                     </div>
                 </form>

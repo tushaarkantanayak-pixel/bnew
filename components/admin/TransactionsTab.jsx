@@ -346,104 +346,107 @@ export default function TransactionsTab() {
               onClick={() => setSelectedTx(null)}
               className="fixed inset-0 z-[1001] bg-black/80 backdrop-blur-sm"
             />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-full w-full max-w-lg bg-[var(--background)] border-l border-[var(--border)] shadow-2xl z-[1002] flex flex-col"
-            >
-              <div className="p-6 border-b border-[var(--border)] bg-gradient-to-r from-[var(--foreground)]/[0.02] to-transparent">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="space-y-0.5">
-                    <p className="text-[9px] font-mono font-black text-[var(--accent)] uppercase tracking-[0.2em] opacity-80 mb-1">#{selectedTx.orderId.toUpperCase()}</p>
-                    <h3 className="text-xl font-black uppercase tracking-tight text-[var(--foreground)]">Transaction Summary</h3>
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed right-0 top-0 h-full w-full max-w-md bg-[var(--card)]/95 backdrop-blur-2xl border-l border-[var(--border)]/60 shadow-[-10px_0_40px_rgba(0,0,0,0.1)] z-[1002] flex flex-col"
+              >
+                <div className="p-5 border-b border-[var(--border)]/40 bg-gradient-to-br from-[var(--accent)]/5 to-transparent">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="space-y-0.5">
+                      <p className="text-[9px] font-mono font-black text-[var(--accent)] uppercase tracking-[0.2em] opacity-80 mb-0.5">#{selectedTx.orderId.toUpperCase()}</p>
+                      <h3 className="text-lg font-black uppercase tracking-tight text-[var(--foreground)]">Transaction Summary</h3>
+                    </div>
+                    <button
+                      onClick={() => setSelectedTx(null)}
+                      className="w-8 h-8 rounded-full bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--muted)] hover:text-white hover:bg-red-500 hover:shadow-[0_0_12px_rgba(239,68,68,0.4)] transition-all"
+                    >
+                      <X size={16} strokeWidth={2.5} />
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setSelectedTx(null)}
-                    className="w-9 h-9 rounded-full bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--muted)]/40 hover:text-[var(--foreground)] hover:bg-red-500/20 transition-all"
-                  >
-                    <X size={18} />
-                  </button>
+
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-[var(--accent)]/10 to-[var(--accent)]/5 border border-[var(--accent)]/20 shadow-inner relative overflow-hidden">
+                    <div className="relative z-10">
+                      <p className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest mb-1 opacity-70">Settlement Amount</p>
+                      <span className="text-2xl font-black text-[var(--accent)] tabular-nums leading-none tracking-tighter">{formatPrice(selectedTx.price)}</span>
+                    </div>
+                    {(() => {
+                      const meta = statusMeta[selectedTx.status] || statusMeta.pending;
+                      return (
+                        <span className={`relative z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[9px] font-black uppercase tracking-widest shadow-sm backdrop-blur-md ${meta.class}`}>
+                          {meta.icon}
+                          {meta.label}
+                        </span>
+                      );
+                    })()}
+                    {/* Subtle background glow */}
+                    <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-[var(--accent)]/20 blur-2xl rounded-full" />
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between p-4.5 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/10">
-                  <div>
-                    <p className="text-[9px] font-bold text-[var(--muted)]/50 uppercase tracking-widest mb-0.5">Settlement Amount</p>
-                    <span className="text-2xl font-black text-emerald-500 tabular-nums leading-none">{formatPrice(selectedTx.price)}</span>
+                <div className="flex-1 overflow-y-auto p-5 space-y-6 no-scrollbar">
+                  <DrawerSection icon={<Gamepad2 size={14} strokeWidth={2.5} />} title="Order Details">
+                    <DrawerDetail label="Game" value={selectedTx.gameSlug} emphasize />
+                    <DrawerDetail label="Item" value={selectedTx.itemName} />
+                    <DrawerDetail label="Code" value={selectedTx.itemSlug} />
+                  </DrawerSection>
 
-                  </div>
-                  {(() => {
-                    const meta = statusMeta[selectedTx.status] || statusMeta.pending;
-                    return (
-                      <span className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[9px] font-bold uppercase tracking-widest ${meta.class}`}>
-                        {meta.icon}
-                        {meta.label}
-                      </span>
-                    );
-                  })()}
+                  <DrawerSection icon={<Smartphone size={14} strokeWidth={2.5} />} title="Player Info">
+                    <DrawerDetail label="Player ID" value={selectedTx.playerId} emphasize />
+                    <DrawerDetail label="Server/Zone" value={selectedTx.zoneId || "GLOBAL"} />
+                  </DrawerSection>
+
+                  <DrawerSection icon={<CreditCard size={14} strokeWidth={2.5} />} title="Payment Details">
+                    <DrawerDetail label="Method" value={selectedTx.paymentMethod} />
+                    <DrawerDetail label="Payment Status" value={selectedTx.paymentStatus} emphasize />
+                    <DrawerDetail label="Delivery Status" value={selectedTx.topupStatus} />
+                  </DrawerSection>
+
+                  <DrawerSection icon={<User size={14} strokeWidth={2.5} />} title="Customer Info">
+                    <DrawerDetail label="Email" value={selectedTx.email || "GUEST"} />
+                    <DrawerDetail label="Phone" value={selectedTx.phone || "UNLINKED"} />
+                    <DrawerDetail label="Date & Time" value={new Date(selectedTx.createdAt).toLocaleString(undefined, {
+                      month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    })} />
+                  </DrawerSection>
+
+                  <div className="pb-4" />
                 </div>
-              </div>
-
-              <div className="flex-1 overflow-y-auto p-8 space-y-10">
-                <DrawerSection icon={<Gamepad2 size={16} />} title="Order Details">
-                  <DrawerDetail label="Game" value={selectedTx.gameSlug} emphasize />
-                  <DrawerDetail label="Item" value={selectedTx.itemName} />
-                  <DrawerDetail label="Code" value={selectedTx.itemSlug} />
-                </DrawerSection>
-
-                <DrawerSection icon={<Smartphone size={16} />} title="Player Info">
-                  <DrawerDetail label="Player ID" value={selectedTx.playerId} emphasize />
-                  <DrawerDetail label="Server/Zone" value={selectedTx.zoneId || "GLOBAL"} />
-                </DrawerSection>
-
-                <DrawerSection icon={<CreditCard size={16} />} title="Payment Details">
-                  <DrawerDetail label="Method" value={selectedTx.paymentMethod} />
-                  <DrawerDetail label="Payment Status" value={selectedTx.paymentStatus} emphasize />
-                  <DrawerDetail label="Delivery Status" value={selectedTx.topupStatus} />
-                </DrawerSection>
-
-                <DrawerSection icon={<User size={16} />} title="Customer Info">
-                  <DrawerDetail label="Email" value={selectedTx.email || "GUEST"} />
-                  <DrawerDetail label="Phone" value={selectedTx.phone || "UNLINKED"} />
-                  <DrawerDetail label="Date & Time" value={new Date(selectedTx.createdAt).toLocaleString()} />
-                </DrawerSection>
-
-                <div className="pb-6" />
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-/* ================= HELPERS ================= */
-
-function DrawerSection({ icon, title, children }) {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-3 text-[var(--muted)]/40 truncate">
-        <div className="p-2 rounded-lg bg-[var(--foreground)]/[0.05] text-[var(--accent)]">{icon}</div>
-        <h4 className="text-[10px] font-black uppercase tracking-[0.2em]">{title}</h4>
-        <div className="h-px flex-1 bg-[var(--border)]" />
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
-      <div className="grid grid-cols-1 gap-4 px-1">{children}</div>
-    </div>
-  );
-}
+    );
+  }
 
-function DrawerDetail({ label, value, emphasize }) {
-  return (
-    <div className="flex justify-between items-baseline gap-4 group">
-      <span className="text-[10px] font-bold text-[var(--muted)]/40 uppercase tracking-tight group-hover:text-[var(--muted)]/60 transition-colors whitespace-nowrap">{label}</span>
-      <span className={`text-sm font-bold text-right truncate ${emphasize ? "text-[var(--accent)] italic uppercase" : "text-[var(--foreground)]"}`}>
-        {value || "N/A"}
-      </span>
-    </div>
-  );
-}
+  /* ================= HELPERS ================= */
+
+  function DrawerSection({ icon, title, children }) {
+    return (
+      <div className="space-y-3">
+        <div className="flex items-center gap-2.5 text-[var(--muted)]/50 truncate">
+          <div className="p-1.5 rounded-md bg-[var(--accent)]/10 text-[var(--accent)]">{icon}</div>
+          <h4 className="text-[9px] font-black uppercase tracking-[0.2em]">{title}</h4>
+          <div className="h-px flex-1 bg-[var(--border)]/40 ml-1" />
+        </div>
+        <div className="flex flex-col gap-2.5 px-1">{children}</div>
+      </div>
+    );
+  }
+
+  function DrawerDetail({ label, value, emphasize }) {
+    return (
+      <div className="flex justify-between items-center gap-4 group">
+        <span className="text-[9px] font-bold text-[var(--muted)]/70 uppercase tracking-widest transition-colors whitespace-nowrap">{label}</span>
+        <span className={`text-xs font-bold text-right truncate ${emphasize ? "text-[var(--accent)] font-black" : "text-[var(--foreground)]"}`}>
+          {value || "N/A"}
+        </span>
+      </div>
+    );
+  }
 
 function InsightCard({ label, value, color, pulse, compact }) {
   const colors = {

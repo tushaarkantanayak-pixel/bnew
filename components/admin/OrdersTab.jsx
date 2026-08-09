@@ -192,9 +192,9 @@ export default function OrdersTab() {
 
 
 
-      <div className="flex gap-2 sm:gap-3">
+      <div className="flex gap-2 items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/50" size={16} />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]/50" size={14} />
           <input
             value={search}
             onChange={(e) => {
@@ -202,16 +202,16 @@ export default function OrdersTab() {
               setSearch(e.target.value);
             }}
             placeholder="Search by Order ID, Email, Method..."
-            className="w-full h-11 pl-11 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.02] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none transition-all placeholder:text-[var(--muted)]/40"
+            className="w-full h-10 pl-10 pr-4 rounded-full border border-[var(--border)]/60 bg-[var(--card)] text-[var(--foreground)] text-xs focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 outline-none transition-all placeholder:text-[var(--muted)]/40 shadow-sm"
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1.5 shrink-0">
           <button
             onClick={() => setShowFilters(true)}
-            className="h-11 px-5 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.02] text-[var(--foreground)] flex items-center justify-center gap-2.5 hover:bg-[var(--foreground)]/[0.05] transition-all outline-none"
+            className="w-10 h-10 rounded-full border border-[var(--border)]/60 bg-[var(--card)] flex items-center justify-center hover:bg-[var(--foreground)]/[0.05] hover:border-[var(--accent)]/30 hover:shadow-[0_0_12px_rgba(var(--accent-rgb),0.1)] transition-all outline-none shadow-sm"
+            title="Filters"
           >
-            <Filter size={14} className="text-[var(--accent)]" />
-            <span className="text-sm font-semibold">Filters</span>
+            <Filter size={16} className="text-[var(--accent)]" />
           </button>
           
           {(search || filters.status || filters.gameSlug || filters.from || filters.to) && (
@@ -220,7 +220,7 @@ export default function OrdersTab() {
                 setSearch("");
                 setFilters({ status: "", gameSlug: "", from: "", to: "" });
               }}
-              className="px-3 h-11 rounded-xl text-rose-500 hover:bg-rose-500/10 text-[10px] font-black uppercase tracking-widest transition-all"
+              className="px-4 h-10 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 hover:bg-rose-500 hover:text-white text-[10px] font-black uppercase tracking-widest transition-all shadow-sm"
             >
               Clear
             </button>
@@ -330,53 +330,56 @@ export default function OrdersTab() {
                 return (
                   <motion.div
                     key={o._id}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.03 }}
                     onClick={() => setSelectedOrder(o)}
-                    className="p-3.5 sm:p-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.05] transition-all"
+                    className="group relative bg-[var(--card)] shadow-sm border border-[var(--border)]/40 rounded-xl p-2.5 overflow-hidden flex flex-col gap-2 active:scale-[0.98] transition-all"
                   >
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--accent)]">
-                          <Gamepad2 size={14} />
+                    {/* Top Row: Icon, Game, Email, ID, Amount */}
+                    <div className="flex justify-between items-center gap-2 relative z-10">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--accent)]/20 to-[var(--accent)]/5 border border-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] shrink-0 shadow-sm">
+                          <Gamepad2 size={16} strokeWidth={2.5} />
                         </div>
-                        <div className="flex flex-col min-w-0">
-                          <p className="font-bold text-[var(--foreground)] uppercase text-[11px] leading-none mb-0.5 truncate">{o.gameSlug}</p>
-                          <p className="text-[10px] text-[var(--muted)] font-medium truncate max-w-[140px] lowercase leading-none mb-0.5">{o.email}</p>
-                          <p className="text-[9px] text-[var(--accent)] font-mono truncate max-w-[140px] leading-none">ID: {o.playerId}</p>
+                        <div className="flex flex-col justify-center min-w-0 gap-0.5">
+                          <span className="text-[11px] font-bold text-[var(--foreground)] truncate leading-none">{o.gameSlug}</span>
+                          <span className="text-[9px] text-[var(--muted)] opacity-80 truncate lowercase leading-none">{o.email}</span>
+                          <span className="text-[9px] font-mono font-bold text-[var(--accent)] opacity-80 truncate leading-none">ID: {o.playerId}</span>
                         </div>
                       </div>
-                      <div className="flex flex-col items-end">
-                        <span className="text-base font-black text-emerald-500 tabular-nums">{formatPrice(o.price)}</span>
-
-                        <span className="text-[8px] font-bold text-[var(--muted)] uppercase opacity-60 tracking-tighter">{o.paymentMethod}</span>
+                      <div className="flex flex-col items-end shrink-0 gap-0.5">
+                        <span className="text-sm font-black tabular-nums text-emerald-500 leading-none">{formatPrice(o.price)}</span>
+                        <span className="text-[8px] font-bold text-[var(--muted)] uppercase opacity-60 tracking-wider leading-none">{o.paymentMethod}</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between gap-3 text-[10px]">
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-[var(--foreground)]/60 line-clamp-1 italic truncate">"{o.itemName}"</p>
-                        <p className="text-[8px] font-mono text-[var(--muted)]/40 mt-0.5 uppercase tracking-tighter truncate">{o.orderId}</p>
+                    {/* Bottom Row: Item, Order ID, Date, Status */}
+                    <div className="flex justify-between items-end relative z-10 pt-1.5 border-t border-[var(--border)]/30 mt-0.5">
+                      <div className="flex flex-col min-w-0 gap-0.5">
+                        <span className="text-[9px] font-medium text-[var(--foreground)]/80 italic truncate leading-none">"{o.itemName}"</span>
+                        <span className="text-[9px] font-mono text-[var(--muted)] opacity-60 truncate leading-none">#{o.orderId}</span>
                       </div>
-
+                      
                       <div className="flex items-center gap-2 shrink-0" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex flex-col items-end mr-1">
-                          <span className="font-bold text-[var(--muted)]/60 leading-tight">{new Date(o.createdAt).toLocaleDateString()}</span>
-                          <span className="text-[8px] font-medium text-[var(--muted)]/40 leading-tight">{new Date(o.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span className="text-[9px] font-mono text-[var(--muted)] opacity-70 leading-none text-right">
+                          {new Date(o.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}<br/>
+                          <span className="text-[8px]">{new Date(o.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </span>
+                        <div className="scale-90 origin-right">
+                          <StatusDropdown
+                            value={o.status}
+                            disabled={updating}
+                            onChange={(v) => updateOrderStatus(o.orderId, v)}
+                            compact
+                            options={[
+                              { value: "pending", label: "Pending" },
+                              { value: "success", label: "Success" },
+                              { value: "failed", label: "Failed" },
+                              { value: "refund", label: "Refund" },
+                            ]}
+                          />
                         </div>
-                        <StatusDropdown
-                          value={o.status}
-                          disabled={updating}
-                          onChange={(v) => updateOrderStatus(o.orderId, v)}
-                          compact
-                          options={[
-                            { value: "pending", label: "Pending" },
-                            { value: "success", label: "Success" },
-                            { value: "failed", label: "Failed" },
-                            { value: "refund", label: "Refund" },
-                          ]}
-                        />
                       </div>
                     </div>
                   </motion.div>

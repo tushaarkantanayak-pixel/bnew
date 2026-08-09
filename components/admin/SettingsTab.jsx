@@ -165,22 +165,22 @@ const SettingsTab = () => {
     }
 
     return (
-        <div className="space-y-8 max-w-2xl">
+        <div className="space-y-6 max-w-2xl">
             <div>
-                <h2 className="text-xl font-bold text-[var(--foreground)] flex items-center gap-2">
-                    <FiSettings className="text-[var(--accent)]" />
+                <h2 className="text-lg sm:text-xl font-black italic uppercase tracking-tighter text-[var(--foreground)] leading-none flex items-center gap-2">
+                    <FiSettings size={18} className="text-[var(--accent)]" />
                     Main Settings
                 </h2>
-                <p className="text-sm text-[var(--muted)] mt-1">
+                <p className="text-[9px] sm:text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mt-1.5">
                     Manage your website status and background settings.
                 </p>
             </div>
 
-            <div className="bg-[var(--background)] border border-[var(--border)] rounded-xl overflow-hidden">
-                <div className="p-6 flex items-center justify-between gap-6 border-b border-[var(--border)]">
+            <div className="flex flex-col -mx-3 sm:-mx-4">
+                <div className="px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-6 border-b border-[var(--border)] hover:bg-[var(--foreground)]/[0.02] transition-colors">
                     <div>
-                        <h3 className="font-semibold text-[var(--foreground)]">Maintenance Mode</h3>
-                        <p className="text-xs text-[var(--muted)] mt-1">
+                        <h3 className="font-bold text-sm text-[var(--foreground)]">Maintenance Mode</h3>
+                        <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-relaxed max-w-md">
                             When enabled, users will see a maintenance message and won't be able to access the site.
                             Admin panel remains accessible for you.
                         </p>
@@ -190,33 +190,31 @@ const SettingsTab = () => {
                         onClick={toggleMaintenance}
                         disabled={saving}
                         className={`
-              relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
+              relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
               ${settings.maintenanceMode ? "bg-[var(--accent)]" : "bg-gray-700"}
               ${saving ? "opacity-50 cursor-not-allowed" : ""}
             `}
                     >
                         <span
                             className={`
-                pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
-                ${settings.maintenanceMode ? "translate-x-5" : "translate-x-0"}
+                pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+                ${settings.maintenanceMode ? "translate-x-4" : "translate-x-0"}
               `}
                         />
                     </button>
                 </div>
 
                 {message.text && (
-                    <div className={`p-4 flex items-center gap-2 text-sm ${message.type === "success" ? "text-green-500 bg-green-500/10" : "text-red-500 bg-red-500/10"}`}>
-                        {message.type === "success" ? <FiCheckCircle /> : <FiAlertCircle />}
+                    <div className={`px-3 sm:px-4 py-3 flex items-center gap-2 text-xs ${message.type === "success" ? "text-green-500 bg-green-500/10" : "text-red-500 bg-red-500/10"}`}>
+                        {message.type === "success" ? <FiCheckCircle size={14} /> : <FiAlertCircle size={14} />}
                         {message.text}
                     </div>
                 )}
-            </div>
 
-            <div className="bg-[var(--background)] border border-[var(--border)] rounded-xl overflow-hidden">
-                <div className="p-6 flex items-center justify-between gap-6 border-b border-[var(--border)]">
+                <div className="px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-6 border-b border-[var(--border)] hover:bg-[var(--foreground)]/[0.02] transition-colors">
                     <div>
-                        <h3 className="font-semibold text-[var(--foreground)]">B2B API Service</h3>
-                        <p className="text-xs text-[var(--muted)] mt-1">
+                        <h3 className="font-bold text-sm text-[var(--foreground)]">B2B API Service</h3>
+                        <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-relaxed max-w-md">
                             When disabled, new external API orders will be instantly rejected without deducting wallet balances. (Frontend website orders will still work normally).
                         </p>
                     </div>
@@ -225,23 +223,24 @@ const SettingsTab = () => {
                         onClick={toggleApiService}
                         disabled={saving}
                         className={`
-              relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
+              relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
               ${settings.apiServiceEnabled ? "bg-emerald-500" : "bg-gray-700"}
               ${saving ? "opacity-50 cursor-not-allowed" : ""}
             `}
                     >
                         <span
                             className={`
-                pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
-                ${settings.apiServiceEnabled ? "translate-x-5" : "translate-x-0"}
+                pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+                ${settings.apiServiceEnabled ? "translate-x-4" : "translate-x-0"}
               `}
                         />
                     </button>
                 </div>
-                <div className="p-6 flex items-center justify-between gap-6 border-b border-[var(--border)]">
+                
+                <div className="px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-6 border-b border-[var(--border)] hover:bg-[var(--foreground)]/[0.02] transition-colors">
                     <div>
-                        <h3 className="font-semibold text-[var(--foreground)]">Website Orders</h3>
-                        <p className="text-xs text-[var(--muted)] mt-1">
+                        <h3 className="font-bold text-sm text-[var(--foreground)]">Website Orders</h3>
+                        <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-relaxed max-w-md">
                             When disabled, new orders from your direct website checkout will be instantly rejected without deducting wallet balances.
                         </p>
                     </div>
@@ -250,23 +249,24 @@ const SettingsTab = () => {
                         onClick={toggleWebsiteOrders}
                         disabled={saving}
                         className={`
-              relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
+              relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
               ${settings.websiteOrdersEnabled ? "bg-blue-500" : "bg-gray-700"}
               ${saving ? "opacity-50 cursor-not-allowed" : ""}
             `}
                     >
                         <span
                             className={`
-                pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
-                ${settings.websiteOrdersEnabled ? "translate-x-5" : "translate-x-0"}
+                pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+                ${settings.websiteOrdersEnabled ? "translate-x-4" : "translate-x-0"}
               `}
                         />
                     </button>
                 </div>
-                <div className="p-6 flex items-center justify-between gap-6 border-b border-[var(--border)]">
+                
+                <div className="px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-6 border-b border-[var(--border)] hover:bg-[var(--foreground)]/[0.02] transition-colors">
                     <div>
-                        <h3 className="font-semibold text-[var(--foreground)]">Members Only Orders</h3>
-                        <p className="text-xs text-[var(--muted)] mt-1">
+                        <h3 className="font-bold text-sm text-[var(--foreground)]">Members Only Orders</h3>
+                        <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-relaxed max-w-md">
                             When enabled, only logged in users with member/reseller access can place orders. Normal users will be rejected.
                         </p>
                     </div>
@@ -275,15 +275,15 @@ const SettingsTab = () => {
                         onClick={toggleMemberOnlyOrders}
                         disabled={saving}
                         className={`
-              relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
+              relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none 
               ${settings.memberOnlyOrdersEnabled ? "bg-purple-500" : "bg-gray-700"}
               ${saving ? "opacity-50 cursor-not-allowed" : ""}
             `}
                     >
                         <span
                             className={`
-                pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
-                ${settings.memberOnlyOrdersEnabled ? "translate-x-5" : "translate-x-0"}
+                pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+                ${settings.memberOnlyOrdersEnabled ? "translate-x-4" : "translate-x-0"}
               `}
                         />
                     </button>
@@ -291,18 +291,18 @@ const SettingsTab = () => {
             </div>
 
             {/* ===== MLBB WEEKLY PASS PROVIDER ===== */}
-            <div>
-                <h2 className="text-xl font-bold text-[var(--foreground)] flex items-center gap-2">
-                    <FiSettings className="text-[var(--accent)]" />
+            <div className="pt-2">
+                <h2 className="text-lg sm:text-xl font-black italic uppercase tracking-tighter text-[var(--foreground)] leading-none flex items-center gap-2">
+                    <FiSettings size={18} className="text-[var(--accent)]" />
                     MLBB Weekly Pass Provider
                 </h2>
-                <p className="text-sm text-[var(--muted)] mt-1">
+                <p className="text-[9px] sm:text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mt-1.5">
                     Choose which fulfillment service to use for MLBB Weekly Pass orders.
                 </p>
             </div>
 
-            <div className="bg-[var(--background)] border border-[var(--border)] rounded-xl overflow-hidden">
-                <div className="p-6 flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5">
+                <div className="flex flex-col gap-2.5">
                     {PROVIDER_OPTIONS.map((option) => {
                         const isActive = settings.mlbbWeeklyProvider === option.value;
                         return (
@@ -314,7 +314,7 @@ const SettingsTab = () => {
                                     w-full flex items-center gap-4 px-5 py-4 rounded-xl border-2 transition-all duration-200 text-left
                                     ${isActive
                                         ? "border-[var(--accent)] bg-[var(--accent)]/10"
-                                        : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/5"
+                                        : "border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/5"
                                     }
                                     ${providerSaving ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}
                                 `}
@@ -336,7 +336,7 @@ const SettingsTab = () => {
                     })}
                 </div>
                 {message.text && (
-                    <div className={`px-6 pb-4 flex items-center gap-2 text-sm ${message.type === "success" ? "text-green-500" : "text-red-500"}`}>
+                    <div className={`py-4 flex items-center gap-2 text-sm ${message.type === "success" ? "text-green-500" : "text-red-500"}`}>
                         {message.type === "success" ? <FiCheckCircle /> : <FiAlertCircle />}
                         {message.text}
                     </div>
