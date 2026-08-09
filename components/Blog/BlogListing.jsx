@@ -1,26 +1,20 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   FiSearch,
-  FiClock,
   FiChevronLeft,
   FiChevronRight,
-  FiArrowRight,
-  FiList,
-  FiPlay,
   FiShare2,
-  FiMoreHorizontal,
   FiFilter,
+  FiArrowRight,
+  FiCalendar,
+  FiX,
 } from "react-icons/fi";
 
-
-
-/* ================= SETTINGS ================= */
-const POSTS_PER_PAGE = 25;
+const POSTS_PER_PAGE = 9;
 
 export default function BlogListing({ initialGame = "all" }) {
   const router = useRouter();
@@ -44,27 +38,14 @@ export default function BlogListing({ initialGame = "all" }) {
     fetchDbBlogs();
   }, []);
 
-  const categories = useMemo(() => {
-    return ["all", ...new Set(dbBlogs.map((b) => b.type))];
-  }, [dbBlogs]);
-
-  const games = useMemo(() => {
-    return ["all", ...new Set(dbBlogs.map((b) => b.game))];
-  }, [dbBlogs]);
+  const categories = useMemo(() => ["all", ...new Set(dbBlogs.map((b) => b.type))], [dbBlogs]);
+  const games = useMemo(() => ["all", ...new Set(dbBlogs.map((b) => b.game))], [dbBlogs]);
 
   const filteredBlogs = useMemo(() => {
     let blogs = [...dbBlogs];
-    if (search) {
-      blogs = blogs.filter((b) =>
-        b.title.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-    if (selectedType !== "all") {
-      blogs = blogs.filter((b) => b.type === selectedType);
-    }
-    if (selectedGame !== "all") {
-      blogs = blogs.filter((b) => b.game === selectedGame);
-    }
+    if (search) blogs = blogs.filter((b) => b.title.toLowerCase().includes(search.toLowerCase()));
+    if (selectedType !== "all") blogs = blogs.filter((b) => b.type === selectedType);
+    if (selectedGame !== "all") blogs = blogs.filter((b) => b.game === selectedGame);
     blogs.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
     return blogs;
   }, [search, selectedType, selectedGame, dbBlogs]);
@@ -76,247 +57,229 @@ export default function BlogListing({ initialGame = "all" }) {
     currentPage * POSTS_PER_PAGE
   );
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [currentPage]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search, selectedType, selectedGame]);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [currentPage]);
+  useEffect(() => { setCurrentPage(1); }, [search, selectedType, selectedGame]);
 
   return (
-    <main className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300 px-6">
-      <div className="max-w-7xl mx-auto pt-8 md:pt-12 relative z-10">
-        <div
-          className="mb-2"
-        >
+    <main className="min-h-screen bg-[var(--background)] relative pb-24 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pt-8 md:pt-12 relative z-10">
 
+        {/* ══ HEADER ══ */}
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-5 h-[2px] bg-[var(--accent)] shrink-0" />
+            <h1 className="text-lg md:text-2xl font-[1000] italic tracking-tighter uppercase leading-none">
+              {initialGame === "all" ? "Latest" : initialGame}{" "}
+              <span className="text-[var(--accent)]">News</span>
+            </h1>
+          </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="flex flex-col gap-2">
-              <h1 className="text-3xl md:text-5xl font-[1000] italic tracking-tighter uppercase leading-none">
-                {initialGame === "all" ? "Latest" : initialGame} <span className="text-[var(--accent)]">News</span>
-              </h1>
-              <p className="text-[10px] md:text-xs font-bold text-[var(--muted)] uppercase tracking-[0.4em] opacity-50 leading-relaxed max-w-xl mt-1">
-                Stay updated with the latest gaming news and updates.
-              </p>
-            </div>
-            
-            {/* 🔍 COMPACT SEARCH & FILTER TOGGLE */}
-            <div className="flex items-center gap-2 w-full md:w-auto mt-4 md:mt-0">
-              <div className="relative flex-1 md:w-60">
-                <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
-                  <FiSearch className="text-[var(--muted)] opacity-30" size={12} />
-                </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="relative w-40 md:w-52 group/search">
+              <div className="absolute -inset-[1px] rounded-xl opacity-0 group-focus-within/search:opacity-100 bg-gradient-to-r from-[var(--accent)]/40 via-[var(--accent)]/20 to-transparent transition-all duration-500 blur-[2px] pointer-events-none" />
+              <div className="relative flex items-center rounded-xl bg-[var(--foreground)]/[0.06] border border-[var(--foreground)]/10 group-focus-within/search:border-[var(--accent)]/50 transition-all duration-300">
+                <FiSearch className="absolute left-2.5 text-[var(--muted)] group-focus-within/search:text-[var(--accent)] transition-colors" size={12} />
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="SEARCH..."
-                  className="w-full h-10 pl-9 pr-6 rounded-xl bg-[var(--card)] border border-[var(--border)] outline-none text-[10px] font-bold tracking-widest uppercase focus:border-[var(--accent)]/40 transition-all font-sans"
+                  placeholder="Search..."
+                  className="w-full pl-8 pr-7 py-2 bg-transparent border-none focus:ring-0 outline-none text-[11px] font-semibold placeholder:text-[var(--muted)]/50 text-[var(--foreground)] rounded-xl"
                 />
+                {search && (
+                  <button onClick={() => setSearch("")} className="absolute right-1.5 p-0.5 rounded hover:bg-[var(--accent)]/15 text-[var(--muted)] hover:text-[var(--accent)] transition-all">
+                    <FiX size={10} />
+                  </button>
+                )}
               </div>
-              <button
-                onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className={`h-10 px-3 sm:px-4 rounded-xl border flex items-center gap-2 text-[10px] font-black uppercase tracking-widest transition-all ${
-                  isFilterOpen 
-                    ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--background)] shadow-md" 
-                    : "bg-[var(--card)] border-[var(--border)] text-[var(--foreground)] hover:border-[var(--accent)]/40 hover:bg-[var(--background)]"
-                }`}
-              >
-                <FiFilter size={14} />
-                <span className="hidden sm:inline">Filter</span>
-              </button>
             </div>
+            <button
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+              className={`h-[34px] px-2.5 rounded-xl border flex items-center gap-1 text-[9px] font-black uppercase tracking-widest transition-all ${
+                isFilterOpen
+                  ? "bg-[var(--accent)] border-[var(--accent)] text-white shadow-md shadow-[var(--accent)]/30"
+                  : "bg-[var(--foreground)]/[0.06] border-[var(--foreground)]/10 text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/40"
+              }`}
+            >
+              <FiFilter size={12} />
+              <span className="hidden sm:inline">Filter</span>
+            </button>
           </div>
         </div>
 
-        {/* 🔖 TOGGLABLE FILTERS */}
-        <>
-          {isFilterOpen && (
-            <aside
-              className="overflow-hidden mt-4 mb-10"
-              aria-label="Blog filters"
-            >
-              <div className="p-4 sm:p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm space-y-6">
-                {initialGame === "all" && (
-                    <div className="space-y-3">
-                        <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50 italic">SELECT GAME</div>
-                        <div className="flex flex-wrap gap-2">
-                            {games.map((game) => (
-                                <Link
-                                    key={game}
-                                    href={game === "all" ? "/blog" : `/blog/${game}`}
-                                    className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-tighter transition-all border ${
-                                        selectedGame === game
-                                            ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--background)] italic shadow-lg shadow-[var(--foreground)]/10"
-                                            : "bg-[var(--background)] border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]/30 hover:text-[var(--foreground)] hover:bg-[var(--card)]"
-                                    }`}
-                                >
-                                    {game === "all" ? "All Games" : game}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                <div className="space-y-3">
-                    <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50 italic">TOPICS</div>
-                    <div className="flex flex-wrap gap-2">
-                        {categories.map((type) => (
-                            <button
-                                key={type}
-                                onClick={() => setSelectedType(type)}
-                                className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-tighter transition-all border ${
-                                    selectedType === type
-                                        ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--background)] italic shadow-lg shadow-[var(--foreground)]/10"
-                                        : "bg-[var(--background)] border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]/30 hover:text-[var(--foreground)] hover:bg-[var(--card)]"
-                                }`}
-                            >
-                                {type === "all" ? "All Topics" : type}
-                            </button>
-                        ))}
-                    </div>
+        {/* ══ FILTERS ══ */}
+        {isFilterOpen && (
+          <aside className="mb-8 p-5 rounded-2xl bg-[var(--foreground)]/[0.04] border border-[var(--foreground)]/8 space-y-5">
+            {initialGame === "all" && (
+              <div className="space-y-2">
+                <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50">Game</div>
+                <div className="flex flex-wrap gap-2">
+                  {games.map((game) => (
+                    <Link
+                      key={game}
+                      href={game === "all" ? "/blog" : `/blog/${game}`}
+                      className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wide transition-all border ${
+                        selectedGame === game
+                          ? "bg-[var(--accent)] border-[var(--accent)] text-white shadow-sm"
+                          : "border-[var(--foreground)]/10 text-[var(--muted)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+                      }`}
+                    >
+                      {game === "all" ? "All Games" : game}
+                    </Link>
+                  ))}
                 </div>
               </div>
-            </aside>
-          )}
-        </>
-
-        {/* 📄 BLOG GRID */}
-        <div className="space-y-3">
-          <>
-            {paginatedBlogs.length > 0 ? (
-              paginatedBlogs.map((blog, index) => (
-                <BlogCard key={blog.id} blog={blog} index={index} />
-              ))
-            ) : (
-              <div
-                key="empty"
-                className="text-center py-20 text-[var(--muted)] text-[10px] font-black uppercase tracking-[0.3em] italic opacity-20"
-              >
-                No Articles Discovered
-              </div>
             )}
-          </>
-        </div>
+            <div className="space-y-2">
+              <div className="text-[8px] font-black uppercase tracking-widest text-[var(--muted)] opacity-50">Topic</div>
+              <div className="flex flex-wrap gap-2">
+                {categories.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedType(type)}
+                    className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wide transition-all border ${
+                      selectedType === type
+                        ? "bg-[var(--accent)] border-[var(--accent)] text-white shadow-sm"
+                        : "border-[var(--foreground)]/10 text-[var(--muted)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+                    }`}
+                  >
+                    {type === "all" ? "All Topics" : type}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </aside>
+        )}
 
-        {/* 🔢 PAGINATION - NUMBERED */}
+        {/* ══ GRID ══ */}
+        {paginatedBlogs.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {paginatedBlogs.map((blog, index) => (
+              <BlogCard key={blog.id} blog={blog} index={index} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-24 text-[var(--muted)] text-[10px] font-black uppercase tracking-[0.3em] italic opacity-20">
+            No Articles Found
+          </div>
+        )}
+
+        {/* ══ PAGINATION ══ */}
         {totalPages > 1 && (
-          <nav aria-label="Pagination" className="flex justify-center items-center gap-2 mt-12 mb-20">
+          <nav className="flex justify-center items-center gap-2 mt-14">
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => p - 1)}
-              className="w-10 h-10 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] disabled:opacity-20 transition-all hover:border-[var(--accent)]/30 hover:text-[var(--accent)]"
+              className="w-9 h-9 rounded-xl bg-[var(--foreground)]/[0.06] border border-[var(--foreground)]/10 flex items-center justify-center text-[var(--muted)] disabled:opacity-20 hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-all"
             >
-              <FiChevronLeft size={16} />
+              <FiChevronLeft size={15} />
             </button>
-            
-            <div className="flex items-center gap-1 mx-2">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(num => (
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
                 <button
                   key={num}
                   onClick={() => setCurrentPage(num)}
-                  className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all border ${
-                    currentPage === num 
-                      ? "bg-[var(--accent)] border-[var(--accent)] text-black scale-110 shadow-lg shadow-[var(--accent)]/20" 
-                      : "bg-[var(--card)] border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]/30 hover:text-[var(--accent)]"
+                  className={`w-9 h-9 rounded-xl text-[10px] font-black transition-all border ${
+                    currentPage === num
+                      ? "bg-[var(--accent)] border-[var(--accent)] text-white shadow-md shadow-[var(--accent)]/20"
+                      : "bg-[var(--foreground)]/[0.06] border-[var(--foreground)]/10 text-[var(--muted)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
                   }`}
                 >
                   {num}
                 </button>
               ))}
             </div>
-
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => p + 1)}
-              className="w-10 h-10 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] disabled:opacity-20 transition-all hover:border-[var(--accent)]/30 hover:text-[var(--accent)]"
+              className="w-9 h-9 rounded-xl bg-[var(--foreground)]/[0.06] border border-[var(--foreground)]/10 flex items-center justify-center text-[var(--muted)] disabled:opacity-20 hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-all"
             >
-              <FiChevronRight size={16} />
+              <FiChevronRight size={15} />
             </button>
           </nav>
         )}
-
-        {/* SEO Footer Removed per spam policy */}
       </div>
     </main>
   );
 }
 
-/* ================= BLOG CARD ================= */
+/* ══════════ PREMIUM BLOG CARD ══════════ */
 function BlogCard({ blog, index }) {
-  const authorInitials = blog.author ? blog.author.substring(0, 2).toUpperCase() : "BB";
   const firstTag = blog.tags?.[0];
+  const date = new Date(blog.publishedAt).toLocaleDateString("en-US", {
+    month: "short", day: "numeric", year: "numeric",
+  });
 
   return (
     <article>
       <Link
         href={`/blog/${blog.game}/${blog.slug}`}
-        className="group block relative rounded-2xl bg-[var(--card)] border border-[var(--border)] p-2 sm:p-3 hover:shadow-md hover:border-[var(--accent)]/30 transition-all duration-300"
+        className="group flex flex-col rounded-xl overflow-hidden border border-[var(--foreground)]/8 bg-[var(--foreground)]/[0.03] hover:border-[var(--accent)]/40 hover:shadow-lg hover:shadow-[var(--accent)]/8 transition-all duration-300"
       >
-        <div className="flex gap-4">
-          {/* 🖼️ THUMBNAIL WITH TAG BADGE */}
-          <div className="relative w-28 h-20 sm:w-40 sm:h-24 rounded-xl overflow-hidden flex-shrink-0 bg-[var(--background)] border border-[var(--border)]">
-            <img 
-              src={blog.image} 
-              alt={blog.title} 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            {firstTag && (
-              <div className="absolute top-2 left-2 max-w-[80px] sm:max-w-[100px] truncate bg-[#1A1A1A]/80 backdrop-blur-sm text-white text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md shadow-sm tracking-wide">
-                #{firstTag.toLowerCase()}
-              </div>
-            )}
-          </div>
+        {/* Cover Image */}
+        <div className="relative w-full aspect-[2/1] overflow-hidden bg-[var(--foreground)]/5">
+          <img
+            src={blog.image}
+            alt={blog.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          {/* gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-          {/* 📝 CONTENT */}
-          <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pr-2">
-            
-            {/* Title */}
-            <div className="mt-1">
-              <h2 className="text-sm sm:text-lg font-bold text-[var(--foreground)] leading-snug line-clamp-2 group-hover:text-[var(--accent)] transition-colors">
-                {blog.title}
-              </h2>
-              {/* Excerpt */}
-              {blog.excerpt && (
-                <p className="text-[10px] sm:text-xs text-[var(--muted)] opacity-70 line-clamp-1 mt-1 leading-snug">
-                  {blog.excerpt}
-                </p>
-              )}
+          {/* Tag badge */}
+          {firstTag && (
+            <div className="absolute top-3 left-3 px-2 py-1 rounded-md bg-[var(--accent)] text-white text-[8px] font-black uppercase tracking-widest shadow">
+              #{firstTag}
+            </div>
+          )}
+
+          {/* Type badge */}
+          {blog.type && (
+            <div className="absolute top-3 right-3 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm text-white text-[8px] font-black uppercase tracking-widest">
+              {blog.type}
+            </div>
+          )}
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col flex-1 p-4 gap-2">
+          {/* Title */}
+          <h2 className="text-[13px] font-black leading-snug line-clamp-2 text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors duration-200">
+            {blog.title}
+          </h2>
+
+          {/* Excerpt */}
+          {blog.excerpt && (
+            <p className="text-[10px] text-[var(--muted)] opacity-60 line-clamp-1 leading-relaxed">
+              {blog.excerpt}
+            </p>
+          )}
+
+          {/* Footer */}
+          <div className="flex items-center justify-between mt-auto pt-2.5 border-t border-[var(--foreground)]/6">
+            {/* Author + Date */}
+            <div className="flex items-center gap-1.5">
+              <div className="w-5 h-5 rounded-full bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center text-[7px] font-black flex-shrink-0">
+                {(blog.author || "BB").substring(0, 2).toUpperCase()}
+              </div>
+              <div className="flex flex-col leading-none gap-0.5">
+                <span className="text-[9px] font-bold text-[var(--foreground)]">{blog.author || "BlueBuff"}</span>
+                <span className="text-[8px] text-[var(--muted)] opacity-50">{date}</span>
+              </div>
             </div>
 
-            {/* Footer / Author Row */}
-            <div className="flex items-center justify-between mt-auto mb-1 gap-1">
-              <div className="flex items-center gap-1.5 min-w-0">
-                {/* Avatar */}
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center text-[8px] font-bold flex-shrink-0">
-                  {authorInitials}
-                </div>
-                {/* Author Info */}
-                <div className="flex flex-col min-w-0 leading-none gap-0.5">
-                  <span className="text-[9px] sm:text-[10px] font-bold text-[var(--foreground)] truncate">by {blog.author || "BlueBuff"}</span>
-                  <span className="text-[8px] sm:text-[9px] text-[var(--muted)] opacity-60">
-                    {new Date(blog.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                  </span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-1 flex-shrink-0">
-                <button 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const url = `${window.location.origin}/blog/${blog.game}/${blog.slug}`;
-                    navigator.clipboard.writeText(url);
-                    alert("Link copied to clipboard!");
-                  }}
-                  className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm hover:bg-blue-600 transition-colors cursor-pointer"
-                >
-                  <FiShare2 size={10} className="ml-[1px]" />
-                </button>
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[var(--card)] text-[var(--muted)] border border-[var(--border)] flex items-center justify-center shadow-sm hover:bg-[var(--background)] transition-colors">
-                  <FiMoreHorizontal size={12} />
-                </div>
+            {/* Read + Share */}
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigator.clipboard.writeText(`${window.location.origin}/blog/${blog.game}/${blog.slug}`);
+                }}
+                className="w-7 h-7 rounded-full bg-[var(--foreground)]/6 hover:bg-[var(--accent)]/15 text-[var(--muted)] hover:text-[var(--accent)] flex items-center justify-center transition-all"
+              >
+                <FiShare2 size={11} />
+              </button>
+              <div className="flex items-center gap-1 text-[var(--accent)] text-[9px] font-black uppercase tracking-wide group-hover:gap-1.5 transition-all">
+                Read <FiArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
               </div>
             </div>
           </div>

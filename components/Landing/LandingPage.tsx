@@ -5,11 +5,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   FiArrowRight, FiShield, FiCpu, FiCode,
-  FiCheck, FiTrendingUp, FiArrowUpRight, FiMessageCircle, FiSend
+  FiCheck, FiTrendingUp, FiArrowUpRight, FiMessageCircle, FiSend,
+  FiLayers, FiZap, FiGlobe, FiShare2
 } from "react-icons/fi";
 import GameCardGrid from "../Games/GameCardGrid";
 import HolographicController from "./HolographicController";
-import PricingSection from "./PricingCard";
+
 
 /* ─── tiny helpers ─── */
 const PRIORITY_SLUGS = [
@@ -32,6 +33,57 @@ const STATS = [
   { value: "10+",     label: "Clients" },
   { value: "99.9%",   label: "Uptime" },
   { value: "24/7",    label: "Support" },
+];
+
+const PRODUCTS = [
+  {
+    id: "topup-web",
+    num: "01",
+    name: "mlbbtopup.in",
+    tagline: "The best website for game top-ups",
+    desc: "A fast, automatic top-up website ready for any game. Set up in minutes, looks like your brand.",
+    icon: FiLayers,
+    features: ["Player ID check", "Auto wallet", "Admin dashboard", "Multi-game"],
+    link: "https://mlbbtopup.in",
+    accent: "#7c3aed",
+    isNew: false,
+  },
+  {
+    id: "payment-gateway",
+    num: "02",
+    name: "xyzpay.site",
+    tagline: "Fast & safe payments for your store",
+    desc: "Accept UPI, cards & more from your customers. Money lands fast, every time.",
+    icon: FiZap,
+    features: ["UPI & cards", "High success rate", "24/7 monitoring", "Easy integration"],
+    link: "https://xyzpay.site",
+    accent: "#4f46e5",
+    isNew: false,
+  },
+  {
+    id: "games-bluebuff",
+    num: "03",
+    name: "games.bluebuff.in",
+    tagline: "Your ultimate gaming destination",
+    desc: "Wide range of games & top-ups, seamlessly integrated. Play, connect, and enjoy.",
+    icon: FiGlobe,
+    features: ["Instant delivery", "Exclusive rewards", "Safe transactions", "24/7 support"],
+    link: "https://games.bluebuff.in",
+    accent: "#059669",
+    isNew: false,
+  },
+  {
+    id: "web-bluebuff",
+    num: "04",
+    name: "Web.BlueBuff.in",
+    tagline: "Link in bio & website builder",
+    desc: "Build a beautiful link-in-bio page or mini website in minutes. No code required.",
+    icon: FiShare2,
+    features: ["Drag & drop", "Custom domain", "Click analytics", "Mobile-first"],
+    link: "https://web.bluebuff.in",
+    accent: "#db2777",
+    isNew: true,
+  },
 ];
 
 const SERVICES = [
@@ -302,7 +354,49 @@ export default function LandingPage() {
           <span className="text-[8px] font-black uppercase tracking-[0.3em] text-[var(--muted)]">scroll</span>
         </div>
       </section>
+   {/* ═══════ GAMES ═══════ */}
+      <section id="games-section" className="py-24 border-b border-[var(--border)]">
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
 
+          {/* header */}
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-6 h-[2px] bg-[var(--accent)]" />
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Top-Up Games</span>
+              </div>
+              <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase">
+                Instant <span className="text-[var(--accent)]">Delivery</span>
+              </h2>
+            </div>
+            <Link
+              href="/games"
+              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors whitespace-nowrap"
+            >
+              All Games <FiArrowRight size={12} />
+            </Link>
+          </div>
+
+          {loading ? (
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 sm:gap-4">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="aspect-square rounded-2xl bg-[var(--card)]/30 animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 sm:gap-4">
+              {games.map((game, i) => (
+                <GameCardGrid
+                  key={game?.gameSlug || i}
+                  game={game}
+                  isOutOfStock={() => false}
+                  index={i}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
       {/* ═══════ MARQUEE ═══════ */}
       <section className="py-10 border-b border-[var(--border)] overflow-hidden relative bg-[var(--card)]/10">
         <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
@@ -324,8 +418,105 @@ export default function LandingPage() {
           ))}
         </div>
       </section>
+  {/* ═══════ PRODUCTS ═══════ */}
+      <section className="py-24 border-b border-[var(--border)] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-5 md:px-10">
 
-      <PricingSection />
+          {/* header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-6 h-[2px] bg-[var(--accent)]" />
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Our Products</span>
+              </div>
+              <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase leading-none">
+                Built for <span className="text-[var(--accent)]">Creators</span> &amp; Sellers
+              </h2>
+            </div>
+            <Link
+              href="/ourproducts"
+              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors self-start md:self-auto"
+            >
+              View all products <FiArrowUpRight size={12} />
+            </Link>
+          </div>
+
+          {/* cards grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {PRODUCTS.map((p, i) => (
+              <motion.a
+                key={p.id}
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22,1,0.36,1] }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className="group relative flex flex-col gap-5 p-6 rounded-2xl border border-[var(--border)] bg-[var(--card)]/40 backdrop-blur-sm hover:border-[var(--accent)]/50 hover:shadow-xl hover:shadow-[var(--accent)]/10 transition-all duration-300 cursor-pointer"
+              >
+                {/* glow on hover */}
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: `radial-gradient(ellipse at top left, ${p.accent}18 0%, transparent 70%)` }}
+                />
+
+                {/* top row */}
+                <div className="flex items-start justify-between">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: `${p.accent}18`, border: `1px solid ${p.accent}30` }}
+                  >
+                    <p.icon size={20} style={{ color: p.accent }} />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {p.isNew && (
+                      <span className="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest text-black animate-pulse"
+                        style={{ background: p.accent }}>
+                        NEW
+                      </span>
+                    )}
+                    <span className="text-[8px] font-black uppercase tracking-[0.3em] text-[var(--muted)]/50 border border-[var(--border)] px-2 py-0.5 rounded-full">
+                      {p.num}
+                    </span>
+                  </div>
+                </div>
+
+                {/* text */}
+                <div className="flex-1 space-y-1.5">
+                  <h3 className="text-base font-black uppercase italic tracking-tight leading-none">{p.name}</h3>
+                  <p className="text-[9px] font-bold uppercase tracking-wide" style={{ color: p.accent }}>{p.tagline}</p>
+                  <p className="text-[10px] text-[var(--muted)] leading-relaxed opacity-70 pt-1">{p.desc}</p>
+                </div>
+
+                {/* feature chips */}
+                <div className="flex flex-wrap gap-1.5">
+                  {p.features.map((f, j) => (
+                    <span key={j} className="px-2 py-0.5 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] text-[8px] font-bold uppercase tracking-wide text-[var(--muted)]">
+                      {f}
+                    </span>
+                  ))}
+                </div>
+
+                {/* cta */}
+                <div
+                  className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest mt-auto group-hover:gap-2 transition-all"
+                  style={{ color: p.accent }}
+                >
+                  Get Started <FiArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
+                </div>
+
+                {/* bottom accent line on hover */}
+                <div
+                  className="absolute bottom-0 left-6 right-6 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"
+                  style={{ background: `linear-gradient(to right, transparent, ${p.accent}, transparent)` }}
+                />
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ═══════ SERVICES ═══════ */}
       <section className="py-24 border-b border-[var(--border)]">
@@ -394,49 +585,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ═══════ GAMES ═══════ */}
-      <section id="games-section" className="py-24 border-b border-[var(--border)]">
-        <div className="max-w-7xl mx-auto px-5 md:px-10">
+    
 
-          {/* header */}
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-[2px] bg-[var(--accent)]" />
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Top-Up Games</span>
-              </div>
-              <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase">
-                Instant <span className="text-[var(--accent)]">Delivery</span>
-              </h2>
-            </div>
-            <Link
-              href="/games"
-              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors whitespace-nowrap"
-            >
-              All Games <FiArrowRight size={12} />
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 sm:gap-4">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="aspect-square rounded-2xl bg-[var(--card)]/30 animate-pulse" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 sm:gap-4">
-              {games.map((game, i) => (
-                <GameCardGrid
-                  key={game?.gameSlug || i}
-                  game={game}
-                  isOutOfStock={() => false}
-                  index={i}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+   
 
       {/* ═══════ CTA ═══════ */}
       <section className="py-8 md:py-12">

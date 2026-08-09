@@ -63,7 +63,7 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/20 to-transparent" />
       <div className="absolute bottom-0 left-[10%] w-[30%] h-[100px] bg-[var(--accent)]/5 rounded-full blur-[90px] pointer-events-none" />
 
-      <div className="w-full px-6 lg:px-12 xl:px-16 mx-auto relative z-10">
+      <div className="max-w-6xl w-full px-6 lg:px-12 xl:px-16 mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-4">
 
           {/* BRAND BLOCK - REFINED SPACE */}

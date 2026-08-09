@@ -10,7 +10,7 @@ export default function OurProductsPage() {
   const products = [
     {
       id: "topup-web",
-      name: "Game Topupweb",
+      name: "mlbbtopup.in",
       tagline: "The best website for game top-ups",
       desc: "Get a fast and automatic website for your game top-up business. It's easy to set up and works with many games.",
       icon: FiLayers,
@@ -27,7 +27,7 @@ export default function OurProductsPage() {
     },
     {
       id: "payment-gateway",
-      name: "Payment Gateway",
+      name: "xyzpay.site",
       tagline: "Fast and safe payments for your store",
       desc: "A secure way to accept payments from your customers. We make sure your money gets to you quickly and safely.",
       icon: FiZap,
@@ -44,7 +44,7 @@ export default function OurProductsPage() {
     },
     {
       id: "games-bluebuff",
-      name: "Games BlueBuff",
+      name: "games.bluebuff.in",
       tagline: "Your ultimate gaming destination",
       desc: "Explore a wide range of games and top-up options seamlessly integrated for the best experience. Play, connect, and enjoy.",
       icon: FiGlobe,
@@ -58,6 +58,24 @@ export default function OurProductsPage() {
       ],
       link: "https://games.bluebuff.in",
       color: "from-green-600 to-emerald-400"
+    },
+    {
+      id: "web-bluebuff",
+      name: "Web.BlueBuff.in",
+      tagline: "Link in bio & website builder",
+      desc: "Create your own customizable link-in-bio page or mini website in minutes. No coding needed — just drag, drop, and go live.",
+      icon: FiShare2,
+      isNew: true,
+      features: [
+        "Custom link-in-bio page",
+        "Drag & drop builder",
+        "Custom domain support",
+        "Social links & buttons",
+        "Analytics & click tracking",
+        "Mobile-first design"
+      ],
+      link: "https://web.bluebuff.in",
+      color: "from-pink-600 to-rose-400"
     }
   ];
 
