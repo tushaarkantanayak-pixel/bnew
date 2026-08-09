@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     const isBlocked = await Blocklist.findOne({
       $or: [
         { type: "email", value: email.toLowerCase() },
-        { type: "ip", value: ip !== "unknown" ? ip : "null" }
+        ...(process.env.NODE_ENV !== "development" && ip !== "unknown" && ip !== "::1" && ip !== "127.0.0.1" ? [{ type: "ip", value: ip }] : [])
       ]
     });
 
@@ -54,7 +54,7 @@ export async function POST(req: Request) {
 
     /* ================= CREATE USER IF NEW ================= */
     if (!user) {
-      if (ip !== "unknown") {
+      if (ip !== "unknown" && process.env.NODE_ENV !== "development" && ip !== "::1" && ip !== "127.0.0.1") {
         const ipCount = await User.countDocuments({ lastLoginIp: ip });
         if (ipCount >= 2) {
            await Blocklist.updateOne(

@@ -47,6 +47,12 @@ export default function ApiKeysPage() {
     const [isUpdating, setIsUpdating] = useState(false);
     const hasFetched = useRef(false);
 
+    // Request Access States
+    const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+    const [requestForm, setRequestForm] = useState({ name: "", number: "", monthlySell: "", games: "" });
+    const [isRequesting, setIsRequesting] = useState(false);
+    const [requestMsg, setRequestMsg] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
     const fetchKeys = async () => {
         try {
             const res = await apiClient.get("/api/user/keys");
@@ -168,7 +174,31 @@ export default function ApiKeysPage() {
         });
     };
 
-
+    const handleRequestAccess = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsRequesting(true);
+        setRequestMsg(null);
+        try {
+            const res = await apiClient.post("/api/api-access-requests", {
+                ...requestForm,
+                email: userDetails.email
+            });
+            if (res.data.success) {
+                setRequestMsg({ type: 'success', text: "Request submitted successfully! We'll contact you soon." });
+                setRequestForm({ name: "", number: "", monthlySell: "", games: "" });
+                setTimeout(() => {
+                    setIsRequestModalOpen(false);
+                    setRequestMsg(null);
+                }, 3000);
+            } else {
+                setRequestMsg({ type: 'error', text: res.data.message || "Failed to submit request." });
+            }
+        } catch (err: any) {
+            setRequestMsg({ type: 'error', text: err.response?.data?.message || "Server error. Please try again." });
+        } finally {
+            setIsRequesting(false);
+        }
+    };
 
     return (
         <div className="space-y-6">
@@ -195,12 +225,12 @@ export default function ApiKeysPage() {
                                 </button>
                             </form>
                         ) : (
-                            <Link
-                                href="/dashboard/support"
+                            <button
+                                onClick={() => setIsRequestModalOpen(true)}
                                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-black uppercase italic hover:bg-amber-500/20 transition-all"
                             >
-                                <FiLock /> Only Member Feature - Contact Support
-                            </Link>
+                                <FiLock /> Request API Access
+                            </button>
                         )
                     )}
                 </div>
@@ -415,13 +445,94 @@ export default function ApiKeysPage() {
                     <div className="space-y-3">
                         <div className="space-y-1">
                             <p className="text-[10px] font-bold text-foreground/50 uppercase">API URL</p>
-                            <code className="text-[10px] bg-foreground/10 px-2 py-1 rounded block truncate text-accent font-mono">
-                                https://bluebuff.in/api/service
-                            </code>
+                            <button 
+                                onClick={() => setIsRequestModalOpen(true)}
+                                className="w-full text-left text-[10px] bg-foreground/10 hover:bg-foreground/20 px-2 py-1 rounded block truncate text-accent font-mono transition-colors"
+                            >
+                                Request Production API Access
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Request Access Modal */}
+            <AnimatePresence>
+                {isRequestModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+                        onClick={() => setIsRequestModalOpen(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-card border border-border rounded-2xl w-full max-w-md overflow-hidden relative shadow-2xl"
+                        >
+                            <div className="p-5 border-b border-border flex items-center justify-between">
+                                <h2 className="font-black uppercase italic text-foreground flex items-center gap-2">
+                                    <FiLock className="text-amber-500" /> Request API Access
+                                </h2>
+                                <button onClick={() => setIsRequestModalOpen(false)} className="text-muted hover:text-foreground">
+                                    <FiX size={20} />
+                                </button>
+                            </div>
+
+                            <form onSubmit={handleRequestAccess} className="p-5 space-y-4">
+                                {requestMsg && (
+                                    <div className={`p-3 rounded-xl text-xs font-bold border ${requestMsg.type === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-500' : 'bg-red-500/10 border-red-500/20 text-red-500'}`}>
+                                        {requestMsg.text}
+                                    </div>
+                                )}
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-muted">Full Name</label>
+                                    <input 
+                                        type="text" required
+                                        value={requestForm.name} onChange={e => setRequestForm({...requestForm, name: e.target.value})}
+                                        className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none" 
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-muted">Phone Number</label>
+                                    <input 
+                                        type="text" required
+                                        value={requestForm.number} onChange={e => setRequestForm({...requestForm, number: e.target.value})}
+                                        className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none" 
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-muted">Est. Monthly Sell (in ₹)</label>
+                                    <input 
+                                        type="text" required placeholder="e.g. 50,000"
+                                        value={requestForm.monthlySell} onChange={e => setRequestForm({...requestForm, monthlySell: e.target.value})}
+                                        className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none" 
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-muted">Games You Want to Sell</label>
+                                    <input 
+                                        type="text" required placeholder="e.g. Free Fire, BGMI"
+                                        value={requestForm.games} onChange={e => setRequestForm({...requestForm, games: e.target.value})}
+                                        className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm focus:border-accent outline-none" 
+                                    />
+                                </div>
+
+                                <button 
+                                    type="submit" disabled={isRequesting}
+                                    className="w-full py-3 rounded-xl bg-amber-500 text-black font-black uppercase italic tracking-widest text-xs hover:bg-amber-400 transition-colors disabled:opacity-50"
+                                >
+                                    {isRequesting ? 'Submitting...' : 'Submit Request'}
+                                </button>
+                            </form>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
         </div>
     );
 }

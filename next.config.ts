@@ -42,6 +42,13 @@ const nextConfig = {
   },
   async headers() {
     return [
+      // 0. Fix Google OAuth popup postMessage (COOP must allow popups)
+      {
+        source: "/login",
+        headers: [
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
+        ]
+      },
       // 1. Allow any origin to access the public API service routes
       {
         source: "/api/service/:path*",
@@ -57,8 +64,6 @@ const nextConfig = {
         source: "/api/:path((?!service).*)*", // Matches all /api/ routes EXCEPT /api/service/
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
-          // Note: In a real strict environment without localhost, you'd hardcode https://bluebuff.in
-          // Next.js handles CORS dynamically if omitted, but this explicitly restricts browsers enforcing CORS.
           { key: "Access-Control-Allow-Origin", value: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://bluebuff.in" },
           { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
           { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization" },

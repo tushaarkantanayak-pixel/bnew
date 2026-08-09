@@ -162,17 +162,51 @@ function AuthContent() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center pt-8 sm:pt-20 px-4 overflow-hidden bg-[var(--background)]">
+    <section className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center pt-8 sm:pt-20 lg:pt-0 px-4 overflow-hidden bg-[var(--background)]">
       {/* AMBIENT BACKGROUND */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(var(--accent-rgb),0.08),transparent_70%)]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(var(--accent-rgb),0.08),transparent_70%)] lg:bg-[radial-gradient(circle_at_25%_50%,rgba(var(--accent-rgb),0.08),transparent_50%)]" />
       </div>
 
+      {/* LEFT SIDE DESKTOP LOGO */}
+      <div className="hidden lg:flex w-1/2 flex-col items-center justify-center h-full relative z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative flex items-center justify-center"
+        >
+          {/* Outer Ring */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute w-72 h-72 rounded-full border border-[var(--accent)]/20 border-dashed"
+          />
+          {/* Inner Ring */}
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute w-56 h-56 rounded-full border-2 border-[var(--accent)]/10"
+          />
+          {/* Logo container */}
+          <div className="bg-[var(--background)] p-8 rounded-full border border-[var(--border)] shadow-2xl relative z-10">
+            <Image
+              src="/logoBB.png"
+              alt="Logo"
+              width={140}
+              height={140}
+              className="drop-shadow-lg"
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* RIGHT SIDE FORM */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-[400px]"
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="relative z-10 w-full lg:w-1/2 max-w-[400px]"
       >
         <div className="w-full relative">
           <motion.div
@@ -185,7 +219,7 @@ function AuthContent() {
             <div className="flex flex-col items-center text-center mb-5">
               <motion.div
                 variants={itemVariants}
-                className="relative mb-3"
+                className="relative mb-3 lg:hidden"
               >
                 <div className="bg-[var(--background)] p-2 rounded-full border border-[var(--border)] shadow-xl">
                   <Image
