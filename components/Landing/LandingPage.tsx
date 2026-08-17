@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  FiArrowRight, FiShield, FiCpu, FiCode,
+  FiArrowRight, FiCpu, FiCode,
   FiCheck, FiTrendingUp, FiArrowUpRight, FiMessageCircle, FiSend,
-  FiLayers, FiZap, FiGlobe, FiShare2
+  FiZap, FiShare2, FiBriefcase, FiSmartphone,
+  FiPlayCircle, FiCreditCard, FiActivity, FiCheckCircle, FiExternalLink
 } from "react-icons/fi";
 import GameCardGrid from "../Games/GameCardGrid";
 import HolographicController from "./HolographicController";
-
 
 /* ─── tiny helpers ─── */
 const PRIORITY_SLUGS = [
@@ -23,67 +23,147 @@ const PRIORITY_SLUGS = [
 ];
 
 const PARTNERS = [
-  "MLBB Topup","Meowji Official","Scammers Official","Yuji MLBB",
-  "Topup Memo","Vampenttic Games","Tronics Official","BlueBuff","Happy Store",
+  "MLBB Topup", "Meowji Official", "Scammers Official", "Yuji MLBB",
+  "Topup Memo", "Vampenttic Games", "Tronics Official", "BlueBuff Agency", "XYZPay", "Happy Store",
 ];
 
 const STATS = [
+  { value: "8",       label: "Live Products" },
   { value: "₹0",      label: "Setup Cost" },
   { value: "Free",    label: "API Access" },
-  { value: "10+",     label: "Clients" },
   { value: "99.9%",   label: "Uptime" },
-  { value: "24/7",    label: "Support" },
+  { value: "24/7",    label: "Monitoring" },
 ];
 
-const PRODUCTS = [
+export const PRODUCTS = [
   {
-    id: "topup-web",
+    id: "bluebuff-agency",
     num: "01",
-    name: "mlbbtopup.in",
-    tagline: "The best website for game top-ups",
-    desc: "A fast, automatic top-up website ready for any game. Set up in minutes, looks like your brand.",
-    icon: FiLayers,
-    features: ["Player ID check", "Auto wallet", "Admin dashboard", "Multi-game"],
-    link: "https://mlbbtopup.in",
-    accent: "#7c3aed",
+    name: "bluebuff.in",
+    categoryKey: "web",
+    categoryLabel: "Agency & Solutions",
+    tagline: "Digital Agency & Development Studio",
+    desc: "Custom web platforms, gaming store builds, mobile apps, and custom tech architecture.",
+    icon: FiBriefcase,
+    features: ["Custom Stores", "Web & Apps", "UI/UX & Branding", "Tech Architecture"],
+    link: "https://bluebuff.in",
+    accent: "#3b82f6",
+    badge: "AGENCY",
     isNew: false,
   },
   {
-    id: "payment-gateway",
+    id: "mlbb-topup",
     num: "02",
-    name: "xyzpay.site",
-    tagline: "Fast & safe payments for your store",
-    desc: "Accept UPI, cards & more from your customers. Money lands fast, every time.",
-    icon: FiZap,
-    features: ["UPI & cards", "High success rate", "24/7 monitoring", "Easy integration"],
-    link: "https://xyzpay.site",
-    accent: "#4f46e5",
+    name: "mlbbtopup.in",
+    categoryKey: "gaming",
+    categoryLabel: "Game Top-Up Store",
+    tagline: "Instant MLBB & Game Recharges",
+    desc: "Fast, reliable Mobile Legends diamond recharge portal with instant Player ID verification.",
+    icon: FiSmartphone,
+    features: ["Player ID Check", "Instant Delivery", "Auto Wallet", "24/7 Checkout"],
+    link: "https://mlbbtopup.in",
+    accent: "#8b5cf6",
+    badge: "TOP-UP STORE",
     isNew: false,
   },
   {
     id: "games-bluebuff",
     num: "03",
     name: "games.bluebuff.in",
-    tagline: "Your ultimate gaming destination",
-    desc: "Wide range of games & top-ups, seamlessly integrated. Play, connect, and enjoy.",
-    icon: FiGlobe,
-    features: ["Instant delivery", "Exclusive rewards", "Safe transactions", "24/7 support"],
+    categoryKey: "gaming",
+    categoryLabel: "Gaming Hub",
+    tagline: "Game Store & Digital Vouchers",
+    desc: "Complete catalog of game top-ups, digital gift cards, and game keys with instant delivery.",
+    icon: FiPlayCircle,
+    features: ["Multi-Game Catalog", "Digital Vouchers", "Gamer Rewards", "Instant Keys"],
     link: "https://games.bluebuff.in",
-    accent: "#059669",
+    accent: "#10b981",
+    badge: "GAMING HUB",
+    isNew: false,
+  },
+  {
+    id: "api-bluebuff",
+    num: "04",
+    name: "api.bluebuff.in",
+    categoryKey: "gaming",
+    categoryLabel: "Developer API Engine",
+    tagline: "Automated Game Top-Up API",
+    desc: "High-speed REST API for resellers and store owners to automate fulfillment & sync stock.",
+    icon: FiCpu,
+    features: ["Sub-Second Speed", "Stock Sync", "Webhook Alerts", "Dev Console"],
+    link: "https://api.bluebuff.in",
+    accent: "#f59e0b",
+    badge: "GAMING API",
     isNew: false,
   },
   {
     id: "web-bluebuff",
-    num: "04",
-    name: "Web.BlueBuff.in",
-    tagline: "Link in bio & website builder",
-    desc: "Build a beautiful link-in-bio page or mini website in minutes. No code required.",
+    num: "05",
+    name: "web.bluebuff.in",
+    categoryKey: "web",
+    categoryLabel: "Website Builder",
+    tagline: "No-Code Website & Bio Link Builder",
+    desc: "Build sleek bio-link pages or mini store websites in minutes. Custom domains & analytics.",
     icon: FiShare2,
-    features: ["Drag & drop", "Custom domain", "Click analytics", "Mobile-first"],
+    features: ["Drag & Drop", "Custom Domains", "Click Analytics", "Mobile First"],
     link: "https://web.bluebuff.in",
-    accent: "#db2777",
+    accent: "#ec4899",
+    badge: "NO-CODE BUILDER",
     isNew: true,
   },
+  {
+    id: "cryptopay-bluebuff",
+    num: "06",
+    name: "cryptopay.bluebuff.in",
+    categoryKey: "payments",
+    categoryLabel: "Crypto Payments",
+    tagline: "Automated Web3 Payment Gateway",
+    desc: "Accept USDT, BTC, ETH, and crypto globally with zero chargeback risk & fast settlement.",
+    icon: FiCreditCard,
+    features: ["USDT, BTC & ETH", "Zero Chargebacks", "Instant Payout", "Auto Webhooks"],
+    link: "https://cryptopay.bluebuff.in",
+    accent: "#6366f1",
+    badge: "CRYPTO PAY",
+    isNew: true,
+  },
+  {
+    id: "stalkerweb-bluebuff",
+    num: "07",
+    name: "stalkerweb.bluebuff.in",
+    categoryKey: "infra",
+    categoryLabel: "Web Monitoring",
+    tagline: "24/7 Web & API Uptime Tracking",
+    desc: "Keep your stores, APIs, and servers active 24/7 with instant downtime alerts & SSL checks.",
+    icon: FiActivity,
+    features: ["24/7 Uptime Check", "Instant Alerts", "SSL Monitor", "Latency Metrics"],
+    link: "https://stalkerweb.bluebuff.in",
+    accent: "#06b6d4",
+    badge: "WEB MONITOR",
+    isNew: true,
+  },
+  {
+    id: "xyzpay-site",
+    num: "08",
+    name: "xyzpay.site",
+    categoryKey: "payments",
+    categoryLabel: "Payment Gateway",
+    tagline: "Instant Merchant Payment Gateway",
+    desc: "Fast checkout for digital game stores. High success rate, instant UPI & wallet payouts.",
+    icon: FiZap,
+    features: ["UPI & Cards", "High Success Rate", "Auto Payouts", "24/7 Security"],
+    link: "https://xyzpay.site",
+    accent: "#a855f7",
+    badge: "PAYMENT GATEWAY",
+    isNew: false,
+  },
+];
+
+const CATEGORIES = [
+  { id: "all", label: "All Products (8)" },
+  { id: "gaming", label: "Gaming & Top-Up" },
+  { id: "payments", label: "Payments & Crypto" },
+  { id: "web", label: "Web & Builder" },
+  { id: "infra", label: "Monitoring & Infra" },
 ];
 
 const SERVICES = [
@@ -91,72 +171,73 @@ const SERVICES = [
     icon: FiCpu,
     tag: "API",
     title: "Game Top-Up API",
-    desc: "Connect to game top-ups instantly. Fast, automatic, and always online.",
-    items: ["Auto delivery", "Many games", "Live updates"],
+    desc: "Connect your storefront to game top-ups instantly powered by api.bluebuff.in.",
+    items: ["Auto delivery", "50+ Games", "Live status updates"],
   },
   {
     icon: FiCode,
     tag: "WEB",
-    title: "Custom Stores",
-    desc: "We build fast, beautiful game stores for your business.",
+    title: "Custom Store Build",
+    desc: "BlueBuff Agency builds custom, high-converting game stores tailored to your brand.",
     items: ["Admin dashboard", "SEO ready", "Mobile first"],
     highlight: true,
   },
   {
     icon: FiTrendingUp,
     tag: "GROWTH",
-    title: "Marketing & SEO",
-    desc: "Get more customers with smart online marketing.",
-    items: ["Search ranking", "Social ads", "Brand kit"],
+    title: "Marketing & Growth",
+    desc: "Scale your revenue with specialized online marketing, store SEO, and gamer ads.",
+    items: ["Search ranking", "Social campaigns", "Brand design"],
   },
   {
     icon: FiMessageCircle,
     tag: "BOTS",
     title: "WhatsApp Bots",
-    desc: "Automated customer support. 1.5/mo or 1% of revenue.",
-    items: ["Instant replies", "24/7 online", "Auto orders"],
+    desc: "Automate order processing and customer support 24/7 directly on WhatsApp.",
+    items: ["Instant replies", "24/7 uptime", "Auto order sync"],
   },
   {
     icon: FiSend,
     tag: "BOTS",
     title: "Telegram Bots",
-    desc: "Fast Telegram bot integration. 1/mo or 1% of revenue.",
-    items: ["Secure", "Group management", "Instant alerts"],
+    desc: "Deploy Telegram order bots and group management automation with alerts.",
+    items: ["Secure token auth", "Group management", "Instant alert bots"],
   },
 ];
 
 /* ═══════════════════════════════════════════════════════ */
 export default function LandingPage() {
-  const [games, setGames]   = useState<any[]>([]);
+  const [games, setGames] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
     (async () => {
       try {
-        const res  = await fetch("/api/games");
+        const res = await fetch("/api/games");
         const json = await res.json();
-        const all  = json?.data?.games || [];
+        const all = json?.data?.games || [];
         setGames(
-          PRIORITY_SLUGS.map(s => all.find((g: any) => g.gameSlug === s)).filter(Boolean)
+          PRIORITY_SLUGS.map((s) => all.find((g: any) => g.gameSlug === s)).filter(Boolean)
         );
       } catch {}
-      finally { setLoading(false); }
+      finally {
+        setLoading(false);
+      }
     })();
   }, []);
+
+  const filteredProducts = selectedCategory === "all"
+    ? PRODUCTS
+    : PRODUCTS.filter((p) => p.categoryKey === selectedCategory);
 
   return (
     <div className="bg-[var(--background)] text-[var(--foreground)] min-h-screen font-sans overflow-x-hidden selection:bg-[var(--accent)]/20">
 
-      {/* ── fixed ambient glows removed ── */}
-
       {/* ═══════ HERO ═══════ */}
-      <section
-        className="relative pt-6 pb-16 md:pt-10 md:pb-20 flex flex-col justify-center overflow-hidden border-b border-[var(--border)]"
-      >
-        {/* ── 3D DECORATIVE BACKGROUND ── */}
+      <section className="relative pt-6 pb-12 sm:pt-8 sm:pb-16 md:pt-12 md:pb-20 flex flex-col justify-center overflow-hidden border-b border-[var(--border)]">
+        {/* 3D DECORATIVE BACKGROUND */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-
-          {/* Perspective grid floor */}
           <div
             className="absolute bottom-0 left-0 right-0 h-[55%]"
             style={{
@@ -166,168 +247,105 @@ export default function LandingPage() {
               transform: "perspective(600px) rotateX(55deg)",
               transformOrigin: "bottom center",
               maskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)" }}
+              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
+            }}
           />
 
-          {/* Large outer glow ring — top right */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             className="absolute -top-[15%] -right-[10%] w-[55vw] h-[55vw] max-w-[650px] max-h-[650px]"
             style={{ border: "1px solid rgba(var(--accent-rgb), 0.12)", borderRadius: "50%" }}
           >
-            {/* dot on ring */}
-            <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--accent)]"
-              
-            />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--accent)]" />
           </motion.div>
-
-          {/* Inner ring */}
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-[5%] right-[2%] w-[38vw] h-[38vw] max-w-[450px] max-h-[450px]"
-            style={{ border: "1px dashed rgba(var(--accent-rgb), 0.08)", borderRadius: "50%" }}
-          >
-            <div
-              className="absolute bottom-0 right-[20%] translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[var(--accent)]/50"
-            />
-          </motion.div>
-
-          {/* Floating wireframe cube — right side */}
-          <motion.div
-            animate={{ y: [-12, 12, -12], rotateZ: [0, 5, 0, -5, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[18%] right-[18%] hidden md:block"
-            style={{ width: 90, height: 90, perspective: 400 }}
-          >
-            <div
-              style={{
-                width: "100%", height: "100%",
-                border: "1px solid rgba(var(--accent-rgb),0.25)",
-                transform: "rotateX(30deg) rotateY(45deg)",
-                position: "relative" }}
-            >
-              {/* inner face */}
-              <div style={{
-                position: "absolute", inset: 12,
-                border: "1px solid rgba(var(--accent-rgb),0.12)" }} />
-            </div>
-          </motion.div>
-
-          {/* Small diamond top-left */}
-          <motion.div
-            animate={{ y: [-8, 8, -8], rotate: [0, 45, 90, 135, 180] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[30%] left-[6%] hidden md:block"
-          >
-            <div style={{
-              width: 28, height: 28,
-              border: "1px solid rgba(var(--accent-rgb),0.2)",
-              transform: "rotate(45deg)" }} />
-          </motion.div>
-
-          {/* Wireframe Sphere (Intersecting rings) */}
-          <motion.div
-            animate={{ rotateX: [0, 360], rotateY: [0, 360] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[60%] left-[12%] hidden md:block"
-            style={{ width: 80, height: 80, transformStyle: "preserve-3d" }}
-          >
-            <div style={{ position: "absolute", inset: 0, border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: "50%", transform: "rotateY(0deg)" }} />
-            <div style={{ position: "absolute", inset: 0, border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: "50%", transform: "rotateY(60deg)" }} />
-            <div style={{ position: "absolute", inset: 0, border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: "50%", transform: "rotateY(120deg)" }} />
-            <div style={{ position: "absolute", inset: 0, border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: "50%", transform: "rotateX(90deg)" }} />
-          </motion.div>
-
-
-
-          {/* Tiny orb cluster */}
-          {[["14%","55%","0.5"],["22%","40%","0.3"],["12%","65%","0.4"]].map(([t,l,o],i) => (
-            <motion.div
-              key={i}
-              animate={{ scale: [1, 1.4, 1], opacity: [Number(o)*0.6, Number(o), Number(o)*0.6] }}
-              transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.8 }}
-              className="absolute w-1.5 h-1.5 rounded-full bg-[var(--accent)] hidden md:block"
-              style={{ top: t, left: l, opacity: Number(o) }}
-            />
-          ))}
-
-
         </div>
 
-        {/* thin top accent line */}
+        {/* Accent top line */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent z-10" />
 
-        {/* content grid */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-10 pt-2 pb-8 md:pt-4 md:pb-10 grid md:grid-cols-2 gap-12 items-center">
-
-          {/* ── LEFT: text ── */}
-          <div className="flex flex-col gap-4 md:gap-7 order-1 md:order-1">
-
-            {/* eyebrow */}
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-[2px] bg-[var(--accent)]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-                Free to Build, Free API
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-10 pt-2 pb-6 md:pt-4 md:pb-10 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* LEFT COLUMN */}
+          <div className="flex flex-col gap-4 sm:gap-5 order-1 md:order-1">
+            
+            {/* Minimal Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/30 w-fit">
+              <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)]">
+                BLUEBUFF ECOSYSTEM
               </span>
             </div>
 
-            {/* headline */}
-            <h1 className="text-[clamp(2.5rem,5vw,4.2rem)] font-[1000] leading-[1.0] tracking-[-0.03em] uppercase italic text-[var(--foreground)] mb-1 md:mb-3 mt-2 md:mt-0">
-              Your Own Game
-              <br />
-              <span className="text-[var(--accent)]">Top-Up Store.</span>
+            {/* Simple Punchy Headline */}
+            <h1 className="text-[clamp(2.2rem,6.5vw,4.2rem)] font-[1000] leading-[1.05] tracking-[-0.03em] uppercase italic text-[var(--foreground)]">
+              Your Gaming &amp; Web <br />
+              <span className="text-[var(--accent)]">Ecosystem.</span>
             </h1>
-            <h2 className="text-[clamp(1.5rem,2.5vw,2.2rem)] font-bold leading-[1.2] tracking-tight text-[var(--foreground)]/90">
-              Pay Only When You Earn.
-            </h2>
 
-            {/* sub */}
-            <p className="text-xs md:text-base text-[var(--muted)] leading-relaxed max-w-md">
-              Launch a fully automated top-up store under your brand — free setup, free API access, zero upfront cost. Choose a simple monthly plan or pay a small % of your profit. You grow, we grow.
+            {/* Simple 1-Line Description */}
+            <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-md">
+              Automated game top-ups, developer APIs, website builders, crypto checkout &amp; digital agency solutions.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-row flex-nowrap items-center gap-2 mt-2 md:mt-0 w-full">
-              <Link
-                href="/dashboard/digital-gametopup/api-keys"
-                style={{ color: "#000" }}
-                className="group flex-1 flex items-center justify-center gap-1.5 px-2 py-3 rounded-xl bg-gradient-to-r from-[var(--accent)] to-[#e879f9] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[9px] md:text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(192,132,252,0.3)] hover:shadow-[0_0_30px_rgba(192,132,252,0.5)] whitespace-nowrap"
-              >
-                Get API Keys
-                <FiArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              <Link
-                href="/games"
-                className="group flex-1 flex items-center justify-center gap-1.5 px-2 py-3 rounded-xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40 hover:bg-[var(--card)]/50 font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[9px] md:text-[11px] italic transition-all whitespace-nowrap"
-              >
-                Topup Now
-                <FiArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
+            {/* Clean Products Domain Pills */}
+            <div className="pt-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                {PRODUCTS.map((p) => (
+                  <a
+                    key={p.id}
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "var(--foreground)" }}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[var(--card)]/60 border border-[var(--border)] text-[9px] font-bold hover:border-[var(--accent)] hover:!text-[var(--accent)] transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: p.accent }} />
+                    <span style={{ color: "var(--foreground)" }}>{p.name}</span>
+                    <FiArrowUpRight size={9} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                  </a>
+                ))}
+              </div>
             </div>
 
+            {/* Clean CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-2 w-full">
+              <a
+                href="#products-suite"
+                style={{ color: "#000000" }}
+                className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] !text-black font-black uppercase tracking-[0.15em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-md whitespace-nowrap"
+              >
+                <span style={{ color: "#000000" }}>Explore Products</span>
+                <FiArrowRight size={14} style={{ color: "#000000" }} className="group-hover:translate-x-1 transition-transform" />
+              </a>
 
+              <Link
+                href="/dashboard/digital-gametopup/api-keys"
+                style={{ color: "var(--foreground)" }}
+                className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] bg-[var(--card)]/40 hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.15em] text-[11px] italic transition-all whitespace-nowrap"
+              >
+                <span style={{ color: "var(--foreground)" }}>Get API Keys</span>
+                <FiCpu size={14} className="text-[var(--accent)]" />
+              </Link>
+            </div>
           </div>
 
-          {/* RIGHT: Holographic Controller */}
+          {/* RIGHT COLUMN: Holographic Controller & Stats */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="flex flex-col gap-4 relative w-full mt-10 md:mt-0 order-2 md:order-2"
+            className="flex flex-col gap-4 relative w-full mt-4 md:mt-0 order-2 md:order-2"
           >
-            {/* Scattered Floating Stats */}
+            {/* Floating Stats */}
             <div className="absolute inset-0 z-20 pointer-events-none">
               {STATS.map((s, i) => {
                 const positions = [
-                  "top-[5%] left-[2%] md:left-[-5%]",
-                  "top-[10%] right-[2%] md:right-[-5%]",
-                  "top-[45%] left-[-2%] md:left-[-15%]",
-                  "top-[55%] right-[-2%] md:right-[-10%]",
-                  "bottom-[15%] left-[5%] md:left-[-5%]",
+                  "top-[2%] left-[2%] md:left-[-5%]",
+                  "top-[8%] right-[2%] md:right-[-5%]",
+                  "top-[45%] left-[-2%] md:left-[-12%]",
+                  "top-[55%] right-[-2%] md:right-[-8%]",
+                  "bottom-[12%] left-[5%] md:left-[-5%]",
                 ];
                 return (
                   <motion.div
@@ -336,55 +354,193 @@ export default function LandingPage() {
                     transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }}
                     className={`absolute flex flex-col items-center text-center ${positions[i]}`}
                   >
-                    <span className="text-sm md:text-base font-[1000] tracking-tighter text-[var(--accent)] leading-none drop-shadow-[0_0_10px_rgba(192,132,252,0.7)]">{s.value}</span>
-                    <span className="text-[6px] md:text-[7px] font-black uppercase tracking-[0.2em] text-[var(--muted)] mt-1 drop-shadow-md">{s.label}</span>
+                    <span className="text-xs sm:text-sm md:text-base font-[1000] tracking-tighter text-[var(--accent)] leading-none">
+                      {s.value}
+                    </span>
+                    <span className="text-[6px] sm:text-[7px] font-black uppercase tracking-[0.2em] text-[var(--muted)] mt-1">
+                      {s.label}
+                    </span>
                   </motion.div>
                 );
               })}
             </div>
-            
+
             <HolographicController />
           </motion.div>
-
-        </div>
-
-        {/* scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-1.5 opacity-30">
-          <div className="w-[1px] h-8 bg-[var(--foreground)] animate-pulse" />
-          <span className="text-[8px] font-black uppercase tracking-[0.3em] text-[var(--muted)]">scroll</span>
         </div>
       </section>
-   {/* ═══════ GAMES ═══════ */}
-      <section id="games-section" className="py-24 border-b border-[var(--border)]">
-        <div className="max-w-7xl mx-auto px-5 md:px-10">
 
-          {/* header */}
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-[2px] bg-[var(--accent)]" />
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Top-Up Games</span>
+      {/* ═══════ MARQUEE ═══════ */}
+      <section className="py-6 border-b border-[var(--border)] overflow-hidden relative bg-[var(--card)]/10">
+        <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />
+        <div className="animate-marquee flex gap-3 w-max">
+          {[...PARTNERS, ...PARTNERS].map((name, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[var(--card)]/20 border border-white/[0.04] group hover:border-[var(--accent)]/20 transition-all cursor-default"
+            >
+              <div className="w-4 h-4 rounded-md bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] text-[8px] font-black border border-[var(--accent)]/10">
+                {name.charAt(0)}
               </div>
-              <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase">
+              <span className="text-[9px] sm:text-[10px] font-bold text-[var(--muted)] whitespace-nowrap group-hover:text-[var(--foreground)] transition-colors">
+                {name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════ PRODUCTS SUITE SECTION ═══════ */}
+      <section id="products-suite" className="py-16 sm:py-20 md:py-24 border-b border-[var(--border)] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-6 h-[2px] bg-[var(--accent)]" />
+                <span className="text-[9px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
+                  Products Suite
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-[1000] tracking-tighter uppercase italic leading-none">
+                Our <span className="text-[var(--accent)]">8 Products</span>
+              </h2>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 self-start md:self-auto">
+              {CATEGORIES.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setSelectedCategory(c.id)}
+                  className={`px-3 py-1.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-wider transition-all border ${
+                    selectedCategory === c.id
+                      ? "bg-[var(--accent)] text-black border-[var(--accent)] shadow-md"
+                      : "bg-[var(--card)]/40 border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 8 Products Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {filteredProducts.map((p, i) => (
+              <motion.div
+                key={p.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.04 }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="group relative flex flex-col justify-between p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)]/40 hover:border-[var(--accent)] transition-all duration-300"
+              >
+                <div>
+                  <div className="flex items-start justify-between mb-4">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${p.accent}18`, border: `1px solid ${p.accent}40` }}
+                    >
+                      <p.icon size={20} style={{ color: p.accent }} />
+                    </div>
+
+                    <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                      {p.isNew && (
+                        <span
+                          className="px-1.5 py-0.5 rounded-full text-[7px] font-black uppercase tracking-widest text-black animate-pulse"
+                          style={{ background: p.accent }}
+                        >
+                          NEW
+                        </span>
+                      )}
+                      <span className="px-2 py-0.5 rounded-full text-[7px] font-black uppercase tracking-[0.2em] text-[var(--accent)] bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+                        {p.badge}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Title & Domain */}
+                  <div className="space-y-1 mb-3">
+                    <h3 className="text-lg font-[1000] uppercase italic tracking-tight leading-none text-[var(--foreground)] truncate">
+                      {p.name}
+                    </h3>
+                    <p className="text-[9px] font-bold uppercase tracking-wider truncate" style={{ color: p.accent }}>
+                      {p.tagline}
+                    </p>
+                    <p className="text-xs text-[var(--muted)] leading-relaxed pt-1 opacity-80 line-clamp-2">
+                      {p.desc}
+                    </p>
+                  </div>
+
+                  {/* Features List */}
+                  <div className="grid grid-cols-2 gap-1.5 my-3 pt-3 border-t border-[var(--border)]/60">
+                    {p.features.map((f, j) => (
+                      <div key={j} className="flex items-center gap-1.5 overflow-hidden">
+                        <FiCheckCircle size={10} style={{ color: p.accent }} className="flex-shrink-0" />
+                        <span className="text-[8px] font-bold uppercase tracking-tight text-[var(--muted)] truncate">
+                          {f}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom CTA Row */}
+                <div className="pt-3 border-t border-[var(--border)]/40 flex items-center justify-between mt-auto">
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ backgroundColor: p.accent, color: "#ffffff" }}
+                    className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl !text-white font-black text-[9px] uppercase italic tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-md truncate"
+                  >
+                    <span className="truncate !text-white" style={{ color: "#ffffff" }}>Visit {p.name}</span>
+                    <FiExternalLink size={11} className="flex-shrink-0 !text-white" style={{ color: "#ffffff" }} />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════ INSTANT GAMES ═══════ */}
+      <section id="games-section" className="py-16 border-b border-[var(--border)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-6 h-[2px] bg-[var(--accent)]" />
+                <span className="text-[9px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
+                  Top-Up Games
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-[1000] tracking-tighter uppercase italic">
                 Instant <span className="text-[var(--accent)]">Delivery</span>
               </h2>
             </div>
             <Link
               href="/games"
-              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors whitespace-nowrap"
+              style={{ color: "var(--muted)" }}
+              className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] hover:!text-[var(--accent)] transition-colors whitespace-nowrap"
             >
               All Games <FiArrowRight size={12} />
             </Link>
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
               {Array.from({ length: 6 }).map((_, i) => (
                 <div key={i} className="aspect-square rounded-2xl bg-[var(--card)]/30 animate-pulse" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
               {games.map((game, i) => (
                 <GameCardGrid
                   key={game?.gameSlug || i}
@@ -397,172 +553,52 @@ export default function LandingPage() {
           )}
         </div>
       </section>
-      {/* ═══════ MARQUEE ═══════ */}
-      <section className="py-10 border-b border-[var(--border)] overflow-hidden relative bg-[var(--card)]/10">
-        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />
-        <p className="text-center text-[9px] font-black uppercase tracking-[0.45em] text-[var(--muted)]/80 mb-5">
-          Trusted across India
-        </p>
-        <div className="animate-marquee flex gap-3 w-max">
-          {[...PARTNERS, ...PARTNERS].map((name, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--card)]/20 border border-white/[0.04] group hover:border-[var(--accent)]/20 transition-all cursor-default"
-            >
-              <div className="w-5 h-5 rounded-md bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] text-[9px] font-black border border-[var(--accent)]/10">
-                {name.charAt(0)}
-              </div>
-              <span className="text-[10px] font-bold text-[var(--muted)] whitespace-nowrap group-hover:text-[var(--foreground)] transition-colors">{name}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-  {/* ═══════ PRODUCTS ═══════ */}
-      <section className="py-24 border-b border-[var(--border)] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-5 md:px-10">
 
-          {/* header */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-6 h-[2px] bg-[var(--accent)]" />
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Our Products</span>
-              </div>
-              <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase leading-none">
-                Built for <span className="text-[var(--accent)]">Creators</span> &amp; Sellers
-              </h2>
-            </div>
-            <Link
-              href="/ourproducts"
-              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors self-start md:self-auto"
-            >
-              View all products <FiArrowUpRight size={12} />
-            </Link>
-          </div>
+      {/* ═══════ SERVICES & AGENCY (bluebuff.in) ═══════ */}
+      <section className="py-16 border-b border-[var(--border)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
 
-          {/* cards grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {PRODUCTS.map((p, i) => (
-              <motion.a
-                key={p.id}
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22,1,0.36,1] }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="group relative flex flex-col gap-5 p-6 rounded-2xl border border-[var(--border)] bg-[var(--card)]/40 backdrop-blur-sm hover:border-[var(--accent)]/50 hover:shadow-xl hover:shadow-[var(--accent)]/10 transition-all duration-300 cursor-pointer"
-              >
-                {/* glow on hover */}
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse at top left, ${p.accent}18 0%, transparent 70%)` }}
-                />
-
-                {/* top row */}
-                <div className="flex items-start justify-between">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${p.accent}18`, border: `1px solid ${p.accent}30` }}
-                  >
-                    <p.icon size={20} style={{ color: p.accent }} />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {p.isNew && (
-                      <span className="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest text-black animate-pulse"
-                        style={{ background: p.accent }}>
-                        NEW
-                      </span>
-                    )}
-                    <span className="text-[8px] font-black uppercase tracking-[0.3em] text-[var(--muted)]/50 border border-[var(--border)] px-2 py-0.5 rounded-full">
-                      {p.num}
-                    </span>
-                  </div>
-                </div>
-
-                {/* text */}
-                <div className="flex-1 space-y-1.5">
-                  <h3 className="text-base font-black uppercase italic tracking-tight leading-none">{p.name}</h3>
-                  <p className="text-[9px] font-bold uppercase tracking-wide" style={{ color: p.accent }}>{p.tagline}</p>
-                  <p className="text-[10px] text-[var(--muted)] leading-relaxed opacity-70 pt-1">{p.desc}</p>
-                </div>
-
-                {/* feature chips */}
-                <div className="flex flex-wrap gap-1.5">
-                  {p.features.map((f, j) => (
-                    <span key={j} className="px-2 py-0.5 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] text-[8px] font-bold uppercase tracking-wide text-[var(--muted)]">
-                      {f}
-                    </span>
-                  ))}
-                </div>
-
-                {/* cta */}
-                <div
-                  className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest mt-auto group-hover:gap-2 transition-all"
-                  style={{ color: p.accent }}
-                >
-                  Get Started <FiArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
-                </div>
-
-                {/* bottom accent line on hover */}
-                <div
-                  className="absolute bottom-0 left-6 right-6 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"
-                  style={{ background: `linear-gradient(to right, transparent, ${p.accent}, transparent)` }}
-                />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════ SERVICES ═══════ */}
-      <section className="py-24 border-b border-[var(--border)]">
-        <div className="max-w-7xl mx-auto px-5 md:px-10">
-
-          {/* header */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-3">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
               <div className="w-6 h-[2px] bg-[var(--accent)]" />
-              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Our Services</span>
+              <span className="text-[9px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
+                Agency Services
+              </span>
             </div>
-            <h2 className="text-2xl md:text-4xl font-[1000] tracking-tighter uppercase">
-              Everything You <span className="text-[var(--accent)]">Need</span>
+            <h2 className="text-2xl sm:text-3xl font-[1000] tracking-tighter uppercase italic">
+              Custom Development &amp; <span className="text-[var(--accent)]">Solutions</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] rounded-2xl overflow-hidden">
             {SERVICES.map((s, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative p-8 md:p-10 flex flex-col gap-5 group transition-all duration-500 ${
+                className={`relative p-6 md:p-8 flex flex-col gap-4 group transition-all duration-500 ${
                   s.highlight
                     ? "bg-[var(--accent)]/[0.06]"
                     : "bg-[var(--background)] hover:bg-[var(--card)]/30"
                 }`}
               >
-                {/* tag */}
                 <div className="flex items-center justify-between">
-                  <span className="text-[8px] font-black uppercase tracking-[0.4em] text-[var(--accent)]/60 border border-[var(--accent)]/20 px-2 py-1 rounded-md">
+                  <span className="text-[8px] font-black uppercase tracking-[0.35em] text-[var(--accent)]/60 border border-[var(--accent)]/20 px-2 py-1 rounded-md">
                     {s.tag}
                   </span>
                   <s.icon size={16} className="text-[var(--accent)] opacity-40 group-hover:opacity-100 transition-opacity" />
                 </div>
 
-                <h3 className="text-xl font-[1000] tracking-tighter uppercase leading-none">{s.title}</h3>
+                <h3 className="text-lg font-[1000] tracking-tighter uppercase italic leading-none">{s.title}</h3>
                 <p className="text-xs text-[var(--muted)] leading-relaxed">{s.desc}</p>
 
-                <div className="space-y-2 mt-auto">
+                <div className="space-y-2 mt-auto pt-2">
                   {s.items.map((f, j) => (
-                    <div key={j} className="flex items-center gap-2.5">
+                    <div key={j} className="flex items-center gap-2">
                       <FiCheck size={11} className="text-[var(--accent)] flex-shrink-0" />
-                      <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">{f}</span>
+                      <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-wider">{f}</span>
                     </div>
                   ))}
                 </div>
@@ -573,65 +609,48 @@ export default function LandingPage() {
               </motion.div>
             ))}
           </div>
-
-          <div className="mt-8 flex justify-end">
-            <Link
-              href="/services"
-              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-            >
-              All services <FiArrowUpRight size={12} />
-            </Link>
-          </div>
         </div>
       </section>
 
-    
-
-   
-
-      {/* ═══════ CTA ═══════ */}
-      <section className="py-8 md:py-12">
-        <div className="max-w-7xl mx-auto px-5 md:px-10">
+      {/* ═══════ CALL TO ACTION ═══════ */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative p-6 sm:p-10 rounded-3xl bg-[var(--card)]/60 border border-[var(--border)] text-center max-w-3xl mx-auto space-y-4"
           >
+            <div className="space-y-2">
+              <h2 className="text-2xl sm:text-4xl font-[1000] tracking-tighter uppercase italic leading-none">
+                Build On <span className="text-[var(--accent)]">bluebuff.in</span>
+              </h2>
 
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
-              <div className="space-y-4 max-w-xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-[2px] bg-[var(--accent)]" />
-                  <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[var(--accent)]">Ready to grow?</span>
-                </div>
-                <h2 className="text-3xl md:text-5xl font-[1000] tracking-tighter uppercase leading-none">
-                  Grow your<br />
-                  <span className="text-[var(--accent)]">Business</span> with us
-                </h2>
-                <p className="text-sm text-[var(--muted)] leading-relaxed">
-                  Let's build your next big project together — stores, APIs, and gaming tools all in one place.
-                </p>
-              </div>
+              <p className="text-xs sm:text-sm text-[var(--muted)] max-w-xl mx-auto leading-relaxed">
+                Connect directly with the <strong className="text-[var(--foreground)]">bluebuff.in</strong> team for custom stores, APIs, payment gateways, and software.
+              </p>
+            </div>
 
-              <div className="flex flex-col gap-3 flex-shrink-0">
-                <Link
-                  href="/contact"
-                  style={{ color: "#000" }}
-                  className="group flex items-center gap-3 px-8 py-3.5 rounded-2xl bg-[var(--accent)] font-black uppercase tracking-[0.2em] text-[12px] italic hover:brightness-110 active:scale-95 transition-all whitespace-nowrap"
-                >
-                  Contact Us
-                  <span className="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                    <FiArrowRight size={14} style={{ color: "#000" }} />
-                  </span>
-                </Link>
-                <Link
-                  href="/services"
-                  className="text-center text-[10px] font-black uppercase tracking-[0.25em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors py-2"
-                >
-                  View Services →
-                </Link>
-              </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <Link
+                href="/contact"
+                style={{ color: "#000000" }}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-[var(--accent)] !text-black font-black uppercase tracking-[0.15em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-md"
+              >
+                <span style={{ color: "#000000" }}>Contact bluebuff.in</span>
+                <FiArrowRight size={14} style={{ color: "#000000" }} />
+              </Link>
+
+              <a
+                href="https://bluebuff.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--foreground)" }}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)] text-[11px] font-black uppercase italic tracking-wider transition-all"
+              >
+                <span style={{ color: "var(--foreground)" }}>Visit bluebuff.in</span>
+                <FiExternalLink size={14} />
+              </a>
             </div>
           </motion.div>
         </div>

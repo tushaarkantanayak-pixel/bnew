@@ -6,9 +6,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import {
   FiInstagram,
   FiTwitter,
-  FiYoutube,
-  FiHeart,
-  FiChevronUp,
+  FiLinkedin,
   FiShield,
   FiExternalLink
 } from "react-icons/fi";
@@ -23,7 +21,6 @@ const FOOTER_LINKS = [
       { label: "Home", href: "/" },
       { label: "Store", href: "/games" },
       { label: "Services", href: "/services" },
-
       { label: "Blog", href: "/blog" },
     ],
   },
@@ -51,12 +48,10 @@ const FOOTER_LINKS = [
 const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com/bluebuff.in", icon: FiInstagram },
   { label: "Twitter", href: "https://x.com/tk_dev_", icon: FiTwitter },
-  { label: "YouTube", href: "https://youtube.com", icon: FiYoutube },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/bluebuffesports", icon: FiLinkedin },
 ];
 
 export default function Footer() {
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
   return (
     <footer className="relative mt-2 bg-[var(--background)] border-t border-[var(--border)] pt-6 pb-2 overflow-hidden">
       {/* Subtle Ambient Lighting */}
@@ -66,7 +61,7 @@ export default function Footer() {
       <div className="max-w-6xl w-full px-6 lg:px-12 xl:px-16 mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-4">
 
-          {/* BRAND BLOCK - REFINED SPACE */}
+          {/* BRAND BLOCK */}
           <div className="md:col-span-3 space-y-6">
             <Link href="/" className="group block">
               <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase leading-none bg-gradient-to-r from-[var(--accent)] via-[var(--foreground)] to-[var(--accent)] bg-clip-text text-transparent group-hover:brightness-110 transition-all">
@@ -77,7 +72,7 @@ export default function Footer() {
               </p>
             </Link>
 
-            {/* Trustpillot Card - Compact High-End */}
+            {/* Trustpilot Card */}
             <a
               href={TRUSTPILOT_URL}
               target="_blank"
@@ -106,7 +101,7 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* LINKS GRID - SYMMETRICAL */}
+          {/* LINKS GRID */}
           <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 gap-y-4 gap-x-4">
             {FOOTER_LINKS.map((section) => (
               <div key={section.title} className="space-y-4">
@@ -131,7 +126,7 @@ export default function Footer() {
               </div>
             ))}
 
-            {/* Mobile-only Find Us (fills the 4th grid slot next to Legal) */}
+            {/* Mobile-only Find Us */}
             <div className="md:hidden space-y-4">
               <div className="flex items-center gap-2">
                 <div className="w-4 h-[1px] bg-[var(--accent)]/40 rounded-full" />
@@ -156,7 +151,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* FIND US & ACTION BLOCK (Desktop) / ACTION BLOCK ONLY (Mobile) */}
+          {/* FIND US (Desktop) */}
           <div className="md:col-span-3 flex flex-col items-end gap-8 mt-4 md:mt-0">
             <div className="hidden md:block space-y-4 md:text-right">
               <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]/80 italic">
@@ -177,7 +172,6 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -132,15 +132,18 @@ export default function SupportQueriesTab() {
   const getStatus = (status) => status || "open";
 
   return (
-    <div className="space-y-6 pb-6 px-4 md:px-0 max-w-full overflow-x-hidden">
+    <div className="space-y-4 pb-6 px-4 md:px-0 max-w-full overflow-x-hidden">
       {/* ================= HEADER ================= */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Support</h2>
+        <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[var(--foreground)] flex items-center gap-2">
+           <div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] hidden sm:block" />
+           Support
+        </h2>
           <button
             onClick={() => { fetchQueriesStats(); fetchQueriesList(); }}
-            className="p-2 rounded-lg bg-[var(--foreground)]/[0.03] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/[0.08] transition-all"
+            className="w-8 h-8 rounded-full bg-[var(--card)] border border-[var(--border)]/60 text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] flex items-center justify-center transition-all shadow-sm active:scale-95 outline-none"
           >
-            <RefreshCcw size={14} className={loading ? "animate-spin" : ""} />
+            <RefreshCcw size={12} className={loading ? "animate-spin" : ""} strokeWidth={2.5} />
           </button>
       </div>
 
@@ -149,7 +152,7 @@ export default function SupportQueriesTab() {
       {/* ================= SEARCH & FILTER ================= */}
       <div className="flex flex-col gap-3">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted)]/40" size={16} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--accent)]" size={14} strokeWidth={2.5} />
           <input
             value={search}
             onChange={(e) => {
@@ -157,7 +160,7 @@ export default function SupportQueriesTab() {
               setSearch(e.target.value);
             }}
             placeholder="Search queries..."
-            className="w-full h-11 pl-11 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.02] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none placeholder:text-[var(--muted)]/40"
+            className="w-full h-9 pl-9 pr-4 rounded-full border border-[var(--border)]/60 bg-[var(--card)] shadow-sm text-[var(--foreground)] text-[11px] font-bold outline-none focus:ring-1 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] transition-all placeholder:text-[var(--muted)]/40 placeholder:font-medium"
           />
         </div>
       </div>
@@ -192,35 +195,35 @@ export default function SupportQueriesTab() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: idx * 0.03 }}
                     onClick={() => setActiveQuery(q)}
-                    className="group relative rounded-2xl border border-[var(--border)] bg-[var(--foreground)]/[0.01] hover:bg-[var(--foreground)]/[0.03] transition-all cursor-pointer p-4 flex items-center gap-4"
+                    className="group relative rounded-xl border border-[var(--border)]/40 shadow-sm bg-[var(--card)] active:scale-[0.98] transition-all cursor-pointer p-3 flex items-center gap-3 overflow-hidden"
                   >
                     <div
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 rounded-r-md"
                       style={{ backgroundColor: meta.label === 'Open' ? '#f59e0b' : meta.label === 'Resolved' ? '#10b981' : '#3b82f6' }}
                     />
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                        <span className={`flex items-center gap-1 px-2 py-0.5 rounded-md border text-[8px] font-bold uppercase tracking-wider ${meta.class}`}>
-                          {meta.icon}
+                        <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded border text-[7px] font-black uppercase tracking-widest leading-none ${meta.class}`}>
+                          {React.cloneElement(meta.icon, { size: 8, strokeWidth: 3 })}
                           {meta.label}
                         </span>
-                        <span className="text-[9px] font-medium text-[var(--muted)]/60 truncate">
+                        <span className="text-[8px] font-bold text-[var(--muted)]/50 truncate tracking-widest uppercase leading-none">
                           {new Date(q.createdAt).toLocaleDateString()}
                         </span>
                       </div>
 
-                      <h4 className="text-sm font-bold text-[var(--foreground)] truncate group-hover:text-[var(--accent)]">
+                      <h4 className="text-[11px] font-bold text-[var(--foreground)] truncate group-hover:text-[var(--accent)] leading-tight">
                         {q.email || "Unknown User"}
                       </h4>
 
-                      <p className="text-[11px] text-[var(--muted)]/60 truncate mt-0.5">
+                      <p className="text-[10px] text-[var(--muted)]/70 truncate mt-0.5 leading-tight font-medium">
                         {q.message}
                       </p>
                     </div>
 
-                    <div className="w-8 h-8 rounded-lg bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--muted)]/40 shrink-0">
-                      <ChevronRight size={16} />
+                    <div className="w-6 h-6 rounded-full bg-[var(--foreground)]/[0.03] border border-[var(--border)]/40 flex items-center justify-center text-[var(--muted)]/60 shrink-0 shadow-sm">
+                      <ChevronRight size={12} strokeWidth={2.5} />
                     </div>
                   </motion.div>
                 );
