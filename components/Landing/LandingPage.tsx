@@ -203,6 +203,13 @@ const SERVICES = [
     desc: "Deploy Telegram order bots and group management automation with alerts.",
     items: ["Secure token auth", "Group management", "Instant alert bots"],
   },
+  {
+    icon: FiCreditCard,
+    tag: "PAYMENT",
+    title: "Payment Integration",
+    desc: "Seamless payment gateway & checkout integration with instant order callbacks.",
+    items: ["Multi-currency", "Instant Webhooks", "Zero Fee Setup"],
+  },
 ];
 
 /* ═══════════════════════════════════════════════════════ */
@@ -612,49 +619,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ═══════ CALL TO ACTION ═══════ */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative p-6 sm:p-10 rounded-3xl bg-[var(--card)]/60 border border-[var(--border)] text-center max-w-3xl mx-auto space-y-4"
-          >
-            <div className="space-y-2">
-              <h2 className="text-2xl sm:text-4xl font-[1000] tracking-tighter uppercase italic leading-none">
-                Build On <span className="text-[var(--accent)]">bluebuff.in</span>
-              </h2>
-
-              <p className="text-xs sm:text-sm text-[var(--muted)] max-w-xl mx-auto leading-relaxed">
-                Connect directly with the <strong className="text-[var(--foreground)]">bluebuff.in</strong> team for custom stores, APIs, payment gateways, and software.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-              <Link
-                href="/contact"
-                style={{ color: "#000000" }}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-[var(--accent)] !text-black font-black uppercase tracking-[0.15em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-md"
-              >
-                <span style={{ color: "#000000" }}>Contact bluebuff.in</span>
-                <FiArrowRight size={14} style={{ color: "#000000" }} />
-              </Link>
-
-              <a
-                href="https://bluebuff.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--foreground)" }}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-[var(--accent)] text-[11px] font-black uppercase italic tracking-wider transition-all"
-              >
-                <span style={{ color: "var(--foreground)" }}>Visit bluebuff.in</span>
-                <FiExternalLink size={14} />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
     </div>
   );

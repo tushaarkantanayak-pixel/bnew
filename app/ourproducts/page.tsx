@@ -291,30 +291,28 @@ export default function OurProductsPage() {
 
           {/* Infrastructure Banner */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-12 sm:mt-16 p-6 sm:p-10 md:p-12 rounded-[2rem] bg-gradient-to-br from-[var(--card)] to-[var(--background)] border border-[var(--accent)]/30 text-center space-y-4 relative overflow-hidden"
+            className="mt-8 p-4 sm:p-5 md:p-6 rounded-2xl bg-gradient-to-r from-[var(--card)] via-[var(--card)]/80 to-[var(--card)] border border-[var(--accent)]/30 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden text-center sm:text-left max-w-5xl mx-auto"
           >
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent" />
-            <div className="space-y-2">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-[1000] uppercase italic tracking-tighter">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/50 to-transparent" />
+            <div className="space-y-1">
+              <h3 className="text-base sm:text-lg md:text-xl font-[1000] uppercase italic tracking-tighter">
                 Ready to Partner or Build?
               </h3>
-              <p className="text-[10px] sm:text-xs font-bold text-[var(--muted)] uppercase tracking-[0.2em]">
+              <p className="text-[10px] sm:text-xs font-medium text-[var(--muted)]">
                 Explore how the BlueBuff ecosystem can transform your business.
               </p>
             </div>
-            <div className="flex justify-center gap-3 pt-2">
-              <Link
-                href="/contact"
-                style={{ color: "#000000" }}
-                className="px-6 py-3 rounded-xl bg-[var(--accent)] !text-black text-[9px] sm:text-[10px] font-black uppercase italic tracking-widest hover:brightness-110 transition-all flex items-center gap-2"
-              >
-                <span style={{ color: "#000000" }}>Contact Sales &amp; Agency</span>
-                <FiArrowRight size={14} style={{ color: "#000000" }} />
-              </Link>
-            </div>
+            <Link
+              href="/contact"
+              style={{ color: "#000000" }}
+              className="px-5 py-2.5 rounded-xl bg-[var(--accent)] !text-black text-[10px] font-black uppercase italic tracking-widest hover:brightness-110 transition-all flex items-center justify-center gap-2 flex-shrink-0 w-full sm:w-auto shadow-md"
+            >
+              <span style={{ color: "#000000" }}>Contact Sales &amp; Agency</span>
+              <FiArrowRight size={14} style={{ color: "#000000" }} />
+            </Link>
           </motion.div>
         </div>
       </main>

@@ -259,22 +259,17 @@ export default function Header() {
                     {/* SCROLLABLE BODY */}
                     <div className="relative z-10 flex-1 overflow-y-auto px-4 pt-4 pb-3 space-y-4 custom-scrollbar">
 
-                      {/* 2. REFINED & BEAUTIFIED TOP 4 NAV BUTTONS GRID */}
-                      <div className="grid grid-cols-4 gap-2">
+                      {/* 2. COMPACT TOP 4 NAV BUTTONS GRID */}
+                      <div className="grid grid-cols-4 gap-1.5">
                         {HEADER_CONFIG.nav.map((item) => (
                           <Link
                             key={item.label}
                             href={item.href}
                             onClick={() => setUserMenuOpen(false)}
-                            className="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--card)] hover:border-[var(--accent)]/40 hover:scale-[1.03] active:scale-95 transition-all duration-200 text-center group"
+                            className="flex flex-col items-center justify-center py-2 px-1 rounded-xl border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)] hover:border-[var(--accent)]/40 active:scale-95 transition-all text-center group"
                           >
-                            <div
-                              className="w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-transform group-hover:scale-110"
-                              style={{ background: `${item.color}15`, color: item.color }}
-                            >
-                              <item.icon size={18} />
-                            </div>
-                            <span className="text-[9px] font-black uppercase tracking-wider text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors truncate max-w-full">
+                            <item.icon size={18} style={{ color: item.color }} className="mb-1 transition-transform group-hover:scale-110" />
+                            <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors truncate max-w-full">
                               {item.label}
                             </span>
                           </Link>
