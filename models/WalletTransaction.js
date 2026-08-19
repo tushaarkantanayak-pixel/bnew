@@ -52,10 +52,13 @@ const WalletTransactionSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-// Optimize Wallet Manager queries
+// Optimize Wallet Manager & Analytics queries
 WalletTransactionSchema.index({ createdAt: -1 });
 WalletTransactionSchema.index({ type: 1, status: 1, createdAt: -1 });
 WalletTransactionSchema.index({ userId: 1, createdAt: -1 });
+WalletTransactionSchema.index({ userId: 1, status: 1, createdAt: -1 });
+WalletTransactionSchema.index({ userId: 1, type: 1, createdAt: -1 });
+WalletTransactionSchema.index({ userObjectId: 1, createdAt: -1 });
 
 export default mongoose.models.WalletTransaction ||
     mongoose.model("WalletTransaction", WalletTransactionSchema);

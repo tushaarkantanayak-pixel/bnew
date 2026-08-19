@@ -24,7 +24,6 @@ export async function GET() {
         `${baseUrl}/blog/genshin`,
         `${baseUrl}/blog/tips`,
         `${baseUrl}/ourproducts`,
-        `${baseUrl}/idsonsell`,
         `${baseUrl}/leaderboard`,
         `${baseUrl}/special-leaderboard`,
         `${baseUrl}/check`,

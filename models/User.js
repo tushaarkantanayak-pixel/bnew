@@ -108,7 +108,9 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-UserSchema.index({ userType: 1 });
+UserSchema.index({ userType: 1, createdAt: -1 });
+UserSchema.index({ referredBy: 1, createdAt: -1 });
+UserSchema.index({ tags: 1, createdAt: -1 });
 UserSchema.index({ createdAt: -1 });
 
 export default mongoose.models.User ||

@@ -18,5 +18,9 @@ const SupportQuerySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+SupportQuerySchema.index({ status: 1, createdAt: -1 });
+SupportQuerySchema.index({ createdAt: -1 });
+SupportQuerySchema.index({ phone: 1, createdAt: -1 });
+
 export default mongoose.models.SupportQuery ||
   mongoose.model("SupportQuery", SupportQuerySchema);

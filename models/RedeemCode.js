@@ -65,4 +65,8 @@ RedeemCodeSchema.virtual('isFullyClaimed').get(function () {
     return this.status === "used";
 });
 
+RedeemCodeSchema.index({ status: 1, createdAt: -1 });
+RedeemCodeSchema.index({ isSeries: 1, status: 1 });
+RedeemCodeSchema.index({ createdAt: -1 });
+
 export default mongoose.models.RedeemCode || mongoose.model("RedeemCode", RedeemCodeSchema);

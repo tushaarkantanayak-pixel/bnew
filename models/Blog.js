@@ -68,4 +68,8 @@ const BlogSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+BlogSchema.index({ isPublished: 1, publishedAt: -1 });
+BlogSchema.index({ game: 1, isPublished: 1, publishedAt: -1 });
+BlogSchema.index({ type: 1, isPublished: 1, publishedAt: -1 });
+
 export default mongoose.models.Blog || mongoose.model("Blog", BlogSchema);

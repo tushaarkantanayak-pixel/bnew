@@ -3,11 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/models/User";
 import WalletTransaction from "@/models/WalletTransaction";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const dynamic = "force-dynamic";
 
 async function readRawBody(req: NextRequest) {
   const arrayBuffer = await req.arrayBuffer();

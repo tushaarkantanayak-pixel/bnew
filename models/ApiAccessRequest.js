@@ -36,5 +36,8 @@ const apiAccessRequestSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+apiAccessRequestSchema.index({ status: 1, createdAt: -1 });
+apiAccessRequestSchema.index({ userId: 1, createdAt: -1 });
+
 export default mongoose.models.ApiAccessRequest ||
   mongoose.model('ApiAccessRequest', apiAccessRequestSchema);

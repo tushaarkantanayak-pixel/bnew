@@ -29,9 +29,9 @@ export async function GET(req: Request) {
         const decodedUserId = decoded.userId;
 
         // Get current user to find their custom userId
-        let currentUser = await User.findById(decodedUserId);
+        let currentUser = await User.findById(decodedUserId).select("userId").lean();
         if (!currentUser) {
-            currentUser = await User.findOne({ userId: decodedUserId });
+            currentUser = await User.findOne({ userId: decodedUserId }).select("userId").lean();
         }
 
         if (!currentUser) {
@@ -52,7 +52,8 @@ export async function GET(req: Request) {
             .sort({ createdAt: -1 })
             .skip(skip)
             .limit(limit)
-            .select("name userId createdAt avatar"); // Select only necessary fields
+            .select("name userId createdAt avatar")
+            .lean(); // Select only necessary fields and use lean
 
         const total = await User.countDocuments({ referredBy: currentCustomId });
 

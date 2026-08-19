@@ -7,8 +7,11 @@ export const dynamic = 'force-dynamic';
 export async function GET(req) {
   try {
     await connectDB();
-    // Only return published blogs to the frontend
-    const blogs = await Blog.find({ isPublished: true }).sort({ publishedAt: -1 }).lean();
+    // Only return published blogs without heavy content field to the frontend
+    const blogs = await Blog.find({ isPublished: true })
+      .select("title slug game type author image excerpt tags publishedAt")
+      .sort({ publishedAt: -1 })
+      .lean();
     
     // Map them to match the structure of static BLOGS_DATA
     const formattedBlogs = blogs.map(blog => ({
@@ -21,8 +24,7 @@ export async function GET(req) {
       image: blog.image,
       excerpt: blog.excerpt,
       tags: blog.tags,
-      publishedAt: blog.publishedAt.toISOString(),
-      content: blog.content, // Include content for individual post pages
+      publishedAt: blog.publishedAt ? new Date(blog.publishedAt).toISOString() : new Date().toISOString(),
       isDbBlog: true, // Flag to identify it as a dynamic blog
     }));
 

@@ -7,7 +7,10 @@ export const dynamic = 'force-dynamic';
 export async function GET(req) {
   try {
     await connectDB();
-    const blogs = await Blog.find().sort({ publishedAt: -1 }).lean();
+    const blogs = await Blog.find()
+      .select("title slug game type author image excerpt tags isPublished publishedAt createdAt")
+      .sort({ publishedAt: -1 })
+      .lean();
     return NextResponse.json({ success: true, data: blogs });
   } catch (error) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });

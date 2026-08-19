@@ -16,12 +16,10 @@ export const dynamic = "force-dynamic";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import SocialFloat from "@/components/SocialFloat/SocialFloat";
+
 import { GoogleAnalytics } from '@next/third-parties/google';
-import ChristmasPopup from "@/components/Seasonal/ChristmasPopup";
 import { Poppins } from "next/font/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-// import ChatBot from "@/components/SocialFloat/Chatbot"; // Removed as we use wrapper
 import ValentinePopup from "@/components/Seasonal/ValentinePopup";
 import ValentineEffect from "@/components/Seasonal/ValentineEffect";
 import Maintaince from "@/components/Seasonal/Maintaince";
@@ -174,9 +172,6 @@ export default async function RootLayout({
 
 
           <Footer />
-          {/* <SocialFloat /> */}
-
-
           <div />
         </GoogleOAuthProvider>
 

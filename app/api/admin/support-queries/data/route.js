@@ -45,6 +45,7 @@ export async function GET(req) {
 
         const [data, total] = await Promise.all([
             SupportQuery.find(query)
+                .select("-__v")
                 .sort({ createdAt: -1 })
                 .skip((page - 1) * limit)
                 .limit(limit)
