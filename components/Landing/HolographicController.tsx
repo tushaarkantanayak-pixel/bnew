@@ -487,24 +487,24 @@ export default function HolographicController() {
 
   return (
     <div className="relative w-full flex flex-col items-center">
-      {/* ── Controller + Hotspots ── */}
+      {/* ── Controller + Hotspots (Pure SVG only) ── */}
       <motion.div
         className="relative w-full mx-auto select-none"
         style={{ aspectRatio: "16/9", maxWidth: "480px" }}
         initial={{ opacity: 0, scale: 0.94 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         {/* Float + tilt animation wrapper */}
         <motion.div
           className="w-full h-full"
-          animate={{ y: [-10, 10, -10] }}
+          animate={{ y: [-8, 8, -8] }}
           transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <motion.div
             className="w-full h-full"
-            animate={{ rotateY: [0, 5, 0, -5, 0] }}
+            animate={{ rotateY: [0, 4, 0, -4, 0] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
             style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
           >
@@ -523,42 +523,6 @@ export default function HolographicController() {
             onLeave={() => setActive(null)}
           />
         ))}
-      </motion.div>
-
-      {/* ── Bottom pill labels ── */}
-      <motion.div
-        className="mt-6 flex flex-wrap justify-center gap-2"
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.45, delay: 0.55 }}
-      >
-        {HOTSPOTS.map((h) => (
-          <motion.button
-            key={h.id}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[9px] font-black uppercase tracking-widest transition-all duration-200"
-            style={{
-              borderColor: active === h.id ? h.color : `${h.color}35`,
-              backgroundColor: active === h.id ? `${h.color}18` : `${h.color}08`,
-              color: h.color,
-              boxShadow: active === h.id ? `0 0 14px ${h.color}30` : "none",
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            onMouseEnter={() => setActive(h.id)}
-            onMouseLeave={() => setActive(null)}
-          >
-            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: h.color }} />
-            {h.label}
-          </motion.button>
-        ))}
-
-        <Link
-          href="/services"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[var(--foreground)] text-[var(--background)] text-[9px] font-black uppercase tracking-widest italic hover:opacity-85 transition-all"
-        >
-          All Services <FiArrowUpRight size={10} />
-        </Link>
       </motion.div>
     </div>
   );

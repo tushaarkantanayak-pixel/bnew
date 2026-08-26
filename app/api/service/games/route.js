@@ -1,44 +1,35 @@
 import { NextResponse } from "next/server";
-import { validateApiKey } from "@/lib/apiKeyAuth";
 
-export async function GET(req) {
-    try {
-        const auth = await validateApiKey(req);
-        if (!auth.success) {
-            return NextResponse.json({ success: false, message: auth.message }, { status: 401 });
-        }
+const disabledResponse = () =>
+    NextResponse.json(
+        {
+            success: false,
+            status: "disabled",
+            message: "This API service is disabled here. Please use the api.bluebuff.in endpoint."
+        },
+        { status: 400 }
+    );
 
-        // Fetching games directly from the external source as requested
-        const response = await fetch("https://game-off-ten.vercel.app/api/v1/game", {
-            method: "GET",
-            headers: {
-                "x-api-key": process.env.API_SECRET_KEY,
-            },
-            cache: "no-store",
-        });
+export async function GET() {
+    return disabledResponse();
+}
 
-        const data = await response.json();
+export async function POST() {
+    return disabledResponse();
+}
 
-        if (!data.success) {
-            return NextResponse.json({ success: false, message: "Failed to fetch source games" }, { status: 500 });
-        }
+export async function PUT() {
+    return disabledResponse();
+}
 
-        // Normalize and send the games list
-        const internalGames = data.data.games.map((g) => ({
-            name: g.gameName,
-            slug: g.gameSlug,
-            publisher: g.gameFrom,
-            available: g.gameAvailablity
-        }));
+export async function DELETE() {
+    return disabledResponse();
+}
 
+export async function PATCH() {
+    return disabledResponse();
+}
 
-        return NextResponse.json({
-            success: true,
-            games: internalGames
-        });
-
-    } catch (error) {
-        console.error("Service Games API Error:", error);
-        return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
-    }
+export async function OPTIONS() {
+    return disabledResponse();
 }

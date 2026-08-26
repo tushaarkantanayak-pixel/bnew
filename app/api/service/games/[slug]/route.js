@@ -1,65 +1,35 @@
 import { NextResponse } from "next/server";
-import { validateApiKey } from "@/lib/apiKeyAuth";
-import { calculateItemPrice } from "@/lib/pricingUtils";
-import { connectDB } from "@/lib/mongodb";
-import User from "@/models/User";
 
-export async function GET(req, { params }) {
-    try {
-        const { slug } = await params;
-        const auth = await validateApiKey(req);
-        if (!auth.success) {
-            return NextResponse.json({ success: false, message: auth.message }, { status: 401 });
-        }
+const disabledResponse = () =>
+    NextResponse.json(
+        {
+            success: false,
+            status: "disabled",
+            message: "This API service is disabled here. Please use the api.bluebuff.in endpoint."
+        },
+        { status: 400 }
+    );
 
-        await connectDB();
-        const user = await User.findById(auth.user.id);
+export async function GET() {
+    return disabledResponse();
+}
 
-        // Fetch game details from external source
-        const response = await fetch(`https://game-off-ten.vercel.app/api/v1/game/${slug}`, {
-            method: "GET",
-            headers: {
-                "x-api-key": process.env.API_SECRET_KEY,
-            },
-            cache: "no-store",
-        });
+export async function POST() {
+    return disabledResponse();
+}
 
-        const data = await response.json();
+export async function PUT() {
+    return disabledResponse();
+}
 
-        if (!data.success) {
-            return NextResponse.json({ success: false, message: "Game not found" }, { status: 404 });
-        }
+export async function DELETE() {
+    return disabledResponse();
+}
 
-        // Apply membership pricing to each item so the API user knows what they pay
-        const itemsWithPricing = await Promise.all(data.data.itemId.map(async (item) => {
-            const pricing = await calculateItemPrice(slug, item.itemSlug, user.userType);
-            return {
-                ...item,
-                sellingPrice: pricing ? pricing.price : item.sellingPrice,
-                itemName: pricing ? pricing.itemName : item.itemName
-            };
-        }));
+export async function PATCH() {
+    return disabledResponse();
+}
 
-        const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5;
-
-        return NextResponse.json({
-            success: true,
-            game: {
-                name: data.data.gameName,
-                slug: data.data.gameSlug,
-                publisher: data.data.gameFrom,
-                currency: "USD",
-                items: itemsWithPricing.map(i => ({
-                    name: i.itemName,
-                    slug: i.itemSlug,
-                    price: Number((i.sellingPrice / rate).toFixed(2)),
-                    available: i.itemAvailablity
-                }))
-            }
-        });
-
-    } catch (error) {
-        console.error("Service Game Details API Error:", error);
-        return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
-    }
+export async function OPTIONS() {
+    return disabledResponse();
 }

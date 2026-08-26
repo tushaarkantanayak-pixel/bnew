@@ -1,47 +1,35 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/mongodb";
-import Order from "@/models/Order";
-import { validateApiKey } from "@/lib/apiKeyAuth";
 
-export async function GET(req, { params }) {
-    try {
-        const auth = await validateApiKey(req);
-        if (!auth.success) {
-            return NextResponse.json({ success: false, message: auth.message }, { status: 401 });
-        }
+const disabledResponse = () =>
+    NextResponse.json(
+        {
+            success: false,
+            status: "disabled",
+            message: "This API service is disabled here. Please use the api.bluebuff.in endpoint."
+        },
+        { status: 400 }
+    );
 
-        const { orderId } = await params;
+export async function GET() {
+    return disabledResponse();
+}
 
-        await connectDB();
+export async function POST() {
+    return disabledResponse();
+}
 
-        // Find order and ensure it belongs to the authenticated user
-        const order = await Order.findOne({
-            orderId: orderId,
-            userId: auth.user.userId
-        });
+export async function PUT() {
+    return disabledResponse();
+}
 
-        if (!order) {
-            return NextResponse.json({ success: false, message: "Order not found or access denied" }, { status: 404 });
-        }
+export async function DELETE() {
+    return disabledResponse();
+}
 
-        const rate = Number(process.env.NEXT_PUBLIC_USD_RATE) || 98.5;
+export async function PATCH() {
+    return disabledResponse();
+}
 
-        return NextResponse.json({
-            success: true,
-            order: {
-                orderId: order.orderId,
-                gameSlug: order.gameSlug,
-                itemName: order.itemName,
-                price: Number((order.price / rate).toFixed(2)),
-                currency: "USD",
-                status: order.status,
-                topupStatus: order.topupStatus,
-                createdAt: order.createdAt
-            }
-        });
-
-    } catch (error) {
-        console.error("Status API Error:", error);
-        return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
-    }
+export async function OPTIONS() {
+    return disabledResponse();
 }

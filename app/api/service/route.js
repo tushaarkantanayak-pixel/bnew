@@ -1,18 +1,35 @@
 import { NextResponse } from "next/server";
 
+const disabledResponse = () =>
+    NextResponse.json(
+        {
+            success: false,
+            status: "disabled",
+            message: "This API service is disabled here. Please use the api.bluebuff.in endpoint."
+        },
+        { status: 400 }
+    );
+
 export async function GET() {
-    return NextResponse.json({
-        success: true,
-        message: "Welcome to bluebuff.in API Service",
-        version: "1.0.0",
-        docs: "https://bluebuff.in/api-docs.html",
-        status: "operational",
-        endpoints: {
-            balance: "/api/service/balance",
-            games: "/api/service/games",
-            order: "/api/service/order",
-            status: "/api/service/status",
-            validate: "/api/service/validate",
-        }
-    });
+    return disabledResponse();
+}
+
+export async function POST() {
+    return disabledResponse();
+}
+
+export async function PUT() {
+    return disabledResponse();
+}
+
+export async function DELETE() {
+    return disabledResponse();
+}
+
+export async function PATCH() {
+    return disabledResponse();
+}
+
+export async function OPTIONS() {
+    return disabledResponse();
 }

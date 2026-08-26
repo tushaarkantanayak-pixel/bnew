@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import GameCardGrid from "../Games/GameCardGrid";
 import HolographicController from "./HolographicController";
+import PromptHeroBar from "./PromptHeroBar";
 
 /* ─── tiny helpers ─── */
 const PRIORITY_SLUGS = [
@@ -158,14 +159,6 @@ export const PRODUCTS = [
   },
 ];
 
-const CATEGORIES = [
-  { id: "all", label: "All Products (8)" },
-  { id: "gaming", label: "Gaming & Top-Up" },
-  { id: "payments", label: "Payments & Crypto" },
-  { id: "web", label: "Web & Builder" },
-  { id: "infra", label: "Monitoring & Infra" },
-];
-
 const SERVICES = [
   {
     icon: FiCpu,
@@ -216,7 +209,6 @@ const SERVICES = [
 export default function LandingPage() {
   const [games, setGames] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
     (async () => {
@@ -233,10 +225,6 @@ export default function LandingPage() {
       }
     })();
   }, []);
-
-  const filteredProducts = selectedCategory === "all"
-    ? PRODUCTS
-    : PRODUCTS.filter((p) => p.categoryKey === selectedCategory);
 
   return (
     <div className="bg-[var(--background)] text-[var(--foreground)] min-h-screen font-sans overflow-x-hidden selection:bg-[var(--accent)]/20">
@@ -271,109 +259,57 @@ export default function LandingPage() {
         {/* Accent top line */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent z-10" />
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-10 pt-2 pb-6 md:pt-4 md:pb-10 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* LEFT COLUMN */}
-          <div className="flex flex-col gap-4 sm:gap-5 order-1 md:order-1">
-            
-            {/* Minimal Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/30 w-fit">
-              <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
-              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)]">
-                BLUEBUFF ECOSYSTEM
-              </span>
-            </div>
-
-            {/* Simple Punchy Headline */}
-            <h1 className="text-[clamp(2.2rem,6.5vw,4.2rem)] font-[1000] leading-[1.05] tracking-[-0.03em] uppercase italic text-[var(--foreground)]">
-              Your Gaming &amp; Web <br />
-              <span className="text-[var(--accent)]">Ecosystem.</span>
-            </h1>
-
-            {/* Simple 1-Line Description */}
-            <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-md">
-              Automated game top-ups, developer APIs, website builders, crypto checkout &amp; digital agency solutions.
-            </p>
-
-            {/* Clean Products Domain Pills */}
-            <div className="pt-2">
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {PRODUCTS.map((p) => (
-                  <a
-                    key={p.id}
-                    href={p.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "var(--foreground)" }}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[var(--card)]/60 border border-[var(--border)] text-[9px] font-bold hover:border-[var(--accent)] hover:!text-[var(--accent)] transition-all group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: p.accent }} />
-                    <span style={{ color: "var(--foreground)" }}>{p.name}</span>
-                    <FiArrowUpRight size={9} className="opacity-50 group-hover:opacity-100 transition-opacity" />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Clean CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-2 w-full">
-              <a
-                href="#products-suite"
-                style={{ color: "#000000" }}
-                className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] !text-black font-black uppercase tracking-[0.15em] text-[11px] italic hover:brightness-110 active:scale-95 transition-all shadow-md whitespace-nowrap"
-              >
-                <span style={{ color: "#000000" }}>Explore Products</span>
-                <FiArrowRight size={14} style={{ color: "#000000" }} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-
-              <Link
-                href="/dashboard/digital-gametopup/api-keys"
-                style={{ color: "var(--foreground)" }}
-                className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[var(--border)] bg-[var(--card)]/40 hover:border-[var(--accent)]/40 font-black uppercase tracking-[0.15em] text-[11px] italic transition-all whitespace-nowrap"
-              >
-                <span style={{ color: "var(--foreground)" }}>Get API Keys</span>
-                <FiCpu size={14} className="text-[var(--accent)]" />
-              </Link>
-            </div>
+        {/* Hero Content - Clean, Centered & Uncluttered */}
+        <div className="relative z-10 max-w-4xl mx-auto w-full px-4 sm:px-6 md:px-10 pt-4 pb-8 md:pt-6 md:pb-12 flex flex-col items-center text-center gap-4 sm:gap-5 min-w-0">
+          
+          {/* Minimal Eyebrow */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/30 w-fit">
+            <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-[var(--accent)]">
+              BLUEBUFF ECOSYSTEM
+            </span>
           </div>
 
-          {/* RIGHT COLUMN: Holographic Controller & Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.15 }}
-            className="flex flex-col gap-4 relative w-full mt-4 md:mt-0 order-2 md:order-2"
-          >
-            {/* Floating Stats */}
-            <div className="absolute inset-0 z-20 pointer-events-none">
-              {STATS.map((s, i) => {
-                const positions = [
-                  "top-[2%] left-[2%] md:left-[-5%]",
-                  "top-[8%] right-[2%] md:right-[-5%]",
-                  "top-[45%] left-[-2%] md:left-[-12%]",
-                  "top-[55%] right-[-2%] md:right-[-8%]",
-                  "bottom-[12%] left-[5%] md:left-[-5%]",
-                ];
-                return (
-                  <motion.div
-                    key={i}
-                    animate={{ y: [-6, 6, -6], x: [-3, 3, -3] }}
-                    transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }}
-                    className={`absolute flex flex-col items-center text-center ${positions[i]}`}
-                  >
-                    <span className="text-xs sm:text-sm md:text-base font-[1000] tracking-tighter text-[var(--accent)] leading-none">
-                      {s.value}
-                    </span>
-                    <span className="text-[6px] sm:text-[7px] font-black uppercase tracking-[0.2em] text-[var(--muted)] mt-1">
-                      {s.label}
-                    </span>
-                  </motion.div>
-                );
-              })}
-            </div>
+          {/* Simple Punchy Headline */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[1000] leading-[1.08] tracking-tight uppercase italic text-[var(--foreground)] break-words max-w-3xl">
+            Your Gaming &amp; Web <br className="hidden sm:inline" />
+            <span className="text-[var(--accent)]">Ecosystem.</span>
+          </h1>
 
+          {/* Simple 1-Line Description */}
+          <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-md">
+            Automated game top-ups, developer APIs, website builders, crypto checkout &amp; digital agency solutions.
+          </p>
+
+          {/* Pure Holographic Controller SVG (positioned above the input bar) */}
+          <div className="w-full max-w-[360px] sm:max-w-[420px] md:max-w-[460px] my-1">
             <HolographicController />
-          </motion.div>
+          </div>
+
+          {/* Prompt / Redirect Pill Bar (directly below SVG) */}
+          <div className="w-full flex justify-center">
+            <PromptHeroBar />
+          </div>
+
+          {/* All 8 Platform Links */}
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap pt-1 max-w-2xl mx-auto">
+            <span className="text-[9px] font-black uppercase tracking-wider text-[var(--muted)] opacity-70">
+              Platforms:
+            </span>
+            {PRODUCTS.map((p) => (
+              <a
+                key={p.id}
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--foreground)" }}
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[var(--card)]/60 border border-[var(--border)] text-[8px] sm:text-[9px] font-bold hover:border-[var(--accent)] hover:!text-[var(--accent)] transition-all"
+              >
+                <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: p.accent }} />
+                <span>{p.name}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -402,41 +338,22 @@ export default function LandingPage() {
       <section id="products-suite" className="py-16 sm:py-20 md:py-24 border-b border-[var(--border)] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
 
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-6 h-[2px] bg-[var(--accent)]" />
-                <span className="text-[9px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-                  Products Suite
-                </span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-[1000] tracking-tighter uppercase italic leading-none">
-                Our <span className="text-[var(--accent)]">8 Products</span>
-              </h2>
+          {/* Section Header (Clean - No Filter Buttons) */}
+          <div className="mb-10 text-left">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-6 h-[2px] bg-[var(--accent)]" />
+              <span className="text-[9px] font-black uppercase tracking-[0.35em] text-[var(--accent)]">
+                Products Suite
+              </span>
             </div>
-
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-1.5 sm:gap-2 self-start md:self-auto">
-              {CATEGORIES.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => setSelectedCategory(c.id)}
-                  className={`px-3 py-1.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-wider transition-all border ${
-                    selectedCategory === c.id
-                      ? "bg-[var(--accent)] text-black border-[var(--accent)] shadow-md"
-                      : "bg-[var(--card)]/40 border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]/40"
-                  }`}
-                >
-                  {c.label}
-                </button>
-              ))}
-            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-[1000] tracking-tighter uppercase italic leading-none text-[var(--foreground)]">
+              Our <span className="text-[var(--accent)]">Products</span>
+            </h2>
           </div>
 
           {/* 8 Products Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {filteredProducts.map((p, i) => (
+            {PRODUCTS.map((p, i) => (
               <motion.div
                 key={p.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -562,7 +479,7 @@ export default function LandingPage() {
       </section>
 
       {/* ═══════ SERVICES & AGENCY (bluebuff.in) ═══════ */}
-      <section className="py-16 border-b border-[var(--border)]">
+      <section id="agency-services" className="py-16 border-b border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
 
           <div className="mb-8">
