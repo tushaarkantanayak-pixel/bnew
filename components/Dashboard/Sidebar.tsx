@@ -5,34 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-    FiKey, 
-    FiLayers, 
-    FiShoppingBag, 
     FiUsers, 
     FiGift, 
     FiMessageSquare, 
     FiMenu, 
-    FiX,
-    FiHome,
-    FiBarChart2
+    FiX
 } from "react-icons/fi";
 
 const SIDEBAR_LINKS = [
-    {
-        title: "Dashboard",
-        items: [
-            { label: "Dashboard", href: "/dashboard", icon: FiHome },
-            { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys", icon: FiKey },
-            { label: "My Wallet", href: "/dashboard/digital-gametopup/wallet", icon: FiLayers },
-            { label: "My Orders", href: "/dashboard/digital-gametopup/orders", icon: FiShoppingBag },
-        ]
-    },
-    {
-        title: "Analytics",
-        items: [
-            { label: "Analytics", href: "/dashboard/digital-gametopup/analytics", icon: FiBarChart2 },
-        ]
-    },
     {
         title: "Rewards",
         items: [

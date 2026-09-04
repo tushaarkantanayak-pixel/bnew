@@ -276,30 +276,7 @@ export default function Header() {
                         ))}
                       </div>
 
-                      {/* 3. MAIN SECTION */}
-                      <div className="space-y-1.5">
-                        <div className="flex items-center gap-2 px-1 py-1">
-                          <div className="w-1 h-3.5 bg-pink-500 rounded-full" />
-                          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--muted)]">MAIN</span>
-                        </div>
 
-                        <Link
-                          href={user ? "/dashboard" : "/login"}
-                          onClick={() => setUserMenuOpen(false)}
-                          className="flex items-center justify-between p-3.5 rounded-2xl border border-[var(--border)] bg-[var(--card)]/40 hover:border-[var(--accent)]/30 transition-all group"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center flex-shrink-0">
-                              <FiGrid size={16} />
-                            </div>
-                            <div>
-                              <p className="text-xs font-black text-[var(--foreground)] leading-tight">Dashboard</p>
-                              <p className="text-[9px] text-[var(--muted)] leading-tight">Go to Dashboard</p>
-                            </div>
-                          </div>
-                          <FiChevronRight size={14} className="text-[var(--muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all" />
-                        </Link>
-                      </div>
 
                       {/* 4. SUPPORT SECTION */}
                       <div className="space-y-1.5">

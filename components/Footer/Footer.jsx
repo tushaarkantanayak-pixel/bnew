@@ -26,7 +26,6 @@ const FOOTER_LINKS = [
   {
     title: "Account",
     links: [
-      { label: "Dashboard", href: "/dashboard" },
       { label: "Auto Top-Ups", href: "/dashboard/digital-gametopup" },
       { label: "Rewards", href: "/dashboard/earning" },
       { label: "API Keys", href: "/dashboard/digital-gametopup/api-keys" },
