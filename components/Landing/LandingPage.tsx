@@ -16,10 +16,10 @@ import PromptHeroBar from "./PromptHeroBar";
 /* ─── tiny helpers ─── */
 const PRIORITY_SLUGS = [
   "pubg-mobile138",
-  "genshin-impact742",
+  "genshin-impact265",
   "honor-of-kings57",
   "where-winds-meet280",
-  "mobile-legends270",
+  "mobile-legends114",
   "wuthering-of-waves464",
 ];
 

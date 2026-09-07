@@ -30,7 +30,7 @@ export default function GamesPage() {
   const [activeTab, setActiveTab] = useState("all");
 
   /* ================= CONFIG ================= */
-  const WEEKLY_PASS_SLUG = "mobile-legends270";
+  const WEEKLY_PASS_SLUG = "mobile-legends114";
 
   const outOfStockGames = [
     "mobile-legends-backup826",
