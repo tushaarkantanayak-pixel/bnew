@@ -8,7 +8,7 @@ const WalletTransactionSchema = new mongoose.Schema(
             unique: true,
         },
         userId: {
-            type: String, // Custom userId (e.g., USER123)
+            type: String,
             required: true,
             index: true,
         },
