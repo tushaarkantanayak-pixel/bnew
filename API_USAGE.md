@@ -40,7 +40,7 @@ Get a list of items and their **member-specific prices** for a specific game.
 > Regional blocking (blocking **INDO, ID, PH, SG, RU, MY, MM**) applies **only** to the following products:
 > *   `mobile-legends114`
 > *   `mlbb-double332`
-> *   `weeklymonthly-bundle468`
+> *   `weeklymonthly-bundle646`
 > Other MLBB products can be ordered globally. Always call the validation endpoint to verify the player's region before ordering.
 
 ### 🛡️ ID & Region Check

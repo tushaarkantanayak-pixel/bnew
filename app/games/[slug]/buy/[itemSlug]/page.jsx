@@ -159,7 +159,7 @@ function BuyFlowContent() {
 
       if (isValid) {
         // Filter restricted regions for SPECIFIC MLBB slugs
-        const restrictedSlugs = ["mobile-legends114", "mlbb-double332", "weeklymonthly-bundle468"];
+        const restrictedSlugs = ["mobile-legends114", "mlbb-double332", "weeklymonthly-bundle646"];
         if (restrictedSlugs.includes(slug)) {
           const restrictedRegions = ["INDO", "ID", "PH", "SG", "RU", "MY", "MM"];
           const playerRegion = region.toUpperCase();

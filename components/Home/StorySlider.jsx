@@ -19,7 +19,7 @@ const storyData = [
     badge: "Hot",
     color: "#ff4d4d", // Red
     image: "/game-assets/weekly-monthly-bundle.jpg",
-    link: "/games/weeklymonthly-bundle468",
+    link: "/games/weeklymonthly-bundle646",
   },
   {
     id: 2,

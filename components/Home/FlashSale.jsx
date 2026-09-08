@@ -57,7 +57,7 @@ const flashSaleData = [
         image: "/game-assets/weekly-monthly-bundle.jpg",
         price: "79",
         originalPrice: "100",
-        slug: "weeklymonthly-bundle468",
+        slug: "weeklymonthly-bundle646",
         badge: "Value"
     },
 
