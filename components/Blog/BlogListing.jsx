@@ -14,7 +14,7 @@ import {
   FiX,
 } from "react-icons/fi";
 
-const POSTS_PER_PAGE = 9;
+const POSTS_PER_PAGE = 12;
 
 export default function BlogListing({ initialGame = "all" }) {
   const router = useRouter();
@@ -152,7 +152,7 @@ export default function BlogListing({ initialGame = "all" }) {
 
         {/* ══ GRID ══ */}
         {paginatedBlogs.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {paginatedBlogs.map((blog, index) => (
               <BlogCard key={blog.id} blog={blog} index={index} />
             ))}

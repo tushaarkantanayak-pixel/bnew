@@ -24,7 +24,7 @@ const HEADER_CONFIG = {
   },
 
   nav: [
-    { label: "Top-Up", href: "/games", icon: FiShoppingBag, color: "#a855f7" },
+    { label: "Top-Up", href: "https://mlbbtopup.in", icon: FiShoppingBag, color: "#a855f7", isExternal: true },
     { label: "News", href: "/blog", icon: FiLayers, color: "#f43f5e" },
     { label: "Services", href: "/services", icon: FiGrid, color: "#10b981" },
     { label: "Products", href: "/ourproducts", icon: FiGlobe, color: "#00f5ff" },
@@ -125,22 +125,38 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden xl:flex items-center space-x-1 justify-center flex-shrink-0">
             {HEADER_CONFIG.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setActiveNav(item.href)}
-                className="relative px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] italic text-[var(--muted)] hover:text-[var(--accent)] transition-all group flex items-center gap-2"
-              >
-                <span className="relative z-10 opacity-70 group-hover:opacity-100 transition-all">
-                  <item.icon size={14} />
-                </span>
-                <span className="relative z-10">{item.label}</span>
-                <motion.span
-                  initial={false}
-                  animate={{ width: activeNav === item.href ? "100%" : "0%" }}
-                  className="absolute bottom-0 left-0 h-[2px] bg-[var(--accent)] transition-all duration-300"
-                />
-              </Link>
+              item.isExternal ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] italic text-[var(--muted)] hover:text-[var(--accent)] transition-all group flex items-center gap-2"
+                >
+                  <span className="relative z-10 opacity-70 group-hover:opacity-100 transition-all">
+                    <item.icon size={14} />
+                  </span>
+                  <span className="relative z-10">{item.label}</span>
+                  <FiExternalLink size={10} className="opacity-50 group-hover:opacity-100" />
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setActiveNav(item.href)}
+                  className="relative px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] italic text-[var(--muted)] hover:text-[var(--accent)] transition-all group flex items-center gap-2"
+                >
+                  <span className="relative z-10 opacity-70 group-hover:opacity-100 transition-all">
+                    <item.icon size={14} />
+                  </span>
+                  <span className="relative z-10">{item.label}</span>
+                  <motion.span
+                    initial={false}
+                    animate={{ width: activeNav === item.href ? "100%" : "0%" }}
+                    className="absolute bottom-0 left-0 h-[2px] bg-[var(--accent)] transition-all duration-300"
+                  />
+                </Link>
+              )
             ))}
           </nav>
 
@@ -187,28 +203,22 @@ export default function Header() {
                     <div className="relative z-10 px-5 pt-5 pb-4 border-b border-[var(--border)]">
                       <div className="flex items-start justify-between gap-3">
                         {user ? (
-                          <div className="flex items-center gap-3 min-w-0">
-                            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--accent)]/10 flex items-center justify-center text-white text-xl font-black flex-shrink-0">
+                          <div className="flex items-center gap-3 min-w-0 flex-1">
+                            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--accent)]/10 flex items-center justify-center text-white text-xl font-black flex-shrink-0 relative">
                               {user?.avatar ? (
                                 <Image src={user.avatar} alt="Avatar" width={48} height={48} className="object-cover w-full h-full" />
                               ) : (
                                 user.name?.charAt(0) || "U"
                               )}
+                              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[var(--background)]" />
                             </div>
 
-                            <div className="flex flex-col min-w-0">
-                              <div className="flex items-center gap-2 mb-0.5">
-                                <span className="text-[15px] font-black text-[var(--foreground)] truncate max-w-[130px] leading-tight">{user.name}</span>
-                                <span className="text-[7px] font-black uppercase tracking-wider text-white bg-[var(--accent)] px-1.5 py-0.5 rounded-full flex-shrink-0">{user.userType || "User"}</span>
+                            <div className="flex flex-col min-w-0 flex-1">
+                              <div className="flex items-center gap-1.5 mb-0.5 flex-wrap">
+                                <span className="text-[14px] font-black text-[var(--foreground)] truncate max-w-[140px] leading-tight">{user.name}</span>
+                                <span className="text-[8px] font-black uppercase tracking-wider text-white bg-[var(--accent)] px-1.5 py-0.5 rounded-full flex-shrink-0">{user.userType || "User"}</span>
                               </div>
-                              <span className="text-[10px] text-[var(--muted)] truncate max-w-[160px]">{user.email}</span>
-
-                              {/* Wallet Chip */}
-                              <div className="flex items-center gap-1 mt-1.5">
-                                <span className="text-[9px] font-black text-[var(--accent)] bg-[var(--accent)]/10 border border-[var(--accent)]/20 px-2 py-0.5 rounded-full">
-                                  💰 {formatPrice(walletBalance)}
-                                </span>
-                              </div>
+                              <span className="text-[10px] text-[var(--muted)] truncate max-w-[170px]">{user.email}</span>
                             </div>
                           </div>
                         ) : (
@@ -217,123 +227,127 @@ export default function Header() {
                               <FiUser size={22} />
                             </div>
                             <div>
-                              <p className="text-sm font-black text-[var(--foreground)]">Guest User</p>
-                              <p className="text-[10px] text-[var(--muted)]">Sign in to continue</p>
+                              <p className="text-sm font-black text-[var(--foreground)]">BlueBuff Menu</p>
+                              <p className="text-[10px] text-[var(--muted)]">Explore our ecosystem</p>
                             </div>
                           </div>
                         )}
 
-                        <div className="flex items-center gap-1 flex-shrink-0">
+                        <div className="flex items-center gap-1.5 flex-shrink-0 pt-0.5">
                           {user && (
                             <button
                               onClick={handleLogout}
-                              className="w-8 h-8 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 hover:bg-red-500/20 transition-colors"
-                              title="Logout"
+                              className="w-8 h-8 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 hover:bg-red-500/20 active:scale-95 transition-all"
+                              aria-label="Logout"
                             >
-                              <FiLogOut size={15} />
+                              <FiLogOut size={14} />
                             </button>
                           )}
                           <button
                             onClick={() => setUserMenuOpen(false)}
-                            className="w-8 h-8 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                            className="w-8 h-8 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5 active:scale-95 transition-all"
+                            aria-label="Close menu"
                           >
-                            <FiX size={18} />
+                            <FiX size={16} />
                           </button>
                         </div>
                       </div>
                     </div>
 
-                    {/* Guest Login Callout */}
-                    {!user && (
-                      <div className="p-4 border-b border-[var(--border)]">
-                        <Link
-                          href="/login"
-                          onClick={() => setUserMenuOpen(false)}
-                          className="w-full py-2.5 rounded-xl bg-[var(--accent)] !text-black text-center text-[10px] font-black uppercase italic tracking-widest hover:brightness-110 transition-all block"
-                        >
-                          Sign In / Register
-                        </Link>
-                      </div>
-                    )}
-
                     {/* SCROLLABLE BODY */}
-                    <div className="relative z-10 flex-1 overflow-y-auto px-4 pt-4 pb-3 space-y-4 custom-scrollbar">
+                    <div className="relative z-10 flex-1 overflow-y-auto px-4 pt-4 pb-4 space-y-4 custom-scrollbar">
 
-                      {/* 2. COMPACT TOP 4 NAV BUTTONS GRID */}
-                      <div className="grid grid-cols-4 gap-1.5">
-                        {HEADER_CONFIG.nav.map((item) => (
-                          <Link
-                            key={item.label}
-                            href={item.href}
-                            onClick={() => setUserMenuOpen(false)}
-                            className="flex flex-col items-center justify-center py-2 px-1 rounded-xl border border-[var(--border)] bg-[var(--card)]/40 hover:bg-[var(--card)] hover:border-[var(--accent)]/40 active:scale-95 transition-all text-center group"
-                          >
-                            <item.icon size={18} style={{ color: item.color }} className="mb-1 transition-transform group-hover:scale-110" />
-                            <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors truncate max-w-full">
-                              {item.label}
-                            </span>
-                          </Link>
-                        ))}
+                      {/* 1. TOP NAV ITEMS - CLEAN & SIMPLE */}
+                      <div className="grid grid-cols-4 gap-1 pb-2 border-b border-[var(--border)]">
+                        {HEADER_CONFIG.nav.map((item) => {
+                          const Tag = item.isExternal ? "a" : Link;
+                          const extProps = item.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
+                          return (
+                            <Tag
+                              key={item.label}
+                              href={item.href}
+                              onClick={() => setUserMenuOpen(false)}
+                              {...extProps}
+                              className="flex flex-col items-center justify-center py-2 px-1 rounded-xl hover:bg-[var(--foreground)]/5 active:scale-95 transition-all text-center group"
+                            >
+                              <item.icon size={18} style={{ color: item.color }} className="mb-1.5 transition-transform group-hover:scale-110" />
+                              <span className="text-[11px] font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
+                                {item.label}
+                              </span>
+                            </Tag>
+                          );
+                        })}
                       </div>
 
+                      {/* 2. DEDICATED PORTALS - SIMPLE ROWS */}
+                      <div className="space-y-1 pt-1">
+                        <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[var(--muted)] px-3 mb-1 block">
+                          PORTALS
+                        </span>
 
-
-                      {/* 4. SUPPORT SECTION */}
-                      <div className="space-y-1.5">
-                        <div className="flex items-center gap-2 px-1 py-1">
-                          <div className="w-1 h-3.5 bg-emerald-500 rounded-full" />
-                          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--muted)]">SUPPORT</span>
-                        </div>
-
-                        <Link
-                          href="/dashboard/support"
-                          onClick={() => setUserMenuOpen(false)}
-                          className="flex items-center justify-between p-3.5 rounded-2xl border border-[var(--border)] bg-[var(--card)]/40 hover:border-emerald-500/30 transition-all group"
+                        <a
+                          href="https://mlbbtopup.in"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[var(--foreground)]/5 transition-colors group"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center flex-shrink-0">
-                              <FiMessageSquare size={16} />
-                            </div>
-                            <div>
-                              <p className="text-xs font-black text-[var(--foreground)] leading-tight">Help Center</p>
-                              <p className="text-[9px] text-[var(--muted)] leading-tight">Get help 24/7</p>
+                            <span className="text-sm">🇮🇳</span>
+                            <div className="flex flex-col">
+                              <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">mlbbtopup.in</span>
+                              <span className="text-[10px] text-[var(--muted)]">Game Top-Up Portal (INR)</span>
                             </div>
                           </div>
-                          <FiChevronRight size={14} className="text-[var(--muted)] group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" />
-                        </Link>
+                          <FiExternalLink size={13} className="text-[var(--muted)] group-hover:text-[var(--accent)]" />
+                        </a>
+
+                        <a
+                          href="https://api.bluebuff.in"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[var(--foreground)]/5 transition-colors group"
+                        >
+                          <div className="flex items-center gap-3">
+                            <FiZap size={15} className="text-amber-400" />
+                            <div className="flex flex-col">
+                              <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-amber-400 transition-colors">api.bluebuff.in</span>
+                              <span className="text-[10px] text-[var(--muted)]">Developer API Engine</span>
+                            </div>
+                          </div>
+                          <FiExternalLink size={13} className="text-[var(--muted)] group-hover:text-amber-400" />
+                        </a>
                       </div>
 
-                      {/* 5. ADMIN CONSOLE — ONLY FOR OWNER */}
-                      {user?.userType === "owner" && (
-                        <div className="relative mt-2">
+                      {/* 3. SUPPORT */}
+                      <div className="space-y-1 pt-2 border-t border-[var(--border)]">
+                        <Link
+                          href="/contact"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[var(--foreground)]/5 transition-colors group"
+                        >
+                          <div className="flex items-center gap-3">
+                            <FiMessageSquare size={15} className="text-emerald-400" />
+                            <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">Help &amp; Inquiries</span>
+                          </div>
+                          <FiChevronRight size={14} className="text-[var(--muted)] group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+
+                        {/* 4. ADMIN CONSOLE — ONLY FOR OWNER */}
+                        {user?.userType === "owner" && (
                           <Link
                             href="/owner-panal"
                             onClick={() => setUserMenuOpen(false)}
-                            className="relative flex items-center justify-between p-3.5 bg-[var(--card)]/60 border border-[var(--border)] hover:border-[var(--accent)] rounded-2xl transition-all duration-300"
+                            className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-[var(--accent)]/10 transition-colors group"
                           >
-                            <div className="flex items-center gap-3 relative z-10 w-full">
-                              <div className="relative flex-shrink-0">
-                                <div className="w-9 h-9 rounded-xl bg-[var(--accent)] text-black flex items-center justify-center">
-                                  <FiZap size={16} />
-                                </div>
-                                <div className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
-                                  <div className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-[var(--background)]"></div>
-                                </div>
-                              </div>
-                              <div className="flex flex-col min-w-0 flex-1">
-                                <h4 className="text-xs font-black uppercase tracking-widest text-[var(--foreground)] mb-0.5">ADMIN CONSOLE</h4>
-                                <div className="flex items-center gap-2">
-                                  <span className="text-[9px] font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-1.5 py-0.5 rounded-md border border-[var(--accent)]/20 uppercase">OWNER</span>
-                                  <span className="text-[9px] font-bold text-[#22c55e] flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-[#22c55e]"></span>Active</span>
-                                </div>
-                              </div>
-                              <div className="w-8 h-8 rounded-full bg-[var(--foreground)]/5 group-hover:bg-[var(--accent)]/10 flex items-center justify-center text-[var(--muted)] group-hover:text-[var(--accent)] transition-all flex-shrink-0">
-                                <FiChevronRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-                              </div>
+                            <div className="flex items-center gap-3">
+                              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                              <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">Admin Console</span>
+                              <span className="text-[8px] font-black uppercase text-[var(--accent)] bg-[var(--accent)]/15 px-1.5 py-0.5 rounded">Owner</span>
                             </div>
+                            <FiChevronRight size={14} className="text-[var(--muted)] group-hover:translate-x-0.5 transition-transform" />
                           </Link>
-                        </div>
-                      )}
+                        )}
+                      </div>
 
                     </div>
 

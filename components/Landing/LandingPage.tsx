@@ -448,13 +448,15 @@ export default function LandingPage() {
                 Instant <span className="text-[var(--accent)]">Delivery</span>
               </h2>
             </div>
-            <Link
-              href="/games"
+            <a
+              href="https://mlbbtopup.in"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ color: "var(--muted)" }}
               className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] hover:!text-[var(--accent)] transition-colors whitespace-nowrap"
             >
               All Games <FiArrowRight size={12} />
-            </Link>
+            </a>
           </div>
 
           {loading ? (
@@ -471,6 +473,7 @@ export default function LandingPage() {
                   game={game}
                   isOutOfStock={() => false}
                   index={i}
+                  customHref="https://mlbbtopup.in"
                 />
               ))}
             </div>

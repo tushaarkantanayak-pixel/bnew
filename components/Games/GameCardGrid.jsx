@@ -6,11 +6,11 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import { useState } from "react";
 
-export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
+export default function GameCardGrid({ game, isOutOfStock, index = 0, customHref }) {
   const [imgError, setImgError] = useState(false);
   
   if (!game) return null;
-  const disabled = isOutOfStock(game.gameName);
+  const disabled = isOutOfStock ? isOutOfStock(game.gameName) : false;
 
   const getFallbackLetter = (name) => {
     return name ? name.charAt(0).toUpperCase() : "?";
@@ -29,10 +29,27 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
   };
 
   const tag = getTag(game.gameName);
+  const href = customHref || (disabled ? "#" : `/games/${game.gameSlug}`);
+  const isExternal = typeof href === "string" && href.startsWith("http");
+
+  const LinkWrapper = ({ children }) => {
+    if (isExternal) {
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="block h-full outline-none">
+          {children}
+        </a>
+      );
+    }
+    return (
+      <Link href={href} className="block h-full outline-none">
+        {children}
+      </Link>
+    );
+  };
 
   return (
     <div className="h-full">
-      <Link href={disabled ? "#" : `/games/${game.gameSlug}`} className="block h-full outline-none">
+      <LinkWrapper>
         
         {/* Simplified Flush Card */}
         <div className={`group relative h-full bg-transparent flex flex-col transition-all duration-300 ease-out
@@ -98,7 +115,7 @@ export default function GameCardGrid({ game, isOutOfStock, index = 0 }) {
             </div>
           </div>
         </div>
-      </Link>
+      </LinkWrapper>
     </div>
   );
 }
