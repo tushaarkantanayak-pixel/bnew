@@ -50,31 +50,31 @@ export default async function BlogDetail({ params }) {
   });
 
   return (
-    <main className="min-h-screen bg-[var(--background)] pb-24 px-6 pt-10">
+    <main className="min-h-screen bg-[var(--background)] pb-20 px-4 sm:px-6 pt-3 sm:pt-4">
       <article className="max-w-7xl mx-auto">
         
         {/* Breadcrumb / Back button */}
         <Link 
           href={`/blog/${game}`}
-          className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[var(--muted)] hover:text-[var(--accent)] transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[var(--muted)] hover:text-[var(--accent)] transition-colors mb-3 sm:mb-4"
         >
           <FiChevronLeft size={14} /> Back to {game} news
         </Link>
 
         {/* Header */}
-        <header className="mb-10 space-y-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="px-3 py-1 rounded-md bg-[var(--accent)] text-black text-[9px] font-black uppercase tracking-widest">
+        <header className="mb-6 sm:mb-8 space-y-3 sm:space-y-4">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scrollbar-none flex-nowrap py-0.5">
+            <span className="shrink-0 px-2.5 py-1 rounded-md bg-[var(--accent)] text-black text-[9px] font-black uppercase tracking-widest">
               {blog.type}
             </span>
             {blog.tags && blog.tags.length > 0 && blog.tags.map(tag => (
-              <span key={tag} className="px-3 py-1 rounded-md border border-[var(--border)] text-[var(--muted)] text-[9px] font-black uppercase tracking-widest">
+              <span key={tag} className="shrink-0 px-2.5 py-1 rounded-md border border-[var(--border)] text-[var(--muted)] text-[9px] font-bold uppercase tracking-wider bg-[var(--foreground)]/[0.02]">
                 #{tag}
               </span>
             ))}
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-[1000] tracking-tight text-[var(--foreground)] leading-none">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-[1000] tracking-tight text-[var(--foreground)] leading-tight">
             {blog.title}
           </h1>
 
