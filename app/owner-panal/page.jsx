@@ -38,19 +38,9 @@ const BlocklistTab = dynamic(() => import("@/components/admin/BlocklistTab"), { 
 
 const SIDEBAR_CATEGORIES = [
   {
-    title: "Finance & Payments",
+    title: "Content",
     items: [
-      { id: "wallet", label: "Wallet", icon: <Wallet /> },
-      { id: "usdt", label: "USDT", icon: <DollarSign /> },
-      { id: "transactions", label: "Transactions", icon: <List /> },
-    ]
-  },
-  {
-    title: "Store Management",
-    items: [
-      { id: "orders", label: "Orders", icon: <ShoppingCart /> },
-      { id: "pricing", label: "Pricing", icon: <Tag /> },
-      { id: "redeem", label: "Redeem", icon: <Gift /> },
+      { id: "blogs", label: "Blogs", icon: <FileText /> },
     ]
   },
   {
@@ -63,24 +53,22 @@ const SIDEBAR_CATEGORIES = [
     ]
   },
   {
-    title: "System & Setup",
+    title: "Store Management",
     items: [
-      { id: "api-keys", label: "API Keys", icon: <Key /> },
-      { id: "stats", label: "Stats", icon: <BarChart2 /> },
-      { id: "settings", label: "Settings", icon: <Settings /> },
+      { id: "redeem", label: "Redeem", icon: <Gift /> },
     ]
   },
   {
-    title: "Content",
+    title: "System & Setup",
     items: [
-      { id: "blogs", label: "Blogs", icon: <FileText /> },
+      { id: "settings", label: "Settings", icon: <Settings /> },
     ]
   }
 ];
 
 export default function AdminPanalPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("stats");
+  const [activeTab, setActiveTab] = useState("blogs");
   const [isOwner, setIsOwner] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -250,27 +238,12 @@ export default function AdminPanalPage() {
             {/* Bottom accent bar */}
             <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[var(--accent)] to-purple-500" />
             
-            {/* Left side: Admin Panel Info & Balance */}
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center gap-1.5 opacity-70">
-                <h1 className="text-[9px] sm:text-[10px] font-bold tracking-widest text-[var(--foreground)] uppercase">
-                  Admin Panel
-                </h1>
-                <span className="h-1 w-1 rounded-full bg-[var(--accent)] shrink-0" />
-              </div>
-              <div className="flex items-baseline gap-1.5">
-                <p className="text-base sm:text-lg font-black text-[var(--foreground)] tracking-tight">
-                  {balance !== null
-                    ? (() => {
-                        const num = parseFloat(String(balance).replace(/[^\d.]/g, ""));
-                        return isNaN(num) ? String(balance) : `$${num.toFixed(2)}`;
-                      })()
-                    : "Loading…"}
-                </p>
-                <span className="text-[8px] font-bold text-green-500 uppercase tracking-widest">
-                  Available
-                </span>
-              </div>
+            {/* Left side: Admin Panel Info */}
+            <div className="flex items-center gap-2">
+              <h1 className="text-xs sm:text-sm font-black tracking-widest text-[var(--foreground)] uppercase">
+                Admin Panel
+              </h1>
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shrink-0" />
             </div>
 
             {/* Right side: Hamburger Menu */}
