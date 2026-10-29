@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Edit, X, ExternalLink, Eye, Columns, FileEdit } from "lucide-react";
+import { Plus, Trash2, Edit, X, ExternalLink, Eye, Columns, FileEdit, Smartphone, Tablet, Monitor, Loader2 } from "lucide-react";
 import apiClient from "@/utils/apiClient";
 import Link from "next/link";
 
@@ -7,9 +7,11 @@ export default function BlogsTab() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
   const [previewMode, setPreviewMode] = useState("split"); // "split" | "edit" | "preview"
+  const [previewDevice, setPreviewDevice] = useState("mobile"); // "mobile" | "desktop"
   
   const initialFormState = {
     title: "",
@@ -98,10 +100,12 @@ export default function BlogsTab() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSaving) return;
+    setIsSaving(true);
     try {
       const payload = {
         ...formData,
-        tags: formData.tags.split(",").map(tag => tag.trim()).filter(Boolean)
+        tags: formData.tags ? formData.tags.split(",").map(tag => tag.trim()).filter(Boolean) : []
       };
 
       let res;
@@ -121,6 +125,8 @@ export default function BlogsTab() {
       }
     } catch (err) {
       alert(err.response?.data?.message || "Failed to save blog");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -462,68 +468,139 @@ export default function BlogsTab() {
 
                 {/* RIGHT PANE: LIVE PREVIEW */}
                 {(previewMode === "preview" || previewMode === "split") && (
-                  <div className="overflow-y-auto p-4 sm:p-6 bg-[var(--background)] flex flex-col gap-4 text-xs">
-                    <div className="flex items-center justify-between border-b border-[var(--border)] pb-2 text-[10px] font-black uppercase tracking-wider text-[var(--muted)] shrink-0">
-                      <span className="flex items-center gap-1.5 text-[var(--accent)]">
-                        <Eye size={13} /> Live Article Preview
-                      </span>
-                      <span className="font-mono text-[9px] bg-[var(--foreground)]/5 border border-[var(--border)] px-2 py-0.5 rounded text-[var(--muted)]">
-                        Real-time rendered
+                  <div className="overflow-y-auto p-3 sm:p-6 bg-[var(--background)] flex flex-col gap-4 text-xs">
+                    {/* Preview Toolbar */}
+                    <div className="flex items-center justify-between border-b border-[var(--border)] pb-2.5 text-[10px] font-black uppercase tracking-wider text-[var(--muted)] shrink-0">
+                      <div className="flex items-center gap-2.5">
+                        <span className="flex items-center gap-1.5 text-[var(--accent)] font-black">
+                          <Eye size={13} /> Live Preview
+                        </span>
+
+                        {/* Viewport Size Switcher */}
+                        <div className="flex items-center bg-[var(--card)] p-0.5 rounded-lg border border-[var(--border)] text-[9px] font-bold">
+                          <button
+                            type="button"
+                            onClick={() => setPreviewDevice("mobile")}
+                            className={`flex items-center gap-1 px-2.5 py-1 rounded transition-all ${
+                              previewDevice === "mobile"
+                                ? "bg-[var(--accent)] text-black"
+                                : "text-[var(--muted)] hover:text-white"
+                            }`}
+                            title="Mobile View (420px)"
+                          >
+                            <Smartphone size={12} /> <span>Mobile</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setPreviewDevice("tablet")}
+                            className={`flex items-center gap-1 px-2.5 py-1 rounded transition-all ${
+                              previewDevice === "tablet"
+                                ? "bg-[var(--accent)] text-black"
+                                : "text-[var(--muted)] hover:text-white"
+                            }`}
+                            title="Tablet View (680px)"
+                          >
+                            <Tablet size={12} /> <span>Tablet</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setPreviewDevice("desktop")}
+                            className={`flex items-center gap-1 px-2.5 py-1 rounded transition-all ${
+                              previewDevice === "desktop"
+                                ? "bg-[var(--accent)] text-black"
+                                : "text-[var(--muted)] hover:text-white"
+                            }`}
+                            title="Desktop View (Full)"
+                          >
+                            <Monitor size={12} /> <span>Desktop</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <span className="font-mono text-[9px] bg-[var(--foreground)]/5 border border-[var(--border)] px-2 py-0.5 rounded text-[var(--muted)] hidden sm:inline">
+                        {previewDevice === "mobile" ? "📱 Mobile Screen (~390–420px)" : previewDevice === "tablet" ? "📱 Tablet View (680px)" : "💻 Desktop Full"}
                       </span>
                     </div>
 
-                    <div className="space-y-4 max-w-2xl mx-auto w-full">
-                      {/* Game & Category Badges */}
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-black text-[var(--accent)] uppercase tracking-wider">
-                          {formData.game}
-                        </span>
-                        <span className="text-[9px] text-[var(--muted)] uppercase font-bold px-2 py-0.5 rounded bg-[var(--foreground)]/5 border border-[var(--border)]">
-                          {formData.type}
-                        </span>
-                        {formData.slug && (
-                          <span className="text-[9px] text-[var(--muted)] font-mono ml-auto opacity-70 truncate max-w-[150px]">
-                            /{formData.slug}
-                          </span>
+                    {/* Viewport Canvas */}
+                    <div className="w-full flex justify-center items-start">
+                      <div 
+                        className={`w-full transition-all duration-200 ${
+                          previewDevice === "mobile"
+                            ? "max-w-[420px] bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl shadow-xl overflow-hidden"
+                            : previewDevice === "tablet"
+                            ? "max-w-[680px] bg-[var(--card)]/40 border border-[var(--border)] rounded-2xl shadow-xl overflow-hidden"
+                            : "max-w-3xl"
+                        }`}
+                      >
+                        {/* Device Frame Header */}
+                        {previewDevice !== "desktop" && (
+                          <div className="bg-[var(--card)] px-4 py-2 border-b border-[var(--border)] flex items-center justify-between text-[10px] text-[var(--muted)] font-mono select-none">
+                            <span className="flex items-center gap-1.5 font-bold text-[var(--foreground)]">
+                              {previewDevice === "mobile" ? <Smartphone size={12} className="text-[var(--accent)]" /> : <Tablet size={12} className="text-[var(--accent)]" />}
+                              <span>{previewDevice === "mobile" ? "Mobile Viewport (390px)" : "Tablet Viewport (680px)"}</span>
+                            </span>
+                            <span className="text-[9px] opacity-70">
+                              Real Mobile Width
+                            </span>
+                          </div>
                         )}
-                      </div>
 
-                      {/* Title */}
-                      <h1 className="text-lg sm:text-2xl font-black text-[var(--foreground)] tracking-tight leading-snug">
-                        {formData.title || <span className="opacity-30 italic">Untitled Blog Post</span>}
-                      </h1>
+                        {/* Article Content Wrapper */}
+                        <div className={`${previewDevice !== "desktop" ? "p-4 sm:p-5" : ""} space-y-4`}>
+                          {/* Game & Category Badges */}
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-black text-[var(--accent)] uppercase tracking-wider">
+                              {formData.game}
+                            </span>
+                            <span className="text-[9px] text-[var(--muted)] uppercase font-bold px-2 py-0.5 rounded bg-[var(--foreground)]/5 border border-[var(--border)]">
+                              {formData.type}
+                            </span>
+                            {formData.slug && (
+                              <span className="text-[9px] text-[var(--muted)] font-mono ml-auto opacity-70 truncate max-w-[130px]">
+                                /{formData.slug}
+                              </span>
+                            )}
+                          </div>
 
-                      {/* Excerpt */}
-                      {formData.excerpt && (
-                        <p className="text-xs sm:text-sm text-[var(--muted)] italic border-l-2 border-[var(--accent)] pl-3 leading-relaxed">
-                          {formData.excerpt}
-                        </p>
-                      )}
+                          {/* Title */}
+                          <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-[var(--foreground)] tracking-tight leading-snug">
+                            {formData.title || <span className="opacity-30 italic">Untitled Blog Post</span>}
+                          </h1>
 
-                      {/* Cover Image */}
-                      {formData.image && (
-                        <div className="rounded-xl overflow-hidden border border-[var(--border)] aspect-video max-h-60 bg-black/20">
-                          <img 
-                            src={formData.image} 
-                            alt={formData.title || "Cover"} 
-                            className="w-full h-full object-cover"
-                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                          {/* Excerpt */}
+                          {formData.excerpt && (
+                            <p className="text-xs sm:text-sm text-[var(--muted)] italic border-l-2 border-[var(--accent)] pl-3 leading-relaxed">
+                              {formData.excerpt}
+                            </p>
+                          )}
+
+                          {/* Cover Image */}
+                          {formData.image && (
+                            <div className="rounded-xl overflow-hidden border border-[var(--border)] aspect-video max-h-60 bg-black/20">
+                              <img 
+                                src={formData.image} 
+                                alt={formData.title || "Cover"} 
+                                className="w-full h-full object-cover"
+                                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                              />
+                            </div>
+                          )}
+
+                          {/* Rendered HTML Content Body */}
+                          <div 
+                            className="prose prose-invert prose-sm sm:prose-base max-w-none 
+                            prose-headings:font-black prose-headings:tracking-tight prose-headings:text-[var(--foreground)]
+                            prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline
+                            prose-img:rounded-xl prose-img:border prose-img:border-[var(--border)]
+                            prose-p:leading-relaxed prose-li:leading-relaxed
+                            text-[var(--foreground)]/80 pt-2"
+                            dangerouslySetInnerHTML={{ 
+                              __html: formData.content || "<p class='text-muted italic opacity-40 py-8 text-center'>Start typing content on the left to see the live formatted preview here...</p>" 
+                            }}
                           />
                         </div>
-                      )}
-
-                      {/* Rendered HTML Content Body */}
-                      <div 
-                        className="prose prose-invert prose-sm sm:prose-base max-w-none 
-                        prose-headings:font-black prose-headings:tracking-tight prose-headings:text-[var(--foreground)]
-                        prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline
-                        prose-img:rounded-xl prose-img:border prose-img:border-[var(--border)]
-                        prose-p:leading-relaxed prose-li:leading-relaxed
-                        text-[var(--foreground)]/80 pt-2"
-                        dangerouslySetInnerHTML={{ 
-                          __html: formData.content || "<p class='text-muted italic opacity-40 py-8 text-center'>Start typing content on the left to see the live formatted preview here...</p>" 
-                        }}
-                      />
+                      </div>
                     </div>
                   </div>
                 )}
@@ -537,16 +614,25 @@ export default function BlogsTab() {
                 <div className="flex items-center gap-2 ml-auto">
                   <button 
                     type="button" 
+                    disabled={isSaving}
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[var(--muted)] hover:text-white hover:bg-white/5 transition-colors"
+                    className="px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[var(--muted)] hover:text-white hover:bg-white/5 transition-colors disabled:opacity-50"
                   >
                     Cancel
                   </button>
                   <button 
                     type="submit" 
-                    className="bg-[var(--accent)] text-black px-5 py-1.5 rounded-lg font-black uppercase tracking-wider hover:brightness-110 transition-all text-xs shadow-lg shadow-[var(--accent)]/10"
+                    disabled={isSaving}
+                    className="flex items-center gap-1.5 bg-[var(--accent)] text-black px-5 py-1.5 rounded-lg font-black uppercase tracking-wider hover:brightness-110 transition-all text-xs shadow-lg shadow-[var(--accent)]/10 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {editMode ? "Save Changes" : "Publish Blog"}
+                    {isSaving ? (
+                      <>
+                        <Loader2 size={13} className="animate-spin shrink-0" />
+                        <span>Saving...</span>
+                      </>
+                    ) : (
+                      <span>{editMode ? "Save Changes" : "Publish Blog"}</span>
+                    )}
                   </button>
                 </div>
               </div>
