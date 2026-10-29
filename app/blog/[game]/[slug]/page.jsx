@@ -4,7 +4,6 @@ import Blog from "@/models/Blog";
 import Link from "next/link";
 import { FiChevronLeft, FiClock, FiUser, FiShare2, FiGift, FiArrowRight } from "react-icons/fi";
 import AdsterraBanner from "@/components/Ads/AdsterraBanner";
-import AdsterraSmartlink from "@/components/Ads/AdsterraSmartlink";
 
 // Revalidate this page every 1 hour (3600 seconds)
 export const revalidate = 3600;
@@ -125,15 +124,30 @@ export default async function BlogDetail({ params }) {
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />
 
-        {/* Smartlink CTA Block */}
-        <div className="mt-16 bg-gradient-to-r from-[var(--accent)]/10 to-transparent p-4 sm:p-5 rounded-2xl border border-[var(--accent)]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-center sm:text-left">
-                <h3 className="text-lg font-black italic uppercase tracking-tighter text-[var(--foreground)] mb-1 flex items-center justify-center sm:justify-start gap-2">
-                    <FiGift className="text-[var(--accent)]" /> TOPUP NOW
-                </h3>
-                <p className="text-xs opacity-70 m-0 leading-snug">Support the site and unlock exclusive daily gaming offers.</p>
+        {/* Play Store App CTA Banner (Compact & Sleek) */}
+        <div className="mt-8 p-3 sm:py-2.5 sm:px-4 rounded-xl border border-[var(--border)] bg-[var(--card)]/50 hover:bg-[var(--card)] flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 transition-all">
+          <div className="flex items-center gap-2.5 text-center sm:text-left min-w-0">
+            <span className="text-base sm:text-lg shrink-0">🎮</span>
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm font-bold text-[var(--foreground)] leading-snug">
+                Play Games & Earn Money, UC and Diamond in Your Favorite Game
+              </p>
+              <p className="text-[10px] text-[var(--muted)] leading-tight hidden sm:block">
+                Download the official BlueBuff app on Google Play
+              </p>
             </div>
-            <AdsterraSmartlink text="TOPUP NOW" />
+          </div>
+          <a
+            href="https://play.google.com/store/apps/details?id=in.bluebuff.games"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 bg-[var(--foreground)] text-[var(--background)] text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-[var(--accent)] hover:text-black transition-colors shrink-0 w-full sm:w-auto"
+          >
+            <svg className="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
+              <path d="M3.609 1.814L13.792 12 3.61 22.186a2.054 2.054 0 0 1-.22-.924V2.738c0-.34.08-.654.22-.924zM15.207 13.414l2.585 2.586-13.01 7.51 10.425-10.096zM15.207 10.586L4.782.49l13.01 7.51-2.585 2.586zm1.414 1.414l3.585-2.07a1.644 1.644 0 0 1 0 2.842l-3.585-2.072z"/>
+            </svg>
+            <span>Get on Google Play</span>
+          </a>
         </div>
 
         <div className="w-full flex justify-center my-10">
